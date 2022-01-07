@@ -1,0 +1,8 @@
+{
+  "name": "yaml-homepage-plugin",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "gatsby-transformer-yaml": "^4.4.0"
+  }
+}
