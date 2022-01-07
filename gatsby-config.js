@@ -7,6 +7,7 @@ require('dotenv').config({
 module.exports = {
   plugins: [
     // Comment and uncomment the desired CMS/backend plugin to switch between data sources
+    /*
       {
         resolve: 'yaml-homepage-plugin',
         options: {
@@ -16,7 +17,6 @@ module.exports = {
         },
       },
 
-    /*
       {
         resolve: 'datocms-homepage-plugin',
         options: {
@@ -26,7 +26,6 @@ module.exports = {
       },
     */
 
-    /*
       {
         resolve: 'contentful-homepage-plugin',
         options: {
@@ -35,6 +34,7 @@ module.exports = {
           accessToken: process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN,
         },
       },
+    /*
     */
 
     'gatsby-plugin-sharp',
