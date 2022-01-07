@@ -205,7 +205,7 @@ exports.onCreateNode = async ({
         text: data.text,
       })
       break
-    case 'DatoCmsBenefitList':
+    case 'DatoCmsBenefitlist':
       id = createNodeId(`${node.id} >>> HomepageBenefitList`)
       actions.createNode({
         ...node,
@@ -235,7 +235,7 @@ exports.onCreateNode = async ({
         avatar: data.avatar,
       })
       break
-    case 'DatoCmsTestimonialList':
+    case 'DatoCmsTestimoniallist':
       id = createNodeId(`${node.id} >>> HomepageTestimonialList`)
       actions.createNode({
         ...node,
@@ -265,13 +265,13 @@ exports.onCreateNode = async ({
         label: data.label,
       })
       break
-    case 'DatoCmsStatList':
+    case 'DatoCmsStatlist':
       id = createNodeId(`${node.id} >>> HomepageStatList`)
       actions.createNode({
         ...node,
         id,
         internal: {
-          type: 'HomepageStatList',
+          type: 'HomepageStatlist',
           contentDigest: node.internal.contentDigest,
         },
         parent: node.id,
@@ -294,7 +294,7 @@ exports.onCreateNode = async ({
         image: data.image,
       })
       break
-    case 'DatoCmsLogoList':
+    case 'DatoCmsLogolist':
       id = createNodeId(`${node.id} >>> HomepageLogoList`)
       actions.createNode({
         ...node,
