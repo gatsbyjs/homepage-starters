@@ -112,46 +112,37 @@ exports.onCreateNode = async ({
 
   let id
 
+  const createHomepageNode = (typeName, data) => {
+    id = createNodeId(`${node.id} >>> ${typeName}`)
+    actions.createNode({
+      ...data,
+      id,
+      internal: {
+        type: typeName,
+        contentDigest: node.internal.contentDigest,
+      },
+      parent: node.id,
+      originalId: node.id,
+    })
+  }
+
+
   switch (node.internal.type) {
     case 'ContentfulHomepage':
-      id = createNodeId(`${node.id} >>> Homepage`)
-      actions.createNode({
-        id,
-        internal: {
-          type: 'Homepage',
-          contentDigest: node.internal.contentDigest,
-        },
-        parent: node.id,
+      createHomepageNode('Homepage', {
         title: node.title,
         description: node.description,
         image: node.image___NODE,
         content: node.content___NODE,
       })
-      const child = getNode(id)
       break
     case 'ContentfulHomepageLink':
-      id = createNodeId(`${node.id} >>> HomepageLink`)
-      actions.createNode({
+      createHomepageNode('HomepageLink', {
         ...node,
-        id,
-        internal: {
-          type: 'HomepageLink',
-          contentDigest: node.internal.contentDigest,
-        },
-        parent: node.id,
-        originalId: node.id,
       })
       break
     case 'ContentfulHomepageHero':
-      id = createNodeId(`${node.id} >>> HomepageHero`)
-      actions.createNode({
-        id,
-        internal: {
-          type: 'HomepageHero',
-          contentDigest: node.internal.contentDigest,
-        },
-        parent: node.id,
-        originalId: node.id,
+      createHomepageNode('HomepageHero', {
         heading: node.heading,
         subhead: node.subhead,
         kicker: node.kicker,
@@ -161,15 +152,7 @@ exports.onCreateNode = async ({
       })
       break
     case 'ContentfulHomepageFeature':
-      id = createNodeId(`${node.id} >>> HomepageFeature`)
-      actions.createNode({
-        id,
-        internal: {
-          type: 'HomepageFeature',
-          contentDigest: node.internal.contentDigest,
-        },
-        parent: node.id,
-        originalId: node.id,
+      createHomepageNode('HomepageFeature', {
         heading: node.heading,
         kicker: node.kicker,
         text: node.text,
@@ -178,122 +161,44 @@ exports.onCreateNode = async ({
       })
       break
     case 'ContentfulHomepageCta':
-      id = createNodeId(`${node.id} >>> HomepageCta`)
-      actions.createNode({
-        id,
-        internal: {
-          type: 'HomepageCta',
-          contentDigest: node.internal.contentDigest,
-        },
-        parent: node.id,
-        originalId: node.id,
+      createHomepageNode('HomepageCta', {
         heading: node.heading,
         text: node.text,
         links: node.links___NODE,
       })
       break
     case 'ContentfulHomepageLogo':
-      id = createNodeId(`${node.id} >>> HomepageLogo`)
-      actions.createNode({
-        id,
-        internal: {
-          type: 'HomepageLogo',
-          contentDigest: node.internal.contentDigest,
-        },
-        parent: node.id,
-        originalId: node.id,
+      createHomepageNode('HomepageLogo', {
         image: node.image___NODE,
         alt: node.alt,
       })
       break
     case 'ContentfulHomepageLogoList':
-      id = createNodeId(`${node.id} >>> HomepageLogoList`)
-      actions.createNode({
-        id,
-        internal: {
-          type: 'HomepageLogoList',
-          contentDigest: node.internal.contentDigest,
-        },
-        parent: node.id,
-        originalId: node.id,
+      createHomepageNode('HomepageLogoList', {
         content: node.content___NODE,
       })
       break
     case 'ContentfulHomepageTestimonial':
-      id = createNodeId(`${node.id} >>> HomepageTestimonial`)
-      actions.createNode({
-        ...node,
-        id,
-        internal: {
-          type: 'HomepageTestimonial',
-          contentDigest: node.internal.contentDigest,
-        },
-        parent: node.id,
-        originalId: node.id,
-      })
+      createHomepageNode('HomepageTestimonial', { ...node })
       break
     case 'ContentfulHomepageTestimonialList':
-      id = createNodeId(`${node.id} >>> HomepageTestimonialList`)
-      actions.createNode({
-        id,
-        internal: {
-          type: 'HomepageTestimonialList',
-          contentDigest: node.internal.contentDigest,
-        },
-        parent: node.id,
-        originalId: node.id,
+      createHomepageNode('HomepageTestimonialList', {
         content: node.content___NODE,
       })
       break
     case 'ContentfulHomepageBenefit':
-      id = createNodeId(`${node.id} >>> HomepageBenefit`)
-      actions.createNode({
-        ...node,
-        id,
-        internal: {
-          type: 'HomepageBenefit',
-          contentDigest: node.internal.contentDigest,
-        },
-        parent: node.id,
-        originalId: node.id,
-      })
+      createHomepageNode('HomepageBenefit', { ...node })
       break
     case 'ContentfulHomepageBenefitList':
-      id = createNodeId(`${node.id} >>> HomepageBenefitList`)
-      actions.createNode({
-        id,
-        internal: {
-          type: 'HomepageBenefitList',
-          contentDigest: node.internal.contentDigest,
-        },
-        parent: node.id,
-        originalId: node.id,
+      createHomepageNode('HomepageBenefitList', {
         content: node.content___NODE,
       })
       break
     case 'ContentfulHomepageStat':
-      id = createNodeId(`${node.id} >>> HomepageStat`)
-      actions.createNode({
-        ...node,
-        id,
-        internal: {
-          type: 'HomepageStat',
-          contentDigest: node.internal.contentDigest,
-        },
-        parent: node.id,
-        originalId: node.id,
-      })
+      createHomepageNode('HomepageStat', { ...node })
       break
     case 'ContentfulHomepageStatList':
-      id = createNodeId(`${node.id} >>> HomepageStatList`)
-      actions.createNode({
-        id,
-        internal: {
-          type: 'HomepageStatList',
-          contentDigest: node.internal.contentDigest,
-        },
-        parent: node.id,
-        originalId: node.id,
+      createHomepageNode('HomepageStatList', {
         content: node.content___NODE,
       })
       break
