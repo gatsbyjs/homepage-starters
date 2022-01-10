@@ -255,6 +255,7 @@ exports.onCreateNode = async ({
   }
 
   const content = node.content.map(createBlock)
+
   actions.createNode({
     id: pageID,
     internal: {
