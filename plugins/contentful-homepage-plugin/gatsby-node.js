@@ -52,9 +52,10 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type HomepageLogo implements Node {
       image: ContentfulAsset @link
       alt: String
+      originalId: String
     }
     type HomepageLogoList implements Node & HomepageBlock {
-      logos: [HomepageLogo]
+      logos: [HomepageLogo] @link(by: "originalId")
       originalId: String @fallbackId
     }
 
@@ -62,9 +63,10 @@ exports.createSchemaCustomization = async ({ actions }) => {
       quote: String
       source: String
       avatar: ContentfulAsset
+      originalId: String
     }
     type HomepageTestimonialList implements Node & HomepageBlock {
-      content: [HomepageTestimonial]
+      content: [HomepageTestimonial] @link(by: "originalId")
       originalId: String @fallbackId
     }
 
@@ -72,9 +74,10 @@ exports.createSchemaCustomization = async ({ actions }) => {
       heading: String
       text: String
       image: ContentfulAsset @link
+      originalId: String,
     }
     type HomepageBenefitList implements Node & HomepageBlock {
-      content: [HomepageBenefit]
+      content: [HomepageBenefit] @link(by: "originalId")
       originalId: String @fallbackId
     }
 
@@ -82,9 +85,10 @@ exports.createSchemaCustomization = async ({ actions }) => {
       value: String
       label: String
       heading: String
+      originalId: String
     }
     type HomepageStatList implements Node & HomepageBlock {
-      content: [HomepageStat]
+      content: [HomepageStat] @link(by: "originalId")
       originalId: String @fallbackId
     }
 
@@ -176,7 +180,6 @@ exports.onCreateNode = async ({
     case 'ContentfulHomepageCta':
       id = createNodeId(`${node.id} >>> HomepageCta`)
       actions.createNode({
-        ...node,
         id,
         internal: {
           type: 'HomepageCta',
@@ -206,7 +209,6 @@ exports.onCreateNode = async ({
     case 'ContentfulHomepageLogoList':
       id = createNodeId(`${node.id} >>> HomepageLogoList`)
       actions.createNode({
-        ...node,
         id,
         internal: {
           type: 'HomepageLogoList',
@@ -214,6 +216,7 @@ exports.onCreateNode = async ({
         },
         parent: node.id,
         originalId: node.id,
+        content: node.content___NODE,
       })
       break
     case 'ContentfulHomepageTestimonial':
@@ -226,12 +229,12 @@ exports.onCreateNode = async ({
           contentDigest: node.internal.contentDigest,
         },
         parent: node.id,
+        originalId: node.id,
       })
       break
-    case 'ContentfulHomepageLogoTestimonialList':
+    case 'ContentfulHomepageTestimonialList':
       id = createNodeId(`${node.id} >>> HomepageTestimonialList`)
       actions.createNode({
-        ...node,
         id,
         internal: {
           type: 'HomepageTestimonialList',
@@ -239,6 +242,7 @@ exports.onCreateNode = async ({
         },
         parent: node.id,
         originalId: node.id,
+        content: node.content___NODE,
       })
       break
     case 'ContentfulHomepageBenefit':
@@ -251,12 +255,12 @@ exports.onCreateNode = async ({
           contentDigest: node.internal.contentDigest,
         },
         parent: node.id,
+        originalId: node.id,
       })
       break
-    case 'ContentfulHomepageLogoBenefitList':
+    case 'ContentfulHomepageBenefitList':
       id = createNodeId(`${node.id} >>> HomepageBenefitList`)
       actions.createNode({
-        ...node,
         id,
         internal: {
           type: 'HomepageBenefitList',
@@ -264,6 +268,7 @@ exports.onCreateNode = async ({
         },
         parent: node.id,
         originalId: node.id,
+        content: node.content___NODE,
       })
       break
     case 'ContentfulHomepageStat':
@@ -276,12 +281,12 @@ exports.onCreateNode = async ({
           contentDigest: node.internal.contentDigest,
         },
         parent: node.id,
+        originalId: node.id,
       })
       break
     case 'ContentfulHomepageStatList':
       id = createNodeId(`${node.id} >>> HomepageStatList`)
       actions.createNode({
-        ...node,
         id,
         internal: {
           type: 'HomepageStatList',
@@ -289,6 +294,7 @@ exports.onCreateNode = async ({
         },
         parent: node.id,
         originalId: node.id,
+        content: node.content___NODE,
       })
       break
   }
