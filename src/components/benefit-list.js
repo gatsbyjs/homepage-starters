@@ -1,9 +1,16 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
 function Benefit (props) {
   return (
     <div>
+      {props.image && (
+        <GatsbyImage
+          alt={props.image.alt}
+          image={getImage(props.image)}
+        />
+      )}
       <h2>{props.heading}</h2>
       <p>{props.text}</p>
     </div>
@@ -33,6 +40,8 @@ export const query = graphql`
       text
       image {
         id
+        gatsbyImageData
+        alt
       }
     }
   }

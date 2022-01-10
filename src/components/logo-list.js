@@ -3,6 +3,8 @@ import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
 function Logo (props) {
+  if (!props.image) return false
+
   return (
     <GatsbyImage
       alt={props.alt}
@@ -34,6 +36,7 @@ export const query = graphql`
       image {
         id
         gatsbyImageData
+        alt
       }
     }
   }

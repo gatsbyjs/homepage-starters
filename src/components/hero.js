@@ -1,11 +1,18 @@
 import * as React from 'react'
 import { graphql, Link } from 'gatsby'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { sprinkles } from '../sprinkles.css.ts'
 import { className } from './hero.css.ts'
 
 export default function Hero (props) {
   return (
     <section className={className}>
+      {props.image && (
+        <GatsbyImage
+          alt={props.image.alt}
+          image={getImage(props.image)}
+        />
+      )}
       <h3>{props.kicker}</h3>
       <h1
         className={sprinkles({
@@ -44,6 +51,7 @@ export const query = graphql`
     image {
       id
       gatsbyImageData
+      alt
     }
   }
 `

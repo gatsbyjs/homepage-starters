@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 
 function Testimonial (props) {
   return (
@@ -8,6 +9,12 @@ function Testimonial (props) {
         {props.quote}
       </p>
       <figcaption>
+        {props.avatar && (
+          <GatsbyImage
+            alt={props.avatar.alt}
+            image={getImage(props.avatar)}
+          />
+        )}
         <cite>
           {props.source}
         </cite>
@@ -40,6 +47,7 @@ export const query = graphql`
       avatar {
         id
         gatsbyImageData
+        alt
       }
     }
   }
