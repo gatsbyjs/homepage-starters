@@ -40,5 +40,6 @@ module.exports = {
     'gatsby-plugin-sharp',
     'gatsby-plugin-image',
     'gatsby-transformer-sharp',
+    'gatsby-plugin-vanilla-extract',
   ]
 }
