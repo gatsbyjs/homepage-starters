@@ -109,7 +109,7 @@ exports.onCreateNode = async ({
         contentDigest: createContentDigest(JSON.stringify(link)),
       },
     })
-    return linkID // getNode(linkID)
+    return linkID
   }
 
   const pageID = createNodeId(`${node.id} >>> Homepage`)
@@ -185,7 +185,7 @@ exports.onCreateNode = async ({
               },
               parent: id,
             })
-            return testimonialID // getNode(testimonialID)
+            return testimonialID
           }),
         })
         break
@@ -208,7 +208,7 @@ exports.onCreateNode = async ({
               },
               parent: id,
             })
-            return benefitID // getNode(benefitID)
+            return benefitID
           }),
         })
         break
@@ -233,7 +233,7 @@ exports.onCreateNode = async ({
               alt: logo.alt,
               image: logo.image,
             })
-            return logoID // getNode(logoID)
+            return logoID
           }),
         })
         break

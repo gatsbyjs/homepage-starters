@@ -9,11 +9,11 @@ const Fallback = (props) =>
   </div>
 
 export default function Homepage (props) {
-  const blocks = props.data.blocks.nodes
+  const [ homepage ] = props.data.allHomepage.nodes
 
   return (
     <div className={themeRoot}>
-      {blocks.map(block => {
+      {homepage.blocks.map(block => {
         const Component = sections[block.__typename] || Fallback
         return <Component key={block.id} {...block} />
       })}
@@ -23,11 +23,22 @@ export default function Homepage (props) {
 
 export const query = graphql`
   {
-    blocks: allHomepageBlock {
+    allHomepage {
       nodes {
         id
-        __typename
-        ...HomepageHeroContent
+        title
+        description
+        blocks: content {
+          id
+          __typename
+          ...HomepageHeroContent
+          ...HomepageFeatureContent
+          ...HomepageCtaContent
+          ...HomepageLogoListContent
+          ...HomepageTestimonialListContent
+          ...HomepageBenefitListContent
+          ...HomepageStatListContent
+        }
       }
     }
   }

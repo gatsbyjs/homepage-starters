@@ -15,8 +15,8 @@
       href: '#!'
   - type: LogoList
     logos:
-    - alt: IBM
-      image: ../assets/IBM.png
+    - image: ../assets/IBM.png
+      alt: IBM
     - image: ../assets/Figma.png
       alt: Figma
     - image: ../assets/Braun.png

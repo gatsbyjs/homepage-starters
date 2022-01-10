@@ -1,21 +1,12 @@
 import * as React from 'react'
 import { graphql, Link } from 'gatsby'
-import { sprinkles } from '../sprinkles.css.ts'
-import { className } from './hero.css.ts'
 
-export default function Hero (props) {
+export default function Feature (props) {
   return (
-    <section className={className}>
+    <section>
       <h3>{props.kicker}</h3>
-      <h1
-        className={sprinkles({
-          fontSize: 5,
-        })}>
-        {props.heading}
-      </h1>
-      <h2>{props.subhead}</h2>
+      <h2>{props.heading}</h2>
       <p>{props.text}</p>
-      <pre>{props.image.id}</pre>
       <ul>
         {props.links.map(link => (
           <li key={link.id}>
@@ -30,11 +21,10 @@ export default function Hero (props) {
 }
 
 export const query = graphql`
-  fragment HomepageHeroContent on HomepageHero {
+  fragment HomepageFeatureContent on HomepageFeature {
     id
     kicker
     heading
-    subhead
     text
     links {
       id
