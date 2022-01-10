@@ -113,23 +113,28 @@ exports.onCreateNode = async ({
   // For other CMSs, adjust this to map source data to the abstraction needed in the starter
   if (!node.internal.type.includes('DatoCms')) return
 
-  const data = node.entityPayload?.attributes || node
   let id
+  const originalId = node.id.replace(/[A-Za-z-]/g, '')
+  const data = node.entityPayload?.attributes || node
 
-  const getDatoID = str => str.replace(/[A-Za-z-]/g, '')
-  const originalId = getDatoID(node.id)
+  const createHomepageNode = (typeName, data) => {
+    id = createNodeId(`${node.id} >>> ${typeName}`)
+    actions.createNode({
+      ...data,
+      id,
+      internal: {
+        type: typeName,
+        contentDigest: node.internal.contentDigest,
+      },
+      parent: node.id,
+      originalId,
+    })
+  }
 
   switch (node.internal.type) {
     case 'DatoCmsHomepage':
-      id = createNodeId(`${node.id} >>> Homepage`)
-      actions.createNode({
+      createHomepageNode('Homepage', {
         ...node,
-        id,
-        internal: {
-          type: 'Homepage',
-          contentDigest: node.internal.contentDigest,
-        },
-        parent: node.id,
         title: data.metadata?.title,
         description: data.metadata?.description,
         image: data.metadata?.image,
@@ -137,16 +142,8 @@ exports.onCreateNode = async ({
       })
       break
     case 'DatoCmsHero':
-      id = createNodeId(`${node.id} >>> HomepageHero`)
-      actions.createNode({
+      createHomepageNode('HomepageHero', {
         ...node,
-        id,
-        internal: {
-          type: 'HomepageHero',
-          contentDigest: node.internal.contentDigest,
-        },
-        parent: node.id,
-        originalId,
         heading: data.heading,
         kicker: data.kicker,
         subhead: data.subhead,
@@ -156,32 +153,16 @@ exports.onCreateNode = async ({
       })
       break
     case 'DatoCmsCta':
-      id = createNodeId(`${node.id} >>> HomepageCta`)
-      actions.createNode({
+      createHomepageNode('HomepageCta', {
         ...node,
-        id,
-        internal: {
-          type: 'HomepageCta',
-          contentDigest: node.internal.contentDigest,
-        },
-        parent: node.id,
-        originalId,
         heading: data.heading,
         text: data.text,
         links: data.links,
       })
       break
     case 'DatoCmsFeature':
-      id = createNodeId(`${node.id} >>> HomepageFeature`)
-      actions.createNode({
+      createHomepageNode('HomepageFeature', {
         ...node,
-        id,
-        internal: {
-          type: 'HomepageFeature',
-          contentDigest: node.internal.contentDigest,
-        },
-        parent: node.id,
-        originalId,
         heading: data.heading,
         kicker: data.kicker,
         image: data.image,
@@ -190,135 +171,63 @@ exports.onCreateNode = async ({
       })
       break
     case 'DatoCmsBenefit':
-      id = createNodeId(`${node.id} >>> HomepageBenefit`)
-      actions.createNode({
+      createHomepageNode('HomepageBenefit', {
         ...node,
-        id,
-        internal: {
-          type: 'HomepageBenefit',
-          contentDigest: node.internal.contentDigest,
-        },
-        parent: node.id,
-        originalId,
         heading: data.heading,
         image: data.image,
         text: data.text,
       })
       break
     case 'DatoCmsBenefitlist':
-      id = createNodeId(`${node.id} >>> HomepageBenefitList`)
-      actions.createNode({
+      createHomepageNode('HomepageBenefitList', {
         ...node,
-        id,
-        internal: {
-          type: 'HomepageBenefitList',
-          contentDigest: node.internal.contentDigest,
-        },
-        parent: node.id,
-        originalId,
         content: data.content
       })
       break
     case 'DatoCmsTestimonial':
-      id = createNodeId(`${node.id} >>> HomepageTestimonial`)
-      actions.createNode({
+      createHomepageNode('HomepageTestimonial', {
         ...node,
-        id,
-        internal: {
-          type: 'HomepageTestimonial',
-          contentDigest: node.internal.contentDigest,
-        },
-        parent: node.id,
-        originalId,
         quote: data.quote,
         source: data.source,
         avatar: data.avatar,
       })
       break
     case 'DatoCmsTestimoniallist':
-      id = createNodeId(`${node.id} >>> HomepageTestimonialList`)
-      actions.createNode({
+      createHomepageNode('HomepageTestimonialList', {
         ...node,
-        id,
-        internal: {
-          type: 'HomepageTestimonialList',
-          contentDigest: node.internal.contentDigest,
-        },
-        parent: node.id,
-        originalId,
         content: data.content
       })
       break
     case 'DatoCmsStat':
-      id = createNodeId(`${node.id} >>> HomepageStat`)
-      actions.createNode({
+      createHomepageNode('HomepageStat', {
         ...node,
-        id,
-        internal: {
-          type: 'HomepageStat',
-          contentDigest: node.internal.contentDigest,
-        },
-        parent: node.id,
-        originalId,
         heading: data.heading,
         value: data.value,
         label: data.label,
       })
       break
     case 'DatoCmsStatlist':
-      id = createNodeId(`${node.id} >>> HomepageStatList`)
-      actions.createNode({
+      createHomepageNode('HomepageStatList', {
         ...node,
-        id,
-        internal: {
-          type: 'HomepageStatlist',
-          contentDigest: node.internal.contentDigest,
-        },
-        parent: node.id,
-        originalId,
         content: data.content,
       })
       break
     case 'DatoCmsLogo':
-      id = createNodeId(`${node.id} >>> HomepageLogo`)
-      actions.createNode({
+      createHomepageNode('HomepageLogo', {
         ...node,
-        id,
-        internal: {
-          type: 'HomepageLogo',
-          contentDigest: node.internal.contentDigest,
-        },
-        parent: node.id,
-        originalId,
         alt: data.alt,
         image: data.image,
       })
       break
     case 'DatoCmsLogolist':
-      id = createNodeId(`${node.id} >>> HomepageLogoList`)
-      actions.createNode({
+      createHomepageNode('HomepageLogoList', {
         ...node,
-        id,
-        internal: {
-          type: 'HomepageLogoList',
-          contentDigest: node.internal.contentDigest,
-        },
-        parent: node.id,
-        originalId,
         logos: data.content,
       })
       break
     case 'DatoCmsLink':
-      id = createNodeId(`${node.id} >>> HomepageLink`)
-      actions.createNode({
+      createHomepageNode('HomepageLink', {
         ...node,
-        id,
-        internal: {
-          type: 'HomepageLink',
-          contentDigest: node.internal.contentDigest,
-        },
-        parent: node.id,
-        originalId,
         href: data.href,
         text: data.text,
       })
