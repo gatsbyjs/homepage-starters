@@ -1,12 +1,18 @@
 import * as React from 'react'
 import { graphql, Link } from 'gatsby'
+import { sprinkles } from '../sprinkles.css.ts'
 import { className } from './hero.css.ts'
 
 export default function Hero (props) {
   return (
     <section className={className}>
       <h3>{props.kicker}</h3>
-      <h1>{props.heading}</h1>
+      <h1
+        className={sprinkles({
+          fontSize: 5,
+        })}>
+        {props.heading}
+      </h1>
       <h2>{props.subhead}</h2>
       <p>{props.text}</p>
       <pre>{props.image.id}</pre>

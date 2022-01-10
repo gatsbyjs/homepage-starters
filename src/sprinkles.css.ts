@@ -2,22 +2,23 @@ import {
   defineProperties,
   createSprinkles
 } from '@vanilla-extract/sprinkles';
+import { theme } from './styles.css.ts'
 
-const space = {
-  0: 0,
-  1: 8,
-  2: 16,
-  3: 32,
-  4: 64,
-  5: 128,
-};
-
-const colors = {
-  text: '#000',
-  background: '#fff',
-};
+const typography = {
+  fontSize: theme.fontSizes,
+}
 
 const layout = {
+  padding: theme.space,
+  paddingTop: theme.space,
+  paddingRight: theme.space,
+  paddingBottom: theme.space,
+  paddingLeft: theme.space,
+  margin: theme.space,
+  marginTop: theme.space,
+  marginRight: theme.space,
+  marginBottom: theme.space,
+  marginLeft: theme.space,
   display: ['none', 'flex', 'block', 'inline'],
   flexDirection: ['row', 'column'],
   justifyContent: [
@@ -39,18 +40,10 @@ const layout = {
 const properties = defineProperties({
   properties: {
     ...layout,
-    padding: space,
-    paddingTop: space,
-    paddingRight: space,
-    paddingBottom: space,
-    paddingLeft: space,
-    margin: space,
-    marginTop: space,
-    marginRight: space,
-    marginBottom: space,
-    marginLeft: space,
-    color: colors,
-    backgroundColor: colors,
+    ...typography,
+    color: theme.colors,
+    backgroundColor: theme.colors,
+    borderColor: theme.colors,
   },
   shorthands: {
     padding: [

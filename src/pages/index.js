@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
+import { themeRoot } from '../styles.css.ts'
 import * as sections from '../components/sections'
 
 const Fallback = (props) =>
@@ -11,7 +12,7 @@ export default function Homepage (props) {
   const blocks = props.data.blocks.nodes
 
   return (
-    <div>
+    <div className={themeRoot}>
       {blocks.map(block => {
         const Component = sections[block.__typename] || Fallback
         return <Component key={block.id} {...block} />
