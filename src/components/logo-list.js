@@ -17,7 +17,7 @@ export default function LogoList (props) {
   return (
     <section>
       <ul>
-        {props.logos.map(logo => (
+        {props.logos.map(logo => logo && (
           <li key={logo.id}>
             <Logo {...logo} />
           </li>

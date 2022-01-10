@@ -1,3 +1,12 @@
+const parentResolverPassthrough = ({ field } = {}) => async (source, args, context, info) => {
+  const fieldName = field || info.fieldName
+  const parentNode = context.nodeModel.getNodeById({ id: source.parent })
+  const schemaType = info.schema.getType(parentNode.internal.type)
+  const resolver = schemaType.getFields()[fieldName].resolve
+  const result = await resolver(parentNode, args, context, { fieldName })
+  return result
+}
+
 exports.createSchemaCustomization = async ({ actions }) => {
   actions.createFieldExtension({
     // Prevents errors when a block is not present in the content
@@ -9,6 +18,20 @@ exports.createSchemaCustomization = async ({ actions }) => {
         }
       }
     }
+  })
+
+  actions.createFieldExtension({
+    name: 'parentResolverPassthrough',
+    args: {
+      field: 'String',
+    },
+    extend({ field }) {
+      return {
+        resolve: parentResolverPassthrough({
+          field,
+        })
+      }
+    },
   })
 
   actions.createTypes(`
@@ -23,12 +46,17 @@ exports.createSchemaCustomization = async ({ actions }) => {
       text: String
     }
 
+    type HomepageImage implements Node {
+      alt: String
+      gatsbyImageData: JSON @parentResolverPassthrough(field: "gatsbyImageData")
+    }
+
     type HomepageHero implements Node & HomepageBlock {
       originalId: String @fallbackId
       heading: String
       kicker: String
       subhead: String
-      image: DatoCmsAsset @link(by: "originalId")
+      image: HomepageImage @link(by: "originalId")
       # also consider image alt text
       text: String
       links: [HomepageLink] @link(by: "originalId")
@@ -39,7 +67,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       heading: String
       kicker: String
       text: String
-      image: DatoCmsAsset @link(by: "originalId", from: "upload_id")
+      image: HomepageImage @link(by: "originalId", from: "upload_id")
       links: [HomepageLink] @link(by: "originalId")
     }
 
@@ -51,52 +79,56 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
 
     type HomepageStat implements Node {
+      originalId: String @fallbackId
       heading: String
       value: String!
       label: String!
     }
 
     type HomepageStatList implements Node & HomepageBlock {
-      content: [HomepageStat]
+      content: [HomepageStat] @link(by: "originalId")
       originalId: String @fallbackId
     }
 
     type HomepageBenefit implements Node {
+      originalId: String @fallbackId
       heading: String
       text: String
-      image: DatoCmsAsset @link(by: "originalId")
+      image: HomepageImage @link(by: "originalId")
     }
 
     type HomepageBenefitList implements Node & HomepageBlock {
       originalId: String @fallbackId
-      content: [HomepageBenefit]
+      content: [HomepageBenefit] @link(by: "originalId")
     }
 
     type HomepageTestimonial implements Node {
+      originalId: String @fallbackId
       quote: String!
       source: String!
-      avatar: JSON
+      avatar: HomepageImage
     }
 
     type HomepageTestimonialList implements Node & HomepageBlock {
       originalId: String @fallbackId
-      content: [HomepageTestimonial]
+      content: [HomepageTestimonial] @link(by: "originalId")
     }
 
     type HomepageLogo implements Node {
+      originalId: String @fallbackId
       alt: String
-      image: DatoCmsAsset @link(by: "originalId")
+      image: HomepageImage @link(by: "originalId")
     }
 
     type HomepageLogoList implements Node & HomepageBlock {
       originalId: String @fallbackId
-      logos: [HomepageLogo]
+      logos: [HomepageLogo] @link(by: "originalId")
     }
 
     type Homepage implements Node @dontInfer {
       title: String!
       description: String!
-      image: DatoCmsAsset @link(by: "originalId")
+      image: HomepageImage @link(by: "originalId")
       content: [HomepageBlock] @link(by: "originalId")
     }
   `)
@@ -114,10 +146,10 @@ exports.onCreateNode = async ({
   if (!node.internal.type.includes('DatoCms')) return
 
   let id
-  const originalId = node.id.replace(/[A-Za-z-]/g, '')
+  const _originalId = node.id.replace(/[A-Za-z-]/g, '')
   const data = node.entityPayload?.attributes || node
 
-  const createHomepageNode = (typeName, data) => {
+  const createHomepageNode = (typeName, data, originalId = _originalId) => {
     id = createNodeId(`${node.id} >>> ${typeName}`)
     actions.createNode({
       ...data,
@@ -141,6 +173,12 @@ exports.onCreateNode = async ({
         content: data.content,
       })
       break
+    case 'DatoCmsAsset':
+      // TODO: get "alt" text from content nodes
+      createHomepageNode('HomepageImage', {
+        ...node,
+        ...data,
+      })
     case 'DatoCmsHero':
       createHomepageNode('HomepageHero', {
         ...node,
@@ -213,16 +251,17 @@ exports.onCreateNode = async ({
       })
       break
     case 'DatoCmsLogo':
+      // TODO: see if this is needed
       createHomepageNode('HomepageLogo', {
         ...node,
         alt: data.alt,
         image: data.image,
-      })
+      }, data.upload_id)
       break
     case 'DatoCmsLogolist':
       createHomepageNode('HomepageLogoList', {
         ...node,
-        logos: data.content,
+        logos: data.logos
       })
       break
     case 'DatoCmsLink':
