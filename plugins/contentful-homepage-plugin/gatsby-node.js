@@ -134,6 +134,11 @@ exports.createSchemaCustomization = async ({ actions }) => {
       logo: ContentfulAsset
     }
 
+    type Layout implements Node {
+      header: LayoutHeader @link(by: "originalId")
+      footer: LayoutFooter @link(by: "originalId")
+    }
+
     type LayoutHeader implements Node {
       # should this be a more generic type?
       logo: HomepageImage @link(by: "originalId")
@@ -292,6 +297,7 @@ exports.onCreateNode = async ({
       createHomepageNode('SocialLink', {
         ...node
       })
+      break
   }
 
   // Skip non-homepage related nodes

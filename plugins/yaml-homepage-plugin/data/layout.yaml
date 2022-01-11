@@ -1,0 +1,40 @@
+- header:
+  - logo: ../assets/Braun.png
+  - links:
+    - text: Products
+      href: #!
+    - text: Pricing
+      href: #!
+    - text: Community
+      href: #!
+    - text: Company
+      href: #!
+    - text: Blog
+      href: #!
+  cta:
+    text: Sign Up
+    href: #!
+- footer:
+  - logo: ../assets/Braun.png
+  - links:
+    - text: Products
+      href: #!
+    - text: Pricing
+      href: #!
+    - text: Community
+      href: #!
+    - text: Company
+      href: #!
+    - text: Blog
+      href: #!
+  - meta:
+    - text: Terms
+      href: #!
+    - text: Privacy Policy
+      href: #!
+  - socialLinks:
+    - service: TWITTER
+      username: gatsbyjs
+    - service: GITHUB
+      username: gatsbyjs
+  copyright: © 2022 Gatsby, Inc. All rights reserved
