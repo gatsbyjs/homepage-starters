@@ -125,8 +125,46 @@ exports.createSchemaCustomization = async ({ actions }) => {
       image: HomepageImage @link(by: "originalId")
       content: [HomepageBlock] @link(by: "originalId")
     }
-  `)
 
+    # prevent errors when undefined
+    type ContentfulLayoutHeader implements Node {
+      logo: ContentfulAsset
+    }
+    type ContentfulLayoutFooter implements Node {
+      logo: ContentfulAsset
+    }
+
+    type LayoutHeader implements Node {
+      # should this be a more generic type?
+      logo: HomepageImage @link(by: "originalId")
+      links: [HomepageLink] @link(by: "originalId")
+      cta: HomepageLink
+    }
+
+    enum SocialService {
+      TWITTER
+      FACEBOOK
+      INSTAGRAM
+      YOUTUBE
+      LINKEDIN
+      GITHUB
+      DISCORD
+      TWITCH
+    }
+
+    type SocialLink implements Node {
+      username: String!
+      service: SocialService!
+    }
+
+    type LayoutFooter implements Node {
+      logo: HomepageImage @link(by: "originalId")
+      links: [HomepageLink] @link(by: "originalId")
+      meta: [HomepageLink] @link(by: "originalId")
+      social: [SocialLink] @link(by: "originalId")
+      copyright: String
+    }
+  `)
 }
 
 exports.onCreateNode = async ({
@@ -153,7 +191,6 @@ exports.onCreateNode = async ({
       originalId: node.id,
     })
   }
-
 
   switch (node.internal.type) {
     case 'ContentfulHomepage':
@@ -235,6 +272,26 @@ exports.onCreateNode = async ({
         content: node.content___NODE,
       })
       break
+    // Layout nodes
+    case 'ContentfulLayout':
+      createHomepageNode('Layout', {
+        ...node,
+      })
+      break
+    case 'ContentfulLayoutHeader':
+      createHomepageNode('LayoutHeader', {
+        ...node
+      })
+      break
+    case 'ContentfulLayoutFooter':
+      createHomepageNode('LayoutFooter', {
+        ...node
+      })
+      break
+    case 'ContentfulSocialLink':
+      createHomepageNode('SocialLink', {
+        ...node
+      })
   }
 
   // Skip non-homepage related nodes
