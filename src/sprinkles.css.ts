@@ -5,10 +5,21 @@ import {
 import { theme } from './styles.css.ts'
 
 const typography = {
+  fontFamily: theme.fonts,
   fontSize: theme.fontSizes,
+  fontWeight: theme.fontWeights,
+  lineHeight: theme.lineHeights,
+  letterSpacing: theme.letterSpacings,
+  textTransform: [
+    'uppercase',
+    'lowercase',
+  ],
 }
 
 const layout = {
+  width: theme.sizes,
+  maxWidth: theme.sizes,
+  minWidth: theme.sizes,
   padding: theme.space,
   paddingTop: theme.space,
   paddingRight: theme.space,

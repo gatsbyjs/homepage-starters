@@ -4,6 +4,11 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { sprinkles } from '../sprinkles.css.ts'
 import { className } from './hero.css.ts'
 
+import Text from './text'
+import Kicker from './kicker'
+import Heading from './heading'
+import Subhead from './subhead'
+
 export default function Hero (props) {
   return (
     <section className={className}>
@@ -13,16 +18,13 @@ export default function Hero (props) {
           image={getImage(props.image)}
         />
       )}
-      <h3>{props.kicker}</h3>
-      <h1
-        className={sprinkles({
-          fontSize: 5,
-        })}>
+      <Kicker as='h3'>{props.kicker}</Kicker>
+      <Heading as='h1'>
         {props.heading}
-      </h1>
-      <h2>{props.subhead}</h2>
-      <p>{props.text}</p>
-      <pre>{props.image.id}</pre>
+      </Heading>
+      <Subhead as='h2'>{props.subhead}</Subhead>
+      <Text as='p'>{props.text}</Text>
+      <Text as='pre' variant='mono'>{props.image.id}</Text>
       <ul>
         {props.links.map(link => (
           <li key={link.id}>
