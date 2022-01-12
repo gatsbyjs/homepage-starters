@@ -167,7 +167,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
       image: HomepageImage
       text: String
       links: [HomepageLink]
-      # @proxy(from: "links___NODE")
     }
 
     type ContenfulHomepageFeature implements Node & HomepageBlock & HomepageFeature {
@@ -234,10 +233,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       title: String
       description: String
       image: HomepageImage
-      content: [HomepageBlock] @link(by: "parent.id")
-
-      # content: [HomepageBlock] @link(by: "parent")
-      # blocks: [HomepageBlock] @proxy(from: "content")
+      content: [HomepageBlock]
     }
   `)
 }
@@ -253,7 +249,7 @@ exports.onCreateNode = async ({
 
   // TODO
   if (node.internal.type === 'ContentfulHomepage') {
-    console.log(node)
+    // console.log(node)
   }
   return
 }
