@@ -143,7 +143,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       # should this be a more generic type?
       logo: HomepageImage @link(by: "originalId")
       links: [HomepageLink] @link(by: "originalId")
-      cta: HomepageLink
+      cta: HomepageLink @link(by: "originalId")
     }
 
     enum SocialService {
@@ -166,7 +166,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       logo: HomepageImage @link(by: "originalId")
       links: [HomepageLink] @link(by: "originalId")
       meta: [HomepageLink] @link(by: "originalId")
-      social: [SocialLink] @link(by: "originalId")
+      socialLinks: [SocialLink] @link(by: "originalId")
       copyright: String
     }
   `)
@@ -280,17 +280,25 @@ exports.onCreateNode = async ({
     // Layout nodes
     case 'ContentfulLayout':
       createHomepageNode('Layout', {
-        ...node,
+        header: node.header___NODE,
+        footer: node.footer___NODE,
       })
       break
     case 'ContentfulLayoutHeader':
       createHomepageNode('LayoutHeader', {
-        ...node
+        logo: node.logo___NODE,
+        links: node.links___NODE,
+        cta: node.cta___NODE,
       })
       break
     case 'ContentfulLayoutFooter':
       createHomepageNode('LayoutFooter', {
-        ...node
+        logo: node.logo___NODE,
+        links: node.links___NODE,
+        meta: node.meta___NODE,
+        socialLinks: node.socialLinks___NODE,
+        copyright: node.copyright,
+
       })
       break
     case 'ContentfulSocialLink':

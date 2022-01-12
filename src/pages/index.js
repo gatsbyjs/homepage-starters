@@ -1,10 +1,8 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
 import { themeRoot } from '../styles.css.ts'
-// import Layout from '../components/layout'
+import Layout from '../components/layout'
 import * as sections from '../components/sections'
-
-const Layout = props => props.children
 
 const Fallback = (props) =>
   <div>
