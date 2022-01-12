@@ -5,7 +5,7 @@ import * as sections from '../components/sections'
 
 const Fallback = (props) =>
   <div>
-    No component found: {props.__typename}
+    No component found: {props.blocktype}
   </div>
 
 export default function Homepage (props) {
@@ -14,7 +14,7 @@ export default function Homepage (props) {
   return (
       <Layout>
         {homepage.blocks.map(block => {
-          const Component = sections[block.__typename] || Fallback
+          const Component = sections[block.blocktype] || Fallback
           return <Component key={block.id} {...block} />
         })}
       </Layout>
@@ -29,7 +29,7 @@ export const query = graphql`
       description
       blocks: content {
         id
-        __typename
+        blocktype
         ...HomepageHeroContent
         ...HomepageFeatureContent
         ...HomepageCtaContent
