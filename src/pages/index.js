@@ -1,37 +1,43 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
+import { themeRoot } from '../styles.css.ts'
+import * as sections from '../components/sections'
+
+const Fallback = (props) =>
+  <div>
+    No component found: {props.__typename}
+  </div>
 
 export default function Homepage (props) {
-  const blocks = props.data.blocks.nodes
+  const [ homepage ] = props.data.allHomepage.nodes
 
   return (
-    <div>
-      {blocks.map(block => (
-        <div key={block.id}>
-          <h2>{block.__typename}</h2>
-          <pre
-            children={JSON.stringify(block, null, 2)}
-          />
-        </div>
-      ))}
+    <div className={themeRoot}>
+      {homepage.blocks.map(block => {
+        const Component = sections[block.__typename] || Fallback
+        return <Component key={block.id} {...block} />
+      })}
     </div>
   )
 }
 
-// TODO update YAML data structure and query top-level homepage
 export const query = graphql`
   {
-    blocks: allHomepageBlock {
+    allHomepage {
       nodes {
         id
-        __typename
-        ... on HomepageHero {
+        title
+        description
+        blocks: content {
           id
-          heading
-        }
-        ... on HomepageFeature {
-          id
-          heading
+          __typename
+          ...HomepageHeroContent
+          ...HomepageFeatureContent
+          ...HomepageCtaContent
+          ...HomepageLogoListContent
+          ...HomepageTestimonialListContent
+          ...HomepageBenefitListContent
+          ...HomepageStatListContent
         }
       }
     }

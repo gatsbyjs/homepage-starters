@@ -1,3 +1,12 @@
+const parentResolverPassthrough = ({ field } = {}) => async (source, args, context, info) => {
+  const fieldName = field || info.fieldName
+  const parentNode = context.nodeModel.getNodeById({ id: source.parent })
+  const schemaType = info.schema.getType(parentNode.internal.type)
+  const resolver = schemaType.getFields()[fieldName].resolve
+  const result = await resolver(parentNode, args, context, { fieldName })
+  return result
+}
+
 exports.createSchemaCustomization = async ({ actions }) => {
   actions.createFieldExtension({
     // Prevents errors when a block is not present in the content
@@ -11,6 +20,20 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
   })
 
+  actions.createFieldExtension({
+    name: 'parentResolverPassthrough',
+    args: {
+      field: 'String',
+    },
+    extend({ field }) {
+      return {
+        resolve: parentResolverPassthrough({
+          field,
+        })
+      }
+    },
+  })
+
   actions.createTypes(`
     interface HomepageBlock implements Node {
       id: ID!
@@ -22,11 +45,16 @@ exports.createSchemaCustomization = async ({ actions }) => {
       text: String
     }
 
+    type HomepageImage implements Node {
+      alt: String
+      gatsbyImageData: JSON @parentResolverPassthrough(field: "gatsbyImageData")
+    }
+
     type HomepageHero implements Node & HomepageBlock {
       heading: String
       kicker: String
       subhead: String
-      image: ContentfulAsset @link
+      image: HomepageImage @link(by: "originalId")
       text: String
       links: [HomepageLink] @link(by: "originalId")
       originalId: String @fallbackId
@@ -36,7 +64,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       heading: String
       kicker: String
       text: String
-      image: ContentfulAsset @link
+      image: HomepageImage @link(by: "originalId")
       links: [HomepageLink] @link(by: "originalId")
       originalId: String @fallbackId
     }
@@ -48,11 +76,10 @@ exports.createSchemaCustomization = async ({ actions }) => {
       originalId: String @fallbackId
     }
 
-
     type HomepageLogo implements Node {
-      image: ContentfulAsset @link
+      image: HomepageImage @link(by: "originalId")
       alt: String
-      originalId: String
+      originalId: String @fallbackId
     }
     type HomepageLogoList implements Node & HomepageBlock {
       logos: [HomepageLogo] @link(by: "originalId")
@@ -62,7 +89,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type HomepageTestimonial implements Node {
       quote: String
       source: String
-      avatar: ContentfulAsset
+      avatar: HomepageImage @link(by: "originalId")
       originalId: String
     }
     type HomepageTestimonialList implements Node & HomepageBlock {
@@ -73,7 +100,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type HomepageBenefit implements Node {
       heading: String
       text: String
-      image: ContentfulAsset @link
+      image: HomepageImage @link(by: "originalId")
       originalId: String,
     }
     type HomepageBenefitList implements Node & HomepageBlock {
@@ -95,10 +122,11 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type Homepage implements Node {
       title: String
       description: String
-      image: ContentfulAsset @link
+      image: HomepageImage @link(by: "originalId")
       content: [HomepageBlock] @link(by: "originalId")
     }
   `)
+
 }
 
 exports.onCreateNode = async ({
@@ -141,6 +169,11 @@ exports.onCreateNode = async ({
         ...node,
       })
       break
+    case 'ContentfulAsset':
+      createHomepageNode('HomepageImage', {
+        ...node,
+        alt: node.title,
+      })
     case 'ContentfulHomepageHero':
       createHomepageNode('HomepageHero', {
         heading: node.heading,
@@ -175,7 +208,7 @@ exports.onCreateNode = async ({
       break
     case 'ContentfulHomepageLogoList':
       createHomepageNode('HomepageLogoList', {
-        content: node.content___NODE,
+        logos: node.logos___NODE,
       })
       break
     case 'ContentfulHomepageTestimonial':
