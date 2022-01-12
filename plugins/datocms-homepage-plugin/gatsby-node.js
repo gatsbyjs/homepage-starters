@@ -131,6 +131,44 @@ exports.createSchemaCustomization = async ({ actions }) => {
       image: HomepageImage @link(by: "originalId")
       content: [HomepageBlock] @link(by: "originalId")
     }
+
+    # Layout
+
+    type Layout implements Node {
+      header: LayoutHeader @link(by: "originalId")
+      footer: LayoutFooter @link(by: "originalId")
+    }
+
+    type LayoutHeader implements Node {
+      # should this be a more generic type?
+      logo: HomepageImage @link(by: "originalId")
+      links: [HomepageLink] @link(by: "originalId")
+      cta: HomepageLink @link(by: "originalId")
+    }
+
+    enum SocialService {
+      TWITTER
+      FACEBOOK
+      INSTAGRAM
+      YOUTUBE
+      LINKEDIN
+      GITHUB
+      DISCORD
+      TWITCH
+    }
+
+    type SocialLink implements Node {
+      username: String!
+      service: SocialService!
+    }
+
+    type LayoutFooter implements Node {
+      logo: HomepageImage @link(by: "originalId")
+      links: [HomepageLink] @link(by: "originalId")
+      meta: [HomepageLink] @link(by: "originalId")
+      socialLinks: [SocialLink] @link(by: "originalId")
+      copyright: String
+    }
   `)
 }
 
@@ -269,6 +307,35 @@ exports.onCreateNode = async ({
         ...node,
         href: data.href,
         text: data.text,
+      })
+      break
+    // Layout nodes
+    case 'DatoCmsLayout':
+      createHomepageNode('Layout', {
+        ...node,
+        ...data
+      })
+      break
+    case 'DatoCmsLayoutheader':
+      const [ cta ] = data.cta
+      createHomepageNode('LayoutHeader', {
+        ...node,
+        ...data,
+        cta,
+      })
+      break
+    case 'DatoCmsLayoutfooter':
+      createHomepageNode('LayoutFooter', {
+        ...node,
+        ...data,
+        socialLinks: data.social_links,
+      })
+      break
+    case 'DatoCmsSocialLink':
+      createHomepageNode('SocialLink', {
+        ...node,
+        service: data.service,
+        username: data.username,
       })
       break
   }

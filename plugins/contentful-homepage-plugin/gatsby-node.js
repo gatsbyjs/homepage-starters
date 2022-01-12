@@ -125,8 +125,51 @@ exports.createSchemaCustomization = async ({ actions }) => {
       image: HomepageImage @link(by: "originalId")
       content: [HomepageBlock] @link(by: "originalId")
     }
-  `)
 
+    # prevent errors when undefined
+    type ContentfulLayoutHeader implements Node {
+      logo: ContentfulAsset
+    }
+    type ContentfulLayoutFooter implements Node {
+      logo: ContentfulAsset
+    }
+
+    type Layout implements Node {
+      header: LayoutHeader @link(by: "originalId")
+      footer: LayoutFooter @link(by: "originalId")
+    }
+
+    type LayoutHeader implements Node {
+      # should this be a more generic type?
+      logo: HomepageImage @link(by: "originalId")
+      links: [HomepageLink] @link(by: "originalId")
+      cta: HomepageLink @link(by: "originalId")
+    }
+
+    enum SocialService {
+      TWITTER
+      FACEBOOK
+      INSTAGRAM
+      YOUTUBE
+      LINKEDIN
+      GITHUB
+      DISCORD
+      TWITCH
+    }
+
+    type SocialLink implements Node {
+      username: String!
+      service: SocialService!
+    }
+
+    type LayoutFooter implements Node {
+      logo: HomepageImage @link(by: "originalId")
+      links: [HomepageLink] @link(by: "originalId")
+      meta: [HomepageLink] @link(by: "originalId")
+      socialLinks: [SocialLink] @link(by: "originalId")
+      copyright: String
+    }
+  `)
 }
 
 exports.onCreateNode = async ({
@@ -153,7 +196,6 @@ exports.onCreateNode = async ({
       originalId: node.id,
     })
   }
-
 
   switch (node.internal.type) {
     case 'ContentfulHomepage':
@@ -233,6 +275,35 @@ exports.onCreateNode = async ({
     case 'ContentfulHomepageStatList':
       createHomepageNode('HomepageStatList', {
         content: node.content___NODE,
+      })
+      break
+    // Layout nodes
+    case 'ContentfulLayout':
+      createHomepageNode('Layout', {
+        header: node.header___NODE,
+        footer: node.footer___NODE,
+      })
+      break
+    case 'ContentfulLayoutHeader':
+      createHomepageNode('LayoutHeader', {
+        logo: node.logo___NODE,
+        links: node.links___NODE,
+        cta: node.cta___NODE,
+      })
+      break
+    case 'ContentfulLayoutFooter':
+      createHomepageNode('LayoutFooter', {
+        logo: node.logo___NODE,
+        links: node.links___NODE,
+        meta: node.meta___NODE,
+        socialLinks: node.socialLinks___NODE,
+        copyright: node.copyright,
+
+      })
+      break
+    case 'ContentfulSocialLink':
+      createHomepageNode('SocialLink', {
+        ...node
       })
       break
   }
