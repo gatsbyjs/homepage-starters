@@ -3,13 +3,12 @@ const path = require('path')
 // TODO add checks for images with all CMSs
 
 const imageResolver = async (source, args, context, info) => {
-  // TODO: see if there's a simpler way to resolve images
   const imageType = info.schema.getType('ImageSharp')
-  // see if this is a deprecated API?
   const fileNode = context.nodeModel.getNodeById({ id: source.parent })
-  // add check for if this is image node
   const imageNode = context.nodeModel.getNodeById({ id: fileNode.children[0] })
-  const resolver = imageType.getFields().gatsbyImageData.resolve
+  const resolver = imageType.getFields().gatsbyImageData?.resolve
+  if (!resolver) return null
+
   const result = await resolver(imageNode, args, context, info)
   return result
 }
@@ -173,12 +172,6 @@ exports.onCreateNode = async ({
   createNodeId,
   createContentDigest,
 }, options = {}) => {
-  // CMS/backend-specific node creation
-  // For other CMSs, adjust this to map source data to the abstraction needed in the starter
-
-  if (node.internal.type === 'ImageSharp') {
-  }
-
   if (node.internal.type === 'File') {
     if (node.sourceInstanceName === 'yaml-homepage-assets') {
       const id = createNodeId(`${node.id} >>> HomepageImage`)
