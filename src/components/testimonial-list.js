@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { Container, Section } from './ui'
 
 function Testimonial (props) {
   return (
@@ -25,15 +26,17 @@ function Testimonial (props) {
 
 export default function TestimonialList (props) {
   return (
-    <section>
-      <ul>
-        {props.content.map(testimonial => (
-          <li key={testimonial.id}>
-            <Testimonial {...testimonial} />
-          </li>
-        ))}
-      </ul>
-    </section>
+    <Section>
+      <Container>
+        <ul>
+          {props.content.map(testimonial => (
+            <li key={testimonial.id}>
+              <Testimonial {...testimonial} />
+            </li>
+          ))}
+        </ul>
+      </Container>
+    </Section>
   )
 }
 

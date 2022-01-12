@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { Container, Section, FlexList } from './ui'
 
 function Benefit (props) {
   return (
@@ -19,15 +20,17 @@ function Benefit (props) {
 
 export default function BenefitList (props) {
   return (
-    <section>
-      <ul>
-        {props.content.map(benefit => (
-          <li key={benefit.id}>
-            <Benefit {...benefit} />
-          </li>
-        ))}
-      </ul>
-    </section>
+    <Section>
+      <Container>
+        <FlexList>
+          {props.content.map(benefit => (
+            <li key={benefit.id}>
+              <Benefit {...benefit} />
+            </li>
+          ))}
+        </FlexList>
+      </Container>
+    </Section>
   )
 }
 

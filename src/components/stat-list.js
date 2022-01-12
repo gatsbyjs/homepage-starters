@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
+import { Container, Section, FlexList } from './ui'
 
 function Stat (props) {
   return (
@@ -12,15 +13,17 @@ function Stat (props) {
 
 export default function StatList (props) {
   return (
-    <section>
-      <ul>
-        {props.content.map(stat => (
-          <li key={stat.id}>
-            <Stat {...stat} />
-          </li>
-        ))}
-      </ul>
-    </section>
+    <Section>
+      <Container>
+        <FlexList>
+          {props.content.map(stat => (
+            <li key={stat.id}>
+              <Stat {...stat} />
+            </li>
+          ))}
+        </FlexList>
+      </Container>
+    </Section>
   )
 }
 

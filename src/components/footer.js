@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { graphql, useStaticQuery, Link } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { Container, Flex, FlexList, Space } from './ui'
 
 const socialMedia = {
   TWITTER: {
@@ -48,7 +49,6 @@ const getSocialName = ({ service }) => {
   return socialMedia[service]?.name
 }
 
-
 export default function Footer (props) {
   const data = useStaticQuery(graphql`
     query {
@@ -89,44 +89,54 @@ export default function Footer (props) {
 
   return (
     <footer>
-      {logo && (
-        <GatsbyImage
-          image={getImage(logo)}
-        />
-      )}
-      <ul>
-        {links && links.map(link => (
-          <li key={link.id}>
-            <Link to={link.href}>
-              {link.text}
-            </Link>
-          </li>
-        ))}
-      </ul>
-      <ul>
-        {socialLinks && socialLinks.map(link => {
-          const url = getSocialURL(link)
-          return url && (
-            <li key={link.id}>
-              <Link to={getSocialURL(link)}>
-                {getSocialName(link)}
-              </Link>
-            </li>
-          )
-        })}
-      </ul>
-      <ul>
-        {meta && meta.map(link => (
-          <li key={link.id}>
-            <Link to={link.href}>
-              {link.text}
-            </Link>
-          </li>
-        ))}
-      </ul>
-      <div>
-        {copyright}
-      </div>
+      <Container>
+        <Flex>
+          {logo && (
+            <GatsbyImage
+              image={getImage(logo)}
+            />
+          )}
+          <FlexList>
+            {links && links.map(link => (
+              <li key={link.id}>
+                <Link to={link.href}>
+                  {link.text}
+                </Link>
+              </li>
+            ))}
+          </FlexList>
+          <Space />
+          <FlexList>
+            {socialLinks && socialLinks.map(link => {
+              const url = getSocialURL(link)
+              return url && (
+                <li key={link.id}>
+                  <Link to={getSocialURL(link)}>
+                    {getSocialName(link)}
+                  </Link>
+                </li>
+              )
+            })}
+          </FlexList>
+        </Flex>
+        <Space size={3} />
+        <Flex>
+          <FlexList>
+            {meta && meta.map(link => (
+              <li key={link.id}>
+                <Link to={link.href}>
+                  {link.text}
+                </Link>
+              </li>
+            ))}
+          </FlexList>
+          <Space />
+          <div>
+            {copyright}
+          </div>
+        </Flex>
+      </Container>
+      <Space size={3} />
     </footer>
   )
 }
