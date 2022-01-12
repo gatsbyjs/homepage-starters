@@ -33,8 +33,8 @@ const homepagePlugins = {
 module.exports = {
   plugins: [
     // Comment and uncomment the desired CMS/backend plugin to switch between data sources
-    // homepagePlugins.yaml,
-    homepagePlugins.datocms,
+    homepagePlugins.yaml,
+    // homepagePlugins.datocms,
     // homepagePlugins.contentful,
 
     'gatsby-plugin-sharp',
