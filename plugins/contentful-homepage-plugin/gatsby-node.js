@@ -1,148 +1,117 @@
-const parentResolverPassthrough = ({ field } = {}) => async (source, args, context, info) => {
-  const fieldName = field || info.fieldName
-  const parentNode = context.nodeModel.getNodeById({ id: source.parent })
-  const schemaType = info.schema.getType(parentNode.internal.type)
-  const resolver = schemaType.getFields()[fieldName].resolve
-  const result = await resolver(parentNode, args, context, { fieldName })
-  return result
-}
-
 exports.createSchemaCustomization = async ({ actions }) => {
-  actions.createFieldExtension({
-    // Prevents errors when a block is not present in the content
-    name: 'fallbackId',
-    extend(options, prevFieldConfig) {
-      return {
-        resolve(source) {
-          return source.originalId || ''
-        }
-      }
-    }
-  })
-
-  actions.createFieldExtension({
-    name: 'parentResolverPassthrough',
-    args: {
-      field: 'String',
-    },
-    extend({ field }) {
-      return {
-        resolve: parentResolverPassthrough({
-          field,
-        })
-      }
-    },
-  })
-
   actions.createTypes(`
     interface HomepageBlock implements Node {
       id: ID!
-      originalId: String
     }
 
-    type HomepageLink implements Node {
+    interface HomepageLink implements Node {
+      id: ID!
       href: String
       text: String
     }
 
-    type HomepageImage implements Node {
+    interface HomepageImage implements Node {
+      id: ID!
       alt: String
-      gatsbyImageData: JSON @parentResolverPassthrough(field: "gatsbyImageData")
+      gatsbyImageData: JSON
     }
 
-    type HomepageHero implements Node & HomepageBlock {
+    interface HomepageHero implements Node & HomepageBlock {
+      id: ID!
       heading: String
       kicker: String
       subhead: String
-      image: HomepageImage @link(by: "originalId")
+      image: HomepageImage
       text: String
-      links: [HomepageLink] @link(by: "originalId")
-      originalId: String @fallbackId
+      links: [HomepageLink]
     }
 
-    type HomepageFeature implements Node & HomepageBlock {
+    interface HomepageFeature implements Node & HomepageBlock {
+      id: ID!
       heading: String
       kicker: String
       text: String
-      image: HomepageImage @link(by: "originalId")
-      links: [HomepageLink] @link(by: "originalId")
-      originalId: String @fallbackId
+      image: HomepageImage
+      links: [HomepageLink]
     }
 
-    type HomepageCta implements Node & HomepageBlock {
+    interface HomepageCta implements Node & HomepageBlock {
+      id: ID!
       heading: String
       text: String
-      links: [HomepageLink] @link(by: "originalId")
-      originalId: String @fallbackId
+      links: [HomepageLink]
     }
 
-    type HomepageLogo implements Node {
-      image: HomepageImage @link(by: "originalId")
+    interface HomepageLogo implements Node {
+      id: ID!
+      image: HomepageImage
       alt: String
-      originalId: String @fallbackId
     }
-    type HomepageLogoList implements Node & HomepageBlock {
-      logos: [HomepageLogo] @link(by: "originalId")
-      originalId: String @fallbackId
+    interface HomepageLogoList implements Node & HomepageBlock {
+      id: ID!
+      logos: [HomepageLogo]
     }
 
-    type HomepageTestimonial implements Node {
+    interface HomepageTestimonial implements Node {
+      id: ID!
       quote: String
       source: String
-      avatar: HomepageImage @link(by: "originalId")
-      originalId: String
+      avatar: HomepageImage
     }
-    type HomepageTestimonialList implements Node & HomepageBlock {
-      content: [HomepageTestimonial] @link(by: "originalId")
-      originalId: String @fallbackId
+    interface HomepageTestimonialList implements Node & HomepageBlock {
+      id: ID!
+      content: [HomepageTestimonial]
     }
 
-    type HomepageBenefit implements Node {
+    interface HomepageBenefit implements Node {
+      id: ID!
       heading: String
       text: String
-      image: HomepageImage @link(by: "originalId")
-      originalId: String,
+      image: HomepageImage
     }
-    type HomepageBenefitList implements Node & HomepageBlock {
-      content: [HomepageBenefit] @link(by: "originalId")
-      originalId: String @fallbackId
+    interface HomepageBenefitList implements Node & HomepageBlock {
+      id: ID!
+      content: [HomepageBenefit]
     }
 
-    type HomepageStat implements Node {
+    interface HomepageStat implements Node {
+      id: ID!
       value: String
       label: String
       heading: String
-      originalId: String
     }
-    type HomepageStatList implements Node & HomepageBlock {
-      content: [HomepageStat] @link(by: "originalId")
-      originalId: String @fallbackId
+    interface HomepageStatList implements Node & HomepageBlock {
+      id: ID!
+      content: [HomepageStat]
     }
 
-    type Homepage implements Node {
+    interface Homepage implements Node {
+      id: ID!
       title: String
       description: String
-      image: HomepageImage @link(by: "originalId")
-      content: [HomepageBlock] @link(by: "originalId")
+      image: HomepageImage
+      content: [HomepageBlock]
+      # blocks: [HomepageBlock] @proxy(from: "content")
     }
 
     # prevent errors when undefined
-    type ContentfulLayoutHeader implements Node {
-      logo: ContentfulAsset
-    }
-    type ContentfulLayoutFooter implements Node {
-      logo: ContentfulAsset
+    # type ContentfulLayoutHeader implements Node {
+    #   logo: ContentfulAsset
+    # }
+    # type ContentfulLayoutFooter implements Node {
+    #   logo: ContentfulAsset
+    # }
+
+    interface Layout implements Node {
+      id: ID!
+      header: LayoutHeader
+      footer: LayoutFooter
     }
 
-    type Layout implements Node {
-      header: LayoutHeader @link(by: "originalId")
-      footer: LayoutFooter @link(by: "originalId")
-    }
-
-    type LayoutHeader implements Node {
-      # should this be a more generic type?
-      logo: HomepageImage @link(by: "originalId")
-      links: [HomepageLink] @link(by: "originalId")
+    interface LayoutHeader implements Node {
+      id: ID!
+      logo: HomepageImage
+      links: [HomepageLink]
       cta: HomepageLink
     }
 
@@ -157,17 +126,118 @@ exports.createSchemaCustomization = async ({ actions }) => {
       TWITCH
     }
 
-    type SocialLink implements Node {
+    interface SocialLink implements Node {
+      id: ID!
       username: String!
       service: SocialService!
     }
 
-    type LayoutFooter implements Node {
-      logo: HomepageImage @link(by: "originalId")
-      links: [HomepageLink] @link(by: "originalId")
-      meta: [HomepageLink] @link(by: "originalId")
-      social: [SocialLink] @link(by: "originalId")
+    interface LayoutFooter implements Node {
+      id: ID!
+      logo: HomepageImage
+      links: [HomepageLink]
+      meta: [HomepageLink]
+      social: [SocialLink]
       copyright: String
+    }
+
+    type ContentfulLink implements Node & HomepageLink {
+      id: ID!
+      href: String
+      text: String
+      # consider @proxy
+    }
+
+    type ContentfulAsset implements Node & HomepageImage {
+      id: ID!
+      alt: String
+      gatsbyImageData: JSON
+    }
+
+    type ContentfulHomepageLink implements Node & HomepageLink {
+      href: String
+      text: String
+    }
+
+    type ContentfulHomepageHero implements Node & HomepageHero & HomepageBlock {
+      id: ID!
+      heading: String
+      kicker: String
+      subhead: String
+      image: HomepageImage
+      text: String
+      links: [HomepageLink]
+      # @proxy(from: "links___NODE")
+    }
+
+    type ContenfulHomepageFeature implements Node & HomepageBlock & HomepageFeature {
+      id: ID!
+      heading: String
+      kicker: String
+      text: String
+      image: HomepageImage
+      links: [HomepageLink]
+    }
+
+    type ContentfulHomepageCta implements Node & HomepageBlock & HomepageCta {
+      heading: String
+      text: String
+      links: [HomepageLink]
+    }
+
+    type ContentfulHomepageLogo implements Node & HomepageBlock & HomepageLogo {
+      id: ID!
+      image: HomepageImage
+      alt: String
+    }
+    type ContentfulHomepageLogoList implements Node & HomepageBlock & HomepageLogoList {
+      id: ID!
+      logos: [HomepageLogo]
+    }
+
+    type ContentfulHomepageTestimonial implements Node & HomepageTestimonial {
+      id: ID!
+      quote: String
+      source: String
+      avatar: HomepageImage
+    }
+
+    type ContentfulHomepageTestimonialList implements Node & HomepageBlock & HomepageTestimonialList {
+      id: ID!
+      content: [HomepageTestimonial]
+    }
+
+    type ContentfulHomepageBenefit implements Node & HomepageBenefit {
+      id: ID!
+      heading: String
+      text: String
+      image: HomepageImage
+    }
+    type ContentfulHomepageBenefitList implements Node & HomepageBlock & HomepageBenefitList {
+      id: ID!
+      content: [HomepageBenefit]
+    }
+
+    type ContentfulHomepageState implements Node & HomepageStat {
+      id: ID!
+      value: String
+      label: String
+      heading: String
+    }
+    type ContentfulHomepageStatList implements Node & HomepageBlock & HomepageStatList {
+      id: ID!
+      content: [HomepageStat]
+    }
+
+    type ContentfulHomepage implements Node & Homepage {
+      id: ID!
+      title: String
+      description: String
+      image: HomepageImage
+      content: [HomepageBlock] @link(by: "parent.id")
+
+      # content: [HomepageBlock] @link(by: "parent")
+      # blocks: [HomepageBlock] @proxy(from: "content")
     }
   `)
 }
@@ -181,131 +251,9 @@ exports.onCreateNode = async ({
 }) => {
   if (!node.internal.type.includes('Contentful')) return
 
-  let id
-
-  const createHomepageNode = (typeName, data) => {
-    id = createNodeId(`${node.id} >>> ${typeName}`)
-    actions.createNode({
-      ...data,
-      id,
-      internal: {
-        type: typeName,
-        contentDigest: node.internal.contentDigest,
-      },
-      parent: node.id,
-      originalId: node.id,
-    })
+  // TODO
+  if (node.internal.type === 'ContentfulHomepage') {
+    console.log(node)
   }
-
-  switch (node.internal.type) {
-    case 'ContentfulHomepage':
-      createHomepageNode('Homepage', {
-        title: node.title,
-        description: node.description,
-        image: node.image___NODE,
-        content: node.content___NODE,
-      })
-      break
-    case 'ContentfulHomepageLink':
-      createHomepageNode('HomepageLink', {
-        ...node,
-      })
-      break
-    case 'ContentfulAsset':
-      createHomepageNode('HomepageImage', {
-        ...node,
-        alt: node.title,
-      })
-    case 'ContentfulHomepageHero':
-      createHomepageNode('HomepageHero', {
-        heading: node.heading,
-        subhead: node.subhead,
-        kicker: node.kicker,
-        text: node.text,
-        image: node.image___NODE,
-        links: node.links___NODE,
-      })
-      break
-    case 'ContentfulHomepageFeature':
-      createHomepageNode('HomepageFeature', {
-        heading: node.heading,
-        kicker: node.kicker,
-        text: node.text,
-        image: node.image___NODE,
-        links: node.links___NODE,
-      })
-      break
-    case 'ContentfulHomepageCta':
-      createHomepageNode('HomepageCta', {
-        heading: node.heading,
-        text: node.text,
-        links: node.links___NODE,
-      })
-      break
-    case 'ContentfulHomepageLogo':
-      createHomepageNode('HomepageLogo', {
-        image: node.image___NODE,
-        alt: node.alt,
-      })
-      break
-    case 'ContentfulHomepageLogoList':
-      createHomepageNode('HomepageLogoList', {
-        logos: node.logos___NODE,
-      })
-      break
-    case 'ContentfulHomepageTestimonial':
-      createHomepageNode('HomepageTestimonial', { ...node })
-      break
-    case 'ContentfulHomepageTestimonialList':
-      createHomepageNode('HomepageTestimonialList', {
-        content: node.content___NODE,
-      })
-      break
-    case 'ContentfulHomepageBenefit':
-      createHomepageNode('HomepageBenefit', { ...node })
-      break
-    case 'ContentfulHomepageBenefitList':
-      createHomepageNode('HomepageBenefitList', {
-        content: node.content___NODE,
-      })
-      break
-    case 'ContentfulHomepageStat':
-      createHomepageNode('HomepageStat', { ...node })
-      break
-    case 'ContentfulHomepageStatList':
-      createHomepageNode('HomepageStatList', {
-        content: node.content___NODE,
-      })
-      break
-    // Layout nodes
-    case 'ContentfulLayout':
-      createHomepageNode('Layout', {
-        ...node,
-      })
-      break
-    case 'ContentfulLayoutHeader':
-      createHomepageNode('LayoutHeader', {
-        ...node
-      })
-      break
-    case 'ContentfulLayoutFooter':
-      createHomepageNode('LayoutFooter', {
-        ...node
-      })
-      break
-    case 'ContentfulSocialLink':
-      createHomepageNode('SocialLink', {
-        ...node
-      })
-      break
-  }
-
-  // Skip non-homepage related nodes
-  if (id) {
-    const child = getNode(id)
-    actions.createParentChildLink({
-      parent: node,
-      child,
-    })
-  }
+  return
 }

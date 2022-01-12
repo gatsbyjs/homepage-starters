@@ -14,6 +14,10 @@ const Fallback = (props) =>
 export default function Homepage (props) {
   const { homepage } = props.data
 
+  console.log(props)
+
+  return <pre>todo</pre>
+
   return (
     <div className={themeRoot}>
       <Layout>
