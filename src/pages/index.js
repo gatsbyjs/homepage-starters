@@ -6,7 +6,7 @@ import * as sections from '../components/sections'
 
 const Fallback = (props) =>
   <div>
-    No component found: {props.__typename}
+    No component found: {props.blocktype}
   </div>
 
 export default function Homepage (props) {
