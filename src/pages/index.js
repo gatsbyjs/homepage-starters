@@ -1,16 +1,19 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
 import { themeRoot } from '../styles.css.ts'
-import Layout from '../components/layout'
+// import Layout from '../components/layout'
 import * as sections from '../components/sections'
+
+const Layout = props => props.children
 
 const Fallback = (props) =>
   <div>
-    No component found: {props.__typename}
+    No component found: {props.blocktype}
   </div>
 
 export default function Homepage (props) {
   const { homepage } = props.data
+  console.log(homepage)
 
   return (
     <div className={themeRoot}>

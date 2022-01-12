@@ -27,6 +27,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
   actions.createTypes(`
     interface HomepageBlock implements Node {
       id: ID!
+      blocktype: String
     }
 
     type Homepage implements Node {
@@ -44,10 +45,12 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     # generic fallback type
     type HomepageSection implements Node & HomepageBlock {
+      blocktype: String
       name: String
     }
 
     type HomepageHero implements Node & HomepageBlock {
+      blocktype: String
       heading: String
       kicker: String
       subhead: String
@@ -58,6 +61,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
 
     type HomepageFeature implements Node & HomepageBlock {
+      blocktype: String
       heading: String
       kicker: String
       text: String
@@ -66,6 +70,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
 
     type HomepageCta implements Node & HomepageBlock {
+      blocktype: String
       heading: String
       text: String
       links: [HomepageLink] @link
@@ -78,6 +83,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
 
     type HomepageStatList implements Node & HomepageBlock {
+      blocktype: String
       content: [HomepageStat] @link
     }
 
@@ -88,6 +94,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
 
     type HomepageBenefitList implements Node & HomepageBlock {
+      blocktype: String
       content: [HomepageBenefit] @link
     }
 
@@ -103,6 +110,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
 
     type HomepageTestimonialList implements Node & HomepageBlock {
+      blocktype: String
       content: [HomepageTestimonial] @link
     }
 
@@ -112,7 +120,47 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
 
     type HomepageLogoList implements Node & HomepageBlock {
+      blocktype: String
       logos: [HomepageLogo] @link
+    }
+
+    type LayoutHeader implements Node {
+      id: ID!
+      logo: HomepageImage @link(by: "relativePath")
+      links: [HomepageLink] @link
+      cta: HomepageLink @link
+    }
+
+    enum SocialService {
+      TWITTER
+      FACEBOOK
+      INSTAGRAM
+      YOUTUBE
+      LINKEDIN
+      GITHUB
+      DISCORD
+      TWITCH
+    }
+
+    type SocialLink implements Node {
+      id: ID!
+      username: String!
+      service: SocialService!
+    }
+
+    type LayoutFooter implements Node {
+      id: ID!
+      logo: HomepageImage @link(by: "relativePath")
+      links: [HomepageLink] @link
+      meta: [HomepageLink] @link
+      socialLinks: [SocialLink] @link
+      copyright: String
+    }
+
+    type Layout implements Node {
+      id: ID!
+      header: LayoutHeader! @link
+      footer: LayoutFooter! @link
     }
   `)
 }
@@ -148,8 +196,6 @@ exports.onCreateNode = async ({
     }
   }
 
-  if (!node.internal.type.includes('HomepageYaml')) return
-
   const createLinkNode = parentId => (link, i) => {
     const linkID = createNodeId(`${parentId} >>> HomepageLink ${i}`)
     actions.createNode({
@@ -163,6 +209,69 @@ exports.onCreateNode = async ({
     return linkID
   }
 
+  if (node.internal.type === 'LayoutYaml') {
+    const layoutID = createNodeId(`${node.id} >>> Layout`)
+    const headerID = createNodeId(`${layoutID} >>> LayoutHeader`)
+    const footerID = createNodeId(`${layoutID} >>> LayoutFooter`)
+    const ctaID = createNodeId(`${headerID} >>> HomepageLink`)
+
+    const cta = createLinkNode(headerID)(node.header.cta, 0)
+    const createSocialLinkNode = (link, i) => {
+      const linkID = createNodeId(`${footerID} >>> SocialLink ${i}`)
+      actions.createNode({
+        ...link,
+        id: linkID,
+        internal: {
+          type: 'SocialLink',
+          contentDigest: createContentDigest(JSON.stringify(link)),
+        },
+      })
+      return linkID
+    }
+
+    // header
+    actions.createNode({
+      ...node.header,
+      id: headerID,
+      internal: {
+        type: 'LayoutHeader',
+        contentDigest: node.internal.contentDigest,
+      },
+      parent: layoutID,
+      links: node.header?.links?.map(createLinkNode(headerID)),
+      cta,
+    })
+
+    // footer
+    actions.createNode({
+      ...node.footer,
+      id: footerID,
+      internal: {
+        type: 'LayoutFooter',
+        contentDigest: node.internal.contentDigest,
+      },
+      parent: layoutID,
+      links: node.footer?.links?.map(createLinkNode(footerID)),
+      socialLinks: node.footer?.socialLinks?.map(createSocialLinkNode),
+      meta: node.footer?.meta?.map(createLinkNode(footerID + 'meta')),
+    })
+
+    // layout
+    actions.createNode({
+      // ...node,
+      id: layoutID,
+      internal: {
+        type: 'Layout',
+        contentDigest: node.internal.contentDigest,
+      },
+      header: headerID,
+      footer: footerID,
+    })
+  }
+
+  if (!node.internal.type.includes('HomepageYaml')) return
+
+
   const pageID = createNodeId(`${node.id} >>> Homepage`)
 
   const assetsPath = options.assetsPath || ''
@@ -175,6 +284,7 @@ exports.onCreateNode = async ({
 
   const createBlock = (item, i) => {
     let id
+    const blocktype =  `Homepage${item.type}`
     switch (item.type) {
       case 'Hero':
         id = createNodeId(`${node.id} >>> HomepageHero ${i}`)
@@ -185,6 +295,7 @@ exports.onCreateNode = async ({
             contentDigest: node.internal.contentDigest,
           },
           parent: pageID,
+          blocktype,
           heading: item.heading,
           subhead: item.subhead,
           kicker: item.kicker,
@@ -202,6 +313,7 @@ exports.onCreateNode = async ({
             contentDigest: node.internal.contentDigest,
           },
           parent: pageID,
+          blocktype,
           heading: item.heading,
           subhead: item.subhead,
           kicker: item.kicker,
@@ -210,7 +322,7 @@ exports.onCreateNode = async ({
           image: getRelativeImage(item.image),
         })
         break
-      case 'CTA':
+      case 'Cta':
         id = createNodeId(`${node.id} >>> HomepageCta ${i}`)
         actions.createNode({
           id,
@@ -219,6 +331,7 @@ exports.onCreateNode = async ({
             contentDigest: node.internal.contentDigest,
           },
           parent: pageID,
+          blocktype,
           heading: item.heading,
           subhead: item.subhead,
           text: item.text,
@@ -233,6 +346,8 @@ exports.onCreateNode = async ({
             type: 'HomepageTestimonialList',
             contentDigest: node.internal.contentDigest,
           },
+          parent: pageID,
+          blocktype,
           content: item.content?.map((testimonial, i) => {
             const testimonialID = createNodeId(`${id} >>> HomepageTestimonial ${i}`)
             actions.createNode({
@@ -256,6 +371,8 @@ exports.onCreateNode = async ({
             type: 'HomepageBenefitList',
             contentDigest: node.internal.contentDigest,
           },
+          parent: pageID,
+          blocktype,
           content: item.content?.map((benefit, i) => {
             const benefitID = createNodeId(`${id} >>> HomepageBenefit ${i}`)
             actions.createNode({
@@ -279,6 +396,8 @@ exports.onCreateNode = async ({
             type: 'HomepageLogoList',
             contentDigest: node.internal.contentDigest,
           },
+          parent: pageID,
+          blocktype,
           logos: item.logos?.map((logo, i) => {
             const logoID = createNodeId(`${id} >>> HomepageLogo ${i}`)
             actions.createNode({
@@ -304,6 +423,8 @@ exports.onCreateNode = async ({
             type: 'HomepageStatList',
             contentDigest: node.internal.contentDigest,
           },
+          parent: pageID,
+          blocktype,
           content: item.content?.map((stat, i) => {
             const statID = createNodeId(`${id} >>> HomepageStat ${i}`)
             actions.createNode({
@@ -334,6 +455,7 @@ exports.onCreateNode = async ({
             contentDigest: node.internal.contentDigest,
           },
           parent: pageID,
+          blocktype,
         })
     }
     return id
