@@ -16,7 +16,7 @@ export default function Homepage (props) {
     <div className={themeRoot}>
       <Layout>
         {homepage.blocks.map(block => {
-          const Component = sections[block.__typename] || Fallback
+          const Component = sections[block.blocktype] || Fallback
           return <Component key={block.id} {...block} />
         })}
       </Layout>
@@ -32,7 +32,7 @@ export const query = graphql`
       description
       blocks: content {
         id
-        __typename
+        blocktype
         ...HomepageHeroContent
         ...HomepageFeatureContent
         ...HomepageCtaContent
