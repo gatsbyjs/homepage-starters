@@ -182,7 +182,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       links: [HomepageLink] @link(from: "links___NODE")
     }
 
-    type ContenfulHomepageFeature implements Node & HomepageBlock & HomepageFeature {
+    type ContentfulHomepageFeature implements Node & HomepageBlock & HomepageFeature {
       blocktype: String @blocktype
       heading: String
       kicker: String

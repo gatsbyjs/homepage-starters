@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
 import { themeRoot } from '../styles.css.ts'
-import Layout from '../components/layout'
+// import Layout from '../components/layout'
 import * as sections from '../components/sections'
 
 const Fallback = (props) =>
@@ -11,7 +11,11 @@ const Fallback = (props) =>
 
 export default function Homepage (props) {
   const { homepage } = props.data
+  console.log(props)
 
+  return <pre>todo</pre>
+
+  /*
   return (
     <div className={themeRoot}>
       <Layout>
@@ -22,6 +26,7 @@ export default function Homepage (props) {
       </Layout>
     </div>
   )
+  */
 }
 
 export const query = graphql`
