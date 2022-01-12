@@ -1,8 +1,7 @@
 import * as React from 'react'
 import { graphql, Link } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { sprinkles } from '../sprinkles.css.ts'
-import { className } from './hero.css.ts'
+import * as styles from './hero.css.ts'
 
 import Text from './text'
 import Kicker from './kicker'
@@ -11,7 +10,7 @@ import Subhead from './subhead'
 
 export default function Hero (props) {
   return (
-    <section className={className}>
+    <section className={styles.root}>
       {props.image && (
         <GatsbyImage
           alt={props.image.alt}

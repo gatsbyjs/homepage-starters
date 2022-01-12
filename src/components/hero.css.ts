@@ -1,7 +1,6 @@
-import { sprinkles } from '../sprinkles.css.ts'
+import { style } from '@vanilla-extract/css'
+import { theme } from '../theme.css.ts'
 
-export const className = sprinkles({
-  padding: 3,
-  // color: 'background',
-  // backgroundColor: 'text',
+export const root = style({
+  padding: theme.space[3],
 })
