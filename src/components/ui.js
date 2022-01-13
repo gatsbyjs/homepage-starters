@@ -1,4 +1,6 @@
 import * as React from 'react'
+import { Link as GatsbyLink } from 'gatsby'
+import isAbsoluteURL from 'is-absolute-url'
 import * as styles from './ui.css.ts'
 
 export const cx = (...args) => args
@@ -23,7 +25,6 @@ export function Base ({
   className,
   ...props
 }) {
-  console.log('Base', _cx, cx(..._cx, className))
   return (
     <Component
       className={cx(..._cx, className)}
@@ -33,12 +34,15 @@ export function Base ({
 }
 
 export function Flex ({
-  className,
+  variant,
   ...props
 }) {
   return (
     <Base
-      className={cx(styles.flex, className)}
+      cx={[
+        styles.flex,
+        styles.flexVariants[variant],
+      ]}
       {...props}
     />
   )
@@ -46,11 +50,17 @@ export function Flex ({
 
 export function FlexList ({
   className,
+  variant,
   ...props
 }) {
   return (
-    <ul
-      className={cx(styles.flex, styles.list, className)}
+    <Base
+      as='ul'
+      cx={[
+        styles.flex,
+        styles.list,
+        styles.flexVariants[variant]
+      ]}
       {...props}
     />
   )
@@ -86,7 +96,6 @@ export function Text ({
   variant = 'body',
   ...props
 }) {
-  console.log('Text', props.children, variant, styles.text[variant])
   return (
     <Base
       cx={[styles.text[variant]]}
@@ -131,3 +140,59 @@ export function Kicker ({
   )
 }
 
+export function Link ({
+  to,
+  href,
+  ...props
+}) {
+  const url = href || to
+  if (isAbsoluteURL(url)) {
+    return (
+      <a href={url} {...props} />
+    )
+  }
+  return <GatsbyLink to={url} {...props} />
+}
+
+export function NavLink ({
+  ...props
+}) {
+  return (
+    <Base
+      as={Link}
+      cx={[styles.navlink]}
+      {...props}
+    />
+  )
+}
+
+export function Button ({
+  variant = 'primary',
+  ...props
+}) {
+  return (
+    <Base
+      as={Link}
+      cx={[styles.buttons[variant]]}
+      {...props}
+    />
+  )
+}
+
+export function ButtonList ({
+  links = [],
+}) {
+  return (
+    <FlexList>
+      {links.map((link, i) => (
+        <li key={link.id}>
+          <Button
+            href={link.href}
+            variant={i === 0 ? 'primary' : 'link'}>
+            {link.text}
+          </Button>
+        </li>
+      ))}
+    </FlexList>
+  )
+}

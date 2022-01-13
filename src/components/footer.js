@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { graphql, useStaticQuery, Link } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { Container, Flex, FlexList, Space } from './ui'
+import { Container, Flex, FlexList, Space, NavLink } from './ui'
 
 const socialMedia = {
   TWITTER: {
@@ -99,9 +99,9 @@ export default function Footer (props) {
           <FlexList>
             {links && links.map(link => (
               <li key={link.id}>
-                <Link to={link.href}>
+                <NavLink to={link.href}>
                   {link.text}
-                </Link>
+                </NavLink>
               </li>
             ))}
           </FlexList>
@@ -111,9 +111,9 @@ export default function Footer (props) {
               const url = getSocialURL(link)
               return url && (
                 <li key={link.id}>
-                  <Link to={getSocialURL(link)}>
+                  <NavLink to={getSocialURL(link)}>
                     {getSocialName(link)}
-                  </Link>
+                  </NavLink>
                 </li>
               )
             })}
@@ -124,9 +124,9 @@ export default function Footer (props) {
           <FlexList>
             {meta && meta.map(link => (
               <li key={link.id}>
-                <Link to={link.href}>
+                <NavLink to={link.href}>
                   {link.text}
-                </Link>
+                </NavLink>
               </li>
             ))}
           </FlexList>

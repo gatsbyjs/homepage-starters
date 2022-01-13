@@ -12,8 +12,17 @@ export const container = style({
 export const flex = style({
   display: 'flex',
   alignItems: 'center',
-  flexWrap: 'wrap',
   gap: theme.space[3],
+})
+
+export const flexVariants = styleVariants({
+  wrap: {
+    flexWrap: 'wrap',
+  },
+  spaceBetween: {
+    width: '100%',
+    justifyContent: 'space-between',
+  }
 })
 
 export const list = style({
@@ -75,5 +84,49 @@ export const text = styleVariants({
     lineHeight: theme.lineHeights.tight,
     letterSpacing: theme.letterSpacings.wide,
     textTransform: 'uppercase',
+  }],
+})
+
+export const navlink = style({
+  color: 'inherit',
+  textDecoration: 'none',
+  ':hover': {
+    color: theme.colors.black,
+  },
+})
+
+const button = style({
+  display: 'inline-flex',
+  textDecoration: 'none',
+  fontWeight: theme.fontWeights.bold,
+  fontSize: theme.fontSizes[2],
+  lineHeight: 1,
+  paddingTop: theme.space[3],
+  paddingBottom: theme.space[3],
+  paddingLeft: theme.space[3],
+  paddingRight: theme.space[3],
+  borderRadius: theme.radii.button,
+})
+
+export const buttons = styleVariants({
+  primary: [button, {
+    color: theme.colors.background,
+    backgroundColor: theme.colors.primary,
+    ':hover': {
+      backgroundColor: theme.colors.black,
+    },
+    ':focus': {
+      backgroundColor: theme.colors.black,
+    },
+  }],
+  link: [button, {
+    color: 'inherit',
+    backgroundColor: 'transparent',
+    ':hover': {
+      backgroundColor: theme.colors.muted,
+    },
+    ':focus': {
+      backgroundColor: theme.colors.muted,
+    },
   }],
 })

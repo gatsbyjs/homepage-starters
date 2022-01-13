@@ -1,7 +1,15 @@
 import * as React from 'react'
-import { graphql, useStaticQuery, Link } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { Container, Flex, FlexList, Space } from './ui'
+import {
+  Container,
+  Flex,
+  FlexList,
+  Space,
+  NavLink,
+  Button,
+  Link,
+} from './ui'
 
 export default function Header (props) {
   const data = useStaticQuery(graphql`
@@ -48,9 +56,9 @@ export default function Header (props) {
             <FlexList>
               {links && links.map(link => (
                 <li key={link.id}>
-                  <Link to={link.href}>
+                  <NavLink to={link.href}>
                     {link.text}
-                  </Link>
+                  </NavLink>
                 </li>
               ))}
             </FlexList>
@@ -58,10 +66,10 @@ export default function Header (props) {
           <Space />
           <div>
             {cta && (
-              <Link
+              <Button
                 to={cta.href}>
                 {cta.text}
-              </Link>
+              </Button>
             )}
           </div>
         </Flex>
