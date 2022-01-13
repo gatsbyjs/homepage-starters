@@ -21,7 +21,7 @@ function Benefit (props) {
           size='large'
         />
       )}
-      <Space size={4} />
+      <Space size={2} />
       <Heading variant='subhead'>{props.heading}</Heading>
       <Text>{props.text}</Text>
     </Box>

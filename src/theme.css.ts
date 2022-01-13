@@ -26,9 +26,10 @@ const fontSizes = {
   0: '12px',
   1: '14px',
   2: '16px',
-  3: '24px',
-  4: '32px',
-  5: '48px',
+  3: '18px',
+  4: '24px',
+  5: '32px',
+  6: '48px',
 }
 
 const fontWeights = {

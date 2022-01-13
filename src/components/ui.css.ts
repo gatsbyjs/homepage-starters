@@ -43,10 +43,12 @@ export const flexVariants = styleVariants({
   },
   spaceBetween: {
     width: '100%',
+    flexWrap: 'wrap',
     justifyContent: 'space-between',
   },
   center: {
     width: '100%',
+    flexWrap: 'wrap',
     justifyContent: 'center',
   },
   responsive: {
@@ -87,7 +89,7 @@ export const box = styleVariants({
   center: {
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center',
+    alignItems: 'center',
     textAlign: 'center',
   },
 })
@@ -127,14 +129,14 @@ export const text = styleVariants({
   }],
   heading: [margin0, {
     marginBottom: theme.space[3],
-    fontSize: theme.fontSizes[5],
+    fontSize: theme.fontSizes[6],
     fontWeight: theme.fontWeights.extrabold,
     lineHeight: theme.lineHeights.tight,
     letterSpacing: theme.letterSpacings.tight,
   }],
   subhead: [margin0, {
     marginBottom: theme.space[3],
-    fontSize: theme.fontSizes[4],
+    fontSize: theme.fontSizes[5],
     fontWeight: theme.fontWeights.extrabold,
     lineHeight: theme.lineHeights.tight,
     letterSpacing: theme.letterSpacings.tight,
@@ -148,9 +150,9 @@ export const text = styleVariants({
     textTransform: 'uppercase',
   }],
   serif: [margin0, {
-    marginBottom: theme.space[4],
+    marginBottom: theme.space[2],
     fontFamily: theme.fonts.serif,
-    fontSize: theme.fontSizes[5],
+    fontSize: theme.fontSizes[6],
     lineHeight: theme.lineHeights.tight,
   }],
   small: [margin0, {

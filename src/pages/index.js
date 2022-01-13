@@ -13,9 +13,15 @@ export default function Homepage (props) {
 
   return (
       <Layout>
-        {homepage.blocks.map(block => {
+        {homepage.blocks.map((block, i) => {
           const Component = sections[block.blocktype] || Fallback
-          return <Component key={block.id} {...block} />
+          return (
+            <Component
+              key={block.id}
+              index={i}
+              {...block}
+            />
+          )
         })}
       </Layout>
   )

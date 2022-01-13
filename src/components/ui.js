@@ -62,6 +62,7 @@ export function Box ({
   paddingY,
   radius,
   center = false,
+  cx,
   ...props
 }) {
   return (
@@ -73,6 +74,7 @@ export function Box ({
         styles.paddingY[paddingY],
         styles.radii[radius],
         center && styles.box.center,
+        cx,
       ]}
       {...props}
     />
@@ -116,14 +118,11 @@ export function Space ({
   )
 }
 
-export function Section ({
-  className,
-  ...props
-}) {
+export function Section (props) {
   return (
-    <Base
+    <Box
       as='section'
-      className={cx(styles.section, className)}
+      cx={styles.section}
       {...props}
     />
   )

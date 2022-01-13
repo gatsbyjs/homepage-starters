@@ -21,7 +21,7 @@ export default function StatList (props) {
   return (
     <Section>
       <Container>
-        <FlexList variant='spaceBetween'>
+        <FlexList gap={5} variant='center'>
           {props.content.map(stat => (
             <li key={stat.id}>
               <Stat {...stat} />

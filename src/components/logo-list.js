@@ -23,7 +23,7 @@ export default function LogoList (props) {
   return (
     <Section>
       <Container width='narrow'>
-        <FlexList variant='spaceBetween'>
+        <FlexList gap={5} variant='center'>
           {props.logos.map(logo => logo && (
             <li key={logo.id}>
               <LogoItem {...logo} />
