@@ -1,18 +1,32 @@
 import { style, styleVariants } from '@vanilla-extract/css'
 import { theme } from '../theme.css.ts'
 
+const breakpoints = [
+  '40em',
+  '52em',
+  '64em',
+]
+
+const mqAliases = ['small', 'medium', 'large']
+const media = breakpoints
+  .map(n => `screen and (min-width: ${n})`)
+  .reduce((a, b, i) => {
+    a[i] = b
+    a[mqAliases[i]] = b
+    return a
+  }, {})
+
 export const container = style({
   maxWidth: theme.sizes.container,
   marginLeft: 'auto',
   marginRight: 'auto',
-  paddingLeft: theme.space[3],
-  paddingRight: theme.space[3],
+  paddingLeft: theme.space[4],
+  paddingRight: theme.space[4],
 })
 
 export const flex = style({
   display: 'flex',
   alignItems: 'center',
-  gap: theme.space[3],
 })
 
 export const flexVariants = styleVariants({
@@ -22,8 +36,37 @@ export const flexVariants = styleVariants({
   spaceBetween: {
     width: '100%',
     justifyContent: 'space-between',
-  }
+  },
+  responsive: {
+    flexDirection: 'column',
+    '@media': {
+      [media.small]: {
+        flexDirection: 'row',
+        // display: 'flex',
+      }
+    }
+  },
 })
+
+export const flexGap = styleVariants(theme.space, (gap) => ({ gap }))
+
+export const widths = styleVariants({
+  full: '100%',
+  half: '50%',
+  quarter: '25%',
+  third: '33.3333%',
+  twothirds: '33.3333%',
+}, (width) => [{
+  width: '100%',
+  '@media': {
+    [media.small]: {
+      width,
+    }
+  },
+}])
+
+export const padding = styleVariants(theme.space, (padding) => ({ padding }))
+export const radii = styleVariants(theme.radii, (borderRadius) => ({ borderRadius }))
 
 export const list = style({
   listStyle: 'none',
@@ -37,14 +80,9 @@ export const section = style({
 })
 
 export const margin = styleVariants({
-  1: { margin: theme.space[1] },
-  2: { margin: theme.space[2] },
-  3: { margin: theme.space[3] },
-  4: { margin: theme.space[4] },
-  5: { margin: theme.space[5] },
-  6: { margin: theme.space[6] },
-  auto: { margin: 'auto' }
-})
+  ...theme.space,
+  auto: 'auto',
+}, (margin) => ({ margin }))
 
 export const margin0 = style({ margin: 0 })
 
@@ -85,6 +123,21 @@ export const text = styleVariants({
     letterSpacing: theme.letterSpacings.wide,
     textTransform: 'uppercase',
   }],
+  serif: [margin0, {
+    fontFamily: theme.fonts.serif,
+    marginBottom: theme.space[3],
+    fontSize: theme.fontSizes[5],
+    lineHeight: theme.lineHeights.tight,
+  }],
+  small: [margin0, {
+    fontSize: theme.fontSizes[1],
+  }],
+  center: {
+    textAlign: 'center',
+  },
+  bold: {
+    fontWeight: theme.fontWeights.bold,
+  },
 })
 
 export const navlink = style({
@@ -119,6 +172,18 @@ export const buttons = styleVariants({
       backgroundColor: theme.colors.black,
     },
   }],
+  reversed: [button, {
+    color: theme.colors.primary,
+    backgroundColor: theme.colors.background,
+    ':hover': {
+      color: theme.colors.background,
+      backgroundColor: theme.colors.black,
+    },
+    ':focus': {
+      color: theme.colors.background,
+      backgroundColor: theme.colors.black,
+    },
+  }],
   link: [button, {
     color: 'inherit',
     backgroundColor: 'transparent',
@@ -129,4 +194,47 @@ export const buttons = styleVariants({
       backgroundColor: theme.colors.muted,
     },
   }],
+  linkReversed: [button, {
+    color: 'inherit',
+    backgroundColor: 'transparent',
+    ':hover': {
+      color: theme.colors.primary,
+      backgroundColor: theme.colors.muted,
+    },
+    ':focus': {
+      color: theme.colors.primary,
+      backgroundColor: theme.colors.muted,
+    },
+  }],
 })
+
+export const backgrounds = styleVariants({
+  primary: {
+    color: theme.colors.background,
+    backgroundColor: theme.colors.primary,
+  },
+  muted: {
+    color: theme.colors.primary,
+    backgroundColor: theme.colors.muted,
+  },
+})
+
+export const blockquote = style([
+  text.lead,
+  {
+    textAlign: 'center',
+    padding: 0,
+  }
+])
+
+export const avatar = style({
+  width: theme.sizes.avatar,
+  height: theme.sizes.avatar,
+  borderRadius: theme.radii.circle,
+})
+
+// for debugging only
+export const debug = style({
+  outline: '1px solid tomato',
+})
+

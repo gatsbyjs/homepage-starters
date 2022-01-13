@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Link as GatsbyLink } from 'gatsby'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import isAbsoluteURL from 'is-absolute-url'
 import * as styles from './ui.css.ts'
 
@@ -35,6 +36,8 @@ export function Base ({
 
 export function Flex ({
   variant,
+  gap = 3,
+  cx: _cx,
   ...props
 }) {
   return (
@@ -42,6 +45,28 @@ export function Flex ({
       cx={[
         styles.flex,
         styles.flexVariants[variant],
+        styles.flexGap[gap],
+        _cx
+      ]}
+      {...props}
+    />
+  )
+}
+
+export function Box ({
+  width = 'full',
+  background,
+  padding,
+  radius,
+  ...props
+}) {
+  return (
+    <Base
+      cx={[
+        styles.widths[width],
+        styles.backgrounds[background],
+        styles.padding[padding],
+        styles.radii[radius],
       ]}
       {...props}
     />
@@ -49,18 +74,24 @@ export function Flex ({
 }
 
 export function FlexList ({
-  className,
-  variant,
   ...props
 }) {
   return (
-    <Base
+    <Flex
       as='ul'
       cx={[
-        styles.flex,
         styles.list,
-        styles.flexVariants[variant]
       ]}
+      {...props}
+    />
+  )
+}
+
+export function List (props) {
+  return (
+    <Base
+      as='ul'
+      cx={[ styles.list ]}
       {...props}
     />
   )
@@ -98,7 +129,9 @@ export function Text ({
 }) {
   return (
     <Base
-      cx={[styles.text[variant]]}
+      cx={[
+        styles.text[variant],
+      ]}
       {...props}
     />
   )
@@ -148,6 +181,7 @@ export function Link ({
   const url = href || to
   if (isAbsoluteURL(url)) {
     return (
+      // eslint-disable-next-line jsx-a11y/anchor-has-content
       <a href={url} {...props} />
     )
   }
@@ -181,18 +215,48 @@ export function Button ({
 
 export function ButtonList ({
   links = [],
+  reversed = false,
 }) {
+  const getVariant = (i) => {
+    if (reversed) {
+      return i === 0 ? 'reversed' : 'linkReversed'
+    }
+    return i === 0 ? 'primary' : 'link'
+  }
   return (
     <FlexList>
       {links.map((link, i) => (
         <li key={link.id}>
           <Button
             href={link.href}
-            variant={i === 0 ? 'primary' : 'link'}>
+            variant={getVariant(i)}>
             {link.text}
           </Button>
         </li>
       ))}
     </FlexList>
+  )
+}
+
+export function Blockquote (props) {
+  return (
+    <Base
+      as='blockquote'
+      cx={[styles.blockquote]}
+      {...props}
+    />
+  )
+}
+
+export function Avatar ({
+  alt,
+  image,
+}) {
+  return (
+    <GatsbyImage
+      alt={alt}
+      image={getImage(image)}
+      className={styles.avatar}
+    />
   )
 }

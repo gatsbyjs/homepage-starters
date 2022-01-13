@@ -1,26 +1,35 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { Container, Section } from './ui'
+import {
+  Container,
+  Section,
+  Box,
+  List,
+  Blockquote,
+  Text,
+  Avatar,
+} from './ui'
 
 function Testimonial (props) {
   return (
-    <blockquote>
+    <Blockquote>
       <p>
         {props.quote}
       </p>
-      <figcaption>
+      <Text as='figcaption'>
         {props.avatar && (
-          <GatsbyImage
+          <Avatar
             alt={props.avatar.alt}
-            image={getImage(props.avatar)}
+            image={props.avatar}
           />
         )}
-        <cite>
-          {props.source}
-        </cite>
-      </figcaption>
-    </blockquote>
+        <Box>
+          <cite>
+            {props.source}
+          </cite>
+        </Box>
+      </Text>
+    </Blockquote>
   )
 }
 
@@ -28,13 +37,13 @@ export default function TestimonialList (props) {
   return (
     <Section>
       <Container>
-        <ul>
+        <List>
           {props.content.map(testimonial => (
             <li key={testimonial.id}>
               <Testimonial {...testimonial} />
             </li>
           ))}
-        </ul>
+        </List>
       </Container>
     </Section>
   )

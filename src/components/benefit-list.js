@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { Container, Section, FlexList } from './ui'
+import { Container, Section, FlexList, Box } from './ui'
 
 function Benefit (props) {
   return (
-    <div>
+    <Box as='li'>
       {props.image && (
         <GatsbyImage
           alt={props.image.alt}
@@ -14,7 +14,7 @@ function Benefit (props) {
       )}
       <h2>{props.heading}</h2>
       <p>{props.text}</p>
-    </div>
+    </Box>
   )
 }
 
@@ -22,11 +22,12 @@ export default function BenefitList (props) {
   return (
     <Section>
       <Container>
-        <FlexList>
+        <FlexList variant='responsive'>
           {props.content.map(benefit => (
-            <li key={benefit.id}>
-              <Benefit {...benefit} />
-            </li>
+            <Benefit
+              key={benefit.id}
+              {...benefit}
+            />
           ))}
         </FlexList>
       </Container>

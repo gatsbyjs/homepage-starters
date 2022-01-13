@@ -1,13 +1,19 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
-import { Container, Section, FlexList } from './ui'
+import {
+  Container,
+  Section,
+  FlexList,
+  Text,
+  Box,
+} from './ui'
 
 function Stat (props) {
   return (
-    <div>
-      <div>{props.value}</div>
-      <div>{props.label}</div>
-    </div>
+    <Box>
+      <Text variant='serif'>{props.value}</Text>
+      <Text>{props.label}</Text>
+    </Box>
   )
 }
 
@@ -15,7 +21,7 @@ export default function StatList (props) {
   return (
     <Section>
       <Container>
-        <FlexList>
+        <FlexList variant='spaceBetween'>
           {props.content.map(stat => (
             <li key={stat.id}>
               <Stat {...stat} />

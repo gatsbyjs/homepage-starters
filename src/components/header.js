@@ -8,7 +8,6 @@ import {
   Space,
   NavLink,
   Button,
-  Link,
 } from './ui'
 
 export default function Header (props) {

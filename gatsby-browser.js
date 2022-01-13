@@ -1,3 +1,2 @@
-// double check fonts
-// import "@fontsource/inter"
 import "@fontsource/dm-sans"
+import "@fontsource/dm-serif-text"

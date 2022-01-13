@@ -5,6 +5,9 @@ const colors = {
   primary: '#004ca3',
   muted: '#f5fcff',
   black: '#000',
+
+  // ask flo
+  muteda: 'rgba(0, 76, 163, 0.1)',
 }
 
 colors.text = colors.primary
@@ -39,6 +42,7 @@ const fontWeights = {
 const fonts = {
   text: '"DM Sans", sans-serif',
   heading: '"DM Sans", sans-serif',
+  serif: '"DM Serif Text", serif',
   mono: 'Menlo, monospace',
 }
 
@@ -56,10 +60,12 @@ const letterSpacings = {
 
 const sizes = {
   container: '1280px',
+  avatar: '48px',
 }
 
 const radii = {
   button: '10px',
+  circle: '99999px',
 }
 
 export const theme = createGlobalTheme(':root', {
