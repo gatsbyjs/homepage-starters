@@ -35,7 +35,5 @@ Development setup for homepage starters with various CMS backends
   - data and assets are in the plugin directory
 - DatoCMS
   - Requires a `.env.development`
-  - Project needs to be set up in the shared Gatsby DatoCMS account
 - Contenful
   - Requires a `.env.development`
-  - Not currently working

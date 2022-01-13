@@ -1,33 +1,47 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import {
+  Container,
+  Section,
+  FlexList,
+  Box,
+  Icon,
+  Heading,
+  Text,
+  Space,
+} from './ui'
 
 function Benefit (props) {
   return (
-    <div>
+    <Box as='li' center>
       {props.image && (
-        <GatsbyImage
+        <Icon
           alt={props.image.alt}
-          image={getImage(props.image)}
+          image={props.image}
+          size='large'
         />
       )}
-      <h2>{props.heading}</h2>
-      <p>{props.text}</p>
-    </div>
+      <Space size={2} />
+      <Heading variant='subhead'>{props.heading}</Heading>
+      <Text>{props.text}</Text>
+    </Box>
   )
 }
 
 export default function BenefitList (props) {
   return (
-    <section>
-      <ul>
-        {props.content.map(benefit => (
-          <li key={benefit.id}>
-            <Benefit {...benefit} />
-          </li>
-        ))}
-      </ul>
-    </section>
+    <Section>
+      <Container>
+        <FlexList variant='responsive'>
+          {props.content.map(benefit => (
+            <Benefit
+              key={benefit.id}
+              {...benefit}
+            />
+          ))}
+        </FlexList>
+      </Container>
+    </Section>
   )
 }
 

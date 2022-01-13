@@ -1,21 +1,33 @@
 import * as React from 'react'
 import { graphql, Link } from 'gatsby'
+import {
+  Container,
+  Section,
+  Heading,
+  Text,
+  Box,
+  Space,
+  ButtonList,
+} from './ui'
 
 export default function HomepageCta (props) {
   return (
-    <section>
-      <h2>{props.heading}</h2>
-      <p>{props.text}</p>
-      <ul>
-        {props.links.map(link => (
-          <li key={link.id}>
-            <Link to={link.href}>
-              {link.text}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </section>
+    <Section>
+      <Container>
+        <Box
+          padding={5}
+          radius='button'
+          background='primary'>
+          <Heading center>{props.heading}</Heading>
+          <Text as='p' center variant='lead'>{props.text}</Text>
+          <ButtonList
+            links={props.links}
+            variant='center'
+            reversed
+          />
+        </Box>
+      </Container>
+    </Section>
   )
 }
 

@@ -1,38 +1,43 @@
 import * as React from 'react'
-import { graphql, Link } from 'gatsby'
+import { graphql } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { sprinkles } from '../sprinkles.css.ts'
-import { className } from './hero.css.ts'
+import {
+  Container,
+  Section,
+  Text,
+  Heading,
+  Subhead,
+  Kicker,
+  Flex,
+  Box,
+  ButtonList,
+} from './ui'
 
 export default function Hero (props) {
   return (
-    <section className={className}>
-      {props.image && (
-        <GatsbyImage
-          alt={props.image.alt}
-          image={getImage(props.image)}
-        />
-      )}
-      <h3>{props.kicker}</h3>
-      <h1
-        className={sprinkles({
-          fontSize: 5,
-        })}>
-        {props.heading}
-      </h1>
-      <h2>{props.subhead}</h2>
-      <p>{props.text}</p>
-      <pre>{props.image.id}</pre>
-      <ul>
-        {props.links.map(link => (
-          <li key={link.id}>
-            <Link to={link.href}>
-              {link.text}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </section>
+    <Section>
+      <Container>
+        <Flex variant='responsive'>
+          <Box width='half'>
+            {props.image && (
+              <GatsbyImage
+                alt={props.image.alt}
+                image={getImage(props.image)}
+              />
+            )}
+          </Box>
+          <Box width='half'>
+            <Kicker as='h3'>{props.kicker}</Kicker>
+            <Heading as='h1'>
+              {props.heading}
+            </Heading>
+            <Subhead as='h2'>{props.subhead}</Subhead>
+            <Text as='p'>{props.text}</Text>
+            <ButtonList links={props.links} />
+          </Box>
+        </Flex>
+      </Container>
+    </Section>
   )
 }
 
