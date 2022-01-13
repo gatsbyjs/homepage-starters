@@ -16,8 +16,6 @@
   "dependencies": {
     "@fontsource/dm-sans": "^4.5.0",
     "@fontsource/dm-serif-text": "^4.5.0",
-    "@fontsource/inter": "^4.5.1",
-    "@vanilla-extract/recipes": "^0.2.3",
     "gatsby": "^4.4.0",
     "gatsby-plugin-image": "^2.4.0",
     "gatsby-plugin-sharp": "^4.4.0",
