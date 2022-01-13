@@ -1,7 +1,15 @@
 import * as React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { Container, Flex, FlexList, Space, NavLink } from './ui'
+import {
+  Container,
+  Flex,
+  FlexList,
+  Box,
+  Space,
+  NavLink,
+  Logo,
+  Text
+} from './ui'
 
 const socialMedia = {
   TWITTER: {
@@ -57,6 +65,7 @@ export default function Footer (props) {
           id
           logo {
             id
+            gatsbyImageData
           }
           links {
             id
@@ -88,16 +97,17 @@ export default function Footer (props) {
   } = data.layout.footer
 
   return (
-    <footer>
+    <Box as='footer' paddingY={4}>
       <Container>
         <Flex>
           {logo && (
-            <GatsbyImage
-              image={getImage(logo)}
+            <Logo
+              image={logo}
             />
           )}
+          <Space />
           <FlexList>
-            {links && links.map(link => (
+            {meta && meta.map(link => (
               <li key={link.id}>
                 <NavLink to={link.href}>
                   {link.text}
@@ -105,7 +115,6 @@ export default function Footer (props) {
               </li>
             ))}
           </FlexList>
-          <Space />
           <FlexList>
             {socialLinks && socialLinks.map(link => {
               const url = getSocialURL(link)
@@ -119,10 +128,10 @@ export default function Footer (props) {
             })}
           </FlexList>
         </Flex>
-        <Space size={3} />
+        <Space size={5} />
         <Flex>
           <FlexList>
-            {meta && meta.map(link => (
+            {links && links.map(link => (
               <li key={link.id}>
                 <NavLink to={link.href}>
                   {link.text}
@@ -131,12 +140,12 @@ export default function Footer (props) {
             ))}
           </FlexList>
           <Space />
-          <div>
+          <Text variant='small'>
             {copyright}
-          </div>
+          </Text>
         </Flex>
       </Container>
       <Space size={3} />
-    </footer>
+    </Box>
   )
 }

@@ -3,7 +3,10 @@ import { graphql, Link } from 'gatsby'
 import {
   Container,
   Section,
+  Heading,
+  Text,
   Box,
+  Space,
   ButtonList,
 } from './ui'
 
@@ -12,13 +15,14 @@ export default function HomepageCta (props) {
     <Section>
       <Container>
         <Box
-          padding={4}
+          padding={5}
           radius='button'
           background='primary'>
-          <h2>{props.heading}</h2>
-          <p>{props.text}</p>
+          <Heading center>{props.heading}</Heading>
+          <Text as='p' center variant='lead'>{props.text}</Text>
           <ButtonList
             links={props.links}
+            variant='center'
             reversed
           />
         </Box>

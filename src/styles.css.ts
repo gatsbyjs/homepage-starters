@@ -6,3 +6,7 @@ globalStyle('body', {
   fontFamily: theme.fonts.text,
   color: theme.colors.text,
 })
+
+globalStyle('*', {
+  boxSizing: 'border-box',
+})

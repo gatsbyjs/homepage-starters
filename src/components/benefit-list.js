@@ -1,19 +1,29 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { Container, Section, FlexList, Box } from './ui'
+import {
+  Container,
+  Section,
+  FlexList,
+  Box,
+  Icon,
+  Heading,
+  Text,
+  Space,
+} from './ui'
 
 function Benefit (props) {
   return (
-    <Box as='li'>
+    <Box as='li' center>
       {props.image && (
-        <GatsbyImage
+        <Icon
           alt={props.image.alt}
-          image={getImage(props.image)}
+          image={props.image}
+          size='large'
         />
       )}
-      <h2>{props.heading}</h2>
-      <p>{props.text}</p>
+      <Space size={4} />
+      <Heading variant='subhead'>{props.heading}</Heading>
+      <Text>{props.text}</Text>
     </Box>
   )
 }

@@ -1,13 +1,14 @@
 import * as React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import {
   Container,
   Flex,
   FlexList,
   Space,
+  Link,
   NavLink,
   Button,
+  Logo,
 } from './ui'
 
 export default function Header (props) {
@@ -47,8 +48,8 @@ export default function Header (props) {
         <Space size={3} />
         <Flex>
           {logo && (
-            <GatsbyImage
-              image={getImage(logo)}
+            <Logo
+              image={logo}
             />
           )}
           <nav>

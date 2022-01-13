@@ -24,6 +24,14 @@ export const container = style({
   paddingRight: theme.space[4],
 })
 
+export const containers = styleVariants({
+  normal: [container],
+  wide: [container],
+  narrow: [container, {
+    maxWidth: theme.sizes.narrow,
+  }],
+})
+
 export const flex = style({
   display: 'flex',
   alignItems: 'center',
@@ -36,6 +44,10 @@ export const flexVariants = styleVariants({
   spaceBetween: {
     width: '100%',
     justifyContent: 'space-between',
+  },
+  center: {
+    width: '100%',
+    justifyContent: 'center',
   },
   responsive: {
     flexDirection: 'column',
@@ -66,7 +78,19 @@ export const widths = styleVariants({
 }])
 
 export const padding = styleVariants(theme.space, (padding) => ({ padding }))
+export const paddingY = styleVariants(theme.space, (padding) => ({
+  paddingTop: padding,
+  paddingBottom: padding,
+}))
 export const radii = styleVariants(theme.radii, (borderRadius) => ({ borderRadius }))
+export const box = styleVariants({
+  center: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    textAlign: 'center',
+  },
+})
 
 export const list = style({
   listStyle: 'none',
@@ -88,28 +112,28 @@ export const margin0 = style({ margin: 0 })
 
 export const text = styleVariants({
   body: [margin0, {
-    marginBottom: theme.space[2],
+    marginBottom: theme.space[3],
     fontSize: theme.fontSizes[2],
     fontWeight: theme.fontWeights.normal,
     lineHeight: theme.lineHeights.text,
     letterSpacing: theme.letterSpacings.normal,
   }],
   lead: [margin0, {
-    marginBottom: theme.space[2],
+    marginBottom: theme.space[3],
     fontSize: theme.fontSizes[3],
     fontWeight: theme.fontWeights.normal,
     lineHeight: theme.lineHeights.text,
     letterSpacing: theme.letterSpacings.normal,
   }],
   heading: [margin0, {
-    marginBottom: theme.space[2],
+    marginBottom: theme.space[3],
     fontSize: theme.fontSizes[5],
     fontWeight: theme.fontWeights.extrabold,
     lineHeight: theme.lineHeights.tight,
     letterSpacing: theme.letterSpacings.tight,
   }],
   subhead: [margin0, {
-    marginBottom: theme.space[2],
+    marginBottom: theme.space[3],
     fontSize: theme.fontSizes[4],
     fontWeight: theme.fontWeights.extrabold,
     lineHeight: theme.lineHeights.tight,
@@ -124,13 +148,14 @@ export const text = styleVariants({
     textTransform: 'uppercase',
   }],
   serif: [margin0, {
+    marginBottom: theme.space[4],
     fontFamily: theme.fonts.serif,
-    marginBottom: theme.space[3],
     fontSize: theme.fontSizes[5],
     lineHeight: theme.lineHeights.tight,
   }],
   small: [margin0, {
     fontSize: theme.fontSizes[1],
+    marginBottom: theme.space[2],
   }],
   center: {
     textAlign: 'center',
@@ -223,7 +248,10 @@ export const blockquote = style([
   text.lead,
   {
     textAlign: 'center',
-    padding: 0,
+    paddingLeft: 0,
+    paddingRight: 0,
+    paddingTop: theme.space[4],
+    paddingBottom: theme.space[4],
   }
 ])
 
@@ -232,6 +260,27 @@ export const avatar = style({
   height: theme.sizes.avatar,
   borderRadius: theme.radii.circle,
 })
+
+export const logos = styleVariants({
+  small: {
+    width: '85px',
+    height: '20px',
+  },
+  medium: {
+    maxWidth: '128px',
+  },
+})
+
+export const icons = styleVariants({
+  small: '24px',
+  medium: '32px',
+  large: '64px',
+},
+  (size) => ({
+    width: size,
+    height: size,
+  })
+)
 
 // for debugging only
 export const debug = style({

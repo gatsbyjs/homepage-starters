@@ -8,18 +8,6 @@ export const cx = (...args) => args
   .filter(Boolean)
   .join(' ')
 
-export function Container ({
-  className,
-  ...props
-}) {
-  return (
-    <div
-      className={cx(styles.container, className)}
-      {...props}
-    />
-  )
-}
-
 export function Base ({
   as: Component = 'div',
   cx: _cx = [],
@@ -29,6 +17,20 @@ export function Base ({
   return (
     <Component
       className={cx(..._cx, className)}
+      {...props}
+    />
+  )
+}
+
+export function Container ({
+  width = 'normal',
+  ...props
+}) {
+  return (
+    <Base
+      cx={[
+        styles.containers[width],
+      ]}
       {...props}
     />
   )
@@ -57,7 +59,9 @@ export function Box ({
   width = 'full',
   background,
   padding,
+  paddingY,
   radius,
+  center = false,
   ...props
 }) {
   return (
@@ -66,7 +70,9 @@ export function Box ({
         styles.widths[width],
         styles.backgrounds[background],
         styles.padding[padding],
+        styles.paddingY[paddingY],
         styles.radii[radius],
+        center && styles.box.center,
       ]}
       {...props}
     />
@@ -125,12 +131,14 @@ export function Section ({
 
 export function Text ({
   variant = 'body',
+  center,
   ...props
 }) {
   return (
     <Base
       cx={[
         styles.text[variant],
+        center && styles.text.center,
       ]}
       {...props}
     />
@@ -216,6 +224,7 @@ export function Button ({
 export function ButtonList ({
   links = [],
   reversed = false,
+  ...props
 }) {
   const getVariant = (i) => {
     if (reversed) {
@@ -224,7 +233,7 @@ export function ButtonList ({
     return i === 0 ? 'primary' : 'link'
   }
   return (
-    <FlexList>
+    <FlexList {...props}>
       {links.map((link, i) => (
         <li key={link.id}>
           <Button
@@ -257,6 +266,34 @@ export function Avatar ({
       alt={alt}
       image={getImage(image)}
       className={styles.avatar}
+    />
+  )
+}
+
+export function Logo ({
+  alt,
+  image,
+  size = 'small',
+}) {
+  return (
+    <GatsbyImage
+      alt={alt}
+      image={getImage(image)}
+      className={styles.logos[size]}
+    />
+  )
+}
+
+export function Icon ({
+  alt,
+  image,
+  size = 'medium',
+}) {
+  return (
+    <GatsbyImage
+      alt={alt}
+      image={getImage(image)}
+      className={styles.icons[size]}
     />
   )
 }

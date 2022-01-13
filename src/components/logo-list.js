@@ -1,18 +1,20 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import { Container, Section, FlexList } from './ui'
-import * as styles from './logo-list.css.ts'
+import {
+  Container,
+  Section,
+  FlexList,
+  Logo
+} from './ui'
 
-
-function Logo (props) {
+function LogoItem (props) {
   if (!props.image) return false
 
   return (
-    <GatsbyImage
+    <Logo
       alt={props.alt}
-      image={getImage(props.image)}
-      className={styles.logo}
+      image={props.image}
+      size='medium'
     />
   )
 }
@@ -20,11 +22,11 @@ function Logo (props) {
 export default function LogoList (props) {
   return (
     <Section>
-      <Container>
+      <Container width='narrow'>
         <FlexList variant='spaceBetween'>
           {props.logos.map(logo => logo && (
             <li key={logo.id}>
-              <Logo {...logo} />
+              <LogoItem {...logo} />
             </li>
           ))}
         </FlexList>
