@@ -1,0 +1,9 @@
+{
+  "name": "wordpress-homepage-plugin",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "gatsby-source-wordpress": "^6.5.1"
+  }
+}
