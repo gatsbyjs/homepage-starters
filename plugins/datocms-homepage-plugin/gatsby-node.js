@@ -12,6 +12,37 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
   })
 
+  actions.createFieldExtension({
+    name: 'metalinks',
+    extend(options) {
+      return {
+        async resolve(source, args, context, info) {
+          const type = info.schema.getType(source.internal.type)
+          const resolver = type.getFields().metalinks?.resolve
+          const result = await resolver(source, args, context, {
+            fieldName: 'metalinks'
+          })
+          return result
+        }
+      }
+    }
+  })
+
+  // TODO fix this
+  actions.createFieldExtension({
+    name: 'ctalink',
+    extend(options) {
+      return {
+        async resolve(source, args, context, info) {
+          const type = info.schema.getType(source.internal.type)
+          const resolver = type.getFields().ctas?.resolve
+          const result = await resolver(source, args, context, {})
+          return result[0]
+        }
+      }
+    }
+  })
+
   // abstract interfaces
   actions.createTypes(`
     interface HomepageBlock implements Node {
@@ -319,7 +350,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       logo: HomepageImage
       links: [HomepageLink]
-      cta: HomepageLink @link(by: "originalId",from: "entityPayload.attributes.cta.0")
+      ctas: HomepageLink @link(by: "originalId",from: "entityPayload.attributes.cta")
+      cta: HomepageLink @ctalink
       originalId: String
       entityPayload: JSON
     }
@@ -334,8 +366,11 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       logo: HomepageImage
       links: [HomepageLink]
+
+      ## TODO: fix this
       metalinks: [HomepageLink]
-      meta: [HomepageLink] @proxy(from: "entityPayload.attributes.metalinks")
+      meta: [HomepageLink] @metalinks
+
       socialLinks: [SocialLink]
       copyright: String
       originalId: String
@@ -348,20 +383,4 @@ exports.createSchemaCustomization = async ({ actions }) => {
       footer: LayoutFooter
     }
   `)
-}
-
-exports.onCreateNode = async ({
-  actions,
-  node,
-  getNode,
-  getNodeAndSavePathDependency,
-  createNodeId,
-}) => {
-  // CMS specific node creation
-  // For other CMSs, adjust this to map source data to the abstraction needed in the starter
-  if (!node.internal.type.includes('DatoCms')) return
-
-  if (node.internal.type === 'DatoCmsLayoutfooter') {
-    console.log('footer', node)
-  }
 }
