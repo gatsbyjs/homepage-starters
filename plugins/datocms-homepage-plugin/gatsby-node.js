@@ -551,7 +551,6 @@ exports.onCreateNode = async ({
       })
       break
     case 'DatoCmsLayoutfooter':
-      console.log(data)
       createHomepageNode('LayoutFooter', {
         ...node,
         ...data,

@@ -1,6 +1,15 @@
 import * as React from 'react'
-import { graphql, useStaticQuery, Link } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import { graphql, useStaticQuery } from 'gatsby'
+import {
+  Container,
+  Flex,
+  FlexList,
+  Box,
+  Space,
+  NavLink,
+  Logo,
+  Text
+} from './ui'
 
 const socialMedia = {
   TWITTER: {
@@ -48,7 +57,6 @@ const getSocialName = ({ service }) => {
   return socialMedia[service]?.name
 }
 
-
 export default function Footer (props) {
   const data = useStaticQuery(graphql`
     query {
@@ -57,6 +65,7 @@ export default function Footer (props) {
           id
           logo {
             id
+            gatsbyImageData
           }
           links {
             id
@@ -88,45 +97,55 @@ export default function Footer (props) {
   } = data.layout.footer
 
   return (
-    <footer>
-      {logo && (
-        <GatsbyImage
-          image={getImage(logo)}
-        />
-      )}
-      <ul>
-        {links && links.map(link => (
-          <li key={link.id}>
-            <Link to={link.href}>
-              {link.text}
-            </Link>
-          </li>
-        ))}
-      </ul>
-      <ul>
-        {socialLinks && socialLinks.map(link => {
-          const url = getSocialURL(link)
-          return url && (
-            <li key={link.id}>
-              <Link to={getSocialURL(link)}>
-                {getSocialName(link)}
-              </Link>
-            </li>
-          )
-        })}
-      </ul>
-      <ul>
-        {meta && meta.map(link => (
-          <li key={link.id}>
-            <Link to={link.href}>
-              {link.text}
-            </Link>
-          </li>
-        ))}
-      </ul>
-      <div>
-        {copyright}
-      </div>
-    </footer>
+    <Box as='footer' paddingY={4}>
+      <Container>
+        <Flex>
+          {logo && (
+            <Logo
+              image={logo}
+            />
+          )}
+          <Space />
+          <FlexList>
+            {meta && meta.map(link => (
+              <li key={link.id}>
+                <NavLink to={link.href}>
+                  {link.text}
+                </NavLink>
+              </li>
+            ))}
+          </FlexList>
+          <FlexList>
+            {socialLinks && socialLinks.map(link => {
+              const url = getSocialURL(link)
+              return url && (
+                <li key={link.id}>
+                  <NavLink to={getSocialURL(link)}>
+                    {getSocialName(link)}
+                  </NavLink>
+                </li>
+              )
+            })}
+          </FlexList>
+        </Flex>
+        <Space size={5} />
+        <Flex>
+          <FlexList>
+            {links && links.map(link => (
+              <li key={link.id}>
+                <NavLink to={link.href}>
+                  {link.text}
+                </NavLink>
+              </li>
+            ))}
+          </FlexList>
+          <Space />
+          <Text variant='small'>
+            {copyright}
+          </Text>
+        </Flex>
+      </Container>
+      <Space size={3} />
+    </Box>
   )
 }

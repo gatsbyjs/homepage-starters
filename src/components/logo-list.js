@@ -1,29 +1,37 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import {
+  Container,
+  Section,
+  FlexList,
+  Logo
+} from './ui'
 
-function Logo (props) {
+function LogoItem (props) {
   if (!props.image) return false
 
   return (
-    <GatsbyImage
+    <Logo
       alt={props.alt}
-      image={getImage(props.image)}
+      image={props.image}
+      size='medium'
     />
   )
 }
 
 export default function LogoList (props) {
   return (
-    <section>
-      <ul>
-        {props.logos.map(logo => logo && (
-          <li key={logo.id}>
-            <Logo {...logo} />
-          </li>
-        ))}
-      </ul>
-    </section>
+    <Section>
+      <Container width='narrow'>
+        <FlexList gap={5} variant='center'>
+          {props.logos.map(logo => logo && (
+            <li key={logo.id}>
+              <LogoItem {...logo} />
+            </li>
+          ))}
+        </FlexList>
+      </Container>
+    </Section>
   )
 }
 
