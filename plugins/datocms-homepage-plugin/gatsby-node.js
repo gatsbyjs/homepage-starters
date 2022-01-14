@@ -1,63 +1,12 @@
-/*
-const parentResolverPassthrough = ({ field } = {}) => async (source, args, context, info) => {
-  const fieldName = field || info.fieldName
-  const parentNode = context.nodeModel.getNodeById({ id: source.parent })
-  const schemaType = info.schema.getType(parentNode.internal.type)
-  const resolver = schemaType.getFields()[fieldName].resolve
-  const result = await resolver(parentNode, args, context, { fieldName })
-  return result
-}
-*/
-
 exports.createSchemaCustomization = async ({ actions }) => {
-  /*
-  actions.createFieldExtension({
-    // Prevents errors when a block is not present in the content
-    name: 'fallbackId',
-    extend(options, prevFieldConfig) {
-      return {
-        resolve(source) {
-          return source.originalId || ''
-        }
-      }
-    }
-  })
-
-  actions.createFieldExtension({
-    name: 'parentResolverPassthrough',
-    args: {
-      field: 'String',
-    },
-    extend({ field }) {
-      return {
-        resolve: parentResolverPassthrough({
-          field,
-        })
-      }
-    },
-  })
-  */
-
   actions.createFieldExtension({
     name: 'blocktype',
     extend(options) {
       return {
         resolve(source) {
-          return source.internal.type.replace('DatoCms', '')
-        }
-      }
-    }
-  })
-
-  // TODO: test this out
-  actions.createFieldExtension({
-    name: 'datoproxy',
-    extend(options, prevFieldConfig) {
-      return {
-        resolve(source, args, context, info) {
-          const value = source.entityPayload.attributes[info.fieldName]
-          console.log({ value, info })
-          return source.entityPayload.attributes[info.fieldName]
+          return source.internal.type
+            .replace('DatoCms', 'Homepage')
+            .replace(/list$/, 'List')
         }
       }
     }
@@ -206,6 +155,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       logo: HomepageImage
       links: [HomepageLink]
       cta: HomepageLink
+      entityPayload: JSON
     }
 
     enum SocialService {
@@ -232,6 +182,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       meta: [HomepageLink]
       socialLinks: [SocialLink]
       copyright: String
+      entityPayload: JSON
     }
 
     interface Layout implements Node {
@@ -267,9 +218,9 @@ exports.createSchemaCustomization = async ({ actions }) => {
       heading: String
       kicker: String
       subhead: String
-      image: HomepageImage @link(by: "originalId", from: "entityPayload.attributes.image.upload_id")
+      image: HomepageImage
       text: String
-      links: [HomepageLink] @link(by: "originalId") @datoproxy
+      links: [HomepageLink]
     }
 
     type DatoCmsFeature implements Node & HomepageBlock & HomepageFeature {
@@ -278,8 +229,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
       heading: String
       kicker: String
       text: String
-      image: HomepageImage @link(by: "originalId", from: "entityPayload.attributes.image.upload_id")
-      links: [HomepageLink] @link(by: "originalId", from: "entityPayload.attributes.links")
+      image: HomepageImage
+      links: [HomepageLink]
       entityPayload: JSON
     }
 
@@ -289,12 +240,14 @@ exports.createSchemaCustomization = async ({ actions }) => {
       blocktype: String @blocktype
       heading: String
       text: String
-      links: [HomepageLink] @link(from: "links___NODE")
+      links: [HomepageLink]
     }
 
-    type DatoCmsLogo implements Node & HomepageLogo {
+    ## This is set up differently from Contentful in DatoCMS,
+    ## which may need to be adjusted
+    type DatoCmsAsset implements Node & HomepageLogo {
       id: ID!
-      image: HomepageImage @link(from: "image___NODE")
+      image: HomepageImage
       alt: String
     }
 
@@ -302,14 +255,14 @@ exports.createSchemaCustomization = async ({ actions }) => {
       originalId: String
       entityPayload: JSON
       blocktype: String @blocktype
-      logos: [HomepageLogo] @link(from: "logos___NODE")
+      logos: [HomepageLogo]
     }
 
     type DatoCmsTestimonial implements Node & HomepageTestimonial {
       id: ID!
       quote: String
       source: String
-      avatar: HomepageImage @link(from: "avatar___NODE")
+      avatar: HomepageImage
     }
 
     type DatoCmsTestimoniallist implements Node & HomepageBlock & HomepageTestimonialList {
@@ -317,14 +270,14 @@ exports.createSchemaCustomization = async ({ actions }) => {
       originalId: String
       entityPayload: JSON
       blocktype: String @blocktype
-      content: [HomepageTestimonial] @link(from: "content___NODE")
+      content: [HomepageTestimonial]
     }
 
     type DatoCmsBenefit implements Node & HomepageBenefit {
       id: ID!
       heading: String
       text: String
-      image: HomepageImage @link(from: "image___NODE")
+      image: HomepageImage
     }
 
     type DatoCmsBenefitlist implements Node & HomepageBlock & HomepageBenefitList {
@@ -332,7 +285,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       originalId: String
       entityPayload: JSON
       blocktype: String @blocktype
-      content: [HomepageBenefit] @link(from: "content___NODE")
+      content: [HomepageBenefit]
     }
 
     type DatoCmsStat implements Node & HomepageStat {
@@ -347,7 +300,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       originalId: String
       entityPayload: JSON
       blocktype: String @blocktype
-      content: [HomepageStat] @link(from: "content___NODE")
+      content: [HomepageStat]
     }
 
     type DatoCmsHomepage implements Node & Homepage {
@@ -355,19 +308,20 @@ exports.createSchemaCustomization = async ({ actions }) => {
       title: String @proxy(from: "entityPayload.attributes.metadata.title")
       description: String @proxy(from: "entityPayload.attributes.metadata.description")
       image: HomepageImage @link(by: "originalId", from: "entityPayload.attributes.metadata.image")
-      # image: HomepageImage @link(by: "originalId", from: "entityPayload.attributes.metadata.image")
-      content: [HomepageBlock] @link(by: "originalId", from: "entityPayload.attributes.content")
+      content: [HomepageBlock]
       entityPayload: JSON
     }
   `)
 
   // Layout types
   actions.createTypes(`
-    type DatoCmsLayoutHeader implements Node & LayoutHeader {
+    type DatoCmsLayoutheader implements Node & LayoutHeader {
       id: ID!
-      logo: HomepageImage @link(from: "logo___NODE")
-      links: [HomepageLink] @link(from: "links___NODE")
-      cta: HomepageLink @link(from: "cta___NODE")
+      logo: HomepageImage
+      links: [HomepageLink]
+      cta: HomepageLink @link(by: "originalId",from: "entityPayload.attributes.cta.0")
+      originalId: String
+      entityPayload: JSON
     }
 
     type DatoCmsSocialLink implements Node & SocialLink {
@@ -376,19 +330,22 @@ exports.createSchemaCustomization = async ({ actions }) => {
       service: SocialService!
     }
 
-    type DatoCmsLayoutFooter implements Node & LayoutFooter {
+    type DatoCmsLayoutfooter implements Node & LayoutFooter {
       id: ID!
-      logo: HomepageImage @link(from: "logo___NODE")
-      links: [HomepageLink] @link(from: "links___NODE")
-      meta: [HomepageLink] @link(from: "meta___NODE")
-      socialLinks: [SocialLink] @link(from: "socialLinks___NODE")
+      logo: HomepageImage
+      links: [HomepageLink]
+      metalinks: [HomepageLink]
+      meta: [HomepageLink] @proxy(from: "entityPayload.attributes.metalinks")
+      socialLinks: [SocialLink]
       copyright: String
+      originalId: String
+      entityPayload: JSON
     }
 
     type DatoCmsLayout implements Node & Layout {
       id: ID!
-      header: LayoutHeader @link(from: "header___NODE")
-      footer: LayoutFooter @link(from: "footer___NODE")
+      header: LayoutHeader
+      footer: LayoutFooter
     }
   `)
 }
@@ -404,175 +361,7 @@ exports.onCreateNode = async ({
   // For other CMSs, adjust this to map source data to the abstraction needed in the starter
   if (!node.internal.type.includes('DatoCms')) return
 
-  if (node.internal.type === 'DatoCmsHero') {
-    console.log('Hero', node.entityPayload.attributes)
+  if (node.internal.type === 'DatoCmsLayoutfooter') {
+    console.log('footer', node)
   }
-
-/*
-  let id
-  const _originalId = node.id.replace(/[A-Za-z-]/g, '')
-  const data = node.entityPayload?.attributes || node
-
-  const createHomepageNode = (typeName, data, originalId = _originalId) => {
-    id = createNodeId(`${node.id} >>> ${typeName}`)
-    actions.createNode({
-      ...data,
-      id,
-      internal: {
-        type: typeName,
-        contentDigest: node.internal.contentDigest,
-      },
-      parent: node.id,
-      originalId,
-    })
-  }
-
-  switch (node.internal.type) {
-    case 'DatoCmsHomepage':
-      createHomepageNode('Homepage', {
-        ...node,
-        title: data.metadata?.title,
-        description: data.metadata?.description,
-        image: data.metadata?.image,
-        content: data.content,
-      })
-      break
-    case 'DatoCmsAsset':
-      // TODO: get "alt" text from content nodes
-      createHomepageNode('HomepageImage', {
-        ...node,
-        ...data,
-      })
-    case 'DatoCmsHero':
-      createHomepageNode('HomepageHero', {
-        ...node,
-        heading: data.heading,
-        kicker: data.kicker,
-        subhead: data.subhead,
-        image: data.image?.upload_id,
-        text: data.text,
-        links: data.links,
-      })
-      break
-    case 'DatoCmsCta':
-      createHomepageNode('HomepageCta', {
-        ...node,
-        heading: data.heading,
-        text: data.text,
-        links: data.links,
-      })
-      break
-    case 'DatoCmsFeature':
-      createHomepageNode('HomepageFeature', {
-        ...node,
-        heading: data.heading,
-        kicker: data.kicker,
-        image: data.image,
-        text: data.text,
-        links: data.links,
-      })
-      break
-    case 'DatoCmsBenefit':
-      createHomepageNode('HomepageBenefit', {
-        ...node,
-        heading: data.heading,
-        image: data.image,
-        text: data.text,
-      })
-      break
-    case 'DatoCmsBenefitlist':
-      createHomepageNode('HomepageBenefitList', {
-        ...node,
-        content: data.content
-      })
-      break
-    case 'DatoCmsTestimonial':
-      createHomepageNode('HomepageTestimonial', {
-        ...node,
-        quote: data.quote,
-        source: data.source,
-        avatar: data.avatar,
-      })
-      break
-    case 'DatoCmsTestimoniallist':
-      createHomepageNode('HomepageTestimonialList', {
-        ...node,
-        content: data.content
-      })
-      break
-    case 'DatoCmsStat':
-      createHomepageNode('HomepageStat', {
-        ...node,
-        heading: data.heading,
-        value: data.value,
-        label: data.label,
-      })
-      break
-    case 'DatoCmsStatlist':
-      createHomepageNode('HomepageStatList', {
-        ...node,
-        content: data.content,
-      })
-      break
-    case 'DatoCmsLogo':
-      // TODO: see if this is needed
-      createHomepageNode('HomepageLogo', {
-        ...node,
-        alt: data.alt,
-        image: data.image,
-      }, data.upload_id)
-      break
-    case 'DatoCmsLogolist':
-      createHomepageNode('HomepageLogoList', {
-        ...node,
-        logos: data.logos
-      })
-      break
-    case 'DatoCmsLink':
-      createHomepageNode('HomepageLink', {
-        ...node,
-        href: data.href,
-        text: data.text,
-      })
-      break
-    // Layout nodes
-    case 'DatoCmsLayout':
-      createHomepageNode('Layout', {
-        ...node,
-        ...data
-      })
-      break
-    case 'DatoCmsLayoutheader':
-      const [ cta ] = data.cta
-      createHomepageNode('LayoutHeader', {
-        ...node,
-        ...data,
-        cta,
-      })
-      break
-    case 'DatoCmsLayoutfooter':
-      createHomepageNode('LayoutFooter', {
-        ...node,
-        ...data,
-        socialLinks: data.social_links,
-      })
-      break
-    case 'DatoCmsSocialLink':
-      createHomepageNode('SocialLink', {
-        ...node,
-        service: data.service,
-        username: data.username,
-      })
-      break
-  }
-
-  // Skip non-homepage related nodes
-  if (id) {
-    const child = getNode(id)
-    actions.createParentChildLink({
-      parent: node,
-      child,
-    })
-  }
-*/
 }

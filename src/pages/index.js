@@ -8,28 +8,26 @@ const Fallback = (props) =>
     No component found: {props.blocktype}
   </div>
 
+const Layout = props => props.children
+
 export default function Homepage (props) {
   const { homepage } = props.data
   console.log(props)
 
-  return <pre>todo</pre>
-
-  /*
   return (
-      <Layout>
-        {homepage.blocks.map((block, i) => {
-          const Component = sections[block.blocktype] || Fallback
-          return (
-            <Component
-              key={block.id}
-              index={i}
-              {...block}
-            />
-          )
-        })}
-      </Layout>
+    <Layout>
+      {homepage.blocks.map((block, i) => {
+        const Component = sections[block.blocktype] || Fallback
+        return (
+          <Component
+            key={block.id}
+            index={i}
+            {...block}
+          />
+        )
+      })}
+    </Layout>
   )
-  */
 }
 
 export const query = graphql`
