@@ -5,11 +5,10 @@ require('dotenv').config({
 module.exports = {
   plugins: [
     {
-      resolve: 'gatsby-source-datocms',
+      resolve: 'gatsby-source-wordpress',
       options: {
-        apiToken: process.env.DATOCMS_API_TOKEN,
-        environment: process.env.DATOCMS_ENVIRONMENT,
-      }
+        url: process.env.WPGRAPHQL_URL,
+      },
     },
     'gatsby-plugin-sharp',
     'gatsby-plugin-image',
