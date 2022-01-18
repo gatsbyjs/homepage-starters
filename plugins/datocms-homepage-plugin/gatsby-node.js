@@ -28,16 +28,27 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
   })
 
-  // TODO fix this
   actions.createFieldExtension({
     name: 'ctalink',
     extend(options) {
       return {
         async resolve(source, args, context, info) {
           const type = info.schema.getType(source.internal.type)
-          const resolver = type.getFields().ctas?.resolve
-          const result = await resolver(source, args, context, {})
-          return result[0]
+          const resolver = type.getFields().originalCta?.resolve
+          const result = await resolver(source, args, context, info)
+          return result
+        }
+      }
+    }
+  })
+
+  // support DatoCMS logos as images
+  actions.createFieldExtension({
+    name: 'recursiveImage',
+    extend(options) {
+      return {
+        async resolve(source, args, context, info) {
+          return source
         }
       }
     }
@@ -69,6 +80,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       ## DatoCMS specific
       originalId: String
       entityPayload: JSON
+      image: HomepageImage @recursiveImage
     }
 
     interface HomepageHero implements Node & HomepageBlock {
@@ -109,16 +121,10 @@ exports.createSchemaCustomization = async ({ actions }) => {
       entityPayload: JSON
     }
 
-    interface HomepageLogo implements Node {
-      id: ID!
-      image: HomepageImage
-      alt: String
-    }
-
     interface HomepageLogoList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
-      logos: [HomepageLogo]
+      logos: [HomepageImage]
       ## DatoCMS
       originalId: String
       entityPayload: JSON
@@ -239,6 +245,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       gatsbyImageData: JSON
       originalId: String
       entityPayload: JSON
+      image: HomepageImage @recursiveImage
     }
 
     type DatoCmsHero implements Node & HomepageHero & HomepageBlock {
@@ -274,19 +281,11 @@ exports.createSchemaCustomization = async ({ actions }) => {
       links: [HomepageLink]
     }
 
-    ## This is set up differently from Contentful in DatoCMS,
-    ## which may need to be adjusted
-    type DatoCmsAsset implements Node & HomepageLogo {
-      id: ID!
-      image: HomepageImage
-      alt: String
-    }
-
     type DatoCmsLogolist implements Node & HomepageBlock & HomepageLogoList {
       originalId: String
       entityPayload: JSON
       blocktype: String @blocktype
-      logos: [HomepageLogo]
+      logos: [HomepageImage]
     }
 
     type DatoCmsTestimonial implements Node & HomepageTestimonial {
@@ -350,7 +349,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       logo: HomepageImage
       links: [HomepageLink]
-      ctas: HomepageLink @link(by: "originalId",from: "entityPayload.attributes.cta")
+      originalCta: HomepageLink @link(by: "originalId",from: "entityPayload.attributes.cta")
       cta: HomepageLink @ctalink
       originalId: String
       entityPayload: JSON
