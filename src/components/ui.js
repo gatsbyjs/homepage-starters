@@ -51,10 +51,10 @@ export function Flex ({
       cx={[
         styles.flex,
         styles.flexVariants[variant],
-        styles.flexGap[gap],
         responsive && styles.flexVariants.responsive,
         wrap && styles.flexVariants.wrap,
         gutter && styles.gutter[gutter],
+        gutter ? styles.flexGap[0] : styles.flexGap[gap],
         _cx
       ]}
       {...props}

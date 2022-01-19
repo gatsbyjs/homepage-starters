@@ -3,8 +3,11 @@ import { graphql } from 'gatsby'
 import {
   Container,
   Section,
+  Heading,
+  Kicker,
+  Flex,
   Box,
-  List,
+  FlexList,
   Blockquote,
   Text,
   Avatar,
@@ -24,9 +27,9 @@ function Testimonial (props) {
           />
         )}
         <Box>
-          <cite>
+          <Text as='cite' variant='caps'>
             {props.source}
-          </cite>
+          </Text>
         </Box>
       </Text>
     </Blockquote>
@@ -34,18 +37,20 @@ function Testimonial (props) {
 }
 
 export default function TestimonialList (props) {
-  // props.kicker
-  // props.heading
   return (
     <Section>
       <Container>
-        <List>
+        <Box center>
+          {props.kicker && <Kicker>{props.kicker}</Kicker>}
+          {props.heading && <Heading>{props.heading}</Heading>}
+        </Box>
+        <FlexList gutter={3} variant='start' responsive wrap>
           {props.content.map(testimonial => (
-            <li key={testimonial.id}>
+            <Box as='li' key={testimonial.id} width='half' padding={3}>
               <Testimonial {...testimonial} />
-            </li>
+            </Box>
           ))}
-        </List>
+        </FlexList>
       </Container>
     </Section>
   )

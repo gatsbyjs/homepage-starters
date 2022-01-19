@@ -157,6 +157,14 @@ export const text = styleVariants({
     letterSpacing: theme.letterSpacings.wide,
     textTransform: 'uppercase',
   }],
+  caps: [margin0, {
+    marginBottom: theme.space[2],
+    fontSize: theme.fontSizes[1],
+    fontWeight: theme.fontWeights.semibold,
+    letterSpacing: theme.letterSpacings.wide,
+    textTransform: 'uppercase',
+    fontStyle: 'normal',
+  }],
   serif: [margin0, {
     marginBottom: theme.space[2],
     fontFamily: theme.fonts.serif,
@@ -265,7 +273,6 @@ export const backgrounds = styleVariants({
 export const blockquote = style([
   text.lead,
   {
-    textAlign: 'center',
     paddingLeft: 0,
     paddingRight: 0,
     paddingTop: theme.space[4],
