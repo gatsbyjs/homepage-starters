@@ -7,17 +7,25 @@ import {
   Text,
   Kicker,
   Heading,
+  Subhead,
   Box,
   Icon,
-  ButtonList,
+  LinkList,
 } from './ui'
 
 function Product (props) {
   return (
-    <Box>
-      <Heading>{props.heading}</Heading>
+    <Box center>
+      {props.image && (
+        <Icon
+          alt={props.image.alt}
+          image={props.image}
+          size='large'
+        />
+      )}
+      <Subhead>{props.heading}</Subhead>
       <Text>{props.text}</Text>
-      <ButtonList links={props.links} />
+      <LinkList links={props.links} />
     </Box>
   )
 }
@@ -26,18 +34,18 @@ export default function ProductList (props) {
   return (
     <Section>
       <Container>
-        <Box>
+        <Box center paddingY={4}>
           {props.kicker && <Kicker>{props.kicker}</Kicker>}
           {props.heading && <Heading>{props.heading}</Heading>}
           {props.text && <Text>{props.text}</Text>}
-          <FlexList gap={5} variant='center'>
-            {props.content.map(product => (
-              <li key={product.id}>
-                <Product {...product} />
-              </li>
-            ))}
-          </FlexList>
         </Box>
+        <FlexList variant='responsive'>
+          {props.content.map(product => (
+            <li key={product.id}>
+              <Product {...product} />
+            </li>
+          ))}
+        </FlexList>
       </Container>
     </Section>
   )

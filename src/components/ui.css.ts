@@ -41,6 +41,9 @@ export const flexVariants = styleVariants({
   wrap: {
     flexWrap: 'wrap',
   },
+  start: {
+    alignItems: 'flex-start',
+  },
   spaceBetween: {
     width: '100%',
     flexWrap: 'wrap',
@@ -56,7 +59,6 @@ export const flexVariants = styleVariants({
     '@media': {
       [media.small]: {
         flexDirection: 'row',
-        // display: 'flex',
       }
     }
   },
@@ -79,12 +81,23 @@ export const widths = styleVariants({
   },
 }])
 
+export const list = style({
+  listStyle: 'none',
+  padding: 0,
+  margin: 0,
+})
+
 export const padding = styleVariants(theme.space, (padding) => ({ padding }))
 export const paddingY = styleVariants(theme.space, (padding) => ({
   paddingTop: padding,
   paddingBottom: padding,
 }))
+export const gutter = styleVariants(theme.space, (val) => ({
+  marginLeft: `calc(-1 * ${val})`,
+  marginRight: `calc(-1 * ${val})`,
+}))
 export const radii = styleVariants(theme.radii, (borderRadius) => ({ borderRadius }))
+export const order = styleVariants([0, 1, 2, 3], (order) => ({ order }))
 export const box = styleVariants({
   center: {
     display: 'flex',
@@ -94,11 +107,6 @@ export const box = styleVariants({
   },
 })
 
-export const list = style({
-  listStyle: 'none',
-  padding: 0,
-  margin: 0,
-})
 
 export const section = style({
   paddingTop: theme.space[5],
@@ -173,6 +181,14 @@ export const navlink = style({
   ':hover': {
     color: theme.colors.black,
   },
+})
+
+export const ctaLink = style({
+  color: 'inherit',
+  fontWeight: theme.fontWeights.bold,
+  ':hover': {
+    color: theme.colors.black,
+  }
 })
 
 const button = style({
@@ -281,6 +297,7 @@ export const icons = styleVariants({
   (size) => ({
     width: size,
     height: size,
+    marginBottom: theme.space[2],
   })
 )
 

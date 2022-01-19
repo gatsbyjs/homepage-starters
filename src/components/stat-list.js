@@ -8,6 +8,7 @@ import {
   Text,
   Kicker,
   Heading,
+  Flex,
   Box,
   Icon,
   ButtonList,
@@ -24,30 +25,45 @@ function Stat (props) {
 
 export default function StatList (props) {
   return (
-    <Section>
-      <Container>
-        <Box>
-          {props.icon && <Icon {...props.icon} />}
-          {props.kicker && <Kicker>{props.kicker}</Kicker>}
-          {props.heading && <Heading>{props.heading}</Heading>}
-          {props.text && <Text>{props.text}</Text>}
-          <FlexList gap={5} variant='center'>
-            {props.content.map(stat => (
-              <li key={stat.id}>
-                <Stat {...stat} />
-              </li>
-            ))}
-          </FlexList>
-        </Box>
-        {props.image && (
-          <GatsbyImage
-            alt={props.image.alt}
-            image={getImage(props.image)}
-          />
-        )}
-        <ButtonList links={props.links} />
-      </Container>
-    </Section>
+    <Container>
+      <Section
+        padding={5}
+        radius='large'
+        background='primary'>
+        <Flex responsive>
+          <Box width='half'>
+            {props.icon && (
+              <Icon
+                alt={props.icon.alt}
+                image={props.icon}
+              />
+            )}
+            {props.kicker && <Kicker>{props.kicker}</Kicker>}
+            {props.heading && <Heading>{props.heading}</Heading>}
+            {props.text && <Text variant='lead'>{props.text}</Text>}
+            <FlexList gap={5}>
+              {props.content.map(stat => (
+                <li key={stat.id}>
+                  <Stat {...stat} />
+                </li>
+              ))}
+            </FlexList>
+            <ButtonList
+              links={props.links}
+              reversed
+            />
+          </Box>
+          <Box width='half'>
+            {props.image && (
+              <GatsbyImage
+                alt={props.image.alt}
+                image={getImage(props.image)}
+              />
+            )}
+          </Box>
+        </Flex>
+      </Section>
+    </Container>
   )
 }
 

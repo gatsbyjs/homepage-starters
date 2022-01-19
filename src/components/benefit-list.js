@@ -13,12 +13,12 @@ import {
 
 function Benefit (props) {
   return (
-    <Box as='li' center>
+    <Box as='li' width='third' padding={3}>
       {props.image && (
         <Icon
           alt={props.image.alt}
           image={props.image}
-          size='large'
+          size='small'
         />
       )}
       <Space size={2} />
@@ -32,9 +32,11 @@ export default function BenefitList (props) {
   return (
     <Section>
       <Container>
-        {props.heading && <Heading>{props.heading}</Heading>}
-        {props.text && <Text variant='lead'>{props.text}</Text>}
-        <FlexList variant='responsive'>
+        <Box center>
+          {props.heading && <Heading>{props.heading}</Heading>}
+          {props.text && <Text variant='lead'>{props.text}</Text>}
+        </Box>
+        <FlexList gap={0} gutter={3} variant='start' responsive wrap>
           {props.content.map(benefit => (
             <Benefit
               key={benefit.id}

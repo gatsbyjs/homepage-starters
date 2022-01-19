@@ -39,15 +39,22 @@ export function Container ({
 export function Flex ({
   variant,
   gap = 3,
+  gutter,
+  wrap,
+  responsive,
   cx: _cx,
   ...props
 }) {
+  gutter && console.log(styles.gutter[gutter])
   return (
     <Base
       cx={[
         styles.flex,
         styles.flexVariants[variant],
         styles.flexGap[gap],
+        responsive && styles.flexVariants.responsive,
+        wrap && styles.flexVariants.wrap,
+        gutter && styles.gutter[gutter],
         _cx
       ]}
       {...props}
@@ -62,6 +69,7 @@ export function Box ({
   paddingY,
   radius,
   center = false,
+  order,
   cx,
   ...props
 }) {
@@ -74,6 +82,7 @@ export function Box ({
         styles.paddingY[paddingY],
         styles.radii[radius],
         center && styles.box.center,
+        order && styles.order[order],
         cx,
       ]}
       {...props}
@@ -240,6 +249,33 @@ export function ButtonList ({
             variant={getVariant(i)}>
             {link.text}
           </Button>
+        </li>
+      ))}
+    </FlexList>
+  )
+}
+
+export function CTALink (props) {
+  return (
+    <Base
+      as={Link}
+      cx={[styles.ctaLink]}
+      {...props}
+    />
+  )
+}
+
+export function LinkList ({
+  links = [],
+  ...props
+}) {
+  return (
+    <FlexList {...props}>
+      {links && links.map((link, i) => (
+        <li key={link.id}>
+          <CTALink href={link.href}>
+            {link.text}
+          </CTALink>
         </li>
       ))}
     </FlexList>

@@ -68,6 +68,7 @@ const sizes = {
 
 const radii = {
   button: '10px',
+  large: '24px',
   circle: '99999px',
 }
 

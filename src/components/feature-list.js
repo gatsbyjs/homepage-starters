@@ -3,6 +3,7 @@ import { graphql } from 'gatsby'
 import {
   Container,
   Section,
+  Box,
   Kicker,
   Heading,
   Text,
@@ -11,16 +12,22 @@ import Feature from './feature'
 
 export default function FeatureList (props) {
   return (
-    <Section>
-      <Container width='narrow'>
-        {props.kicker && <Kicker>{props.kicker}</Kicker>}
-        {props.heading && <Heading>{props.heading}</Heading>}
-        {props.text && <Text>{props.text}</Text>}
-        {props.content.map(feature => (
-          <Feature key={feature.id} {...feature} />
+    <Container>
+      <Section background='muted' radius='large'>
+        <Box center>
+          {props.kicker && <Kicker>{props.kicker}</Kicker>}
+          {props.heading && <Heading>{props.heading}</Heading>}
+          {props.text && <Text>{props.text}</Text>}
+        </Box>
+        {props.content.map((feature, i) => (
+          <Feature
+            key={feature.id}
+            {...feature}
+            flip={i % 2}
+          />
         ))}
-      </Container>
-    </Section>
+      </Section>
+    </Container>
   )
 }
 
