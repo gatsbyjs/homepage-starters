@@ -1,149 +1,198 @@
-const parentResolverPassthrough = ({ field } = {}) => async (source, args, context, info) => {
-  const fieldName = field || info.fieldName
-  const parentNode = context.nodeModel.getNodeById({ id: source.parent })
-  const schemaType = info.schema.getType(parentNode.internal.type)
-  const resolver = schemaType.getFields()[fieldName].resolve
-  const result = await resolver(parentNode, args, context, { fieldName })
-  return result
-}
-
 exports.createSchemaCustomization = async ({ actions }) => {
   actions.createFieldExtension({
-    // Prevents errors when a block is not present in the content
-    name: 'fallbackId',
-    extend(options, prevFieldConfig) {
+    name: 'blocktype',
+    extend(options) {
       return {
         resolve(source) {
-          return source.originalId || ''
+          return source.internal.type
+            .replace('DatoCms', 'Homepage')
+            .replace(/list$/, 'List')
         }
       }
     }
   })
 
   actions.createFieldExtension({
-    name: 'parentResolverPassthrough',
-    args: {
-      field: 'String',
-    },
-    extend({ field }) {
+    name: 'metalinks',
+    extend(options) {
       return {
-        resolve: parentResolverPassthrough({
-          field,
-        })
+        async resolve(source, args, context, info) {
+          const type = info.schema.getType(source.internal.type)
+          const resolver = type.getFields().metalinks?.resolve
+          const result = await resolver(source, args, context, {
+            fieldName: 'metalinks'
+          })
+          return result
+        }
       }
-    },
+    }
   })
 
+  actions.createFieldExtension({
+    name: 'ctalink',
+    extend(options) {
+      return {
+        async resolve(source, args, context, info) {
+          const type = info.schema.getType(source.internal.type)
+          const resolver = type.getFields().originalCta?.resolve
+          const result = await resolver(source, args, context, info)
+          return result
+        }
+      }
+    }
+  })
+
+  // support DatoCMS logos as images
+  actions.createFieldExtension({
+    name: 'recursiveImage',
+    extend(options) {
+      return {
+        async resolve(source, args, context, info) {
+          return source
+        }
+      }
+    }
+  })
+
+  // abstract interfaces
   actions.createTypes(`
     interface HomepageBlock implements Node {
       id: ID!
+      blocktype: String
+      ## DatoCMS
       originalId: String
+      entityPayload: JSON
     }
 
-    type HomepageLink implements Node {
-      originalId: String
+    interface HomepageLink implements Node {
+      id: ID!
       href: String
       text: String
+      ## DatoCMS
+      originalId: String
+      entityPayload: JSON
     }
 
-    type HomepageImage implements Node {
+    interface HomepageImage implements Node {
+      id: ID!
       alt: String
-      gatsbyImageData: JSON @parentResolverPassthrough(field: "gatsbyImageData")
+      gatsbyImageData: JSON
+      ## DatoCMS specific
+      originalId: String
+      entityPayload: JSON
+      image: HomepageImage @recursiveImage
     }
 
-    type HomepageHero implements Node & HomepageBlock {
-      originalId: String @fallbackId
+    interface HomepageHero implements Node & HomepageBlock {
+      id: ID!
+      blocktype: String
       heading: String
       kicker: String
       subhead: String
-      image: HomepageImage @link(by: "originalId")
-      # also consider image alt text
+      image: HomepageImage
       text: String
-      links: [HomepageLink] @link(by: "originalId")
+      links: [HomepageLink]
+      ## DatoCMS
+      originalId: String
+      entityPayload: JSON
     }
 
-    type HomepageFeature implements Node & HomepageBlock {
-      originalId: String @fallbackId
+    interface HomepageFeature implements Node & HomepageBlock {
+      id: ID!
+      blocktype: String
       heading: String
       kicker: String
       text: String
-      image: HomepageImage @link(by: "originalId", from: "upload_id")
-      links: [HomepageLink] @link(by: "originalId")
+      image: HomepageImage
+      links: [HomepageLink]
+      ## DatoCMS
+      originalId: String
+      entityPayload: JSON
     }
 
-    type HomepageCta implements Node & HomepageBlock {
-      originalId: String @fallbackId
+    interface HomepageCta implements Node & HomepageBlock {
+      id: ID!
+      blocktype: String
       heading: String
       text: String
-      links: [HomepageLink] @link(by: "originalId")
+      links: [HomepageLink]
+      ## DatoCMS
+      originalId: String
+      entityPayload: JSON
     }
 
-    type HomepageStat implements Node {
-      originalId: String @fallbackId
-      heading: String
-      value: String!
-      label: String!
+    interface HomepageLogoList implements Node & HomepageBlock {
+      id: ID!
+      blocktype: String
+      logos: [HomepageImage]
+      ## DatoCMS
+      originalId: String
+      entityPayload: JSON
     }
 
-    type HomepageStatList implements Node & HomepageBlock {
-      content: [HomepageStat] @link(by: "originalId")
-      originalId: String @fallbackId
-    }
-
-    type HomepageBenefit implements Node {
-      originalId: String @fallbackId
-      heading: String
-      text: String
-      image: HomepageImage @link(by: "originalId")
-    }
-
-    type HomepageBenefitList implements Node & HomepageBlock {
-      originalId: String @fallbackId
-      content: [HomepageBenefit] @link(by: "originalId")
-    }
-
-    type HomepageTestimonial implements Node {
-      originalId: String @fallbackId
-      quote: String!
-      source: String!
+    interface HomepageTestimonial implements Node {
+      id: ID!
+      quote: String
+      source: String
       avatar: HomepageImage
     }
 
-    type HomepageTestimonialList implements Node & HomepageBlock {
-      originalId: String @fallbackId
-      content: [HomepageTestimonial] @link(by: "originalId")
+    interface HomepageTestimonialList implements Node & HomepageBlock {
+      id: ID!
+      blocktype: String
+      content: [HomepageTestimonial]
+      ## DatoCMS
+      originalId: String
+      entityPayload: JSON
     }
 
-    type HomepageLogo implements Node {
-      originalId: String @fallbackId
-      alt: String
-      image: HomepageImage @link(by: "originalId")
+    interface HomepageBenefit implements Node {
+      id: ID!
+      heading: String
+      text: String
+      image: HomepageImage
     }
 
-    type HomepageLogoList implements Node & HomepageBlock {
-      originalId: String @fallbackId
-      logos: [HomepageLogo] @link(by: "originalId")
+    interface HomepageBenefitList implements Node & HomepageBlock {
+      id: ID!
+      blocktype: String
+      content: [HomepageBenefit]
+      ## DatoCMS
+      originalId: String
+      entityPayload: JSON
     }
 
-    type Homepage implements Node @dontInfer {
-      title: String!
-      description: String!
-      image: HomepageImage @link(by: "originalId")
-      content: [HomepageBlock] @link(by: "originalId")
+    interface HomepageStat implements Node {
+      id: ID!
+      value: String
+      label: String
+      heading: String
     }
 
-    # Layout
-
-    type Layout implements Node {
-      header: LayoutHeader @link(by: "originalId")
-      footer: LayoutFooter @link(by: "originalId")
+    interface HomepageStatList implements Node & HomepageBlock {
+      id: ID!
+      blocktype: String
+      content: [HomepageStat]
+      ## DatoCMS
+      originalId: String
+      entityPayload: JSON
     }
 
-    type LayoutHeader implements Node {
-      # should this be a more generic type?
-      logo: HomepageImage @link(by: "originalId")
-      links: [HomepageLink] @link(by: "originalId")
-      cta: HomepageLink @link(by: "originalId")
+    interface Homepage implements Node {
+      id: ID!
+      title: String
+      description: String
+      image: HomepageImage
+      content: [HomepageBlock]
+      entityPayload: JSON
+    }
+
+    interface LayoutHeader implements Node {
+      id: ID!
+      logo: HomepageImage
+      links: [HomepageLink]
+      cta: HomepageLink
+      entityPayload: JSON
     }
 
     enum SocialService {
@@ -157,195 +206,180 @@ exports.createSchemaCustomization = async ({ actions }) => {
       TWITCH
     }
 
-    type SocialLink implements Node {
+    interface SocialLink implements Node {
+      id: ID!
       username: String!
       service: SocialService!
     }
 
-    type LayoutFooter implements Node {
-      logo: HomepageImage @link(by: "originalId")
-      links: [HomepageLink] @link(by: "originalId")
-      meta: [HomepageLink] @link(by: "originalId")
-      socialLinks: [SocialLink] @link(by: "originalId")
+    interface LayoutFooter implements Node {
+      id: ID!
+      logo: HomepageImage
+      links: [HomepageLink]
+      meta: [HomepageLink]
+      socialLinks: [SocialLink]
       copyright: String
+      entityPayload: JSON
+    }
+
+    interface Layout implements Node {
+      id: ID!
+      header: LayoutHeader
+      footer: LayoutFooter
     }
   `)
-}
 
-exports.onCreateNode = async ({
-  actions,
-  node,
-  getNode,
-  getNodeAndSavePathDependency,
-  createNodeId,
-}) => {
-  // CMS specific node creation
-  // For other CMSs, adjust this to map source data to the abstraction needed in the starter
-  if (!node.internal.type.includes('DatoCms')) return
 
-  let id
-  const _originalId = node.id.replace(/[A-Za-z-]/g, '')
-  const data = node.entityPayload?.attributes || node
+  actions.createTypes(`
+    type DatoCmsLink implements Node & HomepageLink {
+      id: ID!
+      originalId: String
+      entityPayload: JSON
+      href: String
+      text: String
+    }
 
-  const createHomepageNode = (typeName, data, originalId = _originalId) => {
-    id = createNodeId(`${node.id} >>> ${typeName}`)
-    actions.createNode({
-      ...data,
-      id,
-      internal: {
-        type: typeName,
-        contentDigest: node.internal.contentDigest,
-      },
-      parent: node.id,
-      originalId,
-    })
-  }
+    type DatoCmsAsset implements Node & HomepageImage {
+      id: ID!
+      alt: String
+      gatsbyImageData: JSON
+      originalId: String
+      entityPayload: JSON
+      image: HomepageImage @recursiveImage
+    }
 
-  switch (node.internal.type) {
-    case 'DatoCmsHomepage':
-      createHomepageNode('Homepage', {
-        ...node,
-        title: data.metadata?.title,
-        description: data.metadata?.description,
-        image: data.metadata?.image,
-        content: data.content,
-      })
-      break
-    case 'DatoCmsAsset':
-      // TODO: get "alt" text from content nodes
-      createHomepageNode('HomepageImage', {
-        ...node,
-        ...data,
-      })
-    case 'DatoCmsHero':
-      createHomepageNode('HomepageHero', {
-        ...node,
-        heading: data.heading,
-        kicker: data.kicker,
-        subhead: data.subhead,
-        image: data.image?.upload_id,
-        text: data.text,
-        links: data.links,
-      })
-      break
-    case 'DatoCmsCta':
-      createHomepageNode('HomepageCta', {
-        ...node,
-        heading: data.heading,
-        text: data.text,
-        links: data.links,
-      })
-      break
-    case 'DatoCmsFeature':
-      createHomepageNode('HomepageFeature', {
-        ...node,
-        heading: data.heading,
-        kicker: data.kicker,
-        image: data.image,
-        text: data.text,
-        links: data.links,
-      })
-      break
-    case 'DatoCmsBenefit':
-      createHomepageNode('HomepageBenefit', {
-        ...node,
-        heading: data.heading,
-        image: data.image,
-        text: data.text,
-      })
-      break
-    case 'DatoCmsBenefitlist':
-      createHomepageNode('HomepageBenefitList', {
-        ...node,
-        content: data.content
-      })
-      break
-    case 'DatoCmsTestimonial':
-      createHomepageNode('HomepageTestimonial', {
-        ...node,
-        quote: data.quote,
-        source: data.source,
-        avatar: data.avatar,
-      })
-      break
-    case 'DatoCmsTestimoniallist':
-      createHomepageNode('HomepageTestimonialList', {
-        ...node,
-        content: data.content
-      })
-      break
-    case 'DatoCmsStat':
-      createHomepageNode('HomepageStat', {
-        ...node,
-        heading: data.heading,
-        value: data.value,
-        label: data.label,
-      })
-      break
-    case 'DatoCmsStatlist':
-      createHomepageNode('HomepageStatList', {
-        ...node,
-        content: data.content,
-      })
-      break
-    case 'DatoCmsLogo':
-      // TODO: see if this is needed
-      createHomepageNode('HomepageLogo', {
-        ...node,
-        alt: data.alt,
-        image: data.image,
-      }, data.upload_id)
-      break
-    case 'DatoCmsLogolist':
-      createHomepageNode('HomepageLogoList', {
-        ...node,
-        logos: data.logos
-      })
-      break
-    case 'DatoCmsLink':
-      createHomepageNode('HomepageLink', {
-        ...node,
-        href: data.href,
-        text: data.text,
-      })
-      break
-    // Layout nodes
-    case 'DatoCmsLayout':
-      createHomepageNode('Layout', {
-        ...node,
-        ...data
-      })
-      break
-    case 'DatoCmsLayoutheader':
-      const [ cta ] = data.cta
-      createHomepageNode('LayoutHeader', {
-        ...node,
-        ...data,
-        cta,
-      })
-      break
-    case 'DatoCmsLayoutfooter':
-      createHomepageNode('LayoutFooter', {
-        ...node,
-        ...data,
-        socialLinks: data.social_links,
-      })
-      break
-    case 'DatoCmsSocialLink':
-      createHomepageNode('SocialLink', {
-        ...node,
-        service: data.service,
-        username: data.username,
-      })
-      break
-  }
+    type DatoCmsHero implements Node & HomepageHero & HomepageBlock {
+      id: ID!
+      originalId: String
+      entityPayload: JSON
+      blocktype: String @blocktype
+      heading: String
+      kicker: String
+      subhead: String
+      image: HomepageImage
+      text: String
+      links: [HomepageLink]
+    }
 
-  // Skip non-homepage related nodes
-  if (id) {
-    const child = getNode(id)
-    actions.createParentChildLink({
-      parent: node,
-      child,
-    })
-  }
+    type DatoCmsFeature implements Node & HomepageBlock & HomepageFeature {
+      originalId: String
+      blocktype: String @blocktype
+      heading: String
+      kicker: String
+      text: String
+      image: HomepageImage
+      links: [HomepageLink]
+      entityPayload: JSON
+    }
+
+    type DatoCmsCta implements Node & HomepageBlock & HomepageCta {
+      originalId: String
+      entityPayload: JSON
+      blocktype: String @blocktype
+      heading: String
+      text: String
+      links: [HomepageLink]
+    }
+
+    type DatoCmsLogolist implements Node & HomepageBlock & HomepageLogoList {
+      originalId: String
+      entityPayload: JSON
+      blocktype: String @blocktype
+      logos: [HomepageImage]
+    }
+
+    type DatoCmsTestimonial implements Node & HomepageTestimonial {
+      id: ID!
+      quote: String
+      source: String
+      avatar: HomepageImage
+    }
+
+    type DatoCmsTestimoniallist implements Node & HomepageBlock & HomepageTestimonialList {
+      id: ID!
+      originalId: String
+      entityPayload: JSON
+      blocktype: String @blocktype
+      content: [HomepageTestimonial]
+    }
+
+    type DatoCmsBenefit implements Node & HomepageBenefit {
+      id: ID!
+      heading: String
+      text: String
+      image: HomepageImage
+    }
+
+    type DatoCmsBenefitlist implements Node & HomepageBlock & HomepageBenefitList {
+      id: ID!
+      originalId: String
+      entityPayload: JSON
+      blocktype: String @blocktype
+      content: [HomepageBenefit]
+    }
+
+    type DatoCmsStat implements Node & HomepageStat {
+      id: ID!
+      value: String
+      label: String
+      heading: String
+    }
+
+    type DatoCmsStatlist implements Node & HomepageBlock & HomepageStatList {
+      id: ID!
+      originalId: String
+      entityPayload: JSON
+      blocktype: String @blocktype
+      content: [HomepageStat]
+    }
+
+    type DatoCmsHomepage implements Node & Homepage {
+      id: ID!
+      title: String @proxy(from: "entityPayload.attributes.metadata.title")
+      description: String @proxy(from: "entityPayload.attributes.metadata.description")
+      image: HomepageImage @link(by: "originalId", from: "entityPayload.attributes.metadata.image")
+      content: [HomepageBlock]
+      entityPayload: JSON
+    }
+  `)
+
+  // Layout types
+  actions.createTypes(`
+    type DatoCmsLayoutheader implements Node & LayoutHeader {
+      id: ID!
+      logo: HomepageImage
+      links: [HomepageLink]
+      originalCta: HomepageLink @link(by: "originalId",from: "entityPayload.attributes.cta")
+      cta: HomepageLink @ctalink
+      originalId: String
+      entityPayload: JSON
+    }
+
+    type DatoCmsSocialLink implements Node & SocialLink {
+      id: ID!
+      username: String!
+      service: SocialService!
+    }
+
+    type DatoCmsLayoutfooter implements Node & LayoutFooter {
+      id: ID!
+      logo: HomepageImage
+      links: [HomepageLink]
+
+      ## TODO: fix this
+      metalinks: [HomepageLink]
+      meta: [HomepageLink] @metalinks
+
+      socialLinks: [SocialLink]
+      copyright: String
+      originalId: String
+      entityPayload: JSON
+    }
+
+    type DatoCmsLayout implements Node & Layout {
+      id: ID!
+      header: LayoutHeader
+      footer: LayoutFooter
+    }
+  `)
 }
