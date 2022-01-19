@@ -29,11 +29,11 @@ function Benefit (props) {
 }
 
 export default function BenefitList (props) {
-  // props.heading
-  // props.text
   return (
     <Section>
       <Container>
+        {props.heading && <Heading>{props.heading}</Heading>}
+        {props.text && <Text variant='lead'>{props.text}</Text>}
         <FlexList variant='responsive'>
           {props.content.map(benefit => (
             <Benefit

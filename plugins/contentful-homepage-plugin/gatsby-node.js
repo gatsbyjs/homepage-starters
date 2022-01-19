@@ -127,6 +127,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       image: HomepageImage
       icon: HomepageImage
       content: [HomepageStat]
+      links: [HomepageLink]
     }
 
     interface HomepageProduct implements Node {
@@ -301,6 +302,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       image: HomepageImage @link(from: "image___NODE")
       icon: HomepageImage @link(from: "icon___NODE")
       content: [HomepageStat] @link(from: "content___NODE")
+      links: [HomepageLink] @link(from: "links___NODE")
     }
 
     type ContentfulHomepageProduct implements Node & HomepageProduct {

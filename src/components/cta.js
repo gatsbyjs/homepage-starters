@@ -1,17 +1,16 @@
 import * as React from 'react'
-import { graphql, Link } from 'gatsby'
+import { graphql } from 'gatsby'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import {
   Container,
   Section,
   Heading,
   Text,
   Box,
-  Space,
   ButtonList,
 } from './ui'
 
 export default function HomepageCta (props) {
-  // props.image
   return (
     <Section>
       <Container>
@@ -26,6 +25,12 @@ export default function HomepageCta (props) {
             variant='center'
             reversed
           />
+          {props.image && (
+            <GatsbyImage
+              alt={props.image.alt}
+              image={getImage(props.image)}
+            />
+          )}
         </Box>
       </Container>
     </Section>

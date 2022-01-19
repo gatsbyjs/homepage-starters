@@ -233,7 +233,7 @@ export function ButtonList ({
   }
   return (
     <FlexList {...props}>
-      {links.map((link, i) => (
+      {links && links.map((link, i) => (
         <li key={link.id}>
           <Button
             href={link.href}
