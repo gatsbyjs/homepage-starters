@@ -68,10 +68,19 @@ exports.createSchemaCustomization = async ({ actions }) => {
       links: [HomepageLink] @link
     }
 
+    type HomepageFeatureList implements Node & HomepageBlock {
+      blocktype: String
+      kicker: String
+      heading: String
+      text: String
+      content: [HomepageFeature] @link
+    }
+
     type HomepageCta implements Node & HomepageBlock {
       blocktype: String
       heading: String
       text: String
+      image: HomepageImage @link(by: "relativePath")
       links: [HomepageLink] @link
     }
 
@@ -83,6 +92,12 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type HomepageStatList implements Node & HomepageBlock {
       blocktype: String
+      kicker: String
+      heading: String
+      text: String
+      image: HomepageImage
+      icon: HomepageImage
+      links: [HomepageLink] @link
       content: [HomepageStat] @link
     }
 
@@ -94,6 +109,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type HomepageBenefitList implements Node & HomepageBlock {
       blocktype: String
+      heading: String
+      text: String
       content: [HomepageBenefit] @link
     }
 
@@ -110,6 +127,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type HomepageTestimonialList implements Node & HomepageBlock {
       blocktype: String
+      kicker: String
+      heading: String
       content: [HomepageTestimonial] @link
     }
 
@@ -120,7 +139,23 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type HomepageLogoList implements Node & HomepageBlock {
       blocktype: String
+      text: String
       logos: [HomepageLogo] @link
+    }
+
+    type HomepageProduct implements Node {
+      heading: String
+      text: String
+      image: HomepageImage
+      links: [HomepageLink]
+    }
+
+    type HomepageProductList implements Node & HomepageBlock {
+      blocktype: String
+      heading: String
+      kicker: String
+      text: String
+      content: [HomepageProduct]
     }
 
     type LayoutHeader implements Node {
