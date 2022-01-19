@@ -18,6 +18,11 @@ function Stat (props) {
 }
 
 export default function StatList (props) {
+  // props.kicker
+  // props.heading
+  // props.text
+  // props.image
+  // props.icon
   return (
     <Section>
       <Container>
@@ -36,6 +41,17 @@ export default function StatList (props) {
 export const query = graphql`
   fragment HomepageStatListContent on HomepageStatList {
     id
+    kicker
+    heading
+    text
+    image {
+      id
+      gatsbyImageData
+    }
+    icon {
+      id
+      gatsbyImageData
+    }
     content {
       id
       value

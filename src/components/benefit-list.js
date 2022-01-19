@@ -29,6 +29,8 @@ function Benefit (props) {
 }
 
 export default function BenefitList (props) {
+  // props.heading
+  // props.text
   return (
     <Section>
       <Container>
@@ -48,6 +50,8 @@ export default function BenefitList (props) {
 export const query = graphql`
   fragment HomepageBenefitListContent on HomepageBenefitList {
     id
+    heading
+    text
     content {
       id
       heading

@@ -11,6 +11,7 @@ import {
 } from './ui'
 
 export default function HomepageCta (props) {
+  // props.image
   return (
     <Section>
       <Container>
@@ -36,6 +37,10 @@ export const query = graphql`
     id
     heading
     text
+    image {
+      id
+      gatsbyImageData
+    }
     links {
       id
       href

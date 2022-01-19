@@ -34,6 +34,8 @@ function Testimonial (props) {
 }
 
 export default function TestimonialList (props) {
+  // props.kicker
+  // props.heading
   return (
     <Section>
       <Container>
@@ -52,6 +54,8 @@ export default function TestimonialList (props) {
 export const query = graphql`
   fragment HomepageTestimonialListContent on HomepageTestimonialList {
     id
+    kicker
+    heading
     content {
       id
       quote

@@ -20,6 +20,7 @@ function LogoItem (props) {
 }
 
 export default function LogoList (props) {
+  // props.text
   return (
     <Section>
       <Container width='narrow'>
@@ -38,6 +39,7 @@ export default function LogoList (props) {
 export const query = graphql`
   fragment HomepageLogoListContent on HomepageLogoList {
     id
+    text
     logos {
       id
       alt
