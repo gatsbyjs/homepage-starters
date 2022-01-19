@@ -110,11 +110,24 @@ exports.createSchemaCustomization = async ({ actions }) => {
       entityPayload: JSON
     }
 
+    interface HomepageFeatureList implements Node & HomepageBlock {
+      id: ID!
+      blocktype: String
+      kicker: String
+      heading: String
+      text: String
+      content: [HomepageFeature]
+      ## DatoCMS
+      originalId: String
+      entityPayload: JSON
+    }
+
     interface HomepageCta implements Node & HomepageBlock {
       id: ID!
       blocktype: String
       heading: String
       text: String
+      image: HomepageImage
       links: [HomepageLink]
       ## DatoCMS
       originalId: String
@@ -124,6 +137,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     interface HomepageLogoList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
+      text: String
       logos: [HomepageImage]
       ## DatoCMS
       originalId: String
