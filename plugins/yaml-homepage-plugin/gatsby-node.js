@@ -302,6 +302,7 @@ exports.onCreateNode = async ({
 
   const pageID = createNodeId(`${node.id} >>> Homepage`)
 
+  // TODO get source-filesystem plugin paths
   const assetsPath = options.assetsPath || ''
   const dataPath = options.path || ''
   const relativePath = path.relative(dataPath, assetsPath)
@@ -350,6 +351,7 @@ exports.onCreateNode = async ({
           image: getRelativeImage(item.image),
         })
         break
+      // TODO case 'FeatureList':
       case 'Cta':
         id = createNodeId(`${node.id} >>> HomepageCta ${i}`)
         actions.createNode({
@@ -471,6 +473,7 @@ exports.onCreateNode = async ({
           }),
         })
         break
+      // TODO case 'ProductList':
       default:
         console.warn('Unknown type', item.type)
         // fallback for handling unknown blocks

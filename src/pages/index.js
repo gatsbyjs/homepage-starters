@@ -44,6 +44,7 @@ export const query = graphql`
         ...HomepageTestimonialListContent
         ...HomepageBenefitListContent
         ...HomepageStatListContent
+        ...HomepageProductListContent
       }
     }
   }

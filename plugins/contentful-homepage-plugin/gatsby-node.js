@@ -197,7 +197,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
   // CMS-specific types
   actions.createTypes(`
-    type ContentfulHomepageLink implements Node & HomepageLink {
+    type ContentfulHomepageLink implements Node & HomepageLink @dontInfer {
       id: ID!
       href: String
       text: String
@@ -209,7 +209,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       gatsbyImageData: JSON
     }
 
-    type ContentfulHomepageHero implements Node & HomepageHero & HomepageBlock {
+    type ContentfulHomepageHero implements Node & HomepageHero & HomepageBlock @dontInfer {
       id: ID!
       blocktype: String @blocktype
       heading: String
@@ -220,7 +220,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       links: [HomepageLink] @link(from: "links___NODE")
     }
 
-    type ContentfulHomepageFeature implements Node & HomepageBlock & HomepageFeature {
+    type ContentfulHomepageFeature implements Node & HomepageBlock & HomepageFeature @dontInfer {
       blocktype: String @blocktype
       heading: String
       kicker: String
@@ -228,7 +228,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       image: HomepageImage @link(from: "image___NODE")
       links: [HomepageLink] @link(from: "links___NODE")
     }
-    type ContentfulHomepageFeatureList implements Node & HomepageBlock & HomepageFeatureList {
+    type ContentfulHomepageFeatureList implements Node & HomepageBlock & HomepageFeatureList @dontInfer {
       blocktype: String @blocktype
       kicker: String
       heading: String
@@ -236,7 +236,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       content: [HomepageFeature] @link(from: "content___NODE")
     }
 
-    type ContentfulHomepageCta implements Node & HomepageBlock & HomepageCta {
+    type ContentfulHomepageCta implements Node & HomepageBlock & HomepageCta @dontInfer {
       blocktype: String @blocktype
       heading: String
       text: String
@@ -244,26 +244,26 @@ exports.createSchemaCustomization = async ({ actions }) => {
       links: [HomepageLink] @link(from: "links___NODE")
     }
 
-    type ContentfulHomepageLogo implements Node & HomepageLogo {
+    type ContentfulHomepageLogo implements Node & HomepageLogo @dontInfer {
       id: ID!
       image: HomepageImage @link(from: "image___NODE")
       alt: String
     }
 
-    type ContentfulHomepageLogoList implements Node & HomepageBlock & HomepageLogoList {
+    type ContentfulHomepageLogoList implements Node & HomepageBlock & HomepageLogoList @dontInfer {
       blocktype: String @blocktype
       text: String
       logos: [HomepageLogo] @link(from: "logos___NODE")
     }
 
-    type ContentfulHomepageTestimonial implements Node & HomepageTestimonial {
+    type ContentfulHomepageTestimonial implements Node & HomepageTestimonial @dontInfer {
       id: ID!
       quote: String
       source: String
       avatar: HomepageImage @link(from: "avatar___NODE")
     }
 
-    type ContentfulHomepageTestimonialList implements Node & HomepageBlock & HomepageTestimonialList {
+    type ContentfulHomepageTestimonialList implements Node & HomepageBlock & HomepageTestimonialList @dontInfer {
       id: ID!
       blocktype: String @blocktype
       kicker: String
@@ -271,14 +271,14 @@ exports.createSchemaCustomization = async ({ actions }) => {
       content: [HomepageTestimonial] @link(from: "content___NODE")
     }
 
-    type ContentfulHomepageBenefit implements Node & HomepageBenefit {
+    type ContentfulHomepageBenefit implements Node & HomepageBenefit @dontInfer {
       id: ID!
       heading: String
       text: String
       image: HomepageImage @link(from: "image___NODE")
     }
 
-    type ContentfulHomepageBenefitList implements Node & HomepageBlock & HomepageBenefitList {
+    type ContentfulHomepageBenefitList implements Node & HomepageBlock & HomepageBenefitList @dontInfer {
       id: ID!
       blocktype: String @blocktype
       heading: String
@@ -286,14 +286,14 @@ exports.createSchemaCustomization = async ({ actions }) => {
       content: [HomepageBenefit] @link(from: "content___NODE")
     }
 
-    type ContentfulHomepageStat implements Node & HomepageStat {
+    type ContentfulHomepageStat implements Node & HomepageStat @dontInfer {
       id: ID!
       value: String
       label: String
       heading: String
     }
 
-    type ContentfulHomepageStatList implements Node & HomepageBlock & HomepageStatList {
+    type ContentfulHomepageStatList implements Node & HomepageBlock & HomepageStatList @dontInfer {
       id: ID!
       blocktype: String @blocktype
       kicker: String
@@ -305,14 +305,14 @@ exports.createSchemaCustomization = async ({ actions }) => {
       links: [HomepageLink] @link(from: "links___NODE")
     }
 
-    type ContentfulHomepageProduct implements Node & HomepageProduct {
+    type ContentfulHomepageProduct implements Node & HomepageProduct @dontInfer {
       heading: String
       text: String
       image: HomepageImage @link(from: "image___NODE")
       links: [HomepageLink] @link(from: "links___NODE")
     }
 
-    type ContentfulHomepageProductList implements Node & HomepageProductList & HomepageBlock {
+    type ContentfulHomepageProductList implements Node & HomepageProductList & HomepageBlock @dontInfer {
       blocktype: String @blocktype
       heading: String
       kicker: String
@@ -320,7 +320,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       content: [HomepageProduct] @link(from: "content___NODE")
     }
 
-    type ContentfulHomepage implements Node & Homepage {
+    type ContentfulHomepage implements Node & Homepage @dontInfer {
       id: ID!
       title: String
       description: String
@@ -331,20 +331,20 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
   // Layout types
   actions.createTypes(`
-    type ContentfulLayoutHeader implements Node & LayoutHeader {
+    type ContentfulLayoutHeader implements Node & LayoutHeader @dontInfer {
       id: ID!
       logo: HomepageImage @link(from: "logo___NODE")
       links: [HomepageLink] @link(from: "links___NODE")
       cta: HomepageLink @link(from: "cta___NODE")
     }
 
-    type ContentfulSocialLink implements Node & SocialLink {
+    type ContentfulSocialLink implements Node & SocialLink @dontInfer {
       id: ID!
       username: String!
       service: SocialService!
     }
 
-    type ContentfulLayoutFooter implements Node & LayoutFooter {
+    type ContentfulLayoutFooter implements Node & LayoutFooter @dontInfer {
       id: ID!
       logo: HomepageImage @link(from: "logo___NODE")
       links: [HomepageLink] @link(from: "links___NODE")
@@ -353,10 +353,16 @@ exports.createSchemaCustomization = async ({ actions }) => {
       copyright: String
     }
 
-    type ContentfulLayout implements Node & Layout {
+    type ContentfulLayout implements Node & Layout @dontInfer {
       id: ID!
       header: LayoutHeader @link(from: "header___NODE")
       footer: LayoutFooter @link(from: "footer___NODE")
     }
   `)
 }
+
+// exports.onCreateNode = ({ node }) => {
+//   if (node.internal.type === 'ContentfulHomepageProduct') {
+//     console.log(node)
+//   }
+// }
