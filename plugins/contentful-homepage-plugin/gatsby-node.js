@@ -360,9 +360,3 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
   `)
 }
-
-// exports.onCreateNode = ({ node }) => {
-//   if (node.internal.type === 'ContentfulHomepageProduct') {
-//     console.log(node)
-//   }
-// }
