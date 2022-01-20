@@ -1,6 +1,6 @@
-import * as React from 'react'
-import { graphql, Link } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import * as React from "react"
+import { graphql, Link } from "gatsby"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import {
   Container,
   Section,
@@ -10,15 +10,15 @@ import {
   Kicker,
   Text,
   ButtonList,
-} from './ui'
+} from "./ui"
 
 // TODO add prop for reversed order
-export default function Feature (props) {
+export default function Feature(props) {
   return (
-    <Section background='muted'>
+    <Section background="muted">
       <Container>
-        <Flex gap={4} variant='responsive'>
-          <Box width='half'>
+        <Flex gap={4} variant="responsive">
+          <Box width="half">
             {props.image && (
               <GatsbyImage
                 alt={props.image.alt}
@@ -26,10 +26,10 @@ export default function Feature (props) {
               />
             )}
           </Box>
-          <Box width='half'>
+          <Box width="half">
             <Kicker>{props.kicker}</Kicker>
             <Heading>{props.heading}</Heading>
-            <Text variant='lead'>{props.text}</Text>
+            <Text variant="lead">{props.text}</Text>
             <ButtonList links={props.links} />
           </Box>
         </Flex>
