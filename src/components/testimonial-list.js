@@ -15,24 +15,24 @@ import {
 
 function Testimonial (props) {
   return (
-    <Blockquote>
-      <p>
-        {props.quote}
-      </p>
-      <Text as='figcaption'>
-        {props.avatar && (
-          <Avatar
-            alt={props.avatar.alt}
-            image={props.avatar}
-          />
-        )}
-        <Box>
-          <Text as='cite' variant='caps'>
+    <Flex variant='start'>
+      {props.avatar && (
+        <Avatar
+          alt={props.avatar.alt}
+          image={props.avatar}
+        />
+      )}
+      <Blockquote>
+        <Text as='p' variant='lead'>
+          {props.quote}
+        </Text>
+        <figcaption>
+          <Text as='cite' bold variant='caps'>
             {props.source}
           </Text>
-        </Box>
-      </Text>
-    </Blockquote>
+        </figcaption>
+      </Blockquote>
+    </Flex>
   )
 }
 

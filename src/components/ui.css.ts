@@ -270,17 +270,17 @@ export const backgrounds = styleVariants({
   },
 })
 
-export const blockquote = style([
-  text.lead,
-  {
-    paddingLeft: 0,
-    paddingRight: 0,
-    paddingTop: theme.space[4],
-    paddingBottom: theme.space[4],
-  }
-])
+export const blockquote = style({
+  margin: 0,
+  paddingLeft: 0,
+  paddingRight: 0,
+  paddingTop: 0,
+  paddingBottom: theme.space[4],
+})
 
 export const avatar = style({
+  minWidth: 0,
+  flexShrink: 0,
   width: theme.sizes.avatar,
   height: theme.sizes.avatar,
   borderRadius: theme.radii.circle,

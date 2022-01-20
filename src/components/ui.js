@@ -140,6 +140,7 @@ export function Section (props) {
 export function Text ({
   variant = 'body',
   center,
+  bold,
   ...props
 }) {
   return (
@@ -147,6 +148,7 @@ export function Text ({
       cx={[
         styles.text[variant],
         center && styles.text.center,
+        bold && styles.text.bold,
       ]}
       {...props}
     />
