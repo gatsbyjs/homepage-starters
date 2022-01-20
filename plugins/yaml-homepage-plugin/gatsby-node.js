@@ -375,8 +375,8 @@ exports.onCreateNode = async ({
                 contentDigest: createContentDigest(JSON.stringify(feature)),
               },
               parent: id,
-              image: getRelativeImage(item.image),
-              links: item.links?.map(createLinkNode(id)),
+              image: getRelativeImage(feature.image),
+              links: feature.links?.map(createLinkNode(id)),
             })
             return featureID
           }),
@@ -395,6 +395,7 @@ exports.onCreateNode = async ({
           heading: item.heading,
           subhead: item.subhead,
           text: item.text,
+          image: getRelativeImage(item.image),
           links: item.links?.map(createLinkNode(id)),
         })
         break
@@ -418,6 +419,7 @@ exports.onCreateNode = async ({
                 contentDigest: createContentDigest(JSON.stringify(testimonial)),
               },
               parent: id,
+              avatar: getRelativeImage(testimonial.avatar),
             })
             return testimonialID
           }),
@@ -443,6 +445,7 @@ exports.onCreateNode = async ({
                 contentDigest: createContentDigest(JSON.stringify(benefit)),
               },
               parent: id,
+              image: getRelativeImage(benefit.image),
             })
             return benefitID
           }),
