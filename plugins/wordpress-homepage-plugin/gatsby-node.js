@@ -10,29 +10,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
   })
 
-  /* might not need this
-  actions.createFieldExtension({
-    name: 'proxyLinks',
-    args: {
-      name: {
-        type: 'String!',
-      },
-    },
-    extend(options) {
-      return {
-        resolve(source, args, context, info) {
-          const link = source[options.name]?.link
-          console.log(options.name, link)
-          if (!link) return null
-          return [
-            link.id,
-          ]
-        }
-      }
-    }
-  })
-  */
-
   actions.createFieldExtension({
     name: 'recursiveImage',
     extend(options) {
@@ -232,16 +209,16 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
 
     type WpBenefit implements Node & HomepageBenefit {
-      heading: String
-      text: String
-      image: HomepageImage @link
+      heading: String @proxy(from: "benefit.heading")
+      text: String @proxy(from: "benefit.text")
+      image: HomepageImage @link @proxy(from: "benefit.image.id")
     }
 
     type WpProduct implements Node & HomepageProduct {
-      heading: String
-      text: String
-      image: HomepageImage @link
-      links: [HomepageLink] @link
+      heading: String @proxy(from: "product.heading")
+      text: String @proxy(from: "product.text")
+      image: HomepageImage @link @proxy(from: "product.image.id")
+      links: [HomepageLink] @link @proxy(from: "fields.links")
     }
 
     type WpFeature implements Node & HomepageFeature & HomepageBlock {
@@ -251,14 +228,14 @@ exports.createSchemaCustomization = async ({ actions }) => {
       heading: String @proxy(from: "feature.heading")
       kicker: String @proxy(from: "feature.kicker")
       text: String @proxy(from: "feature.text")
-      image: HomepageImage @link
+      image: HomepageImage @link @proxy(from: "feature.image.id")
       links: [HomepageLink] @proxy(from: "fields.links") @link
     }
 
     type WpTestimonial implements Node & HomepageTestimonial {
-      quote: String
-      source: String
-      avatar: HomepageImage @link
+      quote: String @proxy(from: "testimonial.quote")
+      source: String @proxy(from: "testimonial.source")
+      avatar: HomepageImage @link @proxy(from: "testimonial.avatar.id")
     }
   `)
 
@@ -340,6 +317,7 @@ exports.onCreateNode = ({
         productList,
         logoList,
         featureList,
+        benefitList,
       } = node
 
       const heroID = createNodeId(`${node.id} >>> HomepageHero`)
@@ -380,6 +358,7 @@ exports.onCreateNode = ({
         ]
           .filter(Boolean)
           .map(createLinkNode(ctaID)),
+        image: homepageCta.image.id,
       })
 
       actions.createNode({
@@ -394,6 +373,31 @@ exports.onCreateNode = ({
         links: [
           statList.link && createLinkNode(statID)(statList.link),
         ].filter(Boolean),
+        content: [
+          {
+            value: statList.stat1,
+            label: statList.stat1label,
+          },
+          {
+            value: statList.stat2,
+            label: statList.stat2label,
+          },
+          {
+            value: statList.stat3,
+            label: statList.stat3label,
+          },
+        ].map(stat => {
+          const id = createNodeId(`${statID} >>> HomepageStat`)
+          actions.createNode({
+            ...stat,
+            id,
+            internal: {
+              type: 'HomepageStat',
+              contentDigest: createContentDigest(stat),
+            },
+          })
+          return id
+        })
       })
 
       actions.createNode({
@@ -405,6 +409,12 @@ exports.onCreateNode = ({
         },
         parent: node.id,
         blocktype: 'HomepageTestimonialList',
+        content: [
+          testimonialList.testimonial1.id,
+          testimonialList.testimonial2.id,
+          testimonialList.testimonial3.id,
+          testimonialList.testimonial4.id,
+        ],
       })
 
       actions.createNode({
@@ -416,6 +426,11 @@ exports.onCreateNode = ({
         },
         parent: node.id,
         blocktype: 'HomepageProductList',
+        content: [
+          productList.product1,
+          productList.product2,
+          productList.product3,
+        ].map(product => product.id),
       })
 
       actions.createNode({
@@ -452,6 +467,22 @@ exports.onCreateNode = ({
       })
 
       actions.createNode({
+        ...benefitList,
+        id: createNodeId(`${node.id} >>> HomepageBenefitList`),
+        internal: {
+          type: 'HomepageBenefitList',
+          contentDigest: createContentDigest(JSON.stringify(benefitList)),
+        },
+        parent: node.id,
+        blocktype: 'HomepageBenefitList',
+        content: [
+          benefitList.benefit1.id,
+          benefitList.benefit2.id,
+          benefitList.benefit3.id,
+        ],
+      })
+
+      actions.createNode({
         ...node,
         id: createNodeId(`${node.id} >>> Homepage`),
         internal: {
@@ -464,10 +495,8 @@ exports.onCreateNode = ({
         // content:
       })
 
-      // console.log(node)
       break
     case 'WpFeature':
-      console.log(node)
       if (node.feature.link) {
         const linkID = createLinkNode(node.id)(node.feature.link, 0)
         actions.createNodeField({
@@ -477,7 +506,17 @@ exports.onCreateNode = ({
         })
       }
       break
+    case 'WpProduct':
+      if (node.product.link) {
+        const linkID = createLinkNode(node.id)(node.product.link, 0)
+        actions.createNodeField({
+          node,
+          name: 'links',
+          value: [ linkID ],
+        })
+      }
+      break
     default:
-      console.log(node.internal.type)
+      // console.log(node.internal.type)
   }
 }
