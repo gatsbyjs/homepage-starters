@@ -21,7 +21,6 @@ function LogoItem (props) {
 }
 
 export default function LogoList (props) {
-  // props.text
   return (
     <Section>
       <Container width='narrow'>
