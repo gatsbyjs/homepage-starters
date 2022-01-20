@@ -3,10 +3,10 @@ import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import * as sections from '../components/sections'
 
-const Fallback = (props) =>
-  <div>
-    No component found: {props.blocktype}
-  </div>
+const Fallback = (props) => {
+  console.warn(`No component found for: ${props.blocktype}`)
+  return false
+}
 
 export default function Homepage (props) {
   const { homepage } = props.data
