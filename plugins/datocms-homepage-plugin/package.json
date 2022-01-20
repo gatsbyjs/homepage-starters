@@ -4,6 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "gatsby-source-datocms": "^3.0.12"
+    "gatsby-plugin-react-helmet": "^5.5.0",
+    "gatsby-source-datocms": "^3.0.12",
+    "react-helmet": "^6.1.0"
   }
 }
