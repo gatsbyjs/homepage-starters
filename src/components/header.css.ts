@@ -38,6 +38,11 @@ export const mobileNavOverlay = style({
   height: "100vh",
   background: theme.colors.primary,
   zIndex: 1,
+  "@media": {
+    [mediaQueries.small]: {
+      display: "none",
+    },
+  },
 });
 
 export const mobileNavLinkList = style({
