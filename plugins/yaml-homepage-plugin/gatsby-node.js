@@ -146,8 +146,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type HomepageProduct implements Node {
       heading: String
       text: String
-      image: HomepageImage
-      links: [HomepageLink]
+      image: HomepageImage @link(by: "relativePath")
+      links: [HomepageLink] @link
     }
 
     type HomepageProductList implements Node & HomepageBlock {
@@ -155,7 +155,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       heading: String
       kicker: String
       text: String
-      content: [HomepageProduct]
+      content: [HomepageProduct] @link
     }
 
     type LayoutHeader implements Node {
@@ -286,7 +286,6 @@ exports.onCreateNode = async ({
 
     // layout
     actions.createNode({
-      // ...node,
       id: layoutID,
       internal: {
         type: 'Layout',
@@ -302,11 +301,12 @@ exports.onCreateNode = async ({
 
   const pageID = createNodeId(`${node.id} >>> Homepage`)
 
-  // TODO get source-filesystem plugin paths
-  const assetsPath = options.assetsPath || ''
-  const dataPath = options.path || ''
+  const assetsPath = path.join(__dirname, 'assets')
+  const dataPath = path.join(__dirname, 'data')
   const relativePath = path.relative(dataPath, assetsPath)
+
   const getRelativeImage = (src) => {
+    if (!src) return null
     const image = path.relative(relativePath, src)
     return image
   }
@@ -331,6 +331,7 @@ exports.onCreateNode = async ({
           text: item.text,
           links: item.links?.map(createLinkNode(id)),
           image: getRelativeImage(item.image),
+          imagePath: getRelativeImage(item.image),
         })
         break
       case 'Feature':
@@ -351,7 +352,36 @@ exports.onCreateNode = async ({
           image: getRelativeImage(item.image),
         })
         break
-      // TODO case 'FeatureList':
+      case 'FeatureList':
+        id = createNodeId(`${node.id} >>> HomepageFeatureList ${i}`)
+        actions.createNode({
+          id,
+          internal: {
+            type: 'HomepageFeatureList',
+            contentDigest: node.internal.contentDigest,
+          },
+          parent: pageID,
+          blocktype,
+          kicker: item.kicker,
+          heading: item.heading,
+          text: item.text,
+          content: item.content?.map((feature, i) => {
+            const featureID = createNodeId(`${id} >>> HomepageFeature ${i}`)
+            actions.createNode({
+              ...feature,
+              id: featureID,
+              internal: {
+                type: 'HomepageFeature',
+                contentDigest: createContentDigest(JSON.stringify(feature)),
+              },
+              parent: id,
+              image: getRelativeImage(item.image),
+              links: item.links?.map(createLinkNode(id)),
+            })
+            return featureID
+          }),
+        })
+        break
       case 'Cta':
         id = createNodeId(`${node.id} >>> HomepageCta ${i}`)
         actions.createNode({
@@ -462,7 +492,7 @@ exports.onCreateNode = async ({
               id: statID,
               internal: {
                 type: 'HomepageStat',
-                contentDigest: createContentDigest(JSON.stringify(logo)),
+                contentDigest: createContentDigest(JSON.stringify(stat)),
               },
               parent: id,
               value: stat.value,
@@ -473,7 +503,36 @@ exports.onCreateNode = async ({
           }),
         })
         break
-      // TODO case 'ProductList':
+      case 'ProductList':
+        id = createNodeId(`${node.id} >>> HomepageProductList ${i}`)
+        actions.createNode({
+          ...item,
+          id,
+          internal: {
+            type: 'HomepageProductList',
+            contentDigest: node.internal.contentDigest,
+          },
+          parent: pageID,
+          blocktype,
+          content: item.content?.map((product, i) => {
+            const productID = createNodeId(`${id} >>> HomepageProduct ${i}`)
+            actions.createNode({
+              ...product,
+              id: productID,
+              internal: {
+                type: 'HomepageProduct',
+                contentDigest: createContentDigest(JSON.stringify(product)),
+              },
+              parent: id,
+              heading: product.heading,
+              text: product.text,
+              image: getRelativeImage(product.image),
+              links: product.links?.map(createLinkNode(id)),
+            })
+            return productID
+          }),
+        })
+        break
       default:
         console.warn('Unknown type', item.type)
         // fallback for handling unknown blocks
