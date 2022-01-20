@@ -126,9 +126,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
       image: HomepageImage @link
       text: String
       links: [HomepageLink] @link
-
-      debug: String
     }
+
     type HomepageCta implements Node & HomepageBlock {
       id: ID!
       blocktype: String
@@ -137,6 +136,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       links: [HomepageLink] @link
       image: HomepageImage @link
     }
+
     type HomepageFeatureList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
@@ -145,12 +145,14 @@ exports.createSchemaCustomization = async ({ actions }) => {
       text: String
       content: [HomepageFeature] @link
     }
+
     type HomepageLogoList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
       text: String
       logos: [HomepageImage] @link
     }
+
     type HomepageTestimonialList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
@@ -158,6 +160,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       heading: String
       content: [HomepageTestimonial] @link
     }
+
     type HomepageBenefitList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
@@ -165,12 +168,14 @@ exports.createSchemaCustomization = async ({ actions }) => {
       text: String
       content: [HomepageBenefit] @link
     }
+
     type HomepageStat implements Node {
       id: ID!
       value: String
       label: String
       heading: String
     }
+
     type HomepageStatList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
@@ -182,6 +187,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       content: [HomepageStat] @link
       links: [HomepageLink] @link
     }
+
     type HomepageProductList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
@@ -322,7 +328,12 @@ exports.onCreateNode = ({
 
       const heroID = createNodeId(`${node.id} >>> HomepageHero`)
       const ctaID = createNodeId(`${node.id} >>> HomepageCta`)
-      const statID = createNodeId(`${node.id} >>> HomepageStatList`)
+      const statsID = createNodeId(`${node.id} >>> HomepageStatList`)
+      const testimonialsID = createNodeId(`${node.id} >>> HomepageTestimonialList`)
+      const productsID = createNodeId(`${node.id} >>> HomepageProductList`)
+      const logosID = createNodeId(`${node.id} >>> HomepageLogoList`)
+      const featuresID = createNodeId(`${node.id} >>> HomepageFeatureList`)
+      const benefitsID = createNodeId(`${node.id} >>> HomepageBenefitList`)
 
       actions.createNode({
         ...homepageHero,
@@ -339,8 +350,6 @@ exports.onCreateNode = ({
           homepageHero.secondarylink,
         ].filter(Boolean)
           .map(createLinkNode(heroID)),
-
-        debug: homepageHero.image.id,
       })
 
       actions.createNode({
@@ -363,7 +372,7 @@ exports.onCreateNode = ({
 
       actions.createNode({
         ...statList,
-        id: statID,
+        id: statsID,
         internal: {
           type: 'HomepageStatList',
           contentDigest: createContentDigest(JSON.stringify(statList)),
@@ -371,8 +380,10 @@ exports.onCreateNode = ({
         parent: node.id,
         blocktype: 'HomepageStatList',
         links: [
-          statList.link && createLinkNode(statID)(statList.link),
+          statList.link && createLinkNode(statsID)(statList.link),
         ].filter(Boolean),
+        icon: statList.icon.id,
+        image: statList.image.id,
         content: [
           {
             value: statList.stat1,
@@ -387,7 +398,7 @@ exports.onCreateNode = ({
             label: statList.stat3label,
           },
         ].map(stat => {
-          const id = createNodeId(`${statID} >>> HomepageStat`)
+          const id = createNodeId(`${statsID} >>> HomepageStat`)
           actions.createNode({
             ...stat,
             id,
@@ -402,7 +413,7 @@ exports.onCreateNode = ({
 
       actions.createNode({
         ...testimonialList,
-        id: createNodeId(`${node.id} >>> HomepageTestimonialList`),
+        id: testimonialsID,
         internal: {
           type: 'HomepageTestimonialList',
           contentDigest: createContentDigest(JSON.stringify(testimonialList)),
@@ -419,7 +430,7 @@ exports.onCreateNode = ({
 
       actions.createNode({
         ...productList,
-        id: createNodeId(`${node.id} >>> HomepageProductList`),
+        id: productsID,
         internal: {
           type: 'HomepageProductList',
           contentDigest: createContentDigest(JSON.stringify(productList)),
@@ -435,7 +446,7 @@ exports.onCreateNode = ({
 
       actions.createNode({
         ...logoList,
-        id: createNodeId(`${node.id} >>> HomepageLogoList`),
+        id: logosID,
         internal: {
           type: 'HomepageLogoList',
           contentDigest: createContentDigest(JSON.stringify(logoList)),
@@ -453,7 +464,7 @@ exports.onCreateNode = ({
 
       actions.createNode({
         ...featureList,
-        id: createNodeId(`${node.id} >>> HomepageFeatureList`),
+        id: featuresID,
         internal: {
           type: 'HomepageFeatureList',
           contentDigest: createContentDigest(JSON.stringify(featureList)),
@@ -468,7 +479,7 @@ exports.onCreateNode = ({
 
       actions.createNode({
         ...benefitList,
-        id: createNodeId(`${node.id} >>> HomepageBenefitList`),
+        id: benefitsID,
         internal: {
           type: 'HomepageBenefitList',
           contentDigest: createContentDigest(JSON.stringify(benefitList)),
@@ -491,8 +502,16 @@ exports.onCreateNode = ({
         },
         parent: node.id,
         blocktype: 'Homepage',
-        // TODO
-        // content:
+        content: [
+          heroID,
+          logosID,
+          productsID,
+          featuresID,
+          benefitsID,
+          statsID,
+          testimonialsID,
+          ctaID,
+        ],
       })
 
       break
@@ -516,7 +535,5 @@ exports.onCreateNode = ({
         })
       }
       break
-    default:
-      // console.log(node.internal.type)
   }
 }
