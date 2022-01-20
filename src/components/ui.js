@@ -1,62 +1,35 @@
-import * as React from 'react'
-import { Link as GatsbyLink } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import isAbsoluteURL from 'is-absolute-url'
-import * as styles from './ui.css.ts'
+import * as React from "react";
+import { Link as GatsbyLink } from "gatsby";
+import { GatsbyImage, getImage } from "gatsby-plugin-image";
+import isAbsoluteURL from "is-absolute-url";
+import * as styles from "./ui.css.ts";
 
-export const cx = (...args) => args
-  .filter(Boolean)
-  .join(' ')
+export const cx = (...args) => args.filter(Boolean).join(" ");
 
-export function Base ({
-  as: Component = 'div',
+export function Base({
+  as: Component = "div",
   cx: _cx = [],
   className,
   ...props
 }) {
-  return (
-    <Component
-      className={cx(..._cx, className)}
-      {...props}
-    />
-  )
+  return <Component className={cx(..._cx, className)} {...props} />;
 }
 
-export function Container ({
-  width = 'normal',
-  ...props
-}) {
+export function Container({ width = "normal", ...props }) {
+  return <Base cx={[styles.containers[width]]} {...props} />;
+}
+
+export function Flex({ variant, gap = 3, cx: _cx, ...props }) {
   return (
     <Base
-      cx={[
-        styles.containers[width],
-      ]}
+      cx={[styles.flex, styles.flexVariants[variant], styles.flexGap[gap], _cx]}
       {...props}
     />
-  )
+  );
 }
 
-export function Flex ({
-  variant,
-  gap = 3,
-  cx: _cx,
-  ...props
-}) {
-  return (
-    <Base
-      cx={[
-        styles.flex,
-        styles.flexVariants[variant],
-        styles.flexGap[gap],
-        _cx
-      ]}
-      {...props}
-    />
-  )
-}
-
-export function Box ({
-  width = 'full',
+export function Box({
+  width = "full",
   background,
   padding,
   paddingY,
@@ -78,221 +51,119 @@ export function Box ({
       ]}
       {...props}
     />
-  )
+  );
 }
 
-export function FlexList ({
-  ...props
-}) {
-  return (
-    <Flex
-      as='ul'
-      cx={[
-        styles.list,
-      ]}
-      {...props}
-    />
-  )
+export function FlexList({ ...props }) {
+  return <Flex as="ul" cx={[styles.list]} {...props} />;
 }
 
-export function List (props) {
-  return (
-    <Base
-      as='ul'
-      cx={[ styles.list ]}
-      {...props}
-    />
-  )
+export function List(props) {
+  return <Base as="ul" cx={[styles.list]} {...props} />;
 }
 
-export function Space ({
-  className,
-  size = 'auto',
-  ...props
-}) {
+export function Space({ className, size = "auto", ...props }) {
+  return <Base className={cx(styles.margin[size], className)} {...props} />;
+}
+
+export function Padding({ className, size = "auto", ...props }) {
+  return <Base className={cx(styles.padding[size], className)} {...props} />;
+}
+
+export function Section(props) {
+  return <Box as="section" cx={styles.section} {...props} />;
+}
+
+export function Text({ variant = "body", center, ...props }) {
   return (
     <Base
-      className={cx(styles.margin[size], className)}
+      cx={[styles.text[variant], center && styles.text.center]}
       {...props}
     />
-  )
+  );
 }
 
-export function Section (props) {
-  return (
-    <Box
-      as='section'
-      cx={styles.section}
-      {...props}
-    />
-  )
+export function Heading({ ...props }) {
+  return <Text as="h2" variant="heading" {...props} />;
 }
 
-export function Text ({
-  variant = 'body',
-  center,
-  ...props
-}) {
-  return (
-    <Base
-      cx={[
-        styles.text[variant],
-        center && styles.text.center,
-      ]}
-      {...props}
-    />
-  )
+export function Subhead({ ...props }) {
+  return <Text as="h3" variant="subhead" {...props} />;
 }
 
-export function Heading ({
-  ...props
-}) {
-  return (
-    <Text
-      as='h2'
-      variant='heading'
-      {...props}
-    />
-  )
+export function Kicker({ ...props }) {
+  return <Text as="h4" variant="kicker" {...props} />;
 }
 
-export function Subhead ({
-  ...props
-}) {
-  return (
-    <Text
-      as='h3'
-      variant='subhead'
-      {...props}
-    />
-  )
-}
-
-export function Kicker ({
-  ...props
-}) {
-  return (
-    <Text
-      as='h4'
-      variant='kicker'
-      {...props}
-    />
-  )
-}
-
-export function Link ({
-  to,
-  href,
-  ...props
-}) {
-  const url = href || to
+export function Link({ to, href, ...props }) {
+  const url = href || to;
   if (isAbsoluteURL(url)) {
     return (
       // eslint-disable-next-line jsx-a11y/anchor-has-content
       <a href={url} {...props} />
-    )
+    );
   }
-  return <GatsbyLink to={url} {...props} />
+  return <GatsbyLink to={url} {...props} />;
 }
 
-export function NavLink ({
-  ...props
-}) {
-  return (
-    <Base
-      as={Link}
-      cx={[styles.navlink]}
-      {...props}
-    />
-  )
+export function NavLink({ ...props }) {
+  return <Base as={Link} cx={[styles.navlink]} {...props} />;
 }
 
-export function Button ({
-  variant = 'primary',
-  ...props
-}) {
-  return (
-    <Base
-      as={Link}
-      cx={[styles.buttons[variant]]}
-      {...props}
-    />
-  )
+export function Button({ variant = "primary", ...props }) {
+  return <Base as={Link} cx={[styles.buttons[variant]]} {...props} />;
 }
 
-export function ButtonList ({
-  links = [],
-  reversed = false,
-  ...props
-}) {
+export function ButtonList({ links = [], reversed = false, ...props }) {
   const getVariant = (i) => {
     if (reversed) {
-      return i === 0 ? 'reversed' : 'linkReversed'
+      return i === 0 ? "reversed" : "linkReversed";
     }
-    return i === 0 ? 'primary' : 'link'
-  }
+    return i === 0 ? "primary" : "link";
+  };
   return (
     <FlexList {...props}>
       {links.map((link, i) => (
         <li key={link.id}>
-          <Button
-            href={link.href}
-            variant={getVariant(i)}>
+          <Button href={link.href} variant={getVariant(i)}>
             {link.text}
           </Button>
         </li>
       ))}
     </FlexList>
-  )
+  );
 }
 
-export function Blockquote (props) {
+export function InteractiveIcon(props) {
+  return <Base as="button" cx={[styles.interactiveIcon]} {...props} />;
+}
+
+export function Blockquote(props) {
+  return <Base as="blockquote" cx={[styles.blockquote]} {...props} />;
+}
+
+export function Avatar({ alt, image }) {
   return (
-    <Base
-      as='blockquote'
-      cx={[styles.blockquote]}
-      {...props}
-    />
-  )
+    <GatsbyImage alt={alt} image={getImage(image)} className={styles.avatar} />
+  );
 }
 
-export function Avatar ({
-  alt,
-  image,
-}) {
-  return (
-    <GatsbyImage
-      alt={alt}
-      image={getImage(image)}
-      className={styles.avatar}
-    />
-  )
-}
-
-export function Logo ({
-  alt,
-  image,
-  size = 'small',
-}) {
+export function Logo({ alt, image, size = "small" }) {
   return (
     <GatsbyImage
       alt={alt}
       image={getImage(image)}
       className={styles.logos[size]}
     />
-  )
+  );
 }
 
-export function Icon ({
-  alt,
-  image,
-  size = 'medium',
-}) {
+export function Icon({ alt, image, size = "medium" }) {
   return (
     <GatsbyImage
       alt={alt}
       image={getImage(image)}
       className={styles.icons[size]}
     />
-  )
+  );
 }
