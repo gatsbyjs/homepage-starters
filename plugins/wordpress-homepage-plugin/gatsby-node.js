@@ -67,10 +67,9 @@ exports.createSchemaCustomization = async ({ actions }) => {
       links: [HomepageLink]
     }
 
-## TODO layout
-
     interface LayoutHeader implements Node {
       id: ID!
+      contentTypeName: String!
       logo: HomepageImage
       links: [HomepageLink]
       cta: HomepageLink
@@ -87,25 +86,14 @@ exports.createSchemaCustomization = async ({ actions }) => {
       TWITCH
     }
 
-    interface SocialLink implements Node {
-      id: ID!
-      username: String!
-      service: SocialService!
-    }
-
     interface LayoutFooter implements Node {
       id: ID!
+      contentTypeName: String!
       logo: HomepageImage
       links: [HomepageLink]
       meta: [HomepageLink]
       socialLinks: [SocialLink]
       copyright: String
-    }
-
-    interface Layout implements Node {
-      id: ID!
-      header: LayoutHeader
-      footer: LayoutFooter
     }
   `)
 
@@ -245,49 +233,54 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
   `)
 
-  /*
-  actions.createTypes(`
-
-    type ContentfulHomepageLogo implements Node & HomepageLogo {
-      id: ID!
-      image: HomepageImage @link(from: "image___NODE")
-      alt: String
-    }
-  `)
-  */
-
   // Layout types
-  /*
   actions.createTypes(`
-    type ContentfulLayoutHeader implements Node & LayoutHeader {
+    type WpHeader implements Node & LayoutHeader {
       id: ID!
-      logo: HomepageImage @link(from: "logo___NODE")
-      links: [HomepageLink] @link(from: "links___NODE")
-      cta: HomepageLink @link(from: "cta___NODE")
+      contentTypeName: String!
+      logo: HomepageImage @link
+      links: [HomepageLink] @link @proxy(from: "fields.links")
+      cta: HomepageLink @link @proxy(from: "fields.cta")
     }
 
-    type ContentfulSocialLink implements Node & SocialLink {
+    type SocialLink implements Node {
       id: ID!
       username: String!
       service: SocialService!
     }
 
-    type ContentfulLayoutFooter implements Node & LayoutFooter {
+    type WpFooter implements Node & LayoutFooter {
       id: ID!
-      logo: HomepageImage @link(from: "logo___NODE")
-      links: [HomepageLink] @link(from: "links___NODE")
-      meta: [HomepageLink] @link(from: "meta___NODE")
-      socialLinks: [SocialLink] @link(from: "socialLinks___NODE")
+      contentTypeName: String!
+      logo: HomepageImage @link
+      links: [HomepageLink] @link @proxy(from: "fields.links")
+      meta: [HomepageLink] @link @proxy(from: "fields.meta")
+      socialLinks: [SocialLink] @link @proxy(from: "fields.socialLinks")
       copyright: String
     }
 
-    type ContentfulLayout implements Node & Layout {
+    type Layout implements Node {
       id: ID!
-      header: LayoutHeader @link(from: "header___NODE")
-      footer: LayoutFooter @link(from: "footer___NODE")
+      header: LayoutHeader @link(by: "contentTypeName")
+      footer: LayoutFooter @link(by: "contentTypeName")
     }
   `)
-  */
+}
+
+exports.sourceNodes = ({
+  actions,
+  createNodeId,
+  createContentDigest,
+}) => {
+  actions.createNode({
+    id: createNodeId('HomepageLayout'),
+    internal: {
+      type: 'Layout',
+      contentDigest: createContentDigest('Layout'),
+    },
+    header: 'header',
+    footer: 'footer',
+  })
 }
 
 exports.onCreateNode = ({
@@ -336,7 +329,6 @@ exports.onCreateNode = ({
       const benefitsID = createNodeId(`${node.id} >>> HomepageBenefitList`)
 
       actions.createNode({
-        ...homepageHero,
         id: heroID,
         internal: {
           type: 'HomepageHero',
@@ -344,10 +336,13 @@ exports.onCreateNode = ({
         },
         parent: node.id,
         blocktype: 'HomepageHero',
-        image: homepageHero.image.id,
+        image: homepageHero.heroImage.id,
+        kicker: homepageHero.heroKicker,
+        heading: homepageHero.heroHeading,
+        text: homepageHero.heroText,
         links: [
-          homepageHero.link,
-          homepageHero.secondarylink,
+          homepageHero.heroLink,
+          homepageHero.heroSecondarylink,
         ].filter(Boolean)
           .map(createLinkNode(heroID)),
       })
@@ -534,6 +529,69 @@ exports.onCreateNode = ({
           value: [ linkID ],
         })
       }
+      break
+    case 'WpHeader':
+      const { header } = node
+      const headerLinks = [
+        header.link1,
+        header.link2,
+        header.link3,
+        header.link4,
+        header.link5,
+      ].map(createLinkNode(node.id))
+      const headerCta = createLinkNode(node.id)(header.cta, 9999)
+      actions.createNodeField({
+        node,
+        name: 'links',
+        value: headerLinks,
+      })
+      actions.createNodeField({
+        node,
+        name: 'cta',
+        value: headerCta,
+      })
+      break
+    case 'WpFooter':
+      const { footer } = node
+      const footerLinks = [
+        footer.link1,
+        footer.link2,
+        footer.link3,
+        footer.link4,
+        footer.link5,
+      ].map(createLinkNode(node.id))
+      // TODO currently hard-coded to only these social networks
+      const socialLinks = [
+        { username: footer.twitter, service: 'TWITTER' },
+        { username: footer.github, service: 'GITHUB' },
+      ].map((link, i) => {
+        const id = createNodeId(`${node.id} >>> SocialLink ${i}`)
+        actions.createNode({
+          ...link,
+          id,
+          internal: {
+            type: 'SocialLink',
+            contentDigest: createContentDigest(JSON.stringify(link)),
+          },
+        })
+        return id
+      })
+      actions.createNodeField({
+        node,
+        name: 'links',
+        value: footerLinks,
+      })
+      actions.createNodeField({
+        node,
+        name: 'socialLinks',
+        value: socialLinks,
+      })
+      // TODO
+      actions.createNodeField({
+        node,
+        name: 'meta',
+        value: [],
+      })
       break
   }
 }
