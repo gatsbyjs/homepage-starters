@@ -11,19 +11,19 @@ export default function HamburgerIcon() {
     >
       <path
         d="M3 5.5H12H21"
-        stroke="#004CA3"
+        stroke="currentColor"
         stroke-width="2"
         stroke-linecap="round"
       />
       <path
         d="M3 11.5H12H21"
-        stroke="#004CA3"
+        stroke="currentColor"
         stroke-width="2"
         stroke-linecap="round"
       />
       <path
         d="M3 17.5H12H21"
-        stroke="#004CA3"
+        stroke="currentColor"
         stroke-width="2"
         stroke-linecap="round"
       />

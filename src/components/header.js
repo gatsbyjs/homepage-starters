@@ -1,15 +1,12 @@
 import * as React from "react";
 import { graphql, useStaticQuery } from "gatsby";
-import { StaticImage } from "gatsby-plugin-image";
 import {
   Container,
   Flex,
   FlexList,
   Space,
-  Link,
   NavLink,
   Button,
-  Logo,
   InteractiveIcon,
   Padding,
 } from "./ui";
@@ -19,13 +16,13 @@ import {
   mobileNavLink,
   desktopHeaderNavWrapper,
   mobileHeaderNavWrapper,
-  mobileNavLogoWrapper,
+  mobileNavSVGColorWrapper,
 } from "./header.css.ts";
 import CloseIcon from "./closeIcon";
 import HamburgerIcon from "./hamburgerIcon";
 import { GatsbyWordpressLogo } from "./logos";
 
-export default function Header(props) {
+export default function Header() {
   const data = useStaticQuery(graphql`
     query {
       layout {
@@ -84,7 +81,9 @@ export default function Header(props) {
         <Padding size={2} />
         <Flex variant="spaceBetween">
           <span
-            className={mobileNavLogoWrapper[isOpen ? "reversed" : "primary"]}
+            className={
+              mobileNavSVGColorWrapper[isOpen ? "reversed" : "primary"]
+            }
           >
             <GatsbyWordpressLogo />
           </span>
@@ -97,7 +96,12 @@ export default function Header(props) {
                 </Button>
               )}
             </div>
-            <InteractiveIcon onClick={() => setOpen(!isOpen)}>
+            <InteractiveIcon
+              onClick={() => setOpen(!isOpen)}
+              className={
+                mobileNavSVGColorWrapper[isOpen ? "reversed" : "primary"]
+              }
+            >
               {isOpen ? <CloseIcon /> : <HamburgerIcon />}
             </InteractiveIcon>
           </Flex>

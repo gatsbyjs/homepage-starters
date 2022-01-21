@@ -32,7 +32,7 @@ export const mobileHeaderNavWrapper = styleVariants({
   closed: [mobileHeaderNavWrapperBase],
 });
 
-export const mobileNavLogoWrapper = styleVariants({
+export const mobileNavSVGColorWrapper = styleVariants({
   primary: [{ color: theme.colors.primary }],
   reversed: [{ color: theme.colors.background }],
 });
