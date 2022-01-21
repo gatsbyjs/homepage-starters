@@ -36,8 +36,10 @@ export default function TestimonialList(props) {
     <Section>
       <Container>
         <Box center>
-          {props.kicker && <Kicker>{props.kicker}</Kicker>}
-          {props.heading && <Heading>{props.heading}</Heading>}
+          <Heading>
+            {props.kicker && <Kicker>{props.kicker}</Kicker>}
+            {props.heading}
+          </Heading>
         </Box>
         <FlexList gutter={3} variant="start" responsive wrap>
           {props.content.map((testimonial) => (

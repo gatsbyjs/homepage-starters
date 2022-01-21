@@ -110,7 +110,7 @@ export function Subhead({ ...props }) {
 }
 
 export function Kicker({ ...props }) {
-  return <Text as="h4" variant="kicker" {...props} />
+  return <Text variant="kicker" {...props} />
 }
 
 export function Link({ to, href, ...props }) {
