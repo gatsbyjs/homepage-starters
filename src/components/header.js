@@ -14,16 +14,15 @@ import {
   Padding,
 } from "./ui";
 import {
-  desktopHeaderNavWrapper,
-  mobileHeaderNavWrapper,
-} from "./header.css.ts";
-import Close from "./close";
-import Hamburger from "./hamburger";
-import {
   mobileNavOverlay,
   mobileNavLinkList,
   mobileNavLink,
+  desktopHeaderNavWrapper,
+  mobileHeaderNavWrapper,
+  mobileNavLogoWrapper,
 } from "./header.css.ts";
+import CloseIcon from "./closeIcon";
+import HamburgerIcon from "./hamburgerIcon";
 import { GatsbyWordpressLogo } from "./logos";
 
 export default function Header(props) {
@@ -55,7 +54,7 @@ export default function Header(props) {
     if (isOpen) {
       document.body.style.overflowY = "hidden";
     } else {
-      document.body.style.overflowY = "scroll";
+      document.body.style.overflowY = "visible";
     }
   }, [isOpen]);
 
@@ -84,7 +83,11 @@ export default function Header(props) {
       <Container className={mobileHeaderNavWrapper[isOpen ? "open" : "closed"]}>
         <Padding size={2} />
         <Flex variant="spaceBetween">
-          <GatsbyWordpressLogo inverted={isOpen} />
+          <span
+            className={mobileNavLogoWrapper[isOpen ? "reversed" : "primary"]}
+          >
+            <GatsbyWordpressLogo />
+          </span>
           <Flex>
             <Space />
             <div>
@@ -95,7 +98,7 @@ export default function Header(props) {
               )}
             </div>
             <InteractiveIcon onClick={() => setOpen(!isOpen)}>
-              {isOpen ? <Close /> : <Hamburger />}
+              {isOpen ? <CloseIcon /> : <HamburgerIcon />}
             </InteractiveIcon>
           </Flex>
         </Flex>

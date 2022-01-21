@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export default function Hamburger() {
+export default function CloseIcon() {
   return (
     <svg
       width="24"
@@ -10,20 +10,20 @@ export default function Hamburger() {
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M3 5.5H12H21"
-        stroke="#004CA3"
+        d="M6 5.5L9.0641 8.5641L12.1282 11.6282"
+        stroke="#ffffff"
         stroke-width="2"
         stroke-linecap="round"
       />
       <path
-        d="M3 11.5H12H21"
-        stroke="#004CA3"
+        d="M6 17.5L11.9999 11.5001L17.9999 5.50011"
+        stroke="#ffffff"
         stroke-width="2"
         stroke-linecap="round"
       />
       <path
-        d="M3 17.5H12H21"
-        stroke="#004CA3"
+        d="M12 11.5L15 14.5L17.9999 17.4999"
+        stroke="#ffffff"
         stroke-width="2"
         stroke-linecap="round"
       />

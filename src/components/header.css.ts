@@ -32,6 +32,11 @@ export const mobileHeaderNavWrapper = styleVariants({
   closed: [mobileHeaderNavWrapperBase],
 });
 
+export const mobileNavLogoWrapper = styleVariants({
+  primary: [{ color: theme.colors.primary }],
+  reversed: [{ color: theme.colors.background }],
+});
+
 export const mobileNavOverlay = style({
   position: "absolute",
   width: "100vw",

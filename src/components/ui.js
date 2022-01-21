@@ -66,7 +66,7 @@ export function Space({ className, size = "auto", ...props }) {
   return <Base className={cx(styles.margin[size], className)} {...props} />;
 }
 
-export function Padding({ className, size = "auto", ...props }) {
+export function Padding({ className, size = "0", ...props }) {
   return <Base className={cx(styles.padding[size], className)} {...props} />;
 }
 
