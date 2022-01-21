@@ -45,7 +45,6 @@ export function Flex ({
   cx: _cx,
   ...props
 }) {
-  gutter && console.log(styles.gutter[gutter])
   return (
     <Base
       cx={[
