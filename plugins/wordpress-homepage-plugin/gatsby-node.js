@@ -21,6 +21,24 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
   })
 
+  actions.createFieldExtension({
+    name: 'proxyImage',
+    extend(options) {
+      return {
+        async resolve(source, args, context, info) {
+          const imageType = info.schema.getType('ImageSharp')
+          const file = context.nodeModel.getNodeById(source.localFile)
+          const image = context.nodeModel.getNodeById({
+            id: file.children[0]
+          })
+          const resolver = imageType.getFields().gatsbyImageData.resolve
+          if (!resolver) return null
+          return await resolver(image, args, context, info)
+        }
+      }
+    }
+  })
+
   // abstract interfaces
   actions.createTypes(`
     interface HomepageBlock implements Node {
@@ -31,8 +49,9 @@ exports.createSchemaCustomization = async ({ actions }) => {
     interface HomepageImage implements Node {
       id: ID!
       alt: String
-      gatsbyImageData: JSON
+      gatsbyImageData: JSON @proxyImage
       image: HomepageImage @recursiveImage
+      localFile: File
     }
 
     interface HomepageFeature implements Node & HomepageBlock {
@@ -198,8 +217,9 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type WpMediaItem implements Node & HomepageImage {
       id: ID!
       alt: String @proxy(from: "altText")
-      gatsbyImageData: JSON
+      gatsbyImageData: JSON @proxyImage
       image: HomepageImage @recursiveImage
+      localFile: File
     }
 
     type WpBenefit implements Node & HomepageBenefit {
@@ -224,6 +244,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       text: String @proxy(from: "feature.text")
       image: HomepageImage @link @proxy(from: "feature.image.id")
       links: [HomepageLink] @proxy(from: "fields.links") @link
+      feature: JSON
     }
 
     type WpTestimonial implements Node & HomepageTestimonial {
@@ -238,7 +259,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type WpHeader implements Node & LayoutHeader {
       id: ID!
       contentTypeName: String!
-      logo: HomepageImage @link
+      logo: HomepageImage @link @proxy(from: "header.logo.id")
       links: [HomepageLink] @link @proxy(from: "fields.links")
       cta: HomepageLink @link @proxy(from: "fields.cta")
     }
@@ -252,11 +273,11 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type WpFooter implements Node & LayoutFooter {
       id: ID!
       contentTypeName: String!
-      logo: HomepageImage @link
+      logo: HomepageImage @link @proxy(from: "footer.logo.id")
       links: [HomepageLink] @link @proxy(from: "fields.links")
       meta: [HomepageLink] @link @proxy(from: "fields.meta")
       socialLinks: [SocialLink] @link @proxy(from: "fields.socialLinks")
-      copyright: String
+      copyright: String @proxy(from: "footer.copyright")
     }
 
     type Layout implements Node {
@@ -342,7 +363,7 @@ exports.onCreateNode = ({
         text: homepageHero.heroText,
         links: [
           homepageHero.heroLink,
-          homepageHero.heroSecondarylink,
+          homepageHero.heroSecondaryLink,
         ].filter(Boolean)
           .map(createLinkNode(heroID)),
       })
