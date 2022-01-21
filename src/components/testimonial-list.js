@@ -1,44 +1,27 @@
-import * as React from 'react'
-import { graphql } from 'gatsby'
-import {
-  Container,
-  Section,
-  Box,
-  List,
-  Blockquote,
-  Text,
-  Avatar,
-} from './ui'
+import * as React from "react"
+import { graphql } from "gatsby"
+import { Container, Section, Box, List, Blockquote, Text, Avatar } from "./ui"
 
-function Testimonial (props) {
+function Testimonial(props) {
   return (
     <Blockquote>
-      <p>
-        {props.quote}
-      </p>
-      <Text as='figcaption'>
-        {props.avatar && (
-          <Avatar
-            alt={props.avatar.alt}
-            image={props.avatar}
-          />
-        )}
+      <p>{props.quote}</p>
+      <Text as="figcaption">
+        {props.avatar && <Avatar alt={props.avatar.alt} image={props.avatar} />}
         <Box>
-          <cite>
-            {props.source}
-          </cite>
+          <cite>{props.source}</cite>
         </Box>
       </Text>
     </Blockquote>
   )
 }
 
-export default function TestimonialList (props) {
+export default function TestimonialList(props) {
   return (
     <Section>
       <Container>
         <List>
-          {props.content.map(testimonial => (
+          {props.content.map((testimonial) => (
             <li key={testimonial.id}>
               <Testimonial {...testimonial} />
             </li>

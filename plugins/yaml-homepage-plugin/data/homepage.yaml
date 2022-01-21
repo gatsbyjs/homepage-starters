@@ -2,71 +2,71 @@
   description: Create a beautiful homepage with Gatsby
   image: ../assets/shot-by-cerqueira-0o_GEzyargo-unsplash.jpg
   content:
-  - type: Hero
-    kicker: Gatsby YAML Homepage Starter
-    heading: Hello YAML Homepage
-    subhead: This page is powered by a YAML file for content
-    text: Clone, deploy, edit, and customize this starter to build your own homepage
-    image: ../assets/shot-by-cerqueira-0o_GEzyargo-unsplash.jpg
-    links:
-    - text: Deploy Now
-      href: '#!'
-    - text: GitHub
-      href: '#!'
-  - type: LogoList
-    logos:
-    - image: ../assets/IBM.png
-      alt: IBM
-    - image: ../assets/Figma.png
-      alt: Figma
-    - image: ../assets/Braun.png
-      alt: Braun
-    - image: ../assets/Meetup.png
-      alt: Meetup
-    - image: ../assets/Spotify.png
-      alt: Spotify
-    - image: ../assets/TypeScript.png
-      alt: TypeScript
-  - type: Feature
-    heading: Modular
-    image: ../assets/nasa-2W-QWAC0mzI-unsplash.jpg
-    text: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    links:
-    - text: Learn more
-      href: '#!'
-  - type: Feature
-    heading: Decoupled
-    image: ../assets/nasa-7Cz6bWjdlDs-unsplash.jpg
-    text: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    links:
-    - text: Learn more
-      href: '#!'
-  - type: Feature
-    heading: Customizable
-    image: ../assets/nasa-dCgbRAQmTQA-unsplash.jpg
-    text: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    links:
-    - text: Learn more
-      href: '#!'
-  - type: BenefitList
-    content:
-    - heading: Performant
+    - type: Hero
+      kicker: Gatsby YAML Homepage Starter
+      heading: Hello YAML Homepage
+      subhead: This page is powered by a YAML file for content
+      text: Clone, deploy, edit, and customize this starter to build your own homepage
+      image: ../assets/shot-by-cerqueira-0o_GEzyargo-unsplash.jpg
+      links:
+        - text: Deploy Now
+          href: "#!"
+        - text: GitHub
+          href: "#!"
+    - type: LogoList
+      logos:
+        - image: ../assets/IBM.png
+          alt: IBM
+        - image: ../assets/Figma.png
+          alt: Figma
+        - image: ../assets/Braun.png
+          alt: Braun
+        - image: ../assets/Meetup.png
+          alt: Meetup
+        - image: ../assets/Spotify.png
+          alt: Spotify
+        - image: ../assets/TypeScript.png
+          alt: TypeScript
+    - type: Feature
+      heading: Modular
+      image: ../assets/nasa-2W-QWAC0mzI-unsplash.jpg
       text: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    - heading: Extensible
+      links:
+        - text: Learn more
+          href: "#!"
+    - type: Feature
+      heading: Decoupled
+      image: ../assets/nasa-7Cz6bWjdlDs-unsplash.jpg
       text: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-  - type: TestimonialList
-    content:
-    - quote: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      source: Jane Doe
-    - quote: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      source: John Doe
-    - quote: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-      source: Yuriko Daguchi
-  - type: Cta
-    heading: Get Started Now
-    text: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-    links:
-    - text: Deploy Now
-      href: '#!'
-    - text: GitHub
-      href: '#!'
+      links:
+        - text: Learn more
+          href: "#!"
+    - type: Feature
+      heading: Customizable
+      image: ../assets/nasa-dCgbRAQmTQA-unsplash.jpg
+      text: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      links:
+        - text: Learn more
+          href: "#!"
+    - type: BenefitList
+      content:
+        - heading: Performant
+          text: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        - heading: Extensible
+          text: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    - type: TestimonialList
+      content:
+        - quote: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          source: Jane Doe
+        - quote: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          source: John Doe
+        - quote: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          source: Yuriko Daguchi
+    - type: Cta
+      heading: Get Started Now
+      text: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      links:
+        - text: Deploy Now
+          href: "#!"
+        - text: GitHub
+          href: "#!"
