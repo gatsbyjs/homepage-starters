@@ -96,6 +96,7 @@ export default function Header() {
               )}
             </div>
             <InteractiveIcon
+              title='Toggle menu'
               onClick={() => setOpen(!isOpen)}
               className={
                 mobileNavSVGColorWrapper[isOpen ? "reversed" : "primary"]
