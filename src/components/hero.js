@@ -27,8 +27,10 @@ export default function Hero(props) {
             )}
           </Box>
           <Box width="half">
-            <Kicker as="h3">{props.kicker}</Kicker>
-            <Heading as="h1">{props.heading}</Heading>
+            <Heading as="h1">
+              {props.kicker && <Kicker>{props.kicker}</Kicker>}
+              {props.heading}
+            </Heading>
             <Subhead as="h2">{props.subhead}</Subhead>
             <Text as="p">{props.text}</Text>
             <ButtonList links={props.links} />
