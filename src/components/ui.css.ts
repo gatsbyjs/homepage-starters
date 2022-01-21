@@ -12,6 +12,8 @@ const media = breakpoints
     return a
   }, {})
 
+export const mediaQueries = media
+
 export const container = style({
   maxWidth: theme.sizes.container,
   marginLeft: "auto",
@@ -352,6 +354,15 @@ export const icons = styleVariants(
     marginBottom: theme.space[2],
   })
 )
+
+export const interactiveIcon = style({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  background: "transparent",
+  border: "none",
+  cursor: "pointer",
+})
 
 // for debugging only
 export const debug = style({

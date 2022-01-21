@@ -8,7 +8,6 @@ import {
   NavLink,
   Button,
   InteractiveIcon,
-  Padding,
 } from "./ui"
 import {
   mobileNavOverlay,
@@ -59,7 +58,7 @@ export default function Header() {
     <header>
       <Container className={desktopHeaderNavWrapper}>
         {/* Desktop / Tablet - Header / Nav */}
-        <Padding size={2} />
+        <Space size={2} />
         <Flex>
           <GatsbyWordpressLogo />
           <nav>
@@ -78,7 +77,7 @@ export default function Header() {
       </Container>
       {/* Mobile - Header / Nav */}
       <Container className={mobileHeaderNavWrapper[isOpen ? "open" : "closed"]}>
-        <Padding size={2} />
+        <Space size={2} />
         <Flex variant="spaceBetween">
           <span
             className={
