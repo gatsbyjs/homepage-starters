@@ -110,11 +110,24 @@ exports.createSchemaCustomization = async ({ actions }) => {
       entityPayload: JSON
     }
 
+    interface HomepageFeatureList implements Node & HomepageBlock {
+      id: ID!
+      blocktype: String
+      kicker: String
+      heading: String
+      text: String
+      content: [HomepageFeature]
+      ## DatoCMS
+      originalId: String
+      entityPayload: JSON
+    }
+
     interface HomepageCta implements Node & HomepageBlock {
       id: ID!
       blocktype: String
       heading: String
       text: String
+      image: HomepageImage
       links: [HomepageLink]
       ## DatoCMS
       originalId: String
@@ -124,6 +137,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     interface HomepageLogoList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
+      text: String
       logos: [HomepageImage]
       ## DatoCMS
       originalId: String
@@ -140,6 +154,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
     interface HomepageTestimonialList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
+      kicker: String
+      heading: String
       content: [HomepageTestimonial]
       ## DatoCMS
       originalId: String
@@ -156,6 +172,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
     interface HomepageBenefitList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
+      heading: String
+      text: String
       content: [HomepageBenefit]
       ## DatoCMS
       originalId: String
@@ -172,7 +190,33 @@ exports.createSchemaCustomization = async ({ actions }) => {
     interface HomepageStatList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
+      kicker: String
+      heading: String
+      text: String
+      image: HomepageImage
+      icon: HomepageImage
       content: [HomepageStat]
+      links: [HomepageLink]
+      ## DatoCMS
+      originalId: String
+      entityPayload: JSON
+    }
+
+    interface HomepageProduct implements Node {
+      id: ID!
+      heading: String
+      text: String
+      image: HomepageImage
+      links: [HomepageLink]
+    }
+
+    interface HomepageProductList implements Node & HomepageBlock {
+      id: ID!
+      blocktype: String
+      heading: String
+      kicker: String
+      text: String
+      content: [HomepageProduct]
       ## DatoCMS
       originalId: String
       entityPayload: JSON
@@ -247,7 +291,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       image: HomepageImage @recursiveImage
     }
 
-    type DatoCmsHero implements Node & HomepageHero & HomepageBlock {
+    type DatoCmsHero implements Node & HomepageHero & HomepageBlock @dontInfer {
       id: ID!
       originalId: String
       entityPayload: JSON
@@ -260,7 +304,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       links: [HomepageLink]
     }
 
-    type DatoCmsFeature implements Node & HomepageBlock & HomepageFeature {
+    type DatoCmsFeature implements Node & HomepageBlock & HomepageFeature @dontInfer {
       originalId: String
       blocktype: String @blocktype
       heading: String
@@ -271,68 +315,111 @@ exports.createSchemaCustomization = async ({ actions }) => {
       entityPayload: JSON
     }
 
-    type DatoCmsCta implements Node & HomepageBlock & HomepageCta {
+    type DatoCmsFeaturelist implements Node & HomepageBlock & HomepageFeatureList @dontInfer {
+      originalId: String
+      blocktype: String @blocktype
+      kicker: String
+      heading: String
+      text: String
+      content: [HomepageFeature]
+      entityPayload: JSON
+    }
+
+    type DatoCmsCta implements Node & HomepageBlock & HomepageCta @dontInfer {
       originalId: String
       entityPayload: JSON
       blocktype: String @blocktype
       heading: String
       text: String
+      image: HomepageImage
       links: [HomepageLink]
     }
 
-    type DatoCmsLogolist implements Node & HomepageBlock & HomepageLogoList {
+    type DatoCmsLogolist implements Node & HomepageBlock & HomepageLogoList @dontInfer {
       originalId: String
       entityPayload: JSON
       blocktype: String @blocktype
+      text: String
       logos: [HomepageImage]
     }
 
-    type DatoCmsTestimonial implements Node & HomepageTestimonial {
+    type DatoCmsTestimonial implements Node & HomepageTestimonial @dontInfer {
       id: ID!
       quote: String
       source: String
       avatar: HomepageImage
     }
 
-    type DatoCmsTestimoniallist implements Node & HomepageBlock & HomepageTestimonialList {
+    type DatoCmsTestimoniallist implements Node & HomepageBlock & HomepageTestimonialList @dontInfer {
       id: ID!
       originalId: String
       entityPayload: JSON
       blocktype: String @blocktype
+      kicker: String
+      heading: String
       content: [HomepageTestimonial]
     }
 
-    type DatoCmsBenefit implements Node & HomepageBenefit {
+    type DatoCmsBenefit implements Node & HomepageBenefit @dontInfer {
       id: ID!
       heading: String
       text: String
       image: HomepageImage
     }
 
-    type DatoCmsBenefitlist implements Node & HomepageBlock & HomepageBenefitList {
+    type DatoCmsBenefitlist implements Node & HomepageBlock & HomepageBenefitList @dontInfer {
       id: ID!
       originalId: String
       entityPayload: JSON
       blocktype: String @blocktype
+      heading: String
+      text: String
       content: [HomepageBenefit]
     }
 
-    type DatoCmsStat implements Node & HomepageStat {
+    type DatoCmsStat implements Node & HomepageStat @dontInfer {
       id: ID!
       value: String
       label: String
       heading: String
     }
 
-    type DatoCmsStatlist implements Node & HomepageBlock & HomepageStatList {
+    type DatoCmsStatlist implements Node & HomepageBlock & HomepageStatList @dontInfer {
       id: ID!
       originalId: String
       entityPayload: JSON
       blocktype: String @blocktype
+      kicker: String
+      heading: String
+      text: String
+      image: HomepageImage
+      icon: HomepageImage
       content: [HomepageStat]
+      links: [HomepageLink]
     }
 
-    type DatoCmsHomepage implements Node & Homepage {
+    type DatoCmsProduct implements Node & HomepageProduct @dontInfer {
+      id: ID!
+      originalId: String
+      entityPayload: JSON
+      heading: String
+      text: String
+      image: HomepageImage
+      links: [HomepageLink]
+    }
+
+    type DatoCmsProductlist implements Node & HomepageBlock & HomepageProductList @dontInfer {
+      id: ID!
+      blocktype: String @blocktype
+      originalId: String
+      entityPayload: JSON
+      heading: String
+      kicker: String
+      text: String
+      content: [HomepageProduct]
+    }
+
+    type DatoCmsHomepage implements Node & Homepage @dontInfer {
       id: ID!
       title: String @proxy(from: "entityPayload.attributes.metadata.title")
       description: String @proxy(from: "entityPayload.attributes.metadata.description")
@@ -344,7 +431,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
   // Layout types
   actions.createTypes(`
-    type DatoCmsLayoutheader implements Node & LayoutHeader {
+    type DatoCmsLayoutheader implements Node & LayoutHeader @dontInfer {
       id: ID!
       logo: HomepageImage
       links: [HomepageLink]
@@ -354,28 +441,25 @@ exports.createSchemaCustomization = async ({ actions }) => {
       entityPayload: JSON
     }
 
-    type DatoCmsSocialLink implements Node & SocialLink {
+    type DatoCmsSocialLink implements Node & SocialLink @dontInfer {
       id: ID!
       username: String!
       service: SocialService!
     }
 
-    type DatoCmsLayoutfooter implements Node & LayoutFooter {
+    type DatoCmsLayoutfooter implements Node & LayoutFooter @dontInfer {
       id: ID!
       logo: HomepageImage
       links: [HomepageLink]
-
-      ## TODO: fix this
       metalinks: [HomepageLink]
       meta: [HomepageLink] @metalinks
-
       socialLinks: [SocialLink]
       copyright: String
       originalId: String
       entityPayload: JSON
     }
 
-    type DatoCmsLayout implements Node & Layout {
+    type DatoCmsLayout implements Node & Layout @dontInfer {
       id: ID!
       header: LayoutHeader
       footer: LayoutFooter

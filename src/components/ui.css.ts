@@ -1,13 +1,18 @@
 import { style, styleVariants } from "@vanilla-extract/css"
-import { theme } from "../theme.css"
+import { theme } from "../theme.css.ts"
 
 const breakpoints = ["40em", "52em", "64em"]
 
-export const mediaQueries = {
-  small: `screen and (min-width: ${breakpoints[0]})`,
-  medium: `screen and (min-width: ${breakpoints[1]})`,
-  large: `screen and (min-width: ${breakpoints[2]})`,
-}
+const mqAliases = ["small", "medium", "large"]
+const media = breakpoints
+  .map((n) => `screen and (min-width: ${n})`)
+  .reduce((a, b, i) => {
+    a[i] = b
+    a[mqAliases[i]] = b
+    return a
+  }, {})
+
+export const mediaQueries = media
 
 export const container = style({
   maxWidth: theme.sizes.container,
@@ -37,6 +42,9 @@ export const flexVariants = styleVariants({
   wrap: {
     flexWrap: "wrap",
   },
+  start: {
+    alignItems: "flex-start",
+  },
   spaceBetween: {
     width: "100%",
     flexWrap: "wrap",
@@ -50,7 +58,7 @@ export const flexVariants = styleVariants({
   responsive: {
     flexDirection: "column",
     "@media": {
-      [mediaQueries.small]: {
+      [media.small]: {
         flexDirection: "row",
       },
     },
@@ -71,7 +79,7 @@ export const widths = styleVariants(
     {
       width: "100%",
       "@media": {
-        [mediaQueries.small]: {
+        [media.small]: {
           width,
         },
       },
@@ -79,17 +87,25 @@ export const widths = styleVariants(
   ]
 )
 
-export const padding = styleVariants(theme.space, (padding) => ({ padding }))
+export const list = style({
+  listStyle: "none",
+  padding: 0,
+  margin: 0,
+})
 
+export const padding = styleVariants(theme.space, (padding) => ({ padding }))
 export const paddingY = styleVariants(theme.space, (padding) => ({
   paddingTop: padding,
   paddingBottom: padding,
 }))
-
+export const gutter = styleVariants(theme.space, (val) => ({
+  marginLeft: `calc(-1 * ${val})`,
+  marginRight: `calc(-1 * ${val})`,
+}))
 export const radii = styleVariants(theme.radii, (borderRadius) => ({
   borderRadius,
 }))
-
+export const order = styleVariants([0, 1, 2, 3], (order) => ({ order }))
 export const box = styleVariants({
   center: {
     display: "flex",
@@ -97,12 +113,6 @@ export const box = styleVariants({
     alignItems: "center",
     textAlign: "center",
   },
-})
-
-export const list = style({
-  listStyle: "none",
-  padding: 0,
-  margin: 0,
 })
 
 export const section = style({
@@ -172,6 +182,17 @@ export const text = styleVariants({
       textTransform: "uppercase",
     },
   ],
+  caps: [
+    margin0,
+    {
+      marginBottom: theme.space[2],
+      fontSize: theme.fontSizes[1],
+      fontWeight: theme.fontWeights.semibold,
+      letterSpacing: theme.letterSpacings.wide,
+      textTransform: "uppercase",
+      fontStyle: "normal",
+    },
+  ],
   serif: [
     margin0,
     {
@@ -199,6 +220,14 @@ export const text = styleVariants({
 export const navlink = style({
   color: "inherit",
   textDecoration: "none",
+  ":hover": {
+    color: theme.colors.black,
+  },
+})
+
+export const ctaLink = style({
+  color: "inherit",
+  fontWeight: theme.fontWeights.bold,
   ":hover": {
     color: theme.colors.black,
   },
@@ -276,15 +305,6 @@ export const buttons = styleVariants({
   ],
 })
 
-export const interactiveIcon = style({
-  display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  background: "transparent",
-  border: "none",
-  cursor: "pointer",
-})
-
 export const backgrounds = styleVariants({
   primary: {
     color: theme.colors.background,
@@ -296,18 +316,17 @@ export const backgrounds = styleVariants({
   },
 })
 
-export const blockquote = style([
-  text.lead,
-  {
-    textAlign: "center",
-    paddingLeft: 0,
-    paddingRight: 0,
-    paddingTop: theme.space[4],
-    paddingBottom: theme.space[4],
-  },
-])
+export const blockquote = style({
+  margin: 0,
+  paddingLeft: 0,
+  paddingRight: 0,
+  paddingTop: 0,
+  paddingBottom: theme.space[4],
+})
 
 export const avatar = style({
+  minWidth: 0,
+  flexShrink: 0,
   width: theme.sizes.avatar,
   height: theme.sizes.avatar,
   borderRadius: theme.radii.circle,
@@ -332,8 +351,18 @@ export const icons = styleVariants(
   (size) => ({
     width: size,
     height: size,
+    marginBottom: theme.space[2],
   })
 )
+
+export const interactiveIcon = style({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  background: "transparent",
+  border: "none",
+  cursor: "pointer",
+})
 
 // for debugging only
 export const debug = style({

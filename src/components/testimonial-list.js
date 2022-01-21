@@ -1,18 +1,33 @@
 import * as React from "react"
 import { graphql } from "gatsby"
-import { Container, Section, Box, List, Blockquote, Text, Avatar } from "./ui"
+import {
+  Container,
+  Section,
+  Heading,
+  Kicker,
+  Flex,
+  Box,
+  FlexList,
+  Blockquote,
+  Text,
+  Avatar,
+} from "./ui"
 
 function Testimonial(props) {
   return (
-    <Blockquote>
-      <p>{props.quote}</p>
-      <Text as="figcaption">
-        {props.avatar && <Avatar alt={props.avatar.alt} image={props.avatar} />}
-        <Box>
-          <cite>{props.source}</cite>
-        </Box>
-      </Text>
-    </Blockquote>
+    <Flex variant="start">
+      {props.avatar && <Avatar alt={props.avatar.alt} image={props.avatar} />}
+      <Blockquote>
+        <Text as="p" variant="lead">
+          {props.quote}
+        </Text>
+        <figcaption>
+          <Text as="cite" bold variant="caps">
+            {props.source}
+          </Text>
+        </figcaption>
+      </Blockquote>
+    </Flex>
   )
 }
 
@@ -20,13 +35,17 @@ export default function TestimonialList(props) {
   return (
     <Section>
       <Container>
-        <List>
+        <Box center>
+          {props.kicker && <Kicker>{props.kicker}</Kicker>}
+          {props.heading && <Heading>{props.heading}</Heading>}
+        </Box>
+        <FlexList gutter={3} variant="start" responsive wrap>
           {props.content.map((testimonial) => (
-            <li key={testimonial.id}>
+            <Box as="li" key={testimonial.id} width="half" padding={3}>
               <Testimonial {...testimonial} />
-            </li>
+            </Box>
           ))}
-        </List>
+        </FlexList>
       </Container>
     </Section>
   )
@@ -35,6 +54,8 @@ export default function TestimonialList(props) {
 export const query = graphql`
   fragment HomepageTestimonialListContent on HomepageTestimonialList {
     id
+    kicker
+    heading
     content {
       id
       quote

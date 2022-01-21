@@ -6,14 +6,14 @@ module.exports = {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "yaml-homepage",
-        path: path.join(__dirname, ".", "data"),
+        path: path.join(__dirname, "data"),
       },
     },
     {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "yaml-homepage-assets",
-        path: path.join(__dirname, ".", "assets"),
+        path: path.join(__dirname, "assets"),
       },
     },
     "gatsby-transformer-yaml",

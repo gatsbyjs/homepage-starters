@@ -19,10 +19,26 @@ export function Container({ width = "normal", ...props }) {
   return <Base cx={[styles.containers[width]]} {...props} />
 }
 
-export function Flex({ variant, gap = 3, cx: _cx, ...props }) {
+export function Flex({
+  variant,
+  gap = 3,
+  gutter,
+  wrap,
+  responsive,
+  cx: _cx,
+  ...props
+}) {
   return (
     <Base
-      cx={[styles.flex, styles.flexVariants[variant], styles.flexGap[gap], _cx]}
+      cx={[
+        styles.flex,
+        styles.flexVariants[variant],
+        responsive && styles.flexVariants.responsive,
+        wrap && styles.flexVariants.wrap,
+        gutter && styles.gutter[gutter],
+        gutter ? styles.flexGap[0] : styles.flexGap[gap],
+        _cx,
+      ]}
       {...props}
     />
   )
@@ -35,6 +51,7 @@ export function Box({
   paddingY,
   radius,
   center = false,
+  order,
   cx,
   ...props
 }) {
@@ -47,6 +64,7 @@ export function Box({
         styles.paddingY[paddingY],
         styles.radii[radius],
         center && styles.box.center,
+        order && styles.order[order],
         cx,
       ]}
       {...props}
@@ -66,18 +84,18 @@ export function Space({ className, size = "auto", ...props }) {
   return <Base className={cx(styles.margin[size], className)} {...props} />
 }
 
-export function Padding({ className, size = "0", ...props }) {
-  return <Base className={cx(styles.padding[size], className)} {...props} />
-}
-
 export function Section(props) {
   return <Box as="section" cx={styles.section} {...props} />
 }
 
-export function Text({ variant = "body", center, ...props }) {
+export function Text({ variant = "body", center, bold, ...props }) {
   return (
     <Base
-      cx={[styles.text[variant], center && styles.text.center]}
+      cx={[
+        styles.text[variant],
+        center && styles.text.center,
+        bold && styles.text.bold,
+      ]}
       {...props}
     />
   )
@@ -123,19 +141,33 @@ export function ButtonList({ links = [], reversed = false, ...props }) {
   }
   return (
     <FlexList {...props}>
-      {links.map((link, i) => (
-        <li key={link.id}>
-          <Button href={link.href} variant={getVariant(i)}>
-            {link.text}
-          </Button>
-        </li>
-      ))}
+      {links &&
+        links.map((link, i) => (
+          <li key={link.id}>
+            <Button href={link.href} variant={getVariant(i)}>
+              {link.text}
+            </Button>
+          </li>
+        ))}
     </FlexList>
   )
 }
 
-export function InteractiveIcon(props) {
-  return <Base as="button" cx={[styles.interactiveIcon]} {...props} />
+export function CTALink(props) {
+  return <Base as={Link} cx={[styles.ctaLink]} {...props} />
+}
+
+export function LinkList({ links = [], ...props }) {
+  return (
+    <FlexList {...props}>
+      {links &&
+        links.map((link, i) => (
+          <li key={link.id}>
+            <CTALink href={link.href}>{link.text}</CTALink>
+          </li>
+        ))}
+    </FlexList>
+  )
 }
 
 export function Blockquote(props) {
@@ -166,4 +198,8 @@ export function Icon({ alt, image, size = "medium" }) {
       className={styles.icons[size]}
     />
   )
+}
+
+export function InteractiveIcon(props) {
+  return <Base as="button" cx={[styles.interactiveIcon]} {...props} />
 }

@@ -1,5 +1,5 @@
 import * as React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import {
   Container,
@@ -18,6 +18,12 @@ export default function Feature(props) {
     <Section background="muted">
       <Container>
         <Flex gap={4} variant="responsive">
+          <Box width="half" order={props.flip ? 1 : null}>
+            <Kicker>{props.kicker}</Kicker>
+            <Heading>{props.heading}</Heading>
+            <Text variant="lead">{props.text}</Text>
+            <ButtonList links={props.links} />
+          </Box>
           <Box width="half">
             {props.image && (
               <GatsbyImage
@@ -25,12 +31,6 @@ export default function Feature(props) {
                 image={getImage(props.image)}
               />
             )}
-          </Box>
-          <Box width="half">
-            <Kicker>{props.kicker}</Kicker>
-            <Heading>{props.heading}</Heading>
-            <Text variant="lead">{props.text}</Text>
-            <ButtonList links={props.links} />
           </Box>
         </Flex>
       </Container>

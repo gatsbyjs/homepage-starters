@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from "react"
 
 export default function CloseIcon() {
   return (
@@ -28,5 +28,5 @@ export default function CloseIcon() {
         stroke-linecap="round"
       />
     </svg>
-  );
+  )
 }

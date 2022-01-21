@@ -13,9 +13,9 @@ import {
 
 function Benefit(props) {
   return (
-    <Box as="li" center>
+    <Box as="li" width="third" padding={3}>
       {props.image && (
-        <Icon alt={props.image.alt} image={props.image} size="large" />
+        <Icon alt={props.image.alt} image={props.image} size="small" />
       )}
       <Space size={2} />
       <Heading variant="subhead">{props.heading}</Heading>
@@ -28,7 +28,11 @@ export default function BenefitList(props) {
   return (
     <Section>
       <Container>
-        <FlexList variant="responsive">
+        <Box center>
+          {props.heading && <Heading>{props.heading}</Heading>}
+          {props.text && <Text variant="lead">{props.text}</Text>}
+        </Box>
+        <FlexList gutter={3} variant="start" responsive wrap>
           {props.content.map((benefit) => (
             <Benefit key={benefit.id} {...benefit} />
           ))}
@@ -41,6 +45,8 @@ export default function BenefitList(props) {
 export const query = graphql`
   fragment HomepageBenefitListContent on HomepageBenefitList {
     id
+    heading
+    text
     content {
       id
       heading
