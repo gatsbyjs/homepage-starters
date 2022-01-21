@@ -4,7 +4,7 @@ import Footer from './footer'
 import Head from './head'
 import '../styles.css.ts'
 
-export default function Layout (props) {
+export default function Layout(props) {
   return (
     <>
       <Head {...props} />

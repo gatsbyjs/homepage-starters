@@ -1,9 +1,9 @@
-const path = require('path')
+const path = require("path")
 
 // TODO add checks for images with all CMSs
 
 const imageResolver = async (source, args, context, info) => {
-  const imageType = info.schema.getType('ImageSharp')
+  const imageType = info.schema.getType("ImageSharp")
   const fileNode = context.nodeModel.getNodeById({ id: source.parent })
   const imageNode = context.nodeModel.getNodeById({ id: fileNode.children[0] })
   const resolver = imageType.getFields().gatsbyImageData?.resolve
@@ -15,12 +15,12 @@ const imageResolver = async (source, args, context, info) => {
 
 exports.createSchemaCustomization = async ({ actions }) => {
   actions.createFieldExtension({
-    name: 'imageResolver',
+    name: "imageResolver",
     extend() {
       return {
-        resolve: imageResolver
+        resolve: imageResolver,
       }
-    }
+    },
   })
 
   actions.createTypes(`
@@ -164,21 +164,24 @@ exports.createSchemaCustomization = async ({ actions }) => {
   `)
 }
 
-exports.onCreateNode = async ({
-  actions,
-  node,
-  getNode,
-  getNodeAndSavePathDependency,
-  createNodeId,
-  createContentDigest,
-}, options = {}) => {
-  if (node.internal.type === 'File') {
-    if (node.sourceInstanceName === 'yaml-homepage-assets') {
+exports.onCreateNode = async (
+  {
+    actions,
+    node,
+    getNode,
+    getNodeAndSavePathDependency,
+    createNodeId,
+    createContentDigest,
+  },
+  options = {}
+) => {
+  if (node.internal.type === "File") {
+    if (node.sourceInstanceName === "yaml-homepage-assets") {
       const id = createNodeId(`${node.id} >>> HomepageImage`)
       actions.createNode({
         id,
         internal: {
-          type: 'HomepageImage',
+          type: "HomepageImage",
           contentDigest: node.internal.contentDigest,
         },
         parent: node.id,
@@ -189,20 +192,20 @@ exports.onCreateNode = async ({
     }
   }
 
-  const createLinkNode = parentId => (link, i) => {
+  const createLinkNode = (parentId) => (link, i) => {
     const linkID = createNodeId(`${parentId} >>> HomepageLink ${i}`)
     actions.createNode({
       ...link,
       id: linkID,
       internal: {
-        type: 'HomepageLink',
+        type: "HomepageLink",
         contentDigest: createContentDigest(JSON.stringify(link)),
       },
     })
     return linkID
   }
 
-  if (node.internal.type === 'LayoutYaml') {
+  if (node.internal.type === "LayoutYaml") {
     const layoutID = createNodeId(`${node.id} >>> Layout`)
     const headerID = createNodeId(`${layoutID} >>> LayoutHeader`)
     const footerID = createNodeId(`${layoutID} >>> LayoutFooter`)
@@ -215,7 +218,7 @@ exports.onCreateNode = async ({
         ...link,
         id: linkID,
         internal: {
-          type: 'SocialLink',
+          type: "SocialLink",
           contentDigest: createContentDigest(JSON.stringify(link)),
         },
       })
@@ -227,7 +230,7 @@ exports.onCreateNode = async ({
       ...node.header,
       id: headerID,
       internal: {
-        type: 'LayoutHeader',
+        type: "LayoutHeader",
         contentDigest: node.internal.contentDigest,
       },
       parent: layoutID,
@@ -240,13 +243,13 @@ exports.onCreateNode = async ({
       ...node.footer,
       id: footerID,
       internal: {
-        type: 'LayoutFooter',
+        type: "LayoutFooter",
         contentDigest: node.internal.contentDigest,
       },
       parent: layoutID,
       links: node.footer?.links?.map(createLinkNode(footerID)),
       socialLinks: node.footer?.socialLinks?.map(createSocialLinkNode),
-      meta: node.footer?.meta?.map(createLinkNode(footerID + 'meta')),
+      meta: node.footer?.meta?.map(createLinkNode(footerID + "meta")),
     })
 
     // layout
@@ -254,7 +257,7 @@ exports.onCreateNode = async ({
       // ...node,
       id: layoutID,
       internal: {
-        type: 'Layout',
+        type: "Layout",
         contentDigest: node.internal.contentDigest,
       },
       header: headerID,
@@ -262,13 +265,12 @@ exports.onCreateNode = async ({
     })
   }
 
-  if (!node.internal.type.includes('HomepageYaml')) return
-
+  if (!node.internal.type.includes("HomepageYaml")) return
 
   const pageID = createNodeId(`${node.id} >>> Homepage`)
 
-  const assetsPath = options.assetsPath || ''
-  const dataPath = options.path || ''
+  const assetsPath = options.assetsPath || ""
+  const dataPath = options.path || ""
   const relativePath = path.relative(dataPath, assetsPath)
   const getRelativeImage = (src) => {
     const image = path.relative(relativePath, src)
@@ -277,14 +279,14 @@ exports.onCreateNode = async ({
 
   const createBlock = (item, i) => {
     let id
-    const blocktype =  `Homepage${item.type}`
+    const blocktype = `Homepage${item.type}`
     switch (item.type) {
-      case 'Hero':
+      case "Hero":
         id = createNodeId(`${node.id} >>> HomepageHero ${i}`)
         actions.createNode({
           id,
           internal: {
-            type: 'HomepageHero',
+            type: "HomepageHero",
             contentDigest: node.internal.contentDigest,
           },
           parent: pageID,
@@ -297,12 +299,12 @@ exports.onCreateNode = async ({
           image: getRelativeImage(item.image),
         })
         break
-      case 'Feature':
+      case "Feature":
         id = createNodeId(`${node.id} >>> HomepageFeature ${i}`)
         actions.createNode({
           id,
           internal: {
-            type: 'HomepageFeature',
+            type: "HomepageFeature",
             contentDigest: node.internal.contentDigest,
           },
           parent: pageID,
@@ -315,12 +317,12 @@ exports.onCreateNode = async ({
           image: getRelativeImage(item.image),
         })
         break
-      case 'Cta':
+      case "Cta":
         id = createNodeId(`${node.id} >>> HomepageCta ${i}`)
         actions.createNode({
           id,
           internal: {
-            type: 'HomepageCta',
+            type: "HomepageCta",
             contentDigest: node.internal.contentDigest,
           },
           parent: pageID,
@@ -331,23 +333,25 @@ exports.onCreateNode = async ({
           links: item.links?.map(createLinkNode(id)),
         })
         break
-      case 'TestimonialList':
+      case "TestimonialList":
         id = createNodeId(`${node.id} >>> HomepageTestimonialList ${i}`)
         actions.createNode({
           id,
           internal: {
-            type: 'HomepageTestimonialList',
+            type: "HomepageTestimonialList",
             contentDigest: node.internal.contentDigest,
           },
           parent: pageID,
           blocktype,
           content: item.content?.map((testimonial, i) => {
-            const testimonialID = createNodeId(`${id} >>> HomepageTestimonial ${i}`)
+            const testimonialID = createNodeId(
+              `${id} >>> HomepageTestimonial ${i}`
+            )
             actions.createNode({
               ...testimonial,
               id: testimonialID,
               internal: {
-                type: 'HomepageTestimonial',
+                type: "HomepageTestimonial",
                 contentDigest: createContentDigest(JSON.stringify(testimonial)),
               },
               parent: id,
@@ -356,12 +360,12 @@ exports.onCreateNode = async ({
           }),
         })
         break
-      case 'BenefitList':
+      case "BenefitList":
         id = createNodeId(`${node.id} >>> HomepageBenefitList ${i}`)
         actions.createNode({
           id,
           internal: {
-            type: 'HomepageBenefitList',
+            type: "HomepageBenefitList",
             contentDigest: node.internal.contentDigest,
           },
           parent: pageID,
@@ -372,7 +376,7 @@ exports.onCreateNode = async ({
               ...benefit,
               id: benefitID,
               internal: {
-                type: 'HomepageBenefit',
+                type: "HomepageBenefit",
                 contentDigest: createContentDigest(JSON.stringify(benefit)),
               },
               parent: id,
@@ -381,12 +385,12 @@ exports.onCreateNode = async ({
           }),
         })
         break
-      case 'LogoList':
+      case "LogoList":
         id = createNodeId(`${node.id} >>> HomepageLogoList ${i}`)
         actions.createNode({
           id,
           internal: {
-            type: 'HomepageLogoList',
+            type: "HomepageLogoList",
             contentDigest: node.internal.contentDigest,
           },
           parent: pageID,
@@ -397,7 +401,7 @@ exports.onCreateNode = async ({
               ...logo,
               id: logoID,
               internal: {
-                type: 'HomepageLogo',
+                type: "HomepageLogo",
                 contentDigest: createContentDigest(JSON.stringify(logo)),
               },
               parent: id,
@@ -408,12 +412,12 @@ exports.onCreateNode = async ({
           }),
         })
         break
-      case 'StatList':
+      case "StatList":
         id = createNodeId(`${node.id} >>> HomepageStatList ${i}`)
         actions.createNode({
           id,
           internal: {
-            type: 'HomepageStatList',
+            type: "HomepageStatList",
             contentDigest: node.internal.contentDigest,
           },
           parent: pageID,
@@ -424,7 +428,7 @@ exports.onCreateNode = async ({
               ...stat,
               id: statID,
               internal: {
-                type: 'HomepageStat',
+                type: "HomepageStat",
                 contentDigest: createContentDigest(JSON.stringify(logo)),
               },
               parent: id,
@@ -437,14 +441,14 @@ exports.onCreateNode = async ({
         })
         break
       default:
-        console.warn('Unknown type', item.type)
+        console.warn("Unknown type", item.type)
         // fallback for handling unknown blocks
         id = createNodeId(`${node.id} >>> HomepageSection ${i}`)
         actions.createNode({
           ...item,
           id,
           internal: {
-            type: 'HomepageSection',
+            type: "HomepageSection",
             contentDigest: node.internal.contentDigest,
           },
           parent: pageID,
@@ -459,7 +463,7 @@ exports.onCreateNode = async ({
   actions.createNode({
     id: pageID,
     internal: {
-      type: 'Homepage',
+      type: "Homepage",
       contentDigest: node.internal.contentDigest,
     },
     parent: node.id,

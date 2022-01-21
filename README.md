@@ -1,4 +1,3 @@
-
 # Gatsby Homepage Starters
 
 Development setup for homepage starters with various CMS backends

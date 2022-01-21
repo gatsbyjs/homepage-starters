@@ -1,19 +1,19 @@
-const path = require('path')
+const path = require("path")
 
 module.exports = {
   plugins: [
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
-        name: 'yaml-homepage',
-        path: path.join(__dirname, '.', 'data'),
+        name: "yaml-homepage",
+        path: path.join(__dirname, ".", "data"),
       },
     },
     {
-      resolve: 'gatsby-source-filesystem',
+      resolve: "gatsby-source-filesystem",
       options: {
-        name: 'yaml-homepage-assets',
-        path: path.join(__dirname, '.', 'assets'),
+        name: "yaml-homepage-assets",
+        path: path.join(__dirname, ".", "assets"),
       },
     },
     'gatsby-transformer-yaml',
@@ -22,5 +22,5 @@ module.exports = {
     'gatsby-transformer-sharp',
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-vanilla-extract',
-  ]
+  ],
 }

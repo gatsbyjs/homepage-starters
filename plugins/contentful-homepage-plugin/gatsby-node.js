@@ -1,13 +1,13 @@
 exports.createSchemaCustomization = async ({ actions }) => {
   actions.createFieldExtension({
-    name: 'blocktype',
+    name: "blocktype",
     extend(options) {
       return {
         resolve(source) {
-          return source.internal.type.replace('Contentful', '')
-        }
+          return source.internal.type.replace("Contentful", "")
+        },
       }
-    }
+    },
   })
 
   actions.createFieldExtension({
