@@ -1,5 +1,5 @@
-import * as React from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
+import * as React from "react"
+import { graphql, useStaticQuery } from "gatsby"
 import {
   Container,
   Flex,
@@ -8,42 +8,42 @@ import {
   Space,
   NavLink,
   Logo,
-  Text
-} from './ui'
+  Text,
+} from "./ui"
 
 const socialMedia = {
   TWITTER: {
-    url: 'https://twitter.com',
-    name: 'Twitter',
+    url: "https://twitter.com",
+    name: "Twitter",
   },
   INSTAGRAM: {
-    url: 'https://instagram.com',
-    name: 'Instagram',
+    url: "https://instagram.com",
+    name: "Instagram",
   },
   FACEBOOK: {
-    url: 'https://facebook.com',
-    name: 'Facebook',
+    url: "https://facebook.com",
+    name: "Facebook",
   },
   YOUTUBE: {
-    url: 'https://youtube.com',
-    name: 'YouTube',
+    url: "https://youtube.com",
+    name: "YouTube",
   },
   LINKEDIN: {
-    url: 'https://linkedin.com',
-    name: 'LinkedIn',
+    url: "https://linkedin.com",
+    name: "LinkedIn",
   },
   GITHUB: {
-    url: 'https://github.com',
-    name: 'GitHub',
+    url: "https://github.com",
+    name: "GitHub",
   },
   // TODO: determine correct URLs for Discord
   DISCORD: {
-    url: 'https://discord.com',
-    name: 'Discord',
+    url: "https://discord.com",
+    name: "Discord",
   },
   TWITCH: {
-    url: 'https://twitch.tv',
-    name: 'Twitch',
+    url: "https://twitch.tv",
+    name: "Twitch",
   },
 }
 
@@ -57,7 +57,7 @@ const getSocialName = ({ service }) => {
   return socialMedia[service]?.name
 }
 
-export default function Footer (props) {
+export default function Footer(props) {
   const data = useStaticQuery(graphql`
     query {
       layout {
@@ -88,61 +88,50 @@ export default function Footer (props) {
     }
   `)
 
-  const {
-    logo,
-    links,
-    meta,
-    socialLinks,
-    copyright,
-  } = data.layout.footer
+  const { logo, links, meta, socialLinks, copyright } = data.layout.footer
 
   return (
-    <Box as='footer' paddingY={4}>
+    <Box as="footer" paddingY={4}>
       <Container>
         <Flex>
-          {logo && (
-            <Logo
-              image={logo}
-            />
-          )}
+          {logo && <Logo image={logo} />}
           <Space />
           <FlexList>
-            {meta && meta.map(link => (
-              <li key={link.id}>
-                <NavLink to={link.href}>
-                  {link.text}
-                </NavLink>
-              </li>
-            ))}
+            {meta &&
+              meta.map((link) => (
+                <li key={link.id}>
+                  <NavLink to={link.href}>{link.text}</NavLink>
+                </li>
+              ))}
           </FlexList>
           <FlexList>
-            {socialLinks && socialLinks.map(link => {
-              const url = getSocialURL(link)
-              return url && (
-                <li key={link.id}>
-                  <NavLink to={getSocialURL(link)}>
-                    {getSocialName(link)}
-                  </NavLink>
-                </li>
-              )
-            })}
+            {socialLinks &&
+              socialLinks.map((link) => {
+                const url = getSocialURL(link)
+                return (
+                  url && (
+                    <li key={link.id}>
+                      <NavLink to={getSocialURL(link)}>
+                        {getSocialName(link)}
+                      </NavLink>
+                    </li>
+                  )
+                )
+              })}
           </FlexList>
         </Flex>
         <Space size={5} />
         <Flex>
           <FlexList>
-            {links && links.map(link => (
-              <li key={link.id}>
-                <NavLink to={link.href}>
-                  {link.text}
-                </NavLink>
-              </li>
-            ))}
+            {links &&
+              links.map((link) => (
+                <li key={link.id}>
+                  <NavLink to={link.href}>{link.text}</NavLink>
+                </li>
+              ))}
           </FlexList>
           <Space />
-          <Text variant='small'>
-            {copyright}
-          </Text>
+          <Text variant="small">{copyright}</Text>
         </Flex>
       </Container>
       <Space size={3} />

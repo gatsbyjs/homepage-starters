@@ -1,13 +1,13 @@
-import { style, styleVariants } from "@vanilla-extract/css";
-import { theme } from "../theme.css";
+import { style, styleVariants } from "@vanilla-extract/css"
+import { theme } from "../theme.css"
 
-const breakpoints = ["40em", "52em", "64em"];
+const breakpoints = ["40em", "52em", "64em"]
 
 export const mediaQueries = {
   small: `screen and (min-width: ${breakpoints[0]})`,
   medium: `screen and (min-width: ${breakpoints[1]})`,
   large: `screen and (min-width: ${breakpoints[2]})`,
-};
+}
 
 export const container = style({
   maxWidth: theme.sizes.container,
@@ -15,7 +15,7 @@ export const container = style({
   marginRight: "auto",
   paddingLeft: theme.space[4],
   paddingRight: theme.space[4],
-});
+})
 
 export const containers = styleVariants({
   normal: [container],
@@ -26,12 +26,12 @@ export const containers = styleVariants({
       maxWidth: theme.sizes.narrow,
     },
   ],
-});
+})
 
 export const flex = style({
   display: "flex",
   alignItems: "center",
-});
+})
 
 export const flexVariants = styleVariants({
   wrap: {
@@ -55,9 +55,9 @@ export const flexVariants = styleVariants({
       },
     },
   },
-});
+})
 
-export const flexGap = styleVariants(theme.space, (gap) => ({ gap }));
+export const flexGap = styleVariants(theme.space, (gap) => ({ gap }))
 
 export const widths = styleVariants(
   {
@@ -77,16 +77,19 @@ export const widths = styleVariants(
       },
     },
   ]
-);
+)
 
-export const padding = styleVariants(theme.space, (padding) => ({ padding }));
+export const padding = styleVariants(theme.space, (padding) => ({ padding }))
+
 export const paddingY = styleVariants(theme.space, (padding) => ({
   paddingTop: padding,
   paddingBottom: padding,
-}));
+}))
+
 export const radii = styleVariants(theme.radii, (borderRadius) => ({
   borderRadius,
-}));
+}))
+
 export const box = styleVariants({
   center: {
     display: "flex",
@@ -94,18 +97,18 @@ export const box = styleVariants({
     alignItems: "center",
     textAlign: "center",
   },
-});
+})
 
 export const list = style({
   listStyle: "none",
   padding: 0,
   margin: 0,
-});
+})
 
 export const section = style({
   paddingTop: theme.space[5],
   paddingBottom: theme.space[5],
-});
+})
 
 export const margin = styleVariants(
   {
@@ -113,9 +116,9 @@ export const margin = styleVariants(
     auto: "auto",
   },
   (margin) => ({ margin })
-);
+)
 
-export const margin0 = style({ margin: 0 });
+export const margin0 = style({ margin: 0 })
 
 export const text = styleVariants({
   body: [
@@ -191,7 +194,7 @@ export const text = styleVariants({
   bold: {
     fontWeight: theme.fontWeights.bold,
   },
-});
+})
 
 export const navlink = style({
   color: "inherit",
@@ -199,7 +202,7 @@ export const navlink = style({
   ":hover": {
     color: theme.colors.black,
   },
-});
+})
 
 const button = style({
   display: "inline-flex",
@@ -212,7 +215,7 @@ const button = style({
   paddingLeft: theme.space[3],
   paddingRight: theme.space[3],
   borderRadius: theme.radii.button,
-});
+})
 
 export const buttons = styleVariants({
   primary: [
@@ -271,7 +274,7 @@ export const buttons = styleVariants({
       },
     },
   ],
-});
+})
 
 export const interactiveIcon = style({
   display: "flex",
@@ -280,7 +283,7 @@ export const interactiveIcon = style({
   background: "transparent",
   border: "none",
   cursor: "pointer",
-});
+})
 
 export const backgrounds = styleVariants({
   primary: {
@@ -291,7 +294,7 @@ export const backgrounds = styleVariants({
     color: theme.colors.primary,
     backgroundColor: theme.colors.muted,
   },
-});
+})
 
 export const blockquote = style([
   text.lead,
@@ -302,13 +305,13 @@ export const blockquote = style([
     paddingTop: theme.space[4],
     paddingBottom: theme.space[4],
   },
-]);
+])
 
 export const avatar = style({
   width: theme.sizes.avatar,
   height: theme.sizes.avatar,
   borderRadius: theme.radii.circle,
-});
+})
 
 export const logos = styleVariants({
   small: {
@@ -318,7 +321,7 @@ export const logos = styleVariants({
   medium: {
     maxWidth: "128px",
   },
-});
+})
 
 export const icons = styleVariants(
   {
@@ -330,9 +333,9 @@ export const icons = styleVariants(
     width: size,
     height: size,
   })
-);
+)
 
 // for debugging only
 export const debug = style({
   outline: "1px solid tomato",
-});
+})

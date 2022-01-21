@@ -1,9 +1,9 @@
-import * as React from 'react'
-import Header from './header'
-import Footer from './footer'
-import '../styles.css.ts'
+import * as React from "react"
+import Header from "./header"
+import Footer from "./footer"
+import "../styles.css.ts"
 
-export default function Layout (props) {
+export default function Layout(props) {
   return (
     <>
       <Header />

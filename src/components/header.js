@@ -1,5 +1,5 @@
-import * as React from "react";
-import { graphql, useStaticQuery } from "gatsby";
+import * as React from "react"
+import { graphql, useStaticQuery } from "gatsby"
 import {
   Container,
   Flex,
@@ -9,7 +9,7 @@ import {
   Button,
   InteractiveIcon,
   Padding,
-} from "./ui";
+} from "./ui"
 import {
   mobileNavOverlay,
   mobileNavLinkList,
@@ -17,10 +17,10 @@ import {
   desktopHeaderNavWrapper,
   mobileHeaderNavWrapper,
   mobileNavSVGColorWrapper,
-} from "./header.css.ts";
-import CloseIcon from "./closeIcon";
-import HamburgerIcon from "./hamburgerIcon";
-import { GatsbyWordpressLogo } from "./logos";
+} from "./header.css.ts"
+import CloseIcon from "./closeIcon"
+import HamburgerIcon from "./hamburgerIcon"
+import { GatsbyWordpressLogo } from "./logos"
 
 export default function Header() {
   const data = useStaticQuery(graphql`
@@ -41,19 +41,19 @@ export default function Header() {
         }
       }
     }
-  `);
+  `)
 
-  const { links, cta } = data.layout.header;
+  const { links, cta } = data.layout.header
 
-  const [isOpen, setOpen] = React.useState(false);
+  const [isOpen, setOpen] = React.useState(false)
 
   React.useEffect(() => {
     if (isOpen) {
-      document.body.style.overflowY = "hidden";
+      document.body.style.overflowY = "hidden"
     } else {
-      document.body.style.overflowY = "visible";
+      document.body.style.overflowY = "visible"
     }
-  }, [isOpen]);
+  }, [isOpen])
 
   return (
     <header>
@@ -126,5 +126,5 @@ export default function Header() {
         </div>
       )}
     </header>
-  );
+  )
 }
