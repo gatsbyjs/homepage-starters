@@ -1,16 +1,13 @@
 import { style, styleVariants } from "@vanilla-extract/css"
-import { theme } from "../theme.css.ts"
+import { theme } from "../theme.css"
 
 const breakpoints = ["40em", "52em", "64em"]
 
-const mqAliases = ["small", "medium", "large"]
-const media = breakpoints
-  .map((n) => `screen and (min-width: ${n})`)
-  .reduce((a, b, i) => {
-    a[i] = b
-    a[mqAliases[i]] = b
-    return a
-  }, {})
+export const mediaQueries = {
+  small: `screen and (min-width: ${breakpoints[0]})`,
+  medium: `screen and (min-width: ${breakpoints[1]})`,
+  large: `screen and (min-width: ${breakpoints[2]})`,
+}
 
 export const container = style({
   maxWidth: theme.sizes.container,
@@ -53,9 +50,8 @@ export const flexVariants = styleVariants({
   responsive: {
     flexDirection: "column",
     "@media": {
-      [media.small]: {
+      [mediaQueries.small]: {
         flexDirection: "row",
-        // display: 'flex',
       },
     },
   },
@@ -75,7 +71,7 @@ export const widths = styleVariants(
     {
       width: "100%",
       "@media": {
-        [media.small]: {
+        [mediaQueries.small]: {
           width,
         },
       },
@@ -84,13 +80,16 @@ export const widths = styleVariants(
 )
 
 export const padding = styleVariants(theme.space, (padding) => ({ padding }))
+
 export const paddingY = styleVariants(theme.space, (padding) => ({
   paddingTop: padding,
   paddingBottom: padding,
 }))
+
 export const radii = styleVariants(theme.radii, (borderRadius) => ({
   borderRadius,
 }))
+
 export const box = styleVariants({
   center: {
     display: "flex",
@@ -275,6 +274,15 @@ export const buttons = styleVariants({
       },
     },
   ],
+})
+
+export const interactiveIcon = style({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  background: "transparent",
+  border: "none",
+  cursor: "pointer",
 })
 
 export const backgrounds = styleVariants({

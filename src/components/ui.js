@@ -66,6 +66,10 @@ export function Space({ className, size = "auto", ...props }) {
   return <Base className={cx(styles.margin[size], className)} {...props} />
 }
 
+export function Padding({ className, size = "0", ...props }) {
+  return <Base className={cx(styles.padding[size], className)} {...props} />
+}
+
 export function Section(props) {
   return <Box as="section" cx={styles.section} {...props} />
 }
@@ -128,6 +132,10 @@ export function ButtonList({ links = [], reversed = false, ...props }) {
       ))}
     </FlexList>
   )
+}
+
+export function InteractiveIcon(props) {
+  return <Base as="button" cx={[styles.interactiveIcon]} {...props} />
 }
 
 export function Blockquote(props) {
