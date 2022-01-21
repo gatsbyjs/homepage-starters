@@ -1,5 +1,6 @@
 import * as React from "react";
 import { graphql, useStaticQuery } from "gatsby";
+import { StaticImage } from "gatsby-plugin-image";
 import {
   Container,
   Flex,
@@ -23,6 +24,7 @@ import {
   mobileNavLinkList,
   mobileNavLink,
 } from "./header.css.ts";
+import { GatsbyWordpressLogo } from "./logos";
 
 export default function Header(props) {
   const data = useStaticQuery(graphql`
@@ -30,10 +32,6 @@ export default function Header(props) {
       layout {
         header {
           id
-          logo {
-            id
-            gatsbyImageData
-          }
           links {
             id
             href
@@ -49,7 +47,7 @@ export default function Header(props) {
     }
   `);
 
-  const { logo, links, cta } = data.layout.header;
+  const { links, cta } = data.layout.header;
 
   const [isOpen, setOpen] = React.useState(false);
 
@@ -61,7 +59,7 @@ export default function Header(props) {
         {/* Desktop / Tablet - Header / Nav */}
         <Padding size={2} />
         <Flex>
-          {logo && <Logo image={logo} />}
+          <GatsbyWordpressLogo />
           <nav>
             <FlexList>
               {links &&
@@ -80,7 +78,7 @@ export default function Header(props) {
       <Container className={mobileHeaderNavWrapper[isOpen ? "open" : "closed"]}>
         <Padding size={2} />
         <Flex variant="spaceBetween">
-          {logo && <Logo image={logo} />}
+          <GatsbyWordpressLogo inverted={isOpen} />
           <Flex>
             <Space />
             <div>

@@ -1,12 +1,12 @@
-import { globalStyle } from '@vanilla-extract/css'
-import { theme } from './theme.css.ts'
+import { globalStyle } from "@vanilla-extract/css";
+import { theme } from "./theme.css.ts";
 
-globalStyle('body', {
+globalStyle("body", {
   margin: 0,
   fontFamily: theme.fonts.text,
   color: theme.colors.text,
-})
+});
 
-globalStyle('*', {
-  boxSizing: 'border-box',
-})
+globalStyle("*", {
+  boxSizing: "border-box",
+});
