@@ -10,6 +10,22 @@ exports.createSchemaCustomization = async ({ actions }) => {
     },
   })
 
+  actions.createFieldExtension({
+    name: 'imageUrl',
+    extend(options) {
+      const schemaRE = /^\/\//
+      const addURLSchema = str => {
+        if (schemaRE.test(str)) return `https:${str}`
+        return str
+      }
+      return {
+        resolve(source) {
+          return addURLSchema(source.file.url)
+        }
+      }
+    }
+  })
+
   // abstract interfaces
   actions.createTypes(`
     interface HomepageBlock implements Node {
@@ -27,6 +43,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       alt: String
       gatsbyImageData: JSON
+      url: String
     }
 
     interface HomepageHero implements Node & HomepageBlock {
@@ -207,6 +224,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       alt: String
       gatsbyImageData: JSON
+      url: String @imageUrl
+      file: JSON
     }
 
     type ContentfulHomepageHero implements Node & HomepageHero & HomepageBlock @dontInfer {
