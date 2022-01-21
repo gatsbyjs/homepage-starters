@@ -348,7 +348,6 @@ exports.onCreateNode = ({
       })
 
       actions.createNode({
-        ...homepageCta,
         id: ctaID,
         internal: {
           type: 'HomepageCta',
@@ -356,17 +355,18 @@ exports.onCreateNode = ({
         },
         parent: node.id,
         blocktype: 'HomepageCta',
+        heading: homepageCta.ctaHeading,
+        text: homepageCta.ctaText,
         links: [
-          homepageCta.link,
-          homepageCta.secondarylink,
+          homepageCta.ctaLink,
+          homepageCta.ctaSecondaryLink,
         ]
           .filter(Boolean)
           .map(createLinkNode(ctaID)),
-        image: homepageCta.image.id,
+        image: homepageCta.ctaImage.id,
       })
 
       actions.createNode({
-        ...statList,
         id: statsID,
         internal: {
           type: 'HomepageStatList',
@@ -374,11 +374,14 @@ exports.onCreateNode = ({
         },
         parent: node.id,
         blocktype: 'HomepageStatList',
+        kicker: statList.statsKicker,
+        heading: statList.statsHeading,
+        text: statList.statsText,
         links: [
-          statList.link && createLinkNode(statsID)(statList.link),
+          statList.statsLink && createLinkNode(statsID)(statList.statsLink),
         ].filter(Boolean),
-        icon: statList.icon.id,
-        image: statList.image.id,
+        icon: statList.statsIcon.id,
+        image: statList.statsImage.id,
         content: [
           {
             value: statList.stat1,
@@ -407,7 +410,6 @@ exports.onCreateNode = ({
       })
 
       actions.createNode({
-        ...testimonialList,
         id: testimonialsID,
         internal: {
           type: 'HomepageTestimonialList',
@@ -415,6 +417,8 @@ exports.onCreateNode = ({
         },
         parent: node.id,
         blocktype: 'HomepageTestimonialList',
+        kicker: testimonialList.testimonialsKicker,
+        heading: testimonialList.testimonialsHeading,
         content: [
           testimonialList.testimonial1.id,
           testimonialList.testimonial2.id,
@@ -424,7 +428,6 @@ exports.onCreateNode = ({
       })
 
       actions.createNode({
-        ...productList,
         id: productsID,
         internal: {
           type: 'HomepageProductList',
@@ -432,6 +435,8 @@ exports.onCreateNode = ({
         },
         parent: node.id,
         blocktype: 'HomepageProductList',
+        kicker: productList.productsKicker,
+        heading: productList.productsHeading,
         content: [
           productList.product1,
           productList.product2,
@@ -440,7 +445,6 @@ exports.onCreateNode = ({
       })
 
       actions.createNode({
-        ...logoList,
         id: logosID,
         internal: {
           type: 'HomepageLogoList',
@@ -448,6 +452,7 @@ exports.onCreateNode = ({
         },
         parent: node.id,
         blocktype: 'HomepageLogoList',
+        text: logoList.logosText,
         logos: [
           logoList.logo1,
           logoList.logo2,
@@ -458,7 +463,6 @@ exports.onCreateNode = ({
       })
 
       actions.createNode({
-        ...featureList,
         id: featuresID,
         internal: {
           type: 'HomepageFeatureList',
@@ -466,6 +470,9 @@ exports.onCreateNode = ({
         },
         parent: node.id,
         blocktype: 'HomepageFeatureList',
+        kicker: featureList.featuresKicker,
+        heading: featureList.featuresHeading,
+        text: featureList.featuresText,
         content: [
           featureList.feature1.id,
           featureList.feature2.id,
@@ -473,7 +480,6 @@ exports.onCreateNode = ({
       })
 
       actions.createNode({
-        ...benefitList,
         id: benefitsID,
         internal: {
           type: 'HomepageBenefitList',
@@ -481,6 +487,8 @@ exports.onCreateNode = ({
         },
         parent: node.id,
         blocktype: 'HomepageBenefitList',
+        heading: benefitList.benefitsHeading,
+        text: benefitList.benefitsText,
         content: [
           benefitList.benefit1.id,
           benefitList.benefit2.id,
