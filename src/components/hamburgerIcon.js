@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from "react"
 
 export default function HamburgerIcon() {
   return (
@@ -28,5 +28,5 @@ export default function HamburgerIcon() {
         stroke-linecap="round"
       />
     </svg>
-  );
+  )
 }

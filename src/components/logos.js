@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from "react"
 
 export const GatsbyWordpressLogo = () => (
   <svg
@@ -41,7 +41,7 @@ export const GatsbyWordpressLogo = () => (
       fill="currentColor"
     />
   </svg>
-);
+)
 
 export const GatsbyContentfulLogo = () => (
   <svg
@@ -87,7 +87,7 @@ export const GatsbyContentfulLogo = () => (
       stroke-width="1.5"
     />
   </svg>
-);
+)
 
 export const GatsbyDatoLogo = () => (
   <svg
@@ -112,4 +112,4 @@ export const GatsbyDatoLogo = () => (
       fill="currentColor"
     />
   </svg>
-);
+)
