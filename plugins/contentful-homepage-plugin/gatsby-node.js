@@ -222,10 +222,11 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type ContentfulAsset implements Node & HomepageImage {
       id: ID!
-      alt: String
+      alt: String @proxy(from: "title")
       gatsbyImageData: JSON
       url: String @imageUrl
       file: JSON
+      title: String
     }
 
     type ContentfulHomepageHero implements Node & HomepageHero & HomepageBlock @dontInfer {
