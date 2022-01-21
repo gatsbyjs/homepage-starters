@@ -51,7 +51,13 @@ export default function Header(props) {
 
   const [isOpen, setOpen] = React.useState(false);
 
-  // TODO: useEffect to disable scrolling when menu is open
+  React.useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflowY = "hidden";
+    } else {
+      document.body.style.overflowY = "scroll";
+    }
+  }, [isOpen]);
 
   return (
     <header>
