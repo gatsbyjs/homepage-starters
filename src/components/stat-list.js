@@ -1,6 +1,6 @@
-import * as React from 'react'
-import { graphql } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import * as React from "react"
+import { graphql } from "gatsby"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import {
   Container,
   Section,
@@ -12,48 +12,37 @@ import {
   Box,
   Icon,
   ButtonList,
-} from './ui'
+} from "./ui"
 
-function Stat (props) {
+function Stat(props) {
   return (
     <Box>
-      <Text variant='serif'>{props.value}</Text>
+      <Text variant="serif">{props.value}</Text>
       <Text>{props.label}</Text>
     </Box>
   )
 }
 
-export default function StatList (props) {
+export default function StatList(props) {
   return (
     <Container>
-      <Section
-        padding={5}
-        radius='large'
-        background='primary'>
+      <Section padding={5} radius="large" background="primary">
         <Flex responsive>
-          <Box width='half'>
-            {props.icon && (
-              <Icon
-                alt={props.icon.alt}
-                image={props.icon}
-              />
-            )}
+          <Box width="half">
+            {props.icon && <Icon alt={props.icon.alt} image={props.icon} />}
             {props.kicker && <Kicker>{props.kicker}</Kicker>}
             {props.heading && <Heading>{props.heading}</Heading>}
-            {props.text && <Text variant='lead'>{props.text}</Text>}
+            {props.text && <Text variant="lead">{props.text}</Text>}
             <FlexList gap={5}>
-              {props.content.map(stat => (
+              {props.content.map((stat) => (
                 <li key={stat.id}>
                   <Stat {...stat} />
                 </li>
               ))}
             </FlexList>
-            <ButtonList
-              links={props.links}
-              reversed
-            />
+            <ButtonList links={props.links} reversed />
           </Box>
-          <Box width='half'>
+          <Box width="half">
             {props.image && (
               <GatsbyImage
                 alt={props.image.alt}

@@ -1,42 +1,25 @@
-import * as React from 'react'
-import { Link as GatsbyLink } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import isAbsoluteURL from 'is-absolute-url'
-import * as styles from './ui.css.ts'
+import * as React from "react"
+import { Link as GatsbyLink } from "gatsby"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import isAbsoluteURL from "is-absolute-url"
+import * as styles from "./ui.css.ts"
 
-export const cx = (...args) => args
-  .filter(Boolean)
-  .join(' ')
+export const cx = (...args) => args.filter(Boolean).join(" ")
 
-export function Base ({
-  as: Component = 'div',
+export function Base({
+  as: Component = "div",
   cx: _cx = [],
   className,
   ...props
 }) {
-  return (
-    <Component
-      className={cx(..._cx, className)}
-      {...props}
-    />
-  )
+  return <Component className={cx(..._cx, className)} {...props} />
 }
 
-export function Container ({
-  width = 'normal',
-  ...props
-}) {
-  return (
-    <Base
-      cx={[
-        styles.containers[width],
-      ]}
-      {...props}
-    />
-  )
+export function Container({ width = "normal", ...props }) {
+  return <Base cx={[styles.containers[width]]} {...props} />
 }
 
-export function Flex ({
+export function Flex({
   variant,
   gap = 3,
   gutter,
@@ -45,7 +28,6 @@ export function Flex ({
   cx: _cx,
   ...props
 }) {
-  gutter && console.log(styles.gutter[gutter])
   return (
     <Base
       cx={[
@@ -55,15 +37,15 @@ export function Flex ({
         wrap && styles.flexVariants.wrap,
         gutter && styles.gutter[gutter],
         gutter ? styles.flexGap[0] : styles.flexGap[gap],
-        _cx
+        _cx,
       ]}
       {...props}
     />
   )
 }
 
-export function Box ({
-  width = 'full',
+export function Box({
+  width = "full",
   background,
   padding,
   paddingY,
@@ -90,59 +72,23 @@ export function Box ({
   )
 }
 
-export function FlexList ({
-  ...props
-}) {
-  return (
-    <Flex
-      as='ul'
-      cx={[
-        styles.list,
-      ]}
-      {...props}
-    />
-  )
+export function FlexList({ ...props }) {
+  return <Flex as="ul" cx={[styles.list]} {...props} />
 }
 
-export function List (props) {
-  return (
-    <Base
-      as='ul'
-      cx={[ styles.list ]}
-      {...props}
-    />
-  )
+export function List(props) {
+  return <Base as="ul" cx={[styles.list]} {...props} />
 }
 
-export function Space ({
-  className,
-  size = 'auto',
-  ...props
-}) {
-  return (
-    <Base
-      className={cx(styles.margin[size], className)}
-      {...props}
-    />
-  )
+export function Space({ className, size = "auto", ...props }) {
+  return <Base className={cx(styles.margin[size], className)} {...props} />
 }
 
-export function Section (props) {
-  return (
-    <Box
-      as='section'
-      cx={styles.section}
-      {...props}
-    />
-  )
+export function Section(props) {
+  return <Box as="section" cx={styles.section} {...props} />
 }
 
-export function Text ({
-  variant = 'body',
-  center,
-  bold,
-  ...props
-}) {
+export function Text({ variant = "body", center, bold, ...props }) {
   return (
     <Base
       cx={[
@@ -155,47 +101,19 @@ export function Text ({
   )
 }
 
-export function Heading ({
-  ...props
-}) {
-  return (
-    <Text
-      as='h2'
-      variant='heading'
-      {...props}
-    />
-  )
+export function Heading({ ...props }) {
+  return <Text as="h2" variant="heading" {...props} />
 }
 
-export function Subhead ({
-  ...props
-}) {
-  return (
-    <Text
-      as='h3'
-      variant='subhead'
-      {...props}
-    />
-  )
+export function Subhead({ ...props }) {
+  return <Text as="h3" variant="subhead" {...props} />
 }
 
-export function Kicker ({
-  ...props
-}) {
-  return (
-    <Text
-      as='h4'
-      variant='kicker'
-      {...props}
-    />
-  )
+export function Kicker({ ...props }) {
+  return <Text as="h4" variant="kicker" {...props} />
 }
 
-export function Link ({
-  to,
-  href,
-  ...props
-}) {
+export function Link({ to, href, ...props }) {
   const url = href || to
   if (isAbsoluteURL(url)) {
     return (
@@ -206,112 +124,63 @@ export function Link ({
   return <GatsbyLink to={url} {...props} />
 }
 
-export function NavLink ({
-  ...props
-}) {
-  return (
-    <Base
-      as={Link}
-      cx={[styles.navlink]}
-      {...props}
-    />
-  )
+export function NavLink({ ...props }) {
+  return <Base as={Link} cx={[styles.navlink]} {...props} />
 }
 
-export function Button ({
-  variant = 'primary',
-  ...props
-}) {
-  return (
-    <Base
-      as={Link}
-      cx={[styles.buttons[variant]]}
-      {...props}
-    />
-  )
+export function Button({ variant = "primary", ...props }) {
+  return <Base as={Link} cx={[styles.buttons[variant]]} {...props} />
 }
 
-export function ButtonList ({
-  links = [],
-  reversed = false,
-  ...props
-}) {
+export function ButtonList({ links = [], reversed = false, ...props }) {
   const getVariant = (i) => {
     if (reversed) {
-      return i === 0 ? 'reversed' : 'linkReversed'
+      return i === 0 ? "reversed" : "linkReversed"
     }
-    return i === 0 ? 'primary' : 'link'
+    return i === 0 ? "primary" : "link"
   }
   return (
     <FlexList {...props}>
-      {links && links.map((link, i) => (
-        <li key={link.id}>
-          <Button
-            href={link.href}
-            variant={getVariant(i)}>
-            {link.text}
-          </Button>
-        </li>
-      ))}
+      {links &&
+        links.map((link, i) => (
+          <li key={link.id}>
+            <Button href={link.href} variant={getVariant(i)}>
+              {link.text}
+            </Button>
+          </li>
+        ))}
     </FlexList>
   )
 }
 
-export function CTALink (props) {
-  return (
-    <Base
-      as={Link}
-      cx={[styles.ctaLink]}
-      {...props}
-    />
-  )
+export function CTALink(props) {
+  return <Base as={Link} cx={[styles.ctaLink]} {...props} />
 }
 
-export function LinkList ({
-  links = [],
-  ...props
-}) {
+export function LinkList({ links = [], ...props }) {
   return (
     <FlexList {...props}>
-      {links && links.map((link, i) => (
-        <li key={link.id}>
-          <CTALink href={link.href}>
-            {link.text}
-          </CTALink>
-        </li>
-      ))}
+      {links &&
+        links.map((link, i) => (
+          <li key={link.id}>
+            <CTALink href={link.href}>{link.text}</CTALink>
+          </li>
+        ))}
     </FlexList>
   )
 }
 
-export function Blockquote (props) {
+export function Blockquote(props) {
+  return <Base as="blockquote" cx={[styles.blockquote]} {...props} />
+}
+
+export function Avatar({ alt, image }) {
   return (
-    <Base
-      as='blockquote'
-      cx={[styles.blockquote]}
-      {...props}
-    />
+    <GatsbyImage alt={alt} image={getImage(image)} className={styles.avatar} />
   )
 }
 
-export function Avatar ({
-  alt,
-  image,
-}) {
-  return (
-    <GatsbyImage
-      alt={alt}
-      image={getImage(image)}
-      className={styles.avatar}
-    />
-  )
-}
-
-export function Logo ({
-  alt,
-  image,
-  size = 'small',
-}) {
+export function Logo({ alt, image, size = "small" }) {
   return (
     <GatsbyImage
       alt={alt}
@@ -321,11 +190,7 @@ export function Logo ({
   )
 }
 
-export function Icon ({
-  alt,
-  image,
-  size = 'medium',
-}) {
+export function Icon({ alt, image, size = "medium" }) {
   return (
     <GatsbyImage
       alt={alt}
@@ -333,4 +198,8 @@ export function Icon ({
       className={styles.icons[size]}
     />
   )
+}
+
+export function InteractiveIcon(props) {
+  return <Base as="button" cx={[styles.interactiveIcon]} {...props} />
 }

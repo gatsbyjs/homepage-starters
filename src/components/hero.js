@@ -1,6 +1,6 @@
-import * as React from 'react'
-import { graphql } from 'gatsby'
-import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import * as React from "react"
+import { graphql } from "gatsby"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import {
   Container,
   Section,
@@ -11,14 +11,14 @@ import {
   Flex,
   Box,
   ButtonList,
-} from './ui'
+} from "./ui"
 
-export default function Hero (props) {
+export default function Hero(props) {
   return (
     <Section>
       <Container>
-        <Flex variant='responsive'>
-          <Box width='half'>
+        <Flex variant="responsive">
+          <Box width="half">
             {props.image && (
               <GatsbyImage
                 alt={props.image.alt}
@@ -26,13 +26,11 @@ export default function Hero (props) {
               />
             )}
           </Box>
-          <Box width='half'>
-            <Kicker as='h3'>{props.kicker}</Kicker>
-            <Heading as='h1'>
-              {props.heading}
-            </Heading>
-            <Subhead as='h2'>{props.subhead}</Subhead>
-            <Text as='p'>{props.text}</Text>
+          <Box width="half">
+            <Kicker as="h3">{props.kicker}</Kicker>
+            <Heading as="h1">{props.heading}</Heading>
+            <Subhead as="h2">{props.subhead}</Subhead>
+            <Text as="p">{props.text}</Text>
             <ButtonList links={props.links} />
           </Box>
         </Flex>

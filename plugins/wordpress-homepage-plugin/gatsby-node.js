@@ -1,6 +1,6 @@
 exports.createSchemaCustomization = async ({ actions }) => {
   actions.createFieldExtension({
-    name: 'blocktype',
+    name: "blocktype",
     extend(options) {
       return {
         resolve(source) {
@@ -34,9 +34,9 @@ exports.createSchemaCustomization = async ({ actions }) => {
           const resolver = imageType.getFields().gatsbyImageData.resolve
           if (!resolver) return null
           return await resolver(image, args, context, info)
-        }
+        },
       }
-    }
+    },
   })
 
   // abstract interfaces
