@@ -1,12 +1,20 @@
 import * as React from "react"
 import { graphql, useStaticQuery } from "gatsby"
+import {
+  Twitter,
+  Twitch,
+  Instagram,
+  Facebook,
+  Youtube,
+  GitHub,
+} from "react-feather"
 import { Container, Flex, FlexList, Box, Space, NavLink, Text } from "./ui"
-import TwitterIcon from "./icons/twitterIcon"
-import InstagramIcon from "./icons/instagramIcon"
-import FacebookIcon from "./icons/facebookIcon"
-import YoutubeIcon from "./icons/youtubeIcon"
-import GithubIcon from "./icons/githubIcon"
-import TwitchIcon from "./icons/twitchIcon"
+// import TwitterIcon from "./icons/twitterIcon"
+// import InstagramIcon from "./icons/instagramIcon"
+// import FacebookIcon from "./icons/facebookIcon"
+// import YoutubeIcon from "./icons/youtubeIcon"
+// import GithubIcon from "./icons/githubIcon"
+// import TwitchIcon from "./icons/twitchIcon"
 import { GatsbyWordpressLogo } from "./logos"
 import { footerSocialLinkWrapper } from "./footer.css.ts"
 
@@ -14,32 +22,32 @@ const socialMedia = {
   TWITTER: {
     url: "https://twitter.com",
     name: "Twitter",
-    icon: <TwitterIcon />,
+    icon: <Twitter />,
   },
   INSTAGRAM: {
     url: "https://instagram.com",
     name: "Instagram",
-    icon: <InstagramIcon />,
+    icon: <Instagram />,
   },
   FACEBOOK: {
     url: "https://facebook.com",
     name: "Facebook",
-    icon: <FacebookIcon />,
+    icon: <Facebook />,
   },
   YOUTUBE: {
     url: "https://youtube.com",
     name: "YouTube",
-    icon: <YoutubeIcon />,
+    icon: <Youtube />,
   },
   GITHUB: {
     url: "https://github.com",
     name: "GitHub",
-    icon: <GithubIcon />,
+    icon: <GitHub />,
   },
   TWITCH: {
     url: "https://twitch.tv",
     name: "Twitch",
-    icon: <TwitchIcon />,
+    icon: <Twitch />,
   },
 }
 
