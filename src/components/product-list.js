@@ -31,8 +31,10 @@ export default function ProductList(props) {
     <Section>
       <Container>
         <Box center paddingY={4}>
-          {props.kicker && <Kicker>{props.kicker}</Kicker>}
-          {props.heading && <Heading>{props.heading}</Heading>}
+          <Heading>
+            {props.kicker && <Kicker>{props.kicker}</Kicker>}
+            {props.heading}
+          </Heading>
           {props.text && <Text>{props.text}</Text>}
         </Box>
         <FlexList variant="responsive">

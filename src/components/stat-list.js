@@ -30,8 +30,10 @@ export default function StatList(props) {
         <Flex responsive>
           <Box width="half">
             {props.icon && <Icon alt={props.icon.alt} image={props.icon} />}
-            {props.kicker && <Kicker>{props.kicker}</Kicker>}
-            {props.heading && <Heading>{props.heading}</Heading>}
+            <Heading>
+              {props.kicker && <Kicker>{props.kicker}</Kicker>}
+              {props.heading}
+            </Heading>
             {props.text && <Text variant="lead">{props.text}</Text>}
             <FlexList gap={5}>
               {props.content.map((stat) => (

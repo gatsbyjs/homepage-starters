@@ -19,8 +19,10 @@ export default function Feature(props) {
       <Container>
         <Flex gap={4} variant="responsive">
           <Box width="half" order={props.flip ? 1 : null}>
-            <Kicker>{props.kicker}</Kicker>
-            <Heading>{props.heading}</Heading>
+            <Heading>
+              {props.kicker && <Kicker>{props.kicker}</Kicker>}
+              {props.heading}
+            </Heading>
             <Text variant="lead">{props.text}</Text>
             <ButtonList links={props.links} />
           </Box>

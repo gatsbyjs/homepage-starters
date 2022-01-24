@@ -8,8 +8,10 @@ export default function FeatureList(props) {
     <Container>
       <Section background="muted" radius="large">
         <Box center>
-          {props.kicker && <Kicker>{props.kicker}</Kicker>}
-          {props.heading && <Heading>{props.heading}</Heading>}
+          <Heading>
+            {props.kicker && <Kicker>{props.kicker}</Kicker>}
+            {props.heading}
+          </Heading>
           {props.text && <Text>{props.text}</Text>}
         </Box>
         {props.content.map((feature, i) => (

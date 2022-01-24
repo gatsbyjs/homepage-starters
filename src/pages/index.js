@@ -12,7 +12,7 @@ export default function Homepage(props) {
   const { homepage } = props.data
 
   return (
-    <Layout>
+    <Layout {...homepage}>
       {homepage.blocks.map((block, i) => {
         const Component = sections[block.blocktype] || Fallback
         return <Component key={block.id} index={i} {...block} />
@@ -27,6 +27,10 @@ export const query = graphql`
       id
       title
       description
+      image {
+        id
+        url
+      }
       blocks: content {
         id
         blocktype
