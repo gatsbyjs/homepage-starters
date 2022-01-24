@@ -7,43 +7,48 @@ import {
   Box,
   Space,
   NavLink,
-  Logo,
   Text,
+  InteractiveIcon,
 } from "./ui"
+import TwitterIcon from "./icons/twitterIcon"
+import InstagramIcon from "./icons/instagramIcon"
+import FacebookIcon from "./icons/facebookIcon"
+import YoutubeIcon from "./icons/youtubeIcon"
+import GithubIcon from "./icons/githubIcon"
+import TwitchIcon from "./icons/twitchIcon"
+import { GatsbyWordpressLogo } from "./logos"
+import { footerSocialLinkWrapper } from "./footer.css.ts"
 
 const socialMedia = {
   TWITTER: {
     url: "https://twitter.com",
     name: "Twitter",
+    icon: <TwitterIcon />,
   },
   INSTAGRAM: {
     url: "https://instagram.com",
     name: "Instagram",
+    icon: <InstagramIcon />,
   },
   FACEBOOK: {
     url: "https://facebook.com",
     name: "Facebook",
+    icon: <FacebookIcon />,
   },
   YOUTUBE: {
     url: "https://youtube.com",
     name: "YouTube",
-  },
-  LINKEDIN: {
-    url: "https://linkedin.com",
-    name: "LinkedIn",
+    icon: <YoutubeIcon />,
   },
   GITHUB: {
     url: "https://github.com",
     name: "GitHub",
-  },
-  // TODO: determine correct URLs for Discord
-  DISCORD: {
-    url: "https://discord.com",
-    name: "Discord",
+    icon: <GithubIcon />,
   },
   TWITCH: {
     url: "https://twitch.tv",
     name: "Twitch",
+    icon: <TwitchIcon />,
   },
 }
 
@@ -53,8 +58,9 @@ const getSocialURL = ({ service, username }) => {
   return `${domain}/${username}`
 }
 
-const getSocialName = ({ service }) => {
-  return socialMedia[service]?.name
+const getSocialIcon = ({ service }) => {
+  const icon = socialMedia[service]?.icon
+  return icon
 }
 
 export default function Footer(props) {
@@ -88,22 +94,14 @@ export default function Footer(props) {
     }
   `)
 
-  const { logo, links, meta, socialLinks, copyright } = data.layout.footer
+  const { links, meta, socialLinks, copyright } = data.layout.footer
 
   return (
     <Box as="footer" paddingY={4}>
       <Container>
-        <Flex>
-          {logo && <Logo image={logo} />}
+        <Flex variant="start" responsive>
+          <GatsbyWordpressLogo />
           <Space />
-          <FlexList>
-            {meta &&
-              meta.map((link) => (
-                <li key={link.id}>
-                  <NavLink to={link.href}>{link.text}</NavLink>
-                </li>
-              ))}
-          </FlexList>
           <FlexList>
             {socialLinks &&
               socialLinks.map((link) => {
@@ -111,8 +109,10 @@ export default function Footer(props) {
                 return (
                   url && (
                     <li key={link.id}>
-                      <NavLink to={getSocialURL(link)}>
-                        {getSocialName(link)}
+                      <NavLink to={url}>
+                        <InteractiveIcon className={footerSocialLinkWrapper}>
+                          {getSocialIcon(link)}
+                        </InteractiveIcon>
                       </NavLink>
                     </li>
                   )
@@ -121,8 +121,8 @@ export default function Footer(props) {
           </FlexList>
         </Flex>
         <Space size={5} />
-        <Flex>
-          <FlexList>
+        <Flex variant="start" responsive>
+          <FlexList variant="start" responsive>
             {links &&
               links.map((link) => (
                 <li key={link.id}>
@@ -131,6 +131,16 @@ export default function Footer(props) {
               ))}
           </FlexList>
           <Space />
+          <FlexList>
+            {meta &&
+              meta.map((link) => (
+                <li key={link.id}>
+                  <NavLink to={link.href}>
+                    <Text variant="small">{link.text}</Text>
+                  </NavLink>
+                </li>
+              ))}
+          </FlexList>
           <Text variant="small">{copyright}</Text>
         </Flex>
       </Container>
