@@ -1,5 +1,5 @@
 {
-  "name": "contentful-homepage-plugin",
+  "name": "contentful",
   "version": "1.0.0",
   "license": "MIT",
   "dependencies": {

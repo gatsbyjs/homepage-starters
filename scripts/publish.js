@@ -152,6 +152,8 @@ const createPackageJSON = (name) => {
 
 const publish = async () => {
   const starters = fs.readdirSync(dir.plugins)
+    .map(name => name.replace(/\-plugin/, ''))
+
   console.log(`Preparing ${starters.length} starters for publishing...`)
 
   // get last commit message from this repo
