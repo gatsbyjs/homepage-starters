@@ -1,5 +1,5 @@
-import * as React from 'react'
-import { graphql } from 'gatsby'
+import * as React from "react"
+import { graphql } from "gatsby"
 import {
   Container,
   Section,
@@ -11,17 +11,13 @@ import {
   Box,
   Icon,
   LinkList,
-} from './ui'
+} from "./ui"
 
-function Product (props) {
+function Product(props) {
   return (
     <Box center>
       {props.image && (
-        <Icon
-          alt={props.image.alt}
-          image={props.image}
-          size='large'
-        />
+        <Icon alt={props.image.alt} image={props.image} size="large" />
       )}
       <Subhead>{props.heading}</Subhead>
       <Text>{props.text}</Text>
@@ -30,17 +26,19 @@ function Product (props) {
   )
 }
 
-export default function ProductList (props) {
+export default function ProductList(props) {
   return (
     <Section>
       <Container>
         <Box center paddingY={4}>
-          {props.kicker && <Kicker>{props.kicker}</Kicker>}
-          {props.heading && <Heading>{props.heading}</Heading>}
+          <Heading>
+            {props.kicker && <Kicker>{props.kicker}</Kicker>}
+            {props.heading}
+          </Heading>
           {props.text && <Text>{props.text}</Text>}
         </Box>
-        <FlexList variant='responsive'>
-          {props.content.map(product => (
+        <FlexList variant="responsive">
+          {props.content.map((product) => (
             <li key={product.id}>
               <Product {...product} />
             </li>

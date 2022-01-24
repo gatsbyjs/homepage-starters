@@ -5,5 +5,5 @@ module.exports = {
     // 'datocms',
     'contentful',
     // 'wordpress',
-  ]
+  ],
 }

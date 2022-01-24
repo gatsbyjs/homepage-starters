@@ -1,30 +1,21 @@
-import * as React from 'react'
-import { graphql } from 'gatsby'
-import {
-  Container,
-  Section,
-  Box,
-  Kicker,
-  Heading,
-  Text,
-} from './ui'
-import Feature from './feature'
+import * as React from "react"
+import { graphql } from "gatsby"
+import { Container, Section, Box, Kicker, Heading, Text } from "./ui"
+import Feature from "./feature"
 
-export default function FeatureList (props) {
+export default function FeatureList(props) {
   return (
     <Container>
-      <Section background='muted' radius='large'>
+      <Section background="muted" radius="large">
         <Box center>
-          {props.kicker && <Kicker>{props.kicker}</Kicker>}
-          {props.heading && <Heading>{props.heading}</Heading>}
+          <Heading>
+            {props.kicker && <Kicker>{props.kicker}</Kicker>}
+            {props.heading}
+          </Heading>
           {props.text && <Text>{props.text}</Text>}
         </Box>
         {props.content.map((feature, i) => (
-          <Feature
-            key={feature.id}
-            {...feature}
-            flip={i % 2}
-          />
+          <Feature key={feature.id} {...feature} flip={i % 2} />
         ))}
       </Section>
     </Container>

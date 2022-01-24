@@ -1,35 +1,35 @@
 exports.createSchemaCustomization = async ({ actions }) => {
   actions.createFieldExtension({
-    name: 'blocktype',
+    name: "blocktype",
     extend(options) {
       return {
         resolve(source) {
           return source.internal.type
-            .replace('DatoCms', 'Homepage')
-            .replace(/list$/, 'List')
-        }
+            .replace("DatoCms", "Homepage")
+            .replace(/list$/, "List")
+        },
       }
-    }
+    },
   })
 
   actions.createFieldExtension({
-    name: 'metalinks',
+    name: "metalinks",
     extend(options) {
       return {
         async resolve(source, args, context, info) {
           const type = info.schema.getType(source.internal.type)
           const resolver = type.getFields().metalinks?.resolve
           const result = await resolver(source, args, context, {
-            fieldName: 'metalinks'
+            fieldName: "metalinks",
           })
           return result
-        }
+        },
       }
-    }
+    },
   })
 
   actions.createFieldExtension({
-    name: 'ctalink',
+    name: "ctalink",
     extend(options) {
       return {
         async resolve(source, args, context, info) {
@@ -37,21 +37,21 @@ exports.createSchemaCustomization = async ({ actions }) => {
           const resolver = type.getFields().originalCta?.resolve
           const result = await resolver(source, args, context, info)
           return result
-        }
+        },
       }
-    }
+    },
   })
 
   // support DatoCMS logos as images
   actions.createFieldExtension({
-    name: 'recursiveImage',
+    name: "recursiveImage",
     extend(options) {
       return {
         async resolve(source, args, context, info) {
           return source
-        }
+        },
       }
-    }
+    },
   })
 
   // abstract interfaces
@@ -272,7 +272,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
       footer: LayoutFooter
     }
   `)
-
 
   actions.createTypes(`
     type DatoCmsLink implements Node & HomepageLink {

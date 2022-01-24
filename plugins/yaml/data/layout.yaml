@@ -3,36 +3,36 @@
     logo: ../assets/Braun.png
     links:
       - text: Products
-        href: '#!'
+        href: "#!"
       - text: Pricing
-        href: '#!'
+        href: "#!"
       - text: Community
-        href: '#!'
+        href: "#!"
       - text: Company
-        href: '#!'
+        href: "#!"
       - text: Blog
-        href: '#!'
+        href: "#!"
     cta:
       text: Sign Up
-      href: '#!'
+      href: "#!"
   footer:
     logo: ../assets/Braun.png
     links:
       - text: Products
-        href: '#!'
+        href: "#!"
       - text: Pricing
-        href: '#!'
+        href: "#!"
       - text: Community
-        href: '#!'
+        href: "#!"
       - text: Company
-        href: '#!'
+        href: "#!"
       - text: Blog
-        href: '#!'
+        href: "#!"
     meta:
       - text: Terms
-        href: '#!'
+        href: "#!"
       - text: Privacy Policy
-        href: '#!'
+        href: "#!"
     socialLinks:
       - service: TWITTER
         username: gatsbyjs

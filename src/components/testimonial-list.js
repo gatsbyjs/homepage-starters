@@ -1,5 +1,5 @@
-import * as React from 'react'
-import { graphql } from 'gatsby'
+import * as React from "react"
+import { graphql } from "gatsby"
 import {
   Container,
   Section,
@@ -11,23 +11,18 @@ import {
   Blockquote,
   Text,
   Avatar,
-} from './ui'
+} from "./ui"
 
-function Testimonial (props) {
+function Testimonial(props) {
   return (
-    <Flex variant='start'>
-      {props.avatar && (
-        <Avatar
-          alt={props.avatar.alt}
-          image={props.avatar}
-        />
-      )}
+    <Flex variant="start">
+      {props.avatar && <Avatar alt={props.avatar.alt} image={props.avatar} />}
       <Blockquote>
-        <Text as='p' variant='lead'>
+        <Text as="p" variant="lead">
           {props.quote}
         </Text>
         <figcaption>
-          <Text as='cite' bold variant='caps'>
+          <Text as="cite" bold variant="caps">
             {props.source}
           </Text>
         </figcaption>
@@ -36,17 +31,19 @@ function Testimonial (props) {
   )
 }
 
-export default function TestimonialList (props) {
+export default function TestimonialList(props) {
   return (
     <Section>
       <Container>
         <Box center>
-          {props.kicker && <Kicker>{props.kicker}</Kicker>}
-          {props.heading && <Heading>{props.heading}</Heading>}
+          <Heading>
+            {props.kicker && <Kicker>{props.kicker}</Kicker>}
+            {props.heading}
+          </Heading>
         </Box>
-        <FlexList gutter={3} variant='start' responsive wrap>
-          {props.content.map(testimonial => (
-            <Box as='li' key={testimonial.id} width='half' padding={3}>
+        <FlexList gutter={3} variant="start" responsive wrap>
+          {props.content.map((testimonial) => (
+            <Box as="li" key={testimonial.id} width="half" padding={3}>
               <Testimonial {...testimonial} />
             </Box>
           ))}
