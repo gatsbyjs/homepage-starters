@@ -200,6 +200,6 @@ export function Icon({ alt, image, size = "medium" }) {
   )
 }
 
-export function InteractiveIcon({ as = "button", ...rest }) {
-  return <Base as={as} cx={[styles.interactiveIcon]} {...rest} />
+export function InteractiveIcon(props) {
+  return <Base as="button" cx={[styles.interactiveIcon]} {...props} />
 }

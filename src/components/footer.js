@@ -9,12 +9,6 @@ import {
   GitHub,
 } from "react-feather"
 import { Container, Flex, FlexList, Box, Space, NavLink, Text } from "./ui"
-// import TwitterIcon from "./icons/twitterIcon"
-// import InstagramIcon from "./icons/instagramIcon"
-// import FacebookIcon from "./icons/facebookIcon"
-// import YoutubeIcon from "./icons/youtubeIcon"
-// import GithubIcon from "./icons/githubIcon"
-// import TwitchIcon from "./icons/twitchIcon"
 import { GatsbyWordpressLogo } from "./logos"
 import { footerSocialLinkWrapper } from "./footer.css.ts"
 
@@ -58,8 +52,7 @@ const getSocialURL = ({ service, username }) => {
 }
 
 const getSocialIcon = ({ service }) => {
-  const icon = socialMedia[service]?.icon
-  return icon
+  return socialMedia[service]?.icon
 }
 
 export default function Footer(props) {
