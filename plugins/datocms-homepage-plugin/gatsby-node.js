@@ -77,6 +77,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       alt: String
       gatsbyImageData: JSON
+      url: String
       ## DatoCMS specific
       originalId: String
       entityPayload: JSON
@@ -289,6 +290,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       originalId: String
       entityPayload: JSON
       image: HomepageImage @recursiveImage
+      url: String
     }
 
     type DatoCmsHero implements Node & HomepageHero & HomepageBlock @dontInfer {
