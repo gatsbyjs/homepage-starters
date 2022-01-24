@@ -21,12 +21,11 @@ const dir = {
   dist: path.join(__dirname, '..', 'dist'),
 }
 
-// TODO update with Gatsbyjs repos
 const repos = {
-  contentful: 'https://github.com/jxnblk/gatsby-starter-contentful-homepage',
+  contentful: 'https://github.com/gatsbyjs/gatsby-starter-contentful-homepage',
+  datocms: 'https://github.com/gatsbyjs/gatsby-starter-datocms-homepage',
+  wordpress: 'https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage',
   yaml: null,
-  wordpress: null,
-  datocms: null,
 }
 
 // make dist & clean up
@@ -41,12 +40,13 @@ fs.readdirSync(dir.dist).map(dirname => {
   })
 })
 
-const createStarterDist = async (dirname) => {
-  const repo = repos[dirname]
+const createStarterDist = async (basename) => {
+  const repo = repos[basename]
   if (!repo) {
-    console.warn(`No repo configured for ${dirname}`)
+    console.warn(`No repo configured for ${basename}`)
     return
   }
+  const dirname = `${basename}-plugin`
 
   const name = repo.substring(repo.lastIndexOf('/') + 1)
 
