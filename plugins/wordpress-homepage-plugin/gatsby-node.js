@@ -342,7 +342,7 @@ exports.onCreateNode = ({
         featureList,
         benefitList,
       } = node
-      console.log('homepage', node)
+      
 
       const heroID = createNodeId(`${node.id} >>> HomepageHero`)
       const ctaID = createNodeId(`${node.id} >>> HomepageCta`)
