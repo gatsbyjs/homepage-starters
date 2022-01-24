@@ -1,15 +1,6 @@
 import * as React from "react"
 import { graphql, useStaticQuery } from "gatsby"
-import {
-  Container,
-  Flex,
-  FlexList,
-  Box,
-  Space,
-  NavLink,
-  Text,
-  InteractiveIcon,
-} from "./ui"
+import { Container, Flex, FlexList, Box, Space, NavLink, Text } from "./ui"
 import TwitterIcon from "./icons/twitterIcon"
 import InstagramIcon from "./icons/instagramIcon"
 import FacebookIcon from "./icons/facebookIcon"
@@ -109,10 +100,8 @@ export default function Footer(props) {
                 return (
                   url && (
                     <li key={link.id}>
-                      <NavLink to={url}>
-                        <InteractiveIcon className={footerSocialLinkWrapper}>
-                          {getSocialIcon(link)}
-                        </InteractiveIcon>
+                      <NavLink to={url} className={footerSocialLinkWrapper}>
+                        {getSocialIcon(link)}
                       </NavLink>
                     </li>
                   )
