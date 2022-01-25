@@ -18,7 +18,7 @@ import {
   Text,
   IconLink,
 } from "./ui"
-import { GatsbyWordpressLogo } from "./logos"
+import BrandLogo from "../brand-logo"
 
 const socialMedia = {
   TWITTER: {
@@ -100,7 +100,7 @@ export default function Footer(props) {
     <Box as="footer" paddingY={4}>
       <Container>
         <Flex variant="start" responsive>
-          <GatsbyWordpressLogo />
+          <BrandLogo />
           <Space />
           <FlexList>
             {socialLinks &&
