@@ -18,7 +18,7 @@ import {
   mobileHeaderNavWrapper,
   mobileNavSVGColorWrapper,
 } from "./header.css.ts"
-import { GatsbyWordpressLogo } from "./logos"
+import BrandLogo from "./brand-logo"
 
 export default function Header() {
   const data = useStaticQuery(graphql`
@@ -59,7 +59,7 @@ export default function Header() {
         {/* Desktop / Tablet - Header / Nav */}
         <Space size={2} />
         <Flex>
-          <GatsbyWordpressLogo />
+          <BrandLogo />
           <nav>
             <FlexList>
               {links &&
@@ -83,7 +83,7 @@ export default function Header() {
               mobileNavSVGColorWrapper[isOpen ? "reversed" : "primary"]
             }
           >
-            <GatsbyWordpressLogo />
+            <BrandLogo />
           </span>
           <Flex>
             <Space />
