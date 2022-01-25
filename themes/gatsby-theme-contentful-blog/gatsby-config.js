@@ -8,6 +8,7 @@ module.exports = {
         accessToken: process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN,
       },
     },
+    'gatsby-transformer-remark',
     'gatsby-plugin-image',
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',

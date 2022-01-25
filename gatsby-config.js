@@ -5,5 +5,8 @@ module.exports = {
     // 'datocms-plugin',
     'contentful-plugin',
     // 'wordpress-plugin',
+
+    // testing blog theme
+    'gatsby-theme-contentful-blog',
   ],
 }

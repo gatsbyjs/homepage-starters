@@ -1,14 +1,39 @@
+const path = require('path')
+
 exports.createSchemaCustomization = async ({ actions }) => {
   actions.createTypes(`
+    interface BlogPostBody implements Node {
+      id: ID!
+      childMarkdownRemark: MarkdownRemark!
+    }
+
     interface BlogPost implements Node {
       id: ID!
       slug: String!
       title: String!
+
+      # TODO get body field working
+      # body: BlogPostBody!
+      # TODO
+      # date
+      # image
+      # author
     }
   `)
 
-  // actions.createTypes(`
-  // `)
+  actions.createTypes(`
+    type ContentfulBlogPost implements Node & BlogPost {
+      id: ID!
+      slug: String!
+      title: String!
+      # body: BlogPostBody! @link
+    }
+
+    type ContentfulBlogPostBodyTextNode implements Node & BlogPostBody {
+      id: ID!
+      childMarkdownRemark: MarkdownRemark!
+    }
+  `)
 }
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
@@ -25,7 +50,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   `)
 
   if (result.errors) {
-    reporter.panicOnBuild(`There was an error sourcing blog posts from Contentful`, errors)
+    reporter.panicOnBuild(`There was an error sourcing blog posts from Contentful`, result.errors)
   }
 
   const posts = result.data.posts.nodes

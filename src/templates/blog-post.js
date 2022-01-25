@@ -3,9 +3,17 @@ import { graphql } from 'gatsby'
 
 export default function BlogPost (props) {
   console.log(props)
+  return false
+  const post = props.data.blogPost
+
   return (
     <div>
-      <pre>TK BlogPost</pre>
+      <h1>{post.title}</h1>
+      <div
+        dangerouslySetInnerHTML={{
+          __html: post.body.childMarkdownRemark.html
+        }}
+      />
     </div>
   )
 }
@@ -16,7 +24,11 @@ export const query = graphql`
       id
       slug
       title
-      body
+      body {
+        childMarkdownRemark {
+          html
+        }
+      }
     }
   }
 `
