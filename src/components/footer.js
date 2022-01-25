@@ -8,9 +8,17 @@ import {
   Youtube,
   GitHub,
 } from "react-feather"
-import { Container, Flex, FlexList, Box, Space, NavLink, Text } from "./ui"
+import {
+  Container,
+  Flex,
+  FlexList,
+  Box,
+  Space,
+  NavLink,
+  Text,
+  IconLink,
+} from "./ui"
 import { GatsbyWordpressLogo } from "./logos"
-import { footerSocialLinkWrapper } from "./footer.css.ts"
 
 const socialMedia = {
   TWITTER: {
@@ -101,9 +109,7 @@ export default function Footer(props) {
                 return (
                   url && (
                     <li key={link.id}>
-                      <NavLink to={url} className={footerSocialLinkWrapper}>
-                        {getSocialIcon(link)}
-                      </NavLink>
+                      <IconLink to={url}>{getSocialIcon(link)}</IconLink>
                     </li>
                   )
                 )
