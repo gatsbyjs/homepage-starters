@@ -1,5 +1,6 @@
 import * as React from "react"
 import { graphql, useStaticQuery } from "gatsby"
+import { Menu, X } from "react-feather"
 import {
   Container,
   Flex,
@@ -17,8 +18,6 @@ import {
   mobileHeaderNavWrapper,
   mobileNavSVGColorWrapper,
 } from "./header.css.ts"
-import CloseIcon from "./closeIcon"
-import HamburgerIcon from "./hamburgerIcon"
 import BrandLogo from "../brand-logo"
 
 export default function Header() {
@@ -102,7 +101,7 @@ export default function Header() {
                 mobileNavSVGColorWrapper[isOpen ? "reversed" : "primary"]
               }
             >
-              {isOpen ? <CloseIcon /> : <HamburgerIcon />}
+              {isOpen ? <X /> : <Menu />}
             </InteractiveIcon>
           </Flex>
         </Flex>

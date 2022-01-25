@@ -354,6 +354,17 @@ export const icons = styleVariants(
   })
 )
 
+export const iconLink = style({
+  color: theme.colors.text,
+  marginRight: theme.space[3],
+  ":hover": {
+    color: theme.colors.active,
+  },
+  ":focus": {
+    color: theme.colors.active,
+  },
+})
+
 export const interactiveIcon = style({
   display: "flex",
   justifyContent: "center",
