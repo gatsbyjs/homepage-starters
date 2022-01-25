@@ -12,7 +12,8 @@
     "publish-starters": "./scripts/publish.js"
   },
   "workspaces": [
-    "plugins/*"
+    "plugins/*",
+    "themes/*"
   ],
   "dependencies": {
     "@fontsource/dm-sans": "^4.5.0",

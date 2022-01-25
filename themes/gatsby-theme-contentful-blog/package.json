@@ -1,0 +1,13 @@
+{
+  "name": "gatsby-theme-contentful-blog",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "gatsby-plugin-image": "^2.6.0",
+    "gatsby-plugin-sharp": "^4.6.0",
+    "gatsby-source-contentful": "^7.4.0",
+    "gatsby-transformer-sharp": "^4.6.0",
+    "sharp": "^0.29.3"
+  }
+}
