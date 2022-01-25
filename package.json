@@ -9,7 +9,8 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "publish-starters": "./scripts/publish.js"
+    "publish-starters": "./scripts/publish.js",
+    "publish-starters:dry-run": "./scripts/publish.js --dry-run"
   },
   "workspaces": [
     "plugins/*"

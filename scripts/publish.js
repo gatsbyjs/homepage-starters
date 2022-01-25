@@ -91,20 +91,11 @@ const createStarterDist = async (basename) => {
     "gatsby-node.js",
     "package.json",
     "README.md",
+    "src",
   ]
   files.forEach((file) => {
     const src = path.join(dir.plugins, dirname, file)
     const dest = path.join(dir.dist, name, file)
-    console.log(`Copying '${file}' to '${dest}'`)
-    if (!fs.existsSync(src)) return
-    fs.copySync(src, dest)
-  })
-
-  // copy cms-specific theme files into src
-  const themeFiles = ["brandLogo.js", "colors.css.ts"]
-  themeFiles.forEach((file) => {
-    const src = path.join(dir.plugins, dirname, file)
-    const dest = path.join(dir.dist, name, "src", file)
     console.log(`Copying '${file}' to '${dest}'`)
     if (!fs.existsSync(src)) return
     fs.copySync(src, dest)
