@@ -9,11 +9,11 @@ exports.onCreateWebpackConfig = ({ actions, store }) => {
     if (a) return a
     switch (b) {
       case "gatsby-source-contentful":
-        return "contentful-homepage-plugin"
+        return "contentful-plugin"
       case "gatsby-source-wordpress":
-        return "wordpress-homepage-plugin"
+        return "wordpress-plugin"
       case "gatsby-source-datocms":
-        return "datocms-homepage-plugin"
+        return "datocms-plugin"
     }
     return null
   }, null)

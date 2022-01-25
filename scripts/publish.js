@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-const fs = require('fs-extra')
-const path = require('path')
-const debug = require('debug')
-const SimpleGit = require('simple-git')
+const fs = require("fs-extra")
+const path = require("path")
+const debug = require("debug")
+const SimpleGit = require("simple-git")
 
 /*
  * This script clones the remote starter repos, removes their contents,
@@ -13,18 +13,18 @@ const SimpleGit = require('simple-git')
  * https://github.com/gatsbyjs/gatsby/blob/master/scripts/publish-starters.sh
  */
 
-debug.enable('simple-git:output:*')
+debug.enable("simple-git:output:*")
 
 let commitMessage
 const dir = {
-  plugins: path.join(__dirname, '..', 'plugins'),
-  dist: path.join(__dirname, '..', 'dist'),
+  plugins: path.join(__dirname, "..", "plugins"),
+  dist: path.join(__dirname, "..", "dist"),
 }
 
 const repos = {
-  contentful: 'https://github.com/gatsbyjs/gatsby-starter-contentful-homepage',
-  datocms: 'https://github.com/gatsbyjs/gatsby-starter-datocms-homepage',
-  wordpress: 'https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage',
+  contentful: "https://github.com/gatsbyjs/gatsby-starter-contentful-homepage",
+  datocms: "https://github.com/gatsbyjs/gatsby-starter-datocms-homepage",
+  wordpress: "https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage",
   yaml: null,
 }
 
@@ -33,10 +33,10 @@ if (!fs.existsSync(dir.dist)) {
   fs.mkdirSync(dir.dist)
 }
 
-fs.readdirSync(dir.dist).map(dirname => {
-  console.log('Deleting: ', path.join(dir.dist, dirname))
+fs.readdirSync(dir.dist).map((dirname) => {
+  console.log("Deleting: ", path.join(dir.dist, dirname))
   fs.rmdirSync(path.join(dir.dist, dirname), {
-    recursive: true
+    recursive: true,
   })
 })
 
@@ -48,125 +48,128 @@ const createStarterDist = async (basename) => {
   }
   const dirname = `${basename}-plugin`
 
-  const name = repo.substring(repo.lastIndexOf('/') + 1)
+  const name = repo.substring(repo.lastIndexOf("/") + 1)
 
-  console.log('Cloning repo:', repo)
+  console.log("Cloning repo:", repo)
   await SimpleGit({
     baseDir: dir.dist,
-  }).clone(repo, ['--depth', 1])
+  }).clone(repo, ["--depth", 1])
 
   // Delete all files in clone
-  fs.readdirSync(path.join(dir.dist, name))
-    .forEach(file => {
-      if (file == '.git') return
-      const filepath = path.join(dir.dist, name, file)
-      console.log('Removing file in clone:', filepath)
-      fs.removeSync(filepath)
-    })
+  fs.readdirSync(path.join(dir.dist, name)).forEach((file) => {
+    if (file == ".git") return
+    const filepath = path.join(dir.dist, name, file)
+    console.log("Removing file in clone:", filepath)
+    fs.removeSync(filepath)
+  })
 
   // Copy source files to clone
   const ignore = [
-    'node_modules',
-    'public',
-    '.cache',
-    '.env.development',
-    '.env.production',
+    "node_modules",
+    "public",
+    ".cache",
+    ".env.development",
+    ".env.production",
   ]
 
   // copy root files
-  const rootFiles = [
-    '.gitignore',
-    'src',
-    'gatsby-browser.js',
-  ]
-  rootFiles.forEach(file => {
+  const rootFiles = [".gitignore", "src", "gatsby-browser.js"]
+  rootFiles.forEach((file) => {
     const dest = path.join(dir.dist, name, file)
     console.log(`Copying '${file}' to '${dest}'`)
     fs.copySync(file, dest, {
-      filter: n => !ignore.includes(n),
+      filter: (n) => !ignore.includes(n),
     })
   })
 
   // copy cms-specific files
   const files = [
-    '.env.EXAMPLE',
-    'gatsby-config.js',
-    'gatsby-node.js',
-    'package.json',
-    'README.md',
+    ".env.EXAMPLE",
+    "gatsby-config.js",
+    "gatsby-node.js",
+    "package.json",
+    "README.md",
   ]
-  files.forEach(file => {
+  files.forEach((file) => {
     const src = path.join(dir.plugins, dirname, file)
     const dest = path.join(dir.dist, name, file)
     console.log(`Copying '${file}' to '${dest}'`)
     if (!fs.existsSync(src)) return
     fs.copySync(src, dest)
   })
+
+  // copy cms-specific theme files into src
+  const themeFiles = ["brandLogo.js", "colors.css.ts"]
+  themeFiles.forEach((file) => {
+    const src = path.join(dir.plugins, dirname, file)
+    const dest = path.join(dir.dist, name, "src", file)
+    console.log(`Copying '${file}' to '${dest}'`)
+    if (!fs.existsSync(src)) return
+    fs.copySync(src, dest)
+  })
+
   const json = createPackageJSON(name)
-  fs.writeFileSync(path.join(dir.dist, name, 'package.json'), json, 'utf8')
+  fs.writeFileSync(path.join(dir.dist, name, "package.json"), json, "utf8")
 
   // Check if repo has changes
   let hasChanges = false
   await SimpleGit({
     baseDir: path.join(dir.dist, name),
+  }).status(["--porcelain"], (err, result) => {
+    hasChanges = result.modified.length > 0
   })
-    .status(['--porcelain'], (err, result) => {
-      hasChanges = result.modified.length > 0
-    })
 
   if (!hasChanges) {
     console.log(`No changes to commit for ${name}`)
     return
   } else {
-    console.log('Commiting changes and pushing to remote')
+    console.log("Commiting changes and pushing to remote")
   }
 
   // push changes to remote
   await SimpleGit({
     baseDir: path.join(dir.dist, name),
   })
-    .add('.')
+    .add(".")
     .commit(commitMessage)
-    .push('origin', 'main')
+    .push("origin", "main")
 }
 
 const createPackageJSON = (name) => {
-  console.log('Creating package.json for', name)
-  const root = require('../package.json')
-  const pkg = require(path.resolve(dir.dist, name, 'package.json'))
+  console.log("Creating package.json for", name)
+  const root = require("../package.json")
+  const pkg = require(path.resolve(dir.dist, name, "package.json"))
   pkg.name = name
   pkg.private = true
   Object.entries(root.dependencies).forEach(([key, val]) => {
     pkg.dependencies[key] = val
   })
   pkg.scripts = {
-    start: 'gatsby develop',
-    develop: 'gatsby develop',
-    build: 'gatsby build',
-    serve: 'gatsby serve',
-    clean: 'gatsby clean',
+    start: "gatsby develop",
+    develop: "gatsby develop",
+    build: "gatsby build",
+    serve: "gatsby serve",
+    clean: "gatsby clean",
   }
   const json = JSON.stringify(pkg, null, 2)
   return json
 }
 
 const publish = async () => {
-  const starters = fs.readdirSync(dir.plugins)
-    .map(name => name.replace(/\-plugin/, ''))
+  const starters = fs
+    .readdirSync(dir.plugins)
+    .map((name) => name.replace(/\-plugin/, ""))
 
   console.log(`Preparing ${starters.length} starters for publishing...`)
 
   // get last commit message from this repo
-  await SimpleGit()
-    .log(['-1', '--pretty=%B'], (err, result) => {
-      commitMessage = result.latest.hash
-    })
+  await SimpleGit().log(["-1", "--pretty=%B"], (err, result) => {
+    commitMessage = result.latest.hash
+  })
 
   console.log(`Created ${starters.length} starters`)
-  await Promise.all(
-    starters.map(createStarterDist)
-  )
-  console.log('Done')
+  await Promise.all(starters.map(createStarterDist))
+  console.log("Done")
 }
 
 publish()
