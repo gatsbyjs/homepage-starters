@@ -11,19 +11,19 @@ exports.createSchemaCustomization = async ({ actions }) => {
   })
 
   actions.createFieldExtension({
-    name: 'imageUrl',
+    name: "imageUrl",
     extend(options) {
       const schemaRE = /^\/\//
-      const addURLSchema = str => {
+      const addURLSchema = (str) => {
         if (schemaRE.test(str)) return `https:${str}`
         return str
       }
       return {
         resolve(source) {
           return addURLSchema(source.file.url)
-        }
+        },
       }
-    }
+    },
   })
 
   // abstract interfaces
