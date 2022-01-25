@@ -8,7 +8,8 @@
     "start": "gatsby clean && gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "publish-starters": "./scripts/publish.js"
   },
   "workspaces": [
     "plugins/*"
@@ -29,6 +30,9 @@
     "sharp": "^0.29.3"
   },
   "devDependencies": {
-    "prettier": "2.5.1"
+    "debug": "^4.3.3",
+    "fs-extra": "^10.0.0",
+    "prettier": "2.5.1",
+    "simple-git": "^3.1.0"
   }
 }
