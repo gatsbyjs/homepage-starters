@@ -28,13 +28,15 @@ exports.onCreateWebpackConfig = ({ actions, store }) => {
           __dirname,
           "plugins",
           plugin,
+          "src",
           "colors.css.ts"
         ),
-        "../brandLogo": path.resolve(
+        "../brand-logo": path.resolve(
           __dirname,
           "plugins",
           plugin,
-          "brandLogo.js"
+          "src",
+          "brand-logo.js"
         ),
       },
     },
