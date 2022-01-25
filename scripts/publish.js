@@ -13,6 +13,8 @@ const SimpleGit = require("simple-git")
  * https://github.com/gatsbyjs/gatsby/blob/master/scripts/publish-starters.sh
  */
 
+const dryRun = process.argv.length > 2 && process.argv[2] === "--dry-run"
+
 debug.enable("simple-git:output:*")
 
 let commitMessage
@@ -122,17 +124,22 @@ const createStarterDist = async (basename) => {
   if (!hasChanges) {
     console.log(`No changes to commit for ${name}`)
     return
+  } else if (dryRun) {
+    console.log(
+      "This was a dry run — no changes being committed nor pushed to remote"
+    )
+    return
   } else {
-    console.log("Commiting changes and pushing to remote")
+    console.log("Committing changes and pushing to remote")
   }
 
   // push changes to remote
-  await SimpleGit({
-    baseDir: path.join(dir.dist, name),
-  })
-    .add(".")
-    .commit(commitMessage)
-    .push("origin", "main")
+  // await SimpleGit({
+  //   baseDir: path.join(dir.dist, name),
+  // })
+  //   .add(".")
+  //   .commit(commitMessage)
+  //   .push("origin", "main")
 }
 
 const createPackageJSON = (name) => {
