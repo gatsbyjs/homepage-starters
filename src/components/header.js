@@ -19,7 +19,7 @@ import {
 } from "./header.css.ts"
 import CloseIcon from "./closeIcon"
 import HamburgerIcon from "./hamburgerIcon"
-import { GatsbyWordpressLogo } from "./logos"
+import BrandLogo from "../brandLogo"
 
 export default function Header() {
   const data = useStaticQuery(graphql`
@@ -60,7 +60,7 @@ export default function Header() {
         {/* Desktop / Tablet - Header / Nav */}
         <Space size={2} />
         <Flex>
-          <GatsbyWordpressLogo />
+          <BrandLogo />
           <nav>
             <FlexList>
               {links &&
@@ -84,7 +84,7 @@ export default function Header() {
               mobileNavSVGColorWrapper[isOpen ? "reversed" : "primary"]
             }
           >
-            <GatsbyWordpressLogo />
+            <BrandLogo />
           </span>
           <Flex>
             <Space />
@@ -96,7 +96,7 @@ export default function Header() {
               )}
             </div>
             <InteractiveIcon
-              title='Toggle menu'
+              title="Toggle menu"
               onClick={() => setOpen(!isOpen)}
               className={
                 mobileNavSVGColorWrapper[isOpen ? "reversed" : "primary"]
