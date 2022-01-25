@@ -13,6 +13,8 @@ const SimpleGit = require("simple-git")
  * https://github.com/gatsbyjs/gatsby/blob/master/scripts/publish-starters.sh
  */
 
+const dryRun = process.argv.length > 2 && process.argv[2] === "--dry-run"
+
 debug.enable("simple-git:output:*")
 
 let commitMessage
@@ -89,6 +91,7 @@ const createStarterDist = async (basename) => {
     "gatsby-node.js",
     "package.json",
     "README.md",
+    "src",
   ]
   files.forEach((file) => {
     const src = path.join(dir.plugins, dirname, file)
@@ -97,6 +100,7 @@ const createStarterDist = async (basename) => {
     if (!fs.existsSync(src)) return
     fs.copySync(src, dest)
   })
+
   const json = createPackageJSON(name)
   fs.writeFileSync(path.join(dir.dist, name, "package.json"), json, "utf8")
 
@@ -111,8 +115,13 @@ const createStarterDist = async (basename) => {
   if (!hasChanges) {
     console.log(`No changes to commit for ${name}`)
     return
+  } else if (dryRun) {
+    console.log(
+      "This was a dry run — no changes being committed nor pushed to remote"
+    )
+    return
   } else {
-    console.log("Commiting changes and pushing to remote")
+    console.log("Committing changes and pushing to remote")
   }
 
   // push changes to remote
@@ -157,7 +166,11 @@ const publish = async () => {
   })
 
   console.log(`Created ${starters.length} starters`)
-  await Promise.all(starters.map(createStarterDist))
+
+  for (let i = 0; i < starters.length; i++) {
+    await createStarterDist(starters[i])
+  }
+
   console.log("Done")
 }
 

@@ -588,7 +588,11 @@ exports.onCreateNode = ({
       // TODO currently hard-coded to only these social networks
       const socialLinks = [
         { username: footer.twitter, service: "TWITTER" },
+        { username: footer.twitch, service: "TWITCH" },
+        { username: footer.instagram, service: "INSTAGRAM" },
         { username: footer.github, service: "GITHUB" },
+        { username: footer.youtube, service: "YOUTUBE" },
+        { username: footer.facebook, service: "FACEBOOK" },
       ].map((link, i) => {
         const id = createNodeId(`${node.id} >>> SocialLink ${i}`)
         actions.createNode({
