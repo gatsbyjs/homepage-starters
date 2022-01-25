@@ -18,7 +18,7 @@ import {
   Text,
   IconLink,
 } from "./ui"
-import BrandLogo from "../brand-logo"
+import BrandLogo from "./brand-logo"
 
 const socialMedia = {
   TWITTER: {

@@ -18,7 +18,7 @@ import {
   mobileHeaderNavWrapper,
   mobileNavSVGColorWrapper,
 } from "./header.css.ts"
-import BrandLogo from "../brand-logo"
+import BrandLogo from "./brand-logo"
 
 export default function Header() {
   const data = useStaticQuery(graphql`
