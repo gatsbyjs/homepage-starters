@@ -19,7 +19,7 @@ import {
 } from "./header.css.ts"
 import CloseIcon from "./closeIcon"
 import HamburgerIcon from "./hamburgerIcon"
-import BrandLogo from "../brandLogo"
+import BrandLogo from "../brand-logo"
 
 export default function Header() {
   const data = useStaticQuery(graphql`

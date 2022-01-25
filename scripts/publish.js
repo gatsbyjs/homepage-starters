@@ -125,12 +125,12 @@ const createStarterDist = async (basename) => {
   }
 
   // push changes to remote
-  // await SimpleGit({
-  //   baseDir: path.join(dir.dist, name),
-  // })
-  //   .add(".")
-  //   .commit(commitMessage)
-  //   .push("origin", "main")
+  await SimpleGit({
+    baseDir: path.join(dir.dist, name),
+  })
+    .add(".")
+    .commit(commitMessage)
+    .push("origin", "main")
 }
 
 const createPackageJSON = (name) => {
