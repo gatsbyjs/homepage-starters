@@ -1,7 +1,6 @@
 {
   "name": "contentful",
   "version": "1.0.0",
-  "license": "MIT",
   "dependencies": {
     "gatsby-plugin-react-helmet": "^5.5.0",
     "gatsby-source-contentful": "^7.2.0",

@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT",
+  "license": "BDS",
   "scripts": {
     "start": "gatsby clean && gatsby develop",
     "build": "gatsby build",
