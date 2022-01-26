@@ -2,7 +2,6 @@ import * as React from 'react'
 import { graphql } from 'gatsby'
 
 export default function BlogPost (props) {
-  console.log(props)
   const post = props.data.blogPost
 
   return (

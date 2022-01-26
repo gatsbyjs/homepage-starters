@@ -33,7 +33,15 @@ exports.createSchemaCustomization = async ({ actions }) => {
 }
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
-  const component = path.resolve('./src/templates/blog-post.js')
+  let component
+  try {
+    component = path.resolve('./src/templates/blog-post.js')
+    require.resolve(component)
+  } catch (e) {
+    reporter.warn('No templates found for blog theme in host site')
+    return
+  }
+
   const result = await graphql(`
     {
       posts: allBlogPost {
