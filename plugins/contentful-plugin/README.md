@@ -194,7 +194,7 @@ For this example, we'll create a new "Banner" component.
     }
 
     export const query = graphql`
-      fragment HomepageBanerContent on HomepageBanner {
+      fragment HomepageBannerContent on HomepageBanner {
         id
         heading
         text
