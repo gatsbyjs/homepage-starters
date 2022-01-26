@@ -61,6 +61,10 @@ You will need a [new or existing Contentful space](https://www.contentful.com/he
 
 ## Deployment
 
+Once your content model and data are available in Contentful, deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
+
+[<img src="https://www.gatsbyjs.com/deploynow.png" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-contentful-homepage)
+
 ## What's included?
 
 ```
