@@ -3,7 +3,6 @@ import { graphql } from 'gatsby'
 
 export default function BlogPost (props) {
   console.log(props)
-  return false
   const post = props.data.blogPost
 
   return (
