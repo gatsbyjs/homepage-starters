@@ -84,23 +84,41 @@ You will need a [new or existing Contentful space](https://www.contentful.com/he
 [gatsby node]: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/
 [vanilla extract]: https://vanilla-extract.style/
 
+## How to
+
+### Update the color theme
+
+- `src/colors.css.ts`
+- Add additional color values when needed
+- Use new color values in components
+
+### Add your logo
+
+- `src/brand-logo.js`
+
+### Customize section components
+
+- Edit any file in `src/components`
+
+### Create custom section components
+
+- Update Contentful's content model
+- Update `gatsby-node.js` with the new content type
+  - Create an interface with all fields required for this component
+  - Every `HomepageBlock` requires `blocktype` to be defined, must be unique
+  -
+- Add a new component to `src/components`
+  - Add a GraphQL query fragment, use other sections for reference
+- Export the component from `src/components/sections.js`
+- Add the query fragment to `src/pages/index.js`
+
 <!--
-
-
-- Quick start
-  - Requirements
-  - Deploy
 
 - What's inside
 - How tos
   - Color themes
   - Custom section components
   - Updates to the data model
-
-- Features
-  - Contentful
-  - Homepage sections
-  - Vanilla Extract
 
 -->
 
