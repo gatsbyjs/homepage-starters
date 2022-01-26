@@ -9,7 +9,7 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "prepare": "husky install",
+    "prepublish": "husky install",
     "publish-starters": "./scripts/publish.js"
   },
   "workspaces": [
