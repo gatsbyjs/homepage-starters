@@ -92,39 +92,167 @@ Once your content model and data are available in Contentful, deploy your site t
 
 ### Update the color theme
 
-- `src/colors.css.ts`
-- Add additional color values when needed
-- Use new color values in components
+To update the colors used in this starter, edit the `src/colors.css.ts` file.
+
+```js
+// src/colors.css.ts
+export const colors = {
+  background: "#ffe491",
+  text: "#004ca3",
+  primary: "#004ca3",
+  muted: "#f2d98a",
+  active: "#001d3d",
+  black: "#000",
+}
+```
+
+If you'd like to add additional colors, add additional keys to this object.
+This file is imported into `src/theme.css.ts` and creates CSS custom properties, that can be imported and used in other `.css.ts` files.
+
+The UI components file `src/components/ui.js` imports styles from `src/components/ui.css.ts`. You can see how the theme and color values are being used in this file.
 
 ### Add your logo
 
-- `src/brand-logo.js`
+Replace the `src/components/brand-logo.js` component with your own brand logo.
+If you have an SVG version, it can be rendered inline as a React component, following the example in this file. Note that SVG attributes will need to be camel cased for JSX.
+
+Using an inline SVG for the logo allows it to pick up the colors used in CSS, which is how the logo colors are inverted for the mobile menu.
+
+If you prefer to use an image, use the [`StaticImage`](https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-plugin-image/#staticimage) component from `gatsby-plugin-image` in place of the SVG in this file.
 
 ### Customize section components
 
-- Edit any file in `src/components`
+To customize any of the sections of the homepage, edit the relevant component in `src/components`.
+Most of the styles for these components are handled with shared UI components in `src/components/ui.js`.
 
 ### Create custom section components
 
-- Update Contentful's content model
-- Update `gatsby-node.js` with the new content type
-  - Create an interface with all fields required for this component
-  - Every `HomepageBlock` requires `blocktype` to be defined, must be unique
-  -
-- Add a new component to `src/components`
-  - Add a GraphQL query fragment, use other sections for reference
-- Export the component from `src/components/sections.js`
-- Add the query fragment to `src/pages/index.js`
+To create a new type of section in your homepage, you'll want to create a new section component. Using the existing components as an example.
+For this example, we'll create a new "Banner" component.
 
-<!--
+1. First, update your content model in Contentful
 
-- What's inside
-- How tos
-  - Color themes
-  - Custom section components
-  - Updates to the data model
+    In your Contentful space, create a new content type and call it "Homepage Banner."
+    For this example, add two fields to your new content type: `heading` and `text` – these can be *Short text* types.
 
--->
+    Find the content type for *Homepage* in Contentful and edit the settings for the *Content* field. Under *Validation*, ensure that the new *Homepage Banner* type is checked to make it available as a content type on the Homepage.
+
+    Navigate to the *Content* tab to edit the *Homepage* and add a section with this new *Homepage Banner* content type.
+
+1. Update `gatsby-node.js`
+
+    Edit your site's `gatsby-node.js` file, adding an interface for `HomepageBanner` that matches your content model in Contentful.
+    This allows the homepage to query the abstract `HomepageBanner` type.
+
+    ```js
+    // in gatsby-node.js
+    exports.createSchemaCustomization = async ({ actions }) => {
+      /***/
+      actions.createTypes(`
+        interface HomepageBanner implements Node & HomepageBlock {
+          id: ID!
+          blocktype: String
+          heading: String
+          text: String
+        }
+      `)
+      /***/
+      actions.createTypes(`
+        type ContentfulHomepageBanner implements Node & HomepageBanner & HomepageBlock @dontInfer {
+          id: ID!
+          blocktype: String @blocktype
+          heading: String
+          text: String
+        }
+      `)
+      /***/
+    }
+    ```
+
+1. Next, create the Banner component:
+
+    ```jsx
+    // src/components/product.js
+    import * as React from 'react'
+    import { graphql } from 'gatsby'
+    import {
+      Section,
+      Container,
+      Heading,
+      Text,
+    } from './ui'
+
+    export default function Banner(props) {
+      return (
+        <Section>
+          <Container>
+            <Heading>{props.heading}</Heading>
+            <Text>{props.text}</Text>
+          </Container>
+        </Section>
+      )
+    }
+
+    export const query = graphql`
+      fragment HomepageBanerContent on HomepageBanner {
+        id
+        heading
+        text
+      }
+    `
+    ```
+
+1. Export the component from `src/components/sections.js`
+
+    ```js
+    // src/components/sections.js
+    export { default as HomepageHero } from "./hero"
+    export { default as HomepageFeature } from "./feature"
+    export { default as HomepageFeatureList } from "./feature-list"
+    export { default as HomepageLogoList } from "./logo-list"
+    export { default as HomepageBenefitList } from "./benefit-list"
+    export { default as HomepageTestimonialList } from "./testimonial-list"
+    export { default as HomepageStatList } from "./stat-list"
+    export { default as HomepageCta } from "./cta"
+    export { default as HomepageProductList } from "./product-list"
+
+    // add export for new component
+    export { default as HomepageBanner } from "./product"
+    ```
+
+1. Add the GraphQL query fragment to the query in `src/pages/index.js`
+
+    ```js
+    // in src/pages/index.js
+    export const query = graphql`
+      {
+        homepage {
+          id
+          title
+          description
+          image {
+            id
+            url
+          }
+          blocks: content {
+            id
+            blocktype
+            ...HomepageHeroContent
+            ...HomepageFeatureContent
+            ...HomepageFeatureListContent
+            ...HomepageCtaContent
+            ...HomepageLogoListContent
+            ...HomepageTestimonialListContent
+            ...HomepageBenefitListContent
+            ...HomepageStatListContent
+            ...HomepageProductListContent
+            # New component fragment
+            ...HomepageBannerContent
+          }
+        }
+      }
+    `
+    ```
 
 ## 🎓 Learning Gatsby
 
