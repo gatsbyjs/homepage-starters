@@ -10,7 +10,8 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "prepublish": "husky install",
-    "publish-starters": "./scripts/publish.js"
+    "publish-starters": "./scripts/publish.js",
+    "publish-starters:dry-run": "./scripts/publish.js --dry-run"
   },
   "workspaces": [
     "plugins/*"
@@ -27,6 +28,7 @@
     "is-absolute-url": "^4.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-feather": "^2.0.9",
     "sharp": "^0.29.3"
   },
   "devDependencies": {
