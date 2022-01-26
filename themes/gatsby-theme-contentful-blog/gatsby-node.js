@@ -4,20 +4,16 @@ exports.createSchemaCustomization = async ({ actions }) => {
   actions.createTypes(`
     interface BlogPostBody implements Node {
       id: ID!
-      childMarkdownRemark: MarkdownRemark!
+      childMarkdownRemark: MarkdownRemark
     }
 
     interface BlogPost implements Node {
       id: ID!
       slug: String!
       title: String!
-
-      # TODO get body field working
-      # body: BlogPostBody!
+      body: BlogPostBody!
       # TODO
-      # date
-      # image
-      # author
+      # date # image # author
     }
   `)
 
@@ -26,12 +22,12 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       slug: String!
       title: String!
-      # body: BlogPostBody! @link
+      body: BlogPostBody! @link(by: "id", from: "body___NODE")
     }
 
-    type ContentfulBlogPostBodyTextNode implements Node & BlogPostBody {
+    type contentfulBlogPostBodyTextNode implements Node & BlogPostBody @derivedTypes @childOf(types: ["ContentfulBlogPost"]) {
       id: ID!
-      childMarkdownRemark: MarkdownRemark!
+      body: String
     }
   `)
 }
