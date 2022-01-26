@@ -120,6 +120,10 @@ Using an inline SVG for the logo allows it to pick up the colors used in CSS, wh
 
 If you prefer to use an image, use the [`StaticImage`](https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-plugin-image/#staticimage) component from `gatsby-plugin-image` in place of the SVG in this file.
 
+### Customize headings, buttons, and other styles
+
+To further customize the look and feel of the homepage, edit the UI components in `src/components/ui.js` and styles in `src/components/ui.css.ts`.
+
 ### Customize section components
 
 To customize any of the sections of the homepage, edit the relevant component in `src/components`.
