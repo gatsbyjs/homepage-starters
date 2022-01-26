@@ -172,7 +172,7 @@ For this example, we'll create a new "Banner" component.
 1. Next, create the Banner component:
 
     ```jsx
-    // src/components/product.js
+    // src/components/banner.js
     import * as React from 'react'
     import { graphql } from 'gatsby'
     import {
@@ -217,7 +217,7 @@ For this example, we'll create a new "Banner" component.
     export { default as HomepageProductList } from "./product-list"
 
     // add export for new component
-    export { default as HomepageBanner } from "./product"
+    export { default as HomepageBanner } from "./banner"
     ```
 
 1. Add the GraphQL query fragment to the query in `src/pages/index.js`
