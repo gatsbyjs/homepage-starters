@@ -29,33 +29,33 @@ You will need a [new or existing Contentful space](https://www.contentful.com/he
 
 1. **Create a Gatsby site**
 
-  Use the Gatsby CLI to get started locally:
+    Use the Gatsby CLI to get started locally:
 
-  ```sh
-  npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-contentful-homepage
-  ```
+    ```sh
+    npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-contentful-homepage
+    ```
 
 1. **Run the Contentful setup command**
 
-  **TO BE IMPLEMENTED**
-  From your site's root directory, run:
+    **TO BE IMPLEMENTED**
+    From your site's root directory, run:
 
-  ```sh
-  cd my-homepage
-  yarn setup
-  ```
+    ```sh
+    cd my-homepage
+    yarn setup
+    ```
 
-  This will run a script to populate your Contentful space's content model and add demo content.
+    This will run a script to populate your Contentful space's content model and add demo content.
 
 1. **Start developing**
 
-  In your site directory, start the development server:
+    In your site directory, start the development server:
 
-  ```sh
-  yarn start
-  ```
+    ```sh
+    yarn start
+    ```
 
-  Your site should now be running at <http://localhost:8000>
+    Your site should now be running at <http://localhost:8000>
 
 1. **Open the source code and start editing**
 
