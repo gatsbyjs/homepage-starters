@@ -47,7 +47,7 @@ Code and functionality that is specific to a particular source plugin should be 
 
 To publish changes to these starters, you must have access to push to their repos.
 
-Ensure you have a `GITHUB_TOKEN` variable defined with a personal access token from GitHub.
+Ensure you have HTTPS access to push to GitHub from your command line.
 In the root directory, on the `main` branch with no unstaged changes, run `yarn && yarn publish-starters`.
 This will clone the remote starters, update their contents with files from this repo, commit changes, and push those changes to the remotes.
 The script will log progress so be sure to confirm that it successfully publishes with no errors.
@@ -112,7 +112,7 @@ npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-contentful
 ```
 ````
 
-The `name` variable is used to replace the `$` in the code snippet. Currently this is a simple call to `String.replace` and will not work if the code snippet includes the `$` symbol.
+The `repo` variable is used to replace the `$` in the code snippet. Currently this is a simple call to `String.replace` and will not work if the code snippet includes the `$` symbol.
 
 ### Generating new README.md files
 
