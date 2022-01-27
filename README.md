@@ -53,4 +53,3 @@ This will clone the remote starters, update their contents with files from this 
 The script will log progress so be sure to confirm that it successfully publishes with no errors.
 
 ---
-
