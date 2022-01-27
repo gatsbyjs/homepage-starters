@@ -1105,6 +1105,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fontsource/dm-mono@^4.5.2":
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/@fontsource/dm-mono/-/dm-mono-4.5.2.tgz#0f7ac02bdc6e66f481374bf76616351dd05f2059"
+  integrity sha512-2SBMD3fRNvd5gAhLeZNvpkadtwBkoVLxopeLpBzXOhvgu1YVgul2RfvNbZPtt5yZokG4WWHS+aal07RDwl8ouQ==
+
 "@fontsource/dm-sans@^4.5.0":
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/@fontsource/dm-sans/-/dm-sans-4.5.0.tgz#0dae7ab3563b3ffd47181a3fa4c9c6a33fb04c5e"
