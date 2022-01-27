@@ -63,9 +63,7 @@ Once these plugins are installed, you'll need the URL of the GraphQL endpoint fo
 
 Once your content model and data are available in WordPress, deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
 
-[<img src="https://www.gatsbyjs.com/deploynow.png" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-contentful-homepage)
-
-[](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage){text="<img src="https://www.gatsbyjs.com/deploynow.png" alt="Deploy to Gatsby Cloud">"}
+[![Deploy to Gatsby](https://www.gatsbyjs.com/deploynow.png "Deploy to Gatsby")](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage)
 
 ## What's included?
 

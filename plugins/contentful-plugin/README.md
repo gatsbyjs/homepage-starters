@@ -52,9 +52,7 @@ You will need a new or existing [Contentful space][] to use this starter and wil
 
 Once your content model and data are available in Contentful, deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
 
-[<img src="https://www.gatsbyjs.com/deploynow.png" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-contentful-homepage)
-
-[](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-contentful-homepage){text="<img src="https://www.gatsbyjs.com/deploynow.png" alt="Deploy to Gatsby Cloud">"}
+[![Deploy to Gatsby](https://www.gatsbyjs.com/deploynow.png "Deploy to Gatsby")](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-contentful-homepage)
 
 ## What's included?
 

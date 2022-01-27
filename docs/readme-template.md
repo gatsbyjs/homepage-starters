@@ -48,9 +48,7 @@ Create a homepage using Gatsby and :var[cms]. This starter demonstrates how to u
 
 Once your content model and data are available in :var[cms], deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
 
-[<img src="https://www.gatsbyjs.com/deploynow.png" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-contentful-homepage)
-
-:link[deploynow]{text="<img src="https://www.gatsbyjs.com/deploynow.png" alt="Deploy to Gatsby Cloud">"}
+:link[deploynow]{text="Deploy to Gatsby"}
 
 ## What's included?
 

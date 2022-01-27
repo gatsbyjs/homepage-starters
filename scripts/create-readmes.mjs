@@ -70,12 +70,25 @@ function variablePlugin(opts) {
           node.type = "link"
           node.url = val
           const text = node.attributes?.text
-          node.children = [
-            {
-              type: "text",
-              value: text,
-            },
-          ]
+
+          // Handle edge case for Deploy to Gatsby button
+          if (text === "Deploy to Gatsby") {
+            node.children = [
+              {
+                type: "image",
+                url: "https://www.gatsbyjs.com/deploynow.png",
+                title: "Deploy to Gatsby",
+                alt: "Deploy to Gatsby",
+              },
+            ]
+          } else {
+            node.children = [
+              {
+                type: "text",
+                value: text,
+              },
+            ]
+          }
         }
       }
 
