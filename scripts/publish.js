@@ -166,9 +166,11 @@ const publish = async () => {
   })
 
   console.log(`Created ${starters.length} starters`)
+
   for (let i = 0; i < starters.length; i++) {
     await createStarterDist(starters[i])
   }
+
   console.log("Done")
 }
 

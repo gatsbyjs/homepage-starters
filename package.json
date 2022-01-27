@@ -9,6 +9,7 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
+    "prepublish": "husky install",
     "create-readmes": "./scripts/create-readme.mjs",
     "publish-starters": "./scripts/publish.js",
     "publish-starters:dry-run": "./scripts/publish.js --dry-run"
@@ -17,6 +18,7 @@
     "plugins/*"
   ],
   "dependencies": {
+    "@fontsource/dm-mono": "^4.5.2",
     "@fontsource/dm-sans": "^4.5.0",
     "@fontsource/dm-serif-text": "^4.5.0",
     "gatsby": "^4.4.0",
@@ -34,6 +36,8 @@
   "devDependencies": {
     "debug": "^4.3.3",
     "fs-extra": "^10.0.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.1",
     "prettier": "2.5.1",
     "remark-directive": "^2.0.1",
     "remark-parse": "^10.0.1",
@@ -41,5 +45,8 @@
     "simple-git": "^3.1.0",
     "unified": "^10.1.1",
     "unist-util-visit": "^4.1.0"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   }
 }

@@ -234,7 +234,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     interface LayoutHeader implements Node {
       id: ID!
-      logo: HomepageImage
       links: [HomepageLink]
       cta: HomepageLink
       entityPayload: JSON
@@ -259,7 +258,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     interface LayoutFooter implements Node {
       id: ID!
-      logo: HomepageImage
       links: [HomepageLink]
       meta: [HomepageLink]
       socialLinks: [SocialLink]
@@ -435,7 +433,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
   actions.createTypes(`
     type DatoCmsLayoutheader implements Node & LayoutHeader @dontInfer {
       id: ID!
-      logo: HomepageImage
       links: [HomepageLink]
       originalCta: HomepageLink @link(by: "originalId",from: "entityPayload.attributes.cta")
       cta: HomepageLink @ctalink
@@ -451,7 +448,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type DatoCmsLayoutfooter implements Node & LayoutFooter @dontInfer {
       id: ID!
-      logo: HomepageImage
       links: [HomepageLink]
       metalinks: [HomepageLink]
       meta: [HomepageLink] @metalinks
