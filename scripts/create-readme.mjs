@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import fs from 'fs'
 import path from 'path'
 import { unified } from 'unified'
@@ -7,19 +8,34 @@ import remarkDirective from 'remark-directive'
 import { visit } from 'unist-util-visit'
 import starters from './data.js'
 
+/** example of usage of these remark plugins
 const demo = `
+
+Replace inline text with the CMS's name:
+
 # Hello Gatsby Starter :var[cms] Homepage
 
-::def[demoURL]{#demo}
+:link[demoURL]{text=View the Demo}
 
-This is test markdown.
+      Replace a definition with a variable:
+
+      ::def[demoURL]{#demo}
+
+      This will yield:
+
+      [demo]: http://example.com/demourl
+
+Include a markdown file from the plugin's `/docs` directory:
 
 ::include{file=quick-start-intro.md}
 
-\`\`\`sh beep-boop,slip-slap
-npx bleep new $ && yarn $
+Replace `$` in a code snippet with the `command` variable:
+
+\`\`\`sh command
+npx bleep new $
 \`\`\`
 `
+*/
 
 const stringifyOptions = {
   bullet: '-',
@@ -37,7 +53,7 @@ function variablePlugin(opts) {
         node.type === 'textDirective'
         || node.type === 'leafDirective'
       ) {
-        if (node.name !== 'var' && node.name !== 'def') return
+        if (node.name !== 'var' && node.name !== 'link') return
         const key = node.children?.[0]?.value
         const val = opts[key]
         if (!val) {
@@ -46,10 +62,16 @@ function variablePlugin(opts) {
         if (node.name === 'var') {
           node.type = 'text'
           node.value = val
-        } else if (node.name === 'def') {
-          node.type = 'definition'
-          node.identifier = node.attributes.id
+        } else if (node.name === 'link') {
+          node.type = 'link'
           node.url = val
+          const text = node.attributes?.text
+          node.children = [
+            {
+              type: 'text',
+              value: text,
+            },
+          ]
         }
       }
 
@@ -57,8 +79,12 @@ function variablePlugin(opts) {
         const { meta } = node
         if (!meta) return
         const vars = meta.split(',')
-        vars.forEach(v => {
-          node.value = node.value.replace('$', v)
+        vars.forEach(key => {
+          const n = opts[key]
+          if (!n) {
+            throw new Error(`No defined value found for '${key}'`)
+          }
+          node.value = node.value.replace('$', n)
         })
       }
     })
@@ -83,6 +109,7 @@ function includePlugin({
 
         node.data = node.data || {}
         const filename = path.join(basedir, file)
+        console.log('Including: ', filename)
         let raw
         try {
           raw = fs.readFileSync(filename, 'utf8')
@@ -105,11 +132,11 @@ const buildMarkdown = async (md, opts) => {
   const processor = unified()
     .use(remarkParse)
     .use(remarkDirective)
-    .use(includePlugin, {
-      basedir: opts.basedir,
-    })
     .use(variablePlugin, {
       ...opts.vars,
+    })
+    .use(includePlugin, {
+      basedir: opts.basedir,
     })
     .use(remarkStringify, stringifyOptions)
 
@@ -121,11 +148,11 @@ const template = fs.readFileSync('docs/readme-template.md', 'utf8')
 
 Object.keys(starters).forEach(async (key, i) => {
   const starter = starters[key]
-  const name = starter.repo.substring(repo.lastIndexOf("/") + 1)
-  const outdir = path.join(process.cwd(), 'dist', name)
+  const outdir = path.join(process.cwd(), 'plugins', starter.dirname)
   const readme = await buildMarkdown(template, {
     basedir: path.join(process.cwd(), 'plugins', starter.dirname, 'docs'),
     vars: starter,
   })
-  console.log(readme)
+  fs.writeFileSync(path.join(outdir, 'README.md'), readme)
+  console.log(`README.md written for ${key}`)
 })

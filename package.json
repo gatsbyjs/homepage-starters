@@ -9,7 +9,7 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "md": "node ./scripts/create-readme.mjs",
+    "create-readmes": "./scripts/create-readme.mjs",
     "publish-starters": "./scripts/publish.js",
     "publish-starters:dry-run": "./scripts/publish.js --dry-run"
   },

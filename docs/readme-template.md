@@ -7,9 +7,7 @@
 
 Create a homepage using Gatsby and :var[cms]. This starter demonstrates how to use :var[cms] to build a homepage and can be customized to match your own visual branding.
 
-[View the Demo][demo]
-
-:def[demoURL]{#demo}
+:link[demoURL]{text="View the Demo"}
 
 ## Quick start
 
@@ -19,11 +17,11 @@ Create a homepage using Gatsby and :var[cms]. This starter demonstrates how to u
 
     Use the Gatsby CLI to get started locally:
 
-    ```sh
-    npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-contentful-homepage
+    ```sh name
+    npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-$-homepage
     ```
 
-1. **Run the Contentful setup command**
+1. **Run the :var[cms] setup command**
 
     **TO BE IMPLEMENTED**
     From your site's root directory, run:
@@ -33,7 +31,7 @@ Create a homepage using Gatsby and :var[cms]. This starter demonstrates how to u
     yarn setup
     ```
 
-    This will run a script to populate your Contentful space's content model and add demo content.
+    This will run a script to populate your :var[cms] content model and add demo content.
 
 1. **Start developing**
 
@@ -49,9 +47,11 @@ Create a homepage using Gatsby and :var[cms]. This starter demonstrates how to u
 
 ## Deployment
 
-Once your content model and data are available in Contentful, deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
+Once your content model and data are available in :var[cms], deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
 
 [<img src="https://www.gatsbyjs.com/deploynow.png" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-contentful-homepage)
+
+:link[deploynow]{text="<img src="https://www.gatsbyjs.com/deploynow.png" alt="Deploy to Gatsby Cloud">"}
 
 ## What's included?
 
@@ -122,44 +122,7 @@ Most of the styles for these components are handled with shared UI components in
 To create a new type of section in your homepage, you'll want to create a new section component. Using the existing components as an example.
 For this example, we'll create a new "Banner" component.
 
-1. First, update your content model in Contentful
-
-    In your Contentful space, create a new content type and call it "Homepage Banner."
-    For this example, add two fields to your new content type: `heading` and `text` – these can be *Short text* types.
-
-    Find the content type for *Homepage* in Contentful and edit the settings for the *Content* field. Under *Validation*, ensure that the new *Homepage Banner* type is checked to make it available as a content type on the Homepage.
-
-    Navigate to the *Content* tab to edit the *Homepage* and add a section with this new *Homepage Banner* content type.
-
-1. Update `gatsby-node.js`
-
-    Edit your site's `gatsby-node.js` file, adding an interface for `HomepageBanner` that matches your content model in Contentful.
-    This allows the homepage to query the abstract `HomepageBanner` type.
-
-    ```js
-    // in gatsby-node.js
-    exports.createSchemaCustomization = async ({ actions }) => {
-      /***/
-      actions.createTypes(`
-        interface HomepageBanner implements Node & HomepageBlock {
-          id: ID!
-          blocktype: String
-          heading: String
-          text: String
-        }
-      `)
-      /***/
-      actions.createTypes(`
-        type ContentfulHomepageBanner implements Node & HomepageBanner & HomepageBlock @dontInfer {
-          id: ID!
-          blocktype: String @blocktype
-          heading: String
-          text: String
-        }
-      `)
-      /***/
-    }
-    ```
+::include{file=custom-sections.md}
 
 1. Next, create the Banner component:
 
