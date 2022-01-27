@@ -8,40 +8,30 @@ import remarkDirective from "remark-directive"
 import { visit } from "unist-util-visit"
 import starters from "./data.js"
 
-/**
- * TODO
- * - add docs for this script
- * - clean up examples
- * - include colors from each starter
+/* This script generates README.md files for each starter.
+ * See this repo's README.md for more information.
  */
 
-/** example of usage of these remark plugins
-const demo = `
+/** example usage in markdown
 
-Replace inline text with the CMS's name:
+    Replace inline text with the CMS's name:
 
-# Hello Gatsby Starter :var[cms] Homepage
+      # Hello Gatsby Starter :var[cms] Homepage
 
-:link[demoURL]{text=View the Demo}
+    Replace a link's URL with a variable:
 
-      Replace a definition with a variable:
+      :link[demoURL]{text=View the Demo}
 
-      ::def[demoURL]{#demo}
 
-      This will yield:
+    Include a markdown file from the plugin's `/docs` directory:
 
-      [demo]: http://example.com/demourl
+      ::include{file=quick-start-intro.md}
 
-Include a markdown file from the plugin's `/docs` directory:
+    Replace `$` in a code snippet with the `command` variable:
 
-::include{file=quick-start-intro.md}
-
-Replace `$` in a code snippet with the `command` variable:
-
-\`\`\`sh command
-npx bleep new $
-\`\`\`
-`
+      ```sh command
+      npx bleep new $
+      ```
 */
 
 const stringifyOptions = {
