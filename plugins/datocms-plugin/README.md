@@ -82,16 +82,17 @@ Once your content model and data are available in DatoCMS, deploy your site to [
 
 To update the colors used in this starter, edit the `src/colors.css.ts` file.
 
-```js
+```.ts
 // src/colors.css.ts
 export const colors = {
-  background: "#ffe491",
-  text: "#004ca3",
-  primary: "#004ca3",
-  muted: "#f2d98a",
-  active: "#001d3d",
+  background: "#fff",
+  text: "#db3000",
+  primary: "#db3000",
+  muted: "#fff1ed",
+  active: "#751a00",
   black: "#000",
 }
+
 ```
 
 If you'd like to add additional colors, add additional keys to this object.

@@ -75,10 +75,28 @@ To edit content that is specific for a particular CMS starter, edit or add markd
 
 The template supports the following directives:
 
-**`::include{file=some-file.md}`**
+**`::include{file=docs/some-file.md}`**
 
-Use the `::include` directive to render markdown content from a file in the starters' `docs` directory.
-For example, `::include{file=custom-sections.md}` will render the content from `plugins/[starter-plugin]/docs/custom-sections.md`.
+Use the `::include` directive to render markdown content from a file in the starter's directory.
+For example, `::include{file=docs/custom-sections.md}` will render the content from `plugins/[starter-plugin]/docs/custom-sections.md`.
+
+The `::include` directive can also be used to render content from other filetypes as a code fence.
+
+For example, `::include{file=src/colors.css.ts}` will render:
+
+````md
+```ts
+// src/colors.css.ts
+export const colors = {
+  background: "#ffe491",
+  text: "#004ca3",
+  primary: "#004ca3",
+  muted: "#f2d98a",
+  active: "#001d3d",
+  black: "#000",
+}
+```
+````
 
 **`:var[some-var]`**
 

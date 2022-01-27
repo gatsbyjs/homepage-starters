@@ -83,7 +83,7 @@ Once your content model and data are available in Contentful, deploy your site t
 
 To update the colors used in this starter, edit the `src/colors.css.ts` file.
 
-```js
+```.ts
 // src/colors.css.ts
 export const colors = {
   background: "#ffe491",
@@ -93,6 +93,7 @@ export const colors = {
   active: "#001d3d",
   black: "#000",
 }
+
 ```
 
 If you'd like to add additional colors, add additional keys to this object.

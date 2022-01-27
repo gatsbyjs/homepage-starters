@@ -112,6 +112,7 @@ function includePlugin({ basedir = process.cwd() }) {
 
         node.data = node.data || {}
         const filename = path.join(basedir, file)
+        const ext = path.extname(file)
         console.log("Including: ", filename)
         let raw
         try {
@@ -120,6 +121,13 @@ function includePlugin({ basedir = process.cwd() }) {
           throw new Error(
             `The ::include file path at '${file}' ('${filename}') was not found.`
           )
+        }
+
+        if (ext !== ".md") {
+          node.type = "code"
+          node.value = `// ${file}\n${raw}`
+          node.lang = ext
+          return
         }
 
         const ast = await processor.parse(raw)
@@ -153,7 +161,7 @@ Object.keys(starters).forEach(async (key, i) => {
   const starter = starters[key]
   const outdir = path.join(process.cwd(), "plugins", starter.dirname)
   const readme = await buildMarkdown(template, {
-    basedir: path.join(process.cwd(), "plugins", starter.dirname, "docs"),
+    basedir: path.join(process.cwd(), "plugins", starter.dirname),
     vars: starter,
   })
   fs.writeFileSync(path.join(outdir, "README.md"), readme)

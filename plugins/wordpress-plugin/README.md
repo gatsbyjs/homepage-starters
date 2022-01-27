@@ -94,16 +94,17 @@ Once your content model and data are available in WordPress, deploy your site to
 
 To update the colors used in this starter, edit the `src/colors.css.ts` file.
 
-```js
+```.ts
 // src/colors.css.ts
 export const colors = {
-  background: "#ffe491",
+  background: "#fff",
   text: "#004ca3",
   primary: "#004ca3",
-  muted: "#f2d98a",
+  muted: "#f5fcff",
   active: "#001d3d",
   black: "#000",
 }
+
 ```
 
 If you'd like to add additional colors, add additional keys to this object.

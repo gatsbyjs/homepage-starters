@@ -10,7 +10,7 @@ Create a homepage using Gatsby and :var[cms]. This starter demonstrates how to u
 
 ## Quick start
 
-::include{file=quick-start-intro.md}
+::include{file=docs/quick-start-intro.md}
 
 1. **Create a Gatsby site**
 
@@ -79,17 +79,7 @@ Once your content model and data are available in :var[cms], deploy your site to
 
 To update the colors used in this starter, edit the `src/colors.css.ts` file.
 
-```js
-// src/colors.css.ts
-export const colors = {
-  background: "#ffe491",
-  text: "#004ca3",
-  primary: "#004ca3",
-  muted: "#f2d98a",
-  active: "#001d3d",
-  black: "#000",
-}
-```
+::include{file=src/colors.css.ts}
 
 If you'd like to add additional colors, add additional keys to this object.
 This file is imported into `src/theme.css.ts` and creates CSS custom properties, that can be imported and used in other `.css.ts` files.
@@ -119,7 +109,7 @@ Most of the styles for these components are handled with shared UI components in
 To create a new type of section in your homepage, you'll want to create a new section component. Using the existing components as an example.
 For this example, we'll create a new "Banner" component.
 
-::include{file=custom-sections.md}
+::include{file=docs/custom-sections.md}
 
 1. Next, create the Banner component:
 
