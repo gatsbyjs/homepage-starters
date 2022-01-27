@@ -1,19 +1,18 @@
 
-
 <p align="center">
   <a href="https://www.gatsbyjs.com">
     <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
   </a>
 </p>
 <h1 align="center">
-  Gatsby Starter DatoCMS Homepage
+  Gatsby Starter WordPress Homepage
 </h1>
 
-Create a homepage using Gatsby and DatoCMS. This starter demonstrates how to use DatoCMS to build a homepage and can be customized to match your own visual branding.
+Create a homepage using Gatsby and WordPress. This starter demonstrates how to use WordPress to build a homepage and can be customized to match your own visual branding.
 
 [View the Demo][demo]
 
-[demo]: https://gatsbydatocmshomepage.gatsbyjs.io/
+[demo]: https://gatsbywordpresshomepage.gatsbyjs.io/
 
 ## Quick start
 
@@ -28,10 +27,10 @@ You will need a new or existing [Contentful space][] to use this starter and wil
     Use the Gatsby CLI to get started locally:
 
     ```sh
-    npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-datocms-homepage
+    npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage
     ```
 
-1. **Run the DatoCMS setup command**
+1. **Run the WordPress setup command**
 
     **TO BE IMPLEMENTED**
     From your site's root directory, run:
@@ -41,7 +40,7 @@ You will need a new or existing [Contentful space][] to use this starter and wil
     yarn setup
     ```
 
-    This will run a script to populate your DatoCMS instance's content model and add demo content.
+    This will run a script to populate your WordPress instance's custom fields and add demo content.
 
 1. **Start developing**
 
@@ -57,9 +56,9 @@ You will need a new or existing [Contentful space][] to use this starter and wil
 
 ## Deployment
 
-Once your content model and data are available in DatoCMS, deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
+Once your content is available in WordPress, deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
 
-[<img src="https://www.gatsbyjs.com/deploynow.png" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-datocms-homepage)
+[<img src="https://www.gatsbyjs.com/deploynow.png" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage)
 
 ## What's included?
 
@@ -94,10 +93,10 @@ To update the colors used in this starter, edit the `src/colors.css.ts` file.
 // src/colors.css.ts
 export const colors = {
   background: "#fff",
-  text: "#db3000",
-  primary: "#db3000",
-  muted: "#fff1ed",
-  active: "#751a00",
+  text: "#004ca3",
+  primary: "#004ca3",
+  muted: "#f5fcff",
+  active: "#001d3d",
   black: "#000",
 }
 ```
@@ -130,20 +129,20 @@ Most of the styles for these components are handled with shared UI components in
 To create a new type of section in your homepage, you'll want to create a new section component. Using the existing components as an example.
 For this example, we'll create a new "Banner" component.
 
-1. First, update your content model in DatoCMS
+1. First, update your custom fields in WordPress to support the new component
 
-  <!-- TODO
+<!-- TODO
     In your Contentful space, create a new content type and call it "Homepage Banner."
     For this example, add two fields to your new content type: `heading` and `text` – these can be *Short text* types.
 
     Find the content type for *Homepage* in Contentful and edit the settings for the *Content* field. Under *Validation*, ensure that the new *Homepage Banner* type is checked to make it available as a content type on the Homepage.
 
     Navigate to the *Content* tab to edit the *Homepage* and add a section with this new *Homepage Banner* content type.
-  -->
+-->
 
 1. Update `gatsby-node.js`
 
-    Edit your site's `gatsby-node.js` file, adding an interface for `HomepageBanner` that matches your content model in DatoCMS.
+    Edit your site's `gatsby-node.js` file, adding an interface for `HomepageBanner` that matches your custom fields in WordPress.
     This allows the homepage to query the abstract `HomepageBanner` type.
 
     ```js
@@ -160,7 +159,7 @@ For this example, we'll create a new "Banner" component.
       `)
       /***/
       actions.createTypes(`
-        type DatoCmsHomepageBanner implements Node & HomepageBanner & HomepageBlock @dontInfer {
+        type WpHomepageBanner implements Node & HomepageBanner & HomepageBlock @dontInfer {
           id: ID!
           blocktype: String @blocktype
           heading: String
