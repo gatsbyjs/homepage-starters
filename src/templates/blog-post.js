@@ -1,18 +1,24 @@
-import * as React from 'react'
-import { graphql } from 'gatsby'
+import * as React from "react"
+import { graphql } from "gatsby"
+import Layout from "../components/layout"
+import { Container, Heading, Box } from "../components/ui"
 
-export default function BlogPost (props) {
+export default function BlogPost(props) {
   const post = props.data.blogPost
 
   return (
-    <div>
-      <h1>{post.title}</h1>
-      <div
-        dangerouslySetInnerHTML={{
-          __html: post.body.childMarkdownRemark.html
-        }}
-      />
-    </div>
+    <Layout {...post}>
+      <Container>
+        <Box paddingY={4}>
+          <Heading as="h1">{post.title}</Heading>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: post.body.childMarkdownRemark.html,
+            }}
+          />
+        </Box>
+      </Container>
+    </Layout>
   )
 }
 
@@ -22,6 +28,8 @@ export const query = graphql`
       id
       slug
       title
+      # description
+      # image
       body {
         childMarkdownRemark {
           html
