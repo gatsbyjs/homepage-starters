@@ -1,36 +1,36 @@
 
+
 <p align="center">
   <a href="https://www.gatsbyjs.com">
     <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
   </a>
 </p>
 <h1 align="center">
-  Gatsby Starter Contentful Homepage
+  Gatsby Starter DatoCMS Homepage
 </h1>
 
-Create a homepage using Gatsby and Contentful. This starter demonstrates how to use Contentful to build a homepage and can be customized to match your own visual branding.
+Create a homepage using Gatsby and DatoCMS. This starter demonstrates how to use DatoCMS to build a homepage and can be customized to match your own visual branding.
 
 [View the Demo][demo]
 
-[demo]: https://gatsbycontentfulhomepage.gatsbyjs.io/
+[demo]: https://gatsbydatocmshomepage.gatsbyjs.io/
 
 ## Quick start
 
-You will need a new or existing [Contentful space][] to use this starter and will be asked for your [Space ID][] and [Content Delivery API Key][] during installation.
+You will need a new or existing DatoCMS project to use this starter and will be asked for an API token and the [environment][] during installation.
+You can find your read-only API token under the Settings > API tokens section of your administrative area. Make sure to grant both CDA and CMA permissions.
 
-[contentful space]: https://www.contentful.com/help/contentful-101/#step-2-create-a-space
-[space id]: https://www.contentful.com/help/find-space-id/
-[content delivery api key]: https://www.contentful.com/developers/docs/references/authentication/#api-keys-in-the-contentful-web-app
+[environment]: https://www.datocms.com/docs/scripting-migrations/introduction#whats-an-environment
 
 1. **Create a Gatsby site**
 
     Use the Gatsby CLI to get started locally:
 
     ```sh
-    npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-contentful-homepage
+    npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-datocms-homepage
     ```
 
-1. **Run the Contentful setup command**
+1. **Run the DatoCMS setup command**
 
     **TO BE IMPLEMENTED**
     From your site's root directory, run:
@@ -40,7 +40,7 @@ You will need a new or existing [Contentful space][] to use this starter and wil
     yarn setup
     ```
 
-    This will run a script to populate your Contentful space's content model and add demo content.
+    This will run a script to populate your DatoCMS instance's content model and add demo content.
 
 1. **Start developing**
 
@@ -56,9 +56,9 @@ You will need a new or existing [Contentful space][] to use this starter and wil
 
 ## Deployment
 
-Once your content model and data are available in Contentful, deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
+Once your content model and data are available in DatoCMS, deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
 
-[<img src="https://www.gatsbyjs.com/deploynow.png" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-contentful-homepage)
+[<img src="https://www.gatsbyjs.com/deploynow.png" alt="Deploy to Gatsby Cloud">](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-datocms-homepage)
 
 ## What's included?
 
@@ -92,11 +92,11 @@ To update the colors used in this starter, edit the `src/colors.css.ts` file.
 ```js
 // src/colors.css.ts
 export const colors = {
-  background: "#ffe491",
-  text: "#004ca3",
-  primary: "#004ca3",
-  muted: "#f2d98a",
-  active: "#001d3d",
+  background: "#fff",
+  text: "#db3000",
+  primary: "#db3000",
+  muted: "#fff1ed",
+  active: "#751a00",
   black: "#000",
 }
 ```
@@ -129,18 +129,18 @@ Most of the styles for these components are handled with shared UI components in
 To create a new type of section in your homepage, you'll want to create a new section component. Using the existing components as an example.
 For this example, we'll create a new "Banner" component.
 
-1. First, update your content model in Contentful
+1. First, update your content model in DatoCMS
 
-    In your Contentful space, create a new content type and call it "Homepage Banner."
-    For this example, add two fields to your new content type: `heading` and `text` – these can be *Short text* types.
+  In your DatoCMS project, go to Settings > Blocks Library to create a new block called "Banner."
+  For this example, add two Text fields to your new block type: `heading` and `text` – these can be *Single-line string* types.
+  After saving the new block type, navigate to Settings > Models and edit the *Homepage* model.
+  Edit the *Content* field and under *Validations*, add the *Banner* to the list of allowed blocks.
 
-    Find the content type for *Homepage* in Contentful and edit the settings for the *Content* field. Under *Validation*, ensure that the new *Homepage Banner* type is checked to make it available as a content type on the Homepage.
-
-    Navigate to the *Content* tab to edit the *Homepage* and add a section with this new *Homepage Banner* content type.
+  Go to the *Content* tab in your project and click *Create new* to add content for your Banner, then save the *Homepage*.
 
 1. Update `gatsby-node.js`
 
-    Edit your site's `gatsby-node.js` file, adding an interface for `HomepageBanner` that matches your content model in Contentful.
+    Edit your site's `gatsby-node.js` file, adding an interface for `HomepageBanner` that matches your content model in DatoCMS.
     This allows the homepage to query the abstract `HomepageBanner` type.
 
     ```js
@@ -157,7 +157,7 @@ For this example, we'll create a new "Banner" component.
       `)
       // ...
       actions.createTypes(`
-        type ContentfulHomepageBanner implements Node & HomepageBanner & HomepageBlock @dontInfer {
+        type DatoCmsBanner implements Node & HomepageBanner & HomepageBlock @dontInfer {
           id: ID!
           blocktype: String @blocktype
           heading: String
