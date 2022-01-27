@@ -211,10 +211,15 @@ export const text = styleVariants({
   mega: [
     margin0,
     {
-      fontSize: "360px",
+      fontSize: "180px",
       fontFamily: theme.fonts.mono,
       lineHeight: theme.lineHeights.tight,
       letterSpacing: theme.letterSpacings.tight,
+      "@media": {
+        [media.medium]: {
+          fontSize: "360px",
+        },
+      },
     },
   ],
   center: {
