@@ -1,12 +1,12 @@
 #!/usr/bin/env node
-import fs from 'fs'
-import path from 'path'
-import { unified } from 'unified'
-import remarkParse from 'remark-parse'
-import remarkStringify from 'remark-stringify'
-import remarkDirective from 'remark-directive'
-import { visit } from 'unist-util-visit'
-import starters from './data.js'
+import fs from "fs"
+import path from "path"
+import { unified } from "unified"
+import remarkParse from "remark-parse"
+import remarkStringify from "remark-stringify"
+import remarkDirective from "remark-directive"
+import { visit } from "unist-util-visit"
+import starters from "./data.js"
 
 /**
  * TODO
@@ -45,81 +45,74 @@ npx bleep new $
 */
 
 const stringifyOptions = {
-  bullet: '-',
+  bullet: "-",
   incrementListMarker: false,
-  listItemIndent: 'one',
-  rule: '-',
-  emphasis: '_',
+  listItemIndent: "one",
+  rule: "-",
+  emphasis: "_",
   tightDefinitions: true,
 }
 
 function variablePlugin(opts) {
   return (tree) => {
     visit(tree, async (node) => {
-      if (
-        node.type === 'textDirective'
-        || node.type === 'leafDirective'
-      ) {
-        if (node.name !== 'var' && node.name !== 'link') return
+      if (node.type === "textDirective" || node.type === "leafDirective") {
+        if (node.name !== "var" && node.name !== "link") return
         const key = node.children?.[0]?.value
         const val = opts[key]
         if (!val) {
           throw new Error(`No defined value found for :var[${key}]`)
         }
-        if (node.name === 'var') {
-          node.type = 'text'
+        if (node.name === "var") {
+          node.type = "text"
           node.value = val
-        } else if (node.name === 'link') {
-          node.type = 'link'
+        } else if (node.name === "link") {
+          node.type = "link"
           node.url = val
           const text = node.attributes?.text
           node.children = [
             {
-              type: 'text',
+              type: "text",
               value: text,
             },
           ]
         }
       }
 
-      if (node.type === 'code') {
+      if (node.type === "code") {
         const { meta } = node
         if (!meta) return
-        const vars = meta.split(',')
-        vars.forEach(key => {
+        const vars = meta.split(",")
+        vars.forEach((key) => {
           const n = opts[key]
           if (!n) {
             throw new Error(`No defined value found for '${key}'`)
           }
-          node.value = node.value.replace('$', n)
+          node.value = node.value.replace("$", n)
         })
       }
     })
   }
 }
 
-function includePlugin({
-  basedir = process.cwd(),
-}) {
+function includePlugin({ basedir = process.cwd() }) {
   const processor = unified()
     .use(remarkParse)
     .use(remarkStringify, stringifyOptions)
 
   return async (tree) => {
     visit(tree, async (node) => {
-      if (
-        node.type === 'leafDirective'
-      ) {
-        if (node.name !== 'include') return
+      if (node.type === "leafDirective") {
+        if (node.name !== "include") return
         const { file } = node.attributes
         if (!file) return
 
         node.data = node.data || {}
         const filename = path.join(basedir, file)
-        console.log('Including: ', filename)
+        console.log("Including: ", filename)
         let raw
         try {
-          raw = fs.readFileSync(filename, 'utf8')
+          raw = fs.readFileSync(filename, "utf8")
         } catch (e) {
           throw new Error(
             `The ::include file path at '${file}' ('${filename}') was not found.`
@@ -128,7 +121,7 @@ function includePlugin({
 
         const ast = await processor.parse(raw)
 
-        node.type = 'root'
+        node.type = "root"
         node.children = processor.runSync(ast, raw).children
       }
     })
@@ -151,15 +144,15 @@ const buildMarkdown = async (md, opts) => {
   return data.toString()
 }
 
-const template = fs.readFileSync('docs/readme-template.md', 'utf8')
+const template = fs.readFileSync("docs/readme-template.md", "utf8")
 
 Object.keys(starters).forEach(async (key, i) => {
   const starter = starters[key]
-  const outdir = path.join(process.cwd(), 'plugins', starter.dirname)
+  const outdir = path.join(process.cwd(), "plugins", starter.dirname)
   const readme = await buildMarkdown(template, {
-    basedir: path.join(process.cwd(), 'plugins', starter.dirname, 'docs'),
+    basedir: path.join(process.cwd(), "plugins", starter.dirname, "docs"),
     vars: starter,
   })
-  fs.writeFileSync(path.join(outdir, 'README.md'), readme)
+  fs.writeFileSync(path.join(outdir, "README.md"), readme)
   console.log(`README.md written for ${key}`)
 })

@@ -57,16 +57,18 @@ Once your content model and data are available in DatoCMS, deploy your site to [
 
 ## What's included?
 
-    ├── README.md
-    ├── gatsby-config.js
-    ├── gatsby-node.js
-    ├── src
-    │   ├── components
-    │   ├── pages
-    │   ├── colors.css.ts
-    │   ├── styles.css.ts
-    │   └── theme.css.ts
-    └── .env.EXAMPLE
+```sh
+├── README.md
+├── gatsby-config.js
+├── gatsby-node.js
+├── src
+│   ├── components
+│   ├── pages
+│   ├── colors.css.ts
+│   ├── styles.css.ts
+│   └── theme.css.ts
+└── .env.EXAMPLE
+```
 
 1. **`gatsby-config.js`**: [Gatsby config][] file that includes plugins required for this starter.
 1. **`gatsby-node.js`**: [Gatsby Node][] config file that creates an abstract data model for the homepage content.
@@ -165,14 +167,9 @@ For this example, we'll create a new "Banner" component.
 
    ```jsx
    // src/components/banner.js
-   import * as React from 'react'
-   import { graphql } from 'gatsby'
-   import {
-     Section,
-     Container,
-     Heading,
-     Text,
-   } from './ui'
+   import * as React from "react"
+   import { graphql } from "gatsby"
+   import { Section, Container, Heading, Text } from "./ui"
 
    export default function Banner(props) {
      return (

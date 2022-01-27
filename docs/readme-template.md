@@ -1,4 +1,3 @@
-
 <a href="https://www.gatsbyjs.com">
   <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
 </a>
@@ -15,33 +14,33 @@ Create a homepage using Gatsby and :var[cms]. This starter demonstrates how to u
 
 1. **Create a Gatsby site**
 
-    Use the Gatsby CLI to get started locally:
+   Use the Gatsby CLI to get started locally:
 
-    ```sh name
-    npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-$-homepage
-    ```
+   ```sh name
+   npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-$-homepage
+   ```
 
 1. **Run the :var[cms] setup command**
 
-    **TO BE IMPLEMENTED**
-    From your site's root directory, run:
+   **TO BE IMPLEMENTED**
+   From your site's root directory, run:
 
-    ```sh
-    cd my-homepage
-    yarn setup
-    ```
+   ```sh
+   cd my-homepage
+   yarn setup
+   ```
 
-    This will run a script to populate your :var[cms] content model and add demo content.
+   This will run a script to populate your :var[cms] content model and add demo content.
 
 1. **Start developing**
 
-    In your site directory, start the development server:
+   In your site directory, start the development server:
 
-    ```sh
-    yarn start
-    ```
+   ```sh
+   yarn start
+   ```
 
-    Your site should now be running at <http://localhost:8000>
+   Your site should now be running at <http://localhost:8000>
 
 1. **Open the source code and start editing**
 
@@ -55,7 +54,7 @@ Once your content model and data are available in :var[cms], deploy your site to
 
 ## What's included?
 
-```
+```sh
 ├── README.md
 ├── gatsby-config.js
 ├── gatsby-node.js
@@ -126,88 +125,83 @@ For this example, we'll create a new "Banner" component.
 
 1. Next, create the Banner component:
 
-    ```jsx
-    // src/components/banner.js
-    import * as React from 'react'
-    import { graphql } from 'gatsby'
-    import {
-      Section,
-      Container,
-      Heading,
-      Text,
-    } from './ui'
+   ```jsx
+   // src/components/banner.js
+   import * as React from "react"
+   import { graphql } from "gatsby"
+   import { Section, Container, Heading, Text } from "./ui"
 
-    export default function Banner(props) {
-      return (
-        <Section>
-          <Container>
-            <Heading>{props.heading}</Heading>
-            <Text>{props.text}</Text>
-          </Container>
-        </Section>
-      )
-    }
+   export default function Banner(props) {
+     return (
+       <Section>
+         <Container>
+           <Heading>{props.heading}</Heading>
+           <Text>{props.text}</Text>
+         </Container>
+       </Section>
+     )
+   }
 
-    export const query = graphql`
-      fragment HomepageBannerContent on HomepageBanner {
-        id
-        heading
-        text
-      }
-    `
-    ```
+   export const query = graphql`
+     fragment HomepageBannerContent on HomepageBanner {
+       id
+       heading
+       text
+     }
+   `
+   ```
 
 1. Export the component from `src/components/sections.js`
 
-    ```js
-    // src/components/sections.js
-    export { default as HomepageHero } from "./hero"
-    export { default as HomepageFeature } from "./feature"
-    export { default as HomepageFeatureList } from "./feature-list"
-    export { default as HomepageLogoList } from "./logo-list"
-    export { default as HomepageBenefitList } from "./benefit-list"
-    export { default as HomepageTestimonialList } from "./testimonial-list"
-    export { default as HomepageStatList } from "./stat-list"
-    export { default as HomepageCta } from "./cta"
-    export { default as HomepageProductList } from "./product-list"
+   ```js
+   // src/components/sections.js
+   export { default as HomepageHero } from "./hero"
+   export { default as HomepageFeature } from "./feature"
+   export { default as HomepageFeatureList } from "./feature-list"
+   export { default as HomepageLogoList } from "./logo-list"
+   export { default as HomepageBenefitList } from "./benefit-list"
+   export { default as HomepageTestimonialList } from "./testimonial-list"
+   export { default as HomepageStatList } from "./stat-list"
+   export { default as HomepageCta } from "./cta"
+   export { default as HomepageProductList } from "./product-list"
 
-    // add export for new component
-    export { default as HomepageBanner } from "./banner"
-    ```
+   // add export for new component
+   export { default as HomepageBanner } from "./banner"
+   ```
 
 1. Add the GraphQL query fragment to the query in `src/pages/index.js`
 
-    ```js
-    // in src/pages/index.js
-    export const query = graphql`
-      {
-        homepage {
-          id
-          title
-          description
-          image {
-            id
-            url
-          }
-          blocks: content {
-            id
-            blocktype
-            ...HomepageHeroContent
-            ...HomepageFeatureContent
-            ...HomepageFeatureListContent
-            ...HomepageCtaContent
-            ...HomepageLogoListContent
-            ...HomepageTestimonialListContent
-            ...HomepageBenefitListContent
-            ...HomepageStatListContent
-            ...HomepageProductListContent
-            # New component fragment
-            ...HomepageBannerContent
-          }
-        }
-      }
-    `
-    ```
+   ```js
+   // in src/pages/index.js
+   export const query = graphql`
+     {
+       homepage {
+         id
+         title
+         description
+         image {
+           id
+           url
+         }
+         blocks: content {
+           id
+           blocktype
+           ...HomepageHeroContent
+           ...HomepageFeatureContent
+           ...HomepageFeatureListContent
+           ...HomepageCtaContent
+           ...HomepageLogoListContent
+           ...HomepageTestimonialListContent
+           ...HomepageBenefitListContent
+           ...HomepageStatListContent
+           ...HomepageProductListContent
+           # New component fragment
+           ...HomepageBannerContent
+         }
+       }
+     }
+   `
+   ```
 
 ## 🎓 Learning Gatsby
 
@@ -221,4 +215,3 @@ Looking for more guidance? Full documentation for Gatsby lives [on the website](
 [Build, Deploy, and Host On The Only Cloud Built For Gatsby](https://www.gatsbyjs.com/cloud/)
 
 Gatsby Cloud is an end-to-end cloud platform specifically built for the Gatsby framework that combines a modern developer experience with an optimized, global edge network.
-
