@@ -146,7 +146,7 @@ For this example, we'll create a new "Banner" component.
     ```js
     // in gatsby-node.js
     exports.createSchemaCustomization = async ({ actions }) => {
-      /***/
+      // ...
       actions.createTypes(`
         interface HomepageBanner implements Node & HomepageBlock {
           id: ID!
@@ -155,7 +155,7 @@ For this example, we'll create a new "Banner" component.
           text: String
         }
       `)
-      /***/
+      // ...
       actions.createTypes(`
         type ContentfulHomepageBanner implements Node & HomepageBanner & HomepageBlock @dontInfer {
           id: ID!
@@ -164,7 +164,7 @@ For this example, we'll create a new "Banner" component.
           text: String
         }
       `)
-      /***/
+      // ...
     }
     ```
 

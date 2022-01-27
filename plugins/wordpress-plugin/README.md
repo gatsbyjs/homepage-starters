@@ -25,7 +25,7 @@ This starter requires the following plugins to be installed in your WordPress in
 - [WPGraphQL for Advanced Custom Fields][]
 - [Custom Post Type UI][] (Optional)
 
-Once these plugins are installed, you'll need the URL for the GraphQL endpoint for configuration.
+Once these plugins are installed, you'll need the URL of the GraphQL endpoint for configuration.
 
 [wpgatsby]: https://wordpress.org/plugins/wp-gatsby/
 [wpgraphql]: https://wordpress.org/plugins/wp-graphql/
@@ -143,7 +143,7 @@ For this example, we'll create a new "Banner" component.
 
 1. First, update your custom fields in WordPress to support the new component
 
-    Under the *Custom Fields* tab, create a new *Field Group* anc call it "Homepage Banner."
+    Under the *Custom Fields* tab, create a new *Field Group* and call it "Homepage Banner."
     For this example, add two text fields: `banner_heading` and `banner_text`.
     In the *Location* rules, be sure to show the field group in *Page* post types.
     Also ensure that the *Show in GraphQL* option is enabled for this field.
@@ -152,13 +152,13 @@ For this example, we'll create a new "Banner" component.
 
 1. Update `gatsby-node.js`
 
-    Edit your site's `gatsby-node.js` file, adding an interface for `HomepageBanner` that matches your custom fields in WordPress.
+    Edit your site's `gatsby-node.js` file, adding a type for `HomepageBanner` that matches your custom fields in WordPress.
     This allows the homepage to query the abstract `HomepageBanner` type.
 
     ```js
     // in gatsby-node.js
     exports.createSchemaCustomization = async ({ actions }) => {
-      /***/
+      // ...
       actions.createTypes(`
         type HomepageBanner implements Node & HomepageBlock {
           id: ID!
@@ -167,12 +167,12 @@ For this example, we'll create a new "Banner" component.
           text: String
         }
       `)
-      /***/
+      // ...
     }
-    /***/
+    // ...
     exports.onCreateNode = ({ actions, node, createNodeId, createContentDigest }) => {
     }
-      /***/
+      // ...
       switch (node.internal.type) {
         case "WpPage":
           if (node.slug !== "homepage") return
@@ -192,7 +192,7 @@ For this example, we'll create a new "Banner" component.
           const heroID = createNodeId(`${node.id} >>> HomepageHero`)
           // create an node id for the field group
           const bannerID = createNodeId(`${node.id} >>> HomepageBanner`)
-          /***/
+          // ...
 
           // create a new node for this field group
           actions.createNode({
@@ -206,7 +206,7 @@ For this example, we'll create a new "Banner" component.
             heading: homepageBanner.bannerHeading,
             text: homepageBanner.bannerText,
           })
-          /***/
+          // ...
           actions.createNode({
             ...node,
             id: createNodeId(`${node.id} >>> Homepage`),
@@ -230,7 +230,7 @@ For this example, we'll create a new "Banner" component.
               ctaID,
             ],
           })
-          /***/
+          // ...
       }
     }
     ```
