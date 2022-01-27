@@ -31,7 +31,7 @@ You will need a [new or existing Contentful space](https://www.contentful.com/he
 
     Use the Gatsby CLI to get started locally:
 
-    ```sh
+    ```sh repo=gatsby-starter-contentful-homepage
     npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-contentful-homepage
     ```
 
