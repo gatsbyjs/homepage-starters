@@ -5,63 +5,29 @@ import remarkParse from 'remark-parse'
 import remarkStringify from 'remark-stringify'
 import remarkDirective from 'remark-directive'
 import { visit } from 'unist-util-visit'
+import starters from './data.js'
 
 const demo = `
-# Hello Gatsby Starter :var[CMS] Homepage
+# Hello Gatsby Starter :var[cms] Homepage
 
-::def[url]{#demo}
+::def[demoURL]{#demo}
 
 This is test markdown.
 
-::include{file=plugins/contentful-plugin/README.md}
+::include{file=quick-start-intro.md}
 
 \`\`\`sh beep-boop,slip-slap
 npx bleep new $ && yarn $
 \`\`\`
 `
 
-const processor = unified()
-  .use(remarkParse)
-  .use(remarkDirective)
-  .use(includePlugin)
-  .use(variablePlugin, {
-    CMS: 'Contentful',
-    cms: 'contentful',
-    url: 'https://gatsbycontentfulhomepage.gatsbyjs.io/',
-  })
-  .use(remarkStringify)
-
-function includePlugin() {
-  return (tree) => {
-    visit(tree, async (node) => {
-      if (
-        node.type === 'leafDirective'
-      ) {
-        if (node.name !== 'include') return
-        const { file } = node.attributes
-        if (!file) return
-
-        node.data = node.data || {}
-        const filename = path.join(process.cwd(), file)
-        let raw
-        try {
-          raw = fs.readFileSync(filename, 'utf8')
-        } catch (e) {
-          throw new Error(
-            `The ::include file path at '${file}' ('${filename}') was not found.`
-          )
-        }
-
-        // development only
-        // raw = 'beep\n'
-
-        const ast = processor.parse(raw)
-
-        node.type = 'root'
-        node.children = processor.runSync(ast, raw).children
-      }
-    })
-  }
+const stringifyOptions = {
+  bullet: '-',
+  incrementListMarker: false,
+  listItemIndent: 'one',
+  rule: '-',
+  emphasis: '_',
+  tightDefinitions: true,
 }
 
 function variablePlugin(opts) {
@@ -99,9 +65,67 @@ function variablePlugin(opts) {
   }
 }
 
-const buildMarkdown = async (md) => {
-  const data = await processor.process(md)
-  console.log(String(data))
+function includePlugin({
+  basedir = process.cwd(),
+}) {
+  const processor = unified()
+    .use(remarkParse)
+    .use(remarkStringify, stringifyOptions)
+
+  return async (tree) => {
+    visit(tree, async (node) => {
+      if (
+        node.type === 'leafDirective'
+      ) {
+        if (node.name !== 'include') return
+        const { file } = node.attributes
+        if (!file) return
+
+        node.data = node.data || {}
+        const filename = path.join(basedir, file)
+        let raw
+        try {
+          raw = fs.readFileSync(filename, 'utf8')
+        } catch (e) {
+          throw new Error(
+            `The ::include file path at '${file}' ('${filename}') was not found.`
+          )
+        }
+
+        const ast = await processor.parse(raw)
+
+        node.type = 'root'
+        node.children = processor.runSync(ast, raw).children
+      }
+    })
+  }
 }
 
-buildMarkdown(demo)
+const buildMarkdown = async (md, opts) => {
+  const processor = unified()
+    .use(remarkParse)
+    .use(remarkDirective)
+    .use(includePlugin, {
+      basedir: opts.basedir,
+    })
+    .use(variablePlugin, {
+      ...opts.vars,
+    })
+    .use(remarkStringify, stringifyOptions)
+
+  const data = await processor.process(md)
+  return data.toString()
+}
+
+const template = fs.readFileSync('docs/readme-template.md', 'utf8')
+
+Object.keys(starters).forEach(async (key, i) => {
+  const starter = starters[key]
+  const name = starter.repo.substring(repo.lastIndexOf("/") + 1)
+  const outdir = path.join(process.cwd(), 'dist', name)
+  const readme = await buildMarkdown(template, {
+    basedir: path.join(process.cwd(), 'plugins', starter.dirname, 'docs'),
+    vars: starter,
+  })
+  console.log(readme)
+})
