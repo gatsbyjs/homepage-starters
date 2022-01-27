@@ -17,11 +17,10 @@ Create a homepage using Gatsby and DatoCMS. This starter demonstrates how to use
 
 ## Quick start
 
-<!-- TODO
-You will need a new or existing [Contentful space][] to use this starter and will be asked for your [Space ID][] and [Content Delivery API Key][] during installation.
+You will need a new or existing DatoCMS project to use this starter and will be asked for an API token and the [environment][] during installation.
+You can find your read-only API token under the Settings > API tokens section of your administrative area. Make sure to grant both CDA and CMA permissions.
 
-[contentful space]: https://www.contentful.com/help/contentful-101/#step-2-create-a-space
--->
+[environment]: https://www.datocms.com/docs/scripting-migrations/introduction#whats-an-environment
 
 1. **Create a Gatsby site**
 
@@ -132,14 +131,12 @@ For this example, we'll create a new "Banner" component.
 
 1. First, update your content model in DatoCMS
 
-  <!-- TODO
-    In your Contentful space, create a new content type and call it "Homepage Banner."
-    For this example, add two fields to your new content type: `heading` and `text` – these can be *Short text* types.
+  In your DatoCMS project, go to Settings > Blocks Library to create a new block called "Banner."
+  For this example, add two Text fields to your new block type: `heading` and `text` – these can be *Single-line string* types.
+  After saving the new block type, navigate to Settings > Models and edit the *Homepage* model.
+  Edit the *Content* field and under *Validations*, add the *Banner* to the list of allowed blocks.
 
-    Find the content type for *Homepage* in Contentful and edit the settings for the *Content* field. Under *Validation*, ensure that the new *Homepage Banner* type is checked to make it available as a content type on the Homepage.
-
-    Navigate to the *Content* tab to edit the *Homepage* and add a section with this new *Homepage Banner* content type.
-  -->
+  Go to the *Content* tab in your project and click *Create new* to add content for your Banner, then save the *Homepage*.
 
 1. Update `gatsby-node.js`
 
@@ -160,7 +157,7 @@ For this example, we'll create a new "Banner" component.
       `)
       /***/
       actions.createTypes(`
-        type DatoCmsHomepageBanner implements Node & HomepageBanner & HomepageBlock @dontInfer {
+        type DatoCmsBanner implements Node & HomepageBanner & HomepageBlock @dontInfer {
           id: ID!
           blocktype: String @blocktype
           heading: String
