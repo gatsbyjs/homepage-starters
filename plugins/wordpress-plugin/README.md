@@ -16,11 +16,23 @@ Create a homepage using Gatsby and WordPress. This starter demonstrates how to u
 
 ## Quick start
 
-<!-- TODO
-You will need a new or existing [Contentful space][] to use this starter and will be asked for your [Space ID][] and [Content Delivery API Key][] during installation.
+You will need a new or existing WordPress instance to use this starter.
+This starter requires the following plugins to be installed in your WordPress instance:
 
-[contentful space]: https://www.contentful.com/help/contentful-101/#step-2-create-a-space
--->
+- [WPGatsby][]
+- [WPGraphQL][]
+- [Advanced Custom Fields][]
+- [WPGraphQL for Advanced Custom Fields][]
+- [Custom Post Type UI][] (Optional)
+
+Once these plugins are installed, you'll need the URL for the GraphQL endpoint for configuration.
+
+[wpgatsby]: https://wordpress.org/plugins/wp-gatsby/
+[wpgraphql]: https://wordpress.org/plugins/wp-graphql/
+[advanced custom fields]: https://wordpress.org/plugins/advanced-custom-fields/
+[wpgraphql for advanced custom fields]: https://github.com/wp-graphql/wp-graphql-acf
+[custom post type ui]: https://wordpress.org/plugins/custom-post-type-ui/
+
 
 1. **Create a Gatsby site**
 
@@ -131,14 +143,12 @@ For this example, we'll create a new "Banner" component.
 
 1. First, update your custom fields in WordPress to support the new component
 
-<!-- TODO
-    In your Contentful space, create a new content type and call it "Homepage Banner."
-    For this example, add two fields to your new content type: `heading` and `text` – these can be *Short text* types.
+    Under the *Custom Fields* tab, create a new *Field Group* anc call it "Homepage Banner."
+    For this example, add two text fields: `banner_heading` and `banner_text`.
+    In the *Location* rules, be sure to show the field group in *Page* post types.
+    Also ensure that the *Show in GraphQL* option is enabled for this field.
 
-    Find the content type for *Homepage* in Contentful and edit the settings for the *Content* field. Under *Validation*, ensure that the new *Homepage Banner* type is checked to make it available as a content type on the Homepage.
-
-    Navigate to the *Content* tab to edit the *Homepage* and add a section with this new *Homepage Banner* content type.
--->
+    Navigate to the *Pages* tab and edit the Homepage and add content for the new Banner component.
 
 1. Update `gatsby-node.js`
 
@@ -150,7 +160,7 @@ For this example, we'll create a new "Banner" component.
     exports.createSchemaCustomization = async ({ actions }) => {
       /***/
       actions.createTypes(`
-        interface HomepageBanner implements Node & HomepageBlock {
+        type HomepageBanner implements Node & HomepageBlock {
           id: ID!
           blocktype: String
           heading: String
@@ -158,15 +168,70 @@ For this example, we'll create a new "Banner" component.
         }
       `)
       /***/
-      actions.createTypes(`
-        type WpHomepageBanner implements Node & HomepageBanner & HomepageBlock @dontInfer {
-          id: ID!
-          blocktype: String @blocktype
-          heading: String
-          text: String
-        }
-      `)
+    }
+    /***/
+    exports.onCreateNode = ({ actions, node, createNodeId, createContentDigest }) => {
+    }
       /***/
+      switch (node.internal.type) {
+        case "WpPage":
+          if (node.slug !== "homepage") return
+          const {
+            homepageHero,
+            homepageCta,
+            statList,
+            testimonialList,
+            productList,
+            logoList,
+            featureList,
+            benefitList,
+            // add the new custom field group here
+            homepageBanner,
+          } = node
+
+          const heroID = createNodeId(`${node.id} >>> HomepageHero`)
+          // create an node id for the field group
+          const bannerID = createNodeId(`${node.id} >>> HomepageBanner`)
+          /***/
+
+          // create a new node for this field group
+          actions.createNode({
+            id: bannerID,
+            internal: {
+              type: "HomepageBanner",
+              contentDigest: createContentDigest(JSON.stringify(homepageBanner)),
+            },
+            parent: node.id,
+            blocktype: "HomepageBanner",
+            heading: homepageBanner.bannerHeading,
+            text: homepageBanner.bannerText,
+          })
+          /***/
+          actions.createNode({
+            ...node,
+            id: createNodeId(`${node.id} >>> Homepage`),
+            internal: {
+              type: "Homepage",
+              contentDigest: node.internal.contentDigest,
+            },
+            parent: node.id,
+            blocktype: "Homepage",
+            image: node.featuredImageId,
+            content: [
+              heroID,
+              logosID,
+              // add your banner content in the postion you would like it to appear on the page
+              bannerID,
+              productsID,
+              featuresID,
+              benefitsID,
+              statsID,
+              testimonialsID,
+              ctaID,
+            ],
+          })
+          /***/
+      }
     }
     ```
 
