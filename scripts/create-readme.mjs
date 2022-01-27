@@ -8,6 +8,13 @@ import remarkDirective from 'remark-directive'
 import { visit } from 'unist-util-visit'
 import starters from './data.js'
 
+/**
+ * TODO
+ * - add docs for this script
+ * - clean up examples
+ * - include colors from each starter
+ */
+
 /** example of usage of these remark plugins
 const demo = `
 
