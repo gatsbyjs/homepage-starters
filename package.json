@@ -10,6 +10,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "prepublish": "husky install",
+    "create-readmes": "./scripts/create-readmes.mjs",
     "publish-starters": "./scripts/publish.js",
     "publish-starters:dry-run": "./scripts/publish.js --dry-run"
   },
@@ -38,7 +39,12 @@
     "husky": "^7.0.4",
     "lint-staged": "^12.3.1",
     "prettier": "2.5.1",
-    "simple-git": "^3.1.0"
+    "remark-directive": "^2.0.1",
+    "remark-parse": "^10.0.1",
+    "remark-stringify": "^10.0.2",
+    "simple-git": "^3.1.0",
+    "unified": "^10.1.1",
+    "unist-util-visit": "^4.1.0"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
