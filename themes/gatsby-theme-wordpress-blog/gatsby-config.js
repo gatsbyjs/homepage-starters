@@ -6,6 +6,7 @@ module.exports = {
         url: process.env.WPGRAPHQL_URL,
       },
     },
+    "gatsby-theme-abstract-blog",
     "gatsby-transformer-remark",
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",

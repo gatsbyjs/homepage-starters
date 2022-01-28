@@ -6,18 +6,15 @@ exports.createSchemaCustomization = async ({ actions }) => {
     extend(options) {
       return {
         async resolve(source, args, context, info) {
-          // const type = info.schema.getType("MarkdownRemark")
-          const type = info.schema.getType("ContentfulBlogPost")
+          const markdownType = info.schema.getType("MarkdownRemark")
+          const postType = info.schema.getType("ContentfulBlogPost")
 
-          console.log({ source })
-          // const body = context.nodeModel.getNodeById(source.children[0])
-          const bodyResolver = type.getFields().body.resolve
-          const body = await bodyResolver(source, args, context, info)
-          console.log({ body })
-          return null
-          const markdown = context.nodeModel.getNodeById(body.children[0])
-          console.log(markdown)
-          const resolver = type.getFields().html.resolve
+          const [childID] = source.children
+          const body = context.nodeModel.getNodeById({ id: childID })
+          const [markdownID] = body.children
+          const markdown = context.nodeModel.getNodeById({ id: markdownID })
+          const resolver = markdownType.getFields().html.resolve
+
           if (!resolver) return null
           return await resolver(markdown, args, context, info)
         },
@@ -26,17 +23,11 @@ exports.createSchemaCustomization = async ({ actions }) => {
   })
 
   actions.createTypes(`
-    # interface BlogPostBody implements Node {
-    #   id: ID!
-    #   childMarkdownRemark: MarkdownRemark
-    # }
-
     interface BlogPost implements Node {
       id: ID!
       slug: String!
       title: String!
       html: String!
-      # body: BlogPostBody!
       # TODO
       # date # image # author
     }
@@ -58,6 +49,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
   `)
 }
 
+/** pages are created in gatsby-theme-abstract-blog
 exports.createPages = async ({ actions, graphql, reporter }) => {
   let component
   try {
@@ -106,3 +98,4 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     })
   })
 }
+*/
