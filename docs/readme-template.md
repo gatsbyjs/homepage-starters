@@ -44,9 +44,9 @@ Create a homepage using Gatsby and :var[cms]. This starter demonstrates how to u
 
 1. **Open the source code and start editing**
 
-## Deployment
+## Deploy your site
 
-Once your content model and data are available in :var[cms], deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
+Once your content is available in :var[cms], deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
 
 :link[deploynow]{text="Deploy to Gatsby"}
 
