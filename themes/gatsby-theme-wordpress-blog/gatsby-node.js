@@ -17,19 +17,12 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
   `)
 
-  /*
   actions.createTypes(`
-    type ContentfulBlogPost implements Node & BlogPost {
+    type WpPost implements Node & BlogPost {
       id: ID!
       slug: String!
       title: String!
-      body: BlogPostBody! @link(by: "id", from: "body___NODE")
+      html: String! @proxy(from: "content")
     }
-
-    # type contentfulBlogPostBodyTextNode implements Node & BlogPostBody @derivedTypes @childOf(types: ["ContentfulBlogPost"]) {
-    #   id: ID!
-    #   body: String
-    # }
   `)
-  */
 }
