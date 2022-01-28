@@ -13,7 +13,8 @@ export default function BlogPost(props) {
           <Heading as="h1">{post.title}</Heading>
           <div
             dangerouslySetInnerHTML={{
-              __html: post.body.childMarkdownRemark.html,
+              // __html: post.body.childMarkdownRemark.html,
+              __html: post.html,
             }}
           />
         </Box>
@@ -28,13 +29,15 @@ export const query = graphql`
       id
       slug
       title
+      html
+
       # description
       # image
-      body {
-        childMarkdownRemark {
-          html
-        }
-      }
+      # body {
+      #   childMarkdownRemark {
+      #     html
+      #   }
+      # }
     }
   }
 `

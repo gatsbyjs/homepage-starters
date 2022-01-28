@@ -1,17 +1,42 @@
-const path = require('path')
+const path = require("path")
 
 exports.createSchemaCustomization = async ({ actions }) => {
+  actions.createFieldExtension({
+    name: "proxyHtml",
+    extend(options) {
+      return {
+        async resolve(source, args, context, info) {
+          // const type = info.schema.getType("MarkdownRemark")
+          const type = info.schema.getType("ContentfulBlogPost")
+
+          console.log({ source })
+          // const body = context.nodeModel.getNodeById(source.children[0])
+          const bodyResolver = type.getFields().body.resolve
+          const body = await bodyResolver(source, args, context, info)
+          console.log({ body })
+          return null
+          const markdown = context.nodeModel.getNodeById(body.children[0])
+          console.log(markdown)
+          const resolver = type.getFields().html.resolve
+          if (!resolver) return null
+          return await resolver(markdown, args, context, info)
+        },
+      }
+    },
+  })
+
   actions.createTypes(`
-    interface BlogPostBody implements Node {
-      id: ID!
-      childMarkdownRemark: MarkdownRemark
-    }
+    # interface BlogPostBody implements Node {
+    #   id: ID!
+    #   childMarkdownRemark: MarkdownRemark
+    # }
 
     interface BlogPost implements Node {
       id: ID!
       slug: String!
       title: String!
-      body: BlogPostBody!
+      html: String!
+      # body: BlogPostBody!
       # TODO
       # date # image # author
     }
@@ -22,10 +47,11 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       slug: String!
       title: String!
-      body: BlogPostBody! @link(by: "id", from: "body___NODE")
+      body: contentfulBlogPostBodyTextNode! @link(by: "id", from: "body___NODE")
+      html: String! @proxyHtml
     }
 
-    type contentfulBlogPostBodyTextNode implements Node & BlogPostBody @derivedTypes @childOf(types: ["ContentfulBlogPost"]) {
+    type contentfulBlogPostBodyTextNode implements Node @derivedTypes @childOf(types: ["ContentfulBlogPost"]) {
       id: ID!
       body: String
     }
@@ -35,10 +61,10 @@ exports.createSchemaCustomization = async ({ actions }) => {
 exports.createPages = async ({ actions, graphql, reporter }) => {
   let component
   try {
-    component = path.resolve('./src/templates/blog-post.js')
+    component = path.resolve("./src/templates/blog-post.js")
     require.resolve(component)
   } catch (e) {
-    reporter.warn('No templates found for blog theme in host site')
+    reporter.warn("No templates found for blog theme in host site")
     return
   }
 
@@ -54,12 +80,15 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   `)
 
   if (result.errors) {
-    reporter.panicOnBuild(`There was an error sourcing blog posts from Contentful`, result.errors)
+    reporter.panicOnBuild(
+      `There was an error sourcing blog posts from Contentful`,
+      result.errors
+    )
   }
 
   const posts = result.data.posts.nodes
 
-  if (posts.length < 1) return;
+  if (posts.length < 1) return
 
   posts.forEach((post, i) => {
     const previous = posts[i - 1]?.slug
