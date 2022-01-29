@@ -39,6 +39,19 @@ exports.createSchemaCustomization = async ({ actions }) => {
     },
   })
 
+  /*
+  actions.createFieldExtension({
+    name: 'proxyHtml',
+    extend(options) {
+      return {
+        async resolve(source) {
+          return source.content
+        }
+      }
+    }
+  })
+  */
+
   // abstract interfaces
   actions.createTypes(`
     interface HomepageBlock implements Node {
@@ -112,6 +125,15 @@ exports.createSchemaCustomization = async ({ actions }) => {
       meta: [HomepageLink]
       socialLinks: [SocialLink]
       copyright: String
+    }
+
+    interface Page implements Node {
+      id: ID!
+      slug: String!
+      title: String
+      description: String
+      image: HomepageImage
+      html: String
     }
   `)
 
@@ -252,6 +274,16 @@ exports.createSchemaCustomization = async ({ actions }) => {
       quote: String @proxy(from: "testimonial.quote")
       source: String @proxy(from: "testimonial.source")
       avatar: HomepageImage @link @proxy(from: "testimonial.avatar.id")
+    }
+
+    type WpPage implements Node & Page {
+      id: ID!
+      slug: String!
+      title: String
+      description: String
+      image: HomepageImage @link @proxy(from: "featuredImageId")
+      content: String
+      html: String @proxy(from: "content")
     }
   `)
 
