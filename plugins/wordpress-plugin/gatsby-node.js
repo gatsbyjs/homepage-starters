@@ -39,19 +39,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
     },
   })
 
-  /*
-  actions.createFieldExtension({
-    name: 'proxyHtml',
-    extend(options) {
-      return {
-        async resolve(source) {
-          return source.content
-        }
-      }
-    }
-  })
-  */
-
   // abstract interfaces
   actions.createTypes(`
     interface HomepageBlock implements Node {
@@ -633,6 +620,9 @@ exports.onCreateNode = ({
         })
         return id
       })
+      const metaLinks = [footer.termsLink, footer.privacyPolicyLink].map(
+        createLinkNode(node.id)
+      )
       actions.createNodeField({
         node,
         name: "links",
@@ -643,11 +633,10 @@ exports.onCreateNode = ({
         name: "socialLinks",
         value: socialLinks,
       })
-      // TODO
       actions.createNodeField({
         node,
         name: "meta",
-        value: [],
+        value: metaLinks,
       })
       break
   }
