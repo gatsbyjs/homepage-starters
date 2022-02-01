@@ -2,9 +2,16 @@
   "name": "datocms-homepage-plugin",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "export-content": "node ./scripts/export.js"
+  },
   "dependencies": {
     "gatsby-plugin-react-helmet": "^5.5.0",
     "gatsby-source-datocms": "^3.0.12",
     "react-helmet": "^6.1.0"
+  },
+  "devDependencies": {
+    "axios": "^0.25.0",
+    "datocms-client": "^3.5.14"
   }
 }
