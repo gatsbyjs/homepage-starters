@@ -1,5 +1,5 @@
 import * as React from "react"
-import { graphql, useStaticQuery, Link } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
 import {
   Twitter,
   Twitch,
@@ -96,9 +96,9 @@ export default function Footer(props) {
     <Box as="footer" paddingY={4}>
       <Container>
         <Flex variant="start" responsive>
-          <Link to="/">
+          <NavLink to="/">
             <BrandLogo />
-          </Link>
+          </NavLink>
           <Space />
           <FlexList>
             {socialLinks &&
