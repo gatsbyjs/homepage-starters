@@ -4,12 +4,12 @@ require("dotenv").config({
 const SiteClient = require("datocms-client").SiteClient
 const fs = require("fs")
 const path = require("path")
-// const request = require('request')
 const axios = require("axios")
 const client = new SiteClient(process.env.DATOCMS_API_TOKEN)
 
 console.log("Downloading DatoCMS records...")
 
+// https://www.datocms.com/docs/import-and-export/export-data
 client.items
   .all({}, { allPages: true })
   .then((response) => {

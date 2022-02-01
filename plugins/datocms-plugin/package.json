@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "import-content": "node ./scripts/import.js",
     "export-content": "node ./scripts/export.js"
   },
   "dependencies": {
