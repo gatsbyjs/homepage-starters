@@ -1,5 +1,5 @@
 import * as React from "react"
-import { graphql, useStaticQuery } from "gatsby"
+import { graphql, Link, useStaticQuery } from "gatsby"
 import { Menu, X } from "react-feather"
 import {
   Container,
@@ -59,7 +59,9 @@ export default function Header() {
         {/* Desktop / Tablet - Header / Nav */}
         <Space size={2} />
         <Flex>
-          <BrandLogo />
+          <Link to="/">
+            <BrandLogo />
+          </Link>
           <nav>
             <FlexList>
               {links &&
