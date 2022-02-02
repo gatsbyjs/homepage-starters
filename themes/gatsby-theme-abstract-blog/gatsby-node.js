@@ -5,12 +5,12 @@ const path = require("path")
 // as well as an abstract BlogPost interface in GraphQL
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
-  let component
+  const components = {}
   try {
-    postComponent = path.resolve("./src/templates/blog-post.js")
-    // indexComponent = path.resolve("./src/templates/blog-index.js")
-    require.resolve(postComponent)
-    // require.resolve(indexComponent)
+    components.post = path.resolve("./src/templates/blog-post.js")
+    components.index = path.resolve("./src/templates/blog-index.js")
+    require.resolve(components.post)
+    require.resolve(components.index)
   } catch (e) {
     reporter.warn("No templates found for blog theme in host site")
     return
@@ -38,14 +38,11 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   if (posts.length < 1) return
 
-  /*
   actions.createPage({
-    path: '/blog/',
-    component: indexComponent,
-    context: {
-    },
+    path: "/blog/",
+    component: components.index,
+    context: {},
   })
-  */
 
   posts.forEach((post, i) => {
     const previous = posts[i - 1]?.slug
@@ -53,7 +50,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
     actions.createPage({
       path: `/blog/${post.slug}`,
-      component: postComponent,
+      component: components.post,
       context: {
         id: post.id,
         slug: post.slug,

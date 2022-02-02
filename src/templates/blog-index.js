@@ -10,7 +10,7 @@ import {
 } from "../components/ui"
 
 export default function BlogIndex(props) {
-  const posts = props.data.allBlogPost
+  const posts = props.data.allBlogPost.nodes
 
   return (
     <Layout title="Blog">
@@ -30,14 +30,14 @@ export default function BlogIndex(props) {
   )
 }
 
-/* TODO
 export const query = graphql`
   query {
     allBlogPost {
-      id
-      slug
-      title
+      nodes {
+        id
+        slug
+        title
+      }
     }
   }
 `
-*/
