@@ -6,7 +6,7 @@ module.exports = {
     "contentful-plugin",
     // "wordpress-plugin",
 
-    // testing blog themes
+    // blog themes
     // "gatsby-theme-contentful-blog",
     "gatsby-theme-wordpress-blog",
   ],
