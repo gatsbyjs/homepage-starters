@@ -7,7 +7,7 @@ module.exports = {
     // "wordpress-plugin",
 
     // blog themes
-    // "gatsby-theme-contentful-blog",
-    "gatsby-theme-wordpress-blog",
+    "gatsby-theme-contentful-blog",
+    // "gatsby-theme-wordpress-blog",
   ],
 }
