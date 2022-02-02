@@ -5,11 +5,13 @@ require("dotenv").config({
 module.exports = {
   plugins: [
     {
-      resolve: "gatsby-source-contentful",
+      resolve: `gatsby-source-drupal`,
       options: {
-        downloadLocal: true,
-        spaceId: process.env.CONTENTFUL_SPACE_ID,
-        accessToken: process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN,
+        baseUrl: process.env.DRUPAL_BASE_URL,
+        basicAuth: {
+          username: process.env.DRUPAL_BASIC_AUTH_USERNAME,
+          password: process.env.DRUPAL_BASIC_AUTH_PASSWORD,
+        },
       },
     },
     "gatsby-plugin-sharp",
