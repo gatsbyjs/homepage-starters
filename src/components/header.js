@@ -59,7 +59,9 @@ export default function Header() {
         {/* Desktop / Tablet - Header / Nav */}
         <Space size={2} />
         <Flex>
-          <BrandLogo />
+          <NavLink to="/">
+            <BrandLogo />
+          </NavLink>
           <nav>
             <FlexList>
               {links &&

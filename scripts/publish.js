@@ -3,6 +3,7 @@ const fs = require("fs-extra")
 const path = require("path")
 const debug = require("debug")
 const SimpleGit = require("simple-git")
+const data = require("./data")
 
 /*
  * This script clones the remote starter repos, removes their contents,
@@ -23,12 +24,9 @@ const dir = {
   dist: path.join(__dirname, "..", "dist"),
 }
 
-const repos = {
-  contentful: "https://github.com/gatsbyjs/gatsby-starter-contentful-homepage",
-  datocms: "https://github.com/gatsbyjs/gatsby-starter-datocms-homepage",
-  wordpress: "https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage",
-  yaml: null,
-}
+const repos = Object.keys(data)
+  .map((key) => ({ [key]: data[key].repo }))
+  .reduce((a, b) => ({ ...a, ...b }), {})
 
 // make dist & clean up
 if (!fs.existsSync(dir.dist)) {
@@ -75,7 +73,7 @@ const createStarterDist = async (basename) => {
   ]
 
   // copy root files
-  const rootFiles = [".gitignore", "src", "gatsby-browser.js"]
+  const rootFiles = [".gitignore", "src", "gatsby-browser.js", "LICENSE"]
   rootFiles.forEach((file) => {
     const dest = path.join(dir.dist, name, file)
     console.log(`Copying '${file}' to '${dest}'`)

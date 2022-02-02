@@ -2,7 +2,6 @@
   "name": "datocms-homepage-plugin",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT",
   "dependencies": {
     "gatsby-plugin-react-helmet": "^5.5.0",
     "gatsby-source-datocms": "^3.0.12",
