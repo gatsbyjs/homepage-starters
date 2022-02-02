@@ -12,6 +12,7 @@ module.exports = {
           username: process.env.DRUPAL_BASIC_AUTH_USERNAME,
           password: process.env.DRUPAL_BASIC_AUTH_PASSWORD,
         },
+        fastBuilds: true,
       },
     },
     "gatsby-plugin-sharp",
