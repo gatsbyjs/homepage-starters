@@ -1,10 +1,23 @@
+const formatAsNodeType = (str) => {
+  const base = str.replace("node__", "")
+  const type = base
+    .split("_")
+    .map(
+      (section) =>
+        `${section.substring(0, 1).toUpperCase()}${section.substring(1)}`
+    )
+    .join("")
+  const internalType = base.toLowerCase()
+  return [type, internalType]
+}
+
 exports.createSchemaCustomization = async ({ actions }) => {
   actions.createFieldExtension({
     name: "blocktype",
     extend(options) {
       return {
         resolve(source) {
-          return source.internal.type.replace("Drupal", "")
+          return formatAsNodeType(source.internal.type)[0]
         },
       }
     },
@@ -13,21 +26,46 @@ exports.createSchemaCustomization = async ({ actions }) => {
   actions.createFieldExtension({
     name: "imageUrl",
     extend(options) {
-      const schemaRE = /^\/\//
-      const addURLSchema = (str) => {
-        if (schemaRE.test(str)) return `https:${str}`
-        return str
-      }
       return {
-        resolve(source) {
-          return addURLSchema(source.file.url)
+        async resolve(source, args, context, info) {
+          const fieldMediaImage = context.nodeModel.getNodeById({
+            id: source.relationships.field_media_image___NODE,
+          })
+          console.log(source.relationships.field_media_image___NODE)
+          const localFile = context.nodeModel.getNodeById({
+            id: fieldMediaImage.localFile___NODE,
+          })
+          return localFile.url
+        },
+      }
+    },
+  })
+
+  actions.createFieldExtension({
+    name: "proxyImage",
+    extend(options) {
+      return {
+        async resolve(source, args, context, info) {
+          const imageType = info.schema.getType("ImageSharp")
+          const fieldMediaImage = context.nodeModel.getNodeById({
+            id: source.relationships.field_media_image___NODE,
+          })
+          const localFile = context.nodeModel.getNodeById({
+            id: fieldMediaImage.localFile___NODE,
+          })
+          const image = context.nodeModel.getNodeById({
+            id: localFile.children[0],
+          })
+          const resolver = imageType.getFields().gatsbyImageData.resolve
+          if (!resolver) return null
+          return await resolver(image, args, context, info)
         },
       }
     },
   })
 
   // abstract interfaces
-  actions.createTypes(`
+  actions.createTypes(/* GraphQL */ `
     interface HomepageBlock implements Node {
       id: ID!
       blocktype: String
@@ -211,53 +249,57 @@ exports.createSchemaCustomization = async ({ actions }) => {
   `)
 
   // CMS-specific types
-  actions.createTypes(`
-    type DrupalHomepageLink implements Node & HomepageLink @dontInfer {
+  actions.createTypes(/* GraphQL */ `
+    type node__homepage_link implements Node & HomepageLink @dontInfer {
       id: ID!
-      href: String
-      text: String
+      href: String @proxy(from: "field_href")
+      text: String @proxy(from: "title")
     }
 
-    type DrupalAsset implements Node & HomepageImage {
+    type media__image implements Node & HomepageImage {
       id: ID!
-      alt: String @proxy(from: "title")
-      gatsbyImageData: JSON
+      alt: String @proxy(from: "field_media_image.alt")
+      gatsbyImageData: JSON @proxyImage
       url: String @imageUrl
-      file: JSON
       title: String
     }
 
-    type DrupalHomepageHero implements Node & HomepageHero & HomepageBlock @dontInfer {
+    type node__homepage_hero implements Node & HomepageHero & HomepageBlock {
       id: ID!
       blocktype: String @blocktype
-      heading: String
-      kicker: String
-      subhead: String
-      image: HomepageImage @link(from: "image___NODE")
-      text: String
-      links: [HomepageLink] @link(from: "links___NODE")
+      heading: String @proxy(from: "title")
+      kicker: String @proxy(from: "field_kicker")
+      subhead: String @proxy(from: "field_subhead")
+      image: HomepageImage
+        @link(by: "id", from: "relationships.field_image___NODE")
+      text: String @proxy(from: "field_text")
+      links: [HomepageLink]
+        @link(by: "id", from: "relationships.field_links___NODE")
     }
 
-    type DrupalHomepageFeature implements Node & HomepageBlock & HomepageFeature @dontInfer {
+    type DrupalHomepageFeature implements Node & HomepageBlock & HomepageFeature
+      @dontInfer {
       blocktype: String @blocktype
       heading: String
-      kicker: String
-      text: String
+      kicker: String @proxy(from: "field_kicker")
+      text: String @proxy(from: "title")
       image: HomepageImage @link(from: "image___NODE")
       links: [HomepageLink] @link(from: "links___NODE")
     }
-    type DrupalHomepageFeatureList implements Node & HomepageBlock & HomepageFeatureList @dontInfer {
+    type DrupalHomepageFeatureList implements Node & HomepageBlock & HomepageFeatureList
+      @dontInfer {
       blocktype: String @blocktype
-      kicker: String
+      kicker: String @proxy(from: "field_kicker")
       heading: String
-      text: String
+      text: String @proxy(from: "title")
       content: [HomepageFeature] @link(from: "content___NODE")
     }
 
-    type DrupalHomepageCta implements Node & HomepageBlock & HomepageCta @dontInfer {
+    type DrupalHomepageCta implements Node & HomepageBlock & HomepageCta
+      @dontInfer {
       blocktype: String @blocktype
       heading: String
-      text: String
+      text: String @proxy(from: "title")
       image: HomepageImage @link(from: "image___NODE")
       links: [HomepageLink] @link(from: "links___NODE")
     }
@@ -268,23 +310,26 @@ exports.createSchemaCustomization = async ({ actions }) => {
       alt: String
     }
 
-    type DrupalHomepageLogoList implements Node & HomepageBlock & HomepageLogoList @dontInfer {
+    type DrupalHomepageLogoList implements Node & HomepageBlock & HomepageLogoList
+      @dontInfer {
       blocktype: String @blocktype
-      text: String
+      text: String @proxy(from: "title")
       logos: [HomepageLogo] @link(from: "logos___NODE")
     }
 
-    type DrupalHomepageTestimonial implements Node & HomepageTestimonial @dontInfer {
+    type DrupalHomepageTestimonial implements Node & HomepageTestimonial
+      @dontInfer {
       id: ID!
       quote: String
       source: String
       avatar: HomepageImage @link(from: "avatar___NODE")
     }
 
-    type DrupalHomepageTestimonialList implements Node & HomepageBlock & HomepageTestimonialList @dontInfer {
+    type DrupalHomepageTestimonialList implements Node & HomepageBlock & HomepageTestimonialList
+      @dontInfer {
       id: ID!
       blocktype: String @blocktype
-      kicker: String
+      kicker: String @proxy(from: "field_kicker")
       heading: String
       content: [HomepageTestimonial] @link(from: "content___NODE")
     }
@@ -292,31 +337,26 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type DrupalHomepageBenefit implements Node & HomepageBenefit @dontInfer {
       id: ID!
       heading: String
-      text: String
+      text: String @proxy(from: "title")
       image: HomepageImage @link(from: "image___NODE")
     }
 
-    type DrupalHomepageBenefitList implements Node & HomepageBlock & HomepageBenefitList @dontInfer {
+    type DrupalHomepageBenefitList implements Node & HomepageBlock & HomepageBenefitList
+      @dontInfer {
       id: ID!
       blocktype: String @blocktype
       heading: String
-      text: String
+      text: String @proxy(from: "title")
       content: [HomepageBenefit] @link(from: "content___NODE")
     }
 
-    type DrupalHomepageStat implements Node & HomepageStat @dontInfer {
-      id: ID!
-      value: String
-      label: String
-      heading: String
-    }
-
-    type DrupalHomepageStatList implements Node & HomepageBlock & HomepageStatList @dontInfer {
+    type DrupalHomepageStatList implements Node & HomepageBlock & HomepageStatList
+      @dontInfer {
       id: ID!
       blocktype: String @blocktype
-      kicker: String
+      kicker: String @proxy(from: "field_kicker")
       heading: String
-      text: String
+      text: String @proxy(from: "title")
       image: HomepageImage @link(from: "image___NODE")
       icon: HomepageImage @link(from: "icon___NODE")
       content: [HomepageStat] @link(from: "content___NODE")
@@ -325,16 +365,17 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type DrupalHomepageProduct implements Node & HomepageProduct @dontInfer {
       heading: String
-      text: String
+      text: String @proxy(from: "title")
       image: HomepageImage @link(from: "image___NODE")
       links: [HomepageLink] @link(from: "links___NODE")
     }
 
-    type DrupalHomepageProductList implements Node & HomepageProductList & HomepageBlock @dontInfer {
+    type DrupalHomepageProductList implements Node & HomepageProductList & HomepageBlock
+      @dontInfer {
       blocktype: String @blocktype
       heading: String
-      kicker: String
-      text: String
+      kicker: String @proxy(from: "field_kicker")
+      text: String @proxy(from: "title")
       content: [HomepageProduct] @link(from: "content___NODE")
     }
 
@@ -348,7 +389,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
   `)
 
   // Layout types
-  actions.createTypes(`
+  actions.createTypes(/* GraphQL */ `
     type DrupalLayoutHeader implements Node & LayoutHeader @dontInfer {
       id: ID!
       links: [HomepageLink] @link(from: "links___NODE")

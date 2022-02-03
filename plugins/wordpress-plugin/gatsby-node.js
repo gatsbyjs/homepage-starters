@@ -40,7 +40,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
   })
 
   // abstract interfaces
-  actions.createTypes(`
+  actions.createTypes(/* GraphQL */ `
     interface HomepageBlock implements Node {
       id: ID!
       blocktype: String
@@ -116,7 +116,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
   `)
 
   // creating custom types because WP does not provide these
-  actions.createTypes(`
+  actions.createTypes(/* GraphQL */ `
     type HomepageLink implements Node {
       id: ID!
       href: String
@@ -212,7 +212,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
   `)
 
-  actions.createTypes(`
+  actions.createTypes(/* GraphQL */ `
     type WpMediaItem implements Node & HomepageImage {
       id: ID!
       alt: String @proxy(from: "altText")
@@ -256,7 +256,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
   `)
 
   // Layout types
-  actions.createTypes(`
+  actions.createTypes(/* GraphQL */ `
     type WpHeader implements Node & LayoutHeader {
       id: ID!
       contentTypeName: String!

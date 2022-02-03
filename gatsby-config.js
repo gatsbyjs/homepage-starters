@@ -6,5 +6,6 @@ module.exports = {
     "drupal-plugin",
     // "contentful-plugin",
     // "wordpress-plugin",
+    // "gatsby-plugin-schema-snapshot",
   ],
 }
