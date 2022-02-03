@@ -150,6 +150,17 @@ export const text = styleVariants({
       letterSpacing: theme.letterSpacings.normal,
     },
   ],
+  superHeading: [
+    margin0,
+    {
+      marginTop: theme.space[5],
+      marginBottom: theme.space[6],
+      fontSize: theme.fontSizes[7],
+      fontWeight: theme.fontWeights.extrabold,
+      lineHeight: theme.lineHeights.heading,
+      letterSpacing: theme.letterSpacings.tight,
+    },
+  ],
   heading: [
     margin0,
     {

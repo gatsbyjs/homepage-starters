@@ -101,6 +101,10 @@ export function Text({ variant = "body", center, bold, ...props }) {
   )
 }
 
+export function SuperHeading({ ...props }) {
+  return <Text as="h1" variant="superHeading" {...props} />
+}
+
 export function Heading({ ...props }) {
   return <Text as="h2" variant="heading" {...props} />
 }

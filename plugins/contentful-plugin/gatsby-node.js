@@ -208,9 +208,25 @@ exports.createSchemaCustomization = async ({ actions }) => {
       header: LayoutHeader
       footer: LayoutFooter
     }
+
+    interface AboutPage implements Node {
+      id: ID!
+      title: String
+      description: String
+      image: HomepageImage
+      content: [HomepageBlock]
+    }
+
+    interface AboutHero implements Node & HomepageBlock {
+      id: ID!
+      blocktype: String
+      heading: String
+      text: String
+      image: HomepageImage
+    }
   `)
 
-  // CMS-specific types
+  // CMS-specific types for Homepage
   actions.createTypes(`
     type ContentfulHomepageLink implements Node & HomepageLink @dontInfer {
       id: ID!
@@ -246,6 +262,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       image: HomepageImage @link(from: "image___NODE")
       links: [HomepageLink] @link(from: "links___NODE")
     }
+
     type ContentfulHomepageFeatureList implements Node & HomepageBlock & HomepageFeatureList @dontInfer {
       blocktype: String @blocktype
       kicker: String
@@ -339,6 +356,25 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
 
     type ContentfulHomepage implements Node & Homepage @dontInfer {
+      id: ID!
+      title: String
+      description: String
+      image: HomepageImage @link(from: "image___NODE")
+      content: [HomepageBlock] @link(from: "content___NODE")
+    }
+  `)
+
+  // CMS specific types for About page
+  actions.createTypes(`
+    type ContentfulAboutHero implements Node & AboutHero & HomepageBlock @dontInfer {
+      id: ID!
+      blocktype: String @blocktype
+      heading: String
+      text: String
+      image: HomepageImage @link(from: "image___NODE")
+    }
+
+    type ContentfulAboutPage implements Node & AboutPage @dontInfer {
       id: ID!
       title: String
       description: String
