@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "import-content": "node ./scripts/import.js",
+    "setup": "node ./scripts/setup.js",
     "export-content": "node ./scripts/export.js"
   },
   "dependencies": {
@@ -13,6 +13,9 @@
   },
   "devDependencies": {
     "axios": "^0.25.0",
-    "datocms-client": "^3.5.14"
+    "chalk": "4",
+    "datocms-client": "^3.5.14",
+    "inquirer": "^8.2.0",
+    "yargs": "^17.3.1"
   }
 }

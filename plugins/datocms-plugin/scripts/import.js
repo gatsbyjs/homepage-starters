@@ -32,6 +32,7 @@ const orderedItemTypes = [
 ]
 
 async function importContent(token) {
+  console.log(`Importing ${data.itemTypes.length} DatoCMS Models`)
   const client = new SiteClient(token)
   const { itemTypes, fields } = data
 
@@ -111,11 +112,9 @@ async function importContent(token) {
 
   if (errors.length) {
     fs.writeFileSync("datocms-errors.log", JSON.stringify(errors, null, 2))
+    return errors
   }
+  return null
 }
-
-console.log(`Importing ${data.itemTypes.length} DatoCMS Models`)
-
-importContent(process.env.DATOCMS_API_TOKEN)
 
 module.exports = importContent
