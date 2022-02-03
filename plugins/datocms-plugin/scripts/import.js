@@ -31,20 +31,30 @@ const orderedItemTypes = [
   "Page",
 ]
 
-module.exports = async function importContent(token) {
+async function importContent(token) {
   const client = new SiteClient(token)
-  const { itemTypes, fields, items } = data
+  const { itemTypes, fields } = data
 
   const errors = []
 
-  // map itemType ids to names
-  items.forEach((item) => {
-    item.itemType = itemTypes.find((t) => t.id === item.itemType)?.name
-    if (!item.itemType) {
-      throw new Error(`Missing itemType: ${item}`)
+  // map field validators to itemType names
+  fields.forEach((field) => {
+    const richItemTypes = field.validators.richTextBlocks?.itemTypes
+    const linkItemTypes = field.validators.itemItemType?.itemTypes
+    if (!richItemTypes?.length && !linkItemTypes?.length) return
+    if (richItemTypes) {
+      field.validators.richTextBlocks.itemTypes = richItemTypes.map((id) => {
+        return itemTypes.find((t) => t.id === id)?.apiKey
+      })
+    }
+    if (linkItemTypes) {
+      field.validators.itemItemType.itemTypes = linkItemTypes.map((id) => {
+        return itemTypes.find((t) => t.id === id)?.apiKey
+      })
     }
   })
 
+  const nextIDs = {}
   for (let i = 0; i < orderedItemTypes.length; i++) {
     const name = orderedItemTypes[i]
     const type = itemTypes.find((t) => t.name === name)
@@ -62,28 +72,40 @@ module.exports = async function importContent(token) {
 
     try {
       const record = await client.itemType.create(itemType)
+      nextIDs[record.apiKey] = record.id
+      console.log("created Item Type", record.name)
+
       for (let j = 0; j < itemType.fields.length; j++) {
         const field = fields.find((f) => f.id === itemType.fields[j])
+        console.log(`Creating field: ${field.label} ${field.apiKey}`)
+        const richItemTypes = field.validators.richTextBlocks?.itemTypes
+        const linkItemTypes = field.validators.itemItemType?.itemTypes
+        if (richItemTypes) {
+          field.validators.richTextBlocks.itemTypes = richItemTypes.map(
+            (key) => nextIDs[key]
+          )
+          console.log("Creating linked field")
+        }
+        if (linkItemTypes) {
+          field.validators.itemItemType.itemTypes = linkItemTypes.map(
+            (key) => nextIDs[key]
+          )
+          console.log("Creating linked field")
+        }
         try {
           // some fields can reference other itemTypes
           if (field.id) {
             const { id, ...attr } = field
+            const nextField = await client.field.create(record.id, attr)
+            console.log(`Created field: ${nextField.label}`)
           }
         } catch (e) {
-          const existingNextField = await client.field.find(field.apiKey)
-          if (existingNextField.id) {
-            console.log(`${field.label} already created`)
-          } else {
-            console.error(`Error creating field ${field.label}`)
-            errors.push(e)
-          }
+          console.log(`Could not create field: ${field.apiKey}`)
         }
       }
-      console.log("created Item Type", record.name)
     } catch (e) {
       console.error(`Error creating Item Type: ${itemType.name} - ${e.message}`)
       errors.push(e)
-      // TODO handle existing item Types
     }
   }
 
@@ -92,8 +114,8 @@ module.exports = async function importContent(token) {
   }
 }
 
-console.log(
-  `Importing ${data.items.length} DatoCMS Items and ${data.itemTypes.length} Item Types`
-)
+console.log(`Importing ${data.itemTypes.length} DatoCMS Models`)
 
 importContent(process.env.DATOCMS_API_TOKEN)
+
+module.exports = importContent
