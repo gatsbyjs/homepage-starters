@@ -31,7 +31,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
           const fieldMediaImage = context.nodeModel.getNodeById({
             id: source.relationships.field_media_image___NODE,
           })
-          console.log(source.relationships.field_media_image___NODE)
           const localFile = context.nodeModel.getNodeById({
             id: fieldMediaImage.localFile___NODE,
           })
@@ -132,6 +131,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     interface HomepageLogoList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
+      name: String
       text: String
       logos: [HomepageLogo]
     }
@@ -277,143 +277,179 @@ exports.createSchemaCustomization = async ({ actions }) => {
         @link(by: "id", from: "relationships.field_links___NODE")
     }
 
-    type DrupalHomepageFeature implements Node & HomepageBlock & HomepageFeature
+    type node__homepage_feature implements Node & HomepageBlock & HomepageFeature
       @dontInfer {
       blocktype: String @blocktype
-      heading: String
+      heading: String @proxy(from: "title")
       kicker: String @proxy(from: "field_kicker")
-      text: String @proxy(from: "title")
-      image: HomepageImage @link(from: "image___NODE")
-      links: [HomepageLink] @link(from: "links___NODE")
+      text: String @proxy(from: "field_text")
+      image: HomepageImage
+        @link(by: "id", from: "relationships.field_image___NODE")
+      links: [HomepageLink]
+        @link(by: "id", from: "relationships.field_links___NODE")
     }
-    type DrupalHomepageFeatureList implements Node & HomepageBlock & HomepageFeatureList
+    type node__homepage_feature_list implements Node & HomepageBlock & HomepageFeatureList
       @dontInfer {
-      blocktype: String @blocktype
-      kicker: String @proxy(from: "field_kicker")
-      heading: String
-      text: String @proxy(from: "title")
-      content: [HomepageFeature] @link(from: "content___NODE")
-    }
-
-    type DrupalHomepageCta implements Node & HomepageBlock & HomepageCta
-      @dontInfer {
-      blocktype: String @blocktype
-      heading: String
-      text: String @proxy(from: "title")
-      image: HomepageImage @link(from: "image___NODE")
-      links: [HomepageLink] @link(from: "links___NODE")
-    }
-
-    type DrupalHomepageLogo implements Node & HomepageLogo @dontInfer {
-      id: ID!
-      image: HomepageImage @link(from: "image___NODE")
-      alt: String
-    }
-
-    type DrupalHomepageLogoList implements Node & HomepageBlock & HomepageLogoList
-      @dontInfer {
-      blocktype: String @blocktype
-      text: String @proxy(from: "title")
-      logos: [HomepageLogo] @link(from: "logos___NODE")
-    }
-
-    type DrupalHomepageTestimonial implements Node & HomepageTestimonial
-      @dontInfer {
-      id: ID!
-      quote: String
-      source: String
-      avatar: HomepageImage @link(from: "avatar___NODE")
-    }
-
-    type DrupalHomepageTestimonialList implements Node & HomepageBlock & HomepageTestimonialList
-      @dontInfer {
-      id: ID!
       blocktype: String @blocktype
       kicker: String @proxy(from: "field_kicker")
-      heading: String
-      content: [HomepageTestimonial] @link(from: "content___NODE")
+      heading: String @proxy(from: "title")
+      text: String @proxy(from: "field_text")
+      content: [HomepageFeature]
+        @link(by: "id", from: "relationships.field_content___NODE")
     }
 
-    type DrupalHomepageBenefit implements Node & HomepageBenefit @dontInfer {
+    type node__homepage_cta implements Node & HomepageBlock & HomepageCta
+      @dontInfer {
+      blocktype: String @blocktype
+      heading: String @proxy(from: "title")
+      text: String @proxy(from: "field_text")
+      image: HomepageImage
+        @link(by: "id", from: "relationships.field_image___NODE")
+      links: [HomepageLink]
+        @link(by: "id", from: "relationships.field_links___NODE")
+    }
+
+    type node__homepage_logo implements Node & HomepageLogo @dontInfer {
       id: ID!
-      heading: String
-      text: String @proxy(from: "title")
-      image: HomepageImage @link(from: "image___NODE")
+      image: HomepageImage
+        @link(by: "id", from: "relationships.field_image___NODE")
+      alt: String @proxy(from: "title")
     }
 
-    type DrupalHomepageBenefitList implements Node & HomepageBlock & HomepageBenefitList
+    type node__homepage_logo_list implements Node & HomepageBlock & HomepageLogoList
+      @dontInfer {
+      blocktype: String @blocktype
+      name: String @proxy(from: "title")
+      text: String @proxy(from: "field_text")
+      logos: [HomepageLogo]
+        @link(by: "id", from: "relationships.field_logos___NODE")
+    }
+
+    type node__homepage_testimonial implements Node & HomepageTestimonial
       @dontInfer {
       id: ID!
-      blocktype: String @blocktype
-      heading: String
-      text: String @proxy(from: "title")
-      content: [HomepageBenefit] @link(from: "content___NODE")
+      quote: String @proxy(from: "field_quote")
+      source: String @proxy(from: "title")
+      avatar: HomepageImage
+        @link(by: "id", from: "relationships.field_avatar___NODE")
     }
 
-    type DrupalHomepageStatList implements Node & HomepageBlock & HomepageStatList
+    type node__homepage_testimonial_list implements Node & HomepageBlock & HomepageTestimonialList
       @dontInfer {
       id: ID!
       blocktype: String @blocktype
       kicker: String @proxy(from: "field_kicker")
-      heading: String
-      text: String @proxy(from: "title")
-      image: HomepageImage @link(from: "image___NODE")
-      icon: HomepageImage @link(from: "icon___NODE")
-      content: [HomepageStat] @link(from: "content___NODE")
-      links: [HomepageLink] @link(from: "links___NODE")
+      heading: String @proxy(from: "title")
+      content: [HomepageTestimonial]
+        @link(by: "id", from: "relationships.field_content___NODE")
     }
 
-    type DrupalHomepageProduct implements Node & HomepageProduct @dontInfer {
-      heading: String
-      text: String @proxy(from: "title")
-      image: HomepageImage @link(from: "image___NODE")
-      links: [HomepageLink] @link(from: "links___NODE")
+    type node__home_page_benefit implements Node & HomepageBenefit @dontInfer {
+      id: ID!
+      heading: String @proxy(from: "title")
+      text: String @proxy(from: "field_text")
+      image: HomepageImage
+        @link(by: "id", from: "relationships.field_image___NODE")
     }
 
-    type DrupalHomepageProductList implements Node & HomepageProductList & HomepageBlock
+    type node__homepage_benefit_list implements Node & HomepageBlock & HomepageBenefitList
+      @dontInfer {
+      id: ID!
+      blocktype: String @blocktype
+      heading: String @proxy(from: "title")
+      text: String @proxy(from: "field_text")
+      content: [HomepageBenefit]
+        @link(by: "id", from: "relationships.field_content___NODE")
+    }
+
+    type node__homepage_stat implements Node & HomepageBlock & HomepageStat
+      @dontInfer {
+      id: ID!
+      blocktype: String @blocktype
+      heading: String @proxy(from: "field_heading")
+      label: String @proxy(from: "field_label")
+      value: String @proxy(from: "title")
+    }
+
+    type node__homepage_stat_list implements Node & HomepageBlock & HomepageStatList
+      @dontInfer {
+      id: ID!
+      blocktype: String @blocktype
+      kicker: String @proxy(from: "field_kicker")
+      heading: String @proxy(from: "title")
+      text: String @proxy(from: "field_text")
+      image: HomepageImage
+        @link(by: "id", from: "relationships.field_image___NODE")
+      icon: HomepageImage
+        @link(by: "id", from: "relationships.field_icon___NODE")
+      content: [HomepageStat]
+        @link(by: "id", from: "relationships.field_content___NODE")
+      links: [HomepageLink]
+        @link(by: "id", from: "relationships.field_links___NODE")
+    }
+
+    type node__homepage_product implements Node & HomepageProduct @dontInfer {
+      heading: String @proxy(from: "title")
+      text: String @proxy(from: "field_text")
+      image: HomepageImage
+        @link(by: "id", from: "relationships.field_image___NODE")
+      links: [HomepageLink]
+        @link(by: "id", from: "relationships.field_links___NODE")
+    }
+
+    type node__homepage_product_list implements Node & HomepageProductList & HomepageBlock
       @dontInfer {
       blocktype: String @blocktype
-      heading: String
+      heading: String @proxy(from: "title")
       kicker: String @proxy(from: "field_kicker")
-      text: String @proxy(from: "title")
-      content: [HomepageProduct] @link(from: "content___NODE")
+      text: String @proxy(from: "field_text")
+      content: [HomepageProduct]
+        @link(by: "id", from: "relationships.field_content___NODE")
     }
 
-    type DrupalHomepage implements Node & Homepage @dontInfer {
+    type node__homepage implements Node & Homepage @dontInfer {
       id: ID!
       title: String
-      description: String
-      image: HomepageImage @link(from: "image___NODE")
-      content: [HomepageBlock] @link(from: "content___NODE")
+      description: String @proxy(from: "field_description")
+      image: HomepageImage
+        @link(by: "id", from: "relationships.field_image___NODE")
+      content: [HomepageBlock]
+        @link(by: "id", from: "relationships.field_content___NODE")
     }
   `)
 
   // Layout types
   actions.createTypes(/* GraphQL */ `
-    type DrupalLayoutHeader implements Node & LayoutHeader @dontInfer {
+    type node__layout_header implements Node & LayoutHeader @dontInfer {
       id: ID!
-      links: [HomepageLink] @link(from: "links___NODE")
-      cta: HomepageLink @link(from: "cta___NODE")
+      links: [HomepageLink]
+        @link(by: "id", from: "relationships.field_links___NODE")
+      cta: HomepageLink @link(by: "id", from: "relationships.field_cta___NODE")
     }
 
-    type DrupalSocialLink implements Node & SocialLink @dontInfer {
+    type node__social_link implements Node & SocialLink @dontInfer {
       id: ID!
-      username: String!
-      service: SocialService!
+      username: String! @proxy(from: "field_username")
+      service: SocialService! @proxy(from: "title")
     }
 
-    type DrupalLayoutFooter implements Node & LayoutFooter @dontInfer {
+    type node__layout_footer implements Node & LayoutFooter @dontInfer {
       id: ID!
-      links: [HomepageLink] @link(from: "links___NODE")
-      meta: [HomepageLink] @link(from: "meta___NODE")
-      socialLinks: [SocialLink] @link(from: "socialLinks___NODE")
-      copyright: String
+      links: [HomepageLink]
+        @link(by: "id", from: "relationships.field_links___NODE")
+      meta: [HomepageLink]
+        @link(by: "id", from: "relationships.field_meta___NODE")
+      socialLinks: [SocialLink]
+        @link(by: "id", from: "relationships.field_social_links___NODE")
+      copyright: String @proxy(from: "field_copyright")
     }
 
-    type DrupalLayout implements Node & Layout @dontInfer {
+    type node__layout implements Node & Layout @dontInfer {
       id: ID!
-      header: LayoutHeader @link(from: "header___NODE")
-      footer: LayoutFooter @link(from: "footer___NODE")
+      header: LayoutHeader
+        @link(by: "id", from: "relationships.field_header___NODE")
+      footer: LayoutFooter
+        @link(by: "id", from: "relationships.field_footer___NODE")
     }
   `)
 }
