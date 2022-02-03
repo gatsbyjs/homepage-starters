@@ -7,68 +7,13 @@ const path = require("path")
 const axios = require("axios")
 const client = new SiteClient(process.env.DATOCMS_API_TOKEN)
 
-console.log("Downloading DatoCMS records...")
-
-const data = {}
+console.log("Exporting DatoCMS Models...")
 
 // https://www.datocms.com/docs/import-and-export/export-data
 async function exportContent() {
-  data.items = await client.items.all({}, { allPages: true })
-
-  const site = await client.site.find()
-  const uploads = await client.uploads.all({}, { allPages: true })
-  await uploads.reduce((chain, upload) => {
-    return chain.then(() => {
-      return new Promise((resolve) => {
-        const imageUrl = "https://" + site.imgixHost + upload.path
-        console.log(`Downloading ${imageUrl}...`)
-        const stream = fs.createWriteStream(
-          path.join(".", "scripts", "assets", path.basename(upload.path))
-        )
-        axios({
-          method: "get",
-          responseType: "stream",
-          url: imageUrl,
-        }).then((res) => {
-          res.data.pipe(stream)
-        })
-        stream.on("close", resolve)
-      })
-    })
-  }, Promise.resolve())
-
-  /*
-    .then(() => {
-      return client.site.find()
-    })
-    .then((site) => {
-      return client.uploads.all({}, { allPages: true }).then((uploads) => {
-        return uploads.reduce((chain, upload) => {
-          return chain.then(() => {
-            return new Promise((resolve) => {
-              const imageUrl = "https://" + site.imgixHost + upload.path
-              console.log(`Downloading ${imageUrl}...`)
-              const stream = fs.createWriteStream(
-                path.join(".", "scripts", "assets", path.basename(upload.path))
-              )
-              axios({
-                method: "get",
-                responseType: "stream",
-                url: imageUrl,
-              }).then((res) => {
-                res.data.pipe(stream)
-              })
-              stream.on("close", resolve)
-            })
-          })
-        }, Promise.resolve())
-      })
-    })
-  */
-
-  data.itemTypes = await client.itemTypes.all()
-
+  const data = {}
   data.fields = []
+  data.itemTypes = await client.itemTypes.all()
 
   for (let i = 0; i < data.itemTypes.length; i++) {
     const itemType = data.itemTypes[i]
@@ -81,7 +26,7 @@ async function exportContent() {
 
   const json = JSON.stringify(data, null, 2)
   fs.writeFileSync("scripts/data.json", json)
-  console.log("Got all items and itemTypes")
+  console.log("Exported Models and Fields from DatoCMS")
 }
 
 exportContent(process.env.DATOCMS_API_TOKEN)

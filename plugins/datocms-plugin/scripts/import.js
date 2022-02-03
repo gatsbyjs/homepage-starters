@@ -1,6 +1,5 @@
 // https://www.datocms.com/docs/import-and-export/importing-data#step-3-importing-to-datocms
 const fs = require("fs")
-const uniq = require("lodash.uniq")
 const { SiteClient } = require("datocms-client")
 const data = require("./data.json")
 
@@ -32,11 +31,10 @@ const orderedItemTypes = [
   "Page",
 ]
 
-async function importContent(token) {
+module.exports = async function importContent(token) {
   const client = new SiteClient(token)
   const { itemTypes, fields, items } = data
 
-  const nextItemTypes = []
   const errors = []
 
   // map itemType ids to names
@@ -64,14 +62,12 @@ async function importContent(token) {
 
     try {
       const record = await client.itemType.create(itemType)
-      nextItemTypes.push(record)
       for (let j = 0; j < itemType.fields.length; j++) {
         const field = fields.find((f) => f.id === itemType.fields[j])
         try {
           // some fields can reference other itemTypes
           if (field.id) {
             const { id, ...attr } = field
-            const nextField = await client.field.create(record.id, attr)
           }
         } catch (e) {
           const existingNextField = await client.field.find(field.apiKey)
@@ -80,10 +76,6 @@ async function importContent(token) {
           } else {
             console.error(`Error creating field ${field.label}`)
             errors.push(e)
-            fs.writeFileSync(
-              "datocms-errors.log",
-              JSON.stringify(errors, null, 2)
-            )
           }
         }
       }
@@ -91,44 +83,9 @@ async function importContent(token) {
     } catch (e) {
       console.error(`Error creating Item Type: ${itemType.name} - ${e.message}`)
       errors.push(e)
-      // throw new Error(e)
       // TODO handle existing item Types
-      fs.writeFileSync("datocms-errors.log", JSON.stringify(errors, null, 2))
     }
   }
-
-  console.log("Importing content")
-  fs.writeFileSync(
-    "temp-items.json",
-    JSON.stringify({ items, __itemTypes: nextItemTypes }, null, 2)
-  )
-
-  for (let i = 0; i < items.length; i++) {
-    const { id, meta, creator, updatedAt, createdAt, ...item } = items[i]
-    // remap new itemType ids based on name
-    item.itemType = nextItemTypes.find((t) => t.name === item.itemType).id
-    try {
-      const record = await client.item.create(item)
-    } catch (e) {
-      console.error(`Error creating item: ${id} - ${e.message}`)
-      errors.push(e)
-      fs.writeFileSync("datocms-errors.log", JSON.stringify(errors, null, 2))
-    }
-  }
-
-  /* TODO
-    const image = await client.uploadFile(
-      dogBreed.image_url,
-      {
-        defaultFieldMetadata: {
-          en: {
-            alt: `${dogBreed} dog`
-          }
-        },
-        notes: `Imported from external source`,
-      }
-    )
-    */
 
   if (errors.length) {
     fs.writeFileSync("datocms-errors.log", JSON.stringify(errors, null, 2))
@@ -140,17 +97,3 @@ console.log(
 )
 
 importContent(process.env.DATOCMS_API_TOKEN)
-
-/*
-const data = [
-  {
-    "id": 1,
-    "breed": "Alapaha Blue Blood Bulldog",
-    "bred_for": "Guarding",
-    "category": "Mixed",
-    "description": "The Alapaha Blue Blood Bulldog is a well-developed, exaggerated bulldog with a broad head and...",
-    "life_span": "12 - 13 years",
-    "image_url": "https://cdn2.thedogapi.com/images/kuvpGHCzm.jpg"
-  },
-]
-*/
