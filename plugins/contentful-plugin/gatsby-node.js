@@ -265,6 +265,14 @@ exports.createSchemaCustomization = async ({ actions }) => {
       link: AboutLink
       logos: [HomepageLogo]
     }
+
+    interface AboutCta implements Node & HomepageBlock {
+      id: ID!
+      blocktype: String
+      heading: String
+      text: String
+      links: [AboutLink]
+    }
   `)
 
   // CMS-specific types for Homepage
@@ -411,6 +419,14 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       href: String
       text: String
+    }
+
+    type ContentfulAboutCta implements Node & AboutCta & HomepageBlock @dontInfer {
+      id: ID!
+      blocktype: String @blocktype
+      heading: String
+      text: String
+      links: [AboutLink] @link(from: "links___NODE")
     }
 
     type ContentfulAboutHero implements Node & AboutHero & HomepageBlock @dontInfer {
