@@ -224,6 +224,18 @@ exports.createSchemaCustomization = async ({ actions }) => {
       text: String
       image: HomepageImage
     }
+
+    interface AboutStat implements Node {
+      id: ID!
+      value: String
+      label: String
+    }
+
+    interface AboutStatList implements Node & HomepageBlock {
+      id: ID!
+      blocktype: String
+      content: [AboutStat]
+    }
   `)
 
   // CMS-specific types for Homepage
@@ -372,6 +384,18 @@ exports.createSchemaCustomization = async ({ actions }) => {
       heading: String
       text: String
       image: HomepageImage @link(from: "image___NODE")
+    }
+
+    type ContentfulAboutStat implements Node& AboutStat @dontInfer {
+      id: ID!
+      value: String
+      label: String
+    }
+
+    type ContentfulAboutStatList implements Node & AboutStatList & HomepageBlock @dontInfer {
+      id: ID!
+      blocktype: String @blocktype
+      content: [AboutStat] @link(from: "content___NODE")
     }
 
     type ContentfulAboutPage implements Node & AboutPage @dontInfer {

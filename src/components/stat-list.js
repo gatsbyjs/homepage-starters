@@ -14,7 +14,7 @@ import {
   ButtonList,
 } from "./ui"
 
-function Stat(props) {
+export function Stat(props) {
   return (
     <Box>
       <Text variant="serif">{props.value}</Text>
