@@ -38,6 +38,8 @@ export const query = graphql`
         blocktype
         ...AboutHeroContent
         ...AboutStatListContent
+        ...HomepageProductListContent
+        ...AboutLeadershipContent
       }
     }
   }
