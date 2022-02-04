@@ -145,11 +145,6 @@ export const box = styleVariants({
   },
 })
 
-export const section = style({
-  paddingTop: theme.space[5],
-  paddingBottom: theme.space[5],
-})
-
 export const margin = styleVariants(
   {
     ...theme.space,
