@@ -35,7 +35,7 @@ export default function StatList(props) {
               {props.heading}
             </Heading>
             {props.text && <Text variant="lead">{props.text}</Text>}
-            <FlexList gap={5}>
+            <FlexList responsive gap={5}>
               {props.content.map((stat) => (
                 <li key={stat.id}>
                   <Stat {...stat} />
