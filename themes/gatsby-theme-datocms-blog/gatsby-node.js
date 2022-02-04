@@ -1,28 +1,19 @@
 const path = require("path")
+const dato = require("datocms-structured-text-to-html-string")
 
 exports.createSchemaCustomization = async ({ actions }) => {
-  /* TODO for datocms
   actions.createFieldExtension({
-    name: "proxyHtml",
+    name: "richText",
     extend(options) {
       return {
-        async resolve(source, args, context, info) {
-          const markdownType = info.schema.getType("MarkdownRemark")
-          const postType = info.schema.getType("ContentfulBlogPost")
-
-          const [childID] = source.children
-          const body = context.nodeModel.getNodeById({ id: childID })
-          const [markdownID] = body.children
-          const markdown = context.nodeModel.getNodeById({ id: markdownID })
-          const resolver = markdownType.getFields().html.resolve
-
-          if (!resolver) return null
-          return await resolver(markdown, args, context, info)
+        resolve(source, args, context, info) {
+          const body = source.entityPayload.attributes.body
+          const html = dato.render(body)
+          return html
         },
       }
     },
   })
-  */
 
   actions.createTypes(`
     interface BlogPost implements Node {
@@ -36,13 +27,12 @@ exports.createSchemaCustomization = async ({ actions }) => {
   `)
 
   actions.createTypes(`
-    type DatocmsBlogPost implements Node & BlogPost {
+    type DatoCmsBlogpost implements Node & BlogPost {
       id: ID!
       slug: String!
       title: String!
       body: String!
-      html: String! @proxyHtml
+      html: String! @richText
     }
-
   `)
 }

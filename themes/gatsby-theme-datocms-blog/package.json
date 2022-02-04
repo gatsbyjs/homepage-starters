@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "datocms-structured-text-to-html-string": "^2.0.0",
     "gatsby-plugin-image": "^2.6.0",
     "gatsby-plugin-sharp": "^4.6.0",
     "gatsby-source-datocms": "^3.0.15",
