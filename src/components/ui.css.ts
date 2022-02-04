@@ -446,6 +446,8 @@ export const interactiveIcon = style({
   background: "transparent",
   border: "none",
   cursor: "pointer",
+  width: 48,
+  height: 48,
 })
 
 // for debugging only
