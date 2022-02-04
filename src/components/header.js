@@ -13,7 +13,6 @@ import {
 } from "./ui"
 import {
   mobileNavOverlay,
-  mobileNavLinkList,
   mobileNavLink,
   desktopHeaderNavWrapper,
   mobileHeaderNavWrapper,
@@ -114,15 +113,13 @@ export default function Header() {
       {isOpen && (
         <div className={mobileNavOverlay}>
           <nav>
-            <FlexList
-              variant="responsive"
-              gap="4"
-              className={mobileNavLinkList}
-            >
+            <FlexList responsive variant="stretch">
               {links &&
                 links.map((link) => (
-                  <li key={link.id} className={mobileNavLink}>
-                    <NavLink to={link.href}>{link.text}</NavLink>
+                  <li key={link.id}>
+                    <NavLink to={link.href} className={mobileNavLink}>
+                      {link.text}
+                    </NavLink>
                   </li>
                 ))}
             </FlexList>

@@ -61,6 +61,9 @@ export const flexVariants = styleVariants({
   end: {
     alignItems: "flex-end",
   },
+  stretch: {
+    alignItems: "stretch",
+  },
   spaceBetween: {
     width: "100%",
     flexWrap: "wrap",
