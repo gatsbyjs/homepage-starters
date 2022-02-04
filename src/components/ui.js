@@ -25,6 +25,7 @@ export function Flex({
   gutter,
   wrap,
   responsive,
+  marginY,
   cx: _cx,
   ...props
 }) {
@@ -37,6 +38,7 @@ export function Flex({
         wrap && styles.flexVariants.wrap,
         gutter && styles.gutter[gutter],
         gutter ? styles.flexGap[0] : styles.flexGap[gap],
+        marginY && styles.marginY[marginY],
         _cx,
       ]}
       {...props}
@@ -73,7 +75,7 @@ export function Box({
 }
 
 export function FlexList({ ...props }) {
-  return <Flex as="ul" cx={[styles.list]} {...props} />
+  return <Flex as="ul" cx={styles.list} {...props} />
 }
 
 export function List(props) {
@@ -140,7 +142,7 @@ export function ButtonList({ links = [], reversed = false, ...props }) {
     return i === 0 ? "primary" : "link"
   }
   return (
-    <FlexList {...props}>
+    <FlexList marginY={4} {...props}>
       {links &&
         links.map((link, i) => (
           <li key={link.id}>

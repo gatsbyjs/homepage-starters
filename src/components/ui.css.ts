@@ -110,6 +110,10 @@ export const paddingY = styleVariants(theme.space, (padding) => ({
   paddingTop: padding,
   paddingBottom: padding,
 }))
+export const marginY = styleVariants(theme.space, (margin) => ({
+  marginTop: margin,
+  marginBottom: margin,
+}))
 export const gutter = styleVariants(theme.space, (val) => ({
   marginLeft: `calc(-1 * ${val})`,
   marginRight: `calc(-1 * ${val})`,
