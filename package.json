@@ -28,6 +28,7 @@
     "gatsby-plugin-vanilla-extract": "^1.0.6",
     "gatsby-source-filesystem": "^4.4.0",
     "gatsby-theme-contentful-blog": "*",
+    "gatsby-theme-datocms-blog": "*",
     "gatsby-theme-wordpress-blog": "*",
     "gatsby-transformer-sharp": "^4.4.0",
     "is-absolute-url": "^4.0.1",

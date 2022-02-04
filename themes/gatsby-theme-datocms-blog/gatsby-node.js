@@ -1,6 +1,7 @@
 const path = require("path")
 
 exports.createSchemaCustomization = async ({ actions }) => {
+  /* TODO for datocms
   actions.createFieldExtension({
     name: "proxyHtml",
     extend(options) {
@@ -21,6 +22,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       }
     },
   })
+  */
 
   actions.createTypes(`
     interface BlogPost implements Node {
@@ -34,17 +36,13 @@ exports.createSchemaCustomization = async ({ actions }) => {
   `)
 
   actions.createTypes(`
-    type ContentfulBlogPost implements Node & BlogPost {
+    type DatocmsBlogPost implements Node & BlogPost {
       id: ID!
       slug: String!
       title: String!
-      body: contentfulBlogPostBodyTextNode! @link(by: "id", from: "body___NODE")
+      body: String!
       html: String! @proxyHtml
     }
 
-    type contentfulBlogPostBodyTextNode implements Node @derivedTypes @childOf(types: ["ContentfulBlogPost"]) {
-      id: ID!
-      body: String
-    }
   `)
 }

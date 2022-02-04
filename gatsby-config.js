@@ -6,8 +6,9 @@ module.exports = {
     "contentful-plugin",
     // "wordpress-plugin",
 
-    // blog themes
+    // optional blog themes
     // "gatsby-theme-contentful-blog",
-    "gatsby-theme-wordpress-blog",
+    "gatsby-theme-datocms-blog",
+    // "gatsby-theme-wordpress-blog",
   ],
 }

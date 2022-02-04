@@ -6262,6 +6262,29 @@ gatsby-source-datocms@^3.0.12:
     semver "^7.3.5"
     unist-util-visit "^2.0.3"
 
+gatsby-source-datocms@^3.0.15:
+  version "3.0.15"
+  resolved "https://registry.yarnpkg.com/gatsby-source-datocms/-/gatsby-source-datocms-3.0.15.tgz#9f368bcc3cae48e8f6bae2751ae28b524f36657b"
+  integrity sha512-RHakQtG4aDGkql6JH7xdec0/rInHiPTPZJs640QrX+qLwDaB4cz3n9K0gGe/jOdBz7Q38qfCa2TZGD7+ft8cpQ==
+  dependencies:
+    core-js "^3.2.1"
+    datocms-client ">=3.5.4"
+    datocms-structured-text-utils "^1.0.13"
+    gatsby-core-utils "^3.1.0"
+    gatsby-plugin-utils "^2.0.0"
+    humps ">=2.0.1"
+    imgix-url-params ">=11.11.2"
+    json-stringify-safe ">=5.0.1"
+    lodash.uniq "^4.5.0"
+    md5 "^2.3.0"
+    object-assign "^4.1.1"
+    object.entries "^1.1.3"
+    promise-queue "2.2.5"
+    query-string "6.14.1"
+    regenerator-runtime "^0.13.3"
+    semver "^7.3.5"
+    unist-util-visit "^2.0.3"
+
 gatsby-source-filesystem@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/gatsby-source-filesystem/-/gatsby-source-filesystem-4.4.0.tgz#9921ac0600166e4ee0cd561d194c2df89a42e11d"
