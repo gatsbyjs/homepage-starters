@@ -1,4 +1,5 @@
 import { style, styleVariants } from "@vanilla-extract/css"
+import { calc } from "@vanilla-extract/css-utils"
 import { theme } from "../theme.css.ts"
 
 const breakpoints = ["40em", "52em", "64em"]
@@ -56,6 +57,9 @@ export const flexVariants = styleVariants({
   },
   start: {
     alignItems: "flex-start",
+  },
+  end: {
+    alignItems: "flex-end",
   },
   spaceBetween: {
     width: "100%",
@@ -115,10 +119,11 @@ export const marginY = styleVariants(theme.space, (margin) => ({
   marginBottom: margin,
 }))
 export const gutter = styleVariants(theme.space, (val) => ({
-  marginLeft: `calc(-1 * ${val})`,
-  marginRight: `calc(-1 * ${val})`,
+  marginLeft: calc.multiply(val, -1),
+  marginRight: calc.multiply(val, -1),
 }))
 export const radii = styleVariants(theme.radii, (borderRadius) => ({
+  overflow: "hidden",
   borderRadius,
 }))
 export const order = styleVariants([0, 1, 2, 3], (order) => ({ order }))
@@ -142,6 +147,34 @@ export const margin = styleVariants(
     auto: "auto",
   },
   (margin) => ({ margin })
+)
+margin.left = styleVariants(
+  {
+    ...theme.space,
+    auto: "auto",
+  },
+  (marginLeft) => ({ marginLeft })
+)
+margin.right = styleVariants(
+  {
+    ...theme.space,
+    auto: "auto",
+  },
+  (marginRight) => ({ marginRight })
+)
+margin.top = styleVariants(
+  {
+    ...theme.space,
+    auto: "auto",
+  },
+  (marginTop) => ({ marginTop })
+)
+margin.bottom = styleVariants(
+  {
+    ...theme.space,
+    auto: "auto",
+  },
+  (marginBottom) => ({ marginBottom })
 )
 
 export const margin0 = style({ margin: 0 })

@@ -82,8 +82,22 @@ export function List(props) {
   return <Base as="ul" cx={[styles.list]} {...props} />
 }
 
-export function Space({ className, size = "auto", ...props }) {
-  return <Base className={cx(styles.margin[size], className)} {...props} />
+export function Space({ size = "auto", ...props }) {
+  return <Base cx={[styles.margin[size]]} {...props} />
+}
+
+export function Nudge({ left, right, top, bottom, ...props }) {
+  return (
+    <Base
+      cx={[
+        styles.margin.left[-left],
+        styles.margin.right[-right],
+        styles.margin.top[-top],
+        styles.margin.bottom[-bottom],
+      ]}
+      {...props}
+    />
+  )
 }
 
 export function Section(props) {
