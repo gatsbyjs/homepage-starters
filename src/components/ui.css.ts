@@ -129,7 +129,13 @@ export const radii = styleVariants(theme.radii, (borderRadius) => ({
   overflow: "hidden",
   borderRadius,
 }))
-export const order = styleVariants([0, 1, 2, 3], (order) => ({ order }))
+export const order = styleVariants([0, 1, 2, 3], (order) => ({
+  "@media": {
+    [media.small]: {
+      order,
+    },
+  },
+}))
 export const box = styleVariants({
   center: {
     display: "flex",
