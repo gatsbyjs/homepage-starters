@@ -9,6 +9,7 @@ import {
   NavLink,
   Button,
   InteractiveIcon,
+  Nudge,
 } from "./ui"
 import {
   mobileNavOverlay,
@@ -96,15 +97,17 @@ export default function Header() {
                 </Button>
               )}
             </div>
-            <InteractiveIcon
-              title="Toggle menu"
-              onClick={() => setOpen(!isOpen)}
-              className={
-                mobileNavSVGColorWrapper[isOpen ? "reversed" : "primary"]
-              }
-            >
-              {isOpen ? <X /> : <Menu />}
-            </InteractiveIcon>
+            <Nudge right={3}>
+              <InteractiveIcon
+                title="Toggle menu"
+                onClick={() => setOpen(!isOpen)}
+                className={
+                  mobileNavSVGColorWrapper[isOpen ? "reversed" : "primary"]
+                }
+              >
+                {isOpen ? <X /> : <Menu />}
+              </InteractiveIcon>
+            </Nudge>
           </Flex>
         </Flex>
       </Container>
