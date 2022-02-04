@@ -5,7 +5,7 @@ import { Container, Section, Heading, Text, ButtonList } from "./ui"
 
 export default function HomepageCta(props) {
   return (
-    <Container>
+    <Container width="fullbleed">
       <Section padding={5} radius="large" background="primary">
         <Heading center>{props.heading}</Heading>
         <Text as="p" center variant="lead">

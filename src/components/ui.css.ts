@@ -30,6 +30,19 @@ export const containers = styleVariants({
       maxWidth: theme.sizes.narrow,
     },
   ],
+  fullbleed: [
+    container,
+    {
+      paddingLeft: 0,
+      paddingRight: 0,
+      "@media": {
+        [media.medium]: {
+          paddingLeft: theme.space[4],
+          paddingRight: theme.space[4],
+        },
+      },
+    },
+  ],
 })
 
 export const flex = style({
