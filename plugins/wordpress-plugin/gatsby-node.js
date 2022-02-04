@@ -126,7 +126,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type HomepageHero implements Node & HomepageBlock {
       id: ID!
       blocktype: String
-      heading: String
+      heading: String!
       kicker: String
       subhead: String
       image: HomepageImage @link
