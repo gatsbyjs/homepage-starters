@@ -1,4 +1,4 @@
-module.exports = {
+module.exports = (options) => ({
   plugins: [
     {
       resolve: "gatsby-source-wordpress",
@@ -6,10 +6,13 @@ module.exports = {
         url: process.env.WPGRAPHQL_URL,
       },
     },
-    "gatsby-theme-abstract-blog",
+    {
+      resolve: "gatsby-theme-abstract-blog",
+      options,
+    },
     "gatsby-transformer-remark",
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
   ],
-}
+})

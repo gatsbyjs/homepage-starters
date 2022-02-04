@@ -1,4 +1,4 @@
-module.exports = {
+module.exports = (options) => ({
   plugins: [
     {
       resolve: "gatsby-source-contentful",
@@ -8,10 +8,13 @@ module.exports = {
         accessToken: process.env.CONTENTFUL_DELIVERY_ACCESS_TOKEN,
       },
     },
-    "gatsby-theme-abstract-blog",
+    {
+      resolve: "gatsby-theme-abstract-blog",
+      options,
+    },
     "gatsby-transformer-remark",
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
   ],
-}
+})

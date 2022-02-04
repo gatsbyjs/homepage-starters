@@ -4,11 +4,21 @@ const path = require("path")
 // and src/template/blog-index.js in the host site
 // as well as an abstract BlogPost interface in GraphQL
 
-exports.createPages = async ({ actions, graphql, reporter }) => {
+const defaults = {
+  postPath: "src/templates/blog-post.js",
+  indexPath: "src/templates/blog-index.js",
+}
+
+exports.createPages = async ({ actions, graphql, reporter }, _opts = {}) => {
   const components = {}
+  const opts = {
+    postPath: _opts.postPath || defaults.postPath,
+    indexPath: _opts.indexPath || defaults.indexPath,
+  }
+
   try {
-    components.post = path.resolve("./src/templates/blog-post.js")
-    components.index = path.resolve("./src/templates/blog-index.js")
+    components.post = path.join(global.__GATSBY.root, opts.postPath)
+    components.index = path.join(global.__GATSBY.root, opts.indexPath)
     require.resolve(components.post)
     require.resolve(components.index)
   } catch (e) {
