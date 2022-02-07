@@ -23,17 +23,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
   })
 
   actions.createTypes(`
-    interface BlogPost implements Node {
-      id: ID!
-      slug: String!
-      title: String!
-      html: String!
-      # TODO
-      # date # image # author
-    }
-  `)
-
-  actions.createTypes(`
     type ContentfulBlogPost implements Node & BlogPost {
       id: ID!
       slug: String!

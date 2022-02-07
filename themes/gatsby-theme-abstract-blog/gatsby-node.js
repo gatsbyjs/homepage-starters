@@ -9,6 +9,19 @@ const defaults = {
   indexPath: "src/templates/blog-index.js",
 }
 
+exports.createSchemaCustomization = async ({ actions }) => {
+  actions.createTypes(`
+    interface BlogPost implements Node {
+      id: ID!
+      slug: String!
+      title: String!
+      html: String!
+      # TODO
+      # date # image # author
+    }
+  `)
+}
+
 exports.createPages = async ({ actions, graphql, reporter }, _opts = {}) => {
   const components = {}
   const opts = {
