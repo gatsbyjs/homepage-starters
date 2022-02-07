@@ -1,5 +1,3 @@
-const path = require("path")
-
 exports.createSchemaCustomization = async ({ actions }) => {
   actions.createTypes(`
     type WpPost implements Node & BlogPost {
