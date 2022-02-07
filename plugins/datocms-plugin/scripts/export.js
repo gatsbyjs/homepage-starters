@@ -4,7 +4,6 @@ require("dotenv").config({
 const SiteClient = require("datocms-client").SiteClient
 const fs = require("fs")
 const path = require("path")
-const axios = require("axios")
 const client = new SiteClient(process.env.DATOCMS_API_TOKEN)
 
 console.log("Exporting DatoCMS Models...")
