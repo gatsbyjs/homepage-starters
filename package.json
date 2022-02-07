@@ -10,7 +10,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "prepublish": "husky install",
-    "create-docs": "./scripts/create-readmes.mjs",
+    "create-docs": "./scripts/create-docs.mjs",
     "publish-starters": "./scripts/publish.js",
     "publish-starters:dry-run": "./scripts/publish.js --dry-run"
   },
