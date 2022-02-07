@@ -6,6 +6,7 @@
     "export-content": "contentful space export --space-id=$SPACE_ID --management-token=$MANAGEMENT_TOKEN --export-dir=scripts --content-file=data.json"
   },
   "dependencies": {
+    "@contentful/rich-text-html-renderer": "^15.11.1",
     "gatsby-plugin-react-helmet": "^5.5.0",
     "gatsby-source-contentful": "^7.2.0",
     "react-helmet": "^6.1.0"
