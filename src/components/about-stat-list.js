@@ -1,11 +1,16 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 import { Container, Section, FlexList, Box, Text } from "./ui"
-import { statHeader, statKicker } from "./about-stat-list.css.ts"
+import {
+  statList,
+  statContainer,
+  statHeader,
+  statKicker,
+} from "./about-stat-list.css.ts"
 
 function AboutStat(props) {
   return (
-    <Box width="fitContent">
+    <Box width="fitContent" className={statContainer}>
       <Text className={statHeader}>{props.value}</Text>
       <Text className={statKicker}>{props.label}</Text>
     </Box>
@@ -16,7 +21,7 @@ export default function AboutStatList(props) {
   return (
     <Container>
       <Section>
-        <FlexList gap={6} variant="center" responsive>
+        <FlexList className={statList} variant="center" responsive>
           {props.content.map((stat) => (
             <AboutStat key={stat.id} {...stat} />
           ))}

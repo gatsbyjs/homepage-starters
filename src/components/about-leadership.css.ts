@@ -2,7 +2,7 @@ import { style } from "@vanilla-extract/css"
 import { theme } from "../theme.css"
 
 export const profileTextContainer = style({
-  height: "100px",
+  height: theme.space[5],
   marginTop: theme.space[3],
 })
 

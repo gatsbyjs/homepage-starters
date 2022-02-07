@@ -4,12 +4,13 @@ import { theme } from "../theme.css.ts"
 const breakpoints = ["40em", "52em", "64em"]
 
 const mqAliases = ["small", "medium", "large"]
-const media = breakpoints
+type Media = { small: string; medium: string; large: string }
+const media: Media = breakpoints
   .map((n) => `screen and (min-width: ${n})`)
   .reduce((a, b, i) => {
     a[mqAliases[i]] = b
     return a
-  }, {})
+  }, {} as Media)
 
 export const mediaQueries = media
 

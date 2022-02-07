@@ -1,5 +1,25 @@
 import { style } from "@vanilla-extract/css"
 import { theme } from "../theme.css.ts"
+import { mediaQueries } from "./ui.css"
+
+export const statList = style({
+  "@media": {
+    [mediaQueries.small]: {
+      gap: theme.space[6],
+    },
+  },
+})
+
+export const statContainer = style({
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  "@media": {
+    [mediaQueries.small]: {
+      alignItems: "flex-start",
+    },
+  },
+})
 
 export const statHeader = style({
   fontFamily: theme.fonts.mono,
