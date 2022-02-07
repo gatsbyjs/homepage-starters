@@ -7,6 +7,7 @@ export const desktopHeaderNavWrapper = style({
   "@media": {
     [mediaQueries.small]: {
       display: "block",
+      paddingTop: theme.space[4],
     },
   },
 })

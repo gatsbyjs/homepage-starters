@@ -7,6 +7,7 @@ import {
   FlexList,
   Space,
   NavLink,
+  NavButtonLink,
   Button,
   InteractiveIcon,
 } from "./ui"
@@ -18,6 +19,7 @@ import {
   mobileHeaderNavWrapper,
   mobileNavSVGColorWrapper,
 } from "./header.css.ts"
+import NavLinkGroup from "./nav-link-group"
 import BrandLogo from "./brand-logo"
 
 export default function Header() {
@@ -27,9 +29,35 @@ export default function Header() {
         header {
           id
           links {
-            id
-            href
-            text
+            ... on ContentfulHomepageLink {
+              id
+              href
+              text
+              internal {
+                type
+              }
+            }
+            ... on ContentfulHomepageLinkGroup {
+              id
+              name
+              links {
+                id
+                href
+                text
+                description
+                icon {
+                  alt
+                  gatsbyImageData
+                }
+                iconAlternative {
+                  alt
+                  gatsbyImageData
+                }
+                internal {
+                  type
+                }
+              }
+            }
           }
           cta {
             id
@@ -45,6 +73,11 @@ export default function Header() {
 
   const [isOpen, setOpen] = React.useState(false)
 
+  const isLinkGroup = React.useCallback((link) => {
+    console.log(link)
+    return !!link.name
+  }, [])
+
   React.useEffect(() => {
     if (isOpen) {
       document.body.style.overflowY = "hidden"
@@ -58,21 +91,25 @@ export default function Header() {
       <Container className={desktopHeaderNavWrapper}>
         {/* Desktop / Tablet - Header / Nav */}
         <Space size={2} />
-        <Flex>
+        <Flex variant="spaceBetween">
           <NavLink to="/">
             <BrandLogo />
           </NavLink>
           <nav>
-            <FlexList>
+            <FlexList gap={4}>
               {links &&
                 links.map((link) => (
                   <li key={link.id}>
-                    <NavLink to={link.href}>{link.text}</NavLink>
+                    {!isLinkGroup(link) ? (
+                      <NavLink to={link.href}>{link.text}</NavLink>
+                    ) : (
+                      <NavLinkGroup name={link.name} links={link.links} />
+                    )}
                   </li>
                 ))}
             </FlexList>
           </nav>
-          <Space />
+          {/* <Space /> */}
           <div>{cta && <Button to={cta.href}>{cta.text}</Button>}</div>
         </Flex>
       </Container>
@@ -119,7 +156,11 @@ export default function Header() {
               {links &&
                 links.map((link) => (
                   <li key={link.id} className={mobileNavLink}>
-                    <NavLink to={link.href}>{link.text}</NavLink>
+                    {!isLinkGroup(link) ? (
+                      <NavLink to={link.href}>{link.text}</NavLink>
+                    ) : (
+                      <NavLinkGroup name={link.name} links={link.links} />
+                    )}
                   </li>
                 ))}
             </FlexList>

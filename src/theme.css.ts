@@ -53,6 +53,7 @@ const sizes = {
   narrow: "1024px",
   wide: "1280px",
   avatar: "48px",
+  navIcon: "32px",
 }
 
 const radii = {
