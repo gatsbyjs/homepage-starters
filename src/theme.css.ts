@@ -2,7 +2,7 @@ import { createGlobalTheme } from "@vanilla-extract/css"
 import { colors } from "./colors.css.ts"
 
 const space = {
-  0: 0,
+  0: "0",
   1: "4px",
   2: "8px",
   3: "16px",
@@ -23,11 +23,11 @@ const fontSizes = {
 }
 
 const fontWeights = {
-  normal: 400,
-  medium: 500,
-  semibold: 600,
-  bold: 700,
-  extrabold: 800,
+  normal: "400",
+  medium: "500",
+  semibold: "600",
+  bold: "700",
+  extrabold: "800",
 }
 
 const fonts = {
@@ -38,13 +38,13 @@ const fonts = {
 }
 
 const lineHeights = {
-  text: 1.65,
-  heading: 1.25,
-  tight: 1.1,
+  text: "1.65",
+  heading: "1.25",
+  tight: "1.1",
 }
 
 const letterSpacings = {
-  normal: 0,
+  normal: "0",
   tight: "-0.02em",
   wide: "0.08em",
 }

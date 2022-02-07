@@ -73,6 +73,7 @@ export const widths = styleVariants(
     quarter: "25%",
     third: "33.3333%",
     twothirds: "33.3333%",
+    fitContent: "fit-content",
   },
   (width) => [
     {
