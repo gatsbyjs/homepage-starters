@@ -5,26 +5,30 @@ A core, data-only theme for adding a blog to your site, with content from WordPr
 ## Get started
 
 Install the theme and add it to your Gatsby site's `gatsby-config.js`.
-You'll also need `gatsby-source-wordpress` if you haven't installed it already.
 
 ```sh
-npm i gatsby-theme-wordpress-blog gatsby-source-wordpress
+npm i gatsby-theme-wordpress-blog
 ```
 
 ```js
 // gatsby-config.js
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   plugins: [
-    {
-      resolve: "gatsby-source-wordpress",
-      options: {
-        url: process.env.WPGRAPHQL_URL,
-      },
-    },
     "gatsby-theme-wordpress-blog",
     // ...
   ],
 }
+```
+
+Add `.env.development` and `.env.production` files with the following environment variable defined:
+
+```sh
+// .env example
+WPGRAPHQL_URL=""
 ```
 
 ### Add templates

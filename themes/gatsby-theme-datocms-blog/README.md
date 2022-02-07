@@ -5,27 +5,31 @@ A core, data-only theme for adding a blog to your site, with content from DatoCM
 ## Get started
 
 Install the theme and add it to your Gatsby site's `gatsby-config.js`.
-You'll also need `gatsby-source-datocms` if you haven't installed it already.
 
 ```sh
-npm i gatsby-theme-datocms-blog gatsby-source-datocms
+npm i gatsby-theme-datocms-blog
 ```
 
 ```js
 // gatsby-config.js
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   plugins: [
-    {
-      resolve: "gatsby-source-datocms",
-      options: {
-        apiToken: process.env.DATOCMS_API_TOKEN,
-        environment: process.env.DATOCMS_ENVIRONMENT,
-      },
-    },
     "gatsby-theme-datocms-blog",
     // ...
   ],
 }
+```
+
+Add `.env.development` and `.env.production` files with the following environment variables defined:
+
+```sh
+// .env example
+DATOCMS_API_TOKEN=""
+DATOCMS_ENVIRONMENT=""
 ```
 
 ### Add templates

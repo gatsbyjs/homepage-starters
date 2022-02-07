@@ -5,28 +5,31 @@ A core, data-only theme for adding a blog to your site, with content from Conten
 ## Get started
 
 Install the theme and add it to your Gatsby site's `gatsby-config.js`.
-You'll also need `gatsby-source-contentful` if you haven't installed it already.
 
 ```sh
-npm i gatsby-theme-contentful-blog gatsby-source-contentful
+npm i gatsby-theme-contentful-blog
 ```
 
 ```js
 // gatsby-config.js
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   plugins: [
-    {
-      resolve: "gatsby-source-contentful",
-      options: {
-        downloadLocal: true,
-        spaceId: process.env.CONTENTFUL_SPACE_ID,
-        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-      },
-    },
     "gatsby-theme-contentful-blog",
     // ...
   ],
 }
+```
+
+Add `.env.development` and `.env.production` files with the following environment variables defined:
+
+```sh
+// .env example
+CONTENTFUL_SPACE_ID=""
+CONTENTFUL_ACCESS_TOKEN=""
 ```
 
 ### Add templates

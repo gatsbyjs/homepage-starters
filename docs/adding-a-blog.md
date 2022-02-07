@@ -39,6 +39,19 @@ module.exports = {
 
 ::include{file=docs/blog-content.md}
 
+### Environment Variables
+
+If you're using a different CMS in your blog than the one used for the homepage content, be sure to add the required environment variables to your `.env.development` and `.end.production` files.
+
+- WordPress requires:
+  - `WPGRAPHQL_URL`
+- Contentful requires:
+  - `CONTENTFUL_SPACE_ID`
+  - `CONTENTFUL_ACCESS_TOKEN`
+- DatoCMS requires:
+  - `DATOCMS_API_TOKEN`
+  - `DATOCMS_ENVIRONMENT`
+
 ## Using another CMS or data source
 
 If the CMS that you'd like to use for your blog hasn't been built as a theme yet, you can use [gatsby-theme-abstract-blog][] to pull your blog content for other sources.
