@@ -3,6 +3,8 @@ import { theme } from "../theme.css"
 import { mediaQueries } from "./ui.css"
 
 export const desktopHeaderNavWrapper = style({
+  position: "relative",
+  zIndex: 1,
   display: "none",
   "@media": {
     [mediaQueries.small]: {

@@ -74,7 +74,6 @@ export default function Header() {
   const [isOpen, setOpen] = React.useState(false)
 
   const isLinkGroup = React.useCallback((link) => {
-    console.log(link)
     return !!link.name
   }, [])
 
