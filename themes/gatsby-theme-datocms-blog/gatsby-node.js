@@ -2,8 +2,9 @@ const path = require("path")
 const dato = require("datocms-structured-text-to-html-string")
 
 exports.createSchemaCustomization = async ({ actions }) => {
+  // todo: determine if field extension already exists
   actions.createFieldExtension({
-    name: "richText",
+    name: "datocmsRichText",
     extend(options) {
       return {
         resolve(source, args, context, info) {
@@ -21,7 +22,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       slug: String!
       title: String!
       body: String!
-      html: String! @richText
+      html: String! @datocmsRichText
     }
   `)
 }

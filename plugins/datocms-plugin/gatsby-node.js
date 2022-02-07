@@ -57,7 +57,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
   })
 
   actions.createFieldExtension({
-    name: "richText",
+    name: "datocmsRichText",
     extend(options) {
       return {
         resolve(source, args, context, info) {
@@ -506,7 +506,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       title: String @proxy(from: "entityPayload.attributes.metadata.title")
       description: String @proxy(from: "entityPayload.attributes.metadata.description")
       image: HomepageImage @link(by: "originalId", from: "entityPayload.attributes.metadata.image")
-      html: String! @richText
+      html: String! @datocmsRichText
       body: DatoCmsDatoCmsPageBodyStructuredText
     }
   `)

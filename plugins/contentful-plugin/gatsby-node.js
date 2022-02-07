@@ -29,7 +29,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
   })
 
   actions.createFieldExtension({
-    name: "richText",
+    name: "contentfulRichText",
     extend(options) {
       return {
         resolve(source, args, context, info) {
@@ -418,7 +418,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
       title: String
       description: String
       image: HomepageImage @link(from: "image___NODE")
-      html: String! @richText
+      html: String! @contentfulRichText
+      body: String!
     }
   `)
 }

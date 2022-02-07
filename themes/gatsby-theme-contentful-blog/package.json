@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "@contentful/rich-text-html-renderer": "^15.11.1",
     "gatsby-plugin-image": "^2.6.0",
     "gatsby-plugin-sharp": "^4.6.0",
     "gatsby-source-contentful": "^7.4.0",

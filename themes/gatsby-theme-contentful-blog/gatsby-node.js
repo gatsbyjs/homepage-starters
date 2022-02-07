@@ -1,22 +1,17 @@
 const path = require("path")
+const { documentToHtmlString } = require("@contentful/rich-text-html-renderer")
 
 exports.createSchemaCustomization = async ({ actions }) => {
+  // todo: check if field extension exists
   actions.createFieldExtension({
-    name: "proxyHtml",
+    name: "contentfulRichText",
     extend(options) {
       return {
-        async resolve(source, args, context, info) {
-          const markdownType = info.schema.getType("MarkdownRemark")
-          const postType = info.schema.getType("ContentfulBlogPost")
-
-          const [childID] = source.children
-          const body = context.nodeModel.getNodeById({ id: childID })
-          const [markdownID] = body.children
-          const markdown = context.nodeModel.getNodeById({ id: markdownID })
-          const resolver = markdownType.getFields().html.resolve
-
-          if (!resolver) return null
-          return await resolver(markdown, args, context, info)
+        resolve(source, args, context, info) {
+          const body = source.body
+          const doc = JSON.parse(body.raw)
+          const html = documentToHtmlString(doc)
+          return html
         },
       }
     },
@@ -27,13 +22,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       slug: String!
       title: String!
-      body: contentfulBlogPostBodyTextNode! @link(by: "id", from: "body___NODE")
-      html: String! @proxyHtml
-    }
-
-    type contentfulBlogPostBodyTextNode implements Node @derivedTypes @childOf(types: ["ContentfulBlogPost"]) {
-      id: ID!
-      body: String
+      html: String! @contentfulRichText
+      body: String!
     }
   `)
 }
