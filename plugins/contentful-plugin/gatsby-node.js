@@ -233,6 +233,15 @@ exports.createSchemaCustomization = async ({ actions }) => {
       image: HomepageImage
       html: String!
     }
+
+    # Optional blog interface
+    interface BlogPost implements Node {
+      id: ID!
+      slug: String!
+      title: String!
+      html: String!
+      # TODO # date # image # author
+    }
   `)
 
   // CMS-specific types

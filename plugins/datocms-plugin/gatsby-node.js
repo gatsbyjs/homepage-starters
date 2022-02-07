@@ -295,6 +295,15 @@ exports.createSchemaCustomization = async ({ actions }) => {
       html: String!
       body: DatoCmsDatoCmsPageBodyStructuredText
     }
+
+    #Optional blog interface
+    interface BlogPost implements Node {
+      id: ID!
+      slug: String!
+      title: String!
+      html: String!
+      # TODO # date # image # author
+    }
   `)
 
   actions.createTypes(`

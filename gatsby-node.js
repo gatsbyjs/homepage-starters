@@ -43,17 +43,3 @@ exports.onCreateWebpackConfig = ({ actions, store }) => {
     },
   })
 }
-
-// TODO: temporary for supporting starter without blog theme
-// - determine where this interface should be defined
-exports.createSchemaCustomization = async ({ actions }) => {
-  actions.createTypes(`
-    interface BlogPost implements Node {
-      id: ID!
-      slug: String!
-      title: String!
-      html: String!
-      # TODO # date # image # author
-    }
-  `)
-}
