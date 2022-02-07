@@ -253,6 +253,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     interface AboutLeadership implements Node & HomepageBlock {
       id: ID!
       blocktype: String
+      kicker: String
       heading: String
       subhead: String
       content: [AboutProfile]
@@ -459,6 +460,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type ContentfulAboutLeadership implements Node & AboutLeadership & HomepageBlock @dontInfer {
       id: ID!
       blocktype: String @blocktype
+      kicker: String
       heading: String
       subhead: String
       content: [AboutProfile] @link(from: "content___NODE")

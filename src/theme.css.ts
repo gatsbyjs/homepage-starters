@@ -53,6 +53,7 @@ const sizes = {
   container: "1280px",
   narrow: "1024px",
   wide: "1280px",
+  tight: "848px",
   avatar: "48px",
 }
 

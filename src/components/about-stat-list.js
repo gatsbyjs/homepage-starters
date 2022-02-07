@@ -14,7 +14,7 @@ function AboutStat(props) {
 
 export default function AboutStatList(props) {
   return (
-    <Container variant="narrow">
+    <Container>
       <Section>
         <FlexList gap={6} variant="center" responsive>
           {props.content.map((stat) => (

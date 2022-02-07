@@ -30,6 +30,12 @@ export const containers = styleVariants({
       maxWidth: theme.sizes.narrow,
     },
   ],
+  tight: [
+    container,
+    {
+      maxWidth: theme.sizes.tight,
+    },
+  ],
 })
 
 export const flex = style({
