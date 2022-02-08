@@ -41,7 +41,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
   })
 
   actions.createFieldExtension({
-    name: "proxyImage",
+    name: "imagePassthroughResolver",
     extend(options) {
       return {
         async resolve(source, args, context, info) {
@@ -246,6 +246,22 @@ exports.createSchemaCustomization = async ({ actions }) => {
       header: LayoutHeader
       footer: LayoutFooter
     }
+
+    # interface PageFieldBody {
+    #   value: String
+    #   processed: String
+    #   format: String
+    # }
+
+    interface Page implements Node {
+      id: ID!
+      slug: String!
+      title: String
+      description: String
+      image: HomepageImage
+      html: String!
+      body: node__pageField_body
+    }
   `)
 
   // CMS-specific types
@@ -259,7 +275,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type media__image implements Node & HomepageImage {
       id: ID!
       alt: String @proxy(from: "field_media_image.alt")
-      gatsbyImageData: JSON @proxyImage
+      gatsbyImageData: JSON @imagePassthroughResolver
       url: String @imageUrl
       title: String
     }
@@ -344,7 +360,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
         @link(by: "id", from: "relationships.field_content___NODE")
     }
 
-    type node__home_page_benefit implements Node & HomepageBenefit @dontInfer {
+    type node__homepage_benefit implements Node & HomepageBenefit @dontInfer {
       id: ID!
       heading: String @proxy(from: "title")
       text: String @proxy(from: "field_text")
@@ -356,7 +372,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       @dontInfer {
       id: ID!
       blocktype: String @blocktype
-      heading: String @proxy(from: "title")
+      heading: String @proxy(from: "field_heading")
       text: String @proxy(from: "field_text")
       content: [HomepageBenefit]
         @link(by: "id", from: "relationships.field_content___NODE")
@@ -450,6 +466,26 @@ exports.createSchemaCustomization = async ({ actions }) => {
         @link(by: "id", from: "relationships.field_header___NODE")
       footer: LayoutFooter
         @link(by: "id", from: "relationships.field_footer___NODE")
+    }
+
+    type node__pageField_body {
+      value: String @proxy(from: "field_value")
+      processed: String @proxy(from: "field_processed")
+      format: String @proxy(from: "field_format")
+    }
+  `)
+
+  // Page types
+  actions.createTypes(/* GraphQL */ `
+    type node__page implements Node & Page @dontInfer {
+      id: ID!
+      slug: String! @proxy(from: "field_slug")
+      title: String
+      description: String @proxy(from: "field_description")
+      image: HomepageImage
+        @link(by: "id", from: "relationships.field_image___NODE")
+      html: String! @proxy(from: "field_body.processed")
+      body: node__pageField_body @proxy(from: "field_body")
     }
   `)
 }
