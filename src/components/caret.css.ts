@@ -1,7 +1,7 @@
 import { style, styleVariants } from "@vanilla-extract/css"
 const caretBase = style({
   transitionProperty: "transform",
-  transitionDuration: "0.2s",
+  transitionDuration: "0.15s",
   transitionTimingFunction: "ease-in-out",
 })
 

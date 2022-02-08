@@ -36,3 +36,24 @@ globalKeyframes("zoomOutDown", {
     visibility: "hidden",
   },
 })
+
+globalKeyframes("fadeIn", {
+  "0%": {
+    visibility: "hidden",
+    opacity: 0,
+  },
+  "100%": {
+    opacity: 1,
+    visibility: "visible",
+  },
+})
+
+globalKeyframes("fadeOut", {
+  "0%": {
+    opacity: 1,
+  },
+  "100%": {
+    opacity: 0,
+    visibility: "hidden",
+  },
+})

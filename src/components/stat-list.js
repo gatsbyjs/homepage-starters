@@ -66,10 +66,12 @@ export const query = graphql`
     text
     image {
       id
+      alt
       gatsbyImageData
     }
     icon {
       id
+      alt
       gatsbyImageData
     }
     content {

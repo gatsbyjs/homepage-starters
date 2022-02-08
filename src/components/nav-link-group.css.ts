@@ -4,7 +4,7 @@ import { mediaQueries } from "./ui.css"
 export const navGroupWrapper = style({
   position: "relative",
 })
-export const navLinkListWrapper = style({
+const navLinkListWrapperBase = style({
   position: "relative",
   whiteSpace: "nowrap",
   width: "fit-content",
@@ -18,6 +18,53 @@ export const navLinkListWrapper = style({
       transform: "translateX(-50%)",
       borderRadius: theme.radii.large,
       minWidth: theme.sizes.navGroupBox,
+      selectors: {
+        "&::before": {
+          content: "",
+          position: "absolute",
+          top: 0,
+          left: "50%",
+          transform: "translateX(-50%) translateY(calc(-100% + 2px))",
+          width: 0,
+          height: 0,
+          borderStyle: "solid",
+          borderWidth: "0 14px 17.3px 14px",
+          borderColor: `transparent transparent ${theme.colors.muted} transparent`,
+        },
+      },
+    },
+  },
+})
+
+export const navLinkListWrapper = styleVariants({
+  opened: [
+    navLinkListWrapperBase,
+    {
+      "@media": {
+        [mediaQueries.small]: {
+          animation: "zoomInUp 0.15s ease-in-out",
+        },
+      },
+    },
+  ],
+  closed: [
+    navLinkListWrapperBase,
+    {
+      "@media": {
+        [mediaQueries.small]: {
+          animation: "zoomOutDown 0.15s ease-in-out",
+          animationFillMode: "forwards",
+        },
+      },
+    },
+  ],
+})
+
+export const navLinkListWrapperInner = style({
+  paddingLeft: theme.space[4],
+  "@media": {
+    [mediaQueries.small]: {
+      paddingLeft: 0,
     },
   },
 })

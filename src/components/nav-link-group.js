@@ -1,43 +1,51 @@
 import * as React from "react"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
-import { Box, Flex, FlexList, NavButtonLink, NavLink, Text } from "./ui"
+import { Box, Flex, FlexList, NavButtonLink, NavLink } from "./ui"
 import Caret from "./caret"
 import {
   navIcon,
   navIconAlternative,
   navGroupWrapper,
   navLinkListWrapper,
+  navLinkListWrapperInner,
   navLinkDescription,
 } from "./nav-link-group.css"
+import { mediaQueries } from "./ui.css"
 
 export default function NavLinkGroup({ name, links }) {
   const [isOpen, setIsOpen] = React.useState(false)
-  const popupBox = React.forwardRef(null)
+  const [popupVisible, setPopupVisible] = React.useState(false)
+  const isSmallScreen = () => {
+    return !window.matchMedia(mediaQueries.small).matches
+  }
   const onGroupButtonClick = () => {
-    setIsOpen((opened) => !opened)
-  }
-  const mountedStyle = {
-    animation: "zoomInUp 0.15s ease-in-out",
-  }
-  const unmountedStyle = {
-    animation: "zoomOutDown 0.15s ease-in-out",
-    animationFillMode: "forwards",
+    if (!isOpen) {
+      setIsOpen(true)
+      setPopupVisible(true)
+    } else {
+      // ensures that sub-menu closes when no animation is available
+      if (isSmallScreen()) {
+        setIsOpen(false)
+      }
+      setPopupVisible(false)
+    }
   }
 
   React.useEffect(() => {
-    const animatedBox = document.querySelector(`.${navLinkListWrapper}`)
-    const onAnimationEnd = () => {
-      console.log("Animation ended")
-    }
-    console.log(`.${navLinkListWrapper}`)
-    if (popupBox.value) {
-      console.log(popupBox.value)
-      popupBox.value.addEventListener("animationend", onAnimationEnd)
-      return () => {
-        popupBox.value.removeEventListener("animationend", onAnimationEnd)
+    // crude implementation of animating the popup without a library
+    const popupBox = document.querySelector(`[data-id="${name}-popup-box"]`)
+    const onAnimationEnd = ({ animationName }) => {
+      if (animationName === `zoomOutDown`) {
+        setIsOpen(false)
       }
     }
-  }, [])
+    if (popupBox) {
+      popupBox.addEventListener("animationend", onAnimationEnd)
+      return () => {
+        popupBox.removeEventListener("animationend", onAnimationEnd)
+      }
+    }
+  }, [isOpen, name])
 
   return (
     <Flex variant="columnStart" gap="4" className={navGroupWrapper}>
@@ -49,10 +57,14 @@ export default function NavLinkGroup({ name, links }) {
       </NavButtonLink>
       {isOpen && (
         <Box
-          className={navLinkListWrapper}
-          style={isOpen ? mountedStyle : unmountedStyle}
+          data-id={`${name}-popup-box`}
+          className={navLinkListWrapper[popupVisible ? "opened" : "closed"]}
         >
-          <FlexList variant="columnStart" gap={4}>
+          <FlexList
+            variant="columnStart"
+            gap={4}
+            className={navLinkListWrapperInner}
+          >
             {links.map((link) => (
               <li key={link.id}>
                 <NavLink to={link.href}>
@@ -72,7 +84,7 @@ export default function NavLinkGroup({ name, links }) {
                       />
                     )}
                     <Flex variant="columnStart" gap={1}>
-                      {link.text}
+                      <Box>{link.text}</Box>
                       {/* {link.description && <Text>{link.description}</Text>} */}
                       <Box className={navLinkDescription}>
                         akfjkajhk askfjh akjsfh jkah fk aksjfhjkah kfjhakjhf
