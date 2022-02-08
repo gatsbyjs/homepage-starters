@@ -10,7 +10,7 @@ Create a homepage using Gatsby and Drupal. This starter demonstrates how to use 
 
 ## Quick start
 
-You will need a new or existing `Drupal` website to use this starter and will be asked for your `baseUrl` and the `username` and `password` for your `Drupal` during installation.
+You will need a new or existing `Drupal` website to use this starter and will be asked for your `baseUrl` and the `username` and `password` for your `Drupal` during installation. In the `gatsby-config` file `fastBuilds` option is set to `true` by default but if it is not enabled on your `Drupal` site you can set the value to `false`.
 
 1. **Create a Gatsby site**
 
