@@ -55,12 +55,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
       text: String
     }
 
-    interface AboutLink implements Node {
-      id: ID!
-      href: String
-      text: String
-    }
-
     interface HomepageImage implements Node {
       id: ID!
       alt: String
@@ -279,7 +273,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       blocktype: String
       heading: String
-      link: AboutLink
+      link: HomepageLink
       logos: [HomepageLogo]
     }
 
@@ -288,7 +282,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       blocktype: String
       heading: String
       text: String
-      links: [AboutLink]
+      links: [HomepageLink]
     }
 
     interface Page implements Node {
@@ -441,18 +435,12 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
   // CMS specific types for About page
   actions.createTypes(`
-    type ContentfulAboutLink implements Node & AboutLink @dontInfer {
-      id: ID!
-      href: String
-      text: String
-    }
-
     type ContentfulAboutCta implements Node & AboutCta & HomepageBlock @dontInfer {
       id: ID!
       blocktype: String @blocktype
       heading: String
       text: String
-      links: [AboutLink] @link(from: "links___NODE")
+      links: [HomepageLink] @link(from: "links___NODE")
     }
 
     type ContentfulAboutHero implements Node & AboutHero & HomepageBlock @dontInfer {
@@ -495,7 +483,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       blocktype: String @blocktype
       heading: String
-      link: AboutLink @link(from: "link___NODE")
+      link: HomepageLink @link(from: "link___NODE")
       logos: [HomepageLogo] @link(from: "logos___NODE")
     }
 
