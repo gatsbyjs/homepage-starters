@@ -101,7 +101,7 @@ async function importContent(token) {
             console.log(`Created field: ${nextField.label}`)
           }
         } catch (e) {
-          console.log(`Could not create field: ${field.apiKey}`)
+          console.log(`Could not create field: ${field.label} ${field.apiKey}`)
         }
       }
     } catch (e) {
