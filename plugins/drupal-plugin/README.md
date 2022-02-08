@@ -10,7 +10,7 @@ Create a homepage using Gatsby and Drupal. This starter demonstrates how to use 
 
 ## Quick start
 
-You will need a new or existing `Drupal` website to use this starter and will be asked for your `baseUrl` and the `username` and `password` for your `Drupal` during installation. In the `gatsby-config` file `fastBuilds` option is set to `true` by default but if it is not enabled on your `Drupal` site you can set the value to `false`.
+You will need a new or existing `Drupal` website to use this starter and will be asked for your `baseUrl` and the `username` and `password` for your `Drupal` during installation.
 
 1. **Create a Gatsby site**
 
@@ -44,9 +44,9 @@ You will need a new or existing `Drupal` website to use this starter and will be
 
 1. **Open the source code and start editing**
 
-## Deployment
+## Deploy your site
 
-Once your content model and data are available in Drupal, deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
+Once your content is available in Drupal, deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
 
 [![Deploy to Gatsby](https://www.gatsbyjs.com/deploynow.png "Deploy to Gatsby")](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-drupal-homepage)
 
@@ -82,10 +82,10 @@ To update the colors used in this starter, edit the `src/colors.css.ts` file.
 ```.ts
 // src/colors.css.ts
 export const colors = {
-  background: "#ffe491",
+  background: "#eff6ff",
   text: "#004ca3",
   primary: "#004ca3",
-  muted: "#f2d98a",
+  muted: "#e6f1ff",
   active: "#001d3d",
   black: "#000",
 }

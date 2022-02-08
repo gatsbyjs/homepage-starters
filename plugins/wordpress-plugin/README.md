@@ -59,9 +59,9 @@ Once these plugins are installed, you'll need the URL of the GraphQL endpoint fo
 
 1. **Open the source code and start editing**
 
-## Deployment
+## Deploy your site
 
-Once your content model and data are available in WordPress, deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
+Once your content is available in WordPress, deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
 
 [![Deploy to Gatsby](https://www.gatsbyjs.com/deploynow.png "Deploy to Gatsby")](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage)
 
