@@ -9,6 +9,7 @@ import {
   navLinkListWrapper,
   navLinkListWrapperInner,
   navLinkDescription,
+  navLinkTitle,
 } from "./nav-link-group.css"
 import { mediaQueries } from "./ui.css"
 
@@ -111,7 +112,9 @@ export default function NavLinkGroup({ name, links }) {
                       />
                     )}
                     <Flex variant="columnStart" gap={1}>
-                      <Box>{link.text}</Box>
+                      <Box as="h2" className={navLinkTitle}>
+                        {link.text}
+                      </Box>
                       {!!link.description && (
                         <Box as="p" className={navLinkDescription}>
                           {link.description}

@@ -103,3 +103,14 @@ export const navLinkDescription = style({
     },
   },
 })
+
+export const navLinkTitle = style({
+  fontWeight: "inherit",
+  fontSize: "inherit",
+  "@media": {
+    [mediaQueries.small]: {
+      margin: 0,
+      fontWeight: theme.fontWeights.bold,
+    },
+  },
+})
