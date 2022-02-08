@@ -18,7 +18,7 @@ export default function NavLinkGroup({ name, links }) {
   const isSmallScreen = () => {
     return !window.matchMedia(mediaQueries.small).matches
   }
-  const onGroupButtonClick = () => {
+  const onGroupButtonClick = React.useCallback(() => {
     if (!isOpen) {
       setIsOpen(true)
       setPopupVisible(true)
@@ -29,7 +29,7 @@ export default function NavLinkGroup({ name, links }) {
       }
       setPopupVisible(false)
     }
-  }
+  }, [isOpen])
 
   React.useEffect(() => {
     // crude implementation of animating the popup without a library
@@ -47,8 +47,35 @@ export default function NavLinkGroup({ name, links }) {
     }
   }, [isOpen, name])
 
+  React.useEffect(() => {
+    // hide menu when clicked outside
+    const handleClickOutside = (event) => {
+      const wrapper = document.querySelector(
+        `[data-id="${name}-group-wrapper"]`
+      )
+      if (
+        !isSmallScreen() &&
+        isOpen &&
+        wrapper &&
+        !wrapper.contains(event.target)
+      ) {
+        onGroupButtonClick()
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [name, isOpen, onGroupButtonClick])
+
   return (
-    <Flex variant="columnStart" gap="4" className={navGroupWrapper}>
+    <Flex
+      data-id={`${name}-group-wrapper`}
+      variant="columnStart"
+      gap="4"
+      className={navGroupWrapper}
+    >
       <NavButtonLink onClick={onGroupButtonClick}>
         <Flex gap={1} variant="baseline">
           {name}
@@ -68,7 +95,7 @@ export default function NavLinkGroup({ name, links }) {
             {links.map((link) => (
               <li key={link.id}>
                 <NavLink to={link.href}>
-                  <Flex gap={3}>
+                  <Flex variant="start" gap={3}>
                     {link.icon && (
                       <GatsbyImage
                         alt={link.icon.alt}
@@ -85,11 +112,11 @@ export default function NavLinkGroup({ name, links }) {
                     )}
                     <Flex variant="columnStart" gap={1}>
                       <Box>{link.text}</Box>
-                      {/* {link.description && <Text>{link.description}</Text>} */}
-                      <Box className={navLinkDescription}>
-                        akfjkajhk askfjh akjsfh jkah fk aksjfhjkah kfjhakjhf
-                        akhka jhfa
-                      </Box>
+                      {!!link.description && (
+                        <Box as="p" className={navLinkDescription}>
+                          {link.description}
+                        </Box>
+                      )}
                     </Flex>
                   </Flex>
                 </NavLink>

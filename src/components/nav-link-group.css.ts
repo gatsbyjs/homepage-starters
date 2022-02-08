@@ -99,6 +99,7 @@ export const navLinkDescription = style({
     [mediaQueries.small]: {
       display: "block",
       fontSize: theme.fontSizes[1],
+      margin: 0,
     },
   },
 })
