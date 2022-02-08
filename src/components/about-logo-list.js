@@ -13,7 +13,7 @@ export default function AboutLogoList(props) {
             <CTALink href={props.link.href}>{props.link.text}</CTALink>
           )}
         </Box>
-        <Box padding={5}>
+        <Box padding={6}>
           <FlexList gap={5} variant="center">
             {props.logos.map(
               (logo) =>
