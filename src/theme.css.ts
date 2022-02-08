@@ -53,7 +53,8 @@ const sizes = {
   narrow: "1024px",
   wide: "1280px",
   avatar: "48px",
-  navGroupBox: "400px",
+  navGroupBoxMin: "300px",
+  navGroupBoxMax: "400px",
   navIcon: "32px",
   navIconSmall: "24px",
 }

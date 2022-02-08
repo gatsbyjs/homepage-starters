@@ -27,7 +27,8 @@ const navLinkListWrapperBase = style({
       left: "50%",
       transform: "translateX(-50%)",
       borderRadius: theme.radii.large,
-      minWidth: theme.sizes.navGroupBox,
+      minWidth: theme.sizes.navGroupBoxMin,
+      maxWidth: theme.sizes.navGroupBoxMax,
       selectors: {
         "&::before": {
           content: "",
@@ -110,6 +111,7 @@ export const navLinkDescription = style({
       display: "block",
       fontSize: theme.fontSizes[1],
       margin: 0,
+      minWidth: "300px",
     },
   },
 })
