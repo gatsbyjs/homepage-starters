@@ -28,6 +28,7 @@ console.log(`
   source content for your Gatsby site.
 `)
 
+// validate that API tokens are 30 alphanumeric characters
 const tokenRE = /^[a-z0-9]{30}$/
 
 inquirer
