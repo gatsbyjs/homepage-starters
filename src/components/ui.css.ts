@@ -1,4 +1,5 @@
 import { style, styleVariants } from "@vanilla-extract/css"
+import { calc } from "@vanilla-extract/css-utils"
 import { theme } from "../theme.css.ts"
 
 const breakpoints = ["40em", "52em", "64em"]
@@ -30,6 +31,19 @@ export const containers = styleVariants({
       maxWidth: theme.sizes.narrow,
     },
   ],
+  fullbleed: [
+    container,
+    {
+      paddingLeft: 0,
+      paddingRight: 0,
+      "@media": {
+        [media.medium]: {
+          paddingLeft: theme.space[4],
+          paddingRight: theme.space[4],
+        },
+      },
+    },
+  ],
 })
 
 export const flex = style({
@@ -50,6 +64,12 @@ export const flexVariants = styleVariants({
   columnStart: {
     flexDirection: "column",
     alignItems: "flex-start",
+  },
+  end: {
+    alignItems: "flex-end",
+  },
+  stretch: {
+    alignItems: "stretch",
   },
   spaceBetween: {
     width: "100%",
@@ -104,14 +124,25 @@ export const paddingY = styleVariants(theme.space, (padding) => ({
   paddingTop: padding,
   paddingBottom: padding,
 }))
+export const marginY = styleVariants(theme.space, (margin) => ({
+  marginTop: margin,
+  marginBottom: margin,
+}))
 export const gutter = styleVariants(theme.space, (val) => ({
-  marginLeft: `calc(-1 * ${val})`,
-  marginRight: `calc(-1 * ${val})`,
+  marginLeft: calc.multiply(val, -1),
+  marginRight: calc.multiply(val, -1),
 }))
 export const radii = styleVariants(theme.radii, (borderRadius) => ({
+  overflow: "hidden",
   borderRadius,
 }))
-export const order = styleVariants([0, 1, 2, 3], (order) => ({ order }))
+export const order = styleVariants([0, 1, 2, 3], (order) => ({
+  "@media": {
+    [media.small]: {
+      order,
+    },
+  },
+}))
 export const box = styleVariants({
   center: {
     display: "flex",
@@ -121,17 +152,40 @@ export const box = styleVariants({
   },
 })
 
-export const section = style({
-  paddingTop: theme.space[5],
-  paddingBottom: theme.space[5],
-})
-
 export const margin = styleVariants(
   {
     ...theme.space,
     auto: "auto",
   },
   (margin) => ({ margin })
+)
+margin.left = styleVariants(
+  {
+    ...theme.space,
+    auto: "auto",
+  },
+  (marginLeft) => ({ marginLeft })
+)
+margin.right = styleVariants(
+  {
+    ...theme.space,
+    auto: "auto",
+  },
+  (marginRight) => ({ marginRight })
+)
+margin.top = styleVariants(
+  {
+    ...theme.space,
+    auto: "auto",
+  },
+  (marginTop) => ({ marginTop })
+)
+margin.bottom = styleVariants(
+  {
+    ...theme.space,
+    auto: "auto",
+  },
+  (marginBottom) => ({ marginBottom })
 )
 
 export const margin0 = style({ margin: 0 })
@@ -161,17 +215,22 @@ export const text = styleVariants({
     margin0,
     {
       marginBottom: theme.space[3],
-      fontSize: theme.fontSizes[6],
+      fontSize: theme.fontSizes[5],
       fontWeight: theme.fontWeights.extrabold,
       lineHeight: theme.lineHeights.tight,
       letterSpacing: theme.letterSpacings.tight,
+      "@media": {
+        [media.medium]: {
+          fontSize: theme.fontSizes[6],
+        },
+      },
     },
   ],
   subhead: [
     margin0,
     {
       marginBottom: theme.space[3],
-      fontSize: theme.fontSizes[5],
+      fontSize: theme.fontSizes[4],
       fontWeight: theme.fontWeights.extrabold,
       lineHeight: theme.lineHeights.tight,
       letterSpacing: theme.letterSpacings.tight,
@@ -420,6 +479,8 @@ export const interactiveIcon = style({
   background: "transparent",
   border: "none",
   cursor: "pointer",
+  width: 48,
+  height: 48,
 })
 
 // for debugging only

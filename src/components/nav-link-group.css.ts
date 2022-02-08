@@ -1,12 +1,26 @@
 import { style, styleVariants } from "@vanilla-extract/css"
 import { theme } from "../theme.css.ts"
 import { mediaQueries } from "./ui.css"
+import { mobileNavLink } from "./header.css"
 
 export const navGroupWrapper = style({
   position: "relative",
 })
 
-export const navGroupTitle = style({
+export const navGroupTitle = style([
+  mobileNavLink,
+  {
+    "@media": {
+      [mediaQueries.small]: {
+        alignItems: "baseline",
+        color: "inherit",
+        fontSize: "inherit",
+      },
+    },
+  },
+])
+
+export const navGroupTitleInner = style({
   "@media": {
     [mediaQueries.small]: {
       alignItems: "baseline",
@@ -73,6 +87,7 @@ export const navLinkListWrapper = styleVariants({
 
 export const navLinkListWrapperInner = style({
   paddingLeft: theme.space[4],
+  paddingBottom: theme.space[3],
   "@media": {
     [mediaQueries.small]: {
       paddingLeft: 0,
@@ -103,6 +118,21 @@ export const navIconAlternative = style({
   },
 })
 
+export const navLinkListLink = style([
+  mobileNavLink,
+  {
+    "@media": {
+      [mediaQueries.small]: {
+        padding: 0,
+        margin: 0,
+        color: "inherit",
+        fontSize: theme.fontSizes[2],
+        fontWeight: theme.fontWeights.bold,
+      },
+    },
+  },
+])
+
 export const navLinkDescription = style({
   display: "none",
   whiteSpace: "normal",
@@ -117,12 +147,6 @@ export const navLinkDescription = style({
 })
 
 export const navLinkTitle = style({
-  fontWeight: "inherit",
-  fontSize: "inherit",
   margin: 0,
-  "@media": {
-    [mediaQueries.small]: {
-      fontWeight: theme.fontWeights.bold,
-    },
-  },
+  padding: 0,
 })

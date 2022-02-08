@@ -1,11 +1,11 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
-import { Container, Section, Heading, Text, ButtonList } from "./ui"
+import { Nudge, Container, Section, Heading, Text, ButtonList } from "./ui"
 
 export default function HomepageCta(props) {
   return (
-    <Container>
+    <Container width="fullbleed">
       <Section padding={5} radius="large" background="primary">
         <Heading center>{props.heading}</Heading>
         <Text as="p" center variant="lead">
@@ -13,7 +13,9 @@ export default function HomepageCta(props) {
         </Text>
         <ButtonList links={props.links} variant="center" reversed />
         {props.image && (
-          <GatsbyImage alt={props.image.alt} image={getImage(props.image)} />
+          <Nudge left={5} right={5} bottom={5}>
+            <GatsbyImage alt={props.image.alt} image={getImage(props.image)} />
+          </Nudge>
         )}
       </Section>
     </Container>

@@ -8,8 +8,10 @@ import {
   navGroupWrapper,
   navLinkListWrapper,
   navLinkListWrapperInner,
+  navLinkListLink,
   navLinkDescription,
   navGroupTitle,
+  navGroupTitleInner,
   navLinkTitle,
 } from "./nav-link-group.css"
 import { mediaQueries } from "./ui.css"
@@ -78,8 +80,8 @@ export default function NavLinkGroup({ name, links }) {
       gap="4"
       className={navGroupWrapper}
     >
-      <NavButtonLink onClick={onGroupButtonClick}>
-        <Flex gap={1} className={navGroupTitle}>
+      <NavButtonLink onClick={onGroupButtonClick} className={navGroupTitle} r>
+        <Flex gap={1} className={navGroupTitleInner}>
           {name}
           <Caret direction={isOpen ? "up" : "down"} />
         </Flex>
@@ -96,7 +98,7 @@ export default function NavLinkGroup({ name, links }) {
           >
             {links.map((link) => (
               <li key={link.id}>
-                <NavLink to={link.href}>
+                <NavLink to={link.href} className={navLinkListLink}>
                   <Flex variant="start" gap={3}>
                     {link.icon && (
                       <GatsbyImage
@@ -113,7 +115,7 @@ export default function NavLinkGroup({ name, links }) {
                       />
                     )}
                     <Flex variant="columnStart" gap={1}>
-                      <Box as="h2" className={navLinkTitle}>
+                      <Box as="span" className={navLinkTitle}>
                         {link.text}
                       </Box>
                       {!!link.description && (

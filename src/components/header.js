@@ -9,10 +9,10 @@ import {
   NavLink,
   Button,
   InteractiveIcon,
+  Nudge,
 } from "./ui"
 import {
   mobileNavOverlay,
-  mobileNavLinkList,
   mobileNavLink,
   desktopHeaderNavWrapper,
   mobileHeaderNavWrapper,
@@ -32,9 +32,6 @@ export default function Header() {
               id
               href
               text
-              internal {
-                type
-              }
             }
             ... on HomepageLinkGroup {
               id
@@ -51,9 +48,6 @@ export default function Header() {
                 iconAlternative {
                   alt
                   gatsbyImageData
-                }
-                internal {
-                  type
                 }
               }
             }
@@ -131,31 +125,31 @@ export default function Header() {
                 </Button>
               )}
             </div>
-            <InteractiveIcon
-              title="Toggle menu"
-              onClick={() => setOpen(!isOpen)}
-              className={
-                mobileNavSVGColorWrapper[isOpen ? "reversed" : "primary"]
-              }
-            >
-              {isOpen ? <X /> : <Menu />}
-            </InteractiveIcon>
+            <Nudge right={3}>
+              <InteractiveIcon
+                title="Toggle menu"
+                onClick={() => setOpen(!isOpen)}
+                className={
+                  mobileNavSVGColorWrapper[isOpen ? "reversed" : "primary"]
+                }
+              >
+                {isOpen ? <X /> : <Menu />}
+              </InteractiveIcon>
+            </Nudge>
           </Flex>
         </Flex>
       </Container>
       {isOpen && (
         <div className={mobileNavOverlay}>
           <nav>
-            <FlexList
-              variant="responsive"
-              gap="4"
-              className={mobileNavLinkList}
-            >
+            <FlexList responsive variant="stretch">
               {links &&
                 links.map((link) => (
-                  <li key={link.id} className={mobileNavLink}>
+                  <li key={link.id}>
                     {!isLinkGroup(link) ? (
-                      <NavLink to={link.href}>{link.text}</NavLink>
+                      <NavLink to={link.href} className={mobileNavLink}>
+                        {link.text}
+                      </NavLink>
                     ) : (
                       <NavLinkGroup name={link.name} links={link.links} />
                     )}
