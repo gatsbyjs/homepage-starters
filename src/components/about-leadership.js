@@ -44,7 +44,7 @@ export default function AboutLeadership(props) {
           {props.heading && <Heading as="h1">{props.heading}</Heading>}
           {props.subhead && <Text>{props.subhead}</Text>}
         </Box>
-        <FlexList gutter={false} gap={0} variant="center">
+        <FlexList gutter={false} gap={0} variant="center" alignItems="start">
           {props.content.map((profile) => (
             <AboutProfile key={profile.id} {...profile} />
           ))}

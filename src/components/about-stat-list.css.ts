@@ -1,10 +1,10 @@
 import { style } from "@vanilla-extract/css"
 import { theme } from "../theme.css.ts"
-import { mediaQueries } from "./ui.css"
+import { media } from "./ui.css"
 
 export const statList = style({
   "@media": {
-    [mediaQueries.small]: {
+    [media.small]: {
       gap: theme.space[6],
     },
   },
@@ -15,7 +15,7 @@ export const statContainer = style({
   flexDirection: "column",
   alignItems: "center",
   "@media": {
-    [mediaQueries.small]: {
+    [media.small]: {
       alignItems: "flex-start",
     },
   },

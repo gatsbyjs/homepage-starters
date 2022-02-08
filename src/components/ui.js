@@ -26,6 +26,7 @@ export function Flex({
   wrap,
   responsive,
   marginY,
+  alignItems,
   cx: _cx,
   ...props
 }) {
@@ -39,6 +40,7 @@ export function Flex({
         gutter && styles.gutter[gutter],
         gutter ? styles.flexGap[0] : styles.flexGap[gap],
         marginY && styles.marginY[marginY],
+        alignItems && styles.flexVariants[alignItems],
         _cx,
       ]}
       {...props}
