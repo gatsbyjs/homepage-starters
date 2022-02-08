@@ -102,7 +102,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     interface HomepageHero implements Node & HomepageBlock {
       id: ID!
       blocktype: String
-      heading: String
+      heading: String!
       kicker: String
       subhead: String
       image: HomepageImage
@@ -321,7 +321,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       originalId: String
       entityPayload: JSON
       blocktype: String @blocktype
-      heading: String
+      heading: String!
       kicker: String
       subhead: String
       image: HomepageImage
