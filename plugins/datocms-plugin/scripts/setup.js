@@ -19,7 +19,7 @@ console.log(`
     2. ${chalk.blue("Read-only API token")}
     3. ${chalk.blue("Environment name")}
 
-  These can be found in your DatoCSM project's ${chalk.blue(
+  These can be found in your DatoCMS project's ${chalk.blue(
     "Settings"
   )} tab, under ${chalk.blue("API tokens")} and ${chalk.blue("Environments")}.
 
