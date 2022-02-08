@@ -1,8 +1,16 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
-import { Container, FlexList, Heading, Section, Text, Box, Kicker } from "./ui"
-import { profileTextContainer, profileText } from "./about-leadership.css.ts"
+import {
+  Container,
+  FlexList,
+  Heading,
+  Section,
+  Text,
+  Box,
+  Kicker,
+  Space,
+} from "./ui"
 
 function AboutProfile(props) {
   return (
@@ -10,14 +18,15 @@ function AboutProfile(props) {
       {props.image && (
         <GatsbyImage alt={props.image.alt} image={getImage(props.image)} />
       )}
-      <Box className={profileTextContainer}>
+      <Space size={3} />
+      <Box>
         {props.name && (
-          <Text bold center className={profileText}>
+          <Text variant="medium" bold center>
             {props.name}
           </Text>
         )}
         {props.title && (
-          <Text center className={profileText}>
+          <Text variant="medium" center>
             {props.title}
           </Text>
         )}

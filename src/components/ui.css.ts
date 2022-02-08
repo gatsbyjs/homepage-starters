@@ -227,6 +227,12 @@ export const text = styleVariants({
       marginBottom: theme.space[2],
     },
   ],
+  medium: [
+    margin0,
+    {
+      fontSize: theme.fontSizes[3],
+    },
+  ],
   mega: [
     margin0,
     {
