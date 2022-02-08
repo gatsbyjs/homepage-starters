@@ -11,6 +11,18 @@ const space = {
   6: "128px",
 }
 
+// add negative margins
+Object.assign(
+  space,
+  Object.entries(space).reduce(
+    (a, [key, val]) => ({
+      ...a,
+      [-1 * key]: `-${val}`,
+    }),
+    {}
+  )
+)
+
 const fontSizes = {
   0: "12px",
   1: "14px",

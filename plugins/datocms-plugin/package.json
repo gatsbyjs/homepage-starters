@@ -2,10 +2,21 @@
   "name": "datocms-homepage-plugin",
   "version": "1.0.0",
   "main": "index.js",
+  "scripts": {
+    "setup": "node ./scripts/setup.js",
+    "export-content": "node ./scripts/export.js"
+  },
   "dependencies": {
     "datocms-structured-text-to-html-string": "^2.0.0",
+    "gatsby-plugin-manifest": "^4.7.0",
     "gatsby-plugin-react-helmet": "^5.5.0",
     "gatsby-source-datocms": "^3.0.12",
     "react-helmet": "^6.1.0"
+  },
+  "devDependencies": {
+    "chalk": "^4.1.0",
+    "datocms-client": "^3.5.14",
+    "inquirer": "^8.2.0",
+    "yargs": "^17.3.1"
   }
 }

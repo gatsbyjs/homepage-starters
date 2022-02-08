@@ -1,6 +1,6 @@
 import * as React from "react"
 import { graphql } from "gatsby"
-import { Container, Section, FlexList, Text, Logo } from "./ui"
+import { Space, Container, Section, FlexList, Text, Logo } from "./ui"
 
 export function LogoItem(props) {
   if (!props.image) return false
@@ -17,7 +17,8 @@ export default function LogoList(props) {
             {props.text}
           </Text>
         )}
-        <FlexList gap={5} variant="center">
+        <Space size={4} />
+        <FlexList gap={4} variant="center">
           {props.logos.map(
             (logo) =>
               logo && (
