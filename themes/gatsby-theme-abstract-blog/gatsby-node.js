@@ -11,13 +11,22 @@ const defaults = {
 
 exports.createSchemaCustomization = async ({ actions }) => {
   actions.createTypes(`
+    interface Image implements Node {
+      id: ID!
+      alt: String
+      gatsbyImageData: JSON
+      url: String
+    }
+
     interface BlogPost implements Node {
       id: ID!
       slug: String!
       title: String!
       html: String!
-      # TODO
-      # date # image # author
+      excerpt: String!
+      image: Image
+      date: Date!
+      # TODO: author
     }
   `)
 }
