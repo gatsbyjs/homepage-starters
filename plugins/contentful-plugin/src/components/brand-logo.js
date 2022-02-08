@@ -1,6 +1,6 @@
 import * as React from "react"
 
-export default function GatsbyDrupalLogo() {
+export default function GatsbyContentfulLogo() {
   return (
     <svg
       width="82"
