@@ -14,6 +14,8 @@ exports.onCreateWebpackConfig = ({ actions, store }) => {
         return "wordpress-plugin"
       case "gatsby-source-datocms":
         return "datocms-plugin"
+      case "gatsby-source-drupal":
+        return "drupal-plugin"
     }
     return null
   }, null)

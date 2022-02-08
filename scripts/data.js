@@ -17,6 +17,15 @@ module.exports = {
     deploynow:
       "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-datocms-homepage",
   },
+  drupal: {
+    repo: "https://github.com/gatsbyjs/gatsby-starter-drupal-homepage",
+    cms: "Drupal",
+    name: "drupal",
+    dirname: "drupal-plugin",
+    demoURL: "https://gatsbydrupalhomepage.gatsbyjs.io/",
+    deploynow:
+      "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-drupal-homepage",
+  },
   wordpress: {
     repo: "https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage",
     cms: "WordPress",
