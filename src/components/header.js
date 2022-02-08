@@ -28,7 +28,7 @@ export default function Header() {
         header {
           id
           links {
-            ... on ContentfulHomepageLink {
+            ... on HomepageLink {
               id
               href
               text
@@ -36,7 +36,7 @@ export default function Header() {
                 type
               }
             }
-            ... on ContentfulHomepageLinkGroup {
+            ... on HomepageLinkGroup {
               id
               name
               links {

@@ -1,9 +1,19 @@
 import { style, styleVariants } from "@vanilla-extract/css"
 import { theme } from "../theme.css.ts"
 import { mediaQueries } from "./ui.css"
+
 export const navGroupWrapper = style({
   position: "relative",
 })
+
+export const navGroupTitle = style({
+  "@media": {
+    [mediaQueries.small]: {
+      alignItems: "baseline",
+    },
+  },
+})
+
 const navLinkListWrapperBase = style({
   position: "relative",
   whiteSpace: "nowrap",

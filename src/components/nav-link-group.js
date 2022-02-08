@@ -9,6 +9,7 @@ import {
   navLinkListWrapper,
   navLinkListWrapperInner,
   navLinkDescription,
+  navGroupTitle,
   navLinkTitle,
 } from "./nav-link-group.css"
 import { mediaQueries } from "./ui.css"
@@ -78,7 +79,7 @@ export default function NavLinkGroup({ name, links }) {
       className={navGroupWrapper}
     >
       <NavButtonLink onClick={onGroupButtonClick}>
-        <Flex gap={1} variant="baseline">
+        <Flex gap={1} className={navGroupTitle}>
           {name}
           <Caret direction={isOpen ? "up" : "down"} />
         </Flex>
