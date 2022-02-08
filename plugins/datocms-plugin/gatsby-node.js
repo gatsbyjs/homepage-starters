@@ -1,3 +1,5 @@
+const dato = require("datocms-structured-text-to-html-string")
+
 exports.createSchemaCustomization = async ({ actions }) => {
   actions.createFieldExtension({
     name: "blocktype",
@@ -54,6 +56,19 @@ exports.createSchemaCustomization = async ({ actions }) => {
     },
   })
 
+  actions.createFieldExtension({
+    name: "richText",
+    extend(options) {
+      return {
+        resolve(source, args, context, info) {
+          const body = source.entityPayload.attributes.body
+          const html = dato.render(body)
+          return html
+        },
+      }
+    },
+  })
+
   // abstract interfaces
   actions.createTypes(`
     interface HomepageBlock implements Node {
@@ -87,7 +102,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     interface HomepageHero implements Node & HomepageBlock {
       id: ID!
       blocktype: String
-      heading: String
+      heading: String!
       kicker: String
       subhead: String
       image: HomepageImage
@@ -270,6 +285,16 @@ exports.createSchemaCustomization = async ({ actions }) => {
       header: LayoutHeader
       footer: LayoutFooter
     }
+
+    interface Page implements Node {
+      id: ID!
+      slug: String!
+      title: String
+      description: String
+      image: HomepageImage
+      html: String!
+      body: DatoCmsDatoCmsPageBodyStructuredText
+    }
   `)
 
   actions.createTypes(`
@@ -296,7 +321,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       originalId: String
       entityPayload: JSON
       blocktype: String @blocktype
-      heading: String
+      heading: String!
       kicker: String
       subhead: String
       image: HomepageImage
@@ -461,6 +486,19 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       header: LayoutHeader
       footer: LayoutFooter
+    }
+  `)
+
+  actions.createTypes(`
+    type DatoCmsPage implements Node & Page {
+      id: ID!
+      entityPayload: JSON!
+      slug: String!
+      title: String @proxy(from: "entityPayload.attributes.metadata.title")
+      description: String @proxy(from: "entityPayload.attributes.metadata.description")
+      image: HomepageImage @link(by: "originalId", from: "entityPayload.attributes.metadata.image")
+      html: String! @richText
+      body: DatoCmsDatoCmsPageBodyStructuredText
     }
   `)
 }

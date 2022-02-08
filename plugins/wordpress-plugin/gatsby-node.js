@@ -113,6 +113,15 @@ exports.createSchemaCustomization = async ({ actions }) => {
       socialLinks: [SocialLink]
       copyright: String
     }
+
+    interface Page implements Node {
+      id: ID!
+      slug: String!
+      title: String
+      description: String
+      image: HomepageImage
+      html: String
+    }
   `)
 
   // creating custom types because WP does not provide these
@@ -126,7 +135,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type HomepageHero implements Node & HomepageBlock {
       id: ID!
       blocktype: String
-      heading: String
+      heading: String!
       kicker: String
       subhead: String
       image: HomepageImage @link
@@ -252,6 +261,16 @@ exports.createSchemaCustomization = async ({ actions }) => {
       quote: String @proxy(from: "testimonial.quote")
       source: String @proxy(from: "testimonial.source")
       avatar: HomepageImage @link @proxy(from: "testimonial.avatar.id")
+    }
+
+    type WpPage implements Node & Page {
+      id: ID!
+      slug: String!
+      title: String
+      description: String
+      image: HomepageImage @link @proxy(from: "featuredImageId")
+      content: String
+      html: String @proxy(from: "content")
     }
   `)
 
@@ -601,6 +620,9 @@ exports.onCreateNode = ({
         })
         return id
       })
+      const metaLinks = [footer.termsLink, footer.privacyPolicyLink].map(
+        createLinkNode(node.id)
+      )
       actions.createNodeField({
         node,
         name: "links",
@@ -611,11 +633,10 @@ exports.onCreateNode = ({
         name: "socialLinks",
         value: socialLinks,
       })
-      // TODO
       actions.createNodeField({
         node,
         name: "meta",
-        value: [],
+        value: metaLinks,
       })
       break
   }

@@ -57,7 +57,6 @@ inquirer
   ])
   .then(async ({ fullAPIToken, apiToken, environment }) => {
     // write env vars to .env.development & .env.production
-    console.log({ fullAPIToken, apiToken, environment })
     const dotenv = [
       `# All environment variables will be sourced`,
       `# and made available to gatsby-config.js, gatsby-node.js, etc.`,

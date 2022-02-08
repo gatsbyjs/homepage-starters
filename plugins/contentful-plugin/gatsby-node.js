@@ -1,3 +1,5 @@
+const { documentToHtmlString } = require("@contentful/rich-text-html-renderer")
+
 exports.createSchemaCustomization = async ({ actions }) => {
   actions.createFieldExtension({
     name: "blocktype",
@@ -26,6 +28,20 @@ exports.createSchemaCustomization = async ({ actions }) => {
     },
   })
 
+  actions.createFieldExtension({
+    name: "richText",
+    extend(options) {
+      return {
+        resolve(source, args, context, info) {
+          const body = source.body
+          const doc = JSON.parse(body.raw)
+          const html = documentToHtmlString(doc)
+          return html
+        },
+      }
+    },
+  })
+
   // abstract interfaces
   actions.createTypes(`
     interface HomepageBlock implements Node {
@@ -49,7 +65,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     interface HomepageHero implements Node & HomepageBlock {
       id: ID!
       blocktype: String
-      heading: String
+      heading: String!
       kicker: String
       subhead: String
       image: HomepageImage
@@ -208,6 +224,15 @@ exports.createSchemaCustomization = async ({ actions }) => {
       header: LayoutHeader
       footer: LayoutFooter
     }
+
+    interface Page implements Node {
+      id: ID!
+      slug: String!
+      title: String
+      description: String
+      image: HomepageImage
+      html: String!
+    }
   `)
 
   // CMS-specific types
@@ -230,7 +255,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type ContentfulHomepageHero implements Node & HomepageHero & HomepageBlock @dontInfer {
       id: ID!
       blocktype: String @blocktype
-      heading: String
+      heading: String!
       kicker: String
       subhead: String
       image: HomepageImage @link(from: "image___NODE")
@@ -373,6 +398,18 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       header: LayoutHeader @link(from: "header___NODE")
       footer: LayoutFooter @link(from: "footer___NODE")
+    }
+  `)
+
+  // Page types
+  actions.createTypes(`
+    type ContentfulPage implements Node & Page {
+      id: ID!
+      slug: String!
+      title: String
+      description: String
+      image: HomepageImage @link(from: "image___NODE")
+      html: String! @richText
     }
   `)
 }
