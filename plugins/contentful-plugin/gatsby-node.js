@@ -280,6 +280,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     interface AboutCta implements Node & HomepageBlock {
       id: ID!
       blocktype: String
+      kicker: String
       heading: String
       text: String
       links: [HomepageLink]
@@ -438,6 +439,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type ContentfulAboutCta implements Node & AboutCta & HomepageBlock @dontInfer {
       id: ID!
       blocktype: String @blocktype
+      kicker: String
       heading: String
       text: String
       links: [HomepageLink] @link(from: "links___NODE")
