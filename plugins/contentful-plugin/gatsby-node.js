@@ -65,7 +65,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     interface HomepageHero implements Node & HomepageBlock {
       id: ID!
       blocktype: String
-      heading: String
+      heading: String!
       kicker: String
       subhead: String
       image: HomepageImage
@@ -264,7 +264,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type ContentfulHomepageHero implements Node & HomepageHero & HomepageBlock @dontInfer {
       id: ID!
       blocktype: String @blocktype
-      heading: String
+      heading: String!
       kicker: String
       subhead: String
       image: HomepageImage @link(from: "image___NODE")
