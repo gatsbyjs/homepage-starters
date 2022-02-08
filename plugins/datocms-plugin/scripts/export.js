@@ -28,4 +28,4 @@ async function exportContent() {
   console.log("Exported Models and Fields from DatoCMS")
 }
 
-exportContent(process.env.DATOCMS_API_TOKEN)
+exportContent()
