@@ -8,8 +8,10 @@ export default function AboutLogoList(props) {
     <Container>
       <Section>
         <Box center>
-          <Heading as="h1">{props.heading}</Heading>
-          <CTALink href={props.link.href}>{props.link.text}</CTALink>
+          {props.heading && <Heading as="h1">{props.heading}</Heading>}
+          {props.link && (
+            <CTALink href={props.link.href}>{props.link.text}</CTALink>
+          )}
         </Box>
         <Box padding={5}>
           <FlexList gap={5} variant="center">

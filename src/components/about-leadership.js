@@ -7,14 +7,20 @@ import { profileTextContainer, profileText } from "./about-leadership.css.ts"
 function AboutProfile(props) {
   return (
     <Box width="third" padding={4} center>
-      <GatsbyImage alt={props.image.alt} image={getImage(props.image)} />
+      {props.image && (
+        <GatsbyImage alt={props.image.alt} image={getImage(props.image)} />
+      )}
       <Box className={profileTextContainer}>
-        <Text bold center className={profileText}>
-          {props.name}
-        </Text>
-        <Text center className={profileText}>
-          {props.title}
-        </Text>
+        {props.name && (
+          <Text bold center className={profileText}>
+            {props.name}
+          </Text>
+        )}
+        {props.title && (
+          <Text center className={profileText}>
+            {props.title}
+          </Text>
+        )}
       </Box>
     </Box>
   )

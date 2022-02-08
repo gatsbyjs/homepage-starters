@@ -11,8 +11,8 @@ import {
 function AboutStat(props) {
   return (
     <Box width="fitContent" className={statContainer}>
-      <Text className={statHeader}>{props.value}</Text>
-      <Text className={statKicker}>{props.label}</Text>
+      {props.value && <Text className={statHeader}>{props.value}</Text>}
+      {props.label && <Text className={statKicker}>{props.label}</Text>}
     </Box>
   )
 }

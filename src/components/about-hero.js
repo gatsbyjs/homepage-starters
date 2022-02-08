@@ -9,7 +9,7 @@ export default function AboutHero(props) {
     <Section>
       <Container>
         <SuperHeading className={aboutHeroHeader}>{props.heading}</SuperHeading>
-        <Text className={aboutHeroText}>{props.text}</Text>
+        {props.text && <Text className={aboutHeroText}>{props.text}</Text>}
       </Container>
       {props.image && (
         <GatsbyImage alt={props.image.alt} image={getImage(props.image)} />

@@ -7,10 +7,12 @@ export default function AboutCta(props) {
     <Container>
       <Section padding={5} radius="large" background="primary">
         <Box center paddingY={4}>
-          <Heading>{props.heading}</Heading>
-          <Text as="p" variant="lead">
-            {props.text}
-          </Text>
+          {props.heading && <Heading>{props.heading}</Heading>}
+          {props.text && (
+            <Text as="p" variant="lead">
+              {props.text}
+            </Text>
+          )}
         </Box>
         <ButtonList links={props.links} variant="center" reversed />
       </Section>
