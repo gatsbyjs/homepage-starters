@@ -2,40 +2,25 @@
   <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
 </a>
 
-# Gatsby Starter WordPress Homepage
+# Gatsby Starter Drupal Homepage
 
-Create a homepage using Gatsby and WordPress. This starter demonstrates how to use WordPress to build a homepage and can be customized to match your own visual branding.
+Create a homepage using Gatsby and Drupal. This starter demonstrates how to use Drupal to build a homepage and can be customized to match your own visual branding.
 
-[View the Demo](https://gatsbywordpresshomepage.gatsbyjs.io/)
+[View the Demo](https://gatsbydrupalhomepage.gatsbyjs.io/)
 
 ## Quick start
 
-You will need a new or existing WordPress instance to use this starter.
-This starter requires the following plugins to be installed in your WordPress instance:
-
-- [WPGatsby][]
-- [WPGraphQL][]
-- [Advanced Custom Fields][]
-- [WPGraphQL for Advanced Custom Fields][]
-- [Custom Post Type UI][] (Optional)
-
-Once these plugins are installed, you'll need the URL of the GraphQL endpoint for configuration.
-
-[wpgatsby]: https://wordpress.org/plugins/wp-gatsby/
-[wpgraphql]: https://wordpress.org/plugins/wp-graphql/
-[advanced custom fields]: https://wordpress.org/plugins/advanced-custom-fields/
-[wpgraphql for advanced custom fields]: https://github.com/wp-graphql/wp-graphql-acf
-[custom post type ui]: https://wordpress.org/plugins/custom-post-type-ui/
+You will need a new or existing `Drupal` website to use this starter and will be asked for your `baseUrl` and the `username` and `password` for your `Drupal` during installation.
 
 1. **Create a Gatsby site**
 
    Use the Gatsby CLI to get started locally:
 
    ```sh name
-   npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage
+   npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-drupal-homepage
    ```
 
-1. **Run the WordPress setup command**
+1. **Run the Drupal setup command**
 
    **TO BE IMPLEMENTED**
    From your site's root directory, run:
@@ -45,7 +30,7 @@ Once these plugins are installed, you'll need the URL of the GraphQL endpoint fo
    yarn setup
    ```
 
-   This will run a script to populate your WordPress content model and add demo content.
+   This will run a script to populate your Drupal content model and add demo content.
 
 1. **Start developing**
 
@@ -61,9 +46,9 @@ Once these plugins are installed, you'll need the URL of the GraphQL endpoint fo
 
 ## Deploy your site
 
-Once your content is available in WordPress, deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
+Once your content is available in Drupal, deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
 
-[![Deploy to Gatsby](https://www.gatsbyjs.com/deploynow.png "Deploy to Gatsby")](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage)
+[![Deploy to Gatsby](https://www.gatsbyjs.com/deploynow.png "Deploy to Gatsby")](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-drupal-homepage)
 
 ## What's included?
 
@@ -97,10 +82,10 @@ To update the colors used in this starter, edit the `src/colors.css.ts` file.
 ```.ts
 // src/colors.css.ts
 export const colors = {
-  background: "#fff",
+  background: "#eff6ff",
   text: "#004ca3",
   primary: "#004ca3",
-  muted: "#f5fcff",
+  muted: "#e6f1ff",
   active: "#001d3d",
   black: "#000",
 }
@@ -135,18 +120,18 @@ Most of the styles for these components are handled with shared UI components in
 To create a new type of section in your homepage, you'll want to create a new section component. Using the existing components as an example.
 For this example, we'll create a new "Banner" component.
 
-1. First, update your custom fields in WordPress to support the new component
+1. First, update your content model in Drupal
 
-   Under the _Custom Fields_ tab, create a new _Field Group_ and call it "Homepage Banner."
-   For this example, add two text fields: `banner_heading` and `banner_text`.
-   In the _Location_ rules, be sure to show the field group in _Page_ post types.
-   Also ensure that the _Show in GraphQL_ option is enabled for this field.
+   In your Drupal website, create a new content type and call it "Homepage Banner."
+   For this example, change the `Title` field's name to `Heading` in when creating your new content type. Remove any fields that are added dy default and create a new field called `text` this should be of `Text (plain, long)` data type.
 
-   Navigate to the _Pages_ tab and edit the Homepage and add content for the new Banner component.
+   Find the content type for _Homepage_ in Drupal and edit the settings for the _Content_ field. Under `Reference Type -> Content Type`, ensure that the new _Homepage Banner_ type is checked to make it available as a content type on the Homepage.
+
+   Navigate to the _Content_ page to edit the _Homepage_ and add a section with this new _Homepage Banner_ content type.
 
 1. Update `gatsby-node.js`
 
-   Edit your site's `gatsby-node.js` file, adding a type for `HomepageBanner` that matches your custom fields in WordPress.
+   Edit your site's `gatsby-node.js` file, adding an interface for `HomepageBanner` that matches your content model in Drupal.
    This allows the homepage to query the abstract `HomepageBanner` type.
 
    ```js
@@ -154,7 +139,7 @@ For this example, we'll create a new "Banner" component.
    exports.createSchemaCustomization = async ({ actions }) => {
      // ...
      actions.createTypes(`
-       type HomepageBanner implements Node & HomepageBlock {
+       interface HomepageBanner implements Node & HomepageBlock {
          id: ID!
          blocktype: String
          heading: String
@@ -162,70 +147,15 @@ For this example, we'll create a new "Banner" component.
        }
      `)
      // ...
-   }
-   // ...
-   exports.onCreateNode = ({ actions, node, createNodeId, createContentDigest }) => {
-   }
+     actions.createTypes(`
+       type node__homepage_banner implements Node & HomepageBanner & HomepageBlock @dontInfer {
+         id: ID!
+         blocktype: String @blocktype
+         heading: String
+         text: String
+       }
+     `)
      // ...
-     switch (node.internal.type) {
-       case "WpPage":
-         if (node.slug !== "homepage") return
-         const {
-           homepageHero,
-           homepageCta,
-           statList,
-           testimonialList,
-           productList,
-           logoList,
-           featureList,
-           benefitList,
-           // add the new custom field group here
-           homepageBanner,
-         } = node
-
-         const heroID = createNodeId(`${node.id} >>> HomepageHero`)
-         // create an node id for the field group
-         const bannerID = createNodeId(`${node.id} >>> HomepageBanner`)
-         // ...
-
-         // create a new node for this field group
-         actions.createNode({
-           id: bannerID,
-           internal: {
-             type: "HomepageBanner",
-             contentDigest: createContentDigest(JSON.stringify(homepageBanner)),
-           },
-           parent: node.id,
-           blocktype: "HomepageBanner",
-           heading: homepageBanner.bannerHeading,
-           text: homepageBanner.bannerText,
-         })
-         // ...
-         actions.createNode({
-           ...node,
-           id: createNodeId(`${node.id} >>> Homepage`),
-           internal: {
-             type: "Homepage",
-             contentDigest: node.internal.contentDigest,
-           },
-           parent: node.id,
-           blocktype: "Homepage",
-           image: node.featuredImageId,
-           content: [
-             heroID,
-             logosID,
-             // add your banner content in the postion you would like it to appear on the page
-             bannerID,
-             productsID,
-             featuresID,
-             benefitsID,
-             statsID,
-             testimonialsID,
-             ctaID,
-           ],
-         })
-         // ...
-     }
    }
    ```
 
