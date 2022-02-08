@@ -74,6 +74,15 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       href: String
       text: String
+      icon: HomepageImage
+      iconAlternative: HomepageImage
+      description: String
+    }
+
+    interface HomepageLinkGroup implements Node {
+      id: ID!
+      name: String
+      links: [HomepageLink]
     }
 
     interface HomepageImage implements Node {
@@ -212,7 +221,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     interface LayoutHeader implements Node {
       id: ID!
-      links: [HomepageLink]
+      links: [NavItem]
       cta: HomepageLink
     }
 
@@ -266,10 +275,24 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
   // CMS-specific types
   actions.createTypes(/* GraphQL */ `
+    union NavItem = node__homepage_link | node__homepage_link_group
     type node__homepage_link implements Node & HomepageLink @dontInfer {
       id: ID!
       href: String @proxy(from: "field_href")
       text: String @proxy(from: "title")
+      icon: HomepageImage
+        @link(by: "id", from: "relationships.field_icon___NODE")
+      iconAlternative: HomepageImage
+        @link(by: "id", from: "relationships.field_icon_alternative___NODE")
+      description: String @proxy(from: "field_description")
+    }
+
+    type node__homepage_link_group implements Node & HomepageLinkGroup
+      @dontInfer {
+      id: ID!
+      name: String @proxy(from: "title")
+      links: [HomepageLink]
+        @link(by: "id", from: "relationships.field_links___NODE")
     }
 
     type media__image implements Node & HomepageImage {
@@ -438,8 +461,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
   actions.createTypes(/* GraphQL */ `
     type node__layout_header implements Node & LayoutHeader @dontInfer {
       id: ID!
-      links: [HomepageLink]
-        @link(by: "id", from: "relationships.field_links___NODE")
+      links: [NavItem] @link(by: "id", from: "relationships.field_links___NODE")
       cta: HomepageLink @link(by: "id", from: "relationships.field_cta___NODE")
     }
 
