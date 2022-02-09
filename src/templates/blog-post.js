@@ -13,7 +13,7 @@ export default function BlogPost(props) {
   const post = props.data.blogPost
 
   return (
-    <Layout {...post}>
+    <Layout {...post} description={post.excerpt}>
       <Container>
         <Box paddingY={4}>
           <Heading as="h1">{post.title}</Heading>
@@ -36,8 +36,14 @@ export const query = graphql`
       slug
       title
       html
-      # description
-      # image
+      excerpt
+      date
+      image {
+        id
+        url
+        gatsbyImageData
+        alt
+      }
     }
   }
 `

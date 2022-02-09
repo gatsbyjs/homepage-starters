@@ -1,3 +1,5 @@
+const sanitizeHTML = require("sanitize-html")
+
 exports.createSchemaCustomization = async ({ actions }) => {
   actions.createFieldExtension({
     name: "wpImageProxy",
@@ -17,6 +19,21 @@ exports.createSchemaCustomization = async ({ actions }) => {
     },
   })
 
+  actions.createFieldExtension({
+    name: "sanitizeHTML",
+    extend(options) {
+      return {
+        resolve(source, args, context, info) {
+          const html = source[info.fieldName]
+          const str = sanitizeHTML(html, {
+            allowedTags: [],
+          })
+          return str
+        },
+      }
+    },
+  })
+
   actions.createTypes(`
     type WpMediaItem implements Node & Image {
       id: ID!
@@ -31,7 +48,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       slug: String!
       title: String!
       html: String! @proxy(from: "content")
-      excerpt: String!
+      excerpt: String! @sanitizeHTML
       date: Date!
       image: Image @link(by: "id", from: "featuredImage.node.id")
     }

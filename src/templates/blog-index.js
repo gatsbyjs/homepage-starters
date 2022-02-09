@@ -21,6 +21,7 @@ export default function BlogIndex(props) {
             {posts.map((post) => (
               <li key={post.id}>
                 <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+                <p>{post.excerpt}</p>
               </li>
             ))}
           </ul>
@@ -37,6 +38,7 @@ export const query = graphql`
         id
         slug
         title
+        excerpt
       }
     }
   }
