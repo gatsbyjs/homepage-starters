@@ -18,6 +18,22 @@ exports.createSchemaCustomization = async ({ actions }) => {
   })
 
   actions.createFieldExtension({
+    name: "contentfulExcerpt",
+    extend(options) {
+      return {
+        async resolve(source, args, context, info) {
+          const type = info.schema.getType(source.internal.type)
+          const resolver = type.getFields().contentfulExcerpt?.resolve
+          const result = await resolver(source, args, context, {
+            fieldName: "contentfulExcerpt",
+          })
+          return result.excerpt
+        },
+      }
+    },
+  })
+
+  actions.createFieldExtension({
     name: "urlSchema",
     extend(options) {
       const schemaRE = /^\/\//
@@ -56,8 +72,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
       html: String! @contentfulRichText
       body: String!
       date: Date!
-      excerpt: String! @proxy(from: "contentfulExcerpt.excerpt")
-      contentfulExcerpt: contentfulBlogPostExcerptTextNode @link
+      excerpt: String! @contentfulExcerpt
+      contentfulExcerpt: contentfulBlogPostExcerptTextNode @link(from: "excerpt___NODE")
       image: Image @link(from: "image___NODE")
     }
   `)
