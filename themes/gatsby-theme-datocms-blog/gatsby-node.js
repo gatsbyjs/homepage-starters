@@ -17,12 +17,24 @@ exports.createSchemaCustomization = async ({ actions }) => {
   })
 
   actions.createTypes(`
+    type DatoCmsAsset implements Node & Image {
+      id: ID!
+      alt: String
+      gatsbyImageData: JSON
+      originalId: String
+      entityPayload: JSON
+      url: String
+    }
+
     type DatoCmsBlogpost implements Node & BlogPost {
       id: ID!
       slug: String!
       title: String!
       body: String!
       html: String! @datocmsRichText
+      excerpt: String!
+      image: Image
+      date: Date!
     }
   `)
 }
