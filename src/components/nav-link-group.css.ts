@@ -12,6 +12,7 @@ export const navGroupTitle = style([
   {
     "@media": {
       [mediaQueries.small]: {
+        padding: 0,
         alignItems: "baseline",
         color: "inherit",
         fontSize: "inherit",
@@ -35,7 +36,7 @@ const navLinkListWrapperBase = style({
   "@media": {
     [mediaQueries.small]: {
       position: "absolute",
-      background: theme.colors.muted,
+      background: theme.colors.background,
       padding: theme.space[4],
       top: "calc(100% + 20px)",
       left: "50%",
@@ -43,6 +44,8 @@ const navLinkListWrapperBase = style({
       borderRadius: theme.radii.large,
       minWidth: theme.sizes.navGroupBoxMin,
       maxWidth: theme.sizes.navGroupBoxMax,
+      boxShadow:
+        "0px 4px 8px 0px #2E29330A, 0px 4px 24px 0px #2E293314, 0px 8px 24px 0px #473F4F29",
       selectors: {
         "&::before": {
           content: "",
@@ -54,7 +57,7 @@ const navLinkListWrapperBase = style({
           height: 0,
           borderStyle: "solid",
           borderWidth: "0 14px 17.3px 14px",
-          borderColor: `transparent transparent ${theme.colors.muted} transparent`,
+          borderColor: `transparent transparent ${theme.colors.background} transparent`,
         },
       },
     },
@@ -123,11 +126,15 @@ export const navLinkListLink = style([
   {
     "@media": {
       [mediaQueries.small]: {
-        padding: 0,
+        padding: `${theme.space[2]}`,
         margin: 0,
         color: "inherit",
         fontSize: theme.fontSizes[2],
         fontWeight: theme.fontWeights.bold,
+        borderRadius: theme.radii.button,
+        ":hover": {
+          background: theme.colors.muted,
+        },
       },
     },
   },
