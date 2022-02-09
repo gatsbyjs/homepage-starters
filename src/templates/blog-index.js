@@ -1,5 +1,6 @@
 import * as React from "react"
 import { graphql } from "gatsby"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
 // prettier-ignore
 import {
@@ -20,6 +21,14 @@ export default function BlogIndex(props) {
           <ul>
             {posts.map((post) => (
               <li key={post.id}>
+                {post.image && (
+                  <Link to={`/blog/${post.slug}`}>
+                    <GatsbyImage
+                      alt={post.image.alt}
+                      image={getImage(post.image)}
+                    />
+                  </Link>
+                )}
                 <Link to={`/blog/${post.slug}`}>{post.title}</Link>
                 <p>{post.excerpt}</p>
               </li>
@@ -39,6 +48,11 @@ export const query = graphql`
         slug
         title
         excerpt
+        image {
+          id
+          alt
+          gatsbyImageData
+        }
       }
     }
   }

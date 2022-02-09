@@ -1,5 +1,6 @@
 import * as React from "react"
 import { graphql } from "gatsby"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
 // prettier-ignore
 import {
@@ -16,6 +17,9 @@ export default function BlogPost(props) {
     <Layout {...post} description={post.excerpt}>
       <Container>
         <Box paddingY={4}>
+          {post.image && (
+            <GatsbyImage alt={post.image.alt} image={getImage(post.image)} />
+          )}
           <Heading as="h1">{post.title}</Heading>
           <div
             className={styles.blogPost}
