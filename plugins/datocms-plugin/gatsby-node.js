@@ -6,12 +6,9 @@ exports.createSchemaCustomization = async ({ actions }) => {
     extend(options) {
       return {
         resolve(source) {
-          console.log("blocktype source BEFORE: ", source.internal.type)
-          const newSource = source.internal.type
+          return source.internal.type
             .replace("DatoCms", "")
             .replace(/list$/, "List")
-          console.log("blocktype source AFTER: ", newSource)
-          return newSource
         },
       }
     },
