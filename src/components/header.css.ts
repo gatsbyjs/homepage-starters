@@ -9,7 +9,7 @@ export const desktopHeaderNavWrapper = style({
   "@media": {
     [mediaQueries.small]: {
       display: "block",
-      paddingTop: theme.space[5],
+      paddingTop: theme.space[4],
     },
   },
 })
@@ -17,7 +17,7 @@ export const desktopHeaderNavWrapper = style({
 const mobileHeaderNavWrapperBase = style({
   display: "block",
   position: "relative",
-  paddingTop: theme.space[4],
+  paddingTop: theme.space[3],
   "@media": {
     [mediaQueries.small]: {
       display: "none",
@@ -44,7 +44,7 @@ export const mobileNavOverlay = style({
   position: "absolute",
   width: "100vw",
   height: "100vh",
-  paddingTop: theme.space[5],
+  paddingTop: theme.space[4],
   background: theme.colors.primary,
   zIndex: 1,
   "@media": {
@@ -60,6 +60,6 @@ export const mobileNavLink = style({
   fontSize: theme.fontSizes[4],
   paddingTop: theme.space[2],
   paddingBottom: theme.space[2],
-  paddingLeft: theme.space[5],
-  paddingRight: theme.space[5],
+  paddingLeft: theme.space[4],
+  paddingRight: theme.space[4],
 })

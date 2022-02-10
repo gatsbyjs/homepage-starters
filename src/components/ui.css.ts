@@ -18,8 +18,8 @@ export const container = style({
   maxWidth: theme.sizes.container,
   marginLeft: "auto",
   marginRight: "auto",
-  paddingLeft: theme.space[5],
-  paddingRight: theme.space[5],
+  paddingLeft: theme.space[4],
+  paddingRight: theme.space[4],
 })
 
 export const containers = styleVariants({
@@ -38,8 +38,8 @@ export const containers = styleVariants({
       paddingRight: 0,
       "@media": {
         [media.medium]: {
-          paddingLeft: theme.space[5],
-          paddingRight: theme.space[5],
+          paddingLeft: theme.space[4],
+          paddingRight: theme.space[4],
         },
       },
     },
@@ -194,7 +194,7 @@ export const text = styleVariants({
   body: [
     margin0,
     {
-      marginBottom: theme.space[4],
+      marginBottom: theme.space[3],
       fontSize: theme.fontSizes[2],
       fontWeight: theme.fontWeights.normal,
       lineHeight: theme.lineHeights.text,
@@ -204,7 +204,7 @@ export const text = styleVariants({
   lead: [
     margin0,
     {
-      marginBottom: theme.space[4],
+      marginBottom: theme.space[3],
       fontSize: theme.fontSizes[3],
       fontWeight: theme.fontWeights.normal,
       lineHeight: theme.lineHeights.text,
@@ -214,7 +214,7 @@ export const text = styleVariants({
   heading: [
     margin0,
     {
-      marginBottom: theme.space[4],
+      marginBottom: theme.space[3],
       fontSize: theme.fontSizes[5],
       fontWeight: theme.fontWeights.extrabold,
       lineHeight: theme.lineHeights.tight,
@@ -229,7 +229,7 @@ export const text = styleVariants({
   subhead: [
     margin0,
     {
-      marginBottom: theme.space[4],
+      marginBottom: theme.space[3],
       fontSize: theme.fontSizes[4],
       fontWeight: theme.fontWeights.extrabold,
       lineHeight: theme.lineHeights.tight,
@@ -345,10 +345,10 @@ const button = style({
   fontWeight: theme.fontWeights.bold,
   fontSize: theme.fontSizes[2],
   lineHeight: 1,
-  paddingTop: theme.space[4],
-  paddingBottom: theme.space[4],
-  paddingLeft: theme.space[4],
-  paddingRight: theme.space[4],
+  paddingTop: theme.space[3],
+  paddingBottom: theme.space[3],
+  paddingLeft: theme.space[3],
+  paddingRight: theme.space[3],
   borderRadius: theme.radii.button,
 })
 
@@ -427,7 +427,7 @@ export const blockquote = style({
   paddingLeft: 0,
   paddingRight: 0,
   paddingTop: 0,
-  paddingBottom: theme.space[5],
+  paddingBottom: theme.space[4],
 })
 
 export const avatar = style({
@@ -463,7 +463,7 @@ export const icons = styleVariants(
 
 export const iconLink = style({
   color: theme.colors.text,
-  marginRight: theme.space[4],
+  marginRight: theme.space[3],
   ":hover": {
     color: theme.colors.active,
   },
