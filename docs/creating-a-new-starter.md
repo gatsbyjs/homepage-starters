@@ -135,7 +135,43 @@ actions.createTypes(`
 `)
 ```
 
-Use [GraphiQL][] as you're adding types to ensure they are working as expected.
+### Using GraphiQL for development
+
+Once you've started working on the GraphQL type definitions in `gatsby-node.js` it can be useful to start up
+the Gatsby develop server's [GraphiQL][] to check that the nodes can be queried correctly.
+Even if the entire schema isn't fully defined, Gatsby develop should be able to start up and will log any errors that the site might encounter
+with the incomplete schema.
+
+To start the Gatsby develop server using this new plugin, navigate to the root of the directory and edit its `gatsby-config.js` file.
+Add the name of the new plugin to the `plugins` array and comment out any other local plugins.
+
+```js
+// gatsby-config.js (in root directory)
+module.exports = {
+  plugins: [
+    // Comment and uncomment the desired CMS/backend plugin to switch between data sources
+    // "datocms-plugin",
+    // "drupal-plugin",
+    // "contentful-plugin",
+    // "datocms-plugin",
+    // "wordpress-plugin",
+
+    // Add the name of the new local plugin here
+    "<CMS>-plugin",
+  ],
+}
+```
+
+Then start up the develop server by running:
+
+```sh
+yarn start
+```
+
+If there are issues with the schema, you might see errors and the site itself might not be viewable, but GraphiQL should start up.
+Navigate to <http://localhost:8000/___graphql> in your browser to inspect and query the nodes that you've defined in your `gatsby-node.js`.
+
+If you're dealing with linked nodes, it can be helpful to ensure the lower-level nodes can be queried then move onto the type definitions for the nodes that link to those nodes. For example, make sure that you can query `allHomepageLink` and `allHomepageImage` first, then check to make sure that you can query `allHomepageHero`, which includes an image and links.
 
 [schema customization]: https://www.gatsbyjs.com/docs/reference/graphql-data-layer/schema-customization/
 [queryable interfaces]: https://www.gatsbyjs.com/docs/reference/graphql-data-layer/schema-customization/#queryable-interfaces
@@ -190,8 +226,24 @@ export default function BrandLogo() {
 }
 ```
 
+## Testing the site
+
+Once the above steps are complete, test the site out by navigating the root directory of this repo, adding your local plugin to the `gatsby-config.js` file and running:
+
+```sh
+yarn start
+```
+
+Ensure that the site works and that the content is being properly sourced from the CMS.
+
 ## Setup script
+
+TK
 
 ## README and documentation
 
+TK
+
 ## Configuration for publishing
+
+TK
