@@ -83,8 +83,16 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       href: String
       text: String
+      ## DatoCMS
+      originalId: String
+      entityPayload: JSON
+    }
+
+    interface NavItem implements Node {
+      id: ID!
+      href: String
+      text: String
       icon: HomepageImage
-      iconAlternative: HomepageImage
       description: String
       ## DatoCMS
       originalId: String
@@ -94,7 +102,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     interface HomepageLinkGroup implements Node {
       id: ID!
       name: String
-      links: [HomepageLink]
+      links: [NavItem]
       ## DatoCMS
       originalId: String
       entityPayload: JSON
@@ -261,7 +269,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     interface LayoutHeader implements Node {
       id: ID!
-      links: [NavItem]
+      links: [HeaderLink]
       cta: HomepageLink
       entityPayload: JSON
     }
@@ -310,22 +318,28 @@ exports.createSchemaCustomization = async ({ actions }) => {
   `)
 
   actions.createTypes(/* GraphQL */ `
-    union NavItem = DatoCmsLink | DatoCmsLinkgroup
     type DatoCmsLink implements Node & HomepageLink {
       id: ID!
       originalId: String
       entityPayload: JSON
       href: String
       text: String
+    }
+
+    type DatoCmsNavitem implements Node & NavItem {
+      id: ID!
+      originalId: String
+      entityPayload: JSON
+      href: String
+      text: String
       icon: HomepageImage
-      iconAlternative: HomepageImage
       description: String
     }
 
     type DatoCmsLinkgroup implements Node & HomepageLinkGroup @dontInfer {
       id: ID!
       name: String
-      links: [HomepageLink]
+      links: [NavItem]
       originalId: String
       entityPayload: JSON
     }
@@ -489,9 +503,10 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
   // Layout types
   actions.createTypes(/* GraphQL */ `
+    union HeaderLink = DatoCmsNavitem | DatoCmsLinkgroup
     type DatoCmsLayoutheader implements Node & LayoutHeader @dontInfer {
       id: ID!
-      links: [NavItem]
+      links: [HeaderLink]
       originalCta: HomepageLink
         @link(by: "originalId", from: "entityPayload.attributes.cta")
       cta: HomepageLink @ctalink
