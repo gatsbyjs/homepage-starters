@@ -47,30 +47,30 @@ Code and functionality that is specific to a particular source plugin should be 
 
 1. This repo is set up as a [Yarn Workspace][]. Run `yarn` in the root directory to install dependencies.
 
-```sh
-yarn
-```
+   ```sh
+   yarn
+   ```
 
 1. Add a `.env.development` file to the root directory and populate environment variables for each CMS you'll be developing against.
 
-```sh
-# example .env.development
-CONTENTFUL_SPACE_ID=""
-CONTENTFUL_ACCESS_TOKEN=""
-DATOCMS_API_TOKEN=""
-DATOCMS_ENVIRONMENT=""
-DRUPAL_BASE_URL=""
-DRUPAL_BASIC_AUTH_USERNAME=""
-DRUPAL_BASIC_AUTH_PASSWORD=""
-WPGRAPHQL_URL=""
-```
+   ```sh
+   # example .env.development
+   CONTENTFUL_SPACE_ID=""
+   CONTENTFUL_ACCESS_TOKEN=""
+   DATOCMS_API_TOKEN=""
+   DATOCMS_ENVIRONMENT=""
+   DRUPAL_BASE_URL=""
+   DRUPAL_BASIC_AUTH_USERNAME=""
+   DRUPAL_BASIC_AUTH_PASSWORD=""
+   WPGRAPHQL_URL=""
+   ```
 
 1. Edit the root `gatsby-config.js` and comment or uncomment the CMS plugin that you're developing against.
 1. To start the development server, run:
 
-```sh
-yarn start
-```
+   ```sh
+   yarn start
+   ```
 
 [yarn workspace]: https://classic.yarnpkg.com/lang/en/docs/workspaces/
 
