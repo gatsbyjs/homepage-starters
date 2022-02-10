@@ -148,6 +148,7 @@ const createPackageJSON = (name) => {
     build: "gatsby build",
     serve: "gatsby serve",
     clean: "gatsby clean",
+    ...(pkg.scripts || {}),
   }
   const json = JSON.stringify(pkg, null, 2)
   return json
