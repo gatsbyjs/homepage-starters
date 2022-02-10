@@ -93,7 +93,7 @@ export default function NavLinkGroup({ name, links }) {
         >
           <FlexList
             variant="columnStart"
-            gap={4}
+            gap={2}
             className={navLinkListWrapperInner}
           >
             {links.map((link) => (

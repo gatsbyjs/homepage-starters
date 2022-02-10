@@ -37,7 +37,7 @@ const navLinkListWrapperBase = style({
     [mediaQueries.small]: {
       position: "absolute",
       background: theme.colors.background,
-      padding: theme.space[4],
+      padding: `${theme.space[3]} ${theme.space[3]} ${theme.space[0]} ${theme.space[3]}`,
       top: "calc(100% + 20px)",
       left: "50%",
       transform: "translateX(-50%)",
@@ -94,6 +94,7 @@ export const navLinkListWrapperInner = style({
   "@media": {
     [mediaQueries.small]: {
       paddingLeft: 0,
+      alignItems: "stretch",
     },
   },
 })
@@ -126,7 +127,7 @@ export const navLinkListLink = style([
   {
     "@media": {
       [mediaQueries.small]: {
-        padding: `${theme.space[2]}`,
+        padding: `${theme.space[2]} ${theme.space[3]} ${theme.space[3]} ${theme.space[2]}`,
         margin: 0,
         color: "inherit",
         fontSize: theme.fontSizes[2],

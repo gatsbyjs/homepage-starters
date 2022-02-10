@@ -66,7 +66,7 @@ const sizes = {
   wide: "1280px",
   avatar: "48px",
   navGroupBoxMin: "300px",
-  navGroupBoxMax: "400px",
+  navGroupBoxMax: "450px",
   navIcon: "32px",
   navIconSmall: "24px",
 }
