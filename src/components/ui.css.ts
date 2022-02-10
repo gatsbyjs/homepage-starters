@@ -4,15 +4,11 @@ import { theme } from "../theme.css.ts"
 
 const breakpoints = ["40em", "52em", "64em"]
 
-const mqAliases = ["small", "medium", "large"]
-const media = breakpoints
-  .map((n) => `screen and (min-width: ${n})`)
-  .reduce((a, b, i) => {
-    a[mqAliases[i]] = b
-    return a
-  }, {})
-
-export const mediaQueries = media
+export const media = {
+  small: `screen and (min-width: ${breakpoints[0]})`,
+  medium: `screen and (min-width: ${breakpoints[1]})`,
+  large: `screen and (min-width: ${breakpoints[2]})`,
+}
 
 export const container = style({
   maxWidth: theme.sizes.container,
@@ -29,6 +25,12 @@ export const containers = styleVariants({
     container,
     {
       maxWidth: theme.sizes.narrow,
+    },
+  ],
+  tight: [
+    container,
+    {
+      maxWidth: theme.sizes.tight,
     },
   ],
   fullbleed: [
@@ -93,6 +95,7 @@ export const widths = styleVariants(
     quarter: "25%",
     third: "33.3333%",
     twothirds: "33.3333%",
+    fitContent: "fit-content",
   },
   (width) => [
     {
@@ -204,6 +207,17 @@ export const text = styleVariants({
       letterSpacing: theme.letterSpacings.normal,
     },
   ],
+  superHeading: [
+    margin0,
+    {
+      marginTop: theme.space[5],
+      marginBottom: theme.space[6],
+      fontSize: theme.fontSizes[7],
+      fontWeight: theme.fontWeights.extrabold,
+      lineHeight: theme.lineHeights.heading,
+      letterSpacing: theme.letterSpacings.tight,
+    },
+  ],
   heading: [
     margin0,
     {
@@ -265,6 +279,12 @@ export const text = styleVariants({
     {
       fontSize: theme.fontSizes[1],
       marginBottom: theme.space[2],
+    },
+  ],
+  medium: [
+    margin0,
+    {
+      fontSize: theme.fontSizes[3],
     },
   ],
   mega: [
