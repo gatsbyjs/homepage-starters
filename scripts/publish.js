@@ -90,6 +90,7 @@ const createStarterDist = async (basename) => {
     "package.json",
     "README.md",
     "src",
+    "scripts",
   ]
   files.forEach((file) => {
     const src = path.join(dir.plugins, dirname, file)
@@ -146,6 +147,7 @@ const createPackageJSON = (name) => {
     build: "gatsby build",
     serve: "gatsby serve",
     clean: "gatsby clean",
+    ...(pkg.scripts || {}),
   }
   const json = JSON.stringify(pkg, null, 2)
   return json
