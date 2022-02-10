@@ -28,7 +28,7 @@ export default function Header() {
         header {
           id
           links {
-            ... on HomepageLink {
+            ... on NavItem {
               id
               href
               text
@@ -42,10 +42,6 @@ export default function Header() {
                 text
                 description
                 icon {
-                  alt
-                  gatsbyImageData
-                }
-                iconAlternative {
                   alt
                   gatsbyImageData
                 }

@@ -9,6 +9,7 @@ export const navGroupWrapper = style({
 
 export const navGroupTitle = style([
   mobileNavLink,
+  { ":hover": { color: theme.colors.background } },
   {
     "@media": {
       [mediaQueries.small]: {
@@ -16,6 +17,7 @@ export const navGroupTitle = style([
         alignItems: "baseline",
         color: "inherit",
         fontSize: "inherit",
+        ":hover": { color: theme.colors.active },
       },
     },
   },
@@ -100,24 +102,13 @@ export const navLinkListWrapperInner = style({
 })
 
 export const navIcon = style({
-  display: "none",
-  flexShrink: 0,
-  width: theme.sizes.navIconSmall,
-  height: theme.sizes.navIconSmall,
-  "@media": {
-    [mediaQueries.small]: {
-      display: "block",
-    },
-  },
-})
-
-export const navIconAlternative = style({
   flexShrink: 0,
   width: theme.sizes.navIcon,
   height: theme.sizes.navIcon,
   "@media": {
     [mediaQueries.small]: {
-      display: "none",
+      width: theme.sizes.navIconSmall,
+      height: theme.sizes.navIconSmall,
     },
   },
 })
@@ -127,7 +118,7 @@ export const navLinkListLink = style([
   {
     "@media": {
       [mediaQueries.small]: {
-        padding: `${theme.space[3]} ${theme.space[3]} ${theme.space[3]} ${theme.space[3]}`,
+        padding: theme.space[2],
         margin: 0,
         color: "inherit",
         fontSize: theme.fontSizes[2],
@@ -135,6 +126,7 @@ export const navLinkListLink = style([
         borderRadius: theme.radii.button,
         ":hover": {
           background: theme.colors.muted,
+          color: "inherit",
         },
       },
     },

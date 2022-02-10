@@ -101,7 +101,7 @@ export function Nudge({ left, right, top, bottom, ...props }) {
 }
 
 export function Section(props) {
-  return <Box as="section" paddingY={7} {...props} />
+  return <Box as="section" paddingY={6} {...props} />
 }
 
 export function Text({ variant = "body", center, bold, ...props }) {

@@ -67,9 +67,9 @@ const sizes = {
   wide: "1280px",
   avatar: "48px",
   navGroupBoxMin: "300px",
-  navGroupBoxMax: "450px",
+  navGroupBoxMax: "400px",
   navIcon: "32px",
-  navIconSmall: "24px",
+  navIconSmall: "30px",
 }
 
 const radii = {

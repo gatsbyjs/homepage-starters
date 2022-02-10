@@ -53,15 +53,20 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       href: String
       text: String
+    }
+
+    interface NavItem implements Node {
+      id: ID!
+      href: String
+      text: String
       icon: HomepageImage
-      iconAlternative: HomepageImage
       description: String
     }
 
     interface HomepageLinkGroup implements Node {
       id: ID!
       name: String
-      links: [HomepageLink]
+      links: [NavItem]
     }
 
     interface HomepageImage implements Node {
@@ -199,7 +204,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     interface LayoutHeader implements Node {
       id: ID!
-      links: [NavItem]
+      links: [HeaderLink]
       cta: HomepageLink
     }
 
@@ -246,20 +251,25 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
   // CMS-specific types
   actions.createTypes(/* GraphQL */ `
-    union NavItem = ContentfulHomepageLink | ContentfulHomepageLinkGroup
     type ContentfulHomepageLink implements Node & HomepageLink @dontInfer {
       id: ID!
       href: String
       text: String
+    }
+
+    type ContentfulNavItem implements Node & NavItem @dontInfer {
+      id: ID!
+      href: String
+      text: String
       icon: HomepageImage @link(from: "icon___NODE")
-      iconAlternative: HomepageImage @link(from: "iconAlternative___NODE")
       description: String
     }
+
     type ContentfulHomepageLinkGroup implements Node & HomepageLinkGroup
       @dontInfer {
       id: ID!
       name: String
-      links: [HomepageLink] @link(from: "links___NODE")
+      links: [NavItem] @link(from: "links___NODE")
     }
 
     type ContentfulAsset implements Node & HomepageImage {
@@ -405,9 +415,10 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
   // Layout types
   actions.createTypes(/* GraphQL */ `
+    union HeaderLink = ContentfulNavItem | ContentfulHomepageLinkGroup
     type ContentfulLayoutHeader implements Node & LayoutHeader @dontInfer {
       id: ID!
-      links: [NavItem] @link(from: "links___NODE")
+      links: [HeaderLink] @link(from: "links___NODE")
       cta: HomepageLink @link(from: "cta___NODE")
     }
 

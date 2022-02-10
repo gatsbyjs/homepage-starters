@@ -4,7 +4,6 @@ import { Box, Flex, FlexList, NavButtonLink, NavLink } from "./ui"
 import Caret from "./caret"
 import {
   navIcon,
-  navIconAlternative,
   navGroupWrapper,
   navLinkListWrapper,
   navLinkListWrapperInner,
@@ -105,13 +104,6 @@ export default function NavLinkGroup({ name, links }) {
                         alt={link.icon.alt}
                         image={getImage(link.icon)}
                         className={navIcon}
-                      />
-                    )}
-                    {link.iconAlternative && (
-                      <GatsbyImage
-                        alt={link.iconAlternative.alt}
-                        image={getImage(link.iconAlternative)}
-                        className={navIconAlternative}
                       />
                     )}
                     <Flex variant="columnStart" gap={1}>
