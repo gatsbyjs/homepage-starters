@@ -13,13 +13,13 @@ import {
   navGroupTitleInner,
   navLinkTitle,
 } from "./nav-link-group.css"
-import { mediaQueries } from "./ui.css"
+import { media } from "./ui.css"
 
 export default function NavLinkGroup({ name, links }) {
   const [isOpen, setIsOpen] = React.useState(false)
   const [popupVisible, setPopupVisible] = React.useState(false)
   const isSmallScreen = () => {
-    return !window.matchMedia(mediaQueries.small).matches
+    return !window.matchMedia(media.small).matches
   }
   const onGroupButtonClick = React.useCallback(() => {
     if (!isOpen) {

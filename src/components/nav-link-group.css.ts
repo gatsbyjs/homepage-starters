@@ -1,6 +1,6 @@
 import { style, styleVariants } from "@vanilla-extract/css"
 import { theme } from "../theme.css.ts"
-import { mediaQueries } from "./ui.css"
+import { media } from "./ui.css"
 import { mobileNavLink } from "./header.css"
 
 export const navGroupWrapper = style({
@@ -12,7 +12,7 @@ export const navGroupTitle = style([
   { ":hover": { color: theme.colors.background } },
   {
     "@media": {
-      [mediaQueries.small]: {
+      [media.small]: {
         padding: 0,
         alignItems: "baseline",
         color: "inherit",
@@ -25,7 +25,7 @@ export const navGroupTitle = style([
 
 export const navGroupTitleInner = style({
   "@media": {
-    [mediaQueries.small]: {
+    [media.small]: {
       alignItems: "baseline",
     },
   },
@@ -36,7 +36,7 @@ const navLinkListWrapperBase = style({
   whiteSpace: "nowrap",
   width: "fit-content",
   "@media": {
-    [mediaQueries.small]: {
+    [media.small]: {
       position: "absolute",
       background: theme.colors.background,
       padding: `${theme.space[3]} ${theme.space[3]} ${theme.space[0]} ${theme.space[3]}`,
@@ -71,7 +71,7 @@ export const navLinkListWrapper = styleVariants({
     navLinkListWrapperBase,
     {
       "@media": {
-        [mediaQueries.small]: {
+        [media.small]: {
           animation: "zoomInUp 0.15s ease-in-out",
         },
       },
@@ -81,7 +81,7 @@ export const navLinkListWrapper = styleVariants({
     navLinkListWrapperBase,
     {
       "@media": {
-        [mediaQueries.small]: {
+        [media.small]: {
           animation: "zoomOutDown 0.15s ease-in-out",
           animationFillMode: "forwards",
         },
@@ -94,7 +94,7 @@ export const navLinkListWrapperInner = style({
   paddingLeft: theme.space[4],
   paddingBottom: theme.space[3],
   "@media": {
-    [mediaQueries.small]: {
+    [media.small]: {
       paddingLeft: 0,
       alignItems: "stretch",
     },
@@ -106,7 +106,7 @@ export const navIcon = style({
   width: theme.sizes.navIcon,
   height: theme.sizes.navIcon,
   "@media": {
-    [mediaQueries.small]: {
+    [media.small]: {
       width: theme.sizes.navIconSmall,
       height: theme.sizes.navIconSmall,
     },
@@ -117,7 +117,7 @@ export const navLinkListLink = style([
   mobileNavLink,
   {
     "@media": {
-      [mediaQueries.small]: {
+      [media.small]: {
         padding: theme.space[2],
         margin: 0,
         color: "inherit",
@@ -137,7 +137,7 @@ export const navLinkDescription = style({
   display: "none",
   whiteSpace: "normal",
   "@media": {
-    [mediaQueries.small]: {
+    [media.small]: {
       display: "block",
       fontSize: theme.fontSizes[1],
       margin: 0,
