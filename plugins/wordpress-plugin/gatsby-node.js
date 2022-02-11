@@ -571,11 +571,11 @@ exports.onCreateNode = ({
           kicker: testimonialList.testimonialsKicker,
           heading: testimonialList.testimonialsHeading,
           content: [
-            testimonialList.testimonial1.id,
-            testimonialList.testimonial2.id,
-            testimonialList.testimonial3.id,
-            testimonialList.testimonial4.id,
-          ],
+            testimonialList.testimonial1,
+            testimonialList.testimonial2,
+            testimonialList.testimonial3,
+            testimonialList.testimonial4,
+          ].map((testimonial) => testimonial.id),
         })
 
         actions.createNode({
@@ -638,10 +638,10 @@ exports.onCreateNode = ({
           heading: benefitList.benefitsHeading,
           text: benefitList.benefitsText,
           content: [
-            benefitList.benefit1.id,
-            benefitList.benefit2.id,
-            benefitList.benefit3.id,
-          ],
+            benefitList.benefit1,
+            benefitList.benefit2,
+            benefitList.benefit3,
+          ].map((benefit) => benefit.id),
         })
 
         actions.createNode({
@@ -757,7 +757,7 @@ exports.onCreateNode = ({
             aboutLeadership.profile4,
             aboutLeadership.profile5,
             aboutLeadership.profile6,
-          ],
+          ].map((profile) => profile.id),
         })
 
         actions.createNode({
@@ -767,8 +767,9 @@ exports.onCreateNode = ({
             contentDigest: createContentDigest(JSON.stringify(aboutLogoList)),
           },
           parent: node.id,
-          blockType: "AboutLogoList",
+          blocktype: "AboutLogoList",
           heading: aboutLogoList.aboutLogoListHeading,
+          link: createLinkNode(aboutLogosID)(aboutLogoList.aboutLogoListLink),
           logos: [
             aboutLogoList.logo1,
             aboutLogoList.logo2,
@@ -799,13 +800,13 @@ exports.onCreateNode = ({
           heading: benefitList.benefitsHeading,
           text: benefitList.benefitsText,
           content: [
-            benefitList.benefit1.id,
-            benefitList.benefit2.id,
-            benefitList.benefit3.id,
-            benefitList.benefit4.id,
-            benefitList.benefit5.id,
-            benefitList.benefit6.id,
-          ],
+            benefitList.benefit1,
+            benefitList.benefit2,
+            benefitList.benefit3,
+            benefitList.benefit4,
+            benefitList.benefit5,
+            benefitList.benefit6,
+          ].map((benefit) => benefit.id),
         })
 
         actions.createNode({
