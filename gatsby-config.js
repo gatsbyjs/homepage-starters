@@ -4,7 +4,7 @@ module.exports = {
     // "yaml-plugin",
     // "drupal-plugin",
     // "contentful-plugin",
-    "datocms-plugin",
-    // "wordpress-plugin",
+    // "datocms-plugin",
+    "wordpress-plugin",
   ],
 }
