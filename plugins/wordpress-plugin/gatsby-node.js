@@ -4,7 +4,10 @@ exports.createSchemaCustomization = async ({ actions }) => {
     extend(options) {
       return {
         resolve(source) {
-          return source.internal.type.replace("Wp", "Homepage")
+          console.log("blocktype extensions before: ", source.internal.type)
+          const updated = source.internal.type.replace("Wp", "Homepage")
+          console.log("blocktype extensions after: ", updated)
+          return updated
         },
       }
     },
@@ -114,33 +117,33 @@ exports.createSchemaCustomization = async ({ actions }) => {
       copyright: String
     }
 
-    interface AboutPage implements Node {
-      id: ID!
-      title: String
-      description: String
-      image: HomepageImage
-      content: [HomepageBlock]
-    }
+    # interface AboutPage implements Node {
+    #   id: ID!
+    #   title: String
+    #   description: String
+    #   image: HomepageImage
+    #   content: [HomepageBlock]
+    # }
 
-    interface AboutHero implements Node & HomepageBlock {
-      id: ID!
-      blocktype: String
-      heading: String
-      text: String
-      image: HomepageImage
-    }
+    # interface AboutHero implements Node & HomepageBlock {
+    #   id: ID!
+    #   blocktype: String
+    #   heading: String
+    #   text: String
+    #   image: HomepageImage
+    # }
 
-    interface AboutStat implements Node {
-      id: ID!
-      value: String
-      label: String
-    }
+    # interface AboutStat implements Node {
+    #   id: ID!
+    #   value: String
+    #   label: String
+    # }
 
-    interface AboutStatList implements Node & HomepageBlock {
-      id: ID!
-      blocktype: String
-      content: [AboutStat]
-    }
+    # interface AboutStatList implements Node & HomepageBlock {
+    #   id: ID!
+    #   blocktype: String
+    #   content: [AboutStat]
+    # }
 
     interface AboutProfile implements Node {
       id: ID!
@@ -149,22 +152,22 @@ exports.createSchemaCustomization = async ({ actions }) => {
       title: String
     }
 
-    interface AboutLeadership implements Node & HomepageBlock {
-      id: ID!
-      blocktype: String
-      kicker: String
-      heading: String
-      subhead: String
-      content: [AboutProfile]
-    }
+    # interface AboutLeadership implements Node & HomepageBlock {
+    #   id: ID!
+    #   blocktype: String
+    #   kicker: String
+    #   heading: String
+    #   subhead: String
+    #   content: [AboutProfile]
+    # }
 
-    interface AboutLogoList implements Node & HomepageBlock {
-      id: ID!
-      blocktype: String
-      heading: String
-      link: HomepageLink
-      logos: [HomepageImage]
-    }
+    # interface AboutLogoList implements Node & HomepageBlock {
+    #   id: ID!
+    #   blocktype: String
+    #   heading: String
+    #   link: HomepageLink
+    #   logos: [HomepageImage]
+    # }
 
     interface Page implements Node {
       id: ID!
@@ -371,7 +374,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
 
     type WPProfile implements Node & AboutProfile {
-      image: HomepageImage @link @proxy(from: "profile.image")
+      image: HomepageImage @link @proxy(from: "profile.image.id")
       title: String @proxy(from: "profile.title")
       name: String @proxy(from: "profile.name")
     }
@@ -675,15 +678,17 @@ exports.onCreateNode = ({
           homepageCta,
         } = node
 
-        const heroID = createNodeId(`${node.id} >>> AboutHero`)
-        const statsID = createNodeId(`${node.id} >>> AboutStatList`)
-        const leadershipID = createNodeId(`${node.id} >>> AboutLeadership`)
-        const logosID = createNodeId(`${node.id} >>> AboutLogoList`)
-        const benefitsID = createNodeId(`${node.id} >>> HomepageBenefitList`)
-        const ctaID = createNodeId(`${node.id} >>> HomepageCta`)
+        const aboutHeroID = createNodeId(`${node.id} >>> AboutHero`)
+        const aboutStatsID = createNodeId(`${node.id} >>> AboutStatList`)
+        const aboutLeadershipID = createNodeId(`${node.id} >>> AboutLeadership`)
+        const aboutLogosID = createNodeId(`${node.id} >>> AboutLogoList`)
+        const aboutBenefitsID = createNodeId(
+          `${node.id} >>> HomepageBenefitList`
+        )
+        const aboutCtaID = createNodeId(`${node.id} >>> HomepageCta`)
 
         actions.createNode({
-          id: heroID,
+          id: aboutHeroID,
           internal: {
             type: "AboutHero",
             contentDigest: createContentDigest(JSON.stringify(aboutHero)),
@@ -696,7 +701,7 @@ exports.onCreateNode = ({
         })
 
         actions.createNode({
-          id: statsID,
+          id: aboutStatsID,
           internal: {
             type: "AboutStatList",
             contentDigest: createContentDigest(JSON.stringify(aboutStatList)),
@@ -721,7 +726,7 @@ exports.onCreateNode = ({
               label: aboutStatList.stat4Label,
             },
           ].map((stat) => {
-            const id = createNodeId(`${statsID} >>> AboutStat`)
+            const id = createNodeId(`${aboutStatsID} >>> AboutStat`)
             actions.createNode({
               ...stat,
               id,
@@ -735,7 +740,7 @@ exports.onCreateNode = ({
         })
 
         actions.createNode({
-          id: leadershipID,
+          id: aboutLeadershipID,
           internal: {
             type: "AboutLeadership",
             contentDigest: createContentDigest(JSON.stringify(aboutLeadership)),
@@ -756,7 +761,7 @@ exports.onCreateNode = ({
         })
 
         actions.createNode({
-          id: logosID,
+          id: aboutLogosID,
           internal: {
             type: "AboutLogoList",
             contentDigest: createContentDigest(JSON.stringify(aboutLogoList)),
@@ -784,7 +789,7 @@ exports.onCreateNode = ({
         })
 
         actions.createNode({
-          id: benefitsID,
+          id: aboutBenefitsID,
           internal: {
             type: "HomepageBenefitList",
             contentDigest: createContentDigest(JSON.stringify(benefitList)),
@@ -804,7 +809,7 @@ exports.onCreateNode = ({
         })
 
         actions.createNode({
-          id: ctaID,
+          id: aboutCtaID,
           internal: {
             type: "HomepageCta",
             contentDigest: createContentDigest(JSON.stringify(homepageCta)),
@@ -816,18 +821,28 @@ exports.onCreateNode = ({
           text: homepageCta.ctaText,
           links: [homepageCta.ctaLink, homepageCta.ctaSecondaryLink]
             .filter(Boolean)
-            .map(createLinkNode(ctaID)),
+            .map(createLinkNode(aboutCtaID)),
           image: "",
         })
-      }
-      break
-    case "WpProfile":
-      if (node.profile.link) {
-        const linkID = createLinkNode(node.id)(node.profile.link, 0)
-        actions.createNodeField({
-          node,
-          name: "links",
-          value: [linkID],
+
+        actions.createNode({
+          ...node,
+          id: createNodeId(`${node.id} >>> AboutPage`),
+          internal: {
+            type: "AboutPage",
+            contentDigest: node.internal.contentDigest,
+          },
+          parent: node.id,
+          blocktype: "AboutPage",
+          image: node.featuredImageId,
+          content: [
+            aboutHeroID,
+            aboutStatsID,
+            aboutLeadershipID,
+            aboutLogosID,
+            aboutBenefitsID,
+            aboutCtaID,
+          ],
         })
       }
       break
@@ -920,5 +935,7 @@ exports.onCreateNode = ({
         value: metaLinks,
       })
       break
+    default:
+      console.log("Node did not match any expected type: ", node.internal.type)
   }
 }

@@ -11,6 +11,8 @@ const Fallback = (props) => {
 export default function About(props) {
   const { aboutPage } = props.data
 
+  console.log("about page data: ", aboutPage)
+
   return (
     <Layout {...aboutPage}>
       {aboutPage.blocks.map((block, i) => {
