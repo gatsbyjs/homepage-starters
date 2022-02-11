@@ -734,8 +734,6 @@ exports.onCreateNode = ({
           }),
         })
 
-        console.log("about leadership content: ", aboutLeadership.content)
-
         actions.createNode({
           id: leadershipID,
           internal: {
@@ -744,10 +742,92 @@ exports.onCreateNode = ({
           },
           parent: node.id,
           blocktype: "AboutLeadership",
-          kicker: aboutLeadership.kicker,
-          heading: aboutLeadership.heading,
-          subhead: aboutLeadership.subhead,
-          content: [],
+          kicker: aboutLeadership.aboutLeadershipKicker,
+          heading: aboutLeadership.aboutLeadershipHeading,
+          subhead: aboutLeadership.aboutLeadershipSubhead,
+          content: [
+            aboutLeadership.profile1,
+            aboutLeadership.profile2,
+            aboutLeadership.profile3,
+            aboutLeadership.profile4,
+            aboutLeadership.profile5,
+            aboutLeadership.profile6,
+          ],
+        })
+
+        actions.createNode({
+          id: logosID,
+          internal: {
+            type: "AboutLogoList",
+            contentDigest: createContentDigest(JSON.stringify(aboutLogoList)),
+          },
+          parent: node.id,
+          blockType: "AboutLogoList",
+          heading: aboutLogoList.aboutLogoListHeading,
+          logos: [
+            aboutLogoList.logo1,
+            aboutLogoList.logo2,
+            aboutLogoList.logo3,
+            aboutLogoList.logo4,
+            aboutLogoList.logo5,
+            aboutLogoList.logo6,
+            aboutLogoList.logo7,
+            aboutLogoList.logo8,
+            aboutLogoList.logo9,
+            aboutLogoList.logo10,
+            aboutLogoList.logo11,
+            aboutLogoList.logo12,
+            aboutLogoList.logo13,
+            aboutLogoList.logo14,
+            aboutLogoList.logo15,
+          ].map((logo) => logo.id),
+        })
+
+        actions.createNode({
+          id: benefitsID,
+          internal: {
+            type: "HomepageBenefitList",
+            contentDigest: createContentDigest(JSON.stringify(benefitList)),
+          },
+          parent: node.id,
+          blocktype: "HomepageBenefitList",
+          heading: benefitList.benefitsHeading,
+          text: benefitList.benefitsText,
+          content: [
+            benefitList.benefit1.id,
+            benefitList.benefit2.id,
+            benefitList.benefit3.id,
+            benefitList.benefit4.id,
+            benefitList.benefit5.id,
+            benefitList.benefit6.id,
+          ],
+        })
+
+        actions.createNode({
+          id: ctaID,
+          internal: {
+            type: "HomepageCta",
+            contentDigest: createContentDigest(JSON.stringify(homepageCta)),
+          },
+          parent: node.id,
+          blocktype: "HomepageCta",
+          kicker: homepageCta.ctaKicker,
+          heading: homepageCta.ctaHeading,
+          text: homepageCta.ctaText,
+          links: [homepageCta.ctaLink, homepageCta.ctaSecondaryLink]
+            .filter(Boolean)
+            .map(createLinkNode(ctaID)),
+          image: "",
+        })
+      }
+      break
+    case "WpProfile":
+      if (node.profile.link) {
+        const linkID = createLinkNode(node.id)(node.profile.link, 0)
+        actions.createNodeField({
+          node,
+          name: "links",
+          value: [linkID],
         })
       }
       break
