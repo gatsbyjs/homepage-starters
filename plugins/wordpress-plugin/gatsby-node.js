@@ -620,6 +620,8 @@ exports.onCreateNode = ({
           ],
         })
 
+        // delete the node because we're not using it in `src/pages/{Page.slug}.js`
+        actions.deleteNode(node, { name: "gatsby-source-wordpress" })
         break
       } else if (node.slug === "about") {
         // console.log("about page node: ", node)
@@ -801,6 +803,9 @@ exports.onCreateNode = ({
             aboutCtaID,
           ],
         })
+
+        // delete the node because we're not using it in `src/pages/{Page.slug}.js`
+        actions.deleteNode(node, { name: "gatsby-source-wordpress" })
       }
       break
     case "WpFeature":
@@ -892,7 +897,7 @@ exports.onCreateNode = ({
         value: metaLinks,
       })
       break
-    default:
-      console.log("Node did not match any expected type: ", node.internal.type)
+    // default:
+    // console.log("Node did not match any expected type: ", node.internal.type)
   }
 }

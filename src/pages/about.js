@@ -11,41 +11,37 @@ const Fallback = (props) => {
 export default function About(props) {
   const { aboutPage } = props.data
 
-  console.log("about page data: ", aboutPage)
-  return null
-
-  // return (
-  //   <Layout {...aboutPage}>
-  //     {aboutPage.blocks.map((block, i) => {
-  //       const Component = sections[block.blocktype] || Fallback
-  //       return <Component key={block.id} index={i} {...block} />
-  //     })}
-  //   </Layout>
-  // )
+  return (
+    <Layout {...aboutPage}>
+      {aboutPage.blocks.map((block, i) => {
+        const Component = sections[block.blocktype] || Fallback
+        return <Component key={block.id} index={i} {...block} />
+      })}
+    </Layout>
+  )
 }
 
 export const query = graphql`
-  {
+  query {
     aboutPage {
       id
       title
       description
+      image {
+        id
+        url
+      }
+      blocks: content {
+        id
+        blocktype
+        ...AboutHeroContent
+        ...AboutStatListContent
+        ...HomepageProductListContent
+        ...AboutLeadershipContent
+        ...HomepageBenefitListContent
+        ...AboutLogoListContent
+        ...HomepageCtaContent
+      }
     }
   }
 `
-
-// # image {
-//   #   id
-//   #   url
-//   # }
-//   #blocks: content {
-//   # id
-//   # blocktype
-//   # ...AboutHeroContent
-//   # ...AboutStatListContent
-//   # ...HomepageProductListContent
-//   # ...AboutLeadershipContent
-//   # ...HomepageBenefitListContent
-//   # ...AboutLogoListContent
-//   # ...HomepageCtaContent
-//   # }
