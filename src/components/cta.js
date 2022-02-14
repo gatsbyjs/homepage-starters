@@ -15,8 +15,10 @@ export default function HomepageCta(props) {
   return (
     <Container width="fullbleed">
       <Section padding={5} radius="large" background="primary">
-        {props.kicker && <Kicker center>{props.kicker}</Kicker>}
-        <Heading center>{props.heading}</Heading>
+        <Heading center>
+          {props.kicker && <Kicker center>{props.kicker}</Kicker>}
+          {props.heading}
+        </Heading>
         <Text as="p" center variant="lead">
           {props.text}
         </Text>
@@ -38,6 +40,7 @@ export const query = graphql`
     heading
     text
     image {
+      alt
       id
       gatsbyImageData
     }

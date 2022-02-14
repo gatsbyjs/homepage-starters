@@ -20,17 +20,7 @@ Create a homepage using Gatsby and :var[cms]. This starter demonstrates how to u
    npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-$-homepage
    ```
 
-1. **Run the :var[cms] setup command**
-
-   **TO BE IMPLEMENTED**
-   From your site's root directory, run:
-
-   ```sh
-   cd my-homepage
-   yarn setup
-   ```
-
-   This will run a script to populate your :var[cms] content model and add demo content.
+::include{file=docs/setup.md}
 
 1. **Start developing**
 

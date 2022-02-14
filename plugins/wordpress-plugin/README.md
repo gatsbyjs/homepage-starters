@@ -35,17 +35,10 @@ Once these plugins are installed, you'll need the URL of the GraphQL endpoint fo
    npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage
    ```
 
-1. **Run the WordPress setup command**
+1. **Import content to your WordPress instance**
 
-   **TO BE IMPLEMENTED**
-   From your site's root directory, run:
-
-   ```sh
-   cd my-homepage
-   yarn setup
-   ```
-
-   This will run a script to populate your WordPress content model and add demo content.
+   Go to your WordPress Admin and navigate to _Tools_ > _Import_.
+   Use the WordPress import tool to upload the `content.xml` file included in this starter.
 
 1. **Start developing**
 

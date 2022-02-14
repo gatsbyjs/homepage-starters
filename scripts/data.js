@@ -17,6 +17,7 @@ module.exports = {
     deploynow:
       "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-datocms-homepage",
   },
+  /* Repo needs to be live first
   drupal: {
     repo: "https://github.com/gatsbyjs/gatsby-starter-drupal-homepage",
     cms: "Drupal",
@@ -26,6 +27,7 @@ module.exports = {
     deploynow:
       "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-drupal-homepage",
   },
+  */
   wordpress: {
     repo: "https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage",
     cms: "WordPress",

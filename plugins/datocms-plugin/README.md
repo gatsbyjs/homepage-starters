@@ -23,9 +23,8 @@ You can find your read-only API token under the Settings > API tokens section of
    npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-datocms-homepage
    ```
 
-1. **Run the DatoCMS setup command**
+1. **Run the DatoCMS setup script**
 
-   **TO BE IMPLEMENTED**
    From your site's root directory, run:
 
    ```sh
@@ -33,7 +32,7 @@ You can find your read-only API token under the Settings > API tokens section of
    yarn setup
    ```
 
-   This will run a script to populate your DatoCMS content model and add demo content.
+   This will run a script to populate your DatoCMS project's data model.
 
 1. **Start developing**
 
