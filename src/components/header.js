@@ -97,7 +97,6 @@ export default function Header() {
                 ))}
             </FlexList>
           </nav>
-          {/* <Space /> */}
           <div>{cta && <Button to={cta.href}>{cta.text}</Button>}</div>
         </Flex>
       </Container>

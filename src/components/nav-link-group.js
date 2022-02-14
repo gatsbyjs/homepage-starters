@@ -2,17 +2,7 @@ import * as React from "react"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { Box, Flex, FlexList, NavButtonLink, NavLink } from "./ui"
 import Caret from "./caret"
-import {
-  navIcon,
-  navGroupWrapper,
-  navLinkListWrapper,
-  navLinkListWrapperInner,
-  navLinkListLink,
-  navLinkDescription,
-  navGroupTitle,
-  navGroupTitleInner,
-  navLinkTitle,
-} from "./nav-link-group.css"
+import * as styles from "./nav-link-group.css"
 import { media } from "./ui.css"
 
 export default function NavLinkGroup({ name, links }) {
@@ -77,10 +67,14 @@ export default function NavLinkGroup({ name, links }) {
       data-id={`${name}-group-wrapper`}
       variant="columnStart"
       gap="4"
-      className={navGroupWrapper}
+      className={styles.navGroupWrapper}
     >
-      <NavButtonLink onClick={onGroupButtonClick} className={navGroupTitle} r>
-        <Flex gap={1} className={navGroupTitleInner}>
+      <NavButtonLink
+        onClick={onGroupButtonClick}
+        className={styles.navGroupTitle}
+        r
+      >
+        <Flex gap={1} className={styles.navGroupTitleInner}>
           {name}
           <Caret direction={isOpen ? "up" : "down"} />
         </Flex>
@@ -88,30 +82,32 @@ export default function NavLinkGroup({ name, links }) {
       {isOpen && (
         <Box
           data-id={`${name}-popup-box`}
-          className={navLinkListWrapper[popupVisible ? "opened" : "closed"]}
+          className={
+            styles.navLinkListWrapper[popupVisible ? "opened" : "closed"]
+          }
         >
           <FlexList
             variant="columnStart"
             gap={2}
-            className={navLinkListWrapperInner}
+            className={styles.navLinkListWrapperInner}
           >
             {links.map((link) => (
               <li key={link.id}>
-                <NavLink to={link.href} className={navLinkListLink}>
+                <NavLink to={link.href} className={styles.navLinkListLink}>
                   <Flex variant="start" gap={3}>
                     {link.icon && (
                       <GatsbyImage
                         alt={link.icon.alt}
                         image={getImage(link.icon)}
-                        className={navIcon}
+                        className={styles.navIcon}
                       />
                     )}
                     <Flex variant="columnStart" gap={1}>
-                      <Box as="span" className={navLinkTitle}>
+                      <Box as="span" className={styles.navLinkTitle}>
                         {link.text}
                       </Box>
                       {!!link.description && (
-                        <Box as="p" className={navLinkDescription}>
+                        <Box as="p" className={styles.navLinkDescription}>
                           {link.description}
                         </Box>
                       )}
