@@ -45,7 +45,7 @@ export default function TestimonialList(props) {
           {props.content.map((testimonial, index) => (
             <Box
               as="li"
-              key={`${testimonial.id}` + index}
+              key={testimonial.id + index}
               width="half"
               padding={3}
             >
