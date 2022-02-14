@@ -9,8 +9,8 @@ export default function AboutLogoList(props) {
       <Section>
         <Box center>
           {props.heading && <Heading as="h1">{props.heading}</Heading>}
-          {props.link && (
-            <CTALink href={props.link.href}>{props.link.text}</CTALink>
+          {props.link && props.link.length > 0 && (
+            <CTALink href={props.link[0].href}>{props.link[0].text}</CTALink>
           )}
         </Box>
         <Box padding={6}>
