@@ -348,6 +348,12 @@ exports.createSchemaCustomization = async ({ actions }) => {
       image: HomepageImage @link @proxy(from: "benefit.image.id")
     }
 
+    type WPProfile implements Node & AboutProfile {
+      title: String @proxy(from: "profile.title")
+      name: String @proxy(from: "profile.name")
+      image: HomepageImage @link @proxy(from: "profile.image.id")
+    }
+
     type WpProduct implements Node & HomepageProduct {
       heading: String @proxy(from: "product.heading")
       text: String @proxy(from: "product.text")
@@ -371,12 +377,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
       quote: String @proxy(from: "testimonial.quote")
       source: String @proxy(from: "testimonial.source")
       avatar: HomepageImage @link @proxy(from: "testimonial.avatar.id")
-    }
-
-    type WPProfile implements Node & AboutProfile {
-      image: HomepageImage @link @proxy(from: "profile.image.id")
-      title: String @proxy(from: "profile.title")
-      name: String @proxy(from: "profile.name")
     }
 
     type WpPage implements Node & Page {
@@ -624,7 +624,9 @@ exports.onCreateNode = ({
           kicker: featureList.featuresKicker,
           heading: featureList.featuresHeading,
           text: featureList.featuresText,
-          content: [featureList.feature1.id, featureList.feature2.id],
+          content: [featureList.feature1, featureList.feature2].map(
+            (feature) => feature.id
+          ),
         })
 
         actions.createNode({
@@ -668,7 +670,7 @@ exports.onCreateNode = ({
 
         break
       } else if (node.slug === "about") {
-        console.log("about page node: ", node)
+        // console.log("about page node: ", node)
         const {
           aboutHero,
           aboutStatList,
@@ -677,6 +679,8 @@ exports.onCreateNode = ({
           aboutLogoList,
           homepageCta,
         } = node
+
+        console.log("about leadership: ", aboutLeadership)
 
         const aboutHeroID = createNodeId(`${node.id} >>> AboutHero`)
         const aboutStatsID = createNodeId(`${node.id} >>> AboutStatList`)

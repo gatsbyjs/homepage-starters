@@ -499,7 +499,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
   `)
 
   // Layout types
-  actions.createTypes(`
+  actions.createTypes(/* GraphQL */ `
     type ContentfulLayoutHeader implements Node & LayoutHeader @dontInfer {
       id: ID!
       links: [HomepageLink] @link(from: "links___NODE")
@@ -528,7 +528,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
   `)
 
   // Page types
-  actions.createTypes(`
+  actions.createTypes(/* GraphQL */ `
     type ContentfulPage implements Node & Page {
       id: ID!
       slug: String!

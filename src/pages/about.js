@@ -29,21 +29,21 @@ export const query = graphql`
       id
       title
       description
-      image {
-        id
-        url
-      }
-      blocks: content {
-        id
-        blocktype
-        ...AboutHeroContent
-        ...AboutStatListContent
-        ...HomepageProductListContent
-        ...AboutLeadershipContent
-        ...HomepageBenefitListContent
-        ...AboutLogoListContent
-        ...HomepageCtaContent
-      }
+      # image {
+      #   id
+      #   url
+      # }
+      #blocks: content {
+      # id
+      # blocktype
+      # ...AboutHeroContent
+      # ...AboutStatListContent
+      # ...HomepageProductListContent
+      # ...AboutLeadershipContent
+      # ...HomepageBenefitListContent
+      # ...AboutLogoListContent
+      # ...HomepageCtaContent
+      # }
     }
   }
 `
