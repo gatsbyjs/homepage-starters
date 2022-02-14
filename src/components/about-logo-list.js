@@ -4,14 +4,13 @@ import { Container, CTALink, Heading, FlexList, Section, Box } from "./ui"
 import { LogoItem } from "./logo-list"
 
 export default function AboutLogoList(props) {
+  const link = props.link && props.link.length > 0 ? props.link[0] : props.link
   return (
     <Container>
       <Section>
         <Box center>
           {props.heading && <Heading as="h1">{props.heading}</Heading>}
-          {props.link && props.link.length > 0 && (
-            <CTALink href={props.link[0].href}>{props.link[0].text}</CTALink>
-          )}
+          {link && <CTALink href={link.href}>{link.text}</CTALink>}
         </Box>
         <Box padding={6}>
           <FlexList gap={5} variant="center">
