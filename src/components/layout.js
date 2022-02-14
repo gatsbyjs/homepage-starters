@@ -10,7 +10,6 @@ export default function Layout(props) {
       <Head {...props} />
       <Header />
       {props.children}
-      <h1>asf</h1>
       <Footer />
     </>
   )
