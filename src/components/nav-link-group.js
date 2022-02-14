@@ -72,7 +72,6 @@ export default function NavLinkGroup({ name, links }) {
       <NavButtonLink
         onClick={onGroupButtonClick}
         className={styles.navGroupTitle}
-        r
       >
         <Flex gap={1} className={styles.navGroupTitleInner}>
           {name}

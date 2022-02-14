@@ -137,9 +137,6 @@ export function Kicker({ ...props }) {
 
 export function Link({ to, href, ...props }) {
   const url = href || to
-  if (!url) {
-    return <button className={styles.link} {...props} />
-  }
   if (isAbsoluteURL(url)) {
     return (
       // eslint-disable-next-line jsx-a11y/anchor-has-content
@@ -154,7 +151,7 @@ export function NavLink({ ...props }) {
 }
 
 export function NavButtonLink({ ...props }) {
-  return <Base as={Link} cx={[styles.navButtonlink]} {...props} />
+  return <Base as="button" cx={[styles.navButtonlink]} {...props} />
 }
 
 export function Button({ variant = "primary", ...props }) {
