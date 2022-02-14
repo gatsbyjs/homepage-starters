@@ -67,6 +67,9 @@ export const flexVariants = styleVariants({
     flexDirection: "column",
     alignItems: "flex-start",
   },
+  column: {
+    flexDirection: "column",
+  },
   end: {
     alignItems: "flex-end",
   },
