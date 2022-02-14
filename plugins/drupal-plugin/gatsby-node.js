@@ -408,7 +408,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type node__homepage_logo implements Node & HomepageLogo @dontInfer {
       id: ID!
-      blocktype: String @blocktype
       image: HomepageImage
         @link(by: "id", from: "relationships.field_image___NODE")
       alt: String @proxy(from: "title")
@@ -427,7 +426,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type node__homepage_testimonial implements Node & HomepageTestimonial
       @dontInfer {
       id: ID!
-      blocktype: String @blocktype
       quote: String @proxy(from: "field_quote")
       source: String @proxy(from: "title")
       avatar: HomepageImage
@@ -446,7 +444,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type node__homepage_benefit implements Node & HomepageBenefit @dontInfer {
       id: ID!
-      blocktype: String @blocktype
       heading: String @proxy(from: "title")
       text: String @proxy(from: "field_text")
       image: HomepageImage
@@ -491,7 +488,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type node__homepage_product implements Node & HomepageProduct @dontInfer {
       id: ID!
-      blocktype: String @blocktype
       heading: String @proxy(from: "title")
       text: String @proxy(from: "field_text")
       image: HomepageImage
@@ -609,7 +605,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type node__layout_footer implements Node & LayoutFooter @dontInfer {
       id: ID!
-      blocktype: String @blocktype
       links: [HomepageLink]
         @link(by: "id", from: "relationships.field_links___NODE")
       meta: [HomepageLink]
@@ -621,7 +616,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type node__layout implements Node & Layout @dontInfer {
       id: ID!
-      blocktype: String @blocktype
       header: LayoutHeader
         @link(by: "id", from: "relationships.field_header___NODE")
       footer: LayoutFooter
@@ -639,7 +633,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
   actions.createTypes(/* GraphQL */ `
     type node__page implements Node & Page @dontInfer {
       id: ID!
-      blocktype: String @blocktype
       slug: String! @proxy(from: "field_slug")
       title: String
       description: String @proxy(from: "field_description")
