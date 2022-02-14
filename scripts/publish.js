@@ -109,7 +109,7 @@ const createStarterDist = async (basename) => {
   await SimpleGit({
     baseDir: path.join(dir.dist, name),
   }).status(["--porcelain"], (err, result) => {
-    hasChanges = result.modified.length > 0
+    hasChanges = result.modified.length > 0 || result.not_added.length > 0
   })
 
   if (!hasChanges) {
