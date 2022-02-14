@@ -52,6 +52,8 @@ Once your content is available in DatoCMS, deploy your site to [Gatsby Cloud](ht
 
 [![Deploy to Gatsby](https://www.gatsbyjs.com/deploynow.png "Deploy to Gatsby")](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-datocms-homepage)
 
+## Setting up Gatsby Cloud Preview
+
 ## What's included?
 
 ```sh
