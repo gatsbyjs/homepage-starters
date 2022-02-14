@@ -32,6 +32,9 @@ export default function Header() {
               id
               href
               text
+              internal {
+                type
+              }
             }
             ... on HomepageLinkGroup {
               id
@@ -45,6 +48,9 @@ export default function Header() {
                   alt
                   gatsbyImageData
                 }
+              }
+              internal {
+                type
               }
             }
           }
@@ -63,7 +69,7 @@ export default function Header() {
   const [isOpen, setOpen] = React.useState(false)
 
   const isLinkGroup = React.useCallback((link) => {
-    return `links` in link
+    return link.internal.type.indexOf("HomepageLinkGroup") > 0
   }, [])
 
   React.useEffect(() => {
