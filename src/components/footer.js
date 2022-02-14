@@ -63,6 +63,10 @@ const getSocialIcon = ({ service }) => {
   return socialMedia[service]?.icon
 }
 
+const getSocialName = ({ service }) => {
+  return socialMedia[service]?.name
+}
+
 export default function Footer(props) {
   const data = useStaticQuery(graphql`
     query {
@@ -96,7 +100,7 @@ export default function Footer(props) {
     <Box as="footer" paddingY={4}>
       <Container>
         <Flex variant="start" responsive>
-          <NavLink to="/">
+          <NavLink to="/" ariaLabel="home">
             <BrandLogo />
           </NavLink>
           <Space />
@@ -107,7 +111,9 @@ export default function Footer(props) {
                 return (
                   url && (
                     <li key={link.id}>
-                      <IconLink to={url}>{getSocialIcon(link)}</IconLink>
+                      <IconLink to={url} ariaLabel={getSocialName(link)}>
+                        {getSocialIcon(link)}
+                      </IconLink>
                     </li>
                   )
                 )
