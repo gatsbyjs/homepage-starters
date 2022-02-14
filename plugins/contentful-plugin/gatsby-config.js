@@ -4,15 +4,23 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
+const contentfulOptions = {
+  downloadLocal: true,
+  spaceId: process.env.CONTENTFUL_SPACE_ID,
+  accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
+}
+
+if (process.env.CONTENTFUL_HOST) {
+  // enable preview
+  contentfulOptions.host = process.env.CONTENTFUL_HOST
+  contentfulOptions.accessToken = process.env.CONTENTFUL_PREVIEW_ACCESS_TOKEN
+}
+
 module.exports = {
   plugins: [
     {
       resolve: "gatsby-source-contentful",
-      options: {
-        downloadLocal: true,
-        spaceId: process.env.CONTENTFUL_SPACE_ID,
-        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-      },
+      options: contentfulOptions,
     },
     "gatsby-plugin-sharp",
     "gatsby-plugin-image",
