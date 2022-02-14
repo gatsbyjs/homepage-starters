@@ -117,57 +117,12 @@ exports.createSchemaCustomization = async ({ actions }) => {
       copyright: String
     }
 
-    # interface AboutPage implements Node {
-    #   id: ID!
-    #   title: String
-    #   description: String
-    #   image: HomepageImage
-    #   content: [HomepageBlock]
-    # }
-
-    # interface AboutHero implements Node & HomepageBlock {
-    #   id: ID!
-    #   blocktype: String
-    #   heading: String
-    #   text: String
-    #   image: HomepageImage
-    # }
-
-    # interface AboutStat implements Node {
-    #   id: ID!
-    #   value: String
-    #   label: String
-    # }
-
-    # interface AboutStatList implements Node & HomepageBlock {
-    #   id: ID!
-    #   blocktype: String
-    #   content: [AboutStat]
-    # }
-
     interface AboutProfile implements Node {
       id: ID!
       image: HomepageImage
       name: String
       title: String
     }
-
-    # interface AboutLeadership implements Node & HomepageBlock {
-    #   id: ID!
-    #   blocktype: String
-    #   kicker: String
-    #   heading: String
-    #   subhead: String
-    #   content: [AboutProfile]
-    # }
-
-    # interface AboutLogoList implements Node & HomepageBlock {
-    #   id: ID!
-    #   blocktype: String
-    #   heading: String
-    #   link: HomepageLink
-    #   logos: [HomepageImage]
-    # }
 
     interface Page implements Node {
       id: ID!
@@ -298,13 +253,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
       content: [AboutStat] @link
     }
 
-    type AboutProfile implements Node {
-      id: ID!
-      image: HomepageImage @link
-      title: String
-      name: String
-    }
-
     type AboutLeadership implements Node & HomepageBlock {
       id: ID!
       blocktype: String
@@ -343,18 +291,22 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
 
     type WpBenefit implements Node & HomepageBenefit {
+      id: ID!
       heading: String @proxy(from: "benefit.heading")
       text: String @proxy(from: "benefit.text")
       image: HomepageImage @link @proxy(from: "benefit.image.id")
     }
 
-    type WPProfile implements Node & AboutProfile {
-      title: String @proxy(from: "profile.title")
-      name: String @proxy(from: "profile.name")
-      image: HomepageImage @link @proxy(from: "profile.image.id")
+    type WpAboutProfile implements Node & AboutProfile {
+      id: ID!
+      aboutProfile: JSON
+      title: String @proxy(from: "aboutProfile.jobTitle")
+      name: String @proxy(from: "aboutProfile.name")
+      image: HomepageImage @link @proxy(from: "aboutProfile.image.id")
     }
 
     type WpProduct implements Node & HomepageProduct {
+      id: ID!
       heading: String @proxy(from: "product.heading")
       text: String @proxy(from: "product.text")
       image: HomepageImage @link @proxy(from: "product.image.id")
@@ -370,10 +322,10 @@ exports.createSchemaCustomization = async ({ actions }) => {
       text: String @proxy(from: "feature.text")
       image: HomepageImage @link @proxy(from: "feature.image.id")
       links: [HomepageLink] @proxy(from: "fields.links") @link
-      feature: JSON
     }
 
     type WpTestimonial implements Node & HomepageTestimonial {
+      id: ID!
       quote: String @proxy(from: "testimonial.quote")
       source: String @proxy(from: "testimonial.source")
       avatar: HomepageImage @link @proxy(from: "testimonial.avatar.id")
@@ -546,8 +498,8 @@ exports.onCreateNode = ({
               value: statList.stat3,
               label: statList.stat3label,
             },
-          ].map((stat) => {
-            const id = createNodeId(`${statsID} >>> HomepageStat`)
+          ].map((stat, i) => {
+            const id = createNodeId(`${statsID} >>> HomepageStat ${i}`)
             actions.createNode({
               ...stat,
               id,
@@ -729,8 +681,8 @@ exports.onCreateNode = ({
               value: aboutStatList.stat4,
               label: aboutStatList.stat4Label,
             },
-          ].map((stat) => {
-            const id = createNodeId(`${aboutStatsID} >>> AboutStat`)
+          ].map((stat, i) => {
+            const id = createNodeId(`${aboutStatsID} >>> AboutStat ${i}`)
             actions.createNode({
               ...stat,
               id,
