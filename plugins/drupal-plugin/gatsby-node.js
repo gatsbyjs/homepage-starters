@@ -264,7 +264,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
   `)
 
-  // CMS-specific type
+  // CMS-specific types
   actions.createTypes(/* GraphQL */ `
     type node__homepage_link implements Node & HomepageLink @dontInfer {
       id: ID!
