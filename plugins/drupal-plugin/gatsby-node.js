@@ -118,6 +118,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       blocktype: String
       heading: String
       text: String
+      kicker: String
       image: HomepageImage
       links: [HomepageLink]
     }
@@ -370,6 +371,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       blocktype: String @blocktype
       heading: String @proxy(from: "title")
       text: String @proxy(from: "field_text")
+      kicker: String @proxy(from: "field_kicker")
       image: HomepageImage
         @link(by: "id", from: "relationships.field_image___NODE")
       links: [HomepageLink]
@@ -500,7 +502,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
       blocktype: String @blocktype
       heading: String @proxy(from: "title")
       text: String @proxy(from: "field_text")
-      image: HomepageImage @link(by: "id", from: "relationships.field_image___NODE")
+      image: HomepageImage
+        @link(by: "id", from: "relationships.field_image___NODE")
     }
 
     type node__about_stat implements Node & AboutStat @dontInfer {
@@ -513,12 +516,14 @@ exports.createSchemaCustomization = async ({ actions }) => {
       @dontInfer {
       id: ID!
       blocktype: String @blocktype
-      content: [AboutStat] @link(by: "id", from: "relationships.field_content___NODE")
+      content: [AboutStat]
+        @link(by: "id", from: "relationships.field_content___NODE")
     }
 
     type node__about_profile implements Node & AboutProfile @dontInfer {
       id: ID!
-      image: HomepageImage @link(by: "id", from: "relationships.field_image___NODE")
+      image: HomepageImage
+        @link(by: "id", from: "relationships.field_image___NODE")
       name: String @proxy(from: "field_name")
       title: String
     }
@@ -530,24 +535,29 @@ exports.createSchemaCustomization = async ({ actions }) => {
       kicker: String @proxy(from: "field_kicker")
       heading: String @proxy(from: "title")
       subhead: String @proxy(from: "field_subhead")
-      content: [AboutProfile] @link(by: "id", from: "relationships.field_content___NODE")
+      content: [AboutProfile]
+        @link(by: "id", from: "relationships.field_content___NODE")
     }
 
     type node__about_logo_list implements Node & AboutLogoList & HomepageBlock
       @dontInfer {
       id: ID!
       blocktype: String @blocktype
-      heading: String String @proxy(from: "title")
-      link: HomepageLink @link(by: "id", from: "relationships.field_link___NODE")
-      logos: [HomepageLogo] @link(by: "id", from: "relationships.field_logos___NODE")
+      heading: String @proxy(from: "title")
+      link: HomepageLink
+        @link(by: "id", from: "relationships.field_link___NODE")
+      logos: [HomepageLogo]
+        @link(by: "id", from: "relationships.field_logos___NODE")
     }
 
     type node__about_page implements Node & AboutPage @dontInfer {
       id: ID!
       title: String
-      description: String String @proxy(from: "field_description")
-      image: HomepageImage @link(by: "id", from: "relationships.field_image___NODE")
-      content: [HomepageBlock] @link(by: "id", from: "relationships.field_content___NODE")
+      description: String @proxy(from: "field_description")
+      image: HomepageImage
+        @link(by: "id", from: "relationships.field_image___NODE")
+      content: [HomepageBlock]
+        @link(by: "id", from: "relationships.field_content___NODE")
     }
   `)
 
