@@ -76,6 +76,20 @@ exports.createSchemaCustomization = async ({ actions }) => {
       text: String
     }
 
+    interface NavItem implements Node {
+      id: ID!
+      href: String
+      text: String
+      icon: HomepageImage
+      description: String
+    }
+
+    interface HomepageLinkGroup implements Node {
+      id: ID!
+      name: String
+      links: [NavItem]
+    }
+
     interface HomepageImage implements Node {
       id: ID!
       alt: String
@@ -213,7 +227,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     interface LayoutHeader implements Node {
       id: ID!
-      links: [HomepageLink]
+      links: [HeaderLink]
       cta: HomepageLink
     }
 
@@ -315,14 +329,28 @@ exports.createSchemaCustomization = async ({ actions }) => {
   actions.createTypes(/* GraphQL */ `
     type node__homepage_link implements Node & HomepageLink @dontInfer {
       id: ID!
-      blocktype: String @blocktype
       href: String @proxy(from: "field_href")
       text: String @proxy(from: "title")
     }
 
+    type node__nav_item implements Node & NavItem @dontInfer {
+      id: ID!
+      href: String @proxy(from: "field_href")
+      text: String @proxy(from: "title")
+      icon: HomepageImage
+        @link(by: "id", from: "relationships.field_icon___NODE")
+      description: String @proxy(from: "field_description")
+    }
+
+    type node__homepage_link_group implements Node & HomepageLinkGroup
+      @dontInfer {
+      id: ID!
+      name: String @proxy(from: "title")
+      links: [NavItem] @link(by: "id", from: "relationships.field_links___NODE")
+    }
+
     type media__image implements Node & HomepageImage {
       id: ID!
-      blocktype: String @blocktype
       alt: String @proxy(from: "field_media_image.alt")
       gatsbyImageData: JSON @imagePassthroughResolver
       url: String @imageUrl
@@ -563,10 +591,11 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
   // Layout types
   actions.createTypes(/* GraphQL */ `
+    union HeaderLink = node__nav_item | node__homepage_link_group
+
     type node__layout_header implements Node & LayoutHeader @dontInfer {
       id: ID!
-      blocktype: String @blocktype
-      links: [HomepageLink]
+      links: [HeaderLink]
         @link(by: "id", from: "relationships.field_links___NODE")
       cta: HomepageLink @link(by: "id", from: "relationships.field_cta___NODE")
     }
