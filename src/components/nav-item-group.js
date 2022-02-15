@@ -2,10 +2,10 @@ import * as React from "react"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { Box, Flex, FlexList, NavButtonLink, NavLink } from "./ui"
 import Caret from "./caret"
-import * as styles from "./nav-link-group.css"
+import * as styles from "./nav-item-group.css"
 import { media } from "./ui.css"
 
-export default function NavLinkGroup({ name, links }) {
+export default function NavItemGroup({ name, navItems }) {
   const [isOpen, setIsOpen] = React.useState(false)
   const [popupVisible, setPopupVisible] = React.useState(false)
   const isSmallScreen = () => {
@@ -90,24 +90,24 @@ export default function NavLinkGroup({ name, links }) {
             gap={2}
             className={styles.navLinkListWrapperInner}
           >
-            {links.map((link) => (
-              <li key={link.id}>
-                <NavLink to={link.href} className={styles.navLinkListLink}>
+            {navItems.map((navItem) => (
+              <li key={navItem.id}>
+                <NavLink to={navItem.href} className={styles.navLinkListLink}>
                   <Flex variant="start" gap={3}>
-                    {link.icon && (
+                    {navItem.icon && (
                       <GatsbyImage
-                        alt={link.icon.alt}
-                        image={getImage(link.icon)}
+                        alt={navItem.icon.alt}
+                        image={getImage(navItem.icon)}
                         className={styles.navIcon}
                       />
                     )}
                     <Flex variant="columnStart" gap={1}>
                       <Box as="span" className={styles.navLinkTitle}>
-                        {link.text}
+                        {navItem.text}
                       </Box>
-                      {!!link.description && (
+                      {!!navItem.description && (
                         <Box as="p" className={styles.navLinkDescription}>
-                          {link.description}
+                          {navItem.description}
                         </Box>
                       )}
                     </Flex>

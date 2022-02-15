@@ -63,10 +63,10 @@ exports.createSchemaCustomization = async ({ actions }) => {
       description: String
     }
 
-    interface HomepageLinkGroup implements Node {
+    interface NavItemGroup implements Node {
       id: ID!
       name: String
-      links: [NavItem]
+      navItems: [NavItem]
     }
 
     interface HomepageImage implements Node {
@@ -205,7 +205,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     interface LayoutHeader implements Node {
       id: ID!
-      links: [HeaderLink]
+      navItems: [HeaderNavItem]
       cta: HomepageLink
     }
 
@@ -318,11 +318,10 @@ exports.createSchemaCustomization = async ({ actions }) => {
       description: String
     }
 
-    type ContentfulHomepageLinkGroup implements Node & HomepageLinkGroup
-      @dontInfer {
+    type ContentfulNavItemGroup implements Node & NavItemGroup @dontInfer {
       id: ID!
       name: String
-      links: [NavItem] @link(from: "links___NODE")
+      navItems: [NavItem] @link(from: "navItems___NODE")
     }
 
     type ContentfulAsset implements Node & HomepageImage {
@@ -529,11 +528,11 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
   // Layout types
   actions.createTypes(/* GraphQL */ `
-    union HeaderLink = ContentfulNavItem | ContentfulHomepageLinkGroup
+    union HeaderNavItem = ContentfulNavItem | ContentfulNavItemGroup
 
     type ContentfulLayoutHeader implements Node & LayoutHeader @dontInfer {
       id: ID!
-      links: [HeaderLink] @link(from: "links___NODE")
+      navItems: [HeaderNavItem] @link(from: "navItems___NODE")
       cta: HomepageLink @link(from: "cta___NODE")
     }
 

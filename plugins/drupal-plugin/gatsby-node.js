@@ -84,10 +84,10 @@ exports.createSchemaCustomization = async ({ actions }) => {
       description: String
     }
 
-    interface HomepageLinkGroup implements Node {
+    interface NavItemGroup implements Node {
       id: ID!
       name: String
-      links: [NavItem]
+      navItems: [NavItem]
     }
 
     interface HomepageImage implements Node {
@@ -227,7 +227,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     interface LayoutHeader implements Node {
       id: ID!
-      links: [HeaderLink]
+      navItems: [HeaderNavItem]
       cta: HomepageLink
     }
 
@@ -342,11 +342,11 @@ exports.createSchemaCustomization = async ({ actions }) => {
       description: String @proxy(from: "field_description")
     }
 
-    type node__homepage_link_group implements Node & HomepageLinkGroup
-      @dontInfer {
+    type node__nav_item_group implements Node & NavItemGroup @dontInfer {
       id: ID!
       name: String @proxy(from: "title")
-      links: [NavItem] @link(by: "id", from: "relationships.field_links___NODE")
+      navItems: [NavItem]
+        @link(by: "id", from: "relationships.field_nav_items___NODE")
     }
 
     type media__image implements Node & HomepageImage {
@@ -587,12 +587,12 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
   // Layout types
   actions.createTypes(/* GraphQL */ `
-    union HeaderLink = node__nav_item | node__homepage_link_group
+    union HeaderNavItem = node__nav_item | node__nav_item_group
 
     type node__layout_header implements Node & LayoutHeader @dontInfer {
       id: ID!
-      links: [HeaderLink]
-        @link(by: "id", from: "relationships.field_links___NODE")
+      navItems: [HeaderNavItem]
+        @link(by: "id", from: "relationships.field_nav_items___NODE")
       cta: HomepageLink @link(by: "id", from: "relationships.field_cta___NODE")
     }
 
