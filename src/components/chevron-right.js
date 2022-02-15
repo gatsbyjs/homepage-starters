@@ -10,9 +10,9 @@ export default function ChevronRight(props) {
       <path
         d="M1.5 9.5L5.5 5.5L1.5 1.5"
         stroke="currentColor"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   )

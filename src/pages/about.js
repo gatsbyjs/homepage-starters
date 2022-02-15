@@ -22,7 +22,7 @@ export default function About(props) {
 }
 
 export const query = graphql`
-  query {
+  {
     aboutPage {
       id
       title
