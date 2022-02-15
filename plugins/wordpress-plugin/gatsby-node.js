@@ -4,10 +4,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     extend(options) {
       return {
         resolve(source) {
-          console.log("blocktype extensions before: ", source.internal.type)
-          const updated = source.internal.type.replace("Wp", "Homepage")
-          console.log("blocktype extensions after: ", updated)
-          return updated
+          return source.internal.type.replace("Wp", "Homepage")
         },
       }
     },
@@ -624,7 +621,6 @@ exports.onCreateNode = ({
         actions.deleteNode(node, { name: "gatsby-source-wordpress" })
         break
       } else if (node.slug === "about") {
-        // console.log("about page node: ", node)
         const {
           aboutHero,
           aboutStatList,
@@ -633,8 +629,6 @@ exports.onCreateNode = ({
           aboutLogoList,
           homepageCta,
         } = node
-
-        console.log("about leadership: ", aboutLeadership)
 
         const aboutHeroID = createNodeId(`${node.id} >>> AboutHero`)
         const aboutStatsID = createNodeId(`${node.id} >>> AboutStatList`)
@@ -897,7 +891,5 @@ exports.onCreateNode = ({
         value: metaLinks,
       })
       break
-    // default:
-    // console.log("Node did not match any expected type: ", node.internal.type)
   }
 }
