@@ -4,10 +4,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     extend(options) {
       return {
         resolve(source) {
-          console.log("blocktype extensions before: ", source.internal.type)
-          const updated = source.internal.type.replace("Wp", "Homepage")
-          console.log("blocktype extensions after: ", updated)
-          return updated
+          return source.internal.type.replace("Wp", "Homepage")
         },
       }
     },
@@ -93,7 +90,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     interface LayoutHeader implements Node {
       id: ID!
       contentTypeName: String!
-      links: [HomepageLink]
+      links: [HeaderLink]
       cta: HomepageLink
     }
 
@@ -124,6 +121,14 @@ exports.createSchemaCustomization = async ({ actions }) => {
       title: String
     }
 
+    interface NavItemGroup implements Node {
+      id: ID!
+      name: String
+      links: [NavItem]
+    }
+
+    union HeaderLink = NavItem | NavItemGroup
+
     interface Page implements Node {
       id: ID!
       slug: String!
@@ -141,6 +146,20 @@ exports.createSchemaCustomization = async ({ actions }) => {
       href: String
       text: String
     }
+
+    type NavItem implements Node {
+      id: ID!
+      href: String
+      text: String
+      icon: HomepageImage @link
+      description: String
+    }
+
+    # type NavItemGroup implements Node {
+    #   id: ID!
+    #   name: String
+    #   links: [NavItem]
+    # }
 
     type HomepageHero implements Node & HomepageBlock {
       id: ID!
@@ -305,6 +324,13 @@ exports.createSchemaCustomization = async ({ actions }) => {
       image: HomepageImage @link @proxy(from: "aboutProfile.image.id")
     }
 
+    type WpNavItemGroup implements Node & NavItemGroup {
+      id: ID!
+      navItemGroup: JSON
+      name: String @proxy(from: "navItemGroup.name")
+      links: [NavItem] @link @proxy(from: "navItemGroup.links")
+    }
+
     type WpProduct implements Node & HomepageProduct {
       id: ID!
       heading: String @proxy(from: "product.heading")
@@ -321,7 +347,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       kicker: String @proxy(from: "feature.kicker")
       text: String @proxy(from: "feature.text")
       image: HomepageImage @link @proxy(from: "feature.image.id")
-      links: [HomepageLink] @proxy(from: "fields.links") @link
+      links: [HomepageLink] @link @proxy(from: "fields.links")
     }
 
     type WpTestimonial implements Node & HomepageTestimonial {
@@ -347,7 +373,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type WpHeader implements Node & LayoutHeader {
       id: ID!
       contentTypeName: String!
-      links: [HomepageLink] @link @proxy(from: "fields.links")
+      links: [HeaderLink] @link @proxy(from: "fields.links")
       cta: HomepageLink @link @proxy(from: "fields.cta")
     }
 
@@ -406,6 +432,26 @@ exports.onCreateNode = ({
         },
         href: url,
         text: title,
+      })
+      return linkID
+    }
+
+  const createNavItemNode =
+    (parentId) =>
+    ({ title, url, description, icon }, i) => {
+      const linkID = createNodeId(`${parentId} >>> NavItem ${i}`)
+      actions.createNode({
+        id: linkID,
+        internal: {
+          type: "NavItem",
+          contentDigest: createContentDigest(
+            JSON.stringify({ title, url, description })
+          ),
+        },
+        href: url,
+        text: title,
+        description,
+        icon: icon.id,
       })
       return linkID
     }
@@ -624,7 +670,6 @@ exports.onCreateNode = ({
         actions.deleteNode(node, { name: "gatsby-source-wordpress" })
         break
       } else if (node.slug === "about") {
-        // console.log("about page node: ", node)
         const {
           aboutHero,
           aboutStatList,
@@ -633,8 +678,6 @@ exports.onCreateNode = ({
           aboutLogoList,
           homepageCta,
         } = node
-
-        console.log("about leadership: ", aboutLeadership)
 
         const aboutHeroID = createNodeId(`${node.id} >>> AboutHero`)
         const aboutStatsID = createNodeId(`${node.id} >>> AboutStatList`)
@@ -828,10 +871,67 @@ exports.onCreateNode = ({
         })
       }
       break
+    case "WpNavItemGroup":
+      console.log("nav item group: ", node)
+      const navItemNodes = []
+      if (node.navItemGroup.link1) {
+        navItemNodes.push(
+          createNavItemNode(node.id)(
+            {
+              ...node.navItemGroup.link1,
+              description: node.navItemGroup.link1Description,
+              icon: node.navItemGroup.link1Icon,
+            },
+            1
+          )
+        )
+      }
+      if (node.navItemGroup.link2) {
+        navItemNodes.push(
+          createNavItemNode(node.id)(
+            {
+              ...node.navItemGroup.link2,
+              description: node.navItemGroup.link2Description,
+              icon: node.navItemGroup.link2Icon,
+            },
+            2
+          )
+        )
+      }
+      if (node.navItemGroup.link3) {
+        navItemNodes.push(
+          createNavItemNode(node.id)(
+            {
+              ...node.navItemGroup.link3,
+              description: node.navItemGroup.link3Description,
+              icon: node.navItemGroup.link3Icon,
+            },
+            3
+          )
+        )
+      }
+
+      actions.createNodeField({
+        node,
+        name: "name",
+        value: node.navItemGroup.name,
+      })
+
+      actions.createNodeField({
+        node,
+        name: "links",
+        value: [navItemNodes],
+      })
+      break
     case "WpHeader":
       const { header } = node
+      console.log("header: ", header)
+      // const headerNavItemGroup = {
+      //   id: header.navItemGroup.id,
+      //   name: header.navItemGroup.name,
+      //   links: [],
+      // }
       const headerLinks = [
-        header.link1,
         header.link2,
         header.link3,
         header.link4,
@@ -897,7 +997,5 @@ exports.onCreateNode = ({
         value: metaLinks,
       })
       break
-    // default:
-    // console.log("Node did not match any expected type: ", node.internal.type)
   }
 }

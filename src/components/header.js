@@ -36,7 +36,7 @@ export default function Header() {
                 type
               }
             }
-            ... on HomepageLinkGroup {
+            ... on NavItemGroup {
               id
               name
               links {
