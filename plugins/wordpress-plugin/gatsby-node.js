@@ -124,7 +124,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     interface NavItemGroup implements Node {
       id: ID!
       name: String
-      links: [NavItem]
+      navItems: [NavItem]
     }
 
     union HeaderLink = NavItem | NavItemGroup
@@ -328,7 +328,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       navItemGroup: JSON
       name: String @proxy(from: "navItemGroup.name")
-      links: [NavItem] @link @proxy(from: "navItemGroup.links")
+      navItems: [NavItem] @link @proxy(from: "navItemGroup.navItems")
     }
 
     type WpProduct implements Node & HomepageProduct {
@@ -373,7 +373,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type WpHeader implements Node & LayoutHeader {
       id: ID!
       contentTypeName: String!
-      links: [HeaderLink] @link @proxy(from: "fields.links")
+      navItems: [HeaderLink] @link @proxy(from: "fields.navItems")
       cta: HomepageLink @link @proxy(from: "fields.cta")
     }
 
