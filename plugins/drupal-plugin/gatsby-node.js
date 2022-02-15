@@ -132,6 +132,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       blocktype: String
       heading: String
       text: String
+      kicker: String
       image: HomepageImage
       links: [HomepageLink]
     }
@@ -261,11 +262,57 @@ exports.createSchemaCustomization = async ({ actions }) => {
       footer: LayoutFooter
     }
 
-    # interface PageFieldBody {
-    #   value: String
-    #   processed: String
-    #   format: String
-    # }
+    interface AboutPage implements Node {
+      id: ID!
+      title: String
+      description: String
+      image: HomepageImage
+      content: [HomepageBlock]
+    }
+
+    interface AboutHero implements Node & HomepageBlock {
+      id: ID!
+      blocktype: String
+      heading: String
+      text: String
+      image: HomepageImage
+    }
+
+    interface AboutStat implements Node {
+      id: ID!
+      value: String
+      label: String
+    }
+
+    interface AboutStatList implements Node & HomepageBlock {
+      id: ID!
+      blocktype: String
+      content: [AboutStat]
+    }
+
+    interface AboutProfile implements Node {
+      id: ID!
+      image: HomepageImage
+      name: String
+      title: String
+    }
+
+    interface AboutLeadership implements Node & HomepageBlock {
+      id: ID!
+      blocktype: String
+      kicker: String
+      heading: String
+      subhead: String
+      content: [AboutProfile]
+    }
+
+    interface AboutLogoList implements Node & HomepageBlock {
+      id: ID!
+      blocktype: String
+      heading: String
+      link: HomepageLink
+      logos: [HomepageLogo]
+    }
 
     interface Page implements Node {
       id: ID!
@@ -325,6 +372,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type node__homepage_feature implements Node & HomepageBlock & HomepageFeature
       @dontInfer {
+      id: ID!
       blocktype: String @blocktype
       heading: String @proxy(from: "title")
       kicker: String @proxy(from: "field_kicker")
@@ -336,6 +384,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
     type node__homepage_feature_list implements Node & HomepageBlock & HomepageFeatureList
       @dontInfer {
+      id: ID!
       blocktype: String @blocktype
       kicker: String @proxy(from: "field_kicker")
       heading: String @proxy(from: "title")
@@ -346,9 +395,11 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type node__homepage_cta implements Node & HomepageBlock & HomepageCta
       @dontInfer {
+      id: ID!
       blocktype: String @blocktype
       heading: String @proxy(from: "title")
       text: String @proxy(from: "field_text")
+      kicker: String @proxy(from: "field_kicker")
       image: HomepageImage
         @link(by: "id", from: "relationships.field_image___NODE")
       links: [HomepageLink]
@@ -364,6 +415,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type node__homepage_logo_list implements Node & HomepageBlock & HomepageLogoList
       @dontInfer {
+      id: ID!
       blocktype: String @blocktype
       name: String @proxy(from: "title")
       text: String @proxy(from: "field_text")
@@ -435,6 +487,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
 
     type node__homepage_product implements Node & HomepageProduct @dontInfer {
+      id: ID!
       heading: String @proxy(from: "title")
       text: String @proxy(from: "field_text")
       image: HomepageImage
@@ -445,6 +498,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type node__homepage_product_list implements Node & HomepageProductList & HomepageBlock
       @dontInfer {
+      id: ID!
       blocktype: String @blocktype
       heading: String @proxy(from: "title")
       kicker: String @proxy(from: "field_kicker")
@@ -454,6 +508,73 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
 
     type node__homepage implements Node & Homepage @dontInfer {
+      id: ID!
+      title: String
+      description: String @proxy(from: "field_description")
+      image: HomepageImage
+        @link(by: "id", from: "relationships.field_image___NODE")
+      content: [HomepageBlock]
+        @link(by: "id", from: "relationships.field_content___NODE")
+    }
+  `)
+
+  // CMS specific types for About page
+  actions.createTypes(/* GraphQL */ `
+    type node__about_hero implements Node & AboutHero & HomepageBlock
+      @dontInfer {
+      id: ID!
+      blocktype: String @blocktype
+      heading: String @proxy(from: "title")
+      text: String @proxy(from: "field_text")
+      image: HomepageImage
+        @link(by: "id", from: "relationships.field_image___NODE")
+    }
+
+    type node__about_stat implements Node & AboutStat @dontInfer {
+      id: ID!
+      value: String @proxy(from: "title")
+      label: String @proxy(from: "field_label")
+    }
+
+    type node__about_stat_list implements Node & AboutStatList & HomepageBlock
+      @dontInfer {
+      id: ID!
+      blocktype: String @blocktype
+      content: [AboutStat]
+        @link(by: "id", from: "relationships.field_content___NODE")
+    }
+
+    type node__about_profile implements Node & AboutProfile @dontInfer {
+      id: ID!
+      image: HomepageImage
+        @link(by: "id", from: "relationships.field_image___NODE")
+      name: String @proxy(from: "field_name")
+      title: String
+    }
+
+    type node__about_leadership implements Node & AboutLeadership & HomepageBlock
+      @dontInfer {
+      id: ID!
+      blocktype: String @blocktype
+      kicker: String @proxy(from: "field_kicker")
+      heading: String @proxy(from: "title")
+      subhead: String @proxy(from: "field_subhead")
+      content: [AboutProfile]
+        @link(by: "id", from: "relationships.field_content___NODE")
+    }
+
+    type node__about_logo_list implements Node & AboutLogoList & HomepageBlock
+      @dontInfer {
+      id: ID!
+      blocktype: String @blocktype
+      heading: String @proxy(from: "title")
+      link: HomepageLink
+        @link(by: "id", from: "relationships.field_link___NODE")
+      logos: [HomepageLogo]
+        @link(by: "id", from: "relationships.field_logos___NODE")
+    }
+
+    type node__about_page implements Node & AboutPage @dontInfer {
       id: ID!
       title: String
       description: String @proxy(from: "field_description")
@@ -477,6 +598,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type node__social_link implements Node & SocialLink @dontInfer {
       id: ID!
+      blocktype: String @blocktype
       username: String! @proxy(from: "field_username")
       service: SocialService! @proxy(from: "title")
     }
