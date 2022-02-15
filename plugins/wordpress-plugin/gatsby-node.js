@@ -90,7 +90,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     interface LayoutHeader implements Node {
       id: ID!
       contentTypeName: String!
-      links: [HeaderLink]
+      # navItems: [HeaderNavItem]
       cta: HomepageLink
     }
 
@@ -121,13 +121,25 @@ exports.createSchemaCustomization = async ({ actions }) => {
       title: String
     }
 
+    interface NavItem implements Node {
+      id: ID!
+      href: String
+      text: String
+      icon: HomepageImage
+      description: String
+    }
+
     interface NavItemGroup implements Node {
       id: ID!
       name: String
       navItems: [NavItem]
     }
 
-    union HeaderLink = NavItem | NavItemGroup
+    # interface HeaderNavItem implements Node {
+    #   id: ID!
+    #   text: String
+    #   href: String
+    # }
 
     interface Page implements Node {
       id: ID!
@@ -146,20 +158,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
       href: String
       text: String
     }
-
-    type NavItem implements Node {
-      id: ID!
-      href: String
-      text: String
-      icon: HomepageImage @link
-      description: String
-    }
-
-    # type NavItemGroup implements Node {
-    #   id: ID!
-    #   name: String
-    #   links: [NavItem]
-    # }
 
     type HomepageHero implements Node & HomepageBlock {
       id: ID!
@@ -324,11 +322,20 @@ exports.createSchemaCustomization = async ({ actions }) => {
       image: HomepageImage @link @proxy(from: "aboutProfile.image.id")
     }
 
+    type WpNavItem implements Node & NavItem {
+      id: ID!
+      navItem: JSON
+      href: String @proxy(from: "navItem.link.href")
+      text: String @proxy(from: "navItem.link.title")
+      description: String @proxy(from: "navItem.description")
+      icon: HomepageImage @link @proxy(from: "navItem.icon.id")
+    }
+
     type WpNavItemGroup implements Node & NavItemGroup {
       id: ID!
       navItemGroup: JSON
       name: String @proxy(from: "navItemGroup.name")
-      navItems: [NavItem] @link @proxy(from: "navItemGroup.navItems")
+      navItems: [NavItem] @link @proxy(from: "navItemGroup.navItems.id")
     }
 
     type WpProduct implements Node & HomepageProduct {
@@ -370,10 +377,12 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
   // Layout types
   actions.createTypes(/* GraphQL */ `
+    # union HeaderNavItem = WpNavItem | WpNavItemGroup
+
     type WpHeader implements Node & LayoutHeader {
       id: ID!
       contentTypeName: String!
-      navItems: [HeaderLink] @link @proxy(from: "fields.navItems")
+      # navItems: [HeaderNavItem] @link @proxy(from: "fields.navItems.id")
       cta: HomepageLink @link @proxy(from: "fields.cta")
     }
 
@@ -436,25 +445,25 @@ exports.onCreateNode = ({
       return linkID
     }
 
-  const createNavItemNode =
-    (parentId) =>
-    ({ title, url, description, icon }, i) => {
-      const linkID = createNodeId(`${parentId} >>> NavItem ${i}`)
-      actions.createNode({
-        id: linkID,
-        internal: {
-          type: "NavItem",
-          contentDigest: createContentDigest(
-            JSON.stringify({ title, url, description })
-          ),
-        },
-        href: url,
-        text: title,
-        description,
-        icon: icon.id,
-      })
-      return linkID
-    }
+  // const createNavItemNode =
+  //   (parentId) =>
+  //   ({ title, url, description, icon }, i) => {
+  //     const linkID = createNodeId(`${parentId} >>> NavItem ${i}`)
+  //     actions.createNode({
+  //       id: linkID,
+  //       internal: {
+  //         type: "NavItem",
+  //         contentDigest: createContentDigest(
+  //           JSON.stringify({ title, url, description })
+  //         ),
+  //       },
+  //       href: url,
+  //       text: title,
+  //       description,
+  //       icon: icon.id,
+  //     })
+  //     return linkID
+  //   }
 
   switch (node.internal.type) {
     case "WpPage":
@@ -873,55 +882,55 @@ exports.onCreateNode = ({
       break
     case "WpNavItemGroup":
       console.log("nav item group: ", node)
-      const navItemNodes = []
-      if (node.navItemGroup.link1) {
-        navItemNodes.push(
-          createNavItemNode(node.id)(
-            {
-              ...node.navItemGroup.link1,
-              description: node.navItemGroup.link1Description,
-              icon: node.navItemGroup.link1Icon,
-            },
-            1
-          )
-        )
-      }
-      if (node.navItemGroup.link2) {
-        navItemNodes.push(
-          createNavItemNode(node.id)(
-            {
-              ...node.navItemGroup.link2,
-              description: node.navItemGroup.link2Description,
-              icon: node.navItemGroup.link2Icon,
-            },
-            2
-          )
-        )
-      }
-      if (node.navItemGroup.link3) {
-        navItemNodes.push(
-          createNavItemNode(node.id)(
-            {
-              ...node.navItemGroup.link3,
-              description: node.navItemGroup.link3Description,
-              icon: node.navItemGroup.link3Icon,
-            },
-            3
-          )
-        )
-      }
+      //   const navItemNodes = []
+      //   if (node.navItemGroup.link1) {
+      //     navItemNodes.push(
+      //       createNavItemNode(node.id)(
+      //         {
+      //           ...node.navItemGroup.link1,
+      //           description: node.navItemGroup.link1Description,
+      //           icon: node.navItemGroup.link1Icon,
+      //         },
+      //         1
+      //       )
+      //     )
+      //   }
+      //   if (node.navItemGroup.link2) {
+      //     navItemNodes.push(
+      //       createNavItemNode(node.id)(
+      //         {
+      //           ...node.navItemGroup.link2,
+      //           description: node.navItemGroup.link2Description,
+      //           icon: node.navItemGroup.link2Icon,
+      //         },
+      //         2
+      //       )
+      //     )
+      //   }
+      //   if (node.navItemGroup.link3) {
+      //     navItemNodes.push(
+      //       createNavItemNode(node.id)(
+      //         {
+      //           ...node.navItemGroup.link3,
+      //           description: node.navItemGroup.link3Description,
+      //           icon: node.navItemGroup.link3Icon,
+      //         },
+      //         3
+      //       )
+      //     )
+      //   }
 
-      actions.createNodeField({
-        node,
-        name: "name",
-        value: node.navItemGroup.name,
-      })
+      //   actions.createNodeField({
+      //     node,
+      //     name: "name",
+      //     value: node.navItemGroup.name,
+      //   })
 
-      actions.createNodeField({
-        node,
-        name: "links",
-        value: [navItemNodes],
-      })
+      //   actions.createNodeField({
+      //     node,
+      //     name: "navItems",
+      //     value: [navItemNodes],
+      //   })
       break
     case "WpHeader":
       const { header } = node
@@ -931,18 +940,18 @@ exports.onCreateNode = ({
       //   name: header.navItemGroup.name,
       //   links: [],
       // }
-      const headerLinks = [
-        header.link2,
-        header.link3,
-        header.link4,
-        header.link5,
-      ].map(createLinkNode(node.id))
+      // const headerLinks = [
+      //   header.link2,
+      //   header.link3,
+      //   header.link4,
+      //   header.link5,
+      // ].map(createLinkNode(node.id))
       const headerCta = createLinkNode(node.id)(header.cta, 9999)
-      actions.createNodeField({
-        node,
-        name: "links",
-        value: headerLinks,
-      })
+      // actions.createNodeField({
+      //   node,
+      //   name: "links",
+      //   value: headerLinks,
+      // })
       actions.createNodeField({
         node,
         name: "cta",
