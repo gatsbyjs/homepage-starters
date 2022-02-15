@@ -2,7 +2,7 @@ import * as React from "react"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { Box, Flex, FlexList, NavButtonLink, NavLink } from "./ui"
 import Caret from "./caret"
-import * as styles from "./nav-link-group.css"
+import * as styles from "./nav-item-group.css"
 import { media } from "./ui.css"
 
 export default function NavItemGroup({ name, navItems }) {

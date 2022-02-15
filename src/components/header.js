@@ -18,7 +18,7 @@ import {
   mobileHeaderNavWrapper,
   mobileNavSVGColorWrapper,
 } from "./header.css.ts"
-import NavItemGroup from "./nav-link-group"
+import NavItemGroup from "./nav-item-group"
 import BrandLogo from "./brand-logo"
 
 export default function Header() {
