@@ -22,6 +22,7 @@ export default function About(props) {
 }
 
 export const query = graphql`
+  {
     aboutPage {
       id
       title
@@ -42,4 +43,5 @@ export const query = graphql`
         ...HomepageCtaContent
       }
     }
+  }
 `
