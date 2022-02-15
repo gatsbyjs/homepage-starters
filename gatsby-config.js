@@ -2,9 +2,9 @@ module.exports = {
   plugins: [
     // Comment and uncomment the desired CMS/backend plugin to switch between data sources
     // "yaml-plugin",
-    // "drupal-plugin",
-    // "contentful-plugin",
     // "datocms-plugin",
-    "wordpress-plugin",
+    // "drupal-plugin",
+    "contentful-plugin",
+    // "wordpress-plugin",
   ],
 }
