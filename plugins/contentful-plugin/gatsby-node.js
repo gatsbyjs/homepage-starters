@@ -530,6 +530,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
   // Layout types
   actions.createTypes(/* GraphQL */ `
     union HeaderLink = ContentfulNavItem | ContentfulHomepageLinkGroup
+
     type ContentfulLayoutHeader implements Node & LayoutHeader @dontInfer {
       id: ID!
       links: [HeaderLink] @link(from: "links___NODE")
