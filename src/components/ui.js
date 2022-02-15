@@ -233,3 +233,7 @@ export function IconLink(props) {
 export function InteractiveIcon(props) {
   return <Base as="button" cx={[styles.interactiveIcon]} {...props} />
 }
+
+export function VisuallyHidden(props) {
+  return <Base as="span" cx={[styles.visuallyHidden]} {...props} />
+}

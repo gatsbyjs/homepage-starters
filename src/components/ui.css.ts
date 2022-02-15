@@ -1,5 +1,6 @@
 import { style, styleVariants } from "@vanilla-extract/css"
 import { calc } from "@vanilla-extract/css-utils"
+import reactDom from "react-dom"
 import { theme } from "../theme.css.ts"
 
 const breakpoints = ["40em", "52em", "64em"]
@@ -504,6 +505,17 @@ export const interactiveIcon = style({
   cursor: "pointer",
   width: 48,
   height: 48,
+})
+
+export const visuallyHidden = style({
+  border: 0,
+  clip: "rect(0 0 0 0)",
+  height: "1px",
+  overflow: "hidden",
+  padding: 0,
+  position: "absolute",
+  whiteSpace: "nowrap",
+  width: "1px",
 })
 
 // for debugging only

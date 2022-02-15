@@ -17,6 +17,7 @@ import {
   NavLink,
   Text,
   IconLink,
+  VisuallyHidden,
 } from "./ui"
 import BrandLogo from "./brand-logo"
 
@@ -100,7 +101,8 @@ export default function Footer(props) {
     <Box as="footer" paddingY={4}>
       <Container>
         <Flex variant="start" responsive>
-          <NavLink to="/" aria-label="home">
+          <NavLink to="/">
+            <VisuallyHidden>Home</VisuallyHidden>
             <BrandLogo />
           </NavLink>
           <Space />
@@ -111,7 +113,8 @@ export default function Footer(props) {
                 return (
                   url && (
                     <li key={link.id}>
-                      <IconLink to={url} aria-label={getSocialName(link)}>
+                      <IconLink to={url}>
+                        <VisuallyHidden>{getSocialName(link)}</VisuallyHidden>
                         {getSocialIcon(link)}
                       </IconLink>
                     </li>
