@@ -366,7 +366,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       blocktype: String
       heading: String
-      link: [HomepageLink]
+      link: HomepageLink
       logos: [HomepageImage]
       # DatoCMS
       originalId: String
@@ -628,7 +628,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       originalId: String
       entityPayload: JSON
       heading: String
-      link: [HomepageLink]
+      link: HomepageLink
       logos: [HomepageImage]
     }
 
