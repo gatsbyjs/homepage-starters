@@ -69,7 +69,7 @@ export default function Header() {
   const [isOpen, setOpen] = React.useState(false)
 
   const isLinkGroup = React.useCallback((link) => {
-    return link.internal.type.indexOf("HomepageLinkGroup") > 0
+    return "links" in link
   }, [])
 
   React.useEffect(() => {
