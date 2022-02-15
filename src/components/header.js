@@ -18,7 +18,7 @@ import {
   mobileHeaderNavWrapper,
   mobileNavSVGColorWrapper,
 } from "./header.css.ts"
-import NavLinkGroup from "./nav-link-group"
+import NavItemGroup from "./nav-link-group"
 import BrandLogo from "./brand-logo"
 
 export default function Header() {
@@ -27,19 +27,16 @@ export default function Header() {
       layout {
         header {
           id
-          links {
+          navItems {
             ... on NavItem {
               id
               href
               text
-              internal {
-                type
-              }
             }
-            ... on HomepageLinkGroup {
+            ... on NavItemGroup {
               id
               name
-              links {
+              navItems {
                 id
                 href
                 text
@@ -48,9 +45,6 @@ export default function Header() {
                   alt
                   gatsbyImageData
                 }
-              }
-              internal {
-                type
               }
             }
           }
@@ -64,12 +58,12 @@ export default function Header() {
     }
   `)
 
-  const { links, cta } = data.layout.header
+  const { navItems, cta } = data.layout.header
 
   const [isOpen, setOpen] = React.useState(false)
 
   const isLinkGroup = React.useCallback((link) => {
-    return "links" in link
+    return "navItems" in link
   }, [])
 
   React.useEffect(() => {
@@ -91,13 +85,16 @@ export default function Header() {
           </NavLink>
           <nav>
             <FlexList gap={4}>
-              {links &&
-                links.map((link) => (
-                  <li key={link.id}>
-                    {!isLinkGroup(link) ? (
-                      <NavLink to={link.href}>{link.text}</NavLink>
+              {navItems &&
+                navItems.map((navItem) => (
+                  <li key={navItem.id}>
+                    {!isLinkGroup(navItem) ? (
+                      <NavLink to={navItem.href}>{navItem.text}</NavLink>
                     ) : (
-                      <NavLinkGroup name={link.name} links={link.links} />
+                      <NavItemGroup
+                        name={navItem.name}
+                        navItems={navItem.navItems}
+                      />
                     )}
                   </li>
                 ))}
@@ -144,15 +141,18 @@ export default function Header() {
         <div className={mobileNavOverlay}>
           <nav>
             <FlexList responsive variant="stretch">
-              {links &&
-                links.map((link) => (
-                  <li key={link.id}>
-                    {!isLinkGroup(link) ? (
-                      <NavLink to={link.href} className={mobileNavLink}>
-                        {link.text}
+              {navItems &&
+                navItems.map((navItem) => (
+                  <li key={navItem.id}>
+                    {!isLinkGroup(navItem) ? (
+                      <NavLink to={navItem.href} className={mobileNavLink}>
+                        {navItem.text}
                       </NavLink>
                     ) : (
-                      <NavLinkGroup name={link.name} links={link.links} />
+                      <NavItemGroup
+                        name={navItem.name}
+                        navItems={navItem.navItems}
+                      />
                     )}
                   </li>
                 ))}
