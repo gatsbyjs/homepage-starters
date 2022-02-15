@@ -592,7 +592,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type node__layout_header implements Node & LayoutHeader @dontInfer {
       id: ID!
       navItems: [HeaderNavItem]
-        @link(by: "id", from: "relationships.field_links___NODE")
+        @link(by: "id", from: "relationships.field_nav_items___NODE")
       cta: HomepageLink @link(by: "id", from: "relationships.field_cta___NODE")
     }
 
