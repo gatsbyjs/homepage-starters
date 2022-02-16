@@ -118,7 +118,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       image: HomepageImage
       name: String
-      title: String
+      jobTitle: String
     }
 
     interface Page implements Node {
@@ -297,7 +297,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type WpAboutProfile implements Node & AboutProfile {
       id: ID!
       aboutProfile: JSON
-      title: String @proxy(from: "aboutProfile.jobTitle")
+      jobTitle: String @proxy(from: "aboutProfile.jobTitle")
       name: String @proxy(from: "aboutProfile.name")
       image: HomepageImage @link @proxy(from: "aboutProfile.image.id")
     }
