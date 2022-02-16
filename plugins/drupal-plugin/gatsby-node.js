@@ -294,7 +294,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       image: HomepageImage
       name: String
-      title: String
+      jobTitle: String
     }
 
     interface AboutLeadership implements Node & HomepageBlock {
@@ -548,8 +548,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       image: HomepageImage
         @link(by: "id", from: "relationships.field_image___NODE")
-      name: String @proxy(from: "field_name")
-      title: String
+      name: String @proxy(from: "title")
+      jobTitle: String @proxy(from: "field_job_title")
     }
 
     type node__about_leadership implements Node & AboutLeadership & HomepageBlock
