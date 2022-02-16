@@ -83,24 +83,30 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       href: String
       text: String
+      ## DatoCMS
+      originalId: String
+      entityPayload: JSON
+    }
+
+    interface NavItem implements Node {
+      id: ID!
+      href: String
+      text: String
       icon: HomepageImage
-      iconAlternative: HomepageImage
       description: String
       ## DatoCMS
       originalId: String
       entityPayload: JSON
     }
 
-    # interface HomepageLinkGroup implements Node {
-    #   id: ID!
-    #   name: String
-    #   links: [HomepageLink]
-    #    DatoCMS
-    #   originalId: String
-    #   entityPayload: JSON
-    # }
-
-    # union NavItem = HomepageLink | HomepageLinkGroup
+    interface NavItemGroup implements Node {
+      id: ID!
+      name: String
+      navItems: [NavItem]
+      ## DatoCMS
+      originalId: String
+      entityPayload: JSON
+    }
 
     interface HomepageImage implements Node {
       id: ID!
@@ -264,7 +270,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     interface LayoutHeader implements Node {
       id: ID!
-      links: [HomepageLink]
+      navItems: [HeaderNavItem]
       cta: HomepageLink
       entityPayload: JSON
     }
@@ -386,18 +392,25 @@ exports.createSchemaCustomization = async ({ actions }) => {
       entityPayload: JSON
       href: String
       text: String
+    }
+
+    type DatoCmsNavItem implements Node & NavItem {
+      id: ID!
+      originalId: String
+      entityPayload: JSON
+      href: String
+      text: String
       icon: HomepageImage
-      iconAlternative: HomepageImage
       description: String
     }
 
-    # type DatoCmsLinkGroup implements Node & HomepageLinkGroup @dontInfer {
-    #   id: ID!
-    #   name: String
-    #   links: [HomepageLink]
-    #   originalId: String
-    #   entityPayload: JSON
-    # }
+    type DatoCmsNavItemGroup implements Node & NavItemGroup @dontInfer {
+      id: ID!
+      name: String
+      navItems: [NavItem]
+      originalId: String
+      entityPayload: JSON
+    }
 
     type DatoCmsAsset implements Node & HomepageImage {
       id: ID!
@@ -633,9 +646,10 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
   // Layout types
   actions.createTypes(/* GraphQL */ `
+    union HeaderNavItem = DatoCmsNavItem | DatoCmsNavItemGroup
     type DatoCmsLayoutheader implements Node & LayoutHeader @dontInfer {
       id: ID!
-      links: [HomepageLink]
+      navItems: [HeaderNavItem]
       originalCta: HomepageLink
         @link(by: "originalId", from: "entityPayload.attributes.cta")
       cta: HomepageLink @ctalink
