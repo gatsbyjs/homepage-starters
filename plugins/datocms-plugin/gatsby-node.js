@@ -660,7 +660,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
       heading: String
       link: HomepageLink @firstLink(by: "originalId")
       logos: [HomepageImage]
-      entityPayload: JSON
     }
 
     type DatoCmsAboutpage implements Node & AboutPage @dontInfer {
