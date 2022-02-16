@@ -310,7 +310,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       blocktype: String
       heading: String
-      link: HomepageLink
+      links: [HomepageLink]
       logos: [HomepageLogo]
     }
 
@@ -568,8 +568,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       blocktype: String @blocktype
       heading: String @proxy(from: "title")
-      link: HomepageLink
-        @link(by: "id", from: "relationships.field_link___NODE")
+      links: [HomepageLink]
+        @link(by: "id", from: "relationships.field_links___NODE")
       logos: [HomepageLogo]
         @link(by: "id", from: "relationships.field_logos___NODE")
     }

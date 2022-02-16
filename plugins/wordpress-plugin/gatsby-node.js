@@ -263,7 +263,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       blocktype: String
       heading: String
-      link: HomepageLink @link
+      links: [HomepageLink] @link
       logos: [HomepageImage] @link
     }
 
@@ -721,7 +721,9 @@ exports.onCreateNode = ({
           parent: node.id,
           blocktype: "AboutLogoList",
           heading: aboutLogoList.aboutLogoListHeading,
-          link: createLinkNode(aboutLogosID)(aboutLogoList.aboutLogoListLink),
+          links: [
+            createLinkNode(aboutLogosID)(aboutLogoList.aboutLogoListLink),
+          ],
           logos: [
             aboutLogoList.logo1,
             aboutLogoList.logo2,
