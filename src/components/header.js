@@ -1,3 +1,4 @@
+/*
 import * as React from "react"
 import { graphql, useStaticQuery } from "gatsby"
 import { Menu, X } from "react-feather"
@@ -77,7 +78,6 @@ export default function Header() {
   return (
     <header>
       <Container className={desktopHeaderNavWrapper}>
-        {/* Desktop / Tablet - Header / Nav */}
         <Space size={2} />
         <Flex variant="spaceBetween">
           <NavLink to="/">
@@ -103,7 +103,6 @@ export default function Header() {
           <div>{cta && <Button to={cta.href}>{cta.text}</Button>}</div>
         </Flex>
       </Container>
-      {/* Mobile - Header / Nav */}
       <Container className={mobileHeaderNavWrapper[isOpen ? "open" : "closed"]}>
         <Space size={2} />
         <Flex variant="spaceBetween">
@@ -163,3 +162,4 @@ export default function Header() {
     </header>
   )
 }
+  */

@@ -1,7 +1,7 @@
 import * as React from "react"
 import { graphql } from "gatsby"
-import Layout from "../components/layout"
-import * as sections from "../components/sections"
+// import Layout from "../components/layout"
+// import * as sections from "../components/sections"
 
 const Fallback = (props) => {
   console.warn(`No component found for: ${props.blocktype}`)
@@ -9,8 +9,11 @@ const Fallback = (props) => {
 }
 
 export default function Homepage(props) {
+  console.log(props)
+  return <pre>homepage</pre>
   const { homepage } = props.data
 
+  /*
   return (
     <Layout {...homepage}>
       {homepage.blocks.map((block, i) => {
@@ -19,8 +22,10 @@ export default function Homepage(props) {
       })}
     </Layout>
   )
+  */
 }
 
+/*
 export const query = graphql`
   {
     homepage {
@@ -34,16 +39,17 @@ export const query = graphql`
       blocks: content {
         id
         blocktype
-        ...HomepageHeroContent
-        ...HomepageFeatureContent
-        ...HomepageFeatureListContent
-        ...HomepageCtaContent
-        ...HomepageLogoListContent
-        ...HomepageTestimonialListContent
-        ...HomepageBenefitListContent
-        ...HomepageStatListContent
-        ...HomepageProductListContent
+        # ...HomepageHeroContent
+        # ...HomepageFeatureContent
+        # ...HomepageFeatureListContent
+        # ...HomepageCtaContent
+        # ...HomepageLogoListContent
+        # ...HomepageTestimonialListContent
+        # ...HomepageBenefitListContent
+        # ...HomepageStatListContent
+        # ...HomepageProductListContent
       }
     }
   }
 `
+*/

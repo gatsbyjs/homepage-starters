@@ -139,7 +139,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       text: String
     }
 
-    type HomepageHero implements Node & HomepageBlock {
+    interface HomepageHero implements Node & HomepageBlock {
       id: ID!
       blocktype: String
       heading: String!
@@ -150,7 +150,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       links: [HomepageLink] @link
     }
 
-    type HomepageCta implements Node & HomepageBlock {
+    interface HomepageCta implements Node & HomepageBlock {
       id: ID!
       blocktype: String
       kicker: String
@@ -160,7 +160,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       image: HomepageImage @link
     }
 
-    type HomepageFeatureList implements Node & HomepageBlock {
+    interface HomepageFeatureList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
       kicker: String
@@ -169,14 +169,14 @@ exports.createSchemaCustomization = async ({ actions }) => {
       content: [HomepageFeature] @link
     }
 
-    type HomepageLogoList implements Node & HomepageBlock {
+    interface HomepageLogoList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
       text: String
       logos: [HomepageImage] @link
     }
 
-    type HomepageTestimonialList implements Node & HomepageBlock {
+    interface HomepageTestimonialList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
       kicker: String
@@ -184,7 +184,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       content: [HomepageTestimonial] @link
     }
 
-    type HomepageBenefitList implements Node & HomepageBlock {
+    interface HomepageBenefitList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
       heading: String
@@ -192,14 +192,14 @@ exports.createSchemaCustomization = async ({ actions }) => {
       content: [HomepageBenefit] @link
     }
 
-    type HomepageStat implements Node {
+    interface HomepageStat implements Node {
       id: ID!
       value: String
       label: String
       heading: String
     }
 
-    type HomepageStatList implements Node & HomepageBlock {
+    interface HomepageStatList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
       kicker: String
@@ -211,7 +211,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       links: [HomepageLink] @link
     }
 
-    type HomepageProductList implements Node & HomepageBlock {
+    interface HomepageProductList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
       kicker: String
@@ -220,6 +220,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       content: [HomepageProduct] @link
     }
 
+    # TODO see if this can be an interface as well
     type Homepage implements Node {
       id: ID!
       title: String
@@ -229,7 +230,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
   `)
 
-  actions.createTypes(/* GraphQL */ `
+  /*
+  actions.createTypes(/* GraphQL * / `
     type AboutHero implements Node & HomepageBlock {
       id: ID!
       blocktype: String
@@ -275,8 +277,10 @@ exports.createSchemaCustomization = async ({ actions }) => {
       content: [HomepageBlock] @link
     }
   `)
+  */
 
-  actions.createTypes(/* GraphQL */ `
+  /*
+  actions.createTypes(/* GraphQL * / `
     type WpMediaItem implements Node & HomepageImage {
       id: ID!
       alt: String @proxy(from: "altText")
@@ -338,6 +342,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       html: String @proxy(from: "content")
     }
   `)
+    */
 
   // Layout types
   actions.createTypes(/* GraphQL */ `
@@ -368,9 +373,18 @@ exports.createSchemaCustomization = async ({ actions }) => {
       header: LayoutHeader @link(by: "contentTypeName")
       footer: LayoutFooter @link(by: "contentTypeName")
     }
+
+    # placeholders
+    type NavItem implements Node {
+      id: ID!
+    }
+    type NavItemGroup implements Node {
+      id: ID!
+    }
   `)
 }
 
+/* TODO
 exports.sourceNodes = ({ actions, createNodeId, createContentDigest }) => {
   actions.createNode({
     id: createNodeId("HomepageLayout"),
@@ -382,7 +396,9 @@ exports.sourceNodes = ({ actions, createNodeId, createContentDigest }) => {
     footer: "footer",
   })
 }
+*/
 
+/* TODO
 exports.onCreateNode = ({
   actions,
   node,
@@ -893,3 +909,4 @@ exports.onCreateNode = ({
       break
   }
 }
+*/

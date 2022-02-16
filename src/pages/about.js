@@ -1,7 +1,7 @@
 import * as React from "react"
 import { graphql } from "gatsby"
-import Layout from "../components/layout"
-import * as sections from "../components/sections"
+// import Layout from "../components/layout"
+// import * as sections from "../components/sections"
 
 const Fallback = (props) => {
   console.warn(`No component found for: ${props.blocktype}`)
@@ -9,6 +9,9 @@ const Fallback = (props) => {
 }
 
 export default function About(props) {
+  console.log(props)
+  return <pre>about</pre>
+  /*
   const { aboutPage } = props.data
 
   return (
@@ -19,8 +22,10 @@ export default function About(props) {
       })}
     </Layout>
   )
+  */
 }
 
+/*
 export const query = graphql`
   {
     aboutPage {
@@ -45,3 +50,4 @@ export const query = graphql`
     }
   }
 `
+*/
