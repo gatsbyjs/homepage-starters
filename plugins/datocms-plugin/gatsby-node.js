@@ -71,20 +71,24 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
   actions.createFieldExtension({
     name: "firstLink",
+    args: {
+      by: {
+        type: "String!",
+      },
+    },
     extend(options) {
       return {
         args: {
           by: "String",
         },
         async resolve(source, args, context, info) {
-          console.log(args)
           const ids = source.entityPayload.attributes[info.fieldName]
           if (ids && ids.length > 0) {
             const node = await context.nodeModel.findOne({
               type: info.returnType,
               query: {
                 filter: {
-                  [`${args.by}`]: { eq: ids[0] },
+                  [`${options.by}`]: { eq: ids[0] },
                 },
               },
             })
