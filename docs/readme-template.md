@@ -40,6 +40,8 @@ Once your content is available in :var[cms], deploy your site to [Gatsby Cloud](
 
 :link[deploynow]{text="Deploy to Gatsby"}
 
+::include{file=docs/preview.md}
+
 ## What's included?
 
 ```sh

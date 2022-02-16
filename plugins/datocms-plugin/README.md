@@ -52,6 +52,14 @@ Once your content is available in DatoCMS, deploy your site to [Gatsby Cloud](ht
 
 [![Deploy to Gatsby](https://www.gatsbyjs.com/deploynow.png "Deploy to Gatsby")](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-datocms-homepage)
 
+## Setting up Gatsby Cloud Preview
+
+To enable Gatsby Preview with this site, see the documentation for
+[Installing Content Sync for DatoCMS][].
+
+[connecting to datocms]: https://support.gatsbyjs.com/hc/en-us/articles/360052324454-Connecting-to-DatoCMS
+[installing content sync for datocms]: https://support.gatsbyjs.com/hc/en-us/articles/4410387813907-Installing-Content-Sync-for-DatoCMS
+
 ## What's included?
 
 ```sh
