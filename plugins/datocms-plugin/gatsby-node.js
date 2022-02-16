@@ -69,6 +69,33 @@ exports.createSchemaCustomization = async ({ actions }) => {
     },
   })
 
+  actions.createFieldExtension({
+    name: "firstLink",
+    extend(options) {
+      return {
+        args: {
+          by: "String",
+        },
+        async resolve(source, args, context, info) {
+          console.log(args)
+          const ids = source.entityPayload.attributes[info.fieldName]
+          if (ids && ids.length > 0) {
+            const node = await context.nodeModel.findOne({
+              type: info.returnType,
+              query: {
+                filter: {
+                  [`${args.by}`]: { eq: ids[0] },
+                },
+              },
+            })
+            return node
+          }
+          return null
+        },
+      }
+    },
+  })
+
   // abstract interfaces
   actions.createTypes(/* GraphQL */ `
     interface HomepageBlock implements Node {
@@ -627,8 +654,9 @@ exports.createSchemaCustomization = async ({ actions }) => {
       originalId: String
       entityPayload: JSON
       heading: String
-      link: HomepageLink
+      link: HomepageLink @firstLink(by: "originalId")
       logos: [HomepageImage]
+      entityPayload: JSON
     }
 
     type DatoCmsAboutpage implements Node & AboutPage @dontInfer {
