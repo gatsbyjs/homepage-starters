@@ -27,27 +27,27 @@ export default function Header() {
       layout {
         header {
           id
-          # navItems {
-          #   ... on NavItem {
-          #     id
-          #     href
-          #     text
-          #   }
-          #   ... on NavItemGroup {
-          #     id
-          #     name
-          #     navItems {
-          #       id
-          #       href
-          #       text
-          #       description
-          #       icon {
-          #         alt
-          #         gatsbyImageData
-          #       }
-          #     }
-          #   }
-          # }
+          navItems {
+            ... on NavItem {
+              id
+              href
+              text
+            }
+            ... on NavItemGroup {
+              id
+              name
+              navItems {
+                id
+                href
+                text
+                description
+                icon {
+                  alt
+                  gatsbyImageData
+                }
+              }
+            }
+          }
           cta {
             id
             href
