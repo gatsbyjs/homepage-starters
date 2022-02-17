@@ -5,15 +5,17 @@ import { LogoItem } from "./logo-list"
 
 export default function AboutLogoList(props) {
   return (
-    <Container>
-      <Section>
+    <Section>
+      <Container>
         <Box center>
-          {props.heading && <Heading as="h1">{props.heading}</Heading>}
+          {props.heading && <Heading>{props.heading}</Heading>}
           {props.link && (
             <CTALink href={props.link.href}>{props.link.text}</CTALink>
           )}
         </Box>
-        <Box padding={6}>
+      </Container>
+      <Container width="narrow">
+        <Box paddingY={6}>
           <FlexList gap={5} variant="center">
             {props.logos.map((logo, i) => (
               <li key={`${logo.id}-${i}`}>
@@ -22,8 +24,8 @@ export default function AboutLogoList(props) {
             ))}
           </FlexList>
         </Box>
-      </Section>
-    </Container>
+      </Container>
+    </Section>
   )
 }
 

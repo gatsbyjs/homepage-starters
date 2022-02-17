@@ -14,15 +14,15 @@ function AboutStat(props) {
 
 export default function AboutStatList(props) {
   return (
-    <Container>
-      <Section>
+    <Section>
+      <Container>
         <FlexList className={styles.statList} variant="center" responsive>
           {props.content.map((stat) => (
             <AboutStat key={stat.id} {...stat} />
           ))}
         </FlexList>
-      </Section>
-    </Container>
+      </Container>
+    </Section>
   )
 }
 

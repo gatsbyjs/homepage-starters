@@ -158,6 +158,17 @@ export const box = styleVariants({
   },
 })
 
+export const section = style({
+  paddingTop: theme.space[5],
+  paddingBottom: theme.space[5],
+  "@media": {
+    [media.small]: {
+      paddingTop: theme.space[6],
+      paddingBottom: theme.space[6],
+    },
+  },
+})
+
 export const margin = styleVariants(
   {
     ...theme.space,
@@ -222,10 +233,15 @@ export const text = styleVariants({
     {
       marginTop: theme.space[5],
       marginBottom: theme.space[6],
-      fontSize: theme.fontSizes[7],
+      fontSize: theme.fontSizes[5],
       fontWeight: theme.fontWeights.extrabold,
       lineHeight: theme.lineHeights.heading,
       letterSpacing: theme.letterSpacings.tight,
+      "@media": {
+        [media.small]: {
+          fontSize: theme.fontSizes[7],
+        },
+      },
     },
   ],
   heading: [
