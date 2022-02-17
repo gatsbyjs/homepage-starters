@@ -62,7 +62,6 @@ const letterSpacings = {
 }
 
 const sizes = {
-  fullWidth: "1440px",
   container: "1280px",
   narrow: "1024px",
   wide: "1280px",
