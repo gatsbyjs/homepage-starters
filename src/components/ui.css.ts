@@ -20,7 +20,14 @@ export const container = style({
 
 export const containers = styleVariants({
   normal: [container],
-  wide: [container],
+  wide: [
+    container,
+    {
+      maxWidth: theme.sizes.wide,
+      paddingLeft: 0,
+      paddingRight: 0,
+    },
+  ],
   narrow: [
     container,
     {
