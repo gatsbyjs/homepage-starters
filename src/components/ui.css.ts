@@ -231,7 +231,6 @@ export const text = styleVariants({
   superHeading: [
     margin0,
     {
-      marginTop: theme.space[5],
       marginBottom: theme.space[6],
       fontSize: theme.fontSizes[5],
       fontWeight: theme.fontWeights.extrabold,
@@ -496,7 +495,7 @@ export const icons = styleVariants(
   (size) => ({
     width: size,
     height: size,
-    marginBottom: theme.space[2],
+    marginBottom: theme.space[3],
   })
 )
 
