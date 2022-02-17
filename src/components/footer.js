@@ -69,6 +69,8 @@ const getSocialName = ({ service }) => {
 }
 
 export default function Footer(props) {
+  return false
+  /*
   const data = useStaticQuery(graphql`
     query {
       layout {
@@ -94,6 +96,7 @@ export default function Footer(props) {
       }
     }
   `)
+  */
 
   const { links, meta, socialLinks, copyright } = data.layout.footer
 
