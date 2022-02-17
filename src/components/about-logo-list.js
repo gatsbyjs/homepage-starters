@@ -1,6 +1,6 @@
 import * as React from "react"
 import { graphql } from "gatsby"
-import { Container, CTALink, Heading, FlexList, Section, Box } from "./ui"
+import { Container, Heading, FlexList, LinkList, Section, Box } from "./ui"
 import { LogoItem } from "./logo-list"
 
 export default function AboutLogoList(props) {
@@ -9,9 +9,7 @@ export default function AboutLogoList(props) {
       <Container>
         <Box center>
           {props.heading && <Heading>{props.heading}</Heading>}
-          {props.link && (
-            <CTALink href={props.link.href}>{props.link.text}</CTALink>
-          )}
+          <LinkList links={props.links} />
         </Box>
       </Container>
       <Container width="narrow">
@@ -33,7 +31,8 @@ export const query = graphql`
   fragment AboutLogoListContent on AboutLogoList {
     id
     heading
-    link {
+    links {
+      id
       href
       text
     }
