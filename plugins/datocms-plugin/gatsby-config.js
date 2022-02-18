@@ -5,6 +5,12 @@ require("dotenv").config({
 })
 
 module.exports = {
+  siteMetadata: {
+    siteUrl: `https://www.yourdomain.tld`,
+    title: `My Blog Title`,
+    author: `My Name`,
+    description: `My site description...`,
+  },
   plugins: [
     {
       resolve: "gatsby-source-datocms",
