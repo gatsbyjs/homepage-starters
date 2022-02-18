@@ -11,17 +11,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
   })
 
   actions.createFieldExtension({
-    name: "recursiveImage",
-    extend(options) {
-      return {
-        async resolve(source, args, context, info) {
-          return source
-        },
-      }
-    },
-  })
-
-  actions.createFieldExtension({
     name: "proxyImage",
     extend(options) {
       return {
@@ -44,20 +33,20 @@ exports.createSchemaCustomization = async ({ actions }) => {
     interface HomepageBlock implements Node {
       id: ID!
       blocktype: String
+      originalId: String
     }
 
     interface HomepageImage implements Node {
       id: ID!
       alt: String
       gatsbyImageData: JSON @proxyImage
-      image: HomepageImage @recursiveImage
+      # image: HomepageImage @recursiveImage
       localFile: File
       url: String
     }
 
     interface LayoutHeader implements Node {
       id: ID!
-      contentTypeName: String!
       links: [HomepageLink]
       cta: HomepageLink
     }
@@ -81,7 +70,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     interface LayoutFooter implements Node {
       id: ID!
-      contentTypeName: String!
       links: [HomepageLink]
       meta: [HomepageLink]
       socialLinks: [SocialLink]
@@ -95,11 +83,11 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
   `)
 
-  // creating custom types because WP does not provide these
   actions.createTypes(/* GraphQL */ `
     type HomepageHero implements Node & HomepageBlock {
       id: ID!
       blocktype: String
+      originalId: String
       heading: String!
       kicker: String
       subhead: String
@@ -111,6 +99,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type HomepageCta implements Node & HomepageBlock {
       id: ID!
       blocktype: String
+      originalId: String
       kicker: String
       heading: String
       text: String
@@ -121,65 +110,77 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type HomepageFeature implements Node & HomepageBlock {
       id: ID!
       blocktype: String
+      originalId: String
       heading: String
       kicker: String
       text: String
-      image: HomepageImage
-      links: [HomepageLink]
+      image: HomepageImage @link
+      links: [HomepageLink] @link
     }
 
     type HomepageTestimonial implements Node {
       id: ID!
       quote: String
       source: String
-      avatar: HomepageImage
+      avatar: HomepageImage @link
     }
 
     type HomepageBenefit implements Node {
       id: ID!
       heading: String
       text: String
-      image: HomepageImage
+      image: HomepageImage @link
+    }
+
+    type HomepageLogo implements Node {
+      id: ID!
+      originalId: String
+      image: HomepageImage @link
+      alt: String @proxy(from: "image.title")
     }
 
     type HomepageProduct implements Node {
       id: ID!
       heading: String
       text: String
-      image: HomepageImage
-      links: [HomepageLink]
+      image: HomepageImage @link
+      links: [HomepageLink] @link
     }
 
     type HomepageFeatureList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
+      originalId: String
       kicker: String
       heading: String
       text: String
-      content: [HomepageFeature] @link
+      content: [HomepageFeature] @link(by: "originalId")
     }
 
     type HomepageLogoList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
+      originalId: String
       text: String
-      logos: [HomepageImage] @link
+      logos: [HomepageLogo] @link(by: "originalId")
     }
 
     type HomepageTestimonialList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
+      originalId: String
       kicker: String
       heading: String
-      content: [HomepageTestimonial] @link
+      content: [HomepageTestimonial] @link(by: "originalId")
     }
 
     type HomepageBenefitList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
+      originalId: String
       heading: String
       text: String
-      content: [HomepageBenefit] @link
+      content: [HomepageBenefit] @link(by: "originalId")
     }
 
     type HomepageStat implements Node {
@@ -192,22 +193,24 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type HomepageStatList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
+      originalId: String
       kicker: String
       heading: String
       text: String
       image: HomepageImage @link
       icon: HomepageImage @link
-      content: [HomepageStat] @link
+      content: [HomepageStat] @link(by: "originalId")
       links: [HomepageLink] @link
     }
 
     type HomepageProductList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
+      originalId: String
       kicker: String
       heading: String
       text: String
-      content: [HomepageProduct] @link
+      content: [HomepageProduct] @link(by: "originalId")
     }
 
     type Homepage implements Node {
@@ -215,7 +218,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       title: String
       description: String
       image: HomepageImage @link
-      content: [HomepageBlock] @link
+      content: [HomepageBlock] @link(by: "originalId")
     }
 
     type AboutPage implements Node {
@@ -223,13 +226,42 @@ exports.createSchemaCustomization = async ({ actions }) => {
       title: String
       description: String
       image: HomepageImage @link
-      content: [HomepageBlock] @link
+      content: [HomepageBlock] @link(by: "originalId")
     }
+    ## TODO AboutPage
     type AboutProfile implements Node {
       id: ID!
       image: HomepageImage
       name: String
       jobTitle: String
+    }
+    type AboutHero implements Node {
+      id: ID!
+      heading: String
+      text: String
+      image: HomepageImage
+    }
+    type AboutLeadership implements Node {
+      id: ID!
+      kicker: String
+      heading: String
+      subhead: String
+      content: [AboutProfile]
+    }
+    type AboutLogoList implements Node {
+      id: ID!
+      heading: String
+      link: HomepageLink
+      logos: [HomepageLogo]
+    }
+    type AboutStat implements Node {
+      id: ID!
+      value: String
+      label: String
+    }
+    type AboutStatList implements Node {
+      id: ID!
+      content: [AboutStat]
     }
 
     type Page implements Node {
@@ -243,8 +275,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type Layout implements Node {
       id: ID!
-      # header: LayoutHeader @link(by: "contentTypeName")
-      # footer: LayoutFooter @link(by: "contentTypeName")
+      # header: LayoutHeader @link
+      # footer: LayoutFooter @link
     }
   `)
 
@@ -252,8 +284,9 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type WpMediaItem implements Node & HomepageImage {
       id: ID!
       alt: String @proxy(from: "altText")
+      altText: String
       gatsbyImageData: JSON @proxyImage
-      image: HomepageImage @recursiveImage
+      # image: HomepageImage @recursiveImage
       localFile: File
       url: String @proxy(from: "mediaItemUrl")
       mediaItemUrl: String
@@ -265,10 +298,11 @@ exports.createSchemaCustomization = async ({ actions }) => {
       text: String @proxy(from: "wpFields.link.title")
       wpFields: JSON
     }
+
+    ## About Page
   `)
 
   // TODO Add WP types as contract
-
   /*
     type WpPage implements Node & Page {
       id: ID!
@@ -280,8 +314,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
       html: String @proxy(from: "content")
     }
   */
-
-  // Layout types
   /*
     type WpHeader implements Node & LayoutHeader {
       id: ID!
@@ -298,7 +330,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
       socialLinks: [SocialLink] @link @proxy(from: "fields.socialLinks")
       copyright: String @proxy(from: "footer.copyright")
     }
-
   */
 }
 
@@ -327,20 +358,6 @@ exports.onCreateNode = ({
   if (node.internal.type === "WpHomepageBlock") {
     if (node.blocktypes.nodes.length < 1) return
     const blocktype = getNode(node.blocktypes.nodes[0].id)
-    /*
-    const {
-      heading,
-      kicker,
-      subhead,
-      image,
-      text,
-      links,
-      content,
-      logos,
-      icon,
-    } = node.wpFields
-    */
-    console.log(blocktype.name)
     switch (blocktype.name) {
       case "Hero":
         actions.createNode({
@@ -350,6 +367,8 @@ exports.onCreateNode = ({
             contentDigest: node.internal.contentDigest,
           },
           blocktype: "HomepageHero",
+          parent: node.id,
+          originalId: node.id,
           ...node.hero,
           image: node.hero.image.id,
           links: node.hero.links.map((link) => link.id),
@@ -363,6 +382,8 @@ exports.onCreateNode = ({
             contentDigest: node.internal.contentDigest,
           },
           blocktype: "HomepageCta",
+          originalId: node.id,
+          parent: node.id,
           ...node.cta,
           image: node.cta.image.id,
           links: node.cta.links.map((link) => link.id),
@@ -376,9 +397,11 @@ exports.onCreateNode = ({
             contentDigest: node.internal.contentDigest,
           },
           blocktype: "HomepageFeature",
+          originalId: node.id,
+          parent: node.id,
           ...node.feature,
           image: node.feature.image.id,
-          links: node.feature.links.map((link) => link.id),
+          links: node.feature.links.filter(Boolean).map((link) => link.id),
         })
         break
       case "FeatureList":
@@ -389,6 +412,8 @@ exports.onCreateNode = ({
             contentDigest: node.internal.contentDigest,
           },
           blocktype: "HomepageFeatureList",
+          originalId: node.id,
+          parent: node.id,
           ...node.featureList,
           content: node.featureList.content.map((item) => item.id),
         })
@@ -401,6 +426,8 @@ exports.onCreateNode = ({
             contentDigest: node.internal.contentDigest,
           },
           blocktype: "HomepageBenefitList",
+          originalId: node.id,
+          parent: node.id,
           ...node.benefitList,
           content: node.benefitList.content.map((item) => item.id),
         })
@@ -413,6 +440,8 @@ exports.onCreateNode = ({
             contentDigest: node.internal.contentDigest,
           },
           blocktype: "HomepageLogoList",
+          originalId: node.id,
+          parent: node.id,
           ...node.logoList,
           logos: node.logoList.logos.map((logo) => logo.id),
         })
@@ -425,6 +454,8 @@ exports.onCreateNode = ({
             contentDigest: node.internal.contentDigest,
           },
           blocktype: "HomepageProductList",
+          originalId: node.id,
+          parent: node.id,
           ...node.productList,
           content: node.productList.content.map((item) => item.id),
         })
@@ -437,10 +468,13 @@ exports.onCreateNode = ({
             contentDigest: node.internal.contentDigest,
           },
           blocktype: "HomepageStatList",
+          originalId: node.id,
+          parent: node.id,
           ...node.statList,
-          icon: node.statList.icon.id,
-          content: node.statList.content.map((item) => item.id),
-          links: node.statList.links.map((link) => link.id),
+          icon: node.statList.icon?.id,
+          image: node.statList.image?.id,
+          content: node.statList.content?.map((item) => item.id),
+          links: node.statList.links?.map((link) => link.id),
         })
         break
       case "TestimonialList":
@@ -451,6 +485,8 @@ exports.onCreateNode = ({
             contentDigest: node.internal.contentDigest,
           },
           blocktype: "HomepageTestimonialList",
+          originalId: node.id,
+          parent: node.id,
           ...node.testimonialList,
           content: node.testimonialList.content.map((item) => item.id),
         })
@@ -461,50 +497,130 @@ exports.onCreateNode = ({
         )
         break
     }
-    // console.log("BLOCK blocktypes", blocktype)
   } else if (node.internal.type === "WpHomepageItem") {
-    // console.log(node)
-    // const itemtype = getNode(node.item)
+    if (node.categories.nodes.length < 1) return
+    const category = getNode(node.categories.nodes[0].id)
+    if (!category) {
+      reporter.warn(`No category found for ${node.id} ${node.title} – skipping`)
+      return
+    }
+    switch (category.name) {
+      case "Benefit":
+        actions.createNode({
+          id: createNodeId(`${node.id} >>> Benefit`),
+          internal: {
+            type: "HomepageBenefit",
+            contentDigest: node.internal.contentDigest,
+          },
+          parent: node.id,
+          originalId: node.id,
+          ...node.benefit,
+          image: node.benefit.image?.id,
+        })
+        break
+      case "Logo":
+        actions.createNode({
+          id: createNodeId(`${node.id} >>> Logo`),
+          internal: {
+            type: "HomepageLogo",
+            contentDigest: node.internal.contentDigest,
+          },
+          parent: node.id,
+          originalId: node.id,
+          image: node.logo.image?.id,
+          // alt: node.logo.image.title,
+        })
+        break
+      case "Product":
+        actions.createNode({
+          id: createNodeId(`${node.id} >>> Product`),
+          internal: {
+            type: "HomepageProduct",
+            contentDigest: node.internal.contentDigest,
+          },
+          parent: node.id,
+          originalId: node.id,
+          ...node.product,
+          image: node.product.image?.id,
+          links: node.product.links?.map((link) => link.id),
+        })
+        break
+      case "Stat":
+        actions.createNode({
+          id: createNodeId(`${node.id} >>> Stat`),
+          internal: {
+            type: "HomepageStat",
+            contentDigest: node.internal.contentDigest,
+          },
+          parent: node.id,
+          originalId: node.id,
+          ...node.stat,
+        })
+        break
+      case "Testimonial":
+        actions.createNode({
+          id: createNodeId(`${node.id} >>> Testimonial`),
+          internal: {
+            type: "HomepageTestimonial",
+            contentDigest: node.internal.contentDigest,
+          },
+          parent: node.id,
+          originalId: node.id,
+          ...node.testimonial,
+          avatar: node.testimonial.avatar?.id,
+        })
+        break
+      default:
+        reporter.warn(
+          `Unknown HomepageItem category: ${category.name} sourced from WordPress. This will not be used.`
+        )
+    }
   } else if (node.internal.type === "WpPage") {
     switch (node.slug) {
       case "homepage":
-        console.log("Homepage", node)
         actions.createNode({
           id: createNodeId(`${node.id} >>> Homepage`),
           internal: {
             type: "Homepage",
             contentDigest: node.internal.contentDigest,
           },
+          parent: node.id,
           ...node.homepage,
           title: node.title,
-          blocks: node.homepage.blocks.map((block) => block.id),
+          image: node.homepage?.image?.id,
+          content: node.homepage?.blocks?.map((block) => block.id),
         })
         break
       case "about":
-        console.log("AboutPage", node.slug)
         actions.createNode({
           id: createNodeId(`${node.id} >>> AboutPage`),
           internal: {
             type: "AboutPage",
             contentDigest: node.internal.contentDigest,
           },
+          parent: node.id,
           ...node.homepage,
           title: node.title,
-          blocks: node.homepage.blocks.map((block) => block.id),
+          image: node.homepage?.image?.id,
+          content: node.homepage?.blocks?.map((block) => block.id),
         })
         break
       default:
-        console.log("Generic page", node.slug)
         actions.createNode({
           id: createNodeId(`${node.id} >>> Page ${node.slug}`),
           internal: {
             type: "Page",
             contentDigest: node.internal.contentDigest,
           },
+          parent: node.id,
           ...node.page,
+          slug: node.slug,
           title: node.title,
+          description: node.page?.description,
+          image: node.image?.id,
           html: node.content,
         })
+        break
     }
   }
 }
