@@ -280,7 +280,8 @@ export const text = styleVariants({
     margin0,
     {
       marginBottom: theme.space[2],
-      fontSize: theme.fontSizes[2],
+      fontFamily: theme.fonts.mono,
+      fontSize: theme.fontSizes[1],
       fontWeight: theme.fontWeights.semibold,
       lineHeight: theme.lineHeights.tight,
       letterSpacing: theme.letterSpacings.wide,
