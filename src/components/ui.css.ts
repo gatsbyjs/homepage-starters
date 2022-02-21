@@ -45,10 +45,14 @@ export const containers = styleVariants({
     {
       paddingLeft: 0,
       paddingRight: 0,
+      paddingTop: theme.space[4],
+      paddingBottom: theme.space[4],
       "@media": {
         [media.medium]: {
           paddingLeft: theme.space[4],
           paddingRight: theme.space[4],
+          paddingTop: theme.space[5],
+          paddingBottom: theme.space[5],
         },
       },
     },
