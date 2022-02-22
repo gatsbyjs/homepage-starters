@@ -303,11 +303,11 @@ export const text = styleVariants({
       fontStyle: "normal",
     },
   ],
-  serif: [
+  stat: [
     margin0,
     {
       marginBottom: theme.space[2],
-      fontFamily: theme.fonts.serif,
+      fontFamily: theme.fonts.mono,
       fontSize: theme.fontSizes[6],
       lineHeight: theme.lineHeights.tight,
     },
