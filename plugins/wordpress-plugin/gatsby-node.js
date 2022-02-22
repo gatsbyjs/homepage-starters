@@ -17,6 +17,17 @@ exports.createSchemaCustomization = async ({ actions }) => {
     },
   })
 
+  actions.createFieldExtension({
+    name: "wpRecursiveImage",
+    extend(options) {
+      return {
+        async resolve(source, args, context, info) {
+          return source
+        },
+      }
+    },
+  })
+
   actions.createTypes(/* GraphQL */ `
     interface HomepageBlock implements Node {
       id: ID!
@@ -27,8 +38,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
     interface HomepageImage implements Node {
       id: ID!
       alt: String
-      gatsbyImageData: JSON @wpImagePassthroughResolver
-      # image: HomepageImage @recursiveImage
+      gatsbyImageData: JSON
+      image: HomepageImage
       localFile: File
       url: String
     }
@@ -150,7 +161,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       blocktype: String
       originalId: String
       text: String
-      logos: [HomepageLogo] @link(by: "originalId")
+      logos: [HomepageImage] @link
     }
 
     type HomepageTestimonialList implements Node & HomepageBlock {
@@ -216,40 +227,55 @@ exports.createSchemaCustomization = async ({ actions }) => {
       image: HomepageImage @link
       content: [HomepageBlock] @link(by: "originalId")
     }
-    ## TODO AboutPage
-    type AboutProfile implements Node {
+
+    type AboutHero implements Node & HomepageBlock {
       id: ID!
-      image: HomepageImage
-      name: String
-      jobTitle: String
-    }
-    type AboutHero implements Node {
-      id: ID!
+      originalId: String
       heading: String
       text: String
-      image: HomepageImage
+      image: HomepageImage @link
     }
-    type AboutLeadership implements Node {
+
+    type AboutStat implements Node & HomepageBlock {
       id: ID!
-      kicker: String
-      heading: String
-      subhead: String
-      content: [AboutProfile]
-    }
-    type AboutLogoList implements Node {
-      id: ID!
-      heading: String
-      link: HomepageLink
-      logos: [HomepageLogo]
-    }
-    type AboutStat implements Node {
-      id: ID!
+      originalId: String
+      blocktype: String
       value: String
       label: String
     }
-    type AboutStatList implements Node {
+
+    type AboutStatList implements Node & HomepageBlock {
       id: ID!
+      originalId: String
+      blocktype: String
       content: [AboutStat]
+    }
+
+    type AboutProfile implements Node {
+      id: ID!
+      originalId: String
+      image: HomepageImage @link
+      name: String
+      jobTitle: String
+    }
+
+    type AboutLeadership implements Node & HomepageBlock {
+      id: ID!
+      originalId: String
+      blocktype: String
+      kicker: String
+      heading: String
+      subhead: String
+      content: [AboutProfile] @link(by: "originalId")
+    }
+
+    type AboutLogoList implements Node & HomepageBlock {
+      id: ID!
+      originalId: String
+      blocktype: String
+      heading: String
+      links: [HomepageLink] @link
+      logos: [HomepageImage] @link
     }
 
     type Page implements Node {
@@ -257,7 +283,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       slug: String!
       title: String
       description: String
-      image: HomepageImage
+      image: HomepageImage @link
       html: String
     }
 
@@ -271,29 +297,30 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
     }
 
-    interface NavItem implements Node & HeaderNavItem {
+    type NavItem implements Node & HeaderNavItem {
       id: ID!
       href: String
       text: String
     }
 
-    interface NavItemDropdown implements Node & HeaderNavItem {
+    type NavItemDropdown implements Node & HeaderNavItem {
       id: ID!
       navItems: [NavItem]
     }
 
-    type WpNavItem implements Node & NavItem & HeaderNavItem {
-      id: ID!
-      navitem: JSON
-      href: String @proxy(from: "navitem.link.url")
-      text: String @proxy(from: "navitem.link.title")
-    }
+    # Create new nodes
+    # type WpNavItem implements Node & NavItem & HeaderNavItem {
+    #   id: ID!
+    #   navitem: JSON
+    #   href: String @proxy(from: "navitem.link.url")
+    #   text: String @proxy(from: "navitem.link.title")
+    # }
 
-    type WpNavItemDropdown implements Node & NavItemDropdown & HeaderNavItem {
-      id: ID!
-      navItemDropdown: JSON
-      navItems: [NavItem] @link(from: "navItemDropdown.navItems.id")
-    }
+    # type WpNavItemDropdown implements Node & NavItemDropdown & HeaderNavItem {
+    #   id: ID!
+    #   navItemDropdown: JSON
+    #   navItems: [NavItem] @link(from: "navItemDropdown.navItems.id")
+    # }
   `)
 
   actions.createTypes(/* GraphQL */ `
@@ -301,8 +328,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       alt: String @proxy(from: "altText")
       altText: String
-      gatsbyImageData: JSON @proxyImage
-      # image: HomepageImage @recursiveImage
+      gatsbyImageData: JSON @wpImagePassthroughResolver
+      image: HomepageImage @wpRecursiveImage
       localFile: File
       url: String @proxy(from: "mediaItemUrl")
       mediaItemUrl: String
@@ -315,6 +342,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
       wpFields: JSON
     }
   `)
+
+  // TODO Layout types
 
   // TODO Add WP types as contract
   /*
@@ -457,6 +486,20 @@ exports.onCreateNode = ({
           logos: node.logoList.logos.map((logo) => logo.id),
         })
         break
+      case "AboutLogoList":
+        actions.createNode({
+          id: createNodeId(`${node.id} >>> AboutLogoList`),
+          internal: {
+            type: "AboutLogoList",
+            contentDigest: node.internal.contentDigest,
+          },
+          blocktype: "AboutLogoList",
+          originalId: node.id,
+          parent: node.id,
+          ...node.aboutLogoList,
+          logos: node.aboutLogoList.logos.map((logo) => logo.id),
+        })
+        break
       case "ProductList":
         actions.createNode({
           id: createNodeId(`${node.id} >>> HomepageProductList`),
@@ -502,6 +545,47 @@ exports.onCreateNode = ({
           content: node.testimonialList.content.map((item) => item.id),
         })
         break
+      case "AboutHero":
+        actions.createNode({
+          id: createNodeId(`${node.id} >>> AboutHero`),
+          internal: {
+            type: "AboutHero",
+            contentDigest: node.internal.contentDigest,
+          },
+          blocktype: "AboutHero",
+          parent: node.id,
+          originalId: node.id,
+          ...node.aboutHero,
+          image: node.aboutHero.image.id,
+        })
+        break
+      case "AboutStatList":
+        actions.createNode({
+          id: createNodeId(`${node.id} >>> AboutStatList`),
+          internal: {
+            type: "AboutStatList",
+            contentDigest: node.internal.contentDigest,
+          },
+          blocktype: "AboutStatList",
+          parent: node.id,
+          originalId: node.id,
+          content: node.aboutStatList.content?.map((item) => item.id),
+        })
+        break
+      case "AboutLeadership":
+        actions.createNode({
+          id: createNodeId(`${node.id} >>> AboutLeadership`),
+          internal: {
+            type: "AboutLeadership",
+            contentDigest: node.internal.contentDigest,
+          },
+          blocktype: "AboutLeadership",
+          parent: node.id,
+          originalId: node.id,
+          ...node.aboutLeadership,
+          content: node.aboutLeadership.content?.map((item) => item.id),
+        })
+        break
       default:
         reporter.warn(
           `Unknown HomepageBlock type: ${blocktype.name} sourced from WordPress. This will not be used.`
@@ -527,19 +611,6 @@ exports.onCreateNode = ({
           originalId: node.id,
           ...node.benefit,
           image: node.benefit.image?.id,
-        })
-        break
-      case "Logo":
-        actions.createNode({
-          id: createNodeId(`${node.id} >>> Logo`),
-          internal: {
-            type: "HomepageLogo",
-            contentDigest: node.internal.contentDigest,
-          },
-          parent: node.id,
-          originalId: node.id,
-          image: node.logo.image?.id,
-          // alt: node.logo.image.title,
         })
         break
       case "Product":
@@ -581,10 +652,47 @@ exports.onCreateNode = ({
           avatar: node.testimonial.avatar?.id,
         })
         break
+      case "AboutStat":
+        actions.createNode({
+          id: createNodeId(`${node.id} >>> AboutStat`),
+          internal: {
+            type: "AboutStat",
+            contentDigest: node.internal.contentDigest,
+          },
+          parent: node.id,
+          originalId: node.id,
+          ...node.aboutStat,
+        })
+        break
+      case "AboutProfile":
+        actions.createNode({
+          id: createNodeId(`${node.id} >>> AboutProfile`),
+          internal: {
+            type: "AboutProfile",
+            contentDigest: node.internal.contentDigest,
+          },
+          parent: node.id,
+          originalId: node.id,
+          ...node.aboutProfile,
+          image: node.aboutProfile.image?.id,
+        })
+        break
       default:
         reporter.warn(
           `Unknown HomepageItem category: ${category.name} sourced from WordPress. This will not be used.`
         )
+    }
+  } else if (node.internal.type === "WpNavItem") {
+    if (node.navItemTypes.nodes.length < 1) return
+    const navItemType = getNode(node.navItemTypes.nodes[0].id)
+    switch (navItemType) {
+      case "Dropdown":
+        console.log("NavItemDropdown", node.id)
+        break
+      case "Link":
+      default:
+        console.log("NavItem", node.id)
+        break
     }
   } else if (node.internal.type === "WpPage") {
     switch (node.slug) {
@@ -598,7 +706,7 @@ exports.onCreateNode = ({
           parent: node.id,
           ...node.homepage,
           title: node.title,
-          image: node.homepage?.image?.id,
+          image: node.featuredImage?.node?.id,
           content: node.homepage?.blocks?.map((block) => block.id),
         })
         break
@@ -612,11 +720,14 @@ exports.onCreateNode = ({
           parent: node.id,
           ...node.homepage,
           title: node.title,
-          image: node.homepage?.image?.id,
+          // TODO use featuredImage instead + remove from field group
+          image: node.featuredImage?.node?.id,
           content: node.homepage?.blocks?.map((block) => block.id),
         })
         break
       default:
+        console.log(node)
+        console.log(node.featuredImage?.node)
         actions.createNode({
           id: createNodeId(`${node.id} >>> Page ${node.slug}`),
           internal: {
@@ -628,7 +739,7 @@ exports.onCreateNode = ({
           slug: node.slug,
           title: node.title,
           description: node.page?.description,
-          image: node.image?.id,
+          image: node.featuredImage?.node?.id,
           html: node.content,
         })
         break

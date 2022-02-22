@@ -11,7 +11,6 @@ const Fallback = (props) => {
 }
 
 export default function Homepage(props) {
-  console.log(props)
   const { homepage } = props.data
 
   return (

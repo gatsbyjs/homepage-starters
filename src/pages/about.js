@@ -8,10 +8,9 @@ const Fallback = (props) => {
   return false
 }
 
+const Layout = (props) => props.children
+
 export default function About(props) {
-  console.log(props)
-  return <pre>about</pre>
-  /*
   const { aboutPage } = props.data
 
   return (
@@ -22,10 +21,8 @@ export default function About(props) {
       })}
     </Layout>
   )
-  */
 }
 
-/*
 export const query = graphql`
   {
     aboutPage {
@@ -50,4 +47,3 @@ export const query = graphql`
     }
   }
 `
-*/
