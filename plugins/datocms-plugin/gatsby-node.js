@@ -57,6 +57,28 @@ exports.createSchemaCustomization = async ({ actions }) => {
   })
 
   actions.createFieldExtension({
+    name: "navItemType",
+    args: {
+      name: {
+        type: "String!",
+        defaultValue: "Link",
+      },
+    },
+    extend(options) {
+      return {
+        resolve() {
+          switch (options.name) {
+            case "Dropdown":
+              return "Dropdown"
+            default:
+              return "Link"
+          }
+        },
+      }
+    },
+  })
+
+  actions.createFieldExtension({
     name: "richText",
     extend(options) {
       return {
@@ -88,8 +110,14 @@ exports.createSchemaCustomization = async ({ actions }) => {
       entityPayload: JSON
     }
 
-    interface NavItem implements Node {
+    interface HeaderNavItem implements Node {
       id: ID!
+      navItemType: String
+    }
+
+    interface NavItem implements Node & HeaderNavItem {
+      id: ID!
+      navItemType: String
       href: String
       text: String
       icon: HomepageImage
@@ -99,8 +127,9 @@ exports.createSchemaCustomization = async ({ actions }) => {
       entityPayload: JSON
     }
 
-    interface NavItemGroup implements Node {
+    interface NavItemGroup implements Node & HeaderNavItem {
       id: ID!
+      navItemType: String
       name: String
       navItems: [NavItem]
       ## DatoCMS
@@ -394,8 +423,9 @@ exports.createSchemaCustomization = async ({ actions }) => {
       text: String
     }
 
-    type DatoCmsNavItem implements Node & NavItem {
+    type DatoCmsNavItem implements Node & NavItem & HeaderNavItem {
       id: ID!
+      navItemType: String @navItemType(name: "Link")
       originalId: String
       entityPayload: JSON
       href: String
@@ -404,8 +434,10 @@ exports.createSchemaCustomization = async ({ actions }) => {
       description: String
     }
 
-    type DatoCmsNavItemGroup implements Node & NavItemGroup @dontInfer {
+    type DatoCmsNavItemGroup implements Node & NavItemGroup & HeaderNavItem
+      @dontInfer {
       id: ID!
+      navItemType: String @navItemType(name: "Dropdown")
       name: String
       navItems: [NavItem]
       originalId: String
@@ -646,7 +678,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
   // Layout types
   actions.createTypes(/* GraphQL */ `
-    union HeaderNavItem = DatoCmsNavItem | DatoCmsNavItemGroup
     type DatoCmsLayoutheader implements Node & LayoutHeader @dontInfer {
       id: ID!
       navItems: [HeaderNavItem]
