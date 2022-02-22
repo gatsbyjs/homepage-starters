@@ -1,0 +1,20 @@
+.views-align-left {
+  text-align: left;
+}
+.views-align-right {
+  text-align: right;
+}
+.views-align-center {
+  text-align: center;
+}
+.views-view-grid .views-col {
+  float: left;
+}
+.views-view-grid .views-row {
+  float: left;
+  clear: both;
+  width: 100%;
+}
+.views-display-link + .views-display-link {
+  margin-left: 0.5em;
+}
