@@ -28,6 +28,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     },
   })
 
+  // abstract interfaces
   actions.createTypes(/* GraphQL */ `
     interface HomepageBlock implements Node {
       id: ID!
@@ -44,37 +45,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
       url: String
     }
 
-    interface LayoutHeader implements Node {
-      id: ID!
-      links: [HomepageLink]
-      cta: HomepageLink
-    }
-
-    enum SocialService {
-      TWITTER
-      FACEBOOK
-      INSTAGRAM
-      YOUTUBE
-      LINKEDIN
-      GITHUB
-      DISCORD
-      TWITCH
-    }
-
-    type SocialLink implements Node {
-      id: ID!
-      username: String!
-      service: SocialService!
-    }
-
-    interface LayoutFooter implements Node {
-      id: ID!
-      links: [HomepageLink]
-      meta: [HomepageLink]
-      socialLinks: [SocialLink]
-      copyright: String
-    }
-
     interface HomepageLink implements Node {
       id: ID!
       href: String
@@ -82,6 +52,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
   `)
 
+  // blocks
   actions.createTypes(/* GraphQL */ `
     type HomepageHero implements Node & HomepageBlock {
       id: ID!
@@ -212,22 +183,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
       content: [HomepageProduct] @link(by: "originalId")
     }
 
-    type Homepage implements Node {
-      id: ID!
-      title: String
-      description: String
-      image: HomepageImage @link
-      content: [HomepageBlock] @link(by: "originalId")
-    }
-
-    type AboutPage implements Node {
-      id: ID!
-      title: String
-      description: String
-      image: HomepageImage @link
-      content: [HomepageBlock] @link(by: "originalId")
-    }
-
     type AboutHero implements Node & HomepageBlock {
       id: ID!
       originalId: String
@@ -248,7 +203,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       originalId: String
       blocktype: String
-      content: [AboutStat]
+      content: [AboutStat] @link(by: "originalId")
     }
 
     type AboutProfile implements Node {
@@ -277,6 +232,25 @@ exports.createSchemaCustomization = async ({ actions }) => {
       links: [HomepageLink] @link
       logos: [HomepageImage] @link
     }
+  `)
+
+  // pages
+  actions.createTypes(/* GraphQL */ `
+    type Homepage implements Node {
+      id: ID!
+      title: String
+      description: String
+      image: HomepageImage @link
+      content: [HomepageBlock] @link(by: "originalId")
+    }
+
+    type AboutPage implements Node {
+      id: ID!
+      title: String
+      description: String
+      image: HomepageImage @link
+      content: [HomepageBlock] @link(by: "originalId")
+    }
 
     type Page implements Node {
       id: ID!
@@ -286,43 +260,73 @@ exports.createSchemaCustomization = async ({ actions }) => {
       image: HomepageImage @link
       html: String
     }
+  `)
 
-    type Layout implements Node {
-      id: ID!
-      # header: LayoutHeader @link
-      # footer: LayoutFooter @link
-    }
-
+  // layout
+  actions.createTypes(/* GraphQL */ `
     interface HeaderNavItem implements Node {
       id: ID!
+      originalId: String
+      navItemType: String
     }
 
     type NavItem implements Node & HeaderNavItem {
       id: ID!
+      originalId: String
       href: String
       text: String
+      icon: HomepageImage @link
+      description: String
     }
 
     type NavItemDropdown implements Node & HeaderNavItem {
       id: ID!
-      navItems: [NavItem]
+      originalId: String
+      name: String
+      navItems: [NavItem] @link(by: "originalId")
     }
 
-    # Create new nodes
-    # type WpNavItem implements Node & NavItem & HeaderNavItem {
-    #   id: ID!
-    #   navitem: JSON
-    #   href: String @proxy(from: "navitem.link.url")
-    #   text: String @proxy(from: "navitem.link.title")
-    # }
+    type LayoutHeader implements Node {
+      id: ID!
+      layoutType: String
+      navItems: [HeaderNavItem] @link(by: "originalId")
+      cta: HomepageLink @link
+    }
 
-    # type WpNavItemDropdown implements Node & NavItemDropdown & HeaderNavItem {
-    #   id: ID!
-    #   navItemDropdown: JSON
-    #   navItems: [NavItem] @link(from: "navItemDropdown.navItems.id")
-    # }
+    enum SocialService {
+      TWITTER
+      FACEBOOK
+      INSTAGRAM
+      YOUTUBE
+      LINKEDIN
+      GITHUB
+      DISCORD
+      TWITCH
+    }
+
+    type SocialLink implements Node {
+      id: ID!
+      username: String!
+      service: SocialService!
+    }
+
+    type LayoutFooter implements Node {
+      id: ID!
+      layoutType: String
+      links: [HomepageLink] @link
+      meta: [HomepageLink] @link
+      socialLinks: [SocialLink] @link(by: "originalId")
+      copyright: String
+    }
+
+    type Layout implements Node {
+      id: ID!
+      header: LayoutHeader @link(by: "layoutType")
+      footer: LayoutFooter @link(by: "layoutType")
+    }
   `)
 
+  // WordPress types
   actions.createTypes(/* GraphQL */ `
     type WpMediaItem implements Node & HomepageImage {
       id: ID!
@@ -341,36 +345,48 @@ exports.createSchemaCustomization = async ({ actions }) => {
       text: String @proxy(from: "wpFields.link.title")
       wpFields: JSON
     }
+
+    ## TODO WP types
+    type WpBlocktype implements Node {
+      id: ID!
+      name: String
+    }
+    type WpCategory implements Node {
+      id: ID!
+      name: String
+    }
+
+    type WpHomepageBlock implements Node {
+      id: ID!
+      blocktypes: [WpBlocktype]
+      benefitList: JSON
+      cta: JSON
+      feature: JSON
+      featureList: JSON
+      hero: JSON
+      logoList: JSON
+      productList: JSON
+      statList: JSON
+      testimonialList: JSON
+      aboutHero: JSON
+      aboutLeadership: JSON
+      aboutLogoList: JSON
+      aboutStatList: JSON
+    }
+
+    type WpHomepageItem implements Node {
+      id: ID!
+      categories: [WpCategory]
+    }
+    type WpLayout implements Node {
+      id: ID!
+      categories: [WpCategory]
+    }
+    type WpNavItem implements Node {
+      id: ID!
+      categories: [WpCategory]
+    }
   `)
-
-  // TODO Layout types
-
-  // TODO Add WP types as contract
-  /*
-    type WpPage implements Node & Page {
-      id: ID!
-      slug: String!
-      title: String
-      description: String
-      image: HomepageImage @link @proxy(from: "featuredImageId")
-      content: String
-      html: String @proxy(from: "content")
-    }
-    type WpHeader implements Node & LayoutHeader {
-      id: ID!
-      contentTypeName: String!
-      links: [HomepageLink] @link @proxy(from: "fields.links")
-      cta: HomepageLink @link @proxy(from: "fields.cta")
-    }
-    type WpFooter implements Node & LayoutFooter {
-      id: ID!
-      contentTypeName: String!
-      links: [HomepageLink] @link @proxy(from: "fields.links")
-      meta: [HomepageLink] @link @proxy(from: "fields.meta")
-      socialLinks: [SocialLink] @link @proxy(from: "fields.socialLinks")
-      copyright: String @proxy(from: "footer.copyright")
-    }
-  */
 }
 
 exports.sourceNodes = ({ actions, createNodeId, createContentDigest }) => {
@@ -380,8 +396,8 @@ exports.sourceNodes = ({ actions, createNodeId, createContentDigest }) => {
       type: "Layout",
       contentDigest: createContentDigest("Layout"),
     },
-    header: "header",
-    footer: "footer",
+    header: "Header",
+    footer: "Footer",
   })
 }
 
@@ -410,8 +426,8 @@ exports.onCreateNode = ({
           parent: node.id,
           originalId: node.id,
           ...node.hero,
-          image: node.hero.image.id,
-          links: node.hero.links.map((link) => link.id),
+          image: node.hero.image?.id,
+          links: node.hero.links?.map((link) => link.id),
         })
         break
       case "Cta":
@@ -425,8 +441,8 @@ exports.onCreateNode = ({
           originalId: node.id,
           parent: node.id,
           ...node.cta,
-          image: node.cta.image.id,
-          links: node.cta.links.map((link) => link.id),
+          image: node.cta.image?.id,
+          links: node.cta.links?.map((link) => link.id),
         })
         break
       case "Feature":
@@ -440,8 +456,8 @@ exports.onCreateNode = ({
           originalId: node.id,
           parent: node.id,
           ...node.feature,
-          image: node.feature.image.id,
-          links: node.feature.links.filter(Boolean).map((link) => link.id),
+          image: node.feature.image?.id,
+          links: node.feature.links?.filter(Boolean).map((link) => link.id),
         })
         break
       case "FeatureList":
@@ -455,7 +471,7 @@ exports.onCreateNode = ({
           originalId: node.id,
           parent: node.id,
           ...node.featureList,
-          content: node.featureList.content.map((item) => item.id),
+          content: node.featureList.content?.map((item) => item.id),
         })
         break
       case "BenefitList":
@@ -469,7 +485,7 @@ exports.onCreateNode = ({
           originalId: node.id,
           parent: node.id,
           ...node.benefitList,
-          content: node.benefitList.content.map((item) => item.id),
+          content: node.benefitList.content?.map((item) => item.id),
         })
         break
       case "LogoList":
@@ -483,7 +499,7 @@ exports.onCreateNode = ({
           originalId: node.id,
           parent: node.id,
           ...node.logoList,
-          logos: node.logoList.logos.map((logo) => logo.id),
+          logos: node.logoList.logos?.map((logo) => logo.id),
         })
         break
       case "AboutLogoList":
@@ -497,7 +513,7 @@ exports.onCreateNode = ({
           originalId: node.id,
           parent: node.id,
           ...node.aboutLogoList,
-          logos: node.aboutLogoList.logos.map((logo) => logo.id),
+          logos: node.aboutLogoList.logos?.map((logo) => logo.id),
         })
         break
       case "ProductList":
@@ -511,7 +527,7 @@ exports.onCreateNode = ({
           originalId: node.id,
           parent: node.id,
           ...node.productList,
-          content: node.productList.content.map((item) => item.id),
+          content: node.productList.content?.map((item) => item.id),
         })
         break
       case "StatList":
@@ -542,7 +558,7 @@ exports.onCreateNode = ({
           originalId: node.id,
           parent: node.id,
           ...node.testimonialList,
-          content: node.testimonialList.content.map((item) => item.id),
+          content: node.testimonialList.content?.map((item) => item.id),
         })
         break
       case "AboutHero":
@@ -556,7 +572,7 @@ exports.onCreateNode = ({
           parent: node.id,
           originalId: node.id,
           ...node.aboutHero,
-          image: node.aboutHero.image.id,
+          image: node.aboutHero.image?.id,
         })
         break
       case "AboutStatList":
@@ -654,6 +670,7 @@ exports.onCreateNode = ({
         break
       case "AboutStat":
         actions.createNode({
+          ...node.aboutStat,
           id: createNodeId(`${node.id} >>> AboutStat`),
           internal: {
             type: "AboutStat",
@@ -661,7 +678,6 @@ exports.onCreateNode = ({
           },
           parent: node.id,
           originalId: node.id,
-          ...node.aboutStat,
         })
         break
       case "AboutProfile":
@@ -683,15 +699,97 @@ exports.onCreateNode = ({
         )
     }
   } else if (node.internal.type === "WpNavItem") {
-    if (node.navItemTypes.nodes.length < 1) return
-    const navItemType = getNode(node.navItemTypes.nodes[0].id)
-    switch (navItemType) {
-      case "Dropdown":
-        console.log("NavItemDropdown", node.id)
+    if (node.categories.nodes.length < 1) return
+    const category = getNode(node.categories.nodes[0].id)
+    if (!category) {
+      reporter.warn(`No category found for ${node.id} ${node.title} – skipping`)
+      return
+    }
+    switch (category.name) {
+      case "NavDropdown":
+        actions.createNode({
+          id: createNodeId(`${node.id} >>> NavItemDropdown`),
+          internal: {
+            type: "NavItemDropdown",
+            contentDigest: node.internal.contentDigest,
+          },
+          parent: node.id,
+          originalId: node.id,
+          navItemType: "Dropdown",
+          name: node.title,
+          navItems: node.navItemDropdown.navItems?.map((item) => item.id),
+        })
         break
-      case "Link":
+      case "SocialLink":
+        actions.createNode({
+          id: createNodeId(`${node.id} >>> SocialLink`),
+          internal: {
+            type: "SocialLink",
+            contentDigest: node.internal.contentDigest,
+          },
+          parent: node.id,
+          originalId: node.id,
+          service: node.socialLink.service,
+          username: node.socialLink.username,
+        })
+        break
+      case "NavLink":
       default:
-        console.log("NavItem", node.id)
+        actions.createNode({
+          id: createNodeId(`${node.id} >>> NavItem`),
+          internal: {
+            type: "NavItem",
+            contentDigest: node.internal.contentDigest,
+          },
+          parent: node.id,
+          originalId: node.id,
+          navItemType: "Link",
+          href: node.navItem.link?.url,
+          text: node.navItem.link?.title,
+          icon: node.navItem.icon?.id,
+          description: node.navItem.description,
+        })
+        break
+    }
+  } else if (node.internal.type === "WpLayout") {
+    if (node.categories.nodes.length < 1) return
+    const category = getNode(node.categories.nodes[0].id)
+    if (!category) {
+      reporter.warn(`No category found for ${node.id} ${node.title} – skipping`)
+      return
+    }
+    switch (category.name) {
+      case "Header":
+        const headerID = createNodeId(`${node.id} >>> LayoutHeader`)
+        actions.createNode({
+          id: headerID,
+          internal: {
+            type: "LayoutHeader",
+            contentDigest: node.internal.contentDigest,
+          },
+          parent: node.id,
+          originalId: node.id,
+          layoutType: "Header",
+          ...node.header,
+          navItems: node.header.navItems?.map((item) => item.id),
+          cta: node.header.cta?.id,
+        })
+        break
+      case "Footer":
+        actions.createNode({
+          id: createNodeId(`${node.id} >>> LayoutFooter`),
+          internal: {
+            type: "LayoutFooter",
+            contentDigest: node.internal.contentDigest,
+          },
+          parent: node.id,
+          originalId: node.id,
+          layoutType: "Footer",
+          ...node.footer,
+          links: node.footer.links?.map((link) => link.id),
+          socialLinks: node.footer.socialLinks?.map((link) => link.id),
+          meta: node.footer.meta?.map((link) => link.id),
+        })
         break
     }
   } else if (node.internal.type === "WpPage") {
@@ -726,8 +824,6 @@ exports.onCreateNode = ({
         })
         break
       default:
-        console.log(node)
-        console.log(node.featuredImage?.node)
         actions.createNode({
           id: createNodeId(`${node.id} >>> Page ${node.slug}`),
           internal: {

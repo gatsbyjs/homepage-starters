@@ -1,4 +1,3 @@
-/*
 import * as React from "react"
 import { graphql, useStaticQuery } from "gatsby"
 import { Menu, X } from "react-feather"
@@ -30,13 +29,13 @@ export default function Header() {
         header {
           id
           navItems {
+            id
+            navItemType
             ... on NavItem {
-              id
               href
               text
             }
-            ... on NavItemGroup {
-              id
+            ... on NavItemDropdown {
               name
               navItems {
                 id
@@ -61,12 +60,7 @@ export default function Header() {
   `)
 
   const { navItems, cta } = data.layout.header
-
   const [isOpen, setOpen] = React.useState(false)
-
-  const isLinkGroup = React.useCallback((link) => {
-    return "navItems" in link
-  }, [])
 
   React.useEffect(() => {
     if (isOpen) {
@@ -90,13 +84,13 @@ export default function Header() {
               {navItems &&
                 navItems.map((navItem) => (
                   <li key={navItem.id}>
-                    {!isLinkGroup(navItem) ? (
-                      <NavLink to={navItem.href}>{navItem.text}</NavLink>
-                    ) : (
+                    {navItem.navItemType === "Dropdown" ? (
                       <NavItemGroup
                         name={navItem.name}
                         navItems={navItem.navItems}
                       />
+                    ) : (
+                      <NavLink to={navItem.href}>{navItem.text}</NavLink>
                     )}
                   </li>
                 ))}
@@ -145,21 +139,20 @@ export default function Header() {
         <div className={mobileNavOverlay}>
           <nav>
             <FlexList responsive variant="stretch">
-              {navItems &&
-                navItems.map((navItem) => (
-                  <li key={navItem.id}>
-                    {!isLinkGroup(navItem) ? (
-                      <NavLink to={navItem.href} className={mobileNavLink}>
-                        {navItem.text}
-                      </NavLink>
-                    ) : (
-                      <NavItemGroup
-                        name={navItem.name}
-                        navItems={navItem.navItems}
-                      />
-                    )}
-                  </li>
-                ))}
+              {navItems?.map((navItem) => (
+                <li key={navItem.id}>
+                  {navItem.navItemType === "Dropdown" ? (
+                    <NavItemGroup
+                      name={navItem.name}
+                      navItems={navItem.navItems}
+                    />
+                  ) : (
+                    <NavLink to={navItem.href} className={mobileNavLink}>
+                      {navItem.text}
+                    </NavLink>
+                  )}
+                </li>
+              ))}
             </FlexList>
           </nav>
         </div>
@@ -167,4 +160,3 @@ export default function Header() {
     </header>
   )
 }
-  */

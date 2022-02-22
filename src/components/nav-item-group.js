@@ -1,4 +1,3 @@
-/*
 import * as React from "react"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { Box, Flex, FlexList, NavButtonLink, NavLink } from "./ui"
@@ -122,4 +121,3 @@ export default function NavItemGroup({ name, navItems }) {
     </Flex>
   )
 }
-*/

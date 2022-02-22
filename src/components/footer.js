@@ -69,8 +69,6 @@ const getSocialName = ({ service }) => {
 }
 
 export default function Footer(props) {
-  return false
-  /*
   const data = useStaticQuery(graphql`
     query {
       layout {
@@ -96,10 +94,7 @@ export default function Footer(props) {
       }
     }
   `)
-  */
 
-  return <pre>footer</pre>
-  /*
   const { links, meta, socialLinks, copyright } = data.layout.footer
 
   return (
@@ -155,5 +150,4 @@ export default function Footer(props) {
       <Space size={3} />
     </Box>
   )
-  */
 }
