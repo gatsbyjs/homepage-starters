@@ -346,11 +346,11 @@ exports.createSchemaCustomization = async ({ actions }) => {
       wpFields: JSON
     }
 
-    ## TODO WP types
     type WpBlocktype implements Node {
       id: ID!
       name: String
     }
+
     type WpCategory implements Node {
       id: ID!
       name: String
@@ -377,14 +377,27 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type WpHomepageItem implements Node {
       id: ID!
       categories: [WpCategory]
+      aboutProfile: JSON
+      aboutStat: JSON
+      benefit: JSON
+      product: JSON
+      stat: JSON
+      testimonial: JSON
     }
+
     type WpLayout implements Node {
       id: ID!
       categories: [WpCategory]
+      footer: JSON
+      header: JSON
     }
+
     type WpNavItem implements Node {
       id: ID!
       categories: [WpCategory]
+      navItem: JSON
+      navItemDropdown: JSON
+      socialLink: JSON
     }
   `)
 }
