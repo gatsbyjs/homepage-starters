@@ -18,7 +18,7 @@ function Benefit(props) {
         <Icon alt={props.image.alt} image={props.image} size="small" />
       )}
       <Space size={2} />
-      <Heading variant="subhead">{props.heading}</Heading>
+      <Heading variant="subheadSmall">{props.heading}</Heading>
       <Text>{props.text}</Text>
     </Box>
   )

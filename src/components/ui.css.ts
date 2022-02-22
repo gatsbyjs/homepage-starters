@@ -274,6 +274,16 @@ export const text = styleVariants({
     margin0,
     {
       marginBottom: theme.space[3],
+      fontSize: theme.fontSizes[5],
+      fontWeight: theme.fontWeights.extrabold,
+      lineHeight: theme.lineHeights.tight,
+      letterSpacing: theme.letterSpacings.tight,
+    },
+  ],
+  subheadSmall: [
+    margin0,
+    {
+      marginBottom: theme.space[3],
       fontSize: theme.fontSizes[4],
       fontWeight: theme.fontWeights.extrabold,
       lineHeight: theme.lineHeights.tight,

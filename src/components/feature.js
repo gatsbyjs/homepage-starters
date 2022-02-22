@@ -6,7 +6,7 @@ import {
   Section,
   Flex,
   Box,
-  Heading,
+  Subhead,
   Kicker,
   Text,
   ButtonList,
@@ -26,10 +26,10 @@ export default function Feature(props) {
             )}
           </Box>
           <Box width="half">
-            <Heading>
+            <Subhead>
               {props.kicker && <Kicker>{props.kicker}</Kicker>}
               {props.heading}
-            </Heading>
+            </Subhead>
             <Text variant="lead">{props.text}</Text>
             <ButtonList links={props.links} />
           </Box>
