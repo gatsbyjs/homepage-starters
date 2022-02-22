@@ -52,6 +52,7 @@ const lineHeights = {
   text: "1.65",
   heading: "1.25",
   tight: "1.1",
+  solid: "1",
 }
 
 const letterSpacings = {

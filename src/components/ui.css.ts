@@ -338,7 +338,7 @@ export const text = styleVariants({
     {
       fontSize: "180px",
       fontFamily: theme.fonts.mono,
-      lineHeight: theme.lineHeights.tight,
+      lineHeight: theme.lineHeights.solid,
       letterSpacing: theme.letterSpacings.tight,
       "@media": {
         [media.medium]: {
@@ -403,7 +403,7 @@ const button = style({
   textDecoration: "none",
   fontWeight: theme.fontWeights.bold,
   fontSize: theme.fontSizes[2],
-  lineHeight: 1,
+  lineHeight: theme.lineHeights.solid,
   paddingTop: theme.space[3],
   paddingBottom: theme.space[3],
   paddingLeft: theme.space[3],
