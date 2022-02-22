@@ -1,14 +1,12 @@
 import * as React from "react"
 import { graphql } from "gatsby"
-// import Layout from "../components/layout"
+import Layout from "../components/layout"
 import * as sections from "../components/sections"
 
 const Fallback = (props) => {
   console.warn(`No component found for: ${props.blocktype}`)
   return false
 }
-
-const Layout = (props) => props.children
 
 export default function About(props) {
   const { aboutPage } = props.data

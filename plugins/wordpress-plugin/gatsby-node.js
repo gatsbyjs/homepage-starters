@@ -279,7 +279,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       description: String
     }
 
-    type NavItemDropdown implements Node & HeaderNavItem {
+    type NavItemGroup implements Node & HeaderNavItem {
       id: ID!
       originalId: String
       name: String
@@ -417,6 +417,7 @@ exports.onCreateNode = ({
     switch (blocktype.name) {
       case "Hero":
         actions.createNode({
+          ...node.hero,
           id: createNodeId(`${node.id} >>> HomepageHero`),
           internal: {
             type: "HomepageHero",
@@ -425,13 +426,13 @@ exports.onCreateNode = ({
           blocktype: "HomepageHero",
           parent: node.id,
           originalId: node.id,
-          ...node.hero,
           image: node.hero.image?.id,
           links: node.hero.links?.map((link) => link.id),
         })
         break
       case "Cta":
         actions.createNode({
+          ...node.cta,
           id: createNodeId(`${node.id} >>> HomepageCta`),
           internal: {
             type: "HomepageCta",
@@ -440,13 +441,13 @@ exports.onCreateNode = ({
           blocktype: "HomepageCta",
           originalId: node.id,
           parent: node.id,
-          ...node.cta,
           image: node.cta.image?.id,
           links: node.cta.links?.map((link) => link.id),
         })
         break
       case "Feature":
         actions.createNode({
+          ...node.feature,
           id: createNodeId(`${node.id} >>> HomepageFeature`),
           internal: {
             type: "HomepageFeature",
@@ -455,13 +456,13 @@ exports.onCreateNode = ({
           blocktype: "HomepageFeature",
           originalId: node.id,
           parent: node.id,
-          ...node.feature,
           image: node.feature.image?.id,
           links: node.feature.links?.filter(Boolean).map((link) => link.id),
         })
         break
       case "FeatureList":
         actions.createNode({
+          ...node.featureList,
           id: createNodeId(`${node.id} >>> HomepageFeatureList`),
           internal: {
             type: "HomepageFeatureList",
@@ -470,12 +471,12 @@ exports.onCreateNode = ({
           blocktype: "HomepageFeatureList",
           originalId: node.id,
           parent: node.id,
-          ...node.featureList,
           content: node.featureList.content?.map((item) => item.id),
         })
         break
       case "BenefitList":
         actions.createNode({
+          ...node.benefitList,
           id: createNodeId(`${node.id} >>> HomepageBenefitList`),
           internal: {
             type: "HomepageBenefitList",
@@ -484,12 +485,12 @@ exports.onCreateNode = ({
           blocktype: "HomepageBenefitList",
           originalId: node.id,
           parent: node.id,
-          ...node.benefitList,
           content: node.benefitList.content?.map((item) => item.id),
         })
         break
       case "LogoList":
         actions.createNode({
+          ...node.logoList,
           id: createNodeId(`${node.id} >>> HomepageLogoList`),
           internal: {
             type: "HomepageLogoList",
@@ -498,12 +499,12 @@ exports.onCreateNode = ({
           blocktype: "HomepageLogoList",
           originalId: node.id,
           parent: node.id,
-          ...node.logoList,
           logos: node.logoList.logos?.map((logo) => logo.id),
         })
         break
       case "AboutLogoList":
         actions.createNode({
+          ...node.aboutLogoList,
           id: createNodeId(`${node.id} >>> AboutLogoList`),
           internal: {
             type: "AboutLogoList",
@@ -512,12 +513,13 @@ exports.onCreateNode = ({
           blocktype: "AboutLogoList",
           originalId: node.id,
           parent: node.id,
-          ...node.aboutLogoList,
           logos: node.aboutLogoList.logos?.map((logo) => logo.id),
+          links: node.aboutLogoList.links?.map((link) => link.id),
         })
         break
       case "ProductList":
         actions.createNode({
+          ...node.productList,
           id: createNodeId(`${node.id} >>> HomepageProductList`),
           internal: {
             type: "HomepageProductList",
@@ -526,12 +528,12 @@ exports.onCreateNode = ({
           blocktype: "HomepageProductList",
           originalId: node.id,
           parent: node.id,
-          ...node.productList,
           content: node.productList.content?.map((item) => item.id),
         })
         break
       case "StatList":
         actions.createNode({
+          ...node.statList,
           id: createNodeId(`${node.id} >>> HomepageStatList`),
           internal: {
             type: "HomepageStatList",
@@ -540,7 +542,6 @@ exports.onCreateNode = ({
           blocktype: "HomepageStatList",
           originalId: node.id,
           parent: node.id,
-          ...node.statList,
           icon: node.statList.icon?.id,
           image: node.statList.image?.id,
           content: node.statList.content?.map((item) => item.id),
@@ -549,6 +550,7 @@ exports.onCreateNode = ({
         break
       case "TestimonialList":
         actions.createNode({
+          ...node.testimonialList,
           id: createNodeId(`${node.id} >>> HomepageTestimonialList`),
           internal: {
             type: "HomepageTestimonialList",
@@ -557,12 +559,12 @@ exports.onCreateNode = ({
           blocktype: "HomepageTestimonialList",
           originalId: node.id,
           parent: node.id,
-          ...node.testimonialList,
           content: node.testimonialList.content?.map((item) => item.id),
         })
         break
       case "AboutHero":
         actions.createNode({
+          ...node.aboutHero,
           id: createNodeId(`${node.id} >>> AboutHero`),
           internal: {
             type: "AboutHero",
@@ -571,7 +573,6 @@ exports.onCreateNode = ({
           blocktype: "AboutHero",
           parent: node.id,
           originalId: node.id,
-          ...node.aboutHero,
           image: node.aboutHero.image?.id,
         })
         break
@@ -590,6 +591,7 @@ exports.onCreateNode = ({
         break
       case "AboutLeadership":
         actions.createNode({
+          ...node.aboutLeadership,
           id: createNodeId(`${node.id} >>> AboutLeadership`),
           internal: {
             type: "AboutLeadership",
@@ -598,7 +600,6 @@ exports.onCreateNode = ({
           blocktype: "AboutLeadership",
           parent: node.id,
           originalId: node.id,
-          ...node.aboutLeadership,
           content: node.aboutLeadership.content?.map((item) => item.id),
         })
         break
@@ -618,6 +619,7 @@ exports.onCreateNode = ({
     switch (category.name) {
       case "Benefit":
         actions.createNode({
+          ...node.benefit,
           id: createNodeId(`${node.id} >>> Benefit`),
           internal: {
             type: "HomepageBenefit",
@@ -625,12 +627,12 @@ exports.onCreateNode = ({
           },
           parent: node.id,
           originalId: node.id,
-          ...node.benefit,
           image: node.benefit.image?.id,
         })
         break
       case "Product":
         actions.createNode({
+          ...node.product,
           id: createNodeId(`${node.id} >>> Product`),
           internal: {
             type: "HomepageProduct",
@@ -638,13 +640,13 @@ exports.onCreateNode = ({
           },
           parent: node.id,
           originalId: node.id,
-          ...node.product,
           image: node.product.image?.id,
           links: node.product.links?.map((link) => link.id),
         })
         break
       case "Stat":
         actions.createNode({
+          ...node.stat,
           id: createNodeId(`${node.id} >>> Stat`),
           internal: {
             type: "HomepageStat",
@@ -652,11 +654,11 @@ exports.onCreateNode = ({
           },
           parent: node.id,
           originalId: node.id,
-          ...node.stat,
         })
         break
       case "Testimonial":
         actions.createNode({
+          ...node.testimonial,
           id: createNodeId(`${node.id} >>> Testimonial`),
           internal: {
             type: "HomepageTestimonial",
@@ -664,7 +666,6 @@ exports.onCreateNode = ({
           },
           parent: node.id,
           originalId: node.id,
-          ...node.testimonial,
           avatar: node.testimonial.avatar?.id,
         })
         break
@@ -682,6 +683,7 @@ exports.onCreateNode = ({
         break
       case "AboutProfile":
         actions.createNode({
+          ...node.aboutProfile,
           id: createNodeId(`${node.id} >>> AboutProfile`),
           internal: {
             type: "AboutProfile",
@@ -689,7 +691,6 @@ exports.onCreateNode = ({
           },
           parent: node.id,
           originalId: node.id,
-          ...node.aboutProfile,
           image: node.aboutProfile.image?.id,
         })
         break
@@ -708,9 +709,9 @@ exports.onCreateNode = ({
     switch (category.name) {
       case "NavDropdown":
         actions.createNode({
-          id: createNodeId(`${node.id} >>> NavItemDropdown`),
+          id: createNodeId(`${node.id} >>> NavItemGroup`),
           internal: {
-            type: "NavItemDropdown",
+            type: "NavItemGroup",
             contentDigest: node.internal.contentDigest,
           },
           parent: node.id,
@@ -762,6 +763,7 @@ exports.onCreateNode = ({
       case "Header":
         const headerID = createNodeId(`${node.id} >>> LayoutHeader`)
         actions.createNode({
+          ...node.header,
           id: headerID,
           internal: {
             type: "LayoutHeader",
@@ -770,13 +772,13 @@ exports.onCreateNode = ({
           parent: node.id,
           originalId: node.id,
           layoutType: "Header",
-          ...node.header,
           navItems: node.header.navItems?.map((item) => item.id),
           cta: node.header.cta?.id,
         })
         break
       case "Footer":
         actions.createNode({
+          ...node.footer,
           id: createNodeId(`${node.id} >>> LayoutFooter`),
           internal: {
             type: "LayoutFooter",
@@ -785,7 +787,6 @@ exports.onCreateNode = ({
           parent: node.id,
           originalId: node.id,
           layoutType: "Footer",
-          ...node.footer,
           links: node.footer.links?.map((link) => link.id),
           socialLinks: node.footer.socialLinks?.map((link) => link.id),
           meta: node.footer.meta?.map((link) => link.id),
@@ -796,13 +797,13 @@ exports.onCreateNode = ({
     switch (node.slug) {
       case "homepage":
         actions.createNode({
+          ...node.homepage,
           id: createNodeId(`${node.id} >>> Homepage`),
           internal: {
             type: "Homepage",
             contentDigest: node.internal.contentDigest,
           },
           parent: node.id,
-          ...node.homepage,
           title: node.title,
           image: node.featuredImage?.node?.id,
           content: node.homepage?.blocks?.map((block) => block.id),
@@ -810,28 +811,27 @@ exports.onCreateNode = ({
         break
       case "about":
         actions.createNode({
+          ...node.homepage,
           id: createNodeId(`${node.id} >>> AboutPage`),
           internal: {
             type: "AboutPage",
             contentDigest: node.internal.contentDigest,
           },
           parent: node.id,
-          ...node.homepage,
           title: node.title,
-          // TODO use featuredImage instead + remove from field group
           image: node.featuredImage?.node?.id,
           content: node.homepage?.blocks?.map((block) => block.id),
         })
         break
       default:
         actions.createNode({
+          ...node.page,
           id: createNodeId(`${node.id} >>> Page ${node.slug}`),
           internal: {
             type: "Page",
             contentDigest: node.internal.contentDigest,
           },
           parent: node.id,
-          ...node.page,
           slug: node.slug,
           title: node.title,
           description: node.page?.description,

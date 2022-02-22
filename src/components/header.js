@@ -35,7 +35,7 @@ export default function Header() {
               href
               text
             }
-            ... on NavItemDropdown {
+            ... on NavItemGroup {
               name
               navItems {
                 id
