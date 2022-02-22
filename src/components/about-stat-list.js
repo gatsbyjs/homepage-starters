@@ -6,7 +6,7 @@ import * as styles from "./about-stat-list.css.ts"
 function AboutStat(props) {
   return (
     <Box width="fitContent" className={styles.statContainer}>
-      {props.value && <Text className={styles.statHeader}>{props.value}</Text>}
+      {props.value && <Text variant="stat">{props.value}</Text>}
       {props.label && <Text variant="statLabel">{props.label}</Text>}
     </Box>
   )
