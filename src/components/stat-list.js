@@ -19,7 +19,7 @@ function Stat(props) {
   return (
     <Box>
       <Text variant="stat">{props.value}</Text>
-      <Text>{props.label}</Text>
+      <Text variant="statLabel">{props.label}</Text>
     </Box>
   )
 }

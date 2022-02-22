@@ -306,11 +306,18 @@ export const text = styleVariants({
   stat: [
     margin0,
     {
-      marginBottom: theme.space[2],
       fontFamily: theme.fonts.mono,
       fontSize: theme.fontSizes[6],
       fontWeight: theme.fontWeights.medium,
       lineHeight: theme.lineHeights.tight,
+    },
+  ],
+  statLabel: [
+    margin0,
+    {
+      fontWeight: theme.fontWeights.bold,
+      fontSize: theme.fontSizes[4],
+      lineHeight: theme.lineHeights.heading,
     },
   ],
   small: [

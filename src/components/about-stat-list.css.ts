@@ -28,9 +28,3 @@ export const statHeader = style({
   fontSize: theme.fontSizes[6],
   margin: 0,
 })
-
-export const statKicker = style({
-  fontSize: theme.fontSizes[3],
-  lineHeight: theme.lineHeights.text,
-  fontWeight: theme.fontWeights.bold,
-})

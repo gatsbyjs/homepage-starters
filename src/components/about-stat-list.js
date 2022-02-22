@@ -7,7 +7,7 @@ function AboutStat(props) {
   return (
     <Box width="fitContent" className={styles.statContainer}>
       {props.value && <Text className={styles.statHeader}>{props.value}</Text>}
-      {props.label && <Text className={styles.statKicker}>{props.label}</Text>}
+      {props.label && <Text variant="statLabel">{props.label}</Text>}
     </Box>
   )
 }
