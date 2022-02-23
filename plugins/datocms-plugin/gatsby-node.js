@@ -68,8 +68,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
       return {
         resolve() {
           switch (options.name) {
-            case "Dropdown":
-              return "Dropdown"
+            case "Group":
+              return "Group"
             default:
               return "Link"
           }

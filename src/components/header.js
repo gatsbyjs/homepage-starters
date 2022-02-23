@@ -84,7 +84,7 @@ export default function Header() {
               {navItems &&
                 navItems.map((navItem) => (
                   <li key={navItem.id}>
-                    {navItem.navItemType === "Dropdown" ? (
+                    {navItem.navItemType === "Group" ? (
                       <NavItemGroup
                         name={navItem.name}
                         navItems={navItem.navItems}
@@ -141,7 +141,7 @@ export default function Header() {
             <FlexList responsive variant="stretch">
               {navItems?.map((navItem) => (
                 <li key={navItem.id}>
-                  {navItem.navItemType === "Dropdown" ? (
+                  {navItem.navItemType === "Group" ? (
                     <NavItemGroup
                       name={navItem.name}
                       navItems={navItem.navItems}

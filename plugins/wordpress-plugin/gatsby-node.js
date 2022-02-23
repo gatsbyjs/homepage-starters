@@ -396,7 +396,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       categories: [WpCategory]
       navItem: JSON
-      navItemDropdown: JSON
+      navItemGroup: JSON
       socialLink: JSON
     }
   `)
@@ -720,7 +720,7 @@ exports.onCreateNode = ({
       return
     }
     switch (category.name) {
-      case "NavDropdown":
+      case "NavItemGroup":
         actions.createNode({
           id: createNodeId(`${node.id} >>> NavItemGroup`),
           internal: {
@@ -729,9 +729,9 @@ exports.onCreateNode = ({
           },
           parent: node.id,
           originalId: node.id,
-          navItemType: "Dropdown",
+          navItemType: "Group",
           name: node.title,
-          navItems: node.navItemDropdown.navItems?.map((item) => item.id),
+          navItems: node.navItemGroup.navItems?.map((item) => item.id),
         })
         break
       case "SocialLink":

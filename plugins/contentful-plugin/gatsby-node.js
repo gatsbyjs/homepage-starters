@@ -40,8 +40,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
       return {
         resolve() {
           switch (options.name) {
-            case "Dropdown":
-              return "Dropdown"
+            case "Group":
+              return "Group"
             default:
               return "Link"
           }
@@ -352,7 +352,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type ContentfulNavItemGroup implements Node & NavItemGroup & HeaderNavItem
       @dontInfer {
       id: ID!
-      navItemType: String @navItemType(name: "Dropdown")
+      navItemType: String @navItemType(name: "Group")
       name: String
       navItems: [NavItem] @link(from: "navItems___NODE")
     }
