@@ -109,7 +109,7 @@ inquirer
     }
   )
   .then(({ spaceId, managementToken }) =>
-    spaceImport({ spaceId, managementToken, content: data })
+    spaceImport({ spaceId, managementToken, content: data, rateLimit: 20 })
   )
   .then((_, error) => {
     console.log(
