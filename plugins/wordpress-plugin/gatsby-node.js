@@ -262,72 +262,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
   `)
 
-  // layout
-  actions.createTypes(/* GraphQL */ `
-    interface HeaderNavItem implements Node {
-      id: ID!
-      originalId: String
-      navItemType: String
-    }
-
-    type NavItem implements Node & HeaderNavItem {
-      id: ID!
-      originalId: String
-      navItemType: String
-      href: String
-      text: String
-      icon: HomepageImage @link
-      description: String
-    }
-
-    type NavItemGroup implements Node & HeaderNavItem {
-      id: ID!
-      originalId: String
-      navItemType: String
-      name: String
-      navItems: [NavItem] @link(by: "originalId")
-    }
-
-    type LayoutHeader implements Node {
-      id: ID!
-      layoutType: String
-      navItems: [HeaderNavItem] @link(by: "originalId")
-      cta: HomepageLink @link
-    }
-
-    enum SocialService {
-      TWITTER
-      FACEBOOK
-      INSTAGRAM
-      YOUTUBE
-      LINKEDIN
-      GITHUB
-      DISCORD
-      TWITCH
-    }
-
-    type SocialLink implements Node {
-      id: ID!
-      username: String!
-      service: SocialService!
-    }
-
-    type LayoutFooter implements Node {
-      id: ID!
-      layoutType: String
-      links: [HomepageLink] @link
-      meta: [HomepageLink] @link
-      socialLinks: [SocialLink] @link(by: "originalId")
-      copyright: String
-    }
-
-    type Layout implements Node {
-      id: ID!
-      header: LayoutHeader @link(by: "layoutType")
-      footer: LayoutFooter @link(by: "layoutType")
-    }
-  `)
-
   // WordPress types
   actions.createTypes(/* GraphQL */ `
     type WpMediaItem implements Node & HomepageImage {
@@ -386,34 +320,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       stat: JSON
       testimonial: JSON
     }
-
-    type WpLayout implements Node {
-      id: ID!
-      categories: [WpCategory]
-      footer: JSON
-      header: JSON
-    }
-
-    type WpNavItem implements Node {
-      id: ID!
-      categories: [WpCategory]
-      navItem: JSON
-      navItemGroup: JSON
-      socialLink: JSON
-    }
   `)
-}
-
-exports.sourceNodes = ({ actions, createNodeId, createContentDigest }) => {
-  actions.createNode({
-    id: createNodeId("HomepageLayout"),
-    internal: {
-      type: "Layout",
-      contentDigest: createContentDigest("Layout"),
-    },
-    header: "Header",
-    footer: "Footer",
-  })
 }
 
 exports.onCreateNode = ({ node, actions, getNode, createNodeId, reporter }) => {
@@ -706,106 +613,6 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, reporter }) => {
         reporter.warn(
           `Unknown HomepageItem category: ${category.name} sourced from WordPress. This will not be used.`
         )
-    }
-  } else if (node.internal.type === "WpNavItem") {
-    if (node.categories.nodes.length < 1) return
-    const category = getNode(node.categories.nodes[0].id)
-    if (!category) {
-      reporter.warn(`No category found for ${node.id} ${node.title} – skipping`)
-      return
-    }
-    switch (category.name) {
-      case "NavItemGroup":
-        actions.createNode({
-          id: createNodeId(`${node.id} >>> NavItemGroup`),
-          internal: {
-            type: "NavItemGroup",
-            contentDigest: node.internal.contentDigest,
-          },
-          parent: node.id,
-          originalId: node.id,
-          navItemType: "Group",
-          name: node.title,
-          navItems: node.navItemGroup.navItems
-            ?.filter(Boolean)
-            .map((item) => item.id),
-        })
-        break
-      case "SocialLink":
-        actions.createNode({
-          id: createNodeId(`${node.id} >>> SocialLink`),
-          internal: {
-            type: "SocialLink",
-            contentDigest: node.internal.contentDigest,
-          },
-          parent: node.id,
-          originalId: node.id,
-          service: node.socialLink.service,
-          username: node.socialLink.username,
-        })
-        break
-      case "NavLink":
-      default:
-        actions.createNode({
-          id: createNodeId(`${node.id} >>> NavItem`),
-          internal: {
-            type: "NavItem",
-            contentDigest: node.internal.contentDigest,
-          },
-          parent: node.id,
-          originalId: node.id,
-          navItemType: "Link",
-          href: node.navItem.link?.url,
-          text: node.navItem.link?.title,
-          icon: node.navItem.icon?.id,
-          description: node.navItem.description,
-        })
-        break
-    }
-  } else if (node.internal.type === "WpLayout") {
-    if (node.categories.nodes.length < 1) return
-    const category = getNode(node.categories.nodes[0].id)
-    if (!category) {
-      reporter.warn(`No category found for ${node.id} ${node.title} – skipping`)
-      return
-    }
-    switch (category.name) {
-      case "Header":
-        const headerID = createNodeId(`${node.id} >>> LayoutHeader`)
-        actions.createNode({
-          ...node.header,
-          id: headerID,
-          internal: {
-            type: "LayoutHeader",
-            contentDigest: node.internal.contentDigest,
-          },
-          parent: node.id,
-          originalId: node.id,
-          layoutType: "Header",
-          navItems: node.header.navItems
-            ?.filter(Boolean)
-            .map((item) => item.id),
-          cta: node.header.cta?.id,
-        })
-        break
-      case "Footer":
-        actions.createNode({
-          ...node.footer,
-          id: createNodeId(`${node.id} >>> LayoutFooter`),
-          internal: {
-            type: "LayoutFooter",
-            contentDigest: node.internal.contentDigest,
-          },
-          parent: node.id,
-          originalId: node.id,
-          layoutType: "Footer",
-          links: node.footer.links?.map((link) => link.id),
-          socialLinks: node.footer.socialLinks
-            ?.filter(Boolean)
-            .map((link) => link.id),
-          meta: node.footer.meta?.map((link) => link.id),
-        })
-        break
     }
   } else if (node.internal.type === "WpPage") {
     switch (node.slug) {
