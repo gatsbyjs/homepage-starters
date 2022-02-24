@@ -7,6 +7,8 @@
    A free, open source, cross-platform, local development environment and DevOps tool built on Docker container technology and developed by Tandem. [See the docs](https://docs.lando.dev/).
 
    ```sh
+   # This will destroy the database and import the data.
+   # If you wish to keep you existing data add the --no-wipe flag.
    lando db-import ~/path/to/homepage-starter-dump.sql
    ```
 
@@ -15,6 +17,7 @@
    For more information on how to use drush commans and how to install the command line shell visit [Drush Documentation Site](https://www.drush.org/latest/).
 
    ```sh
+   # If you wish to start from a clean site
    drush sql-drop
    drush sql-cli < ~/path/to/homepage-starter-dump.sql
    ```
