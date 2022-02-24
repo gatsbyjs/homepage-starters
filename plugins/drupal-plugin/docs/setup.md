@@ -14,7 +14,7 @@
 
    ### Drush
 
-   For more information on how to use drush commans and how to install the command line shell visit [Drush Documentation Site](https://www.drush.org/latest/).
+   For more information on how to use drush commands and how to install the command line shell visit [Drush Documentation Site](https://www.drush.org/latest/).
 
    ```sh
    # If you wish to start from a clean site
