@@ -2279,7 +2279,7 @@
         {
           "param": "post_taxonomy",
           "operator": "==",
-          "value": "layout_type:footer"
+          "value": "category:footer"
         }
       ]
     ],
@@ -2354,7 +2354,7 @@
         {
           "param": "post_taxonomy",
           "operator": "==",
-          "value": "layout_type:header"
+          "value": "category:header"
         }
       ]
     ],
@@ -2447,12 +2447,12 @@
         {
           "param": "post_taxonomy",
           "operator": "!=",
-          "value": "nav_item_type:dropdown"
+          "value": "category:sociallink"
         },
         {
           "param": "post_taxonomy",
           "operator": "!=",
-          "value": "nav_item_type:sociallink"
+          "value": "category:navitemgroup"
         }
       ]
     ],
@@ -2591,7 +2591,7 @@
         {
           "param": "post_taxonomy",
           "operator": "==",
-          "value": "nav_item_type:sociallink"
+          "value": "category:sociallink"
         }
       ]
     ],

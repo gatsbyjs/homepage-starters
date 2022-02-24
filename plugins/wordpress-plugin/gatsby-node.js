@@ -273,6 +273,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type NavItem implements Node & HeaderNavItem {
       id: ID!
       originalId: String
+      navItemType: String
       href: String
       text: String
       icon: HomepageImage @link
@@ -282,6 +283,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type NavItemGroup implements Node & HeaderNavItem {
       id: ID!
       originalId: String
+      navItemType: String
       name: String
       navItems: [NavItem] @link(by: "originalId")
     }
@@ -721,17 +723,19 @@ exports.onCreateNode = ({
     }
     switch (category.name) {
       case "NavItemGroup":
+        // console.log(category.name, node)
         actions.createNode({
           id: createNodeId(`${node.id} >>> NavItemGroup`),
           internal: {
             type: "NavItemGroup",
-            contentDigest: node.internal.contentDigest,
+            contentDigest: createContentDigest(node.navItemGroup),
+            // contentDigest: node.internal.contentDigest,
           },
           parent: node.id,
           originalId: node.id,
           navItemType: "Group",
           name: node.title,
-          navItems: node.navItemGroup.navItems?.map((item) => item.id),
+          navItems: node.navItemGroup.navItems?.map((item) => item?.id),
         })
         break
       case "SocialLink":
@@ -785,7 +789,7 @@ exports.onCreateNode = ({
           parent: node.id,
           originalId: node.id,
           layoutType: "Header",
-          navItems: node.header.navItems?.map((item) => item.id),
+          navItems: node.header.navItems?.map((item) => item?.id),
           cta: node.header.cta?.id,
         })
         break
@@ -801,7 +805,7 @@ exports.onCreateNode = ({
           originalId: node.id,
           layoutType: "Footer",
           links: node.footer.links?.map((link) => link.id),
-          socialLinks: node.footer.socialLinks?.map((link) => link.id),
+          socialLinks: node.footer.socialLinks?.map((link) => link?.id),
           meta: node.footer.meta?.map((link) => link.id),
         })
         break
