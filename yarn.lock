@@ -1203,11 +1203,6 @@
   resolved "https://registry.yarnpkg.com/@fontsource/dm-sans/-/dm-sans-4.5.0.tgz#0dae7ab3563b3ffd47181a3fa4c9c6a33fb04c5e"
   integrity sha512-GKsjzK7NU6G1NHAxXRCquZQmZSvj3ah5AMR4N6PU2YpshIpr+NLIwYc+SJty+ZJ4Btysr9KN40+X4ng34heGjw==
 
-"@fontsource/dm-serif-text@^4.5.0":
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/@fontsource/dm-serif-text/-/dm-serif-text-4.5.0.tgz#86b2350543d8755e5edc7e52562618fb7eb12c87"
-  integrity sha512-VmWDffRcoBejUK/yZonn4wI6KH5+ePpf6zjK68G90qSESokooCDE5dIFzrYqmDoXueytoWlDxsSGOGtIcxRU1g==
-
 "@gatsbyjs/reach-router@^1.3.6":
   version "1.3.6"
   resolved "https://registry.yarnpkg.com/@gatsbyjs/reach-router/-/reach-router-1.3.6.tgz#4e8225836959be247890b66f21a3198a0589e34d"
