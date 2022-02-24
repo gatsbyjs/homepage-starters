@@ -102,7 +102,32 @@ const data = {
       text: "Privacy Policy",
     },
   ],
-  socialLinks: [],
+  socialLinks: [
+    {
+      service: "TWITTER",
+      username: "gatsbyjs",
+    },
+    {
+      service: "INSTAGRAM",
+      username: "gatsbyjs",
+    },
+    {
+      service: "GITHUB",
+      username: "gatsbyjs",
+    },
+    {
+      service: "FACEBOOK",
+      username: "gatsbyjs",
+    },
+    {
+      service: "YOUTUBE",
+      username: "gatsbyjs",
+    },
+    {
+      service: "TWITCH",
+      username: "gatsbyjs",
+    },
+  ],
   copyright: "© 2022 Gatsby Inc. All rights reserved",
 }
 
