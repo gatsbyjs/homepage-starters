@@ -2478,7 +2478,7 @@
         "key": "field_620d23fb86c9e",
         "label": "Nav Items",
         "name": "nav_items",
-        "type": "post_object",
+        "type": "relationship",
         "instructions": "",
         "required": 0,
         "conditional_logic": 0,
@@ -2490,10 +2490,11 @@
         "show_in_graphql": 1,
         "post_type": ["navitem"],
         "taxonomy": "",
-        "allow_null": 0,
-        "multiple": 1,
-        "return_format": "object",
-        "ui": 1
+        "filters": ["search"],
+        "elements": "",
+        "min": "",
+        "max": "",
+        "return_format": "object"
       }
     ],
     "location": [

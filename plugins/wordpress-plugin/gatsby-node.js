@@ -416,14 +416,7 @@ exports.sourceNodes = ({ actions, createNodeId, createContentDigest }) => {
   })
 }
 
-exports.onCreateNode = ({
-  node,
-  actions,
-  getNode,
-  createNodeId,
-  createContentDigest,
-  reporter,
-}) => {
+exports.onCreateNode = ({ node, actions, getNode, createNodeId, reporter }) => {
   if (!node.internal.type.includes("Wp")) return
 
   if (node.internal.type === "WpHomepageBlock") {
@@ -723,19 +716,19 @@ exports.onCreateNode = ({
     }
     switch (category.name) {
       case "NavItemGroup":
-        // console.log(category.name, node)
         actions.createNode({
           id: createNodeId(`${node.id} >>> NavItemGroup`),
           internal: {
             type: "NavItemGroup",
-            contentDigest: createContentDigest(node.navItemGroup),
-            // contentDigest: node.internal.contentDigest,
+            contentDigest: node.internal.contentDigest,
           },
           parent: node.id,
           originalId: node.id,
           navItemType: "Group",
           name: node.title,
-          navItems: node.navItemGroup.navItems?.map((item) => item?.id),
+          navItems: node.navItemGroup.navItems
+            ?.filter(Boolean)
+            .map((item) => item.id),
         })
         break
       case "SocialLink":
@@ -789,7 +782,9 @@ exports.onCreateNode = ({
           parent: node.id,
           originalId: node.id,
           layoutType: "Header",
-          navItems: node.header.navItems?.map((item) => item?.id),
+          navItems: node.header.navItems
+            ?.filter(Boolean)
+            .map((item) => item.id),
           cta: node.header.cta?.id,
         })
         break
@@ -805,7 +800,9 @@ exports.onCreateNode = ({
           originalId: node.id,
           layoutType: "Footer",
           links: node.footer.links?.map((link) => link.id),
-          socialLinks: node.footer.socialLinks?.map((link) => link?.id),
+          socialLinks: node.footer.socialLinks
+            ?.filter(Boolean)
+            .map((link) => link.id),
           meta: node.footer.meta?.map((link) => link.id),
         })
         break

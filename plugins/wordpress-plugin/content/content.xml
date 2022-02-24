@@ -16,7 +16,7 @@
 <!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 <!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/5.9.1" created="2022-02-24 18:31" -->
+	<!-- generator="WordPress/5.9.1" created="2022-02-24 18:57" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -29,7 +29,7 @@
 	<title>homepage-starters-dev</title>
 	<link>http://homepagestartersdev.local</link>
 	<description>Just another WordPress site</description>
-	<pubDate>Thu, 24 Feb 2022 18:31:40 +0000</pubDate>
+	<pubDate>Thu, 24 Feb 2022 18:57:49 +0000</pubDate>
 	<language>en-US</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>http://homepagestartersdev.local</wp:base_site_url>
@@ -2108,13 +2108,13 @@
 		<dc:creator><![CDATA[jxnblk]]></dc:creator>
 		<guid isPermaLink="false">http://homepagestartersdev.local/?post_type=acf-field&#038;p=21</guid>
 		<description></description>
-		<content:encoded><![CDATA[a:12:{s:4:"type";s:11:"post_object";s:12:"instructions";s:0:"";s:8:"required";i:0;s:17:"conditional_logic";i:0;s:7:"wrapper";a:3:{s:5:"width";s:0:"";s:5:"class";s:0:"";s:2:"id";s:0:"";}s:15:"show_in_graphql";i:1;s:9:"post_type";a:1:{i:0;s:7:"navitem";}s:8:"taxonomy";s:0:"";s:10:"allow_null";i:0;s:8:"multiple";i:1;s:13:"return_format";s:6:"object";s:2:"ui";i:1;}]]></content:encoded>
+		<content:encoded><![CDATA[a:13:{s:4:"type";s:12:"relationship";s:12:"instructions";s:0:"";s:8:"required";i:0;s:17:"conditional_logic";i:0;s:7:"wrapper";a:3:{s:5:"width";s:0:"";s:5:"class";s:0:"";s:2:"id";s:0:"";}s:15:"show_in_graphql";i:1;s:9:"post_type";a:1:{i:0;s:7:"navitem";}s:8:"taxonomy";s:0:"";s:7:"filters";a:1:{i:0;s:6:"search";}s:8:"elements";s:0:"";s:3:"min";s:0:"";s:3:"max";s:0:"";s:13:"return_format";s:6:"object";}]]></content:encoded>
 		<excerpt:encoded><![CDATA[nav_items]]></excerpt:encoded>
 		<wp:post_id>21</wp:post_id>
 		<wp:post_date><![CDATA[2022-02-16 16:19:34]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2022-02-16 16:19:34]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-02-23 20:18:44]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-02-23 20:18:44]]></wp:post_modified_gmt>
+		<wp:post_modified><![CDATA[2022-02-24 18:57:03]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-02-24 18:57:03]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[field_620d23fb86c9e]]></wp:post_name>
@@ -4037,8 +4037,8 @@
 		<wp:post_id>20</wp:post_id>
 		<wp:post_date><![CDATA[2022-02-16 16:19:34]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2022-02-16 16:19:34]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-02-23 20:18:44]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-02-23 20:18:44]]></wp:post_modified_gmt>
+		<wp:post_modified><![CDATA[2022-02-24 18:57:03]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-02-24 18:57:03]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[group_620d23f4aa360]]></wp:post_name>
@@ -4622,8 +4622,8 @@
 		<wp:post_id>14</wp:post_id>
 		<wp:post_date><![CDATA[2022-02-16 16:15:17]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2022-02-16 16:15:17]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-02-24 18:31:01]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-02-24 18:31:01]]></wp:post_modified_gmt>
+		<wp:post_modified><![CDATA[2022-02-24 18:57:03]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-02-24 18:57:03]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[post-type-added-1645028117]]></wp:post_name>
@@ -5313,47 +5313,6 @@
 		</wp:postmeta>
 							</item>
 					<item>
-		<title><![CDATA[Hero]]></title>
-		<link>http://homepagestartersdev.local/action_monitor/hero-1645046861/</link>
-		<pubDate>Wed, 16 Feb 2022 21:27:41 +0000</pubDate>
-		<dc:creator><![CDATA[jxnblk]]></dc:creator>
-		<guid isPermaLink="false">http://homepagestartersdev.local/action_monitor/hero-1645046861/</guid>
-		<description></description>
-		<content:encoded><![CDATA[{"action_type":"UPDATE","title":"Hero","node_id":38,"relay_id":"cG9zdDozOA==","graphql_single_name":"HomepageBlock","graphql_plural_name":"HomepageBlocks","status":"publish"}]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>39</wp:post_id>
-		<wp:post_date><![CDATA[2022-02-16 21:27:41]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2022-02-16 21:27:41]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-02-17 18:34:30]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-02-17 18:34:30]]></wp:post_modified_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[hero-1645046861]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[action_monitor]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="gatsby_action_ref_node_dbid" nicename="38"><![CDATA[38]]></category>
-		<category domain="gatsby_action_ref_node_id" nicename="cg9zddozoa"><![CDATA[cG9zdDozOA==]]></category>
-		<category domain="gatsby_action_stream_type" nicename="content"><![CDATA[CONTENT]]></category>
-		<category domain="gatsby_action_ref_node_type" nicename="homepageblock"><![CDATA[HomepageBlock]]></category>
-		<category domain="gatsby_action_type" nicename="update"><![CDATA[UPDATE]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[referenced_node_status]]></wp:meta_key>
-		<wp:meta_value><![CDATA[publish]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[referenced_node_single_name]]></wp:meta_key>
-		<wp:meta_value><![CDATA[homepageBlock]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[referenced_node_plural_name]]></wp:meta_key>
-		<wp:meta_value><![CDATA[homepageBlocks]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
 		<title><![CDATA[Logo List]]></title>
 		<link>http://homepagestartersdev.local/action_monitor/logo-list-1645047181/</link>
 		<pubDate>Wed, 16 Feb 2022 21:33:01 +0000</pubDate>
@@ -5597,47 +5556,6 @@
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[referenced_node_plural_name]]></wp:meta_key>
 		<wp:meta_value><![CDATA[pages]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title><![CDATA[Testimonial List]]></title>
-		<link>http://homepagestartersdev.local/action_monitor/testimonial-list-1645116011/</link>
-		<pubDate>Thu, 17 Feb 2022 16:40:11 +0000</pubDate>
-		<dc:creator><![CDATA[jxnblk]]></dc:creator>
-		<guid isPermaLink="false">http://homepagestartersdev.local/action_monitor/testimonial-list-1645116011/</guid>
-		<description></description>
-		<content:encoded><![CDATA[{"action_type":"UPDATE","title":"Testimonial List","node_id":98,"relay_id":"cG9zdDo5OA==","graphql_single_name":"HomepageBlock","graphql_plural_name":"HomepageBlocks","status":"publish"}]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>100</wp:post_id>
-		<wp:post_date><![CDATA[2022-02-17 16:40:11]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2022-02-17 16:40:11]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-02-17 18:31:10]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-02-17 18:31:10]]></wp:post_modified_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[testimonial-list-1645116011]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[action_monitor]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="gatsby_action_ref_node_dbid" nicename="98"><![CDATA[98]]></category>
-		<category domain="gatsby_action_ref_node_id" nicename="cg9zddo5oa"><![CDATA[cG9zdDo5OA==]]></category>
-		<category domain="gatsby_action_stream_type" nicename="content"><![CDATA[CONTENT]]></category>
-		<category domain="gatsby_action_ref_node_type" nicename="homepageblock"><![CDATA[HomepageBlock]]></category>
-		<category domain="gatsby_action_type" nicename="update"><![CDATA[UPDATE]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[referenced_node_status]]></wp:meta_key>
-		<wp:meta_value><![CDATA[publish]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[referenced_node_single_name]]></wp:meta_key>
-		<wp:meta_value><![CDATA[homepageBlock]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[referenced_node_plural_name]]></wp:meta_key>
-		<wp:meta_value><![CDATA[homepageBlocks]]></wp:meta_value>
 		</wp:postmeta>
 							</item>
 					<item>
@@ -8593,6 +8511,39 @@
 		</wp:postmeta>
 							</item>
 					<item>
+		<title><![CDATA[Hero]]></title>
+		<link>http://homepagestartersdev.local/homepage/hero/</link>
+		<pubDate>Fri, 14 Jan 2022 20:17:42 +0000</pubDate>
+		<dc:creator><![CDATA[jxnblk]]></dc:creator>
+		<guid isPermaLink="false">http://homepagestartersdev.local/wp-content/uploads/2022/01/Hero.png</guid>
+		<description></description>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>6</wp:post_id>
+		<wp:post_date><![CDATA[2022-01-14 20:17:42]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2022-01-14 20:17:42]]></wp:post_date_gmt>
+		<wp:post_modified><![CDATA[2022-01-14 20:17:42]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-01-14 20:17:42]]></wp:post_modified_gmt>
+		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[hero]]></wp:post_name>
+		<wp:status><![CDATA[inherit]]></wp:status>
+		<wp:post_parent>5</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[attachment]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+						<wp:attachment_url><![CDATA[http://homepagestartersdev.local/wp-content/uploads/2022/01/Hero.png]]></wp:attachment_url>
+											<wp:postmeta>
+		<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
+		<wp:meta_value><![CDATA[2022/01/Hero.png]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:5:{s:5:"width";i:1776;s:6:"height";i:1353;s:4:"file";s:16:"2022/01/Hero.png";s:5:"sizes";a:6:{s:6:"medium";a:4:{s:4:"file";s:16:"Hero-300x229.png";s:5:"width";i:300;s:6:"height";i:229;s:9:"mime-type";s:9:"image/png";}s:5:"large";a:4:{s:4:"file";s:17:"Hero-1024x780.png";s:5:"width";i:1024;s:6:"height";i:780;s:9:"mime-type";s:9:"image/png";}s:9:"thumbnail";a:4:{s:4:"file";s:16:"Hero-150x150.png";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:9:"image/png";}s:12:"medium_large";a:4:{s:4:"file";s:16:"Hero-768x585.png";s:5:"width";i:768;s:6:"height";i:585;s:9:"mime-type";s:9:"image/png";}s:9:"1536x1536";a:4:{s:4:"file";s:18:"Hero-1536x1170.png";s:5:"width";i:1536;s:6:"height";i:1170;s:9:"mime-type";s:9:"image/png";}s:14:"post-thumbnail";a:4:{s:4:"file";s:18:"Hero-1568x1195.png";s:5:"width";i:1568;s:6:"height";i:1195;s:9:"mime-type";s:9:"image/png";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
 		<title><![CDATA[Blog]]></title>
 		<link>http://homepagestartersdev.local/action_monitor/blog-1645554920/</link>
 		<pubDate>Tue, 22 Feb 2022 18:35:20 +0000</pubDate>
@@ -9331,36 +9282,44 @@
 		</wp:postmeta>
 							</item>
 					<item>
-		<title><![CDATA[Hero]]></title>
-		<link>http://homepagestartersdev.local/homepage/hero/</link>
-		<pubDate>Fri, 14 Jan 2022 20:17:42 +0000</pubDate>
+		<title><![CDATA[Hello world!]]></title>
+		<link>http://homepagestartersdev.local/action_monitor/hello-world-1645720382/</link>
+		<pubDate>Thu, 24 Feb 2022 16:33:02 +0000</pubDate>
 		<dc:creator><![CDATA[jxnblk]]></dc:creator>
-		<guid isPermaLink="false">http://homepagestartersdev.local/wp-content/uploads/2022/01/Hero.png</guid>
+		<guid isPermaLink="false">http://homepagestartersdev.local/action_monitor/hello-world-1645720382/</guid>
 		<description></description>
-		<content:encoded><![CDATA[]]></content:encoded>
+		<content:encoded><![CDATA[{"action_type":"DELETE","title":"Hello world!","node_id":1,"relay_id":"cG9zdDox","graphql_single_name":"post","graphql_plural_name":"posts","status":"trash"}]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>6</wp:post_id>
-		<wp:post_date><![CDATA[2022-01-14 20:17:42]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2022-01-14 20:17:42]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-01-14 20:17:42]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-01-14 20:17:42]]></wp:post_modified_gmt>
-		<wp:comment_status><![CDATA[open]]></wp:comment_status>
+		<wp:post_id>350</wp:post_id>
+		<wp:post_date><![CDATA[2022-02-24 16:33:02]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2022-02-24 16:33:02]]></wp:post_date_gmt>
+		<wp:post_modified><![CDATA[2022-02-24 16:33:02]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-02-24 16:33:02]]></wp:post_modified_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[hero]]></wp:post_name>
-		<wp:status><![CDATA[inherit]]></wp:status>
-		<wp:post_parent>5</wp:post_parent>
+		<wp:post_name><![CDATA[hello-world-1645720382]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
 		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[attachment]]></wp:post_type>
+		<wp:post_type><![CDATA[action_monitor]]></wp:post_type>
 		<wp:post_password><![CDATA[]]></wp:post_password>
 		<wp:is_sticky>0</wp:is_sticky>
-						<wp:attachment_url><![CDATA[http://homepagestartersdev.local/wp-content/uploads/2022/01/Hero.png]]></wp:attachment_url>
-											<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_attached_file]]></wp:meta_key>
-		<wp:meta_value><![CDATA[2022/01/Hero.png]]></wp:meta_value>
+										<category domain="gatsby_action_ref_node_dbid" nicename="1"><![CDATA[1]]></category>
+		<category domain="gatsby_action_ref_node_id" nicename="cg9zddox"><![CDATA[cG9zdDox]]></category>
+		<category domain="gatsby_action_stream_type" nicename="content"><![CDATA[CONTENT]]></category>
+		<category domain="gatsby_action_type" nicename="delete"><![CDATA[DELETE]]></category>
+		<category domain="gatsby_action_ref_node_type" nicename="post"><![CDATA[post]]></category>
+						<wp:postmeta>
+		<wp:meta_key><![CDATA[referenced_node_status]]></wp:meta_key>
+		<wp:meta_value><![CDATA[trash]]></wp:meta_value>
 		</wp:postmeta>
 							<wp:postmeta>
-		<wp:meta_key><![CDATA[_wp_attachment_metadata]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:5:{s:5:"width";i:1776;s:6:"height";i:1353;s:4:"file";s:16:"2022/01/Hero.png";s:5:"sizes";a:6:{s:6:"medium";a:4:{s:4:"file";s:16:"Hero-300x229.png";s:5:"width";i:300;s:6:"height";i:229;s:9:"mime-type";s:9:"image/png";}s:5:"large";a:4:{s:4:"file";s:17:"Hero-1024x780.png";s:5:"width";i:1024;s:6:"height";i:780;s:9:"mime-type";s:9:"image/png";}s:9:"thumbnail";a:4:{s:4:"file";s:16:"Hero-150x150.png";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:9:"image/png";}s:12:"medium_large";a:4:{s:4:"file";s:16:"Hero-768x585.png";s:5:"width";i:768;s:6:"height";i:585;s:9:"mime-type";s:9:"image/png";}s:9:"1536x1536";a:4:{s:4:"file";s:18:"Hero-1536x1170.png";s:5:"width";i:1536;s:6:"height";i:1170;s:9:"mime-type";s:9:"image/png";}s:14:"post-thumbnail";a:4:{s:4:"file";s:18:"Hero-1568x1195.png";s:5:"width";i:1568;s:6:"height";i:1195;s:9:"mime-type";s:9:"image/png";}}s:10:"image_meta";a:12:{s:8:"aperture";s:1:"0";s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";s:1:"0";s:9:"copyright";s:0:"";s:12:"focal_length";s:1:"0";s:3:"iso";s:1:"0";s:13:"shutter_speed";s:1:"0";s:5:"title";s:0:"";s:11:"orientation";s:1:"0";s:8:"keywords";a:0:{}}}]]></wp:meta_value>
+		<wp:meta_key><![CDATA[referenced_node_single_name]]></wp:meta_key>
+		<wp:meta_value><![CDATA[post]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[referenced_node_plural_name]]></wp:meta_key>
+		<wp:meta_value><![CDATA[posts]]></wp:meta_value>
 		</wp:postmeta>
 							</item>
 					<item>
@@ -10003,6 +9962,104 @@
 		</wp:postmeta>
 							</item>
 					<item>
+		<title><![CDATA[Never pay]]></title>
+		<link>http://homepagestartersdev.local/homepage_item/benefit/</link>
+		<pubDate>Thu, 17 Feb 2022 21:44:38 +0000</pubDate>
+		<dc:creator><![CDATA[jxnblk]]></dc:creator>
+		<guid isPermaLink="false">http://homepagestartersdev.local/?post_type=homepage_item&#038;p=135</guid>
+		<description></description>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>135</wp:post_id>
+		<wp:post_date><![CDATA[2022-02-17 21:44:38]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2022-02-17 21:44:38]]></wp:post_date_gmt>
+		<wp:post_modified><![CDATA[2022-02-18 16:06:09]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-02-18 16:06:09]]></wp:post_modified_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[benefit]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[homepage_item]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+										<category domain="category" nicename="benefit"><![CDATA[Benefit]]></category>
+						<wp:postmeta>
+		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[heading]]></wp:meta_key>
+		<wp:meta_value><![CDATA[Never pay for a homepage again]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_heading]]></wp:meta_key>
+		<wp:meta_value><![CDATA[field_620ec2f5ecea5]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[text]]></wp:meta_key>
+		<wp:meta_value><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_text]]></wp:meta_key>
+		<wp:meta_value><![CDATA[field_620ec308ecea6]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[image]]></wp:meta_key>
+		<wp:meta_value><![CDATA[6]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_image]]></wp:meta_key>
+		<wp:meta_value><![CDATA[field_620ec310ecea7]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
+		<title><![CDATA[100%]]></title>
+		<link>http://homepagestartersdev.local/homepage_item/stat/</link>
+		<pubDate>Thu, 17 Feb 2022 21:45:00 +0000</pubDate>
+		<dc:creator><![CDATA[jxnblk]]></dc:creator>
+		<guid isPermaLink="false">http://homepagestartersdev.local/?post_type=homepage_item&#038;p=138</guid>
+		<description></description>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>138</wp:post_id>
+		<wp:post_date><![CDATA[2022-02-17 21:45:00]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2022-02-17 21:45:00]]></wp:post_date_gmt>
+		<wp:post_modified><![CDATA[2022-02-18 16:06:31]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-02-18 16:06:31]]></wp:post_modified_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[stat]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[homepage_item]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+										<category domain="category" nicename="stat"><![CDATA[Stat]]></category>
+						<wp:postmeta>
+		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[value]]></wp:meta_key>
+		<wp:meta_value><![CDATA[100%]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_value]]></wp:meta_key>
+		<wp:meta_value><![CDATA[field_620ece6278b6d]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[label]]></wp:meta_key>
+		<wp:meta_value><![CDATA[Satisfaction]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_label]]></wp:meta_key>
+		<wp:meta_value><![CDATA[field_620ece6678b6e]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
 		<title><![CDATA[Benefit List]]></title>
 		<link>http://homepagestartersdev.local/homepage_block/benefitlist/</link>
 		<pubDate>Thu, 17 Feb 2022 21:46:09 +0000</pubDate>
@@ -10533,145 +10590,6 @@
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_image]]></wp:meta_key>
 		<wp:meta_value><![CDATA[field_620ecc0188561]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title><![CDATA[Hello world!]]></title>
-		<link>http://homepagestartersdev.local/action_monitor/hello-world-1645720382/</link>
-		<pubDate>Thu, 24 Feb 2022 16:33:02 +0000</pubDate>
-		<dc:creator><![CDATA[jxnblk]]></dc:creator>
-		<guid isPermaLink="false">http://homepagestartersdev.local/action_monitor/hello-world-1645720382/</guid>
-		<description></description>
-		<content:encoded><![CDATA[{"action_type":"DELETE","title":"Hello world!","node_id":1,"relay_id":"cG9zdDox","graphql_single_name":"post","graphql_plural_name":"posts","status":"trash"}]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>350</wp:post_id>
-		<wp:post_date><![CDATA[2022-02-24 16:33:02]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2022-02-24 16:33:02]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-02-24 16:33:02]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-02-24 16:33:02]]></wp:post_modified_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[hello-world-1645720382]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[action_monitor]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="gatsby_action_ref_node_dbid" nicename="1"><![CDATA[1]]></category>
-		<category domain="gatsby_action_ref_node_id" nicename="cg9zddox"><![CDATA[cG9zdDox]]></category>
-		<category domain="gatsby_action_stream_type" nicename="content"><![CDATA[CONTENT]]></category>
-		<category domain="gatsby_action_type" nicename="delete"><![CDATA[DELETE]]></category>
-		<category domain="gatsby_action_ref_node_type" nicename="post"><![CDATA[post]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[referenced_node_status]]></wp:meta_key>
-		<wp:meta_value><![CDATA[trash]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[referenced_node_single_name]]></wp:meta_key>
-		<wp:meta_value><![CDATA[post]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[referenced_node_plural_name]]></wp:meta_key>
-		<wp:meta_value><![CDATA[posts]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title><![CDATA[Never pay]]></title>
-		<link>http://homepagestartersdev.local/homepage_item/benefit/</link>
-		<pubDate>Thu, 17 Feb 2022 21:44:38 +0000</pubDate>
-		<dc:creator><![CDATA[jxnblk]]></dc:creator>
-		<guid isPermaLink="false">http://homepagestartersdev.local/?post_type=homepage_item&#038;p=135</guid>
-		<description></description>
-		<content:encoded><![CDATA[]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>135</wp:post_id>
-		<wp:post_date><![CDATA[2022-02-17 21:44:38]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2022-02-17 21:44:38]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-02-18 16:06:09]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-02-18 16:06:09]]></wp:post_modified_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[benefit]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[homepage_item]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="category" nicename="benefit"><![CDATA[Benefit]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[heading]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Never pay for a homepage again]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_heading]]></wp:meta_key>
-		<wp:meta_value><![CDATA[field_620ec2f5ecea5]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[text]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_text]]></wp:meta_key>
-		<wp:meta_value><![CDATA[field_620ec308ecea6]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[image]]></wp:meta_key>
-		<wp:meta_value><![CDATA[6]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_image]]></wp:meta_key>
-		<wp:meta_value><![CDATA[field_620ec310ecea7]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title><![CDATA[100%]]></title>
-		<link>http://homepagestartersdev.local/homepage_item/stat/</link>
-		<pubDate>Thu, 17 Feb 2022 21:45:00 +0000</pubDate>
-		<dc:creator><![CDATA[jxnblk]]></dc:creator>
-		<guid isPermaLink="false">http://homepagestartersdev.local/?post_type=homepage_item&#038;p=138</guid>
-		<description></description>
-		<content:encoded><![CDATA[]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>138</wp:post_id>
-		<wp:post_date><![CDATA[2022-02-17 21:45:00]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2022-02-17 21:45:00]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-02-18 16:06:31]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-02-18 16:06:31]]></wp:post_modified_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[stat]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[homepage_item]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="category" nicename="stat"><![CDATA[Stat]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[value]]></wp:meta_key>
-		<wp:meta_value><![CDATA[100%]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_value]]></wp:meta_key>
-		<wp:meta_value><![CDATA[field_620ece6278b6d]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[label]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Satisfaction]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_label]]></wp:meta_key>
-		<wp:meta_value><![CDATA[field_620ece6678b6e]]></wp:meta_value>
 		</wp:postmeta>
 							</item>
 					<item>
@@ -11605,6 +11523,112 @@
 		</wp:postmeta>
 							</item>
 					<item>
+		<title><![CDATA[Live our values]]></title>
+		<link>http://homepagestartersdev.local/homepage_item/live-our-values/</link>
+		<pubDate>Tue, 22 Feb 2022 15:55:15 +0000</pubDate>
+		<dc:creator><![CDATA[jxnblk]]></dc:creator>
+		<guid isPermaLink="false">http://homepagestartersdev.local/?post_type=homepage_item&#038;p=268</guid>
+		<description></description>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>268</wp:post_id>
+		<wp:post_date><![CDATA[2022-02-22 15:55:15]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2022-02-22 15:55:15]]></wp:post_date_gmt>
+		<wp:post_modified><![CDATA[2022-02-22 15:55:15]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-02-22 15:55:15]]></wp:post_modified_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[live-our-values]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[homepage_item]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+										<category domain="category" nicename="benefit"><![CDATA[Benefit]]></category>
+						<wp:postmeta>
+		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[heading]]></wp:meta_key>
+		<wp:meta_value><![CDATA[Live our values]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_heading]]></wp:meta_key>
+		<wp:meta_value><![CDATA[field_620ec2f5ecea5]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[text]]></wp:meta_key>
+		<wp:meta_value><![CDATA[We live and breathe integrity, empathy, and quality. Always and in everything we do.]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_text]]></wp:meta_key>
+		<wp:meta_value><![CDATA[field_620ec308ecea6]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[image]]></wp:meta_key>
+		<wp:meta_value><![CDATA[6]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_image]]></wp:meta_key>
+		<wp:meta_value><![CDATA[field_620ec310ecea7]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
+		<title><![CDATA[Love our users]]></title>
+		<link>http://homepagestartersdev.local/homepage_item/love-our-users/</link>
+		<pubDate>Tue, 22 Feb 2022 15:55:33 +0000</pubDate>
+		<dc:creator><![CDATA[jxnblk]]></dc:creator>
+		<guid isPermaLink="false">http://homepagestartersdev.local/?post_type=homepage_item&#038;p=270</guid>
+		<description></description>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>270</wp:post_id>
+		<wp:post_date><![CDATA[2022-02-22 15:55:33]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2022-02-22 15:55:33]]></wp:post_date_gmt>
+		<wp:post_modified><![CDATA[2022-02-22 15:55:33]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-02-22 15:55:33]]></wp:post_modified_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[love-our-users]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[homepage_item]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+										<category domain="category" nicename="benefit"><![CDATA[Benefit]]></category>
+						<wp:postmeta>
+		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[heading]]></wp:meta_key>
+		<wp:meta_value><![CDATA[Love our users]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_heading]]></wp:meta_key>
+		<wp:meta_value><![CDATA[field_620ec2f5ecea5]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[text]]></wp:meta_key>
+		<wp:meta_value><![CDATA[We listen to the user and also hear their unstated needs.]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_text]]></wp:meta_key>
+		<wp:meta_value><![CDATA[field_620ec308ecea6]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[image]]></wp:meta_key>
+		<wp:meta_value><![CDATA[6]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_image]]></wp:meta_key>
+		<wp:meta_value><![CDATA[field_620ec310ecea7]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
 		<title><![CDATA[Blog]]></title>
 		<link>http://homepagestartersdev.local/navitem/beep/</link>
 		<pubDate>Wed, 16 Feb 2022 16:19:57 +0000</pubDate>
@@ -11930,112 +11954,6 @@
 		</wp:postmeta>
 							</item>
 					<item>
-		<title><![CDATA[Live our values]]></title>
-		<link>http://homepagestartersdev.local/homepage_item/live-our-values/</link>
-		<pubDate>Tue, 22 Feb 2022 15:55:15 +0000</pubDate>
-		<dc:creator><![CDATA[jxnblk]]></dc:creator>
-		<guid isPermaLink="false">http://homepagestartersdev.local/?post_type=homepage_item&#038;p=268</guid>
-		<description></description>
-		<content:encoded><![CDATA[]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>268</wp:post_id>
-		<wp:post_date><![CDATA[2022-02-22 15:55:15]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2022-02-22 15:55:15]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-02-22 15:55:15]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-02-22 15:55:15]]></wp:post_modified_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[live-our-values]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[homepage_item]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="category" nicename="benefit"><![CDATA[Benefit]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[heading]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Live our values]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_heading]]></wp:meta_key>
-		<wp:meta_value><![CDATA[field_620ec2f5ecea5]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[text]]></wp:meta_key>
-		<wp:meta_value><![CDATA[We live and breathe integrity, empathy, and quality. Always and in everything we do.]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_text]]></wp:meta_key>
-		<wp:meta_value><![CDATA[field_620ec308ecea6]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[image]]></wp:meta_key>
-		<wp:meta_value><![CDATA[6]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_image]]></wp:meta_key>
-		<wp:meta_value><![CDATA[field_620ec310ecea7]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title><![CDATA[Love our users]]></title>
-		<link>http://homepagestartersdev.local/homepage_item/love-our-users/</link>
-		<pubDate>Tue, 22 Feb 2022 15:55:33 +0000</pubDate>
-		<dc:creator><![CDATA[jxnblk]]></dc:creator>
-		<guid isPermaLink="false">http://homepagestartersdev.local/?post_type=homepage_item&#038;p=270</guid>
-		<description></description>
-		<content:encoded><![CDATA[]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>270</wp:post_id>
-		<wp:post_date><![CDATA[2022-02-22 15:55:33]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2022-02-22 15:55:33]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-02-22 15:55:33]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-02-22 15:55:33]]></wp:post_modified_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[love-our-users]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[homepage_item]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="category" nicename="benefit"><![CDATA[Benefit]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[heading]]></wp:meta_key>
-		<wp:meta_value><![CDATA[Love our users]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_heading]]></wp:meta_key>
-		<wp:meta_value><![CDATA[field_620ec2f5ecea5]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[text]]></wp:meta_key>
-		<wp:meta_value><![CDATA[We listen to the user and also hear their unstated needs.]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_text]]></wp:meta_key>
-		<wp:meta_value><![CDATA[field_620ec308ecea6]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[image]]></wp:meta_key>
-		<wp:meta_value><![CDATA[6]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_image]]></wp:meta_key>
-		<wp:meta_value><![CDATA[field_620ec310ecea7]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
 		<title><![CDATA[Details, details, details]]></title>
 		<link>http://homepagestartersdev.local/homepage_item/details-details-details/</link>
 		<pubDate>Tue, 22 Feb 2022 15:55:52 +0000</pubDate>
@@ -12125,6 +12043,51 @@
 		</wp:postmeta>
 							</item>
 					<item>
+		<title><![CDATA[Products]]></title>
+		<link>http://homepagestartersdev.local/navitem/products/</link>
+		<pubDate>Tue, 22 Feb 2022 16:25:59 +0000</pubDate>
+		<dc:creator><![CDATA[jxnblk]]></dc:creator>
+		<guid isPermaLink="false">http://homepagestartersdev.local/?post_type=navitem&#038;p=293</guid>
+		<description></description>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>293</wp:post_id>
+		<wp:post_date><![CDATA[2022-02-22 16:25:59]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2022-02-22 16:25:59]]></wp:post_date_gmt>
+		<wp:post_modified><![CDATA[2022-02-23 19:27:14]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-02-23 19:27:14]]></wp:post_modified_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[products]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[navitem]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+										<category domain="category" nicename="navitemgroup"><![CDATA[NavItemGroup]]></category>
+						<wp:postmeta>
+		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[link]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_link]]></wp:meta_key>
+		<wp:meta_value><![CDATA[field_620d2354958ed]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[nav_items]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:3:{i:0;s:3:"305";i:1;s:3:"307";i:2;s:3:"309";}]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_nav_items]]></wp:meta_key>
+		<wp:meta_value><![CDATA[field_620d23fb86c9e]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
 		<title><![CDATA[Sign Up]]></title>
 		<link>http://homepagestartersdev.local/homepage_links/sign-up/</link>
 		<pubDate>Tue, 22 Feb 2022 18:26:40 +0000</pubDate>
@@ -12158,6 +12121,59 @@
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_link]]></wp:meta_key>
 		<wp:meta_value><![CDATA[field_620d7538440c4]]></wp:meta_value>
+		</wp:postmeta>
+							</item>
+					<item>
+		<title><![CDATA[Super]]></title>
+		<link>http://homepagestartersdev.local/navitem/super/</link>
+		<pubDate>Tue, 22 Feb 2022 18:29:18 +0000</pubDate>
+		<dc:creator><![CDATA[jxnblk]]></dc:creator>
+		<guid isPermaLink="false">http://homepagestartersdev.local/?post_type=navitem&#038;p=305</guid>
+		<description></description>
+		<content:encoded><![CDATA[]]></content:encoded>
+		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<wp:post_id>305</wp:post_id>
+		<wp:post_date><![CDATA[2022-02-22 18:29:18]]></wp:post_date>
+		<wp:post_date_gmt><![CDATA[2022-02-22 18:29:18]]></wp:post_date_gmt>
+		<wp:post_modified><![CDATA[2022-02-22 20:47:36]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2022-02-22 20:47:36]]></wp:post_modified_gmt>
+		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
+		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
+		<wp:post_name><![CDATA[super]]></wp:post_name>
+		<wp:status><![CDATA[publish]]></wp:status>
+		<wp:post_parent>0</wp:post_parent>
+		<wp:menu_order>0</wp:menu_order>
+		<wp:post_type><![CDATA[navitem]]></wp:post_type>
+		<wp:post_password><![CDATA[]]></wp:post_password>
+		<wp:is_sticky>0</wp:is_sticky>
+										<category domain="category" nicename="navlink"><![CDATA[NavLink]]></category>
+						<wp:postmeta>
+		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[link]]></wp:meta_key>
+		<wp:meta_value><![CDATA[a:3:{s:5:"title";s:5:"Super";s:3:"url";s:2:"#!";s:6:"target";s:0:"";}]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_link]]></wp:meta_key>
+		<wp:meta_value><![CDATA[field_620d2354958ed]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[description]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_description]]></wp:meta_key>
+		<wp:meta_value><![CDATA[field_62152b560af24]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[icon]]></wp:meta_key>
+		<wp:meta_value><![CDATA[6]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[_icon]]></wp:meta_key>
+		<wp:meta_value><![CDATA[field_62152b5b0af25]]></wp:meta_value>
 		</wp:postmeta>
 							</item>
 					<item>
@@ -12535,104 +12551,6 @@
 							<wp:postmeta>
 		<wp:meta_key><![CDATA[_description]]></wp:meta_key>
 		<wp:meta_value><![CDATA[field_620ecf8db5be4]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title><![CDATA[Products]]></title>
-		<link>http://homepagestartersdev.local/navitem/products/</link>
-		<pubDate>Tue, 22 Feb 2022 16:25:59 +0000</pubDate>
-		<dc:creator><![CDATA[jxnblk]]></dc:creator>
-		<guid isPermaLink="false">http://homepagestartersdev.local/?post_type=navitem&#038;p=293</guid>
-		<description></description>
-		<content:encoded><![CDATA[]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>293</wp:post_id>
-		<wp:post_date><![CDATA[2022-02-22 16:25:59]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2022-02-22 16:25:59]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-02-23 19:27:14]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-02-23 19:27:14]]></wp:post_modified_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[products]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[navitem]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="category" nicename="navitemgroup"><![CDATA[NavItemGroup]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[link]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_link]]></wp:meta_key>
-		<wp:meta_value><![CDATA[field_620d2354958ed]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[nav_items]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:3:{i:0;s:3:"305";i:1;s:3:"307";i:2;s:3:"309";}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_nav_items]]></wp:meta_key>
-		<wp:meta_value><![CDATA[field_620d23fb86c9e]]></wp:meta_value>
-		</wp:postmeta>
-							</item>
-					<item>
-		<title><![CDATA[Super]]></title>
-		<link>http://homepagestartersdev.local/navitem/super/</link>
-		<pubDate>Tue, 22 Feb 2022 18:29:18 +0000</pubDate>
-		<dc:creator><![CDATA[jxnblk]]></dc:creator>
-		<guid isPermaLink="false">http://homepagestartersdev.local/?post_type=navitem&#038;p=305</guid>
-		<description></description>
-		<content:encoded><![CDATA[]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
-		<wp:post_id>305</wp:post_id>
-		<wp:post_date><![CDATA[2022-02-22 18:29:18]]></wp:post_date>
-		<wp:post_date_gmt><![CDATA[2022-02-22 18:29:18]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2022-02-22 20:47:36]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2022-02-22 20:47:36]]></wp:post_modified_gmt>
-		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
-		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
-		<wp:post_name><![CDATA[super]]></wp:post_name>
-		<wp:status><![CDATA[publish]]></wp:status>
-		<wp:post_parent>0</wp:post_parent>
-		<wp:menu_order>0</wp:menu_order>
-		<wp:post_type><![CDATA[navitem]]></wp:post_type>
-		<wp:post_password><![CDATA[]]></wp:post_password>
-		<wp:is_sticky>0</wp:is_sticky>
-										<category domain="category" nicename="navlink"><![CDATA[NavLink]]></category>
-						<wp:postmeta>
-		<wp:meta_key><![CDATA[_edit_last]]></wp:meta_key>
-		<wp:meta_value><![CDATA[1]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[link]]></wp:meta_key>
-		<wp:meta_value><![CDATA[a:3:{s:5:"title";s:5:"Super";s:3:"url";s:2:"#!";s:6:"target";s:0:"";}]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_link]]></wp:meta_key>
-		<wp:meta_value><![CDATA[field_620d2354958ed]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[description]]></wp:meta_key>
-		<wp:meta_value><![CDATA[]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_description]]></wp:meta_key>
-		<wp:meta_value><![CDATA[field_62152b560af24]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[icon]]></wp:meta_key>
-		<wp:meta_value><![CDATA[6]]></wp:meta_value>
-		</wp:postmeta>
-							<wp:postmeta>
-		<wp:meta_key><![CDATA[_icon]]></wp:meta_key>
-		<wp:meta_value><![CDATA[field_62152b5b0af25]]></wp:meta_value>
 		</wp:postmeta>
 							</item>
 					<item>
