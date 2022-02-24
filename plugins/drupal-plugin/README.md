@@ -34,7 +34,7 @@ You will need a new or existing `Drupal` website to use this starter and will be
 
    ### Drush
 
-   For more information on how to use drush commans and how to install the command line shell visit [Drush Documentation Site](https://www.drush.org/latest/).
+   For more information on how to use drush commands and how to install the command line shell visit [Drush Documentation Site](https://www.drush.org/latest/).
 
    ```sh
    drush sql-drop
