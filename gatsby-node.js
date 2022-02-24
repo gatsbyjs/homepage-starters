@@ -44,4 +44,37 @@ exports.onCreateWebpackConfig = ({ actions, store }) => {
       },
     },
   })
+
+  if (plugin == "wordpress-plugin") {
+    actions.setWebpackConfig({
+      resolve: {
+        alias: {
+          // WordPress uses a hard-coded header & footer
+          "./header": path.resolve(
+            __dirname,
+            "plugins",
+            plugin,
+            "src",
+            "components",
+            "header.js"
+          ),
+          "./header.css.ts": path.resolve(
+            __dirname,
+            "src",
+            "components",
+            "header.css.ts"
+          ),
+          "./footer": path.resolve(
+            __dirname,
+            "plugins",
+            plugin,
+            "src",
+            "components",
+            "footer.js"
+          ),
+          "./ui": path.resolve(__dirname, "src", "components", "ui.js"),
+        },
+      },
+    })
+  }
 }
