@@ -4,6 +4,6 @@ static
 node_modules
 .vscode
 .idea
-content/post-types.json
-content/taxonomies.json
-content/acf-field-groups.json
+post-types.json
+taxonomies.json
+acf-field-groups.json
