@@ -81,7 +81,7 @@ const data = {
     },
     {
       id: 2,
-      href: "#!",
+      href: "/about",
       text: "About",
     },
     {
