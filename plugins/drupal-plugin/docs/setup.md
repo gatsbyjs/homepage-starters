@@ -2,14 +2,17 @@
 
    For this implementation we used `Pantheon` as our host. So some configurations may be specific to that platform. Before importing the `sql` dump file we recommend adding the `files` folder located in the `data` directory to your drupal site under `sites/default/` or wherever your `files` folder is located on your instance. Afterwards you may use the `sql` dump file provided in the `data` directory of app called `homepage-starter-dump.sql.gz`. Depending on the setup, you may have to extract the `sql` file before trying to import the data.
 
-   ### Lando
-
-   A free, open source, cross-platform, local development environment and DevOps tool built on Docker container technology and developed by Tandem. [See the docs](https://docs.lando.dev/).
+   The `composer.json` file as well as exported configurations found in the `config` folder are also included. If you decide to import and install these configurations, please do so before executing the `sql` script and be sure `not` to clean the existing database.
 
    ```sh
-   # This will destroy the database and import the data.
-   # If you wish to keep you existing data add the --no-wipe flag.
-   lando db-import ~/path/to/homepage-starter-dump.sql
+   # import configurations
+   drush cim
+
+   # initial install
+   composer update
+
+   # installing from composer.lock
+   composer install
    ```
 
    ### Drush
@@ -30,4 +33,14 @@
 
    # Drush 8 & earlier
    drush user-password admin --password="new_password"
+   ```
+
+   ### Lando
+
+   A free, open source, cross-platform, local development environment and DevOps tool built on Docker container technology and developed by Tandem. [See the docs](https://docs.lando.dev/).
+
+   ```sh
+   # This will destroy the database and import the data.
+   # If you wish to keep you existing data add the --no-wipe flag.
+   lando db-import ~/path/to/homepage-starter-dump.sql
    ```
