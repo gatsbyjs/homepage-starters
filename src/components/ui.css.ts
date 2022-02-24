@@ -45,10 +45,14 @@ export const containers = styleVariants({
     {
       paddingLeft: 0,
       paddingRight: 0,
+      paddingTop: theme.space[4],
+      paddingBottom: theme.space[4],
       "@media": {
         [media.medium]: {
           paddingLeft: theme.space[4],
           paddingRight: theme.space[4],
+          paddingTop: theme.space[5],
+          paddingBottom: theme.space[5],
         },
       },
     },
@@ -166,12 +170,12 @@ export const box = styleVariants({
 })
 
 export const section = style({
-  paddingTop: theme.space[5],
-  paddingBottom: theme.space[5],
+  paddingTop: theme.space[4],
+  paddingBottom: theme.space[4],
   "@media": {
     [media.small]: {
-      paddingTop: theme.space[6],
-      paddingBottom: theme.space[6],
+      paddingTop: theme.space[5],
+      paddingBottom: theme.space[5],
     },
   },
 })
@@ -270,6 +274,16 @@ export const text = styleVariants({
     margin0,
     {
       marginBottom: theme.space[3],
+      fontSize: theme.fontSizes[5],
+      fontWeight: theme.fontWeights.extrabold,
+      lineHeight: theme.lineHeights.tight,
+      letterSpacing: theme.letterSpacings.tight,
+    },
+  ],
+  subheadSmall: [
+    margin0,
+    {
+      marginBottom: theme.space[3],
       fontSize: theme.fontSizes[4],
       fontWeight: theme.fontWeights.extrabold,
       lineHeight: theme.lineHeights.tight,
@@ -280,8 +294,9 @@ export const text = styleVariants({
     margin0,
     {
       marginBottom: theme.space[2],
-      fontSize: theme.fontSizes[2],
-      fontWeight: theme.fontWeights.semibold,
+      fontFamily: theme.fonts.mono,
+      fontSize: theme.fontSizes[1],
+      fontWeight: theme.fontWeights.medium,
       lineHeight: theme.lineHeights.tight,
       letterSpacing: theme.letterSpacings.wide,
       textTransform: "uppercase",
@@ -298,13 +313,21 @@ export const text = styleVariants({
       fontStyle: "normal",
     },
   ],
-  serif: [
+  stat: [
     margin0,
     {
-      marginBottom: theme.space[2],
-      fontFamily: theme.fonts.serif,
+      fontFamily: theme.fonts.mono,
       fontSize: theme.fontSizes[6],
+      fontWeight: theme.fontWeights.medium,
       lineHeight: theme.lineHeights.tight,
+    },
+  ],
+  statLabel: [
+    margin0,
+    {
+      fontWeight: theme.fontWeights.bold,
+      fontSize: theme.fontSizes[4],
+      lineHeight: theme.lineHeights.heading,
     },
   ],
   small: [
@@ -325,7 +348,7 @@ export const text = styleVariants({
     {
       fontSize: "180px",
       fontFamily: theme.fonts.mono,
-      lineHeight: theme.lineHeights.tight,
+      lineHeight: theme.lineHeights.solid,
       letterSpacing: theme.letterSpacings.tight,
       "@media": {
         [media.medium]: {
@@ -390,7 +413,7 @@ const button = style({
   textDecoration: "none",
   fontWeight: theme.fontWeights.bold,
   fontSize: theme.fontSizes[2],
-  lineHeight: 1,
+  lineHeight: theme.lineHeights.solid,
   paddingTop: theme.space[3],
   paddingBottom: theme.space[3],
   paddingLeft: theme.space[3],
