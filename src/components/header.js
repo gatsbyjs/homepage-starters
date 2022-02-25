@@ -10,6 +10,7 @@ import {
   Button,
   InteractiveIcon,
   Nudge,
+  VisuallyHidden,
 } from "./ui"
 import {
   mobileNavOverlay,
@@ -18,6 +19,7 @@ import {
   mobileHeaderNavWrapper,
   mobileNavSVGColorWrapper,
 } from "./header.css.ts"
+import NavItemGroup from "./nav-item-group"
 import BrandLogo from "./brand-logo"
 
 export default function Header() {
@@ -26,10 +28,26 @@ export default function Header() {
       layout {
         header {
           id
-          links {
+          navItems {
             id
-            href
-            text
+            navItemType
+            ... on NavItem {
+              href
+              text
+            }
+            ... on NavItemGroup {
+              name
+              navItems {
+                id
+                href
+                text
+                description
+                icon {
+                  alt
+                  gatsbyImageData
+                }
+              }
+            }
           }
           cta {
             id
@@ -41,8 +59,7 @@ export default function Header() {
     }
   `)
 
-  const { links, cta } = data.layout.header
-
+  const { navItems, cta } = data.layout.header
   const [isOpen, setOpen] = React.useState(false)
 
   React.useEffect(() => {
@@ -56,27 +73,32 @@ export default function Header() {
   return (
     <header>
       <Container className={desktopHeaderNavWrapper}>
-        {/* Desktop / Tablet - Header / Nav */}
         <Space size={2} />
-        <Flex>
+        <Flex variant="spaceBetween">
           <NavLink to="/">
+            <VisuallyHidden>Home</VisuallyHidden>
             <BrandLogo />
           </NavLink>
           <nav>
-            <FlexList>
-              {links &&
-                links.map((link) => (
-                  <li key={link.id}>
-                    <NavLink to={link.href}>{link.text}</NavLink>
+            <FlexList gap={4}>
+              {navItems &&
+                navItems.map((navItem) => (
+                  <li key={navItem.id}>
+                    {navItem.navItemType === "Group" ? (
+                      <NavItemGroup
+                        name={navItem.name}
+                        navItems={navItem.navItems}
+                      />
+                    ) : (
+                      <NavLink to={navItem.href}>{navItem.text}</NavLink>
+                    )}
                   </li>
                 ))}
             </FlexList>
           </nav>
-          <Space />
           <div>{cta && <Button to={cta.href}>{cta.text}</Button>}</div>
         </Flex>
       </Container>
-      {/* Mobile - Header / Nav */}
       <Container className={mobileHeaderNavWrapper[isOpen ? "open" : "closed"]}>
         <Space size={2} />
         <Flex variant="spaceBetween">
@@ -85,7 +107,10 @@ export default function Header() {
               mobileNavSVGColorWrapper[isOpen ? "reversed" : "primary"]
             }
           >
-            <BrandLogo />
+            <NavLink to="/">
+              <VisuallyHidden>Home</VisuallyHidden>
+              <BrandLogo />
+            </NavLink>
           </span>
           <Flex>
             <Space />
@@ -114,14 +139,20 @@ export default function Header() {
         <div className={mobileNavOverlay}>
           <nav>
             <FlexList responsive variant="stretch">
-              {links &&
-                links.map((link) => (
-                  <li key={link.id}>
-                    <NavLink to={link.href} className={mobileNavLink}>
-                      {link.text}
+              {navItems?.map((navItem) => (
+                <li key={navItem.id}>
+                  {navItem.navItemType === "Group" ? (
+                    <NavItemGroup
+                      name={navItem.name}
+                      navItems={navItem.navItems}
+                    />
+                  ) : (
+                    <NavLink to={navItem.href} className={mobileNavLink}>
+                      {navItem.text}
                     </NavLink>
-                  </li>
-                ))}
+                  )}
+                </li>
+              ))}
             </FlexList>
           </nav>
         </div>

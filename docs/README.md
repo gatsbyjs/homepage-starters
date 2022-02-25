@@ -20,17 +20,7 @@ Create a homepage using Gatsby and :var[cms]. This starter demonstrates how to u
    npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-$-homepage
    ```
 
-1. **Run the :var[cms] setup command**
-
-   **TO BE IMPLEMENTED**
-   From your site's root directory, run:
-
-   ```sh
-   cd my-homepage
-   yarn setup
-   ```
-
-   This will run a script to populate your :var[cms] content model and add demo content.
+::include{file=docs/setup.md}
 
 1. **Start developing**
 
@@ -49,6 +39,8 @@ Create a homepage using Gatsby and :var[cms]. This starter demonstrates how to u
 Once your content is available in :var[cms], deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
 
 :link[deploynow]{text="Deploy to Gatsby"}
+
+::include{file=docs/preview.md}
 
 ## What's included?
 
@@ -88,6 +80,8 @@ The UI components file `src/components/ui.js` imports styles from `src/component
 
 ### Add your logo
 
+![Logo](./docs/images/logo.png)
+
 Replace the `src/components/brand-logo.js` component with your own brand logo.
 If you have an SVG version, it can be rendered inline as a React component, following the example in this file. Note that SVG attributes will need to be camel cased for JSX.
 
@@ -96,6 +90,8 @@ Using an inline SVG for the logo allows it to pick up the colors used in CSS, wh
 If you prefer to use an image, use the [`StaticImage`](https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-plugin-image/#staticimage) component from `gatsby-plugin-image` in place of the SVG in this file.
 
 ### Customize headings, buttons, and other styles
+
+![Headings & Buttons](./docs/images/headings-buttons.png)
 
 To further customize the look and feel of the homepage, edit the UI components in `src/components/ui.js` and styles in `src/components/ui.css.ts`.
 
@@ -190,6 +186,8 @@ For this example, we'll create a new "Banner" component.
      }
    `
    ```
+
+---
 
 ## 🎓 Learning Gatsby
 

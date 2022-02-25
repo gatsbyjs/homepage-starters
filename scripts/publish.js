@@ -90,6 +90,9 @@ const createStarterDist = async (basename) => {
     "package.json",
     "README.md",
     "src",
+    "scripts",
+    "docs/images",
+    "content",
   ]
   files.forEach((file) => {
     const src = path.join(dir.plugins, dirname, file)
@@ -107,7 +110,7 @@ const createStarterDist = async (basename) => {
   await SimpleGit({
     baseDir: path.join(dir.dist, name),
   }).status(["--porcelain"], (err, result) => {
-    hasChanges = result.modified.length > 0
+    hasChanges = result.modified.length > 0 || result.not_added.length > 0
   })
 
   if (!hasChanges) {
@@ -146,6 +149,7 @@ const createPackageJSON = (name) => {
     build: "gatsby build",
     serve: "gatsby serve",
     clean: "gatsby clean",
+    ...(pkg.scripts || {}),
   }
   const json = JSON.stringify(pkg, null, 2)
   return json

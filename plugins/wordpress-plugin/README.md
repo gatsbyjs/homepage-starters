@@ -17,7 +17,7 @@ This starter requires the following plugins to be installed in your WordPress in
 - [WPGraphQL][]
 - [Advanced Custom Fields][]
 - [WPGraphQL for Advanced Custom Fields][]
-- [Custom Post Type UI][] (Optional)
+- [Custom Post Type UI][]
 
 Once these plugins are installed, you'll need the URL of the GraphQL endpoint for configuration.
 
@@ -35,17 +35,18 @@ Once these plugins are installed, you'll need the URL of the GraphQL endpoint fo
    npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage
    ```
 
-1. **Run the WordPress setup command**
+1. **Import content to your WordPress instance**
 
-   **TO BE IMPLEMENTED**
-   From your site's root directory, run:
+   - In your WordPress Admin navigate to _CPT UI_ > _Tools_ and paste the contents of the `content/post-types.json` file into the _Import Post Types_ field and click the _Import_ button.
+   - In _CPT UI_ > _Tools_, go to the _Taxonomies_ tab and paste the contents of the `content/taxonomies.json` file into the _Import Taxonomies_ field and click the _Import_ button.
 
-   ```sh
-   cd my-homepage
-   yarn setup
-   ```
+   <!--
+   - Navigate to _Custom Fields_ > _Tools_ and upload the `content/acf-field-groups.json` file in the _Import Field Groups_ form and click _Import File_.
+     -->
 
-   This will run a script to populate your WordPress content model and add demo content.
+   - Next, go to _Tools_ > _Import_ and use the _WordPress_ import tool to upload the content from the `content/content.xml` file.
+   - Ensure that the Homepage imported into WordPress is set to be your site's "Homepage" by going to _Settings_ > _Reading_ and setting the _Your homepage displays_ field to _A static page_ and select _Homepage_ from the dropdown.
+   - Finally, go to _GraphQL_ > _Settings_ and copy the endpoint for the GraphQL API (e.g. https://example.com/graphql) and create a `.env` file with `WPGRAPHQL_URL="<your-graphql-endpoint-url>"`.
 
 1. **Start developing**
 
@@ -64,6 +65,13 @@ Once these plugins are installed, you'll need the URL of the GraphQL endpoint fo
 Once your content is available in WordPress, deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
 
 [![Deploy to Gatsby](https://www.gatsbyjs.com/deploynow.png "Deploy to Gatsby")](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage)
+
+## Setting up Gatsby Cloud Preview
+
+To use Gatsby Cloud Preview with this site, see the documentation for
+[Setting up Preview with WPGatsby][].
+
+[setting up preview with wpgatsby]: https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-source-wordpress/docs/tutorials/configuring-wp-gatsby.md#setting-up-preview
 
 ## What's included?
 
@@ -114,6 +122,8 @@ The UI components file `src/components/ui.js` imports styles from `src/component
 
 ### Add your logo
 
+![Logo](./docs/images/logo.png)
+
 Replace the `src/components/brand-logo.js` component with your own brand logo.
 If you have an SVG version, it can be rendered inline as a React component, following the example in this file. Note that SVG attributes will need to be camel cased for JSX.
 
@@ -122,6 +132,8 @@ Using an inline SVG for the logo allows it to pick up the colors used in CSS, wh
 If you prefer to use an image, use the [`StaticImage`](https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-plugin-image/#staticimage) component from `gatsby-plugin-image` in place of the SVG in this file.
 
 ### Customize headings, buttons, and other styles
+
+![Headings & Buttons](./docs/images/headings-buttons.png)
 
 To further customize the look and feel of the homepage, edit the UI components in `src/components/ui.js` and styles in `src/components/ui.css.ts`.
 
@@ -308,6 +320,8 @@ For this example, we'll create a new "Banner" component.
      }
    `
    ```
+
+---
 
 ## 🎓 Learning Gatsby
 

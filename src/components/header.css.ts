@@ -1,12 +1,15 @@
 import { style, styleVariants } from "@vanilla-extract/css"
 import { theme } from "../theme.css"
-import { mediaQueries } from "./ui.css"
+import { media } from "./ui.css"
 
 export const desktopHeaderNavWrapper = style({
+  position: "relative",
+  zIndex: 1,
   display: "none",
   "@media": {
-    [mediaQueries.small]: {
+    [media.small]: {
       display: "block",
+      paddingTop: theme.space[4],
     },
   },
 })
@@ -16,7 +19,7 @@ const mobileHeaderNavWrapperBase = style({
   position: "relative",
   paddingTop: theme.space[3],
   "@media": {
-    [mediaQueries.small]: {
+    [media.small]: {
       display: "none",
     },
   },
@@ -45,7 +48,7 @@ export const mobileNavOverlay = style({
   background: theme.colors.primary,
   zIndex: 1,
   "@media": {
-    [mediaQueries.small]: {
+    [media.small]: {
       display: "none",
     },
   },

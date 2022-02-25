@@ -2,7 +2,7 @@ import * as React from "react"
 import { graphql } from "gatsby"
 import { Space, Container, Section, FlexList, Text, Logo } from "./ui"
 
-function LogoItem(props) {
+export function LogoItem(props) {
   if (!props.image) return false
 
   return <Logo alt={props.alt} image={props.image} size="medium" />
@@ -10,7 +10,7 @@ function LogoItem(props) {
 
 export default function LogoList(props) {
   return (
-    <Section>
+    <Section paddingY={4}>
       <Container width="narrow">
         {props.text && (
           <Text center variant="lead">
