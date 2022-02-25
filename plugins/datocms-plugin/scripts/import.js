@@ -129,76 +129,158 @@ async function importContentModel(token) {
   return null
 }
 
-// function couldBeID(val) {
-//   return /^\d+$/.test(val) && val.length > 4
-// }
+function couldBeID(val) {
+  return /^\d+$/.test(val) && val.length > 4
+}
 
-// const sortByRelation = (items, item, collection = []) => {
-//   // console.log("items: ", items.length)
-//   // console.log("item: ", item)
-//   const index = items.findIndex((i) => i.id === item.id)
-//   const nextItem = items[index + 1]
-//   const sorted = collection.find((i) => i.id === item.id)
+const sortByRelation = (items, item, collection = []) => {
+  // console.log("items: ", items.length)
+  // console.log("item: ", item)
+  const index = items.findIndex((i) => i.id === item.id)
+  const nextItem = items[index + 1]
+  const sorted = collection.find((i) => i.id === item.id)
 
-//   if (sorted) return collection
+  if (sorted) return collection
 
-//   Object.keys(item).forEach((key) => {
-//     const val = item[key]
-//     const relatedFields = []
+  Object.keys(item).forEach((key) => {
+    const val = item[key]
+    const relatedFields = []
 
-//     if (key !== "id" && couldBeID(val)) {
-//       relatedFields.push(key)
-//     }
+    if (key !== "id" && couldBeID(val)) {
+      relatedFields.push(key)
+    }
 
-//     if (relatedFields.includes(key)) {
-//       const relation = items.find((i) => i.id === val)
-//       if (relation) {
-//         return sortByRelation(items, relation, collection)
-//       }
-//     }
+    if (relatedFields.includes(key)) {
+      const relation = items.find((i) => i.id === val)
+      if (relation) {
+        return sortByRelation(items, relation, collection)
+      }
+    }
 
-//     if (Array.isArray(val)) {
-//       val.forEach((relatedID) => {
-//         const relation = items.find((i) => i.id === relatedID)
-//         if (relation) {
-//           return sortByRelation(items, relation, collection)
-//         }
-//       })
-//     }
-//   })
+    if (Array.isArray(val)) {
+      val.forEach((relatedID) => {
+        const relation = items.find((i) => i.id === relatedID)
+        if (relation) {
+          return sortByRelation(items, relation, collection)
+        }
+      })
+    }
+  })
 
-//   collection.push(item)
+  collection.push(item)
 
-//   if (nextItem) {
-//     return sortByRelation(items, nextItem, collection)
-//   }
+  if (nextItem) {
+    return sortByRelation(items, nextItem, collection)
+  }
 
-//   return collection
-// }
+  return collection
+}
 
 async function importContent(token) {
   console.log(`Importing ${data.length} DatoCMS content records`)
   console.log("token: ", token)
-  // const client = new SiteClient(token)
+  const client = new SiteClient(token)
+
+  const itemTypes = await client.itemTypes.all()
+  const items = await client.items.all()
+  const itemMap = []
+
+  if (items.length) {
+    throw new Error("You already have content in this project.")
+  }
 
   // const dataIds = data.map((point) => point.id)
   // console.log("data ids: ", dataIds)
   // console.log("first entry: ", data[0].id)
 
   // get models from DatoCMS instance
-  const models = await DatoCmsTools.exportModels({ apiKey: token })
+  // const models =
 
-  console.log("models: ", models)
+  // console.log("models: ", models)
 
-  const result = await DatoCmsTools.importContent({
-    apiKey: token,
-    content: data,
-    models,
-  })
+  // const result = await DatoCmsTools.importContent({
+  //   apiKey: token,
+  //   content: data,
+  //   models,
+  // })
 
-  console.log("result: ", result)
+  // console.log("result: ", result)
 
-  // const orderedData = sortByRelation(data, data[0])
+  const sortedContent = sortByRelation(data, data[0])
+  // console.log("ordered data: ", orderedData)
+  let newItems = sortedContent
+
+  if (dataModel) {
+    newItems = sortedContent.map((item) => {
+      const existingItemType = dataModel.itemTypes.find(
+        (i) => i.id === item.itemType
+      )
+
+      if (!existingItemType) {
+        throw new Error(
+          `Could not find matching itemType: ${item.itemType}. Are you sure you provided the right models?`
+        )
+      }
+
+      const newItemType = itemTypes.find(
+        (i) => i.apiKey === existingItemType.apiKey
+      )
+      if (!newItemType) {
+        console.error(
+          `Could not find new item type corresponding to old item type with apiKey: ${existingItemType.apiKey}`
+        )
+      }
+      const newItem = { ...item }
+
+      newItem.itemType = newItemType.id
+      return newItem
+    })
+  }
+
+  for (const item of newItems) {
+    const { id, meta, creator, updatedAt, createdAt, ...props } = item
+    const newItem = { ...props }
+
+    Object.keys(newItem).forEach((key) => {
+      const val = newItem[key]
+
+      if (val && typeof val === "string" && !val.length) {
+        newItem[key] = null
+      }
+
+      if (val && key !== "itemType" && couldBeID(val)) {
+        const newID = itemMap.find((mapping) => mapping.old.id === val).new.id
+        if (newID) {
+          newItem[key] = newID
+        }
+      }
+    })
+
+    const freshItem = await client.items.create(newItem)
+    itemMap.push({
+      old: item,
+      new: freshItem,
+    })
+  }
+
+  const freshItems = await client.items.all()
+
+  for (const item of freshItems) {
+    const existingItem = itemMap.find(
+      (mapping) => mapping.new.id === item.id
+    ).old
+    const parentMapping = itemMap.find(
+      (mapping) => mapping.old.id === existingItem.parentId
+    )
+    const parentId = parentMapping ? parentMapping.new.id : null
+    const update = {
+      position: existingItem.position,
+      parentId,
+    }
+    console.log("updating with", update)
+    await client.items.update(item.id, update)
+  }
+
   // const errors = []
 
   // for (let i = 0; i < orderedData.length; i++) {
