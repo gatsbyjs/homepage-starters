@@ -1,0 +1,3911 @@
+{
+  "fields": [
+    {
+      "id": "8976574",
+      "label": "Name",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "name",
+      "hint": null,
+      "validators": {
+        "required": {}
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 1,
+      "itemType": "1788730",
+      "fieldset": null
+    },
+    {
+      "id": "8976780",
+      "label": "Nav Items",
+      "fieldType": "rich_text",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "nav_items",
+      "hint": null,
+      "validators": {
+        "richTextBlocks": {
+          "itemTypes": ["1799528"]
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "position": 2,
+      "itemType": "1788730",
+      "fieldset": null
+    },
+    {
+      "id": "8731595",
+      "label": "Metadata",
+      "fieldType": "seo",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "metadata",
+      "hint": null,
+      "validators": {
+        "titleLength": {
+          "max": 60
+        },
+        "descriptionLength": {
+          "max": 160
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "seo",
+        "parameters": {}
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "seo",
+        "parameters": {}
+      },
+      "position": 1,
+      "itemType": "1740194",
+      "fieldset": null
+    },
+    {
+      "id": "8731596",
+      "label": "slug",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "slug",
+      "hint": null,
+      "validators": {
+        "required": {},
+        "unique": {},
+        "format": {
+          "customPattern": "^[a-zA-Z0-9\\/_-]*$"
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 2,
+      "itemType": "1740194",
+      "fieldset": null
+    },
+    {
+      "id": "8731597",
+      "label": "Body",
+      "fieldType": "structured_text",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "body",
+      "hint": null,
+      "validators": {
+        "structuredTextBlocks": {
+          "itemTypes": []
+        },
+        "structuredTextLinks": {
+          "itemTypes": [],
+          "onPublishWithUnpublishedReferencesStrategy": "fail",
+          "onReferenceUnpublishStrategy": "delete_references",
+          "onReferenceDeleteStrategy": "delete_references"
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "structured_text",
+        "parameters": {
+          "marks": [
+            "strong",
+            "code",
+            "emphasis",
+            "underline",
+            "strikethrough",
+            "highlight"
+          ],
+          "nodes": [
+            "blockquote",
+            "code",
+            "heading",
+            "link",
+            "list",
+            "thematicBreak"
+          ],
+          "blocksStartCollapsed": false,
+          "showLinksMetaEditor": false,
+          "showLinksTargetBlank": true
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "structured_text",
+        "parameters": {
+          "marks": [
+            "strong",
+            "code",
+            "emphasis",
+            "underline",
+            "strikethrough",
+            "highlight"
+          ],
+          "nodes": [
+            "blockquote",
+            "code",
+            "heading",
+            "link",
+            "list",
+            "thematicBreak"
+          ],
+          "blocksStartCollapsed": false,
+          "showLinksMetaEditor": false,
+          "showLinksTargetBlank": true
+        }
+      },
+      "position": 3,
+      "itemType": "1740194",
+      "fieldset": null
+    },
+    {
+      "id": "9102779",
+      "label": "Gatsby Preview",
+      "fieldType": "json",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "gatsbypreview",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "104462",
+        "parameters": {}
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "104462",
+        "parameters": {}
+      },
+      "position": 4,
+      "itemType": "1740194",
+      "fieldset": null
+    },
+    {
+      "id": "8287890",
+      "label": "Quote",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "quote",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 1,
+      "itemType": "1655394",
+      "fieldset": null
+    },
+    {
+      "id": "8287891",
+      "label": "Source",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "source",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 2,
+      "itemType": "1655394",
+      "fieldset": null
+    },
+    {
+      "id": "8287892",
+      "label": "Avatar",
+      "fieldType": "file",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "avatar",
+      "hint": null,
+      "validators": {
+        "requiredAltTitle": {
+          "title": false,
+          "alt": true
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "file",
+        "parameters": {}
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "file",
+        "parameters": {}
+      },
+      "position": 3,
+      "itemType": "1655394",
+      "fieldset": null
+    },
+    {
+      "id": "9037954",
+      "label": "Text",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "text",
+      "hint": null,
+      "validators": {
+        "required": {}
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 1,
+      "itemType": "1799528",
+      "fieldset": null
+    },
+    {
+      "id": "9037953",
+      "label": "Href",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "href",
+      "hint": null,
+      "validators": {
+        "required": {}
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 2,
+      "itemType": "1799528",
+      "fieldset": null
+    },
+    {
+      "id": "9037952",
+      "label": "Icon",
+      "fieldType": "file",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "icon",
+      "hint": null,
+      "validators": {
+        "requiredAltTitle": {
+          "title": false,
+          "alt": true
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "file",
+        "parameters": {}
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "file",
+        "parameters": {}
+      },
+      "position": 3,
+      "itemType": "1799528",
+      "fieldset": null
+    },
+    {
+      "id": "9037950",
+      "label": "Description",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "description",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 4,
+      "itemType": "1799528",
+      "fieldset": null
+    },
+    {
+      "id": "8287839",
+      "label": "Text",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "text",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 1,
+      "itemType": "1655382",
+      "fieldset": null
+    },
+    {
+      "id": "8287840",
+      "label": "Href",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "href",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 2,
+      "itemType": "1655382",
+      "fieldset": null
+    },
+    {
+      "id": "8562910",
+      "label": "Kicker",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "kicker",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 1,
+      "itemType": "1655395",
+      "fieldset": null
+    },
+    {
+      "id": "8562911",
+      "label": "Heading",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "heading",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 2,
+      "itemType": "1655395",
+      "fieldset": null
+    },
+    {
+      "id": "8287893",
+      "label": "Content",
+      "fieldType": "rich_text",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "content",
+      "hint": null,
+      "validators": {
+        "richTextBlocks": {
+          "itemTypes": ["1655394"]
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "position": 3,
+      "itemType": "1655395",
+      "fieldset": null
+    },
+    {
+      "id": "8562960",
+      "label": "Heading",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "heading",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 1,
+      "itemType": "1709664",
+      "fieldset": null
+    },
+    {
+      "id": "8562962",
+      "label": "Text",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "text",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 2,
+      "itemType": "1709664",
+      "fieldset": null
+    },
+    {
+      "id": "8562963",
+      "label": "Image",
+      "fieldType": "file",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "image",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "file",
+        "parameters": {}
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "file",
+        "parameters": {}
+      },
+      "position": 3,
+      "itemType": "1709664",
+      "fieldset": null
+    },
+    {
+      "id": "8562964",
+      "label": "Links",
+      "fieldType": "rich_text",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "links",
+      "hint": null,
+      "validators": {
+        "richTextBlocks": {
+          "itemTypes": ["1655382"]
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "position": 4,
+      "itemType": "1709664",
+      "fieldset": null
+    },
+    {
+      "id": "8287898",
+      "label": "Label",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "label",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 1,
+      "itemType": "1655398",
+      "fieldset": null
+    },
+    {
+      "id": "8287899",
+      "label": "Value",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "value",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 2,
+      "itemType": "1655398",
+      "fieldset": null
+    },
+    {
+      "id": "8287976",
+      "label": "Heading",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "heading",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 3,
+      "itemType": "1655398",
+      "fieldset": null
+    },
+    {
+      "id": "8562953",
+      "label": "Kicker",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "kicker",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 1,
+      "itemType": "1655427",
+      "fieldset": null
+    },
+    {
+      "id": "8562954",
+      "label": "Heading",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "heading",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 2,
+      "itemType": "1655427",
+      "fieldset": null
+    },
+    {
+      "id": "8562955",
+      "label": "Text",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "text",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 3,
+      "itemType": "1655427",
+      "fieldset": null
+    },
+    {
+      "id": "8562956",
+      "label": "Image",
+      "fieldType": "file",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "image",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "file",
+        "parameters": {}
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "file",
+        "parameters": {}
+      },
+      "position": 4,
+      "itemType": "1655427",
+      "fieldset": null
+    },
+    {
+      "id": "8562957",
+      "label": "Icon",
+      "fieldType": "file",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "icon",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "file",
+        "parameters": {}
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "file",
+        "parameters": {}
+      },
+      "position": 5,
+      "itemType": "1655427",
+      "fieldset": null
+    },
+    {
+      "id": "8288014",
+      "label": "Content",
+      "fieldType": "rich_text",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "content",
+      "hint": null,
+      "validators": {
+        "richTextBlocks": {
+          "itemTypes": ["1655398"]
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "position": 6,
+      "itemType": "1655427",
+      "fieldset": null
+    },
+    {
+      "id": "8562958",
+      "label": "Links",
+      "fieldType": "rich_text",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "links",
+      "hint": null,
+      "validators": {
+        "richTextBlocks": {
+          "itemTypes": ["1655382"]
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "position": 7,
+      "itemType": "1655427",
+      "fieldset": null
+    },
+    {
+      "id": "8562966",
+      "label": "Kicker",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "kicker",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 1,
+      "itemType": "1709666",
+      "fieldset": null
+    },
+    {
+      "id": "8562968",
+      "label": "Heading",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "heading",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 2,
+      "itemType": "1709666",
+      "fieldset": null
+    },
+    {
+      "id": "8562969",
+      "label": "Text",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "text",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 3,
+      "itemType": "1709666",
+      "fieldset": null
+    },
+    {
+      "id": "8562971",
+      "label": "Content",
+      "fieldType": "rich_text",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "content",
+      "hint": null,
+      "validators": {
+        "richTextBlocks": {
+          "itemTypes": ["1709664"]
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "position": 4,
+      "itemType": "1709666",
+      "fieldset": null
+    },
+    {
+      "id": "8287845",
+      "label": "Heading",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "heading",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 1,
+      "itemType": "1655384",
+      "fieldset": null
+    },
+    {
+      "id": "8287847",
+      "label": "Kicker",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "kicker",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 2,
+      "itemType": "1655384",
+      "fieldset": null
+    },
+    {
+      "id": "8287848",
+      "label": "Image",
+      "fieldType": "file",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "image",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "file",
+        "parameters": {}
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "file",
+        "parameters": {}
+      },
+      "position": 3,
+      "itemType": "1655384",
+      "fieldset": null
+    },
+    {
+      "id": "8287849",
+      "label": "Text",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "text",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 4,
+      "itemType": "1655384",
+      "fieldset": null
+    },
+    {
+      "id": "8287885",
+      "label": "Links",
+      "fieldType": "rich_text",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "links",
+      "hint": null,
+      "validators": {
+        "richTextBlocks": {
+          "itemTypes": ["1655382"]
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "position": 5,
+      "itemType": "1655384",
+      "fieldset": null
+    },
+    {
+      "id": "8562909",
+      "label": "Text",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "text",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 1,
+      "itemType": "1655430",
+      "fieldset": null
+    },
+    {
+      "id": "8288020",
+      "label": "Logos",
+      "fieldType": "gallery",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "logos",
+      "hint": null,
+      "validators": {
+        "requiredAltTitle": {
+          "title": false,
+          "alt": true
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "gallery",
+        "parameters": {}
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "gallery",
+        "parameters": {}
+      },
+      "position": 2,
+      "itemType": "1655430",
+      "fieldset": null
+    },
+    {
+      "id": "8994373",
+      "label": "Value",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "value",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 1,
+      "itemType": "1792121",
+      "fieldset": null
+    },
+    {
+      "id": "8994375",
+      "label": "Label",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "label",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 2,
+      "itemType": "1792121",
+      "fieldset": null
+    },
+    {
+      "id": "8994524",
+      "label": "Heading",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "heading",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 1,
+      "itemType": "1792148",
+      "fieldset": null
+    },
+    {
+      "id": "8994525",
+      "label": "Link",
+      "fieldType": "rich_text",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "link",
+      "hint": null,
+      "validators": {
+        "richTextBlocks": {
+          "itemTypes": ["1655382"]
+        },
+        "size": {
+          "max": 1
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "position": 2,
+      "itemType": "1792148",
+      "fieldset": null
+    },
+    {
+      "id": "9142984",
+      "label": "Links",
+      "fieldType": "rich_text",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "links",
+      "hint": null,
+      "validators": {
+        "richTextBlocks": {
+          "itemTypes": ["1655382"]
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "position": 3,
+      "itemType": "1792148",
+      "fieldset": null
+    },
+    {
+      "id": "8994527",
+      "label": "Logos",
+      "fieldType": "gallery",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "logos",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "gallery",
+        "parameters": {}
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "gallery",
+        "parameters": {}
+      },
+      "position": 4,
+      "itemType": "1792148",
+      "fieldset": null
+    },
+    {
+      "id": "8994512",
+      "label": "Image",
+      "fieldType": "file",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "image",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "file",
+        "parameters": {}
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "file",
+        "parameters": {}
+      },
+      "position": 1,
+      "itemType": "1792145",
+      "fieldset": null
+    },
+    {
+      "id": "8994514",
+      "label": "Name",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "name",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 2,
+      "itemType": "1792145",
+      "fieldset": null
+    },
+    {
+      "id": "8994515",
+      "label": "Job Title",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "job_title",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 3,
+      "itemType": "1792145",
+      "fieldset": null
+    },
+    {
+      "id": "8994516",
+      "label": "Kicker",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "kicker",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 1,
+      "itemType": "1792146",
+      "fieldset": null
+    },
+    {
+      "id": "8994518",
+      "label": "Heading",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "heading",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 2,
+      "itemType": "1792146",
+      "fieldset": null
+    },
+    {
+      "id": "8994520",
+      "label": "Subhead",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "subhead",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 3,
+      "itemType": "1792146",
+      "fieldset": null
+    },
+    {
+      "id": "8994522",
+      "label": "Content",
+      "fieldType": "rich_text",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "content",
+      "hint": null,
+      "validators": {
+        "richTextBlocks": {
+          "itemTypes": ["1792145"]
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "position": 4,
+      "itemType": "1792146",
+      "fieldset": null
+    },
+    {
+      "id": "8994369",
+      "label": "Heading",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "heading",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 1,
+      "itemType": "1792119",
+      "fieldset": null
+    },
+    {
+      "id": "8994371",
+      "label": "Text",
+      "fieldType": "text",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "text",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "markdown",
+        "parameters": {
+          "toolbar": [
+            "heading",
+            "bold",
+            "italic",
+            "strikethrough",
+            "code",
+            "unordered_list",
+            "ordered_list",
+            "quote",
+            "link",
+            "image",
+            "fullscreen"
+          ]
+        },
+        "type": "markdown"
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "markdown",
+        "parameters": {
+          "toolbar": [
+            "heading",
+            "bold",
+            "italic",
+            "strikethrough",
+            "code",
+            "unordered_list",
+            "ordered_list",
+            "quote",
+            "link",
+            "image",
+            "fullscreen"
+          ]
+        },
+        "type": "markdown"
+      },
+      "position": 2,
+      "itemType": "1792119",
+      "fieldset": null
+    },
+    {
+      "id": "8994372",
+      "label": "Image",
+      "fieldType": "file",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "image",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "file",
+        "parameters": {}
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "file",
+        "parameters": {}
+      },
+      "position": 3,
+      "itemType": "1792119",
+      "fieldset": null
+    },
+    {
+      "id": "8994510",
+      "label": "Content",
+      "fieldType": "rich_text",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "content",
+      "hint": null,
+      "validators": {
+        "richTextBlocks": {
+          "itemTypes": ["1792121"]
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "position": 1,
+      "itemType": "1792122",
+      "fieldset": null
+    },
+    {
+      "id": "8562893",
+      "label": "Kicker",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "kicker",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 1,
+      "itemType": "1709655",
+      "fieldset": null
+    },
+    {
+      "id": "8562894",
+      "label": "Heading",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "heading",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 2,
+      "itemType": "1709655",
+      "fieldset": null
+    },
+    {
+      "id": "8562895",
+      "label": "Text",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "text",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 3,
+      "itemType": "1709655",
+      "fieldset": null
+    },
+    {
+      "id": "8562897",
+      "label": "Content",
+      "fieldType": "rich_text",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "content",
+      "hint": null,
+      "validators": {
+        "richTextBlocks": {
+          "itemTypes": ["1655384"]
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "position": 4,
+      "itemType": "1709655",
+      "fieldset": null
+    },
+    {
+      "id": "8287834",
+      "label": "Heading",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "heading",
+      "hint": null,
+      "validators": {
+        "required": {}
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 1,
+      "itemType": "1655381",
+      "fieldset": null
+    },
+    {
+      "id": "8287835",
+      "label": "Subhead",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "subhead",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 2,
+      "itemType": "1655381",
+      "fieldset": null
+    },
+    {
+      "id": "8287836",
+      "label": "Kicker",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "kicker",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 3,
+      "itemType": "1655381",
+      "fieldset": null
+    },
+    {
+      "id": "8287837",
+      "label": "Image",
+      "fieldType": "file",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "image",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "file",
+        "parameters": {}
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "file",
+        "parameters": {}
+      },
+      "position": 4,
+      "itemType": "1655381",
+      "fieldset": null
+    },
+    {
+      "id": "8287838",
+      "label": "Text",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "text",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 5,
+      "itemType": "1655381",
+      "fieldset": null
+    },
+    {
+      "id": "8287841",
+      "label": "Links",
+      "fieldType": "rich_text",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "links",
+      "hint": null,
+      "validators": {
+        "richTextBlocks": {
+          "itemTypes": ["1655382"]
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "position": 6,
+      "itemType": "1655381",
+      "fieldset": null
+    },
+    {
+      "id": "9001195",
+      "label": "Kicker",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "kicker",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 1,
+      "itemType": "1655383",
+      "fieldset": null
+    },
+    {
+      "id": "8287842",
+      "label": "Heading",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "heading",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 2,
+      "itemType": "1655383",
+      "fieldset": null
+    },
+    {
+      "id": "8287843",
+      "label": "Text",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "text",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 3,
+      "itemType": "1655383",
+      "fieldset": null
+    },
+    {
+      "id": "8562902",
+      "label": "Image",
+      "fieldType": "file",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "image",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "file",
+        "parameters": {}
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "file",
+        "parameters": {}
+      },
+      "position": 4,
+      "itemType": "1655383",
+      "fieldset": null
+    },
+    {
+      "id": "8287844",
+      "label": "Links",
+      "fieldType": "rich_text",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "links",
+      "hint": null,
+      "validators": {
+        "richTextBlocks": {
+          "itemTypes": ["1655382"]
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "position": 5,
+      "itemType": "1655383",
+      "fieldset": null
+    },
+    {
+      "id": "8562913",
+      "label": "Heading",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "heading",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 1,
+      "itemType": "1655397",
+      "fieldset": null
+    },
+    {
+      "id": "8562914",
+      "label": "Text",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "text",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 2,
+      "itemType": "1655397",
+      "fieldset": null
+    },
+    {
+      "id": "8287897",
+      "label": "Content",
+      "fieldType": "rich_text",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "content",
+      "hint": null,
+      "validators": {
+        "richTextBlocks": {
+          "itemTypes": ["1655396"]
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "position": 3,
+      "itemType": "1655397",
+      "fieldset": null
+    },
+    {
+      "id": "8287894",
+      "label": "Heading",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "heading",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 1,
+      "itemType": "1655396",
+      "fieldset": null
+    },
+    {
+      "id": "8287895",
+      "label": "Text",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "text",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 2,
+      "itemType": "1655396",
+      "fieldset": null
+    },
+    {
+      "id": "8287896",
+      "label": "Image",
+      "fieldType": "file",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "image",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "file",
+        "parameters": {}
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "file",
+        "parameters": {}
+      },
+      "position": 3,
+      "itemType": "1655396",
+      "fieldset": null
+    },
+    {
+      "id": "8994363",
+      "label": "Metadata",
+      "fieldType": "seo",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "metadata",
+      "hint": null,
+      "validators": {
+        "titleLength": {
+          "max": 60
+        },
+        "descriptionLength": {
+          "max": 160
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "seo",
+        "parameters": {}
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "seo",
+        "parameters": {}
+      },
+      "position": 1,
+      "itemType": "1792117",
+      "fieldset": null
+    },
+    {
+      "id": "8994364",
+      "label": "Content",
+      "fieldType": "rich_text",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "content",
+      "hint": null,
+      "validators": {
+        "richTextBlocks": {
+          "itemTypes": [
+            "1655383",
+            "1709655",
+            "1709666",
+            "1792119",
+            "1792146",
+            "1792145",
+            "1792148",
+            "1792122",
+            "1792121",
+            "1655397"
+          ]
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "position": 2,
+      "itemType": "1792117",
+      "fieldset": null
+    },
+    {
+      "id": "9102799",
+      "label": "Gatsby Preview",
+      "fieldType": "json",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "gatsbypreview",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "104462",
+        "parameters": {}
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "104462",
+        "parameters": {}
+      },
+      "position": 3,
+      "itemType": "1792117",
+      "fieldset": null
+    },
+    {
+      "id": "8923410",
+      "label": "Title",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "title",
+      "hint": null,
+      "validators": {
+        "required": {}
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": true
+        },
+        "type": "title"
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": true
+        },
+        "type": "title"
+      },
+      "position": 1,
+      "itemType": "1778186",
+      "fieldset": null
+    },
+    {
+      "id": "8923411",
+      "label": "slug",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "slug",
+      "hint": null,
+      "validators": {
+        "required": {},
+        "unique": {},
+        "format": {
+          "customPattern": "^[a-zA-Z0-9\\/_-]*$"
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 2,
+      "itemType": "1778186",
+      "fieldset": null
+    },
+    {
+      "id": "8923412",
+      "label": "Body",
+      "fieldType": "structured_text",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "body",
+      "hint": null,
+      "validators": {
+        "structuredTextBlocks": {
+          "itemTypes": []
+        },
+        "structuredTextLinks": {
+          "itemTypes": [],
+          "onPublishWithUnpublishedReferencesStrategy": "fail",
+          "onReferenceUnpublishStrategy": "delete_references",
+          "onReferenceDeleteStrategy": "delete_references"
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "structured_text",
+        "parameters": {
+          "marks": [
+            "strong",
+            "code",
+            "emphasis",
+            "underline",
+            "strikethrough",
+            "highlight"
+          ],
+          "nodes": [
+            "blockquote",
+            "code",
+            "heading",
+            "link",
+            "list",
+            "thematicBreak"
+          ],
+          "blocksStartCollapsed": false,
+          "showLinksMetaEditor": false,
+          "showLinksTargetBlank": true
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "structured_text",
+        "parameters": {
+          "marks": [
+            "strong",
+            "code",
+            "emphasis",
+            "underline",
+            "strikethrough",
+            "highlight"
+          ],
+          "nodes": [
+            "blockquote",
+            "code",
+            "heading",
+            "link",
+            "list",
+            "thematicBreak"
+          ],
+          "blocksStartCollapsed": false,
+          "showLinksMetaEditor": false,
+          "showLinksTargetBlank": true
+        }
+      },
+      "position": 3,
+      "itemType": "1778186",
+      "fieldset": null
+    },
+    {
+      "id": "8999006",
+      "label": "Image",
+      "fieldType": "file",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "image",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "file",
+        "parameters": {}
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "file",
+        "parameters": {}
+      },
+      "position": 4,
+      "itemType": "1778186",
+      "fieldset": null
+    },
+    {
+      "id": "8999007",
+      "label": "Date",
+      "fieldType": "date",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "date",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "date_picker",
+        "parameters": {}
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "date_picker",
+        "parameters": {}
+      },
+      "position": 5,
+      "itemType": "1778186",
+      "fieldset": null
+    },
+    {
+      "id": "8999008",
+      "label": "Excerpt",
+      "fieldType": "text",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "excerpt",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "textarea",
+        "parameters": {},
+        "type": "textarea"
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "textarea",
+        "parameters": {},
+        "type": "textarea"
+      },
+      "position": 6,
+      "itemType": "1778186",
+      "fieldset": null
+    },
+    {
+      "id": "9102781",
+      "label": "Gatsby Preview",
+      "fieldType": "json",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "gatsbypreview",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "104462",
+        "parameters": {}
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "104462",
+        "parameters": {}
+      },
+      "position": 7,
+      "itemType": "1778186",
+      "fieldset": null
+    },
+    {
+      "id": "8468660",
+      "label": "Name",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "name",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 1,
+      "itemType": "1665125",
+      "fieldset": null
+    },
+    {
+      "id": "8335496",
+      "label": "Links",
+      "fieldType": "rich_text",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "links",
+      "hint": null,
+      "validators": {
+        "richTextBlocks": {
+          "itemTypes": ["1655382"]
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "position": 2,
+      "itemType": "1665125",
+      "fieldset": null
+    },
+    {
+      "id": "8335567",
+      "label": "Social Links",
+      "fieldType": "rich_text",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "social_links",
+      "hint": null,
+      "validators": {
+        "richTextBlocks": {
+          "itemTypes": ["1665136"]
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "position": 3,
+      "itemType": "1665125",
+      "fieldset": null
+    },
+    {
+      "id": "8335551",
+      "label": "Meta",
+      "fieldType": "rich_text",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "metalinks",
+      "hint": null,
+      "validators": {
+        "richTextBlocks": {
+          "itemTypes": ["1655382"]
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "position": 4,
+      "itemType": "1665125",
+      "fieldset": null
+    },
+    {
+      "id": "8335557",
+      "label": "Copyright",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "copyright",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 5,
+      "itemType": "1665125",
+      "fieldset": null
+    },
+    {
+      "id": "9102791",
+      "label": "Gatsby Preview",
+      "fieldType": "json",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "gatsbypreview",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "104462",
+        "parameters": {}
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "104462",
+        "parameters": {}
+      },
+      "position": 6,
+      "itemType": "1665125",
+      "fieldset": null
+    },
+    {
+      "id": "8468661",
+      "label": "Name",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "name",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 1,
+      "itemType": "1665124",
+      "fieldset": null
+    },
+    {
+      "id": "8335492",
+      "label": "NavItems",
+      "fieldType": "rich_text",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "nav_items",
+      "hint": null,
+      "validators": {
+        "richTextBlocks": {
+          "itemTypes": ["1788730", "1799528"]
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "position": 2,
+      "itemType": "1665124",
+      "fieldset": null
+    },
+    {
+      "id": "8335493",
+      "label": "CTA",
+      "fieldType": "rich_text",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "cta",
+      "hint": null,
+      "validators": {
+        "richTextBlocks": {
+          "itemTypes": ["1655382"]
+        },
+        "size": {
+          "min": 0,
+          "max": 1
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "position": 3,
+      "itemType": "1665124",
+      "fieldset": null
+    },
+    {
+      "id": "9102793",
+      "label": "Gatsby Preview",
+      "fieldType": "json",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "gatsbypreview",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "104462",
+        "parameters": {}
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "104462",
+        "parameters": {}
+      },
+      "position": 4,
+      "itemType": "1665124",
+      "fieldset": null
+    },
+    {
+      "id": "8335495",
+      "label": "Header",
+      "fieldType": "link",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "header",
+      "hint": null,
+      "validators": {
+        "itemItemType": {
+          "itemTypes": ["1665124"],
+          "onPublishWithUnpublishedReferencesStrategy": "fail",
+          "onReferenceUnpublishStrategy": "delete_references",
+          "onReferenceDeleteStrategy": "delete_references"
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "link_select",
+        "parameters": {}
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "link_select",
+        "parameters": {}
+      },
+      "position": 1,
+      "itemType": "1665123",
+      "fieldset": null
+    },
+    {
+      "id": "8335568",
+      "label": "Footer",
+      "fieldType": "link",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "footer",
+      "hint": null,
+      "validators": {
+        "itemItemType": {
+          "itemTypes": ["1665125"],
+          "onPublishWithUnpublishedReferencesStrategy": "fail",
+          "onReferenceUnpublishStrategy": "delete_references",
+          "onReferenceDeleteStrategy": "delete_references"
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "link_select",
+        "parameters": {}
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "link_select",
+        "parameters": {}
+      },
+      "position": 2,
+      "itemType": "1665123",
+      "fieldset": null
+    },
+    {
+      "id": "9102795",
+      "label": "Gatsby Preview",
+      "fieldType": "json",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "gatsbypreview",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "104462",
+        "parameters": {}
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "104462",
+        "parameters": {}
+      },
+      "position": 3,
+      "itemType": "1665123",
+      "fieldset": null
+    },
+    {
+      "id": "8335563",
+      "label": "Service",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "service",
+      "hint": null,
+      "validators": {
+        "enum": {
+          "values": [
+            "TWITTER",
+            "FACEBOOK",
+            "INSTAGRAM",
+            "YOUTUBE",
+            "LINKEDIN",
+            "GITHUB",
+            "DISCORD",
+            "TWITCH",
+            ""
+          ]
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 1,
+      "itemType": "1665136",
+      "fieldset": null
+    },
+    {
+      "id": "8335564",
+      "label": "Username",
+      "fieldType": "string",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "username",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "single_line",
+        "parameters": {
+          "heading": false
+        }
+      },
+      "position": 2,
+      "itemType": "1665136",
+      "fieldset": null
+    },
+    {
+      "id": "8287833",
+      "label": "Metadata",
+      "fieldType": "seo",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "metadata",
+      "hint": null,
+      "validators": {
+        "titleLength": {
+          "max": 60
+        },
+        "descriptionLength": {
+          "max": 160
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "seo",
+        "parameters": {}
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "seo",
+        "parameters": {}
+      },
+      "position": 1,
+      "itemType": "1655380",
+      "fieldset": null
+    },
+    {
+      "id": "8288816",
+      "label": "Content",
+      "fieldType": "rich_text",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "content",
+      "hint": null,
+      "validators": {
+        "richTextBlocks": {
+          "itemTypes": [
+            "1655397",
+            "1655383",
+            "1655381",
+            "1655430",
+            "1655427",
+            "1655395",
+            "1655384",
+            "1709655",
+            "1709666"
+          ]
+        }
+      },
+      "appeareance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "rich_text",
+        "parameters": {
+          "startCollapsed": false
+        }
+      },
+      "position": 2,
+      "itemType": "1655380",
+      "fieldset": null
+    },
+    {
+      "id": "9102792",
+      "label": "Gatsby Preview",
+      "fieldType": "json",
+      "localized": false,
+      "defaultValue": null,
+      "apiKey": "gatsbypreview",
+      "hint": null,
+      "validators": {},
+      "appeareance": {
+        "addons": [],
+        "editor": "104462",
+        "parameters": {}
+      },
+      "appearance": {
+        "addons": [],
+        "editor": "104462",
+        "parameters": {}
+      },
+      "position": 3,
+      "itemType": "1655380",
+      "fieldset": null
+    }
+  ],
+  "itemTypes": [
+    {
+      "id": "1788730",
+      "name": "Nav Item Group",
+      "apiKey": "nav_item_group",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": false,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": true,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": false,
+      "hint": null,
+      "singletonItem": null,
+      "fields": ["8976574", "8976780"],
+      "titleField": null,
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1740194",
+      "name": "Page",
+      "apiKey": "page",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": false,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": false,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": false,
+      "hint": null,
+      "singletonItem": null,
+      "fields": ["8731595", "8731596", "8731597", "9102779"],
+      "titleField": "8731596",
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1655394",
+      "name": "Homepage Testimonial",
+      "apiKey": "homepage_testimonial",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": false,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": true,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": false,
+      "hint": null,
+      "singletonItem": null,
+      "fields": ["8287890", "8287891", "8287892"],
+      "titleField": null,
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1799528",
+      "name": "Nav Item",
+      "apiKey": "nav_item",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": false,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": true,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": false,
+      "hint": null,
+      "singletonItem": null,
+      "fields": ["9037954", "9037953", "9037952", "9037950"],
+      "titleField": null,
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1655382",
+      "name": "Homepage Link",
+      "apiKey": "homepage_link",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": false,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": true,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": false,
+      "hint": null,
+      "singletonItem": null,
+      "fields": ["8287839", "8287840"],
+      "titleField": null,
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1655395",
+      "name": "Homepage Testimonial List",
+      "apiKey": "homepage_testimonial_list",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": false,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": true,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": false,
+      "hint": null,
+      "singletonItem": null,
+      "fields": ["8562910", "8562911", "8287893"],
+      "titleField": null,
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1709664",
+      "name": "Homepage Product",
+      "apiKey": "homepage_product",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": false,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": true,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": false,
+      "hint": null,
+      "singletonItem": null,
+      "fields": ["8562960", "8562962", "8562963", "8562964"],
+      "titleField": null,
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1655398",
+      "name": "Homepage Stat",
+      "apiKey": "homepage_stat",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": false,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": true,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": false,
+      "hint": null,
+      "singletonItem": null,
+      "fields": ["8287898", "8287899", "8287976"],
+      "titleField": null,
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1655427",
+      "name": "Homepage Stat List",
+      "apiKey": "homepage_stat_list",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": false,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": true,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": false,
+      "hint": null,
+      "singletonItem": null,
+      "fields": [
+        "8562953",
+        "8562954",
+        "8562955",
+        "8562956",
+        "8562957",
+        "8288014",
+        "8562958"
+      ],
+      "titleField": null,
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1709666",
+      "name": "Homepage Product List",
+      "apiKey": "homepage_product_list",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": false,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": true,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": false,
+      "hint": null,
+      "singletonItem": null,
+      "fields": ["8562966", "8562968", "8562969", "8562971"],
+      "titleField": null,
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1655384",
+      "name": "Homepage Feature",
+      "apiKey": "homepage_feature",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": false,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": true,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": false,
+      "hint": null,
+      "singletonItem": null,
+      "fields": ["8287845", "8287847", "8287848", "8287849", "8287885"],
+      "titleField": null,
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1655430",
+      "name": "Homepage Logo List",
+      "apiKey": "homepage_logo_list",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": false,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": true,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": false,
+      "hint": null,
+      "singletonItem": null,
+      "fields": ["8562909", "8288020"],
+      "titleField": null,
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1792121",
+      "name": "About Stat",
+      "apiKey": "about_stat",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": false,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": true,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": false,
+      "hint": null,
+      "singletonItem": null,
+      "fields": ["8994373", "8994375"],
+      "titleField": null,
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1792148",
+      "name": "About Logo List",
+      "apiKey": "about_logo_list",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": false,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": true,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": false,
+      "hint": null,
+      "singletonItem": null,
+      "fields": ["8994524", "8994525", "9142984", "8994527"],
+      "titleField": null,
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1792145",
+      "name": "About Profile",
+      "apiKey": "about_profile",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": false,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": true,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": false,
+      "hint": null,
+      "singletonItem": null,
+      "fields": ["8994512", "8994514", "8994515"],
+      "titleField": null,
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1792146",
+      "name": "About Leadership",
+      "apiKey": "about_leadership",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": false,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": true,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": false,
+      "hint": null,
+      "singletonItem": null,
+      "fields": ["8994516", "8994518", "8994520", "8994522"],
+      "titleField": null,
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1792119",
+      "name": "About Hero",
+      "apiKey": "about_hero",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": false,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": true,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": false,
+      "hint": null,
+      "singletonItem": null,
+      "fields": ["8994369", "8994371", "8994372"],
+      "titleField": null,
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1792122",
+      "name": "About Stat List",
+      "apiKey": "about_stat_list",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": false,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": true,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": false,
+      "hint": null,
+      "singletonItem": null,
+      "fields": ["8994510"],
+      "titleField": null,
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1709655",
+      "name": "Homepage Feature List",
+      "apiKey": "homepage_feature_list",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": false,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": true,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": false,
+      "hint": null,
+      "singletonItem": null,
+      "fields": ["8562893", "8562894", "8562895", "8562897"],
+      "titleField": null,
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1655381",
+      "name": "Homepage Hero",
+      "apiKey": "homepage_hero",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": false,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": true,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": false,
+      "hint": null,
+      "singletonItem": null,
+      "fields": [
+        "8287834",
+        "8287835",
+        "8287836",
+        "8287837",
+        "8287838",
+        "8287841"
+      ],
+      "titleField": null,
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1655383",
+      "name": "Homepage CTA",
+      "apiKey": "homepage_cta",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": false,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": true,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": false,
+      "hint": null,
+      "singletonItem": null,
+      "fields": ["9001195", "8287842", "8287843", "8562902", "8287844"],
+      "titleField": null,
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1655397",
+      "name": "Homepage Benefit List",
+      "apiKey": "homepage_benefit_list",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": false,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": true,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": false,
+      "hint": null,
+      "singletonItem": null,
+      "fields": ["8562913", "8562914", "8287897"],
+      "titleField": null,
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1655396",
+      "name": "Homepage Benefit",
+      "apiKey": "homepage_benefit",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": false,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": true,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": false,
+      "hint": null,
+      "singletonItem": null,
+      "fields": ["8287894", "8287895", "8287896"],
+      "titleField": null,
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1792117",
+      "name": "AboutPage",
+      "apiKey": "aboutpage",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": true,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": false,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": true,
+      "hint": null,
+      "singletonItem": "106328207",
+      "fields": ["8994363", "8994364", "9102799"],
+      "titleField": null,
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1778186",
+      "name": "BlogPost",
+      "apiKey": "blogpost",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": false,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": false,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": false,
+      "hint": null,
+      "singletonItem": null,
+      "fields": [
+        "8923410",
+        "8923411",
+        "8923412",
+        "8999006",
+        "8999007",
+        "8999008",
+        "9102781"
+      ],
+      "titleField": "8923410",
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1665125",
+      "name": "LayoutFooter",
+      "apiKey": "layoutfooter",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": false,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": false,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": false,
+      "hint": null,
+      "singletonItem": null,
+      "fields": [
+        "8468660",
+        "8335496",
+        "8335567",
+        "8335551",
+        "8335557",
+        "9102791"
+      ],
+      "titleField": "8468660",
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1665124",
+      "name": "LayoutHeader",
+      "apiKey": "layoutheader",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": false,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": false,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": false,
+      "hint": null,
+      "singletonItem": null,
+      "fields": ["8468661", "8335492", "8335493", "9102793"],
+      "titleField": "8468661",
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1665123",
+      "name": "Layout",
+      "apiKey": "layout",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": true,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": false,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": true,
+      "hint": null,
+      "singletonItem": "95347750",
+      "fields": ["8335495", "8335568", "9102795"],
+      "titleField": null,
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1665136",
+      "name": "Social Link",
+      "apiKey": "social_link",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": false,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": true,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": false,
+      "hint": null,
+      "singletonItem": null,
+      "fields": ["8335563", "8335564"],
+      "titleField": null,
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    },
+    {
+      "id": "1655380",
+      "name": "Homepage",
+      "apiKey": "homepage",
+      "collectionAppeareance": "table",
+      "collectionAppearance": "table",
+      "singleton": true,
+      "allLocalesRequired": true,
+      "sortable": false,
+      "modularBlock": false,
+      "draftModeActive": false,
+      "tree": false,
+      "orderingDirection": null,
+      "orderingMeta": null,
+      "hasSingletonItem": true,
+      "hint": null,
+      "singletonItem": "94297558",
+      "fields": ["8287833", "8288816", "9102792"],
+      "titleField": null,
+      "imagePreviewField": null,
+      "excerptField": null,
+      "orderingField": null,
+      "workflow": null
+    }
+  ]
+}
