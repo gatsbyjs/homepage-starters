@@ -1,7 +1,7 @@
 // https://www.datocms.com/docs/import-and-export/importing-data#step-3-importing-to-datocms
 const fs = require("fs")
 const { SiteClient } = require("datocms-client")
-const data = require("./data.json")
+const dataModel = require("./data-model.json")
 
 // fields that link to other fields must be created
 // after the linked field
@@ -9,32 +9,40 @@ const data = require("./data.json")
 // so this list ensures itemTypes and fields are created
 // in the correct order
 const orderedItemTypes = [
-  "Link",
+  "Nav Item",
+  "Nav Item Group",
   "Social Link",
-  "Benefit",
-  "Feature",
-  "Product",
-  "Stat",
-  "Testimonial",
-  "Hero",
-  "CTA",
-  "BenefitList",
-  "FeatureList",
-  "LogoList",
-  "ProductList",
-  "StatList",
+  "Homepage Benefit",
+  "Homepage Feature",
+  "Homepage Product",
+  "Homepage Stat",
+  "Homepage Testimonial",
+  "Homepage Hero",
+  "Homepage CTA",
+  "About Hero",
+  "About Stat",
+  "About Profile",
+  "About Leadership",
+  "Homepage Benefit List",
+  "Homepage Feature List",
+  "Homepage Logo List",
+  "Homepage Product List",
+  "Homepage Stat List",
+  "About Logo List",
+  "About Stat List",
   "TestimonialList",
   "Homepage",
+  "AboutPage",
   "LayoutHeader",
   "LayoutFooter",
   "Layout",
   "Page",
 ]
 
-async function importContent(token) {
-  console.log(`Importing ${data.itemTypes.length} DatoCMS Models`)
+async function importContentModel(token) {
+  console.log(`Importing ${dataModel.itemTypes.length} DatoCMS Models`)
   const client = new SiteClient(token)
-  const { itemTypes, fields } = data
+  const { itemTypes, fields } = dataModel
 
   const errors = []
 
@@ -60,8 +68,10 @@ async function importContent(token) {
     const name = orderedItemTypes[i]
     const type = itemTypes.find((t) => t.name === name)
     if (!type) {
-      console.error(`No item type found: ${name}`)
-      break
+      console.error(
+        `No item type found: ${name} — processing of item type will be skipped`
+      )
+      continue
     }
     // prettier-ignore
     const {
@@ -117,4 +127,4 @@ async function importContent(token) {
   return null
 }
 
-module.exports = importContent
+module.exports = importContentModel
