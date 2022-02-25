@@ -79,7 +79,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
   })
 
   actions.createFieldExtension({
-    name: "datocmsRichText",
+    name: "richText",
     extend(options) {
       return {
         resolve(source, args, context, info) {
@@ -411,15 +411,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
       html: String!
       body: DatoCmsDatoCmsPageBodyStructuredText
     }
-
-    #Optional blog interface
-    interface BlogPost implements Node {
-      id: ID!
-      slug: String!
-      title: String!
-      html: String!
-      # TODO # date # image # author
-    }
   `)
 
   // CMS-specific types for Homepage
@@ -731,7 +722,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
         @proxy(from: "entityPayload.attributes.metadata.description")
       image: HomepageImage
         @link(by: "originalId", from: "entityPayload.attributes.metadata.image")
-      html: String! @datocmsRichText
+      html: String! @richText
       body: DatoCmsDatoCmsPageBodyStructuredText
     }
   `)

@@ -51,7 +51,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
   })
 
   actions.createFieldExtension({
-    name: "contentfulRichText",
+    name: "richText",
     extend(options) {
       return {
         resolve(source, args, context, info) {
@@ -329,15 +329,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
       image: HomepageImage
       html: String!
     }
-
-    # Optional blog interface
-    interface BlogPost implements Node {
-      id: ID!
-      slug: String!
-      title: String!
-      html: String!
-      # TODO # date # image # author
-    }
   `)
 
   // CMS-specific types for Homepage
@@ -605,8 +596,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       title: String
       description: String
       image: HomepageImage @link(from: "image___NODE")
-      html: String! @contentfulRichText
-      body: String!
+      html: String! @richText
     }
   `)
 }

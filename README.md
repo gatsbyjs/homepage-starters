@@ -122,21 +122,20 @@ The script will log progress so be sure to confirm that it successfully publishe
 ## Editing starter READMEs
 
 **Do NOT edit the `README.md` files in the plugins directory.**
-Any changes made to these files will be overwritten by the `create-docs.mjs` script.
+Any changes made to these files will be overwritten by the `create-readmes` script.
 
-The `README.md` and other docs files published with each starter are generated from a script and template that replaces variables for URLs and the names of the relevant CMS and has markdown file includes for sections that deal with specific CMS features.
+The `README.md` file published with each starter is generated from a script and template that replaces variables for URLs and the names of the relevant CMS and has markdown file includes for sections that deal with specific CMS features.
 
 The following files are responsible for generating the README in each starter:
 
-- `scripts/create-docs.mjs` -- ESM Node.js script that uses Remark and remark-directive for templating
+- `scripts/create-readmes.mjs` -- ESM Node.js script that uses Remark and remark-directive for templating
 - `scripts/data.js` -- variables and metadata for each starter
-- `docs/README.md` -- the main template for the starter READMEs; this template uses Remark directives for CMS name, demo URL, and more.
-- `docs/*.md` -- supplemental docs for starters
+- `docs/readme-template.md` -- the main template for the starter READMEs; this template uses Remark directives for CMS name, demo URL, and more.
 - **Starter-specific files** -- each starter _must_ have these files in order to generate the README.md
   - `plugins/[plugin-name]/docs/quick-start-intro.md` -- an intro blurb about CMS requirements that is included in the _Quick start_ section
   - `plugins/[plugin-name]/docs/custom-sections.md` -- the first two list items in the _Create custom section components_ that has CMS-specific information
 
-To edit the content for all starters' READMEs, edit the `docs/README.md` file.
+To edit the content for all starters' READMEs, edit the `readme-template.md` file.
 To edit content that is specific for a particular CMS starter, edit or add markdown files to the relevant `docs` directory for that starter.
 
 ### Remark Directives
@@ -205,5 +204,5 @@ The `repo` variable is used to replace the `$` in the code snippet. Currently th
 If you've made changes to the docs, update each starter's `README.md` file by running this npm script in the root directory:
 
 ```sh
-yarn create-docs
+yarn create-readmes
 ```
