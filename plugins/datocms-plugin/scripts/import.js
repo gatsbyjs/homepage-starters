@@ -2,7 +2,6 @@
 const fs = require("fs")
 const { SiteClient } = require("datocms-client")
 const dataModel = require("./data-model.json")
-const data = require("./records.json")
 
 // fields that link to other fields must be created
 // after the linked field
@@ -128,42 +127,4 @@ async function importContentModel(token) {
   return null
 }
 
-async function importContent(token) {
-  console.log(`Importing ${data.length} DatoCMS content records`)
-  const client = new SiteClient(token)
-
-  const errors = []
-
-  for (let i = 0; i < 5; i++) {
-    try {
-      const {
-        id,
-        meta,
-        updatedAt,
-        createdAt,
-        creator,
-        gatsbypreview,
-        ...recordData
-      } = data[i]
-      console.log(`Creating record: ${id}`)
-      const record = await client.items.create(recordData)
-      console.log("created record: ", record)
-    } catch (e) {
-      console.error(`Error creating record: ${data[i].id}`)
-      errors.push(e)
-    }
-  }
-
-  console.log("Finished importing DatoCMS content records")
-
-  if (errors.length) {
-    fs.writeFileSync("datocms-errors.log", JSON.stringify(errors, null, 2))
-    return errors
-  }
-  return null
-}
-
-module.exports = {
-  importContentModel,
-  importContent,
-}
+module.exports = importContentModel
