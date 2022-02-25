@@ -2,8 +2,7 @@
 
 The Gatsby Homepage starter includes components for creating a homepage and an _About_ page as well as templates for simple pages like a _Privacy Policy_ page.
 
-It also includes templates for a blog, but this feature is disabled by default.
-This guide explains how to enable this feature.
+It does not include a blog by default, but you can install an optional theme to source blog content from a CMS of your choice.
 
 ## Get started
 
@@ -51,6 +50,117 @@ If you're using a different CMS in your blog than the one used for the homepage 
 - DatoCMS requires:
   - `DATOCMS_API_TOKEN`
   - `DATOCMS_ENVIRONMENT`
+
+## Adding templates
+
+These blog themes do not render pages by default. Once a blog theme is added to your site and configured, create two templates in your site to render the blog index page and blog post pages. You will need to add a `src/templates/blog-index.js` file and `src/templates/blog-post.js` file.
+
+```js
+// example src/templates/blog-index.js
+import * as React from "react"
+import { graphql } from "gatsby"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import Layout from "../components/layout"
+import { Container, Heading, Box, Link } from "../components/ui"
+
+export default function BlogIndex(props) {
+  const posts = props.data.allBlogPost.nodes
+
+  return (
+    <Layout title="Blog">
+      <Container>
+        <Box paddingY={4}>
+          <Heading as="h1">Blog</Heading>
+          <ul>
+            {posts.map((post) => (
+              <li key={post.id}>
+                {post.image && (
+                  <Link to={`/blog/${post.slug}`}>
+                    <GatsbyImage
+                      alt={post.image.alt}
+                      image={getImage(post.image)}
+                    />
+                  </Link>
+                )}
+                <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+                <p>{post.excerpt}</p>
+              </li>
+            ))}
+          </ul>
+        </Box>
+      </Container>
+    </Layout>
+  )
+}
+
+export const query = graphql`
+  query {
+    allBlogPost {
+      nodes {
+        id
+        slug
+        title
+        excerpt
+        image {
+          id
+          alt
+          gatsbyImageData
+        }
+      }
+    }
+  }
+`
+```
+
+```js
+// example src/templates/blog-post.js
+import * as React from "react"
+import { graphql } from "gatsby"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import Layout from "../components/layout"
+import { Container, Heading, Box } from "../components/ui"
+
+export default function BlogPost(props) {
+  const post = props.data.blogPost
+
+  return (
+    <Layout {...post} description={post.excerpt}>
+      <Container>
+        <Box paddingY={4}>
+          {post.image && (
+            <GatsbyImage alt={post.image.alt} image={getImage(post.image)} />
+          )}
+          <Heading as="h1">{post.title}</Heading>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: post.html,
+            }}
+          />
+        </Box>
+      </Container>
+    </Layout>
+  )
+}
+
+export const query = graphql`
+  query ($id: String!) {
+    blogPost(id: { eq: $id }) {
+      id
+      slug
+      title
+      html
+      excerpt
+      date
+      image {
+        id
+        url
+        gatsbyImageData
+        alt
+      }
+    }
+  }
+`
+```
 
 ## Using another CMS or data source
 
