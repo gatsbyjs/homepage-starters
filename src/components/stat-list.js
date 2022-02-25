@@ -18,8 +18,8 @@ import {
 function Stat(props) {
   return (
     <Box>
-      <Text variant="serif">{props.value}</Text>
-      <Text>{props.label}</Text>
+      <Text variant="stat">{props.value}</Text>
+      <Text variant="statLabel">{props.label}</Text>
     </Box>
   )
 }
@@ -69,10 +69,12 @@ export const query = graphql`
     text
     image {
       id
+      alt
       gatsbyImageData
     }
     icon {
       id
+      alt
       gatsbyImageData
     }
     content {

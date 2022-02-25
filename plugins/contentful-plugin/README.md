@@ -24,9 +24,8 @@ You will need a new or existing [Contentful space][] to use this starter and wil
    npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-contentful-homepage
    ```
 
-1. **Run the Contentful setup command**
+1. **Run the Contentful setup script**
 
-   **TO BE IMPLEMENTED**
    From your site's root directory, run:
 
    ```sh
@@ -34,7 +33,7 @@ You will need a new or existing [Contentful space][] to use this starter and wil
    yarn setup
    ```
 
-   This will run a script to populate your Contentful content model and add demo content.
+   This will run a script to populate your Contentful space's content model and add demo content.
 
 1. **Start developing**
 
@@ -53,6 +52,15 @@ You will need a new or existing [Contentful space][] to use this starter and wil
 Once your content is available in Contentful, deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
 
 [![Deploy to Gatsby](https://www.gatsbyjs.com/deploynow.png "Deploy to Gatsby")](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-contentful-homepage)
+
+## Setting up Gatsby Cloud Preview
+
+To use Gatsby Cloud Preview with this site, see the documentation for
+[Installing Content Sync for Contentful][].
+
+[installing content sync for contentful]: https://support.gatsbyjs.com/hc/en-us/articles/4410371995539-Installing-Content-Sync-for-Contentful
+[add the gatsby cloud app to contentful]: https://support.gatsbyjs.com/hc/en-us/articles/360056047134-Add-the-Gatsby-Cloud-App-to-Contentful
+[connecting to contentful manually]: https://support.gatsbyjs.com/hc/en-us/articles/360052076554-Connecting-to-Contentful-Manually
 
 ## What's included?
 
@@ -103,6 +111,8 @@ The UI components file `src/components/ui.js` imports styles from `src/component
 
 ### Add your logo
 
+![Logo](./docs/images/logo.png)
+
 Replace the `src/components/brand-logo.js` component with your own brand logo.
 If you have an SVG version, it can be rendered inline as a React component, following the example in this file. Note that SVG attributes will need to be camel cased for JSX.
 
@@ -111,6 +121,8 @@ Using an inline SVG for the logo allows it to pick up the colors used in CSS, wh
 If you prefer to use an image, use the [`StaticImage`](https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-plugin-image/#staticimage) component from `gatsby-plugin-image` in place of the SVG in this file.
 
 ### Customize headings, buttons, and other styles
+
+![Headings & Buttons](./docs/images/headings-buttons.png)
 
 To further customize the look and feel of the homepage, edit the UI components in `src/components/ui.js` and styles in `src/components/ui.css.ts`.
 
@@ -126,12 +138,26 @@ For this example, we'll create a new "Banner" component.
 
 1. First, update your content model in Contentful
 
-   In your Contentful space, create a new content type and call it "Homepage Banner."
-   For this example, add two fields to your new content type: `heading` and `text` – these can be _Short text_ types.
+   1. In your Contentful space, create a new content type and call it "Homepage Banner."
 
-   Find the content type for _Homepage_ in Contentful and edit the settings for the _Content_ field. Under _Validation_, ensure that the new _Homepage Banner_ type is checked to make it available as a content type on the Homepage.
+      <img src="./docs/images/step-1.png" alt="Step 1" width="300" />
 
-   Navigate to the _Content_ tab to edit the _Homepage_ and add a section with this new _Homepage Banner_ content type.
+   1. For this example, add two fields to your new content type: `heading` and `text` – these can be _Short text_ types.
+
+      <img src="./docs/images/step-2.png" alt="Step 2" width="300" />
+      <img src="./docs/images/step-3.png" alt="Step 3" width="300" />
+      <img src="./docs/images/step-4.png" alt="Step 4" width="300" />
+
+   1. Find the content type for _Homepage_ in Contentful and edit the settings for the _Content_ field. Under _Validation_, ensure that the new _Homepage Banner_ type is checked to make it available as a content type on the Homepage.
+
+      <img src="./docs/images/step-5.png" alt="Step 5" width="500" />
+      <img src="./docs/images/step-6.png" alt="Step 6" width="500" />
+      <img src="./docs/images/step-7.png" alt="Step 7" width="500" />
+
+   1. Navigate to the _Content_ tab to edit the _Homepage_ and add a section with this new _Homepage Banner_ content type.
+
+      <img src="./docs/images/step-8.png" alt="Step 8" width="500" />
+      <img src="./docs/images/step-9.png" alt="Step 9" width="500" />
 
 1. Update `gatsby-node.js`
 
@@ -242,6 +268,8 @@ For this example, we'll create a new "Banner" component.
      }
    `
    ```
+
+---
 
 ## 🎓 Learning Gatsby
 

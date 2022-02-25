@@ -7,7 +7,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       return {
         resolve(source) {
           return source.internal.type
-            .replace("DatoCms", "Homepage")
+            .replace("DatoCms", "")
             .replace(/list$/, "List")
         },
       }
@@ -57,6 +57,28 @@ exports.createSchemaCustomization = async ({ actions }) => {
   })
 
   actions.createFieldExtension({
+    name: "navItemType",
+    args: {
+      name: {
+        type: "String!",
+        defaultValue: "Link",
+      },
+    },
+    extend(options) {
+      return {
+        resolve() {
+          switch (options.name) {
+            case "Group":
+              return "Group"
+            default:
+              return "Link"
+          }
+        },
+      }
+    },
+  })
+
+  actions.createFieldExtension({
     name: "richText",
     extend(options) {
       return {
@@ -70,7 +92,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
   })
 
   // abstract interfaces
-  actions.createTypes(`
+  actions.createTypes(/* GraphQL */ `
     interface HomepageBlock implements Node {
       id: ID!
       blocktype: String
@@ -83,6 +105,33 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       href: String
       text: String
+      ## DatoCMS
+      originalId: String
+      entityPayload: JSON
+    }
+
+    interface HeaderNavItem implements Node {
+      id: ID!
+      navItemType: String
+    }
+
+    interface NavItem implements Node & HeaderNavItem {
+      id: ID!
+      navItemType: String
+      href: String
+      text: String
+      icon: HomepageImage
+      description: String
+      ## DatoCMS
+      originalId: String
+      entityPayload: JSON
+    }
+
+    interface NavItemGroup implements Node & HeaderNavItem {
+      id: ID!
+      navItemType: String
+      name: String
+      navItems: [NavItem]
       ## DatoCMS
       originalId: String
       entityPayload: JSON
@@ -141,6 +190,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     interface HomepageCta implements Node & HomepageBlock {
       id: ID!
       blocktype: String
+      kicker: String
       heading: String
       text: String
       image: HomepageImage
@@ -249,7 +299,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     interface LayoutHeader implements Node {
       id: ID!
-      links: [HomepageLink]
+      navItems: [HeaderNavItem]
       cta: HomepageLink
       entityPayload: JSON
     }
@@ -286,6 +336,72 @@ exports.createSchemaCustomization = async ({ actions }) => {
       footer: LayoutFooter
     }
 
+    interface AboutPage implements Node {
+      id: ID!
+      title: String
+      description: String
+      image: HomepageImage
+      content: [HomepageBlock]
+      # DatoCMS
+      entityPayload: JSON
+    }
+
+    interface AboutHero implements Node & HomepageBlock {
+      id: ID!
+      blocktype: String
+      heading: String
+      text: String
+      image: HomepageImage
+      # DatoCMS
+      originalId: String
+      entityPayload: JSON
+    }
+
+    interface AboutStat implements Node {
+      id: ID!
+      value: String
+      label: String
+    }
+
+    interface AboutStatList implements Node & HomepageBlock {
+      id: ID!
+      blocktype: String
+      content: [AboutStat]
+      # DatoCMS
+      originalId: String
+      entityPayload: JSON
+    }
+
+    interface AboutProfile implements Node {
+      id: ID!
+      image: HomepageImage
+      name: String
+      jobTitle: String
+    }
+
+    interface AboutLeadership implements Node & HomepageBlock {
+      id: ID!
+      blocktype: String
+      kicker: String
+      heading: String
+      subhead: String
+      content: [AboutProfile]
+      # DatoCMS
+      originalId: String
+      entityPayload: JSON
+    }
+
+    interface AboutLogoList implements Node & HomepageBlock {
+      id: ID!
+      blocktype: String
+      heading: String
+      links: [HomepageLink]
+      logos: [HomepageImage]
+      # DatoCMS
+      originalId: String
+      entityPayload: JSON
+    }
+
     interface Page implements Node {
       id: ID!
       slug: String!
@@ -297,13 +413,35 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
   `)
 
-  actions.createTypes(`
-    type DatoCmsLink implements Node & HomepageLink {
+  // CMS-specific types for Homepage
+  actions.createTypes(/* GraphQL */ `
+    type DatoCmsHomepageLink implements Node & HomepageLink {
       id: ID!
       originalId: String
       entityPayload: JSON
       href: String
       text: String
+    }
+
+    type DatoCmsNavItem implements Node & NavItem & HeaderNavItem {
+      id: ID!
+      navItemType: String @navItemType(name: "Link")
+      originalId: String
+      entityPayload: JSON
+      href: String
+      text: String
+      icon: HomepageImage
+      description: String
+    }
+
+    type DatoCmsNavItemGroup implements Node & NavItemGroup & HeaderNavItem
+      @dontInfer {
+      id: ID!
+      navItemType: String @navItemType(name: "Dropdown")
+      name: String
+      navItems: [NavItem]
+      originalId: String
+      entityPayload: JSON
     }
 
     type DatoCmsAsset implements Node & HomepageImage {
@@ -316,7 +454,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
       url: String
     }
 
-    type DatoCmsHero implements Node & HomepageHero & HomepageBlock @dontInfer {
+    type DatoCmsHomepageHero implements Node & HomepageHero & HomepageBlock
+      @dontInfer {
       id: ID!
       originalId: String
       entityPayload: JSON
@@ -329,7 +468,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
       links: [HomepageLink]
     }
 
-    type DatoCmsFeature implements Node & HomepageBlock & HomepageFeature @dontInfer {
+    type DatoCmsHomepageFeature implements Node & HomepageBlock & HomepageFeature
+      @dontInfer {
       originalId: String
       blocktype: String @blocktype
       heading: String
@@ -340,7 +480,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
       entityPayload: JSON
     }
 
-    type DatoCmsFeaturelist implements Node & HomepageBlock & HomepageFeatureList @dontInfer {
+    type DatoCmsHomepageFeatureList implements Node & HomepageBlock & HomepageFeatureList
+      @dontInfer {
       originalId: String
       blocktype: String @blocktype
       kicker: String
@@ -350,17 +491,20 @@ exports.createSchemaCustomization = async ({ actions }) => {
       entityPayload: JSON
     }
 
-    type DatoCmsCta implements Node & HomepageBlock & HomepageCta @dontInfer {
+    type DatoCmsHomepageCta implements Node & HomepageBlock & HomepageCta
+      @dontInfer {
       originalId: String
       entityPayload: JSON
       blocktype: String @blocktype
+      kicker: String
       heading: String
       text: String
       image: HomepageImage
       links: [HomepageLink]
     }
 
-    type DatoCmsLogolist implements Node & HomepageBlock & HomepageLogoList @dontInfer {
+    type DatoCmsHomepageLogoList implements Node & HomepageBlock & HomepageLogoList
+      @dontInfer {
       originalId: String
       entityPayload: JSON
       blocktype: String @blocktype
@@ -368,14 +512,16 @@ exports.createSchemaCustomization = async ({ actions }) => {
       logos: [HomepageImage]
     }
 
-    type DatoCmsTestimonial implements Node & HomepageTestimonial @dontInfer {
+    type DatoCmsHomepageTestimonial implements Node & HomepageTestimonial
+      @dontInfer {
       id: ID!
       quote: String
       source: String
       avatar: HomepageImage
     }
 
-    type DatoCmsTestimoniallist implements Node & HomepageBlock & HomepageTestimonialList @dontInfer {
+    type DatoCmsHomepageTestimonialList implements Node & HomepageBlock & HomepageTestimonialList
+      @dontInfer {
       id: ID!
       originalId: String
       entityPayload: JSON
@@ -385,14 +531,15 @@ exports.createSchemaCustomization = async ({ actions }) => {
       content: [HomepageTestimonial]
     }
 
-    type DatoCmsBenefit implements Node & HomepageBenefit @dontInfer {
+    type DatoCmsHomepageBenefit implements Node & HomepageBenefit @dontInfer {
       id: ID!
       heading: String
       text: String
       image: HomepageImage
     }
 
-    type DatoCmsBenefitlist implements Node & HomepageBlock & HomepageBenefitList @dontInfer {
+    type DatoCmsHomepageBenefitList implements Node & HomepageBlock & HomepageBenefitList
+      @dontInfer {
       id: ID!
       originalId: String
       entityPayload: JSON
@@ -402,14 +549,15 @@ exports.createSchemaCustomization = async ({ actions }) => {
       content: [HomepageBenefit]
     }
 
-    type DatoCmsStat implements Node & HomepageStat @dontInfer {
+    type DatoCmsHomepageStat implements Node & HomepageStat @dontInfer {
       id: ID!
       value: String
       label: String
       heading: String
     }
 
-    type DatoCmsStatlist implements Node & HomepageBlock & HomepageStatList @dontInfer {
+    type DatoCmsHomepageStatList implements Node & HomepageBlock & HomepageStatList
+      @dontInfer {
       id: ID!
       originalId: String
       entityPayload: JSON
@@ -423,7 +571,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       links: [HomepageLink]
     }
 
-    type DatoCmsProduct implements Node & HomepageProduct @dontInfer {
+    type DatoCmsHomepageProduct implements Node & HomepageProduct @dontInfer {
       id: ID!
       originalId: String
       entityPayload: JSON
@@ -433,7 +581,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
       links: [HomepageLink]
     }
 
-    type DatoCmsProductlist implements Node & HomepageBlock & HomepageProductList @dontInfer {
+    type DatoCmsHomepageProductList implements Node & HomepageBlock & HomepageProductList
+      @dontInfer {
       id: ID!
       blocktype: String @blocktype
       originalId: String
@@ -447,19 +596,93 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type DatoCmsHomepage implements Node & Homepage @dontInfer {
       id: ID!
       title: String @proxy(from: "entityPayload.attributes.metadata.title")
-      description: String @proxy(from: "entityPayload.attributes.metadata.description")
-      image: HomepageImage @link(by: "originalId", from: "entityPayload.attributes.metadata.image")
+      description: String
+        @proxy(from: "entityPayload.attributes.metadata.description")
+      image: HomepageImage
+        @link(by: "originalId", from: "entityPayload.attributes.metadata.image")
       content: [HomepageBlock]
       entityPayload: JSON
     }
   `)
 
+  // CMS specific types for About page
+  actions.createTypes(/* GraphQL */ `
+    type DatoCmsAboutHero implements Node & AboutHero & HomepageBlock
+      @dontInfer {
+      id: ID!
+      blocktype: String @blocktype
+      originalId: String
+      entityPayload: JSON
+      heading: String
+      text: String
+      image: HomepageImage
+    }
+
+    type DatoCmsAboutStat implements Node & AboutStat @dontInfer {
+      id: ID!
+      value: String
+      label: String
+    }
+
+    type DatoCmsAboutStatList implements Node & AboutStatList & HomepageBlock
+      @dontInfer {
+      id: ID!
+      blocktype: String @blocktype
+      originalId: String
+      entityPayload: JSON
+      content: [AboutStat]
+    }
+
+    type DatoCmsAboutProfile implements Node & AboutProfile @dontInfer {
+      id: ID!
+      image: HomepageImage
+      name: String
+      jobTitle: String
+    }
+
+    type DatoCmsAboutLeadership implements Node & AboutLeadership & HomepageBlock
+      @dontInfer {
+      id: ID!
+      blocktype: String @blocktype
+      originalId: String
+      entityPayload: JSON
+      kicker: String
+      heading: String
+      subhead: String
+      content: [AboutProfile]
+    }
+
+    type DatoCmsAboutLogoList implements Node & AboutLogoList & HomepageBlock
+      @dontInfer {
+      id: ID!
+      blocktype: String @blocktype
+      originalId: String
+      entityPayload: JSON
+      heading: String
+      links: [HomepageLink]
+      logos: [HomepageImage]
+    }
+
+    type DatoCmsAboutpage implements Node & AboutPage @dontInfer {
+      id: ID!
+      title: String @proxy(from: "entityPayload.attributes.metadata.title")
+      description: String
+        @proxy(from: "entityPayload.attributes.metadata.description")
+      image: HomepageImage
+        @link(by: "originalId", from: "entityPayload.attributes.metadata.image")
+      content: [HomepageBlock]
+      entityPayload: JSON
+      originalId: String
+    }
+  `)
+
   // Layout types
-  actions.createTypes(`
+  actions.createTypes(/* GraphQL */ `
     type DatoCmsLayoutheader implements Node & LayoutHeader @dontInfer {
       id: ID!
-      links: [HomepageLink]
-      originalCta: HomepageLink @link(by: "originalId",from: "entityPayload.attributes.cta")
+      navItems: [HeaderNavItem]
+      originalCta: HomepageLink
+        @link(by: "originalId", from: "entityPayload.attributes.cta")
       cta: HomepageLink @ctalink
       originalId: String
       entityPayload: JSON
@@ -489,14 +712,16 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
   `)
 
-  actions.createTypes(`
+  actions.createTypes(/* GraphQL */ `
     type DatoCmsPage implements Node & Page {
       id: ID!
       entityPayload: JSON!
       slug: String!
       title: String @proxy(from: "entityPayload.attributes.metadata.title")
-      description: String @proxy(from: "entityPayload.attributes.metadata.description")
-      image: HomepageImage @link(by: "originalId", from: "entityPayload.attributes.metadata.image")
+      description: String
+        @proxy(from: "entityPayload.attributes.metadata.description")
+      image: HomepageImage
+        @link(by: "originalId", from: "entityPayload.attributes.metadata.image")
       html: String! @richText
       body: DatoCmsDatoCmsPageBodyStructuredText
     }

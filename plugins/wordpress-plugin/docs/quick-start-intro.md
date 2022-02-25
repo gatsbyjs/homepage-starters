@@ -5,7 +5,7 @@ This starter requires the following plugins to be installed in your WordPress in
 - [WPGraphQL][]
 - [Advanced Custom Fields][]
 - [WPGraphQL for Advanced Custom Fields][]
-- [Custom Post Type UI][] (Optional)
+- [Custom Post Type UI][]
 
 Once these plugins are installed, you'll need the URL of the GraphQL endpoint for configuration.
 

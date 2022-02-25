@@ -4,15 +4,11 @@ import { theme } from "../theme.css.ts"
 
 const breakpoints = ["40em", "52em", "64em"]
 
-const mqAliases = ["small", "medium", "large"]
-const media = breakpoints
-  .map((n) => `screen and (min-width: ${n})`)
-  .reduce((a, b, i) => {
-    a[mqAliases[i]] = b
-    return a
-  }, {})
-
-export const mediaQueries = media
+export const media = {
+  small: `screen and (min-width: ${breakpoints[0]})`,
+  medium: `screen and (min-width: ${breakpoints[1]})`,
+  large: `screen and (min-width: ${breakpoints[2]})`,
+}
 
 export const container = style({
   maxWidth: theme.sizes.container,
@@ -24,11 +20,24 @@ export const container = style({
 
 export const containers = styleVariants({
   normal: [container],
-  wide: [container],
+  wide: [
+    container,
+    {
+      maxWidth: theme.sizes.wide,
+      paddingLeft: 0,
+      paddingRight: 0,
+    },
+  ],
   narrow: [
     container,
     {
       maxWidth: theme.sizes.narrow,
+    },
+  ],
+  tight: [
+    container,
+    {
+      maxWidth: theme.sizes.tight,
     },
   ],
   fullbleed: [
@@ -36,10 +45,14 @@ export const containers = styleVariants({
     {
       paddingLeft: 0,
       paddingRight: 0,
+      paddingTop: theme.space[4],
+      paddingBottom: theme.space[4],
       "@media": {
         [media.medium]: {
           paddingLeft: theme.space[4],
           paddingRight: theme.space[4],
+          paddingTop: theme.space[5],
+          paddingBottom: theme.space[5],
         },
       },
     },
@@ -57,6 +70,16 @@ export const flexVariants = styleVariants({
   },
   start: {
     alignItems: "flex-start",
+  },
+  baseline: {
+    alignItems: "baseline",
+  },
+  columnStart: {
+    flexDirection: "column",
+    alignItems: "flex-start",
+  },
+  column: {
+    flexDirection: "column",
   },
   end: {
     alignItems: "flex-end",
@@ -93,6 +116,7 @@ export const widths = styleVariants(
     quarter: "25%",
     third: "33.3333%",
     twothirds: "33.3333%",
+    fitContent: "fit-content",
   },
   (width) => [
     {
@@ -142,6 +166,17 @@ export const box = styleVariants({
     flexDirection: "column",
     alignItems: "center",
     textAlign: "center",
+  },
+})
+
+export const section = style({
+  paddingTop: theme.space[4],
+  paddingBottom: theme.space[4],
+  "@media": {
+    [media.small]: {
+      paddingTop: theme.space[5],
+      paddingBottom: theme.space[5],
+    },
   },
 })
 
@@ -204,6 +239,22 @@ export const text = styleVariants({
       letterSpacing: theme.letterSpacings.normal,
     },
   ],
+  superHeading: [
+    margin0,
+    {
+      marginTop: theme.space[4],
+      marginBottom: theme.space[6],
+      fontSize: theme.fontSizes[5],
+      fontWeight: theme.fontWeights.extrabold,
+      lineHeight: theme.lineHeights.heading,
+      letterSpacing: theme.letterSpacings.tight,
+      "@media": {
+        [media.small]: {
+          fontSize: theme.fontSizes[7],
+        },
+      },
+    },
+  ],
   heading: [
     margin0,
     {
@@ -223,6 +274,16 @@ export const text = styleVariants({
     margin0,
     {
       marginBottom: theme.space[3],
+      fontSize: theme.fontSizes[5],
+      fontWeight: theme.fontWeights.extrabold,
+      lineHeight: theme.lineHeights.tight,
+      letterSpacing: theme.letterSpacings.tight,
+    },
+  ],
+  subheadSmall: [
+    margin0,
+    {
+      marginBottom: theme.space[3],
       fontSize: theme.fontSizes[4],
       fontWeight: theme.fontWeights.extrabold,
       lineHeight: theme.lineHeights.tight,
@@ -233,8 +294,9 @@ export const text = styleVariants({
     margin0,
     {
       marginBottom: theme.space[2],
-      fontSize: theme.fontSizes[2],
-      fontWeight: theme.fontWeights.semibold,
+      fontFamily: theme.fonts.mono,
+      fontSize: theme.fontSizes[1],
+      fontWeight: theme.fontWeights.medium,
       lineHeight: theme.lineHeights.tight,
       letterSpacing: theme.letterSpacings.wide,
       textTransform: "uppercase",
@@ -251,13 +313,21 @@ export const text = styleVariants({
       fontStyle: "normal",
     },
   ],
-  serif: [
+  stat: [
     margin0,
     {
-      marginBottom: theme.space[2],
-      fontFamily: theme.fonts.serif,
+      fontFamily: theme.fonts.mono,
       fontSize: theme.fontSizes[6],
+      fontWeight: theme.fontWeights.medium,
       lineHeight: theme.lineHeights.tight,
+    },
+  ],
+  statLabel: [
+    margin0,
+    {
+      fontWeight: theme.fontWeights.bold,
+      fontSize: theme.fontSizes[4],
+      lineHeight: theme.lineHeights.heading,
     },
   ],
   small: [
@@ -267,12 +337,18 @@ export const text = styleVariants({
       marginBottom: theme.space[2],
     },
   ],
+  medium: [
+    margin0,
+    {
+      fontSize: theme.fontSizes[3],
+    },
+  ],
   mega: [
     margin0,
     {
       fontSize: "180px",
       fontFamily: theme.fonts.mono,
-      lineHeight: theme.lineHeights.tight,
+      lineHeight: theme.lineHeights.solid,
       letterSpacing: theme.letterSpacings.tight,
       "@media": {
         [media.medium]: {
@@ -299,8 +375,28 @@ export const link = style({
 export const navlink = style({
   color: "inherit",
   textDecoration: "none",
+  transitionProperty: "color",
+  transitionDuration: "0.2s",
+  transitionTimingFunction: "ease-in-out",
   ":hover": {
     color: theme.colors.active,
+  },
+})
+
+export const navButtonlink = style({
+  color: "inherit",
+  fontSize: "inherit",
+  fontFamily: theme.fonts.text,
+  padding: 0,
+  background: "none",
+  border: "none",
+  textDecoration: "none",
+  transitionProperty: "color",
+  transitionDuration: "0.2s",
+  transitionTimingFunction: "ease-in-out",
+  ":hover": {
+    color: theme.colors.active,
+    cursor: "pointer",
   },
 })
 
@@ -317,7 +413,7 @@ const button = style({
   textDecoration: "none",
   fontWeight: theme.fontWeights.bold,
   fontSize: theme.fontSizes[2],
-  lineHeight: 1,
+  lineHeight: theme.lineHeights.solid,
   paddingTop: theme.space[3],
   paddingBottom: theme.space[3],
   paddingLeft: theme.space[3],
@@ -430,7 +526,7 @@ export const icons = styleVariants(
   (size) => ({
     width: size,
     height: size,
-    marginBottom: theme.space[2],
+    marginBottom: theme.space[3],
   })
 )
 
@@ -454,6 +550,17 @@ export const interactiveIcon = style({
   cursor: "pointer",
   width: 48,
   height: 48,
+})
+
+export const visuallyHidden = style({
+  border: 0,
+  clip: "rect(0 0 0 0)",
+  height: "1px",
+  overflow: "hidden",
+  padding: 0,
+  position: "absolute",
+  whiteSpace: "nowrap",
+  width: "1px",
 })
 
 // for debugging only

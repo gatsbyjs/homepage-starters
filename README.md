@@ -6,6 +6,7 @@ To use these starters for a new Gatsby site, use one of the following:
 
 - https://github.com/gatsbyjs/gatsby-starter-contentful-homepage
 - https://github.com/gatsbyjs/gatsby-starter-datocms-homepage
+- https://github.com/gatsbyjs/gatsby-starter-drupal-homepage
 - https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage
 
 ## Local development
@@ -29,11 +30,11 @@ Code and functionality that is specific to a particular source plugin should be 
 │   │   ├── gatsby-config.js
 │   │   ├── gatsby-node.js
 │   │   └── package.json
-│   ├── wordpress-plugin
+│   ├── drupal-plugin
 │   │   ├── gatsby-config.js
 │   │   ├── gatsby-node.js
 │   │   └── package.json
-│   └── yaml-plugin
+│   └── wordpress-plugin
 │       ├── gatsby-config.js
 │       ├── gatsby-node.js
 │       └── package.json
