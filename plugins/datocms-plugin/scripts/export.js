@@ -3,13 +3,12 @@ require("dotenv").config({
 })
 const SiteClient = require("datocms-client").SiteClient
 const fs = require("fs")
-const path = require("path")
 const client = new SiteClient(process.env.DATOCMS_API_TOKEN)
 
 console.log("Exporting DatoCMS Models...")
 
 // https://www.datocms.com/docs/import-and-export/export-data
-async function exportContent() {
+async function exportContentModel() {
   const data = {}
   data.fields = []
   data.itemTypes = await client.itemTypes.all()
@@ -24,8 +23,8 @@ async function exportContent() {
   }
 
   const json = JSON.stringify(data, null, 2)
-  fs.writeFileSync("scripts/data.json", json)
+  fs.writeFileSync("scripts/data-model.json", json)
   console.log("Exported Models and Fields from DatoCMS")
 }
 
-exportContent()
+exportContentModel()
