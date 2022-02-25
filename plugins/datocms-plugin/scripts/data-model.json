@@ -3600,7 +3600,7 @@
     {
       "id": "1709655",
       "name": "Homepage Feature List",
-      "apiKey": "homepage__list",
+      "apiKey": "homepage_feature_list",
       "collectionAppeareance": "table",
       "collectionAppearance": "table",
       "singleton": false,
