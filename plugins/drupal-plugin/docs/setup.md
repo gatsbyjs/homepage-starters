@@ -7,27 +7,27 @@
    1. Go to Pantheon.io, register and log in
    1. Create a new blank project and provide a name for the project
 
-      <img src="../docs/images/setup-step-1.png" width="300">
+      <img src="./docs/images/setup-step-1.png" width="300">
 
    1. Select Drupal with Composer and then following the instructions to complete the installation
 
-      <img src="../docs/images/setup-step-2.png" width="300">
+      <img src="./docs/images/setup-step-2.png" width="300">
 
    1. On the `Dashboard` there will be three (3) environments (_Dev, Test and Live_) and for our purposes we will use `Dev`. Select _Database/Files_ then _Wipe_. Click **`Wipe the Development Environment`** and follow the instructions to start with an empty site.
 
-      <img src="../docs/images/setup-step-3.png" width="300">
+      <img src="./docs/images/setup-step-3.png" width="300">
 
    1. Go to _Import_. Here under `MySQL Database` select `File` and use the `homepage-starter-dump.sql.gz` provided in the data directory to upload the database. Make sure _Run update.php after the database import finishes_ is selected before uploading the file. Click **`Import`**.
 
-      <img src="../docs/images/setup-step-4.png" width="500">
+      <img src="./docs/images/setup-step-4.png" width="500">
 
    1. Under `Archive of site files` select `File` and use the `files.zip` also provided in the data directory to upload the files. Click **`Import`**.
 
-      <img src="../docs/images/setup-step-5.png" width="500">
+      <img src="./docs/images/setup-step-5.png" width="500">
 
    1. **`Clear Caches`** and you're done! Test out your site by clicking either **`Visit Development Site`** or **`Site Admin`**.
 
-      <img src="../docs/images/setup-step-6.png" width="500">
+      <img src="./docs/images/setup-step-6.png" width="500">
 
    1. The credentials for loggin in are:
       ```sh
