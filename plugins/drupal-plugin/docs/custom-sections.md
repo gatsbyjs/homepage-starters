@@ -1,16 +1,16 @@
 1. First, update your content model in Drupal
 
-   In your Drupal website, create a new content type and call it `"Homepage Banner"`.
+   In your Drupal website, create a new content type and call it "Homepage Banner".
 
    <img src="./docs/images/step-1.png" alt="Step 1" width="300" />
 
-   For this example, change the `Title` field's name to `Heading` in when creating your new content type. Remove any fields that are added dy default and create a new field called `text` this should be of `Text (plain, long)` data type or use an existing field with the same type and field name.
+   For this example, change the _Title_ field's name to _Heading_ in when creating your new content type. Remove any fields that are added dy default and create a new field called `text` this should be of `Text (plain, long)` data type or use an existing field with the same type and field name.
 
    <img src="./docs/images/step-2.png" alt="Step 2" width="400" />
 
    <img src="./docs/images/step-3.png" alt="Step 3" width="400" />
 
-   Find the content type for `Homepage` click `Manage fields` and edit the settings for the `content` field. Under `Reference Type -> Content Type`, ensure that the new `Homepage Banner` type is checked to make it available as a content type on the Homepage.
+   Find the content type for `Homepage` click _Manage fields_ and edit the settings for the `content` field. Under _Reference Type -> Content Type_, ensure that the new `Homepage Banner` type is checked to make it available as a content type on the Homepage.
 
    <img src="./docs/images/step-4.png" alt="Step 4" width="400"/>
 
