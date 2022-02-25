@@ -155,22 +155,15 @@ const buildMarkdown = async (md, opts) => {
   return data.toString()
 }
 
-// Create READMEs and other docs
+const template = fs.readFileSync("docs/readme-template.md", "utf8")
+
 Object.keys(starters).forEach(async (key, i) => {
-  const templatePaths = fs.readdirSync("docs")
-  const templates = templatePaths.map((filename) => {
-    return fs.readFileSync(path.join("docs", filename), "utf8")
-  })
   const starter = starters[key]
   const outdir = path.join(process.cwd(), "plugins", starter.dirname)
-  for (let i = 0; i < templates.length; i++) {
-    const template = templates[i]
-    const content = await buildMarkdown(template, {
-      basedir: path.join(process.cwd(), "plugins", starter.dirname),
-      vars: starter,
-    })
-    let filename = path.basename(templatePaths[i])
-    fs.writeFileSync(path.join(outdir, filename), content)
-    console.log(`${filename} written for ${key}`)
-  }
+  const readme = await buildMarkdown(template, {
+    basedir: path.join(process.cwd(), "plugins", starter.dirname),
+    vars: starter,
+  })
+  fs.writeFileSync(path.join(outdir, "README.md"), readme)
+  console.log(`README.md written for ${key}`)
 })
