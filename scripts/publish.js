@@ -91,6 +91,7 @@ const createStarterDist = async (basename) => {
     "README.md",
     "src",
     "scripts",
+    "docs/images",
     "content",
   ]
   files.forEach((file) => {
