@@ -238,12 +238,15 @@ Ensure that the site works and that the content is being properly sourced from t
 
 ## Setup script
 
-TK
+Each starter includes either a setup script or data export files to help with setting up the correct schema required for each CMS. Ensure there are instructions in the plugin's `docs/setup.md` file to explain how to populate the data model and content in your CMS.
 
 ## README and documentation
 
-TK
+The READMEs are generated from a template in the root directory. Ensure that the new starter has Markdown partials for the relevant parts of the README in the plugin's `docs` directory then see this repo's [README](../README.md) for instructions on how to generate the starters' READMEs
 
 ## Configuration for publishing
 
-TK
+To publish a new starter, it will need to be added to the `scripts/data.js` file in this repo and a new GitHub repo will need to be created as a target for publishing.
+If you are not part of the `gatsbyjs` GitHub org, please ask for assistance in setting this repo up in your PR description.
+
+Additionally, a demo site on Gatsby Cloud with environment variables set for a demo environment on the CMS should be set up once the starter is ready for publishing.
