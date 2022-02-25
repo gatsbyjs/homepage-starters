@@ -44,7 +44,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
     interface HomepageBlock implements Node {
       id: ID!
       blocktype: String
-      originalId: String
     }
     type HomepageLink implements Node {
       id: ID!
@@ -54,7 +53,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type HomepageHero implements Node & HomepageBlock {
       id: ID!
       blocktype: String
-      originalId: String
       heading: String!
       kicker: String
       subhead: String
@@ -66,7 +64,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type HomepageCta implements Node & HomepageBlock {
       id: ID!
       blocktype: String
-      originalId: String
       kicker: String
       heading: String
       text: String
@@ -77,7 +74,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type HomepageFeature implements Node & HomepageBlock {
       id: ID!
       blocktype: String
-      originalId: String
       heading: String
       kicker: String
       text: String
@@ -101,7 +97,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type HomepageLogo implements Node {
       id: ID!
-      originalId: String
       image: HomepageImage @link
       alt: String @proxy(from: "image.title")
     }
@@ -117,17 +112,15 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type HomepageFeatureList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
-      originalId: String
       kicker: String
       heading: String
       text: String
-      content: [HomepageFeature] @link(by: "originalId")
+      content: [HomepageFeature] @link
     }
 
     type HomepageLogoList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
-      originalId: String
       text: String
       logos: [HomepageImage] @link
     }
@@ -135,19 +128,17 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type HomepageTestimonialList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
-      originalId: String
       kicker: String
       heading: String
-      content: [HomepageTestimonial] @link(by: "originalId")
+      content: [HomepageTestimonial] @link
     }
 
     type HomepageBenefitList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
-      originalId: String
       heading: String
       text: String
-      content: [HomepageBenefit] @link(by: "originalId")
+      content: [HomepageBenefit] @link
     }
 
     type HomepageStat implements Node {
@@ -160,30 +151,27 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type HomepageStatList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
-      originalId: String
       kicker: String
       heading: String
       text: String
       image: HomepageImage @link
       icon: HomepageImage @link
-      content: [HomepageStat] @link(by: "originalId")
+      content: [HomepageStat] @link
       links: [HomepageLink] @link
     }
 
     type HomepageProductList implements Node & HomepageBlock {
       id: ID!
       blocktype: String
-      originalId: String
       kicker: String
       heading: String
       text: String
-      content: [HomepageProduct] @link(by: "originalId")
+      content: [HomepageProduct] @link
     }
 
     type AboutHero implements Node & HomepageBlock {
       id: ID!
       blocktype: String
-      originalId: String
       heading: String
       text: String
       image: HomepageImage @link
@@ -191,7 +179,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type AboutStat implements Node & HomepageBlock {
       id: ID!
-      originalId: String
       blocktype: String
       value: String
       label: String
@@ -199,14 +186,12 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type AboutStatList implements Node & HomepageBlock {
       id: ID!
-      originalId: String
       blocktype: String
-      content: [AboutStat] @link(by: "originalId")
+      content: [AboutStat] @link
     }
 
     type AboutProfile implements Node {
       id: ID!
-      originalId: String
       image: HomepageImage @link
       name: String
       jobTitle: String
@@ -214,17 +199,15 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type AboutLeadership implements Node & HomepageBlock {
       id: ID!
-      originalId: String
       blocktype: String
       kicker: String
       heading: String
       subhead: String
-      content: [AboutProfile] @link(by: "originalId")
+      content: [AboutProfile] @link
     }
 
     type AboutLogoList implements Node & HomepageBlock {
       id: ID!
-      originalId: String
       blocktype: String
       heading: String
       links: [HomepageLink] @link
@@ -247,7 +230,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       title: String
       description: String
       image: HomepageImage @link
-      content: [HomepageBlock] @link(by: "originalId")
+      content: [HomepageBlock] @link
     }
 
     type Page implements Node {
@@ -595,6 +578,12 @@ exports.onCreateNode = ({
 
   const createItemNode = (parent, type) => (data, i) => {
     const id = createNodeId(`${parent.id} >>> ${type} ${i}`)
+    if (data.image) {
+      data.image = data.image?.id
+    }
+    if (Array.isArray(data.link)) {
+      data.links = data.link.filter(Boolean).map(createLinkNode(parent))
+    }
     actions.createNode({
       ...data,
       id,
@@ -603,31 +592,97 @@ exports.onCreateNode = ({
         contentDigest: createContentDigest(data),
       },
     })
+    return id
   }
 
   if (node.internal.type === "WpPage") {
     switch (node.slug) {
       case "homepage":
-        const { homepage } = node
-        console.log(homepage)
-        const hero = {
-          id: createNodeId(`${node.id} >>> HomepageHero`),
-          kicker: homepage.heroKicker,
-          heading: homepage.heroHeading,
-          text: homepage.heroText,
-          links: [homepage.heroCta1, homepage.heroCta2]
-            .map(createLinkNode(node.id))
-            .filter(Boolean),
+        console.log(node.homepage)
+        const { hero, logoList, featureList, productList } = node.homepage
+
+        const content = {
+          features: [featureList.feature1, featureList.feature2]
+            .filter(Boolean)
+            .map((feature) => ({
+              ...feature,
+              blocktype: "Feature",
+            }))
+            .map(createItemNode(node, "HomepageFeature")),
+          products: [
+            productList.product1,
+            productList.product2,
+            productList.product3,
+          ]
+            .filter(Boolean)
+            .map(createItemNode(node, "HomepageProduct")),
+          // benefits: [],
+          // testimonials: [],
+          // stats: [],
         }
-        const productList = {}
+
+        const blocks = {
+          hero: {
+            id: createNodeId(`${node.id} >>> HomepageHero`),
+            ...hero,
+            image: hero.image?.id,
+            links: [hero.cta1, hero.cta2]
+              .map(createLinkNode(node.id))
+              .filter(Boolean),
+          },
+          logoList: {
+            id: createNodeId(`${node.id} >>> HomepageLogoList`),
+            ...logoList,
+            logos: logoList.logos.filter(Boolean).map((logo) => logo.id),
+          },
+          featureList: {
+            id: createNodeId(`${node.id} >>> HomepageFeatureList`),
+            ...featureList,
+            content: content.features,
+          },
+          productList: {
+            id: createNodeId(`${node.id} >>> HomepageProductList`),
+            ...productList,
+            content: content.products,
+          },
+        }
+
         actions.createNode({
-          ...hero,
+          ...blocks.hero,
           blocktype: "HomepageHero",
           internal: {
             type: "HomepageHero",
             contentDigest: node.internal.contentDigest,
           },
         })
+
+        actions.createNode({
+          ...blocks.logoList,
+          blocktype: "HomepageLogoList",
+          internal: {
+            type: "HomepageLogoList",
+            contentDigest: node.internal.contentDigest,
+          },
+        })
+
+        actions.createNode({
+          ...blocks.featureList,
+          blocktype: "HomepageFeatureList",
+          internal: {
+            type: "HomepageFeatureList",
+            contentDigest: node.internal.contentDigest,
+          },
+        })
+
+        actions.createNode({
+          ...blocks.productList,
+          blocktype: "HomepageProductList",
+          internal: {
+            type: "HomepageProductList",
+            contentDigest: node.internal.contentDigest,
+          },
+        })
+
         actions.createNode({
           ...node.homepage,
           id: createNodeId(`${node.id} >>> Homepage`),
@@ -638,24 +693,30 @@ exports.onCreateNode = ({
           parent: node.id,
           title: node.title,
           image: node.featuredImage?.node?.id,
-          content: [hero.id],
-          // content: node.homepage?.blocks?.map((block) => block.id),
+          content: [
+            blocks.hero.id,
+            blocks.logoList.id,
+            blocks.productList.id,
+            blocks.featureList.id,
+          ],
         })
         break
-      case "about":
-        actions.createNode({
-          ...node.homepage,
-          id: createNodeId(`${node.id} >>> AboutPage`),
-          internal: {
-            type: "AboutPage",
-            contentDigest: node.internal.contentDigest,
-          },
-          parent: node.id,
-          title: node.title,
-          image: node.featuredImage?.node?.id,
-          // content: node.homepage?.blocks?.map((block) => block.id),
-        })
-        break
+      /*
+        case "about":
+          actions.createNode({
+            ...node.homepage,
+            id: createNodeId(`${node.id} >>> AboutPage`),
+            internal: {
+              type: "AboutPage",
+              contentDigest: node.internal.contentDigest,
+            },
+            parent: node.id,
+            title: node.title,
+            image: node.featuredImage?.node?.id,
+            // content: node.homepage?.blocks?.map((block) => block.id),
+          })
+          break
+        */
       default:
         actions.createNode({
           ...node.page,
