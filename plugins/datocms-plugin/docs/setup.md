@@ -7,4 +7,4 @@
    yarn setup
    ```
 
-   This will run a script to populate your DatoCMS project's data model.
+   This will run a script to populate your DatoCMS project's data model and create `.env.development` and `.env.production` files for you.
