@@ -29,13 +29,13 @@
 
       <img src="./docs/images/setup-step-6.png" width="500">
 
-   1. The credentials for loggin in are:
+   1. The credentials for logging in are:
       ```sh
       username: admin
       password: DrupalGatsby123
       ```
 
-## Local Developement
+## Local Development
 
 The `composer.json` file as well as exported configurations found in the `config` folder are also included. If you decide to import and install these configurations, please do so before executing the `sql` script and be sure `not` to clean the existing database.
 
