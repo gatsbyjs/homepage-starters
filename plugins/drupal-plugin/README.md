@@ -89,6 +89,8 @@ Once your content is available in Drupal, deploy your site to [Gatsby Cloud](htt
 1. Add the environment variables from your `.env.production` file to Gatsby Cloud during setup
 1. Click **Build site** and your site should start building
 
+For a more detailed walkthrough, see the tutorial on how to [build your site with Gatsby Cloud][tutorial].
+
 [gatsby cloud dashboard]: https://gatsbyjs.com/dashboard
 [tutorial]: https://www.gatsbyjs.com/docs/tutorial/part-1/#build-your-site-with-gatsby-cloud
 
