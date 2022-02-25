@@ -1,7 +1,7 @@
 1. First, update your content model in Drupal
 
    In your Drupal website, create a new content type and call it "Homepage Banner."
-   For this example, change the `Title` field's name to `Heading` in when creating your new content type. Remove any fields that are added dy default and create a new field called `text` this should be of `Text (plain, long)` data type.
+   For this example, change the `Title` field's name to `Heading` in when creating your new content type. Remove any fields that are added dy default and create a new field called `text` this should be of `Text (plain, long)` data type or use an existing field with the same type and field name.
 
    Find the content type for _Homepage_ in Drupal and edit the settings for the _Content_ field. Under `Reference Type -> Content Type`, ensure that the new _Homepage Banner_ type is checked to make it available as a content type on the Homepage.
 
