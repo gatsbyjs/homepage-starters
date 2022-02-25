@@ -91,8 +91,8 @@ const createStarterDist = async (basename) => {
     "README.md",
     "src",
     "scripts",
-    "content.xml",
     "docs/images",
+    "content",
   ]
   files.forEach((file) => {
     const src = path.join(dir.plugins, dirname, file)

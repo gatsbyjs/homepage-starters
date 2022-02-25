@@ -1,5 +1,4 @@
 import * as React from "react"
-import { graphql, useStaticQuery } from "gatsby"
 import { Menu, X } from "react-feather"
 import {
   Container,
@@ -19,47 +18,43 @@ import {
   mobileHeaderNavWrapper,
   mobileNavSVGColorWrapper,
 } from "./header.css.ts"
-import NavItemGroup from "./nav-item-group"
 import BrandLogo from "./brand-logo"
 
-export default function Header() {
-  const data = useStaticQuery(graphql`
-    query {
-      layout {
-        header {
-          id
-          navItems {
-            id
-            navItemType
-            ... on NavItem {
-              href
-              text
-            }
-            ... on NavItemGroup {
-              name
-              navItems {
-                id
-                href
-                text
-                description
-                icon {
-                  alt
-                  gatsbyImageData
-                }
-              }
-            }
-          }
-          cta {
-            id
-            href
-            text
-          }
-        }
-      }
-    }
-  `)
+const data = {
+  navItems: [
+    {
+      id: 0,
+      navItemType: "Link",
+      href: "#!",
+      text: "Products",
+    },
+    {
+      id: 1,
+      navItemType: "Link",
+      href: "#!",
+      text: "Pricing",
+    },
+    {
+      id: 2,
+      navItemType: "Link",
+      href: "/about",
+      text: "About",
+    },
+    {
+      id: 3,
+      navItemType: "Link",
+      href: "#!",
+      text: "Blog",
+    },
+  ],
+  cta: {
+    href: "#!",
+    text: "Sign Up",
+  },
+}
 
-  const { navItems, cta } = data.layout.header
+export default function Header() {
+  const { navItems, cta } = data // .layout.header
   const [isOpen, setOpen] = React.useState(false)
 
   React.useEffect(() => {
@@ -84,14 +79,7 @@ export default function Header() {
               {navItems &&
                 navItems.map((navItem) => (
                   <li key={navItem.id}>
-                    {navItem.navItemType === "Group" ? (
-                      <NavItemGroup
-                        name={navItem.name}
-                        navItems={navItem.navItems}
-                      />
-                    ) : (
-                      <NavLink to={navItem.href}>{navItem.text}</NavLink>
-                    )}
+                    <NavLink to={navItem.href}>{navItem.text}</NavLink>
                   </li>
                 ))}
             </FlexList>
@@ -141,16 +129,9 @@ export default function Header() {
             <FlexList responsive variant="stretch">
               {navItems?.map((navItem) => (
                 <li key={navItem.id}>
-                  {navItem.navItemType === "Group" ? (
-                    <NavItemGroup
-                      name={navItem.name}
-                      navItems={navItem.navItems}
-                    />
-                  ) : (
-                    <NavLink to={navItem.href} className={mobileNavLink}>
-                      {navItem.text}
-                    </NavLink>
-                  )}
+                  <NavLink to={navItem.href} className={mobileNavLink}>
+                    {navItem.text}
+                  </NavLink>
                 </li>
               ))}
             </FlexList>
