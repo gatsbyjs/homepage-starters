@@ -32,7 +32,7 @@ You can find your API tokens under the Settings > API tokens section of your pro
    yarn setup
    ```
 
-   This will run a script to populate your DatoCMS project's data model and create `.env.development` and `.env.production` files for you
+   This will run a script to populate your DatoCMS project's data model and create `.env.development` and `.env.production` files for you.
 
 1. **Start developing**
 
