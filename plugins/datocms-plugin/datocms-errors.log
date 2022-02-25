@@ -1,0 +1,127 @@
+[
+  {
+    "message": "404 NOT_FOUND (details: {})",
+    "body": {
+      "data": [
+        {
+          "id": "302048",
+          "type": "api_error",
+          "attributes": {
+            "code": "NOT_FOUND",
+            "details": {}
+          }
+        }
+      ]
+    },
+    "headers": {
+      "date": [
+        "Fri, 25 Feb 2022 15:09:29 GMT"
+      ],
+      "content-type": [
+        "application/json; charset=utf-8"
+      ],
+      "transfer-encoding": [
+        "chunked"
+      ],
+      "connection": [
+        "close"
+      ],
+      "cf-ray": [
+        "6e31dae46d7c32ee-EWR"
+      ],
+      "access-control-allow-origin": [
+        "*"
+      ],
+      "cache-control": [
+        "no-cache"
+      ],
+      "content-encoding": [
+        "gzip"
+      ],
+      "strict-transport-security": [
+        "max-age=15552000; includeSubDomains; preload"
+      ],
+      "vary": [
+        "Accept,Accept-Encoding"
+      ],
+      "via": [
+        "1.1 vegur"
+      ],
+      "cf-cache-status": [
+        "DYNAMIC"
+      ],
+      "access-control-allow-credentials": [
+        "true"
+      ],
+      "access-control-allow-headers": [
+        "authorization, content-type, x-environment, x-site-domain, x-api-version, user-agent, x-session-id"
+      ],
+      "access-control-allow-methods": [
+        "GET, POST, PUT, OPTIONS, DELETE"
+      ],
+      "access-control-expose-headers": [
+        "x-ratelimit-limit, x-ratelimit-remaining, x-ratelimit-reset"
+      ],
+      "access-control-max-age": [
+        "1728000"
+      ],
+      "expect-ct": [
+        "max-age=604800, report-uri=\"https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct\""
+      ],
+      "referrer-policy": [
+        "strict-origin-when-cross-origin"
+      ],
+      "x-api-version": [
+        "3"
+      ],
+      "x-content-type-options": [
+        "nosniff"
+      ],
+      "x-download-options": [
+        "noopen"
+      ],
+      "x-environment": [
+        "main"
+      ],
+      "x-frame-options": [
+        "SAMEORIGIN"
+      ],
+      "x-permitted-cross-domain-policies": [
+        "none"
+      ],
+      "x-queue-time": [
+        "0ms"
+      ],
+      "x-ratelimit-limit": [
+        "60"
+      ],
+      "x-ratelimit-remaining": [
+        "58"
+      ],
+      "x-request-id": [
+        "0546b5a9-1cf1-41ec-9cc3-a39172fda47b"
+      ],
+      "x-runtime": [
+        "0.011513"
+      ],
+      "x-xss-protection": [
+        "1; mode=block"
+      ],
+      "server": [
+        "cloudflare"
+      ]
+    },
+    "statusCode": 404,
+    "statusText": "Not Found",
+    "requestUrl": "https://site-api.datocms.com/items",
+    "requestMethod": "POST",
+    "requestHeaders": {
+      "content-type": "application/json",
+      "accept": "application/json",
+      "authorization": "Bearer 903c06da6edb1e7008d083c0676202",
+      "user-agent": "js-client v3.5.14",
+      "X-Api-Version": "3"
+    },
+    "requestBody": "{\"data\":{\"type\":\"item\",\"attributes\":{\"heading\":\"Hi, we’re Acme. We make tools like Super™ and Track® that are used by thousands of teams worldwide.\",\"text\":\"We’re serious about creating amazing products, practices, open work, accessibility, and inclusivity. And in all that we strive to embed a good amount of fun. We’re rooted in the open source community and deeply care about giving back.\",\"image\":{\"alt\":null,\"title\":null,\"custom_data\":{},\"focal_point\":null,\"upload_id\":\"41109391\"}},\"relationships\":{\"item_type\":{\"data\":{\"type\":\"item_type\",\"id\":\"1792119\"}}}}}"
+  }
+]

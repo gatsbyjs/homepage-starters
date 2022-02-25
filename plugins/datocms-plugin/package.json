@@ -4,9 +4,11 @@
   "main": "index.js",
   "scripts": {
     "setup": "node ./scripts/setup.js",
-    "export-content": "node ./scripts/export.js"
+    "export-model": "node ./scripts/export-model.js",
+    "export-records": "node ./scripts/export-records.js"
   },
   "dependencies": {
+    "@mmintel/datocms-tools": "^0.1.13",
     "datocms-structured-text-to-html-string": "^2.0.0",
     "gatsby-plugin-manifest": "^4.7.0",
     "gatsby-plugin-react-helmet": "^5.5.0",

@@ -4,7 +4,7 @@ const inquirer = require("inquirer")
 const chalk = require("chalk")
 const yargs = require("yargs/yargs")
 const { hideBin } = require("yargs/helpers")
-const importContent = require("./import")
+const importDatoCMS = require("./import")
 
 const { argv } = yargs(hideBin(process.argv))
 
@@ -61,8 +61,8 @@ inquirer
       `# All environment variables will be sourced`,
       `# and made available to gatsby-config.js, gatsby-node.js, etc.`,
       `# Do NOT commit this file to source control`,
-      `DATOCMS_API_TOKEN=""`,
-      `DATOCMS_ENVIRONMENT=""`,
+      `DATOCMS_API_TOKEN="${apiToken}"`,
+      `DATOCMS_ENVIRONMENT="${environment}"`,
     ].join("\n")
     const configFiles = [".env.development", ".env.production"]
       .map((name) => path.join(__dirname, "..", name))
@@ -71,17 +71,25 @@ inquirer
       })
     console.log(`.env files written`)
     // import data model
-    const errors = await importContent(fullAPIToken)
-    if (errors) {
+    // const errors = await importDatoCMS.importContentModel(fullAPIToken)
+    // if (errors) {
+    //   console.error(
+    //     `Could not import data model. See datocms-errors.log for details.`
+    //   )
+    //   process.exit()
+    // }
+    // console.log(`Successfully imported data model to your DatoCMS project!`)
+
+    const contentErrors = await importDatoCMS.importContent(fullAPIToken)
+    if (contentErrors) {
       console.error(
         `Could not import data model. See datocms-errors.log for details.`
       )
       process.exit()
     }
-    console.log(
-      `Successfully imported data model to your DatoCMS project!`,
-      `Run ${chalk.blue("yarn start")} to start developing your site`
-    )
+    console.log(`Successfully imported data records to your DatoCMS project!`)
+
+    console.log(`Run ${chalk.blue("yarn start")} to start developing your site`)
   })
   .catch((err) => {
     console.error(err)

@@ -1,6 +1,7 @@
 // https://www.datocms.com/docs/import-and-export/importing-data#step-3-importing-to-datocms
 const fs = require("fs")
 const { SiteClient } = require("datocms-client")
+const DatoCmsTools = require("@mmintel/datocms-tools")
 const dataModel = require("./data-model.json")
 const data = require("./records.json")
 
@@ -128,13 +129,69 @@ async function importContentModel(token) {
   return null
 }
 
+function couldBeID(val) {
+  return /^\d+$/.test(val) && val.length > 4
+}
+
+const sortByRelation = (items, item, collection = []) => {
+  // console.log("items: ", items.length)
+  // console.log("item: ", item)
+  const index = items.findIndex((i) => i.id === item.id)
+  const nextItem = items[index + 1]
+  const sorted = collection.find((i) => i.id === item.id)
+
+  if (sorted) return collection
+
+  Object.keys(item).forEach((key) => {
+    const val = item[key]
+    const relatedFields = []
+
+    if (key !== "id" && couldBeID(val)) {
+      relatedFields.push(key)
+    }
+
+    if (relatedFields.includes(key)) {
+      const relation = items.find((i) => i.id === val)
+      if (relation) {
+        return sortByRelation(items, relation, collection)
+      }
+    }
+
+    if (Array.isArray(val)) {
+      val.forEach((relatedID) => {
+        const relation = items.find((i) => i.id === relatedID)
+        if (relation) {
+          return sortByRelation(items, relation, collection)
+        }
+      })
+    }
+  })
+
+  collection.push(item)
+
+  if (nextItem) {
+    return sortByRelation(items, nextItem, collection)
+  }
+
+  return collection
+}
+
 async function importContent(token) {
   console.log(`Importing ${data.length} DatoCMS content records`)
+  console.log("token: ", token)
   const client = new SiteClient(token)
 
+  const existingRecords = await client.items.all({ allPages: true })
+  console.log("existing records: ", existingRecords)
+
+  // const dataIds = data.map((point) => point.id)
+  // console.log("data ids: ", dataIds)
+  // console.log("first entry: ", data[0].id)
+
+  const orderedData = sortByRelation(data, data[0])
   const errors = []
 
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < orderedData.length; i++) {
     try {
       const {
         id,
@@ -144,13 +201,15 @@ async function importContent(token) {
         creator,
         gatsbypreview,
         ...recordData
-      } = data[i]
+      } = orderedData[i]
       console.log(`Creating record: ${id}`)
       const record = await client.items.create(recordData)
       console.log("created record: ", record)
     } catch (e) {
-      console.error(`Error creating record: ${data[i].id}`)
+      console.error(`Error creating record: ${orderedData[i].id}`)
+      console.error(e)
       errors.push(e)
+      break
     }
   }
 
