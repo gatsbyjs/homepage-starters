@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "setup": "node ./scripts/setup.js",
-    "export-content": "node ./scripts/export.js"
+    "setup": "node ./scripts/setup.js"
   },
   "dependencies": {
     "datocms-structured-text-to-html-string": "^2.0.0",
