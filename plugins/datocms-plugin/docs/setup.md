@@ -1,4 +1,4 @@
-1. **Setup your DatoCMS project**
+1. **Create your DatoCMS project**
 
 [![Clone DatoCMS project](https://dashboard.datocms.com/clone/button.svg)](https://dashboard.datocms.com/clone?projectId=60908&name=Homepage+Starter)
 
