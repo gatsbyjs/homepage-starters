@@ -84,33 +84,35 @@ You will need a new or existing `Drupal` website to use this starter and will be
    # Manually install modules
    lando composer require 'drupal/gatsby:^1.0@RC'
    lando composer require 'drupal/markdown:^3.0@RC'
-   lando composer require 'drupal/simplemde:^1.0@alpha'
 
    # Optional but makes navigation easier
    lando composer require 'drupal/admin_toolbar'
 
    # Clear caches again
-   lando drush cc all
+   lando drush cr
    ```
 
+1. Go to your local **Drupal** site and login.
+
+1. Select _Extend_ in the toolbar.
+
+   <img src="./docs/images/setup-step-7.png" width="500">
+
+1. Find the **Gatsby Section** and check **_Gatsby_**, **_Gatsby Fast Builds_**, **_Gatsby JSON\:API Instant Preview and Incremental Builds_**. All other dependent modules will automatically be installed.
+
+   <img src="./docs/images/setup-step-8.png" width="500">
+
+1. Head to the bottom on the page and click the ****Install**** button.
+
 1. ```sh
+   # Clear caches
+   lando drush cr
+
    # Push up Database, Files and Code. We are working on the dev server so be sure to select "dev" when prompted
    lando push
    ```
 
-1. Go to your **Drupal** site hosted on **Patheon** and login.
-
-   1. Select _Extend_ in the toolbar.
-
-      <img src="./docs/images/setup-step-7.png" width="500">
-
-   1. Find the **Gatsby Section** and check **_Gatsby_**, **_Gatsby Fast Builds_**, **_Gatsby JSON\:API Instant Preview and Incremental Builds_**. All other dependent modules will automatically be installed.
-
-      <img src="./docs/images/setup-step-8.png" width="500">
-
-   1. Head to the bottom on the page and click the ****Install**** button.
-
-1. Remember to clear your caches again and you're done!
+1. You're done!
 
 For a video guided step-by-step tutorial see the links below:
 
