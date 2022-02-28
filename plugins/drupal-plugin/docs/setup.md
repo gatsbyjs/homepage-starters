@@ -31,7 +31,7 @@
 
    1. The credentials for logging in are:
       `sh username: admin password: DrupalGatsby123`
-      Our site is up but we still need to install the [Gatsby Module](https://www.drupal.org/project/gatsby). To do that on **Pantheon** we need to pull down the site locally and install the module using **composer**. To streamline this process we will use a free, open source, cross-platform tool called [Lando](https://lando.dev/download/).
+      Our site is up but we still need to install the [Gatsby Module](https://www.drupal.org/project/gatsby). To do that on **Pantheon** we need to pull down the site locally and install the module using **composer**. To streamline this process we will use a free, open source, cross-platform tool called [Lando](https://lando.dev/) which you can [Download Here](https://github.com/lando/lando/releases/tag/v3.6.0) (At the time v3.6.0 was the latest stable version).
 
 ### Lando & Pantheon Integration
 
