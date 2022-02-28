@@ -81,7 +81,7 @@ For a video guided step-by-step tutorial see the links below:
    lando pull
 
    # Clear caches
-   lando drush cc all
+   lando drush cr
    ```
 
 1. ```sh
