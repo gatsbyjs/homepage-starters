@@ -486,6 +486,7 @@ exports.onCreateNode = ({
             blocks.testimonialList.id,
           ],
         })
+
         break
       default:
         actions.createNode({
