@@ -81,11 +81,6 @@ You will need a new or existing `Drupal` website to use this starter and will be
    ```
 
 1. ```sh
-   # Add composer file provide and run:
-   lando composer install
-
-   # OR
-
    # Manually install modules
    lando composer require 'drupal/gatsby:^1.0@RC'
    lando composer require 'drupal/markdown:^3.0@RC'
@@ -103,7 +98,7 @@ You will need a new or existing `Drupal` website to use this starter and will be
    lando push
    ```
 
-1. If you decided to manually add your modules, go to your **Drupal** site hosted on **Patheon** and login.
+1. Go to your **Drupal** site hosted on **Patheon** and login.
 
    1. Select _Extend_ in the toolbar.
 
