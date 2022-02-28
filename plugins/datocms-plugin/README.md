@@ -10,8 +10,8 @@ Create a homepage using Gatsby and DatoCMS. This starter demonstrates how to use
 
 ## Quick start
 
-You will need a new or existing DatoCMS project to use this starter and will be asked for two API tokens (Full-access and Read-only) as well as the [environment][] during installation.
-You can find your API tokens under the Settings > API tokens section of your project settings. The default settings should be correct, but make sure both Content Delivery API and Content Management API permissions are granted to these tokens. Additionally, by default your environment will be named "main".
+You will need a new or existing DatoCMS project to use this starter and will be asked for a Read-only API token as well as the [environment][] during installation.
+You can find your API token under the Settings > API tokens section of your project settings, and Environment can be found under the Settings > Environments section. By default your environment will be named "main".
 
 [environment]: https://www.datocms.com/docs/scripting-migrations/introduction#whats-an-environment
 
@@ -23,16 +23,22 @@ You can find your API tokens under the Settings > API tokens section of your pro
    npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-datocms-homepage
    ```
 
-1. **Run the DatoCMS setup script**
+1. **Create your DatoCMS project**
 
-   From your site's root directory, run:
+[![Clone DatoCMS project](https://dashboard.datocms.com/clone/button.svg)](https://dashboard.datocms.com/clone?projectId=60908&name=Homepage+Starter)
 
-   ```sh
-   cd my-homepage
-   yarn setup
-   ```
+This will clone the data model and records backing the demo site to populate your DatoCMS project.
 
-   This will run a script to populate your DatoCMS project's data model and create `.env.development` and `.env.production` files for you.
+1. **Run the setup script**
+
+After setting up the cloned DatoCMS project, from your site's root directory, run:
+
+```sh
+cd my-homepage
+yarn setup
+```
+
+This will run a script to create `.env.development` and `.env.production` files for you populated with your DatoCMS project environment variables.
 
 1. **Start developing**
 

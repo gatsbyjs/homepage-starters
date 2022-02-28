@@ -437,7 +437,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type DatoCmsNavItemGroup implements Node & NavItemGroup & HeaderNavItem
       @dontInfer {
       id: ID!
-      navItemType: String @navItemType(name: "Dropdown")
+      navItemType: String @navItemType(name: "Group")
       name: String
       navItems: [NavItem]
       originalId: String
