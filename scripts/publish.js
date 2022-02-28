@@ -105,6 +105,12 @@ const createStarterDist = async (basename) => {
   const json = createPackageJSON(name)
   fs.writeFileSync(path.join(dir.dist, name, "package.json"), json, "utf8")
 
+  // Remove the about page from WordPress because it is not used
+  if (basename === "wordpress") {
+    const filepath = path.join(dir.dist, name, "src", "pages", "about.js")
+    fs.removeSync(filepath)
+  }
+
   // Check if repo has changes
   let hasChanges = false
   await SimpleGit({
