@@ -314,6 +314,7 @@ exports.onCreateNode = ({
       case "homepage":
         // prettier-ignore
         const {
+          description,
           hero,
           logoList,
           featureList,
@@ -475,6 +476,7 @@ exports.onCreateNode = ({
           },
           parent: node.id,
           title: node.title,
+          description,
           image: node.featuredImage?.node?.id,
           content: [
             blocks.hero.id,
