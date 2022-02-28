@@ -4,6 +4,26 @@
         "title": "Homepage",
         "fields": [
             {
+                "key": "field_621d1be0dc47b",
+                "label": "Description",
+                "name": "description",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "show_in_graphql": 1,
+                "default_value": "",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
                 "key": "field_62194deb159c0",
                 "label": "Hero",
                 "name": "hero",
