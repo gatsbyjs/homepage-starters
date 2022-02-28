@@ -91,6 +91,12 @@
 
 1. Remember to clear your caches again and you're done!
 
+For a video guided step-by-step tutorial see the links below:
+
+[Local dev for Pantheon sites with Lando by Jantcu](https://www.youtube.com/watch?v=88WUuV-WJao)
+
+[Integrating DDEV-Local with Pantheon by Mediacurrent](https://www.youtube.com/watch?v=uochIVLwBL4)
+
 ---
 
 ## Local Development
