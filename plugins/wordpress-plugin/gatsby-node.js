@@ -185,6 +185,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type AboutHero implements Node & HomepageBlock {
       id: ID!
+      blocktype: String
       originalId: String
       heading: String
       text: String
@@ -326,6 +327,11 @@ exports.createSchemaCustomization = async ({ actions }) => {
 exports.onCreateNode = ({ node, actions, getNode, createNodeId, reporter }) => {
   if (!node.internal.type.includes("Wp")) return
 
+  const getArray = (field) => {
+    const arr = field || []
+    return arr.filter(Boolean).map((item) => item.id)
+  }
+
   if (node.internal.type === "WpHomepageBlock") {
     if (node.blocktypes.nodes.length < 1) return
     const blocktype = getNode(node.blocktypes.nodes[0].id)
@@ -342,7 +348,7 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, reporter }) => {
           parent: node.id,
           originalId: node.id,
           image: node.hero.image?.id,
-          links: node.hero.links?.map((link) => link.id),
+          links: getArray(node.hero.links),
         })
         break
       case "Cta":
@@ -357,7 +363,7 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, reporter }) => {
           originalId: node.id,
           parent: node.id,
           image: node.cta.image?.id,
-          links: node.cta.links?.map((link) => link.id),
+          links: getArray(node.cta.links),
         })
         break
       case "Feature":
@@ -372,7 +378,7 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, reporter }) => {
           originalId: node.id,
           parent: node.id,
           image: node.feature.image?.id,
-          links: node.feature.links?.filter(Boolean).map((link) => link.id),
+          links: getArray(node.feature.links),
         })
         break
       case "FeatureList":
@@ -386,7 +392,7 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, reporter }) => {
           blocktype: "HomepageFeatureList",
           originalId: node.id,
           parent: node.id,
-          content: node.featureList.content?.map((item) => item.id),
+          content: getArray(node.featureList.content),
         })
         break
       case "BenefitList":
@@ -400,7 +406,7 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, reporter }) => {
           blocktype: "HomepageBenefitList",
           originalId: node.id,
           parent: node.id,
-          content: node.benefitList.content?.map((item) => item.id),
+          content: getArray(node.benefitList.content),
         })
         break
       case "LogoList":
@@ -414,7 +420,7 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, reporter }) => {
           blocktype: "HomepageLogoList",
           originalId: node.id,
           parent: node.id,
-          logos: node.logoList.logos?.map((logo) => logo.id),
+          logos: getArray(node.logoList.logos),
         })
         break
       case "AboutLogoList":
@@ -428,8 +434,8 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, reporter }) => {
           blocktype: "AboutLogoList",
           originalId: node.id,
           parent: node.id,
-          logos: node.aboutLogoList.logos?.map((logo) => logo.id),
-          links: node.aboutLogoList.links?.map((link) => link.id),
+          logos: getArray(node.aboutLogoList.logos),
+          links: getArray(node.aboutLogoList.links),
         })
         break
       case "ProductList":
@@ -443,7 +449,7 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, reporter }) => {
           blocktype: "HomepageProductList",
           originalId: node.id,
           parent: node.id,
-          content: node.productList.content?.map((item) => item.id),
+          content: getArray(node.productList.content),
         })
         break
       case "StatList":
@@ -459,8 +465,8 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, reporter }) => {
           parent: node.id,
           icon: node.statList.icon?.id,
           image: node.statList.image?.id,
-          content: node.statList.content?.map((item) => item.id),
-          links: node.statList.links?.map((link) => link.id),
+          content: getArray(node.statList.content),
+          links: getArray(node.statList.links),
         })
         break
       case "TestimonialList":
@@ -474,7 +480,7 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, reporter }) => {
           blocktype: "HomepageTestimonialList",
           originalId: node.id,
           parent: node.id,
-          content: node.testimonialList.content?.map((item) => item.id),
+          content: getArray(node.testimonialList.content),
         })
         break
       case "AboutHero":
@@ -501,7 +507,7 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, reporter }) => {
           blocktype: "AboutStatList",
           parent: node.id,
           originalId: node.id,
-          content: node.aboutStatList.content?.map((item) => item.id),
+          content: getArray(node.aboutStatList.content),
         })
         break
       case "AboutLeadership":
@@ -515,7 +521,7 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, reporter }) => {
           blocktype: "AboutLeadership",
           parent: node.id,
           originalId: node.id,
-          content: node.aboutLeadership.content?.map((item) => item.id),
+          content: getArray(node.aboutLeadership.content),
         })
         break
       default:
@@ -556,7 +562,7 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, reporter }) => {
           parent: node.id,
           originalId: node.id,
           image: node.product.image?.id,
-          links: node.product.links?.map((link) => link.id),
+          links: getArray(node.product.links),
         })
         break
       case "Stat":
@@ -627,7 +633,7 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, reporter }) => {
           parent: node.id,
           title: node.title,
           image: node.featuredImage?.node?.id,
-          content: node.homepage?.blocks?.map((block) => block.id),
+          content: getArray(node.homepage.blocks),
         })
         break
       case "about":
@@ -641,7 +647,7 @@ exports.onCreateNode = ({ node, actions, getNode, createNodeId, reporter }) => {
           parent: node.id,
           title: node.title,
           image: node.featuredImage?.node?.id,
-          content: node.homepage?.blocks?.map((block) => block.id),
+          content: getArray(node.homepage.blocks),
         })
         break
       default:

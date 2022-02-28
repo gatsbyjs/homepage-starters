@@ -10,8 +10,8 @@ Create a homepage using Gatsby and DatoCMS. This starter demonstrates how to use
 
 ## Quick start
 
-You will need a new or existing DatoCMS project to use this starter and will be asked for an API token and the [environment][] during installation.
-You can find your read-only API token under the Settings > API tokens section of your administrative area. Make sure to grant both CDA and CMA permissions.
+You will need a new or existing DatoCMS project to use this starter and will be asked for two API tokens (Full-access and Read-only) as well as the [environment][] during installation.
+You can find your API tokens under the Settings > API tokens section of your project settings. The default settings should be correct, but make sure both Content Delivery API and Content Management API permissions are granted to these tokens. Additionally, by default your environment will be named "main".
 
 [environment]: https://www.datocms.com/docs/scripting-migrations/introduction#whats-an-environment
 
@@ -32,7 +32,7 @@ You can find your read-only API token under the Settings > API tokens section of
    yarn setup
    ```
 
-   This will run a script to populate your DatoCMS project's data model.
+   This will run a script to populate your DatoCMS project's data model and create `.env.development` and `.env.production` files for you.
 
 1. **Start developing**
 
@@ -49,6 +49,22 @@ You can find your read-only API token under the Settings > API tokens section of
 ## Deploy your site
 
 Once your content is available in DatoCMS, deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
+
+1. Push your local site to a new repo in either GitHub, GitLab, or Bitbucket
+1. Log into your [Gatsby Cloud Dashboard][] and click on **Add a site**
+1. Use the **Import from a Git repository** option to find your site
+1. Add the environment variables from your `.env.production` file to Gatsby Cloud during setup
+1. Click **Build site** and your site should start building
+
+For a more detailed walkthrough, see the tutorial on how to [build your site with Gatsby Cloud][tutorial].
+
+[gatsby cloud dashboard]: https://gatsbyjs.com/dashboard
+[tutorial]: https://www.gatsbyjs.com/docs/tutorial/part-1/#build-your-site-with-gatsby-cloud
+
+### Deploy without using the CLI
+
+Alternatively, you can deploy this starter directly to Gatsby Cloud.
+Note that you will need to set up your content in DatoCMS manually.
 
 [![Deploy to Gatsby](https://www.gatsbyjs.com/deploynow.png "Deploy to Gatsby")](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-datocms-homepage)
 
