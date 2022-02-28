@@ -52,13 +52,73 @@ You will need a new or existing `Drupal` website to use this starter and will be
 
       <img src="./docs/images/setup-step-6.png" width="500">
 
-   1. The credentials for loggin in are:
-      ```sh
-      username: admin
-      password: DrupalGatsby123
-      ```
+   1. The credentials for logging in are:
+      `sh username: admin password: DrupalGatsby123 `
+      Our site is up but we still need to install the [Gatsbt Module](https://www.drupal.org/project/gatsby). To do that on `Pantheon` we need to pull down the site locally and install the module using `composer`. To stream line this process we will use a free, open source, cross-platform tool called [Lando](https://lando.dev/download/).
 
-## Local Developement
+### Lando & Pantheon Integration
+
+1. Install `Lando` and `Docker`
+
+1. A `Machine Token` is needed by `Pantheon` in order to _push and pull_ the ****Database, Files and Code****. To generate a `Machine Token` follow these [instructions](https://pantheon.io/docs/machine-tokens). Remember that the `Machine Key` will only be visible once so keep it handy.
+
+1. ```sh
+   # Create a new directory for your Drupal site
+   mkdir homepage-starter
+   cd homepage-starter
+
+   # Initialize Lando and when prompted select Pantheon and paste in the Machine Key generated earlier. Continue following the prompts provided to pull donw your site.
+   lando init
+
+   # Start server
+   lando start
+
+   # Pull down Database, Files and Code. We are working on the dev server so be sure to select "dev" when prompted
+   lando pull
+
+   # Clear caches
+   lando drush cc all
+   ```
+
+1. ```sh
+   # Add composer file provide and run:
+   lando composer install
+
+   # OR
+
+   # Manually install modules
+   lando composer require 'drupal/gatsby:^1.0@RC'
+   lando composer require 'drupal/markdown:^3.0@RC'
+   lando composer require 'drupal/simplemde:^1.0@alpha'
+   # Optional but makes navigation easier
+   lando composer require 'drupal/admin_toolbar'
+
+   # Clear caches again
+   lando drush cc all
+   ```
+
+1. ```sh
+   # Push up Database, Files and Code. We are working on the dev server so be sure to select "dev" when prompted
+   lando push
+   ```
+
+1. If you decided to manually add your modules, go to your `Drupal` site hosted on `Patheon` and login.
+
+   1. Select _Extend_ in the toolbar.
+
+      <img src="./docs/images/setup-step-7.png" width="500">
+
+   1. Find the `Gatsby Section` and check **_`Gatsby`_**, **_`Gatsby Fast Builds`_**, **_`Gatsby JSON:API Instant Preview and Incremental Builds`_**. All other dependent modules will automatically be installed.
+
+      <img src="./docs/images/setup-step-8.png" width="500">
+
+   1. Head to the bottom on the page and click the ****Install**** button.
+
+1. Remember to clear your caches again and you're done!
+
+---
+
+## Local Development
 
 The `composer.json` file as well as exported configurations found in the `config` folder are also included. If you decide to import and install these configurations, please do so before executing the `sql` script and be sure `not` to clean the existing database.
 
