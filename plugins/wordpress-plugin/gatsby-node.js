@@ -365,13 +365,13 @@ exports.onCreateNode = ({
             ...hero,
             image: hero.image?.id,
             links: [hero.cta1, hero.cta2]
-              .map(createLinkNode(node.id))
-              .filter(Boolean),
+              .filter(Boolean)
+              .map(createLinkNode(node.id)),
           },
           logoList: {
             id: createNodeId(`${node.id} >>> HomepageLogoList`),
             ...logoList,
-            logos: logoList.logos.filter(Boolean).map((logo) => logo.id),
+            logos: logoList.logos?.filter(Boolean).map((logo) => logo.id) || [],
           },
           featureList: {
             id: createNodeId(`${node.id} >>> HomepageFeatureList`),
@@ -393,7 +393,7 @@ exports.onCreateNode = ({
             ...statList,
             image: statList.image?.id,
             icon: statList.icon?.id,
-            links: [statList.link].map(createLinkNode(node.id)).filter(Boolean),
+            links: [statList.link].filter(Boolean).map(createLinkNode(node.id)),
             content: content.stats,
           },
           testimonialList: {
