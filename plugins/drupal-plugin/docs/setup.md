@@ -92,7 +92,7 @@ All the modules should know be installed and activated. To ensure that they are 
 
 ---
 
-## Local Development
+## Local Drupal Development
 
 The **composer.json** file as well as exported configurations found in the **config** folder are also included. If you decide to import and install these configurations, please do so before executing the **sql** script and be sure **not** to clean the existing database.
 
