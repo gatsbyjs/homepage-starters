@@ -54,9 +54,13 @@ You will need a new or existing `Drupal` website to use this starter and will be
 
    1. The credentials for logging in are:
       `sh username: admin password: DrupalGatsby123`
-      Our site is up but we still need to install the [Gatsby Module](https://www.drupal.org/project/gatsby). To do that on **Pantheon** we need to pull down the site locally and install the module using **composer**. To stream line this process we will use a free, open source, cross-platform tool called [Lando](https://lando.dev/download/).
+      Our site is up but we still need to install the [Gatsby Module](https://www.drupal.org/project/gatsby). To do that on **Pantheon** we need to pull down the site locally and install the module using **composer**. To streamline this process we will use a free, open source, cross-platform tool called [Lando](https://lando.dev/download/).
 
 ### Lando & Pantheon Integration
+
+For a video guided step-by-step tutorial see the links below:
+
+[Local dev for Pantheon sites with Lando by Jantcu](https://www.youtube.com/watch?v=88WUuV-WJao)
 
 1. Install **Lando** and **Docker**
 
@@ -90,7 +94,12 @@ You will need a new or existing `Drupal` website to use this starter and will be
 
    # Clear caches again
    lando drush cr
+
+   # Push up Database, Files and Code. We are working on the dev server so be sure to select "dev" when prompted
+   lando push
    ```
+
+All the modules should know be installed and activated. To ensure that they are all installed correctly:
 
 1. Go to your local **Drupal** site and login.
 
@@ -104,21 +113,7 @@ You will need a new or existing `Drupal` website to use this starter and will be
 
 1. Head to the bottom on the page and click the ****Install**** button.
 
-1. ```sh
-   # Clear caches
-   lando drush cr
-
-   # Push up Database, Files and Code. We are working on the dev server so be sure to select "dev" when prompted
-   lando push
-   ```
-
 1. You're done!
-
-For a video guided step-by-step tutorial see the links below:
-
-[Local dev for Pantheon sites with Lando by Jantcu](https://www.youtube.com/watch?v=88WUuV-WJao)
-
-[Integrating DDEV-Local with Pantheon by Mediacurrent](https://www.youtube.com/watch?v=uochIVLwBL4)
 
 ---
 
