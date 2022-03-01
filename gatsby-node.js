@@ -152,3 +152,25 @@ exports.createSchemaCustomization = async ({ actions, store }) => {
     }
   `)
 }
+
+// WordPress does not include the about page
+// This type is to shim the GraphQL layer for development
+exports.sourceNodes = ({
+  actions,
+  store,
+  createNodeId,
+  createContentDigest,
+}) => {
+  const state = store.getState()
+  const plugins = state.config.plugins.map((plugin) => plugin.resolve)
+  if (!plugins.includes("gatsby-source-wordpress")) return
+  actions.createNode({
+    id: createNodeId(`Shim AboutPage`),
+    internal: {
+      type: "AboutPage",
+      contentDigest: createContentDigest(""),
+    },
+    title: "About",
+    content: [],
+  })
+}
