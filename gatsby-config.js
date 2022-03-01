@@ -5,5 +5,10 @@ module.exports = {
     // "datocms-plugin",
     // "drupal-plugin",
     // "wordpress-plugin",
+
+    // optional blog themes
+    // "gatsby-theme-contentful-blog",
+    // "gatsby-theme-datocms-blog",
+    // "gatsby-theme-wordpress-blog",
   ],
 }
