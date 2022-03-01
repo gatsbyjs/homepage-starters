@@ -14,7 +14,6 @@
   },
   "devDependencies": {
     "chalk": "^4.1.0",
-    "datocms-client": "^3.5.14",
     "inquirer": "^8.2.0",
     "yargs": "^17.3.1"
   }
