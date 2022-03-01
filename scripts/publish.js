@@ -102,6 +102,12 @@ const createStarterDist = async (basename) => {
     fs.copySync(src, dest)
   })
 
+  // Copy pull request template to target repos
+  fs.copySync(
+    "docs/pr-template.md",
+    path.join(dir.dist, name, "pull_request_template.md")
+  )
+
   const json = createPackageJSON(name)
   fs.writeFileSync(path.join(dir.dist, name, "package.json"), json, "utf8")
 
