@@ -114,6 +114,10 @@ All the modules should know be installed and activated. To ensure that they are 
 
    <img src="./docs/images/setup-step-8.png" width="500">
 
+1. Find the **Web Services Section** and ensure that **_HTTP Basic Authentication_** is checked.
+
+   <img src="./docs/images/setup-step-9.png" width="500">
+
 1. Head to the bottom on the page and click the ****Install**** button.
 
 1. You're done!
