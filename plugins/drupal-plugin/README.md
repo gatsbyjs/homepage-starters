@@ -86,8 +86,11 @@ For a video guided step-by-step tutorial see the links below:
 
 1. ```sh
    # Manually install modules
+   lando composer config repositories.2 '{"type": "package", "package": { "name": "ionaru/easy-markdown-editor", "version": "2.15.0", "type": "drupal-library", "dist": { "url": "https://registry.npmjs.org/easymde/-/easymde-2.15.0.tgz", "type": "tar" } } }'
    lando composer require 'drupal/gatsby:^1.0@RC'
    lando composer require 'drupal/markdown:^3.0@RC'
+   lando composer require 'league/commonmark:^1.0'
+   lando composer require 'drupal/simplemde:^1.0@alpha'
 
    # Optional but makes navigation easier
    lando composer require 'drupal/admin_toolbar'
