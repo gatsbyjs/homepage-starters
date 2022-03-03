@@ -293,7 +293,7 @@ For this example, we'll create a new "Banner" component.
 
 ## Troubleshooting
 
-### Errors after making changes to the scheme
+### Errors after making changes to the schema
 
 If you've made changes to the `gatsby-node.js` file or changes to the DatoCMS data model, clear the Gatsby cache before running the develop server:
 
