@@ -59,6 +59,12 @@ exports.createSchemaCustomization = async ({ actions }) => {
       title: String
     }
 
+    type ContentfulBlogAuthor implements Node & BlogAuthor {
+      id: ID!
+      name: String
+      avatar: Image @link(from: "avatar___NODE")
+    }
+
     type contentfulBlogPostExcerptTextNode implements Node {
       id: ID!
       excerpt: String!
@@ -75,6 +81,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       excerpt: String! @contentfulExcerpt
       contentfulExcerpt: contentfulBlogPostExcerptTextNode @link(from: "excerpt___NODE")
       image: Image @link(from: "image___NODE")
+      author: BlogAuthor @link(from: "author___NODE")
     }
   `)
 }
