@@ -5,8 +5,9 @@ import Layout from "../components/layout"
 // prettier-ignore
 import {
   Container,
+  Box,
   Heading,
-  Box
+  Text,
 } from "../components/ui"
 
 export default function BlogPost(props) {
@@ -20,6 +21,20 @@ export default function BlogPost(props) {
             <GatsbyImage alt={post.image.alt} image={getImage(post.image)} />
           )}
           <Heading as="h1">{post.title}</Heading>
+          {post.author && (
+            <Box>
+              {post.author.avatar &&
+                (!!post.author.avatar.gatsbyImageData ? (
+                  <GatsbyImage
+                    alt={post.author.avatar.alt}
+                    image={getImage(post.author.avatar)}
+                  />
+                ) : (
+                  <img src={post.author.avatar.url} alt={post.author.alt} />
+                ))}
+              <Text>{post.author.name}</Text>
+            </Box>
+          )}
           <div
             dangerouslySetInnerHTML={{
               __html: post.html,
