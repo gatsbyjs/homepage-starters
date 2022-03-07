@@ -11,8 +11,8 @@ module.exports = (options) => ({
       options,
     },
     "gatsby-transformer-remark",
-    "gatsby-plugin-image",
-    "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",
+    "gatsby-plugin-sharp",
+    "gatsby-plugin-image",
   ],
 })

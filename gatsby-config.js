@@ -9,6 +9,6 @@ module.exports = {
     // optional blog themes
     // "gatsby-theme-contentful-blog",
     // "gatsby-theme-datocms-blog",
-    // "gatsby-theme-wordpress-blog",
+    "gatsby-theme-wordpress-blog",
   ],
 }
