@@ -5,10 +5,13 @@ import Layout from "../components/layout"
 // prettier-ignore
 import {
   Container,
+  Flex,
   Box,
   Heading,
   Text,
+  Avatar,
 } from "../components/ui"
+import * as styles from "./blog-post.css.ts"
 
 export default function BlogPost(props) {
   const post = props.data.blogPost
@@ -17,25 +20,24 @@ export default function BlogPost(props) {
     <Layout {...post} description={post.excerpt}>
       <Container>
         <Box paddingY={4}>
-          {post.image && (
-            <GatsbyImage alt={post.image.alt} image={getImage(post.image)} />
-          )}
           <Heading as="h1">{post.title}</Heading>
           {post.author && (
-            <Box>
+            <Flex>
               {post.author.avatar &&
                 (!!post.author.avatar.gatsbyImageData ? (
-                  <GatsbyImage
-                    alt={post.author.avatar.alt}
-                    image={getImage(post.author.avatar)}
-                  />
+                  <Avatar {...post.author.avatar} image={post.author.avatar} />
                 ) : (
                   <img src={post.author.avatar.url} alt={post.author.alt} />
                 ))}
-              <Text>{post.author.name}</Text>
-            </Box>
+              <Text variant="bold">{post.author.name}</Text>
+            </Flex>
+          )}
+          <div>{post.date}</div>
+          {post.image && (
+            <GatsbyImage alt={post.image.alt} image={getImage(post.image)} />
           )}
           <div
+            className={styles.blogPost}
             dangerouslySetInnerHTML={{
               __html: post.html,
             }}
@@ -54,6 +56,7 @@ export const query = graphql`
       title
       html
       excerpt
+      # date(formatString: "MMMM Do, YYYY")
       date
       image {
         id
