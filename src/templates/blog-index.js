@@ -30,6 +30,7 @@ export default function BlogIndex(props) {
                   </Link>
                 )}
                 <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+                {post.author?.name && <div>By {post.author.name}</div>}
                 <p>{post.excerpt}</p>
               </li>
             ))}
