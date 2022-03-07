@@ -7,8 +7,8 @@ module.exports = {
     // "wordpress-plugin",
 
     // optional blog themes
-    "gatsby-theme-contentful-blog",
-    // "gatsby-theme-datocms-blog",
+    // "gatsby-theme-contentful-blog",
+    "gatsby-theme-datocms-blog",
     // "gatsby-theme-wordpress-blog",
   ],
 }
