@@ -73,7 +73,13 @@ const createStarterDist = async (basename) => {
   ]
 
   // copy root files
-  const rootFiles = [".gitignore", "src", "gatsby-browser.js", "LICENSE"]
+  const rootFiles = [
+    ".gitignore",
+    "src",
+    "gatsby-browser.js",
+    "LICENSE",
+    "types",
+  ]
   rootFiles.forEach((file) => {
     const dest = path.join(dir.dist, name, file)
     console.log(`Copying '${file}' to '${dest}'`)

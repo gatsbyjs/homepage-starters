@@ -1,6 +1,13 @@
 import * as React from "react"
 import { caret } from "./caret.css.ts"
-export default function CaretDown({ direction = "down", size = 9 }) {
+
+export default function CaretDown({
+  direction = "down",
+  size = 9,
+}: {
+  direction: string
+  size: number
+}) {
   const width = size
   const height = (8 / 9) * size
   return (

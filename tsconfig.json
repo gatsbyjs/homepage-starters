@@ -1,0 +1,8 @@
+{
+  "include": ["./src"],
+  "exclude": ["node_modules", "scripts", "plugins", "docs", "themes"],
+  "compilerOptions": {
+    "allowJS": true,
+    "jsx": "preserve"
+  }
+}
