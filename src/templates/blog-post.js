@@ -56,8 +56,7 @@ export const query = graphql`
       title
       html
       excerpt
-      # date(formatString: "MMMM Do, YYYY")
-      date
+      date(formatString: "MMMM Do, YYYY")
       image {
         id
         url

@@ -50,7 +50,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       title: String!
       html: String!
       excerpt: String! @sanitizeHTML
-      date: Date!
+      date: Date! @dateformat
       image: Image @link
       author: BlogAuthor @link(by: "parent.id")
     }

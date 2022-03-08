@@ -40,7 +40,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       html: String! @datocmsRichText
       excerpt: String!
       image: Image
-      date: Date!
+      date: Date! @dateformat
     }
   `)
 }
