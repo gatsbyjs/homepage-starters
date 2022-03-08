@@ -7,6 +7,7 @@ import {
   Container,
   Flex,
   Box,
+  Space,
   Heading,
   Text,
   Avatar,
@@ -19,29 +20,42 @@ export default function BlogPost(props) {
   return (
     <Layout {...post} description={post.excerpt}>
       <Container>
-        <Box paddingY={4}>
-          <Heading as="h1">{post.title}</Heading>
+        <Box paddingY={5}>
+          <Heading as="h1" center>
+            {post.title}
+          </Heading>
+          <Space size={4} />
           {post.author && (
-            <Flex>
-              {post.author.avatar &&
-                (!!post.author.avatar.gatsbyImageData ? (
-                  <Avatar {...post.author.avatar} image={post.author.avatar} />
-                ) : (
-                  <img src={post.author.avatar.url} alt={post.author.alt} />
-                ))}
-              <Text variant="bold">{post.author.name}</Text>
-            </Flex>
+            <Box center>
+              <Flex>
+                {post.author.avatar &&
+                  (!!post.author.avatar.gatsbyImageData ? (
+                    <Avatar
+                      {...post.author.avatar}
+                      image={post.author.avatar}
+                    />
+                  ) : (
+                    <img src={post.author.avatar.url} alt={post.author.alt} />
+                  ))}
+                <Text variant="bold">{post.author.name}</Text>
+              </Flex>
+            </Box>
           )}
-          <div>{post.date}</div>
+          <Space size={4} />
+          <Text center>{post.date}</Text>
+          <Space size={4} />
           {post.image && (
             <GatsbyImage alt={post.image.alt} image={getImage(post.image)} />
           )}
-          <div
-            className={styles.blogPost}
-            dangerouslySetInnerHTML={{
-              __html: post.html,
-            }}
-          />
+          <Space size={5} />
+          <Container width="tight">
+            <div
+              className={styles.blogPost}
+              dangerouslySetInnerHTML={{
+                __html: post.html,
+              }}
+            />
+          </Container>
         </Box>
       </Container>
     </Layout>
