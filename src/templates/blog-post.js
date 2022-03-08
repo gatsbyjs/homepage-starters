@@ -48,14 +48,12 @@ export default function BlogPost(props) {
             <GatsbyImage alt={post.image.alt} image={getImage(post.image)} />
           )}
           <Space size={5} />
-          <Container width="tight">
-            <div
-              className={styles.blogPost}
-              dangerouslySetInnerHTML={{
-                __html: post.html,
-              }}
-            />
-          </Container>
+          <div
+            className={styles.blogPost}
+            dangerouslySetInnerHTML={{
+              __html: post.html,
+            }}
+          />
         </Box>
       </Container>
     </Layout>

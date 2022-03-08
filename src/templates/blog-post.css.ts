@@ -15,6 +15,28 @@ globalStyle(`${blogPost} a`, {
   fontWeight: theme.fontWeights.medium,
 })
 
+const containedElements = [
+  "p",
+  "h1",
+  "h2",
+  "h3",
+  "h4",
+  "h5",
+  "h6",
+  "pre",
+  "ul",
+  "ol",
+  "dl",
+]
+  .map((el) => blogPost + " " + el)
+  .join(", ")
+
+globalStyle(containedElements, {
+  maxWidth: theme.sizes.tight,
+  marginLeft: "auto",
+  marginRight: "auto",
+})
+
 globalStyle(`${blogPost} p`, {
   lineHeight: theme.lineHeights.text,
 })
