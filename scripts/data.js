@@ -7,7 +7,17 @@ module.exports = {
     demoURL: "https://gatsbycontentfulhomepage.gatsbyjs.io/",
     deploynow:
       "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-contentful-homepage",
+    isTypescript: false,
   },
+  // "contentful-ts": {
+  //   repo: "",
+  //   cms: "Contentful",
+  //   name: "contentful",
+  //   dirname: "contentful-plugin",
+  //   demoURL: "",
+  //   deploynow: "",
+  //   isTypescript: true,
+  // },
   datocms: {
     repo: "https://github.com/gatsbyjs/gatsby-starter-datocms-homepage",
     cms: "DatoCMS",
@@ -16,7 +26,17 @@ module.exports = {
     demoURL: "https://gatsbydatocmshomepage.gatsbyjs.io/",
     deploynow:
       "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-datocms-homepage",
+    isTypescript: false,
   },
+  // "datocms-ts": {
+  //   repo: "",
+  //   cms: "DatoCMS",
+  //   name: "datocms",
+  //   dirname: "datocms-plugin",
+  //   demoURL: "",
+  //   deploynow: "",
+  //   isTypescript: true,
+  // },
   drupal: {
     repo: "https://github.com/gatsbyjs/gatsby-starter-drupal-homepage",
     cms: "Drupal",
@@ -25,7 +45,17 @@ module.exports = {
     demoURL: "https://gatsbydrupalhomepage.gatsbyjs.io/",
     deploynow:
       "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-drupal-homepage",
+    isTypescript: false,
   },
+  // "drupal-ts": {
+  //   repo: "",
+  //   cms: "Drupal",
+  //   name: "drupal",
+  //   dirname: "drupal-plugin",
+  //   demoURL: "",
+  //   deploynow: "",
+  //   isTypescript: true,
+  // },
   wordpress: {
     repo: "https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage",
     cms: "WordPress",
@@ -34,5 +64,15 @@ module.exports = {
     demoURL: "https://gatsbywordpresshomepage.gatsbyjs.io/",
     deploynow:
       "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage",
+    isTypescript: false,
   },
+  // "wordpress-ts": {
+  //   repo: "",
+  //   cms: "WordPress",
+  //   name: "wordpress",
+  //   dirname: "wordpress-plugin",
+  //   demoURL: "",
+  //   deploynow: "",
+  //   isTypescript: true,
+  // },
 }

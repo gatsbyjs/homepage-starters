@@ -4,6 +4,7 @@ const path = require("path")
 const debug = require("debug")
 const SimpleGit = require("simple-git")
 const ts = require("typescript")
+const prettier = require("prettier")
 const data = require("./data")
 
 /*
@@ -42,6 +43,7 @@ fs.readdirSync(dir.dist).map((dirname) => {
 })
 
 const createStarterDist = async (basename) => {
+  console.log("repos: ", repos)
   const repo = repos[basename]
   if (!repo) {
     console.warn(`No repo configured for ${basename}`)
@@ -75,6 +77,10 @@ const createStarterDist = async (basename) => {
 
   // copy root files
   const rootFiles = [".gitignore", "gatsby-browser.js", "LICENSE"]
+  // if repo is not Typescript add "src"
+  if (!repo.isTypescript) {
+    rootFiles.push("src")
+  }
   rootFiles.forEach((file) => {
     const dest = path.join(dir.dist, name, file)
     console.log(`Copying '${file}' to '${dest}'`)
@@ -83,61 +89,64 @@ const createStarterDist = async (basename) => {
     })
   })
 
-  // array to contain all directories found inside src, seeded with src to begin with
-  const srcDirectories = ["src"]
-  // function to traverse src directory and collect array of all filenames within
-  const getAllSrcFiles = (dirPath = "src", filesArray = []) => {
-    fs.readdirSync(dirPath).forEach((file) => {
-      if (fs.statSync(dirPath + "/" + file).isDirectory()) {
-        srcDirectories.push(dirPath + "/" + file)
-        filesArray = getAllSrcFiles(dirPath + "/" + file, filesArray)
+  // otherwise if repo is Typescript, handle transpilation
+  if (repo.isTypescript) {
+    // array to contain all directories found inside src, seeded with src to begin with
+    const srcDirectories = ["src"]
+    // function to traverse src directory and collect array of all filenames within
+    const getAllSrcFiles = (dirPath = "src", filesArray = []) => {
+      fs.readdirSync(dirPath).forEach((file) => {
+        if (fs.statSync(dirPath + "/" + file).isDirectory()) {
+          srcDirectories.push(dirPath + "/" + file)
+          filesArray = getAllSrcFiles(dirPath + "/" + file, filesArray)
+        } else {
+          filesArray.push(path.join(dirPath, "/", file))
+        }
+      })
+      return filesArray
+    }
+
+    const srcFiles = getAllSrcFiles()
+    // create any directories needed
+    srcDirectories.forEach((directory) => {
+      const destDirectory = path.join(dir.dist, name, directory)
+      console.log(`Copying '${directory}' to '${destDirectory}'`)
+      fs.mkdirSync(destDirectory)
+    })
+    // transpile typescript src files
+    srcFiles.forEach((srcFilename) => {
+      const extension = path.extname(srcFilename)
+      // we want to skip over the .css.ts files and only transpile .ts/.tsx
+      if (
+        (extension === ".ts" || extension === ".tsx") &&
+        !srcFilename.includes(".css.ts")
+      ) {
+        console.log(`Transpiling '${srcFilename}'`)
+        const { outputText } = ts.transpileModule(
+          fs.readFileSync(srcFilename).toString(),
+          {
+            compilerOptions: { jsx: "preserve", target: "es2016" },
+          }
+        )
+        const dest = path.join(
+          dir.dist,
+          name,
+          srcFilename.replace(extension, ".js")
+        )
+        console.log(
+          `Copying transpiled version of '${srcFilename}' to '${dest}`
+        )
+        fs.writeFileSync(dest, prettier.format(outputText, { semi: false }))
       } else {
-        filesArray.push(path.join(dirPath, "/", file))
+        // copy over src files that don't require transpilation
+        const dest = path.join(dir.dist, name, srcFilename)
+        console.log(`Copying '${srcFilename}' to '${dest}'`)
+        fs.copySync(srcFilename, dest, {
+          filter: (n) => !ignore.includes(n),
+        })
       }
     })
-    return filesArray
   }
-
-  const srcFiles = getAllSrcFiles()
-  // create any directories needed
-  srcDirectories.forEach((directory) => {
-    const destDirectory = path.join(dir.dist, name, directory)
-    console.log(`Copying '${directory}' to '${destDirectory}'`)
-    fs.mkdirSync(destDirectory)
-  })
-  // transpile typescript src files
-  srcFiles.forEach((srcFilename) => {
-    const extension = path.extname(srcFilename)
-    // we want to skip over the .css.ts files and only transpile .ts/.tsx
-    if (
-      (extension === ".ts" || extension === ".tsx") &&
-      !srcFilename.includes(".css.ts")
-    ) {
-      console.log(`Transpiling '${srcFilename}'`)
-      const { outputText } = ts.transpileModule(
-        fs.readFileSync(srcFilename).toString(),
-        {
-          compilerOptions: { jsx: "preserve", target: "es2016" },
-        }
-      )
-      // update the filename extension
-      const newExtension = extension === ".ts" ? ".js" : ".jsx"
-      const dest = path.join(
-        dir.dist,
-        name,
-        srcFilename.replace(extension, newExtension)
-      )
-      console.log(`Copying transpiled version of '${srcFilename}' to '${dest}`)
-      fs.writeFileSync(dest, outputText)
-    } else {
-      // copy over src files that don't require transpilation
-      const dest = path.join(dir.dist, name, srcFilename)
-      console.log(`Copying '${srcFilename}' to '${dest}'`)
-      fs.copySync(srcFilename, dest, {
-        filter: (n) => !ignore.includes(n),
-      })
-    }
-  })
 
   // copy cms-specific files
   const files = [
