@@ -1,7 +1,7 @@
 import { style, styleVariants } from "@vanilla-extract/css"
 import { theme } from "../theme.css.ts"
-import { media } from "./ui.css"
-import { mobileNavLink } from "./header.css"
+import { media } from "./ui.css.ts"
+import { mobileNavLink } from "./header.css.ts"
 
 export const navGroupWrapper = style({
   position: "relative",

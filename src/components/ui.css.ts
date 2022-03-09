@@ -18,9 +18,17 @@ export const container = style({
   paddingRight: theme.space[4],
 })
 
+export enum Containers {
+  Normal = "normal",
+  Wide = "wide",
+  Narrow = "narrow",
+  Tight = "tight",
+  Fullbleed = "fullbleed",
+}
+
 export const containers = styleVariants({
-  normal: [container],
-  wide: [
+  [Containers.Normal]: [container],
+  [Containers.Wide]: [
     container,
     {
       maxWidth: theme.sizes.wide,
@@ -28,19 +36,19 @@ export const containers = styleVariants({
       paddingRight: 0,
     },
   ],
-  narrow: [
+  [Containers.Narrow]: [
     container,
     {
       maxWidth: theme.sizes.narrow,
     },
   ],
-  tight: [
+  [Containers.Tight]: [
     container,
     {
       maxWidth: theme.sizes.tight,
     },
   ],
-  fullbleed: [
+  [Containers.Fullbleed]: [
     container,
     {
       paddingLeft: 0,
@@ -64,40 +72,53 @@ export const flex = style({
   alignItems: "center",
 })
 
+export enum FlexVariants {
+  Wrap = "wrap",
+  Start = "start",
+  Baseline = "baseline",
+  ColumnStart = "columnStart",
+  Column = "column",
+  End = "end",
+  Stretch = "stretch",
+  SpaceBetween = "spaceBetween",
+  Center = "center",
+  Responsive = "responsive",
+}
+
 export const flexVariants = styleVariants({
-  wrap: {
+  [FlexVariants.Wrap]: {
     flexWrap: "wrap",
   },
-  start: {
+  [FlexVariants.Start]: {
     alignItems: "flex-start",
   },
-  baseline: {
+  [FlexVariants.Baseline]: {
     alignItems: "baseline",
   },
-  columnStart: {
+  [FlexVariants.ColumnStart]: {
     flexDirection: "column",
     alignItems: "flex-start",
   },
-  column: {
+  [FlexVariants.Column]: {
     flexDirection: "column",
   },
-  end: {
+  [FlexVariants.End]: {
     alignItems: "flex-end",
   },
-  stretch: {
+  [FlexVariants.Stretch]: {
     alignItems: "stretch",
   },
-  spaceBetween: {
+  [FlexVariants.SpaceBetween]: {
     width: "100%",
     flexWrap: "wrap",
     justifyContent: "space-between",
   },
-  center: {
+  [FlexVariants.Center]: {
     width: "100%",
     flexWrap: "wrap",
     justifyContent: "center",
   },
-  responsive: {
+  [FlexVariants.Responsive]: {
     flexDirection: "column",
     "@media": {
       [media.small]: {
@@ -109,14 +130,23 @@ export const flexVariants = styleVariants({
 
 export const flexGap = styleVariants(theme.space, (gap) => ({ gap }))
 
+export enum Widths {
+  Full = "full",
+  Half = "half",
+  Quarter = "quarter",
+  Third = "third",
+  TwoThirds = "twothirds",
+  FitContent = "fitContent",
+}
+
 export const widths = styleVariants(
   {
-    full: "100%",
-    half: "50%",
-    quarter: "25%",
-    third: "33.3333%",
-    twothirds: "33.3333%",
-    fitContent: "fit-content",
+    [Widths.Full]: "100%",
+    [Widths.Half]: "50%",
+    [Widths.Quarter]: "25%",
+    [Widths.Third]: "33.3333%",
+    [Widths.TwoThirds]: "33.3333%",
+    [Widths.FitContent]: "fit-content",
   },
   (width) => [
     {
@@ -145,15 +175,22 @@ export const marginY = styleVariants(theme.space, (margin) => ({
   marginTop: margin,
   marginBottom: margin,
 }))
+
+export enum Gutter {
+  MarginLeft = "marginLeft",
+  MarginRight = "marginRight",
+}
+
 export const gutter = styleVariants(theme.space, (val) => ({
-  marginLeft: calc.multiply(val, -1),
-  marginRight: calc.multiply(val, -1),
+  [Gutter.MarginLeft]: calc.multiply(val, -1),
+  [Gutter.MarginRight]: calc.multiply(val, -1),
 }))
+
 export const radii = styleVariants(theme.radii, (borderRadius) => ({
   overflow: "hidden",
   borderRadius,
 }))
-export const order = styleVariants([0, 1, 2, 3], (order) => ({
+export const order = styleVariants({ 0: 0, 1: 1, 2: 2, 3: 3 }, (order) => ({
   "@media": {
     [media.small]: {
       order,
@@ -187,28 +224,32 @@ export const margin = styleVariants(
   },
   (margin) => ({ margin })
 )
-margin.left = styleVariants(
+
+export const marginLeft = styleVariants(
   {
     ...theme.space,
     auto: "auto",
   },
   (marginLeft) => ({ marginLeft })
 )
-margin.right = styleVariants(
+
+export const marginRight = styleVariants(
   {
     ...theme.space,
     auto: "auto",
   },
   (marginRight) => ({ marginRight })
 )
-margin.top = styleVariants(
+
+export const marginTop = styleVariants(
   {
     ...theme.space,
     auto: "auto",
   },
   (marginTop) => ({ marginTop })
 )
-margin.bottom = styleVariants(
+
+export const marginBottom = styleVariants(
   {
     ...theme.space,
     auto: "auto",
@@ -218,8 +259,26 @@ margin.bottom = styleVariants(
 
 export const margin0 = style({ margin: 0 })
 
+export enum TextVariants {
+  Body = "body",
+  Lead = "lead",
+  SuperHeading = "superHeading",
+  Heading = "heading",
+  Subhead = "subhead",
+  SubheadSmall = "subheadSmall",
+  Kicker = "kicker",
+  Caps = "caps",
+  Stat = "stat",
+  StatLabel = "statLabel",
+  Small = "small",
+  Medium = "medium",
+  Mega = "mega",
+  Center = "center",
+  Bold = "bold",
+}
+
 export const text = styleVariants({
-  body: [
+  [TextVariants.Body]: [
     margin0,
     {
       marginBottom: theme.space[3],
@@ -229,7 +288,7 @@ export const text = styleVariants({
       letterSpacing: theme.letterSpacings.normal,
     },
   ],
-  lead: [
+  [TextVariants.Lead]: [
     margin0,
     {
       marginBottom: theme.space[3],
@@ -239,7 +298,7 @@ export const text = styleVariants({
       letterSpacing: theme.letterSpacings.normal,
     },
   ],
-  superHeading: [
+  [TextVariants.SuperHeading]: [
     margin0,
     {
       marginTop: theme.space[4],
@@ -256,7 +315,7 @@ export const text = styleVariants({
       },
     },
   ],
-  heading: [
+  [TextVariants.Heading]: [
     margin0,
     {
       marginBottom: theme.space[3],
@@ -272,7 +331,7 @@ export const text = styleVariants({
       },
     },
   ],
-  subhead: [
+  [TextVariants.Subhead]: [
     margin0,
     {
       marginBottom: theme.space[3],
@@ -282,7 +341,7 @@ export const text = styleVariants({
       letterSpacing: theme.letterSpacings.tight,
     },
   ],
-  subheadSmall: [
+  [TextVariants.SubheadSmall]: [
     margin0,
     {
       marginBottom: theme.space[3],
@@ -292,7 +351,7 @@ export const text = styleVariants({
       letterSpacing: theme.letterSpacings.tight,
     },
   ],
-  kicker: [
+  [TextVariants.Kicker]: [
     margin0,
     {
       marginBottom: theme.space[2],
@@ -304,7 +363,7 @@ export const text = styleVariants({
       textTransform: "uppercase",
     },
   ],
-  caps: [
+  [TextVariants.Caps]: [
     margin0,
     {
       marginBottom: theme.space[2],
@@ -315,7 +374,7 @@ export const text = styleVariants({
       fontStyle: "normal",
     },
   ],
-  stat: [
+  [TextVariants.Stat]: [
     margin0,
     {
       fontFamily: theme.fonts.mono,
@@ -324,7 +383,7 @@ export const text = styleVariants({
       lineHeight: theme.lineHeights.tight,
     },
   ],
-  statLabel: [
+  [TextVariants.StatLabel]: [
     margin0,
     {
       fontWeight: theme.fontWeights.bold,
@@ -332,20 +391,20 @@ export const text = styleVariants({
       lineHeight: theme.lineHeights.heading,
     },
   ],
-  small: [
+  [TextVariants.Small]: [
     margin0,
     {
       fontSize: theme.fontSizes[1],
       marginBottom: theme.space[2],
     },
   ],
-  medium: [
+  [TextVariants.Medium]: [
     margin0,
     {
       fontSize: theme.fontSizes[3],
     },
   ],
-  mega: [
+  [TextVariants.Mega]: [
     margin0,
     {
       fontSize: "180px",
@@ -359,10 +418,10 @@ export const text = styleVariants({
       },
     },
   ],
-  center: {
+  [TextVariants.Center]: {
     textAlign: "center",
   },
-  bold: {
+  [TextVariants.Bold]: {
     fontWeight: theme.fontWeights.bold,
   },
 })
@@ -482,12 +541,17 @@ export const buttons = styleVariants({
   ],
 })
 
+export enum Backgrounds {
+  Primary = "primary",
+  Muted = "muted",
+}
+
 export const backgrounds = styleVariants({
-  primary: {
+  [Backgrounds.Primary]: {
     color: theme.colors.background,
     backgroundColor: theme.colors.primary,
   },
-  muted: {
+  [Backgrounds.Muted]: {
     color: theme.colors.primary,
     backgroundColor: theme.colors.muted,
   },

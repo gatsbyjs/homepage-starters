@@ -72,7 +72,7 @@ exports.onCreateWebpackConfig = ({ actions, store }) => {
             "components",
             "footer.js"
           ),
-          "./ui": path.resolve(__dirname, "src", "components", "ui.js"),
+          "./ui": path.resolve(__dirname, "src", "components", "ui.tsx"),
         },
       },
     })

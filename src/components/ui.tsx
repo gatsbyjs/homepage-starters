@@ -3,20 +3,44 @@ import { Link as GatsbyLink } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import isAbsoluteURL from "is-absolute-url"
 import * as styles from "./ui.css.ts"
+import { Radii, SpaceKeys } from "../theme.css.ts"
 
 export const cx = (...args) => args.filter(Boolean).join(" ")
+
+interface BaseProps {
+  as?: React.ElementType
+  cx?: string[]
+  className?: string
+}
 
 export function Base({
   as: Component = "div",
   cx: _cx = [],
   className,
   ...props
-}) {
+}: BaseProps) {
   return <Component className={cx(..._cx, className)} {...props} />
 }
 
-export function Container({ width = "normal", ...props }) {
+interface ContainerProps extends BaseProps {
+  width: styles.Containers
+}
+
+export function Container({
+  width = styles.Containers.Normal,
+  ...props
+}: ContainerProps) {
   return <Base cx={[styles.containers[width]]} {...props} />
+}
+
+interface FlexProps extends BaseProps {
+  variant?: styles.FlexVariants
+  gap?: SpaceKeys
+  gutter?: styles.Gutter
+  wrap?: boolean
+  responsive?: boolean
+  marginY?: SpaceKeys
+  alignItems?: styles.FlexVariants
 }
 
 export function Flex({
@@ -27,9 +51,9 @@ export function Flex({
   responsive,
   marginY,
   alignItems,
-  cx: _cx,
+  cx: _cx = [],
   ...props
-}) {
+}: FlexProps) {
   return (
     <Base
       cx={[
@@ -48,28 +72,38 @@ export function Flex({
   )
 }
 
+interface BoxProps extends BaseProps {
+  width?: styles.Widths
+  background?: styles.Backgrounds
+  padding?: SpaceKeys
+  paddingY?: SpaceKeys
+  radius?: Radii
+  center?: boolean
+  order?: 0 | 1 | 2 | 3
+}
+
 export function Box({
-  width = "full",
+  width = styles.Widths.Full,
   background,
   padding,
   paddingY,
   radius,
   center = false,
   order,
-  cx,
+  cx: _cx = [],
   ...props
-}) {
+}: BoxProps) {
   return (
     <Base
       cx={[
         styles.widths[width],
-        styles.backgrounds[background],
-        styles.padding[padding],
-        styles.paddingY[paddingY],
-        styles.radii[radius],
+        background && styles.backgrounds[background],
+        padding && styles.padding[padding],
+        paddingY && styles.paddingY[paddingY],
+        radius && styles.radii[radius],
         center && styles.box.center,
         order && styles.order[order],
-        cx,
+        ..._cx,
       ]}
       {...props}
     />
@@ -77,7 +111,7 @@ export function Box({
 }
 
 export function FlexList({ ...props }) {
-  return <Flex as="ul" cx={styles.list} {...props} />
+  return <Flex as="ul" cx={[styles.list]} {...props} />
 }
 
 export function List(props) {
@@ -92,10 +126,10 @@ export function Nudge({ left, right, top, bottom, ...props }) {
   return (
     <Base
       cx={[
-        styles.margin.left[-left],
-        styles.margin.right[-right],
-        styles.margin.top[-top],
-        styles.margin.bottom[-bottom],
+        styles.marginLeft[-left],
+        styles.marginRight[-right],
+        styles.marginTop[-top],
+        styles.marginBottom[-bottom],
       ]}
       {...props}
     />
@@ -106,7 +140,18 @@ export function Section(props) {
   return <Box as="section" className={styles.section} {...props} />
 }
 
-export function Text({ variant = "body", center, bold, ...props }) {
+interface TextProps extends BaseProps {
+  variant?: styles.TextVariants
+  center?: boolean
+  bold?: boolean
+}
+
+export function Text({
+  variant = styles.TextVariants.Body,
+  center,
+  bold,
+  ...props
+}: TextProps) {
   return (
     <Base
       cx={[
@@ -120,19 +165,19 @@ export function Text({ variant = "body", center, bold, ...props }) {
 }
 
 export function SuperHeading({ ...props }) {
-  return <Text as="h1" variant="superHeading" {...props} />
+  return <Text as="h1" variant={styles.TextVariants.SuperHeading} {...props} />
 }
 
 export function Heading({ ...props }) {
-  return <Text as="h2" variant="heading" {...props} />
+  return <Text as="h2" variant={styles.TextVariants.Heading} {...props} />
 }
 
 export function Subhead({ ...props }) {
-  return <Text as="h3" variant="subhead" {...props} />
+  return <Text as="h3" variant={styles.TextVariants.Subhead} {...props} />
 }
 
 export function Kicker({ ...props }) {
-  return <Text variant="kicker" {...props} />
+  return <Text variant={styles.TextVariants.Kicker} {...props} />
 }
 
 export function Link({ to, href, ...props }) {

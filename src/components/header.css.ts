@@ -1,6 +1,6 @@
 import { style, styleVariants } from "@vanilla-extract/css"
-import { theme } from "../theme.css"
-import { media } from "./ui.css"
+import { theme } from "../theme.css.ts"
+import { media } from "./ui.css.ts"
 
 export const desktopHeaderNavWrapper = style({
   position: "relative",

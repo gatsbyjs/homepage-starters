@@ -1,6 +1,9 @@
 import { createGlobalTheme } from "@vanilla-extract/css"
 import { colors } from "./colors.css.ts"
 
+export type SpaceKeys = 0 | 1 | 2 | 3 | 4 | 5 | 6
+export type Space = Record<SpaceKeys, string>
+
 const space = {
   0: "0",
   1: "4px",
@@ -17,7 +20,7 @@ Object.assign(
   Object.entries(space).reduce(
     (a, [key, val]) => ({
       ...a,
-      [-1 * key]: `-${val}`,
+      [-1 * Number(key)]: `-${val}`,
     }),
     {}
   )
@@ -73,10 +76,16 @@ const sizes = {
   navIconSmall: "30px",
 }
 
+export enum Radii {
+  Button = "button",
+  Large = "large",
+  Circle = "circle",
+}
+
 const radii = {
-  button: "10px",
-  large: "24px",
-  circle: "99999px",
+  [Radii.Button]: "10px",
+  [Radii.Large]: "24px",
+  [Radii.Circle]: "99999px",
 }
 
 const shadows = {
