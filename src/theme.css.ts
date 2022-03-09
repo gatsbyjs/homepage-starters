@@ -1,8 +1,8 @@
 import { createGlobalTheme } from "@vanilla-extract/css"
 import { colors } from "./colors.css.ts"
 
-export type SpaceKeys = 0 | 1 | 2 | 3 | 4 | 5 | 6
-export type Space = Record<SpaceKeys, string>
+export type SpaceTokens = 0 | 1 | 2 | 3 | 4 | 5 | 6
+export type Space = Record<SpaceTokens, string>
 
 const space = {
   0: "0",

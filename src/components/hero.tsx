@@ -11,9 +11,20 @@ import {
   Flex,
   Box,
   ButtonList,
+  HomepageImage,
+  HomepageLink,
 } from "./ui"
 
-export default function Hero(props) {
+interface HeroProps {
+  image?: HomepageImage
+  kicker?: string
+  h1: string
+  subhead: string
+  text: string
+  links: HomepageLink[]
+}
+
+export default function Hero(props: HeroProps) {
   return (
     <Section>
       <Container>
@@ -22,7 +33,7 @@ export default function Hero(props) {
             {props.image && (
               <GatsbyImage
                 alt={props.image.alt}
-                image={getImage(props.image)}
+                image={getImage(props.image.gatsbyImageData)}
               />
             )}
           </Box>

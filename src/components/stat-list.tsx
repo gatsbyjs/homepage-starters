@@ -13,7 +13,15 @@ import {
   Icon,
   ButtonList,
   Nudge,
+  HomepageImage,
+  HomepageLink,
 } from "./ui"
+
+interface StatProps {
+  id: string
+  value: string
+  label: string
+}
 
 function Stat(props) {
   return (
@@ -24,13 +32,25 @@ function Stat(props) {
   )
 }
 
-export default function StatList(props) {
+interface StatListProps {
+  icon?: HomepageImage
+  kicker?: string
+  heading: string
+  text?: string
+  content: StatProps[]
+  links: HomepageLink[]
+  image?: HomepageImage
+}
+
+export default function StatList(props: StatListProps) {
   return (
     <Container width="fullbleed">
       <Section padding={5} radius="large" background="primary">
         <Flex responsive variant="end">
           <Box width="half">
-            {props.icon && <Icon alt={props.icon.alt} image={props.icon} />}
+            {props.icon && (
+              <Icon alt={props.icon.alt} image={props.icon.gatsbyImageData} />
+            )}
             <Heading>
               {props.kicker && <Kicker>{props.kicker}</Kicker>}
               {props.heading}
@@ -50,7 +70,7 @@ export default function StatList(props) {
               <Nudge right={5} bottom={5}>
                 <GatsbyImage
                   alt={props.image.alt}
-                  image={getImage(props.image)}
+                  image={getImage(props.image.gatsbyImageData)}
                 />
               </Nudge>
             )}

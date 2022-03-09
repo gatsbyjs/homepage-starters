@@ -1,14 +1,40 @@
 import * as React from "react"
 import { graphql } from "gatsby"
-import { Space, Container, Section, FlexList, Text, Logo } from "./ui"
+import {
+  Space,
+  Container,
+  Section,
+  FlexList,
+  Text,
+  Logo,
+  HomepageImage,
+} from "./ui"
+import { LogoSizes } from "./ui.css"
 
-export function LogoItem(props) {
-  if (!props.image) return false
-
-  return <Logo alt={props.alt} image={props.image} size="medium" />
+export interface LogoItemProps {
+  id: string
+  alt: string
+  image: HomepageImage
 }
 
-export default function LogoList(props) {
+export function LogoItem(props: LogoItemProps) {
+  if (!props.image) return null
+
+  return (
+    <Logo
+      alt={props.alt}
+      image={props.image.gatsbyImageData}
+      size={LogoSizes.Medium}
+    />
+  )
+}
+
+interface LogoListProps {
+  text?: string
+  logos: LogoItemProps[]
+}
+
+export default function LogoList(props: LogoListProps) {
   return (
     <Section paddingY={4}>
       <Container width="narrow">

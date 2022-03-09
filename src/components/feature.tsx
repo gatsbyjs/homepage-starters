@@ -10,9 +10,21 @@ import {
   Kicker,
   Text,
   ButtonList,
+  HomepageImage,
+  HomepageLink,
 } from "./ui"
 
-export default function Feature(props) {
+export interface FeatureProps {
+  id: string
+  image?: HomepageImage
+  flip: boolean
+  kicker?: string
+  heading: string
+  text: string
+  links: HomepageLink[]
+}
+
+export default function Feature(props: FeatureProps) {
   return (
     <Section padding={4} background="muted">
       <Container>
@@ -21,7 +33,7 @@ export default function Feature(props) {
             {props.image && (
               <GatsbyImage
                 alt={props.image.alt}
-                image={getImage(props.image)}
+                image={getImage(props.image.gatsbyImageData)}
               />
             )}
           </Box>

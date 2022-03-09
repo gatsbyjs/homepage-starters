@@ -1,14 +1,35 @@
 import * as React from "react"
 import { Link as GatsbyLink } from "gatsby"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import {
+  GatsbyImage,
+  GatsbyImageProps,
+  getImage,
+  IGatsbyImageData,
+  ImageDataLike,
+} from "gatsby-plugin-image"
 import isAbsoluteURL from "is-absolute-url"
 import * as styles from "./ui.css.ts"
-import { Radii, SpaceKeys } from "../theme.css.ts"
+import { Radii, SpaceTokens } from "../theme.css.ts"
+import { FlexVariants } from "./ui.css"
 
 export const cx = (...args) => args.filter(Boolean).join(" ")
 
+export interface HomepageLink {
+  id: string
+  href: string
+  url: string
+  text: string
+}
+
+export interface HomepageImage {
+  id: string
+  alt: string
+  gatsbyImageData: IGatsbyImageData
+}
+
+type WithChildren<T = {}> = T & { children?: React.ReactNode }
 interface BaseProps {
-  as?: React.ElementType
+  as?: React.ElementType | React.FC
   cx?: string[]
   className?: string
 }
@@ -23,23 +44,23 @@ export function Base({
 }
 
 interface ContainerProps extends BaseProps {
-  width: styles.Containers
+  width?: styles.Containers
 }
 
 export function Container({
   width = styles.Containers.Normal,
   ...props
-}: ContainerProps) {
+}: WithChildren<ContainerProps>) {
   return <Base cx={[styles.containers[width]]} {...props} />
 }
 
 interface FlexProps extends BaseProps {
   variant?: styles.FlexVariants
-  gap?: SpaceKeys
+  gap?: SpaceTokens
   gutter?: styles.Gutter
   wrap?: boolean
   responsive?: boolean
-  marginY?: SpaceKeys
+  marginY?: SpaceTokens
   alignItems?: styles.FlexVariants
 }
 
@@ -53,7 +74,7 @@ export function Flex({
   alignItems,
   cx: _cx = [],
   ...props
-}: FlexProps) {
+}: WithChildren<FlexProps>) {
   return (
     <Base
       cx={[
@@ -65,7 +86,7 @@ export function Flex({
         gutter ? styles.flexGap[0] : styles.flexGap[gap],
         marginY && styles.marginY[marginY],
         alignItems && styles.flexVariants[alignItems],
-        _cx,
+        ..._cx,
       ]}
       {...props}
     />
@@ -75,8 +96,8 @@ export function Flex({
 interface BoxProps extends BaseProps {
   width?: styles.Widths
   background?: styles.Backgrounds
-  padding?: SpaceKeys
-  paddingY?: SpaceKeys
+  padding?: SpaceTokens
+  paddingY?: SpaceTokens
   radius?: Radii
   center?: boolean
   order?: 0 | 1 | 2 | 3
@@ -92,7 +113,7 @@ export function Box({
   order,
   cx: _cx = [],
   ...props
-}: BoxProps) {
+}: WithChildren<BoxProps>) {
   return (
     <Base
       cx={[
@@ -118,18 +139,35 @@ export function List(props) {
   return <Base as="ul" cx={[styles.list]} {...props} />
 }
 
-export function Space({ size = "auto", ...props }) {
+interface SpaceProps extends BaseProps {
+  size?: SpaceTokens | "auto"
+}
+
+export function Space({ size = "auto", ...props }: SpaceProps) {
   return <Base cx={[styles.margin[size]]} {...props} />
 }
 
-export function Nudge({ left, right, top, bottom, ...props }) {
+interface NudgeProps {
+  left?: number
+  right?: number
+  top?: number
+  bottom?: number
+}
+
+export function Nudge({
+  left,
+  right,
+  top,
+  bottom,
+  ...props
+}: WithChildren<NudgeProps>) {
   return (
     <Base
       cx={[
-        styles.marginLeft[-left],
-        styles.marginRight[-right],
-        styles.marginTop[-top],
-        styles.marginBottom[-bottom],
+        left && styles.marginLeft[-left],
+        right && styles.marginRight[-right],
+        top && styles.marginTop[-top],
+        bottom && styles.marginBottom[-bottom],
       ]}
       {...props}
     />
@@ -151,7 +189,7 @@ export function Text({
   center,
   bold,
   ...props
-}: TextProps) {
+}: WithChildren<TextProps>) {
   return (
     <Base
       cx={[
@@ -199,16 +237,37 @@ export function NavButtonLink({ ...props }) {
   return <Base as="button" cx={[styles.navButtonlink]} {...props} />
 }
 
-export function Button({ variant = "primary", ...props }) {
+interface ButtonProps extends BaseProps {
+  variant?: styles.ButtonVariants
+  href?: string
+  to?: string
+}
+
+export function Button({
+  variant = styles.ButtonVariants.Primary,
+  ...props
+}: WithChildren<ButtonProps>) {
   return <Base as={Link} cx={[styles.buttons[variant]]} {...props} />
 }
 
-export function ButtonList({ links = [], reversed = false, ...props }) {
-  const getVariant = (i) => {
+interface ButtonListProps extends BaseProps {
+  links: HomepageLink[]
+  variant?: FlexVariants
+  reversed?: boolean
+}
+
+export function ButtonList({
+  links = [],
+  reversed = false,
+  ...props
+}: ButtonListProps) {
+  const getVariant = (i): styles.ButtonVariants => {
     if (reversed) {
-      return i === 0 ? "reversed" : "linkReversed"
+      return i === 0
+        ? styles.ButtonVariants.Reversed
+        : styles.ButtonVariants.LinkReversed
     }
-    return i === 0 ? "primary" : "link"
+    return i === 0 ? styles.ButtonVariants.Primary : styles.ButtonVariants.Link
   }
   return (
     <FlexList marginY={4} {...props}>
@@ -228,7 +287,11 @@ export function CTALink(props) {
   return <Base as={Link} cx={[styles.ctaLink]} {...props} />
 }
 
-export function LinkList({ links = [], ...props }) {
+interface LinkListProps extends BaseProps {
+  links: HomepageLink[]
+}
+
+export function LinkList({ links = [], ...props }: LinkListProps) {
   return (
     <FlexList {...props}>
       {links &&
@@ -245,13 +308,22 @@ export function Blockquote(props) {
   return <Base as="blockquote" cx={[styles.blockquote]} {...props} />
 }
 
-export function Avatar({ alt, image }) {
+export interface AvatarProps {
+  alt: string
+  image: ImageDataLike
+}
+
+export function Avatar({ alt, image }: AvatarProps) {
   return (
     <GatsbyImage alt={alt} image={getImage(image)} className={styles.avatar} />
   )
 }
 
-export function Logo({ alt, image, size = "small" }) {
+interface LogoProps extends GatsbyImageProps {
+  size: styles.LogoSizes
+}
+
+export function Logo({ alt, image, size = styles.LogoSizes.Small }: LogoProps) {
   return (
     <GatsbyImage
       alt={alt}
@@ -261,7 +333,15 @@ export function Logo({ alt, image, size = "small" }) {
   )
 }
 
-export function Icon({ alt, image, size = "medium" }) {
+interface IconProps extends GatsbyImageProps {
+  size?: styles.IconSizes
+}
+
+export function Icon({
+  alt,
+  image,
+  size = styles.IconSizes.Medium,
+}: IconProps) {
   return (
     <GatsbyImage
       alt={alt}

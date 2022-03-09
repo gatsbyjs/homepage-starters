@@ -56,7 +56,7 @@ exports.onCreateWebpackConfig = ({ actions, store }) => {
             plugin,
             "src",
             "components",
-            "header.js"
+            "header.tsx"
           ),
           "./header.css.ts": path.resolve(
             __dirname,
@@ -70,7 +70,7 @@ exports.onCreateWebpackConfig = ({ actions, store }) => {
             plugin,
             "src",
             "components",
-            "footer.js"
+            "footer.tsx"
           ),
           "./ui": path.resolve(__dirname, "src", "components", "ui.tsx"),
         },

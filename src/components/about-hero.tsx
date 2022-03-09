@@ -1,10 +1,17 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
-import { Container, Section, Text, SuperHeading } from "./ui"
+import { Container, Section, Text, SuperHeading, HomepageImage } from "./ui"
 import * as styles from "./about-hero.css.ts"
+import { Containers } from "./ui.css.ts"
 
-export default function AboutHero(props) {
+interface AboutHeroProps {
+  heading: string
+  text?: string
+  image?: HomepageImage
+}
+
+export default function AboutHero(props: AboutHeroProps) {
   return (
     <Section>
       <Container>
@@ -15,11 +22,11 @@ export default function AboutHero(props) {
           <Text className={styles.aboutHeroText}>{props.text}</Text>
         )}
       </Container>
-      <Container width="wide">
+      <Container width={Containers.Wide}>
         {props.image && (
           <GatsbyImage
             alt={props.image.alt}
-            image={getImage(props.image)}
+            image={getImage(props.image.gatsbyImageData)}
             className={styles.aboutHeroImage}
           />
         )}

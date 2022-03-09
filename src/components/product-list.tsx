@@ -11,13 +11,28 @@ import {
   Box,
   Icon,
   LinkList,
+  HomepageImage,
+  HomepageLink,
 } from "./ui"
+import { IconSizes } from "./ui.css.ts"
 
-function Product(props) {
+interface ProductProps {
+  id: string
+  image: HomepageImage
+  heading: string
+  text: string
+  links: HomepageLink[]
+}
+
+function Product(props: ProductProps) {
   return (
     <Box center>
       {props.image && (
-        <Icon alt={props.image.alt} image={props.image} size="large" />
+        <Icon
+          alt={props.image.alt}
+          image={props.image.gatsbyImageData}
+          size={IconSizes.Large}
+        />
       )}
       <Subhead>{props.heading}</Subhead>
       <Text>{props.text}</Text>
@@ -26,7 +41,14 @@ function Product(props) {
   )
 }
 
-export default function ProductList(props) {
+interface ProductListProps {
+  kicker?: string
+  heading: string
+  text?: string
+  content: ProductProps[]
+}
+
+export default function ProductList(props: ProductListProps) {
   return (
     <Section>
       <Container>

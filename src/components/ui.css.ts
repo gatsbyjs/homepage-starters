@@ -482,8 +482,15 @@ const button = style({
   borderRadius: theme.radii.button,
 })
 
+export enum ButtonVariants {
+  Primary = "primary",
+  Reversed = "reversed",
+  Link = "link",
+  LinkReversed = "linkReversed",
+}
+
 export const buttons = styleVariants({
-  primary: [
+  [ButtonVariants.Primary]: [
     button,
     {
       color: theme.colors.background,
@@ -496,7 +503,7 @@ export const buttons = styleVariants({
       },
     },
   ],
-  reversed: [
+  [ButtonVariants.Reversed]: [
     button,
     {
       color: theme.colors.primary,
@@ -511,7 +518,7 @@ export const buttons = styleVariants({
       },
     },
   ],
-  link: [
+  [ButtonVariants.Link]: [
     button,
     {
       color: "inherit",
@@ -524,7 +531,7 @@ export const buttons = styleVariants({
       },
     },
   ],
-  linkReversed: [
+  [ButtonVariants.LinkReversed]: [
     button,
     {
       color: "inherit",
@@ -573,21 +580,32 @@ export const avatar = style({
   borderRadius: theme.radii.circle,
 })
 
+export enum LogoSizes {
+  Small = "small",
+  Medium = "medium",
+}
+
 export const logos = styleVariants({
-  small: {
+  [LogoSizes.Small]: {
     width: "85px",
     height: "20px",
   },
-  medium: {
+  [LogoSizes.Medium]: {
     maxWidth: "128px",
   },
 })
 
+export enum IconSizes {
+  Small = "small",
+  Medium = "medium",
+  Large = "large",
+}
+
 export const icons = styleVariants(
   {
-    small: "24px",
-    medium: "32px",
-    large: "64px",
+    [IconSizes.Small]: "24px",
+    [IconSizes.Medium]: "32px",
+    [IconSizes.Large]: "64px",
   },
   (size) => ({
     width: size,

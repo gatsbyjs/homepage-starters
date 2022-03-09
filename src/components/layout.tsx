@@ -4,7 +4,13 @@ import Footer from "./footer"
 import Head from "./head"
 import "../styles.css.ts"
 
-export default function Layout(props) {
+interface LayoutProps {
+  title: string
+  description?: string
+  image?: { url: string }
+}
+
+const Layout: React.FC<LayoutProps> = (props) => {
   return (
     <>
       <Head {...props} />
@@ -14,3 +20,5 @@ export default function Layout(props) {
     </>
   )
 }
+
+export default Layout
