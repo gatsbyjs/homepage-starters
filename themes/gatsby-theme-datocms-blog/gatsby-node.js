@@ -41,6 +41,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       excerpt: String!
       image: Image
       date: Date!
+      author: BlogAuthor
     }
   `)
 }
