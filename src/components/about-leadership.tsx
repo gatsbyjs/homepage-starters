@@ -64,7 +64,6 @@ export default function AboutLeadership(props: AboutLeadershipProps) {
           {props.subhead && <Text>{props.subhead}</Text>}
         </Box>
         <FlexList
-          gutter={false}
           gap={0}
           variant={FlexVariants.Center}
           alignItems={FlexVariants.Start}

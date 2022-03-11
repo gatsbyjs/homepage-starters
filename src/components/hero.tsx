@@ -14,6 +14,7 @@ import {
   HomepageImage,
   HomepageLink,
 } from "./ui"
+import { FlexVariants, Widths } from "./ui.css"
 
 interface HeroProps {
   image?: HomepageImage
@@ -28,8 +29,8 @@ export default function Hero(props: HeroProps) {
   return (
     <Section>
       <Container>
-        <Flex gap={4} variant="responsive">
-          <Box width="half">
+        <Flex gap={4} variant={FlexVariants.Responsive}>
+          <Box width={Widths.Half}>
             {props.image && (
               <GatsbyImage
                 alt={props.image.alt}
@@ -37,7 +38,7 @@ export default function Hero(props: HeroProps) {
               />
             )}
           </Box>
-          <Box width="half">
+          <Box width={Widths.Half}>
             <Heading as="h1">
               {props.kicker && <Kicker>{props.kicker}</Kicker>}
               {props.h1}

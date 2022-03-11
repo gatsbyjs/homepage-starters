@@ -21,6 +21,7 @@ import {
   HomepageLink,
 } from "./ui"
 import BrandLogo from "./brand-logo"
+import { FlexVariants, TextVariants } from "./ui.css"
 
 const socialMedia = {
   TWITTER: {
@@ -113,7 +114,7 @@ export default function Footer() {
   return (
     <Box as="footer" paddingY={4}>
       <Container>
-        <Flex variant="start" responsive>
+        <Flex variant={FlexVariants.Start} responsive>
           <NavLink to="/">
             <VisuallyHidden>Home</VisuallyHidden>
             <BrandLogo />
@@ -137,8 +138,8 @@ export default function Footer() {
           </FlexList>
         </Flex>
         <Space size={5} />
-        <Flex variant="start" responsive>
-          <FlexList variant="start" responsive>
+        <Flex variant={FlexVariants.Start} responsive>
+          <FlexList variant={FlexVariants.Start} responsive>
             {links &&
               links.map((link) => (
                 <li key={link.id}>
@@ -152,12 +153,12 @@ export default function Footer() {
               meta.map((link) => (
                 <li key={link.id}>
                   <NavLink to={link.href}>
-                    <Text variant="small">{link.text}</Text>
+                    <Text variant={TextVariants.Small}>{link.text}</Text>
                   </NavLink>
                 </li>
               ))}
           </FlexList>
-          <Text variant="small">{copyright}</Text>
+          <Text variant={TextVariants.Small}>{copyright}</Text>
         </Flex>
       </Container>
       <Space size={3} />
