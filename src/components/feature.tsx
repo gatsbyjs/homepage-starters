@@ -13,6 +13,7 @@ import {
   HomepageImage,
   HomepageLink,
 } from "./ui"
+import { Backgrounds, FlexVariants, TextVariants, Widths } from "./ui.css"
 
 export interface FeatureProps {
   id: string
@@ -26,10 +27,10 @@ export interface FeatureProps {
 
 export default function Feature(props: FeatureProps) {
   return (
-    <Section padding={4} background="muted">
+    <Section padding={4} background={Backgrounds.Muted}>
       <Container>
-        <Flex gap={4} variant="responsive">
-          <Box width="half" order={props.flip ? 1 : null}>
+        <Flex gap={4} variant={FlexVariants.Responsive}>
+          <Box width={Widths.Half} order={props.flip ? 1 : null}>
             {props.image && (
               <GatsbyImage
                 alt={props.image.alt}
@@ -37,12 +38,12 @@ export default function Feature(props: FeatureProps) {
               />
             )}
           </Box>
-          <Box width="half">
+          <Box width={Widths.Half}>
             <Subhead>
               {props.kicker && <Kicker>{props.kicker}</Kicker>}
               {props.heading}
             </Subhead>
-            <Text variant="lead">{props.text}</Text>
+            <Text variant={TextVariants.Lead}>{props.text}</Text>
             <ButtonList links={props.links} />
           </Box>
         </Flex>

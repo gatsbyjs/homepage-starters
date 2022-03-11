@@ -57,7 +57,7 @@ export function Container({
 interface FlexProps extends BaseProps {
   variant?: styles.FlexVariants
   gap?: SpaceTokens
-  gutter?: styles.Gutter
+  gutter?: SpaceTokens
   wrap?: boolean
   responsive?: boolean
   marginY?: SpaceTokens
@@ -131,7 +131,9 @@ export function Box({
   )
 }
 
-export function FlexList({ ...props }) {
+interface FlexListProps extends FlexProps {}
+
+export function FlexList(props: WithChildren<FlexListProps>) {
   return <Flex as="ul" cx={[styles.list]} {...props} />
 }
 
@@ -174,7 +176,9 @@ export function Nudge({
   )
 }
 
-export function Section(props) {
+interface SectionProps extends BoxProps {}
+
+export function Section(props: WithChildren<SectionProps>) {
   return <Box as="section" className={styles.section} {...props} />
 }
 
