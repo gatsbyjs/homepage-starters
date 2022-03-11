@@ -23,6 +23,7 @@ import NavItemGroup from "./nav-item-group"
 import BrandLogo from "./brand-logo"
 
 export default function Header() {
+  /*
   const data = useStaticQuery(graphql`
     query {
       layout {
@@ -58,6 +59,9 @@ export default function Header() {
       }
     }
   `)
+  */
+
+  return false
 
   const { navItems, cta } = data.layout.header
   const [isOpen, setOpen] = React.useState(false)

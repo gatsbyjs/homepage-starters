@@ -1,0 +1,10 @@
+{
+  "name": "sanity-plugin",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "gatsby-plugin-image": "^2.9.1",
+    "gatsby-source-sanity": "^7.3.2"
+  }
+}
