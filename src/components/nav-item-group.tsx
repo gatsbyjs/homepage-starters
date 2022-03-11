@@ -9,8 +9,8 @@ import {
   NavLink,
 } from "./ui"
 import Caret from "./caret"
-import * as styles from "./nav-item-group.css.ts"
-import { media } from "./ui.css.ts"
+import * as styles from "./nav-item-group.css"
+import { media } from "./ui.css"
 
 export type NavItemGroupNavItem = {
   id: string

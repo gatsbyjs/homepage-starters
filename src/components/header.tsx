@@ -18,8 +18,8 @@ import {
   desktopHeaderNavWrapper,
   mobileHeaderNavWrapper,
   mobileNavSVGColorWrapper,
-} from "./header.css.ts"
-import { FlexVariants } from "./ui.css.ts"
+} from "./header.css"
+import { FlexVariants } from "./ui.css"
 import NavItemGroup, { NavItemGroupNavItem } from "./nav-item-group"
 import BrandLogo from "./brand-logo"
 

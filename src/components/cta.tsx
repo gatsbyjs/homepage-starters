@@ -12,13 +12,8 @@ import {
   HomepageLink,
   HomepageImage,
 } from "./ui"
-import {
-  Backgrounds,
-  Containers,
-  TextVariants,
-  FlexVariants,
-} from "./ui.css.ts"
-import { Radii } from "../theme.css.ts"
+import { Backgrounds, Containers, TextVariants, FlexVariants } from "./ui.css"
+import { Radii } from "../theme.css"
 
 interface HomepageCtaProps {
   id: string

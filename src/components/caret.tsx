@@ -1,5 +1,5 @@
 import * as React from "react"
-import { caret } from "./caret.css.ts"
+import { caret } from "./caret.css"
 
 interface CaretProps {
   direction?: "down" | "up"

@@ -8,8 +8,8 @@ import {
   ImageDataLike,
 } from "gatsby-plugin-image"
 import isAbsoluteURL from "is-absolute-url"
-import * as styles from "./ui.css.ts"
-import { Radii, SpaceTokens } from "../theme.css.ts"
+import * as styles from "./ui.css"
+import { Radii, SpaceTokens } from "../theme.css"
 import { FlexVariants } from "./ui.css"
 
 export const cx = (...args) => args.filter(Boolean).join(" ")

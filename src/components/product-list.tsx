@@ -14,7 +14,7 @@ import {
   HomepageImage,
   HomepageLink,
 } from "./ui"
-import { IconSizes } from "./ui.css.ts"
+import { IconSizes } from "./ui.css"
 
 interface ProductProps {
   id: string

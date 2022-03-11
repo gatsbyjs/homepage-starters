@@ -1,6 +1,6 @@
 import { style, styleVariants } from "@vanilla-extract/css"
 import { calc } from "@vanilla-extract/css-utils"
-import { theme } from "../theme.css.ts"
+import { theme } from "../theme.css"
 
 const breakpoints = ["40em", "52em", "64em"]
 

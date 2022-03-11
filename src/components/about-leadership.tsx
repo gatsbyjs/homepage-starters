@@ -12,7 +12,7 @@ import {
   Space,
   HomepageImage,
 } from "./ui"
-import { Containers, FlexVariants, TextVariants, Widths } from "./ui.css.ts"
+import { Containers, FlexVariants, TextVariants, Widths } from "./ui.css"
 
 interface AboutProfileProps {
   id: string
