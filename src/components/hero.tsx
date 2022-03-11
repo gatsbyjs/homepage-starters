@@ -1,21 +1,21 @@
-import * as React from "react"
 import { graphql } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import * as React from "react"
 import {
-  Container,
-  Section,
-  Text,
-  Heading,
-  Subhead,
-  Kicker,
-  Flex,
   Box,
   ButtonList,
+  Container,
+  Flex,
+  Heading,
   HomepageImage,
   HomepageLink,
+  Kicker,
+  Section,
+  Subhead,
+  Text,
 } from "./ui"
 
-interface HeroProps {
+export interface HeroProps {
   image?: HomepageImage
   kicker?: string
   h1: string

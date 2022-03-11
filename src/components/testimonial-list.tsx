@@ -41,7 +41,7 @@ function Testimonial(props: TestimonialProps) {
   )
 }
 
-interface TestimonialListProps {
+export interface TestimonialListProps {
   kicker?: string
   heading: string
   content: TestimonialProps[]

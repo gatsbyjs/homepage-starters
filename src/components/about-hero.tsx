@@ -5,7 +5,7 @@ import { Container, Section, Text, SuperHeading, HomepageImage } from "./ui"
 import * as styles from "./about-hero.css.ts"
 import { Containers } from "./ui.css.ts"
 
-interface AboutHeroProps {
+export interface AboutHeroProps {
   heading: string
   text?: string
   image?: HomepageImage

@@ -37,7 +37,7 @@ function Benefit(props: BenefitProps) {
   )
 }
 
-interface BenefitListProps {
+export interface BenefitListProps {
   heading?: string
   text?: string
   content: BenefitProps[]

@@ -1,4 +1,3 @@
-import * as React from "react"
 import { Link as GatsbyLink } from "gatsby"
 import {
   GatsbyImage,
@@ -8,9 +7,9 @@ import {
   ImageDataLike,
 } from "gatsby-plugin-image"
 import isAbsoluteURL from "is-absolute-url"
-import * as styles from "./ui.css.ts"
+import * as React from "react"
 import { Radii, SpaceTokens } from "../theme.css.ts"
-import { FlexVariants } from "./ui.css"
+import * as styles from "./ui.css.ts"
 
 export const cx = (...args) => args.filter(Boolean).join(" ")
 

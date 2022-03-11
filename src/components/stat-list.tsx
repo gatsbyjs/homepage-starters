@@ -32,7 +32,7 @@ function Stat(props) {
   )
 }
 
-interface StatListProps {
+export interface StatListProps {
   icon?: HomepageImage
   kicker?: string
   heading: string

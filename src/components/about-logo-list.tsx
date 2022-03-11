@@ -11,7 +11,7 @@ import {
 } from "./ui"
 import { LogoItem, LogoItemProps } from "./logo-list"
 
-interface AboutLogoListProps {
+export interface AboutLogoListProps {
   heading?: string
   links: HomepageLink[]
   logos: LogoItemProps[]

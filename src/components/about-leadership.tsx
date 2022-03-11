@@ -47,7 +47,7 @@ function AboutProfile(props: AboutProfileProps) {
   )
 }
 
-interface AboutLeadershipProps {
+export interface AboutLeadershipProps {
   kicker?: string
   heading?: string
   subhead?: string

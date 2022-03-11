@@ -21,7 +21,7 @@ function AboutStat(props: AboutStatProps) {
   )
 }
 
-interface AboutStatListProps {
+export interface AboutStatListProps {
   content: AboutStatProps[]
 }
 

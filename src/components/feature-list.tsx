@@ -1,15 +1,15 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 import { Container, Box, Kicker, Heading, Text } from "./ui"
-import Feature, { FeatureProps } from "./feature"
+import Feature, { FeatureDataProps } from "./feature"
 import { Backgrounds, Containers } from "./ui.css.ts"
 import { Radii } from "../theme.css.ts"
 
-interface FeatureListProps {
+export interface FeatureListProps {
   kicker?: string
   heading: string
   text?: string
-  content: FeatureProps[]
+  content: FeatureDataProps[]
 }
 
 export default function FeatureList(props: FeatureListProps) {

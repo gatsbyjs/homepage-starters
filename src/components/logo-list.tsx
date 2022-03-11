@@ -29,7 +29,7 @@ export function LogoItem(props: LogoItemProps) {
   )
 }
 
-interface LogoListProps {
+export interface LogoListProps {
   text?: string
   logos: LogoItemProps[]
 }

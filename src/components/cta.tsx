@@ -20,7 +20,7 @@ import {
 } from "./ui.css.ts"
 import { Radii } from "../theme.css.ts"
 
-interface HomepageCtaProps {
+export interface CtaProps {
   id: string
   kicker?: string
   heading: string
@@ -29,7 +29,7 @@ interface HomepageCtaProps {
   image?: HomepageImage
 }
 
-export default function HomepageCta(props: HomepageCtaProps) {
+export default function HomepageCta(props: CtaProps) {
   return (
     <Container width={Containers.Fullbleed}>
       <Section

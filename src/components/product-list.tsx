@@ -41,7 +41,7 @@ function Product(props: ProductProps) {
   )
 }
 
-interface ProductListProps {
+export interface ProductListProps {
   kicker?: string
   heading: string
   text?: string
