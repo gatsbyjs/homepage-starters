@@ -1,3 +1,5 @@
+const sanityBlockContentToHTML = require("@sanity/block-content-to-html")
+
 exports.createSchemaCustomization = async ({ actions }) => {
   actions.createFieldExtension({
     name: "blocktype",
@@ -8,6 +10,25 @@ exports.createSchemaCustomization = async ({ actions }) => {
           const type = source._type
           const cap = type.charAt(0).toUpperCase() + type.slice(1)
           return cap
+        },
+      }
+    },
+  })
+
+  actions.createFieldExtension({
+    name: "sanityBlockContent",
+    args: {
+      fieldName: "String",
+    },
+    extend(options) {
+      return {
+        resolve(source) {
+          console.log("resolve sanity block content", { options })
+          const html = sanityBlockContentToHTML({
+            blocks: source[options.fieldName],
+          })
+          console.log(html)
+          return html
         },
       }
     },
@@ -503,17 +524,17 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type SanityPage implements Node & Page {
       id: ID!
-      slug: String!
+      slug: String! @proxy(from: "slug.current")
       title: String
       description: String
       image: HomepageImage @link(by: "id", from: "image.asset._ref")
-      html: String!
+      html: String! @sanityBlockContent(fieldName: "content")
     }
   `)
 }
 
 exports.onCreateNode = ({ node }) => {
-  if (node.internal.type === "SanityHomepageTestimonial") {
-    console.log(node)
-  }
+  // if (node.internal.type === "SanityHomepageTestimonial") {
+  //   console.log(node)
+  // }
 }
