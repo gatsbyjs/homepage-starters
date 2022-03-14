@@ -1,8 +1,8 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 import { Container, Section, FlexList, Box, Text } from "./ui"
-import * as styles from "./about-stat-list.css.ts"
-import { FlexVariants, TextVariants, Widths } from "./ui.css.ts"
+import * as styles from "./about-stat-list.css"
+import { FlexVariants, TextVariants, Widths } from "./ui.css"
 
 interface AboutStatProps {
   id: string

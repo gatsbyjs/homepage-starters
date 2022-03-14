@@ -1,6 +1,6 @@
 import { style, styleVariants } from "@vanilla-extract/css"
 import { calc } from "@vanilla-extract/css-utils"
-import { theme } from "../theme.css.ts"
+import { theme } from "../theme.css"
 
 const breakpoints = ["40em", "52em", "64em"]
 
@@ -176,14 +176,9 @@ export const marginY = styleVariants(theme.space, (margin) => ({
   marginBottom: margin,
 }))
 
-export enum Gutter {
-  MarginLeft = "marginLeft",
-  MarginRight = "marginRight",
-}
-
 export const gutter = styleVariants(theme.space, (val) => ({
-  [Gutter.MarginLeft]: calc.multiply(val, -1),
-  [Gutter.MarginRight]: calc.multiply(val, -1),
+  marginLeft: calc.multiply(val, -1),
+  marginRight: calc.multiply(val, -1),
 }))
 
 export const radii = styleVariants(theme.radii, (borderRadius) => ({

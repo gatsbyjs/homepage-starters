@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css"
-import { theme } from "../theme.css.ts"
-import { media } from "./ui.css.ts"
+import { theme } from "../theme.css"
+import { media } from "./ui.css"
 
 // specific maxWidths are to support design and
 // current length of content in the Header and Text

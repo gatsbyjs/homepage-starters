@@ -1,6 +1,6 @@
 import { style } from "@vanilla-extract/css"
-import { theme } from "../theme.css.ts"
-import { media } from "./ui.css.ts"
+import { theme } from "../theme.css"
+import { media } from "./ui.css"
 
 export const statList = style({
   "@media": {

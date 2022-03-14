@@ -14,7 +14,7 @@ import {
   HomepageImage,
   HomepageLink,
 } from "./ui"
-import { IconSizes } from "./ui.css.ts"
+import { FlexVariants, IconSizes } from "./ui.css"
 
 interface ProductProps {
   id: string
@@ -59,7 +59,7 @@ export default function ProductList(props: ProductListProps) {
           </Heading>
           {props.text && <Text>{props.text}</Text>}
         </Box>
-        <FlexList gap={4} variant="responsive">
+        <FlexList gap={4} variant={FlexVariants.Responsive}>
           {props.content.map((product) => (
             <li key={product.id}>
               <Product {...product} />

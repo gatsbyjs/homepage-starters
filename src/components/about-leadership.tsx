@@ -12,7 +12,7 @@ import {
   Space,
   HomepageImage,
 } from "./ui"
-import { Containers, FlexVariants, TextVariants, Widths } from "./ui.css.ts"
+import { Containers, FlexVariants, TextVariants, Widths } from "./ui.css"
 
 interface AboutProfileProps {
   id: string
@@ -64,7 +64,6 @@ export default function AboutLeadership(props: AboutLeadershipProps) {
           {props.subhead && <Text>{props.subhead}</Text>}
         </Box>
         <FlexList
-          gutter={false}
           gap={0}
           variant={FlexVariants.Center}
           alignItems={FlexVariants.Start}

@@ -8,8 +8,8 @@ import {
 } from "gatsby-plugin-image"
 import isAbsoluteURL from "is-absolute-url"
 import * as React from "react"
-import { Radii, SpaceTokens } from "../theme.css.ts"
-import * as styles from "./ui.css.ts"
+import * as styles from "./ui.css"
+import { Radii, SpaceTokens } from "../theme.css"
 
 export const cx = (...args) => args.filter(Boolean).join(" ")
 
@@ -56,7 +56,7 @@ export function Container({
 interface FlexProps extends BaseProps {
   variant?: styles.FlexVariants
   gap?: SpaceTokens
-  gutter?: styles.Gutter
+  gutter?: SpaceTokens
   wrap?: boolean
   responsive?: boolean
   marginY?: SpaceTokens
@@ -130,7 +130,9 @@ export function Box({
   )
 }
 
-export function FlexList({ ...props }) {
+interface FlexListProps extends FlexProps {}
+
+export function FlexList(props: WithChildren<FlexListProps>) {
   return <Flex as="ul" cx={[styles.list]} {...props} />
 }
 
@@ -173,7 +175,9 @@ export function Nudge({
   )
 }
 
-export function Section(props) {
+interface SectionProps extends BoxProps {}
+
+export function Section(props: WithChildren<SectionProps>) {
   return <Box as="section" className={styles.section} {...props} />
 }
 
@@ -251,7 +255,7 @@ export function Button({
 
 interface ButtonListProps extends BaseProps {
   links: HomepageLink[]
-  variant?: FlexVariants
+  variant?: styles.FlexVariants
   reversed?: boolean
 }
 

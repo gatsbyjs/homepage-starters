@@ -2,8 +2,8 @@ import * as React from "react"
 import { graphql } from "gatsby"
 import { Container, Box, Kicker, Heading, Text } from "./ui"
 import Feature, { FeatureDataProps } from "./feature"
-import { Backgrounds, Containers } from "./ui.css.ts"
-import { Radii } from "../theme.css.ts"
+import { Backgrounds, Containers } from "./ui.css"
+import { Radii } from "../theme.css"
 
 export interface FeatureListProps {
   kicker?: string

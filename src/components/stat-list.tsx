@@ -16,6 +16,14 @@ import {
   HomepageImage,
   HomepageLink,
 } from "./ui"
+import {
+  Backgrounds,
+  Containers,
+  FlexVariants,
+  TextVariants,
+  Widths,
+} from "./ui.css"
+import { Radii } from "../theme.css"
 
 interface StatProps {
   id: string
@@ -26,8 +34,8 @@ interface StatProps {
 function Stat(props) {
   return (
     <Box>
-      <Text variant="stat">{props.value}</Text>
-      <Text variant="statLabel">{props.label}</Text>
+      <Text variant={TextVariants.Stat}>{props.value}</Text>
+      <Text variant={TextVariants.StatLabel}>{props.label}</Text>
     </Box>
   )
 }
@@ -44,10 +52,14 @@ export interface StatListProps {
 
 export default function StatList(props: StatListProps) {
   return (
-    <Container width="fullbleed">
-      <Section padding={5} radius="large" background="primary">
-        <Flex responsive variant="end">
-          <Box width="half">
+    <Container width={Containers.Fullbleed}>
+      <Section
+        padding={5}
+        radius={Radii.Large}
+        background={Backgrounds.Primary}
+      >
+        <Flex responsive variant={FlexVariants.End}>
+          <Box width={Widths.Half}>
             {props.icon && (
               <Icon alt={props.icon.alt} image={props.icon.gatsbyImageData} />
             )}
@@ -55,7 +67,9 @@ export default function StatList(props: StatListProps) {
               {props.kicker && <Kicker>{props.kicker}</Kicker>}
               {props.heading}
             </Heading>
-            {props.text && <Text variant="lead">{props.text}</Text>}
+            {props.text && (
+              <Text variant={TextVariants.Lead}>{props.text}</Text>
+            )}
             <FlexList wrap gap={4}>
               {props.content.map((stat) => (
                 <li key={stat.id}>
@@ -65,7 +79,7 @@ export default function StatList(props: StatListProps) {
             </FlexList>
             <ButtonList links={props.links} reversed />
           </Box>
-          <Box width="half">
+          <Box width={Widths.Half}>
             {props.image && (
               <Nudge right={5} bottom={5}>
                 <GatsbyImage

@@ -11,7 +11,7 @@ import {
   Space,
   HomepageImage,
 } from "./ui"
-import { FlexVariants, IconSizes, TextVariants, Widths } from "./ui.css.ts"
+import { FlexVariants, IconSizes, TextVariants, Widths } from "./ui.css"
 
 interface BenefitProps {
   id: string

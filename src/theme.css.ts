@@ -1,5 +1,5 @@
 import { createGlobalTheme } from "@vanilla-extract/css"
-import { colors } from "./colors.css.ts"
+import { colors } from "./colors.css"
 
 export type SpaceTokens = 0 | 1 | 2 | 3 | 4 | 5 | 6
 export type Space = Record<SpaceTokens, string>

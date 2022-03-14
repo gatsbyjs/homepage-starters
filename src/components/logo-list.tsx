@@ -9,7 +9,7 @@ import {
   Logo,
   HomepageImage,
 } from "./ui"
-import { LogoSizes } from "./ui.css"
+import { Containers, FlexVariants, LogoSizes, TextVariants } from "./ui.css"
 
 export interface LogoItemProps {
   id: string
@@ -37,14 +37,14 @@ export interface LogoListProps {
 export default function LogoList(props: LogoListProps) {
   return (
     <Section paddingY={4}>
-      <Container width="narrow">
+      <Container width={Containers.Narrow}>
         {props.text && (
-          <Text center variant="lead">
+          <Text center variant={TextVariants.Lead}>
             {props.text}
           </Text>
         )}
         <Space size={4} />
-        <FlexList gap={4} variant="center">
+        <FlexList gap={4} variant={FlexVariants.Center}>
           {props.logos.map(
             (logo) =>
               logo && (

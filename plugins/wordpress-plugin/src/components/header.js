@@ -17,7 +17,7 @@ import {
   desktopHeaderNavWrapper,
   mobileHeaderNavWrapper,
   mobileNavSVGColorWrapper,
-} from "./header.css.ts"
+} from "./header.css"
 import BrandLogo from "./brand-logo"
 
 const data = {

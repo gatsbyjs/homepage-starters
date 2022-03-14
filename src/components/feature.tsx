@@ -13,7 +13,7 @@ import {
   HomepageImage,
   HomepageLink,
 } from "./ui"
-import { Backgrounds, FlexVariants, TextVariants, Widths } from "./ui.css.ts"
+import { Backgrounds, FlexVariants, TextVariants, Widths } from "./ui.css"
 
 export interface FeatureDataProps {
   id: string

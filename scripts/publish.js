@@ -43,7 +43,6 @@ fs.readdirSync(dir.dist).map((dirname) => {
 })
 
 const createStarterDist = async (basename) => {
-  console.log("repos: ", repos)
   const repo = repos[basename]
   if (!repo) {
     console.warn(`No repo configured for ${basename}`)
@@ -77,8 +76,8 @@ const createStarterDist = async (basename) => {
 
   // copy root files
   const rootFiles = [".gitignore", "gatsby-browser.js", "LICENSE"]
-  // if repo is not Typescript add "src"
-  if (!repo.isTypescript) {
+  // if destination repo is Typescript add "src"
+  if (repo.isTypescript) {
     rootFiles.push("src")
   }
   rootFiles.forEach((file) => {
@@ -89,8 +88,8 @@ const createStarterDist = async (basename) => {
     })
   })
 
-  // otherwise if repo is Typescript, handle transpilation
-  if (repo.isTypescript) {
+  // otherwise if destination repo is not Typescript, handle transpilation
+  if (!repo.isTypescript) {
     // array to contain all directories found inside src, seeded with src to begin with
     const srcDirectories = ["src"]
     // function to traverse src directory and collect array of all filenames within
@@ -125,7 +124,7 @@ const createStarterDist = async (basename) => {
         const { outputText } = ts.transpileModule(
           fs.readFileSync(srcFilename).toString(),
           {
-            compilerOptions: { jsx: "preserve", target: "es2016" },
+            compilerOptions: { jsx: "preserve", target: "esnext" },
           }
         )
         const dest = path.join(

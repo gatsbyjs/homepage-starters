@@ -9,8 +9,8 @@ import {
   NavLink,
 } from "./ui"
 import Caret from "./caret"
-import * as styles from "./nav-item-group.css.ts"
-import { media } from "./ui.css.ts"
+import * as styles from "./nav-item-group.css"
+import { FlexVariants, media } from "./ui.css"
 
 export type NavItemGroupNavItem = {
   id: string
@@ -53,9 +53,9 @@ export default function NavItemGroup({ name, navItems }: NavItemGroupProps) {
       }
     }
     if (popupBox) {
-      popupBox.addEventListener("animationend", onAnimationEnd)
+      popupBox.addEventListener("animationend" as any, onAnimationEnd)
       return () => {
-        popupBox.removeEventListener("animationend", onAnimationEnd)
+        popupBox.removeEventListener("animationend" as any, onAnimationEnd)
       }
     }
   }, [isOpen, name])
@@ -85,8 +85,8 @@ export default function NavItemGroup({ name, navItems }: NavItemGroupProps) {
   return (
     <Flex
       data-id={`${name}-group-wrapper`}
-      variant="columnStart"
-      gap="4"
+      variant={FlexVariants.ColumnStart}
+      gap={4}
       className={styles.navGroupWrapper}
     >
       <NavButtonLink
@@ -106,14 +106,14 @@ export default function NavItemGroup({ name, navItems }: NavItemGroupProps) {
           }
         >
           <FlexList
-            variant="columnStart"
+            variant={FlexVariants.ColumnStart}
             gap={2}
             className={styles.navLinkListWrapperInner}
           >
             {navItems.map((navItem) => (
               <li key={navItem.id}>
                 <NavLink to={navItem.href} className={styles.navLinkListLink}>
-                  <Flex variant="start" gap={3}>
+                  <Flex variant={FlexVariants.Start} gap={3}>
                     {navItem.icon && (
                       <GatsbyImage
                         alt={navItem.icon.alt}
@@ -121,7 +121,11 @@ export default function NavItemGroup({ name, navItems }: NavItemGroupProps) {
                         className={styles.navIcon}
                       />
                     )}
-                    <Flex variant="columnStart" marginY={1} gap={0}>
+                    <Flex
+                      variant={FlexVariants.ColumnStart}
+                      marginY={1}
+                      gap={0}
+                    >
                       <Box as="span" className={styles.navLinkTitle}>
                         {navItem.text}
                       </Box>

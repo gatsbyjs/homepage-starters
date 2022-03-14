@@ -2,8 +2,8 @@ import * as React from "react"
 import { graphql } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { Container, Section, Text, SuperHeading, HomepageImage } from "./ui"
-import * as styles from "./about-hero.css.ts"
-import { Containers } from "./ui.css.ts"
+import * as styles from "./about-hero.css"
+import { Containers } from "./ui.css"
 
 export interface AboutHeroProps {
   heading: string
