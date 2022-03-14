@@ -9,7 +9,6 @@ const Fallback = (props) => {
 }
 
 export default function About(props) {
-  return false
   const { aboutPage } = props.data
 
   return (
@@ -22,7 +21,6 @@ export default function About(props) {
   )
 }
 
-/*
 export const query = graphql`
   {
     aboutPage {
@@ -47,4 +45,3 @@ export const query = graphql`
     }
   }
 `
-*/

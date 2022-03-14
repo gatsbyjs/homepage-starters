@@ -459,7 +459,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type SanityAboutHero implements Node & AboutHero & HomepageBlock {
       id: ID!
-      blocktype: String
+      blocktype: String @blocktype
       heading: String
       text: String
       image: HomepageImage @link(by: "id", from: "image.asset._ref")
@@ -473,7 +473,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type SanityAboutStatList implements Node & AboutStatList & HomepageBlock {
       id: ID!
-      blocktype: String
+      blocktype: String @blocktype
       content: [AboutStat]
     }
 
@@ -486,7 +486,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type SanityAboutLeadership implements Node & AboutLeadership & HomepageBlock {
       id: ID!
-      blocktype: String
+      blocktype: String @blocktype
       kicker: String
       heading: String
       subhead: String
@@ -495,7 +495,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type SanityAboutLogoList implements Node & AboutLogoList & HomepageBlock {
       id: ID!
-      blocktype: String
+      blocktype: String @blocktype
       heading: String
       links: [HomepageLink]
       logos: [HomepageLogo]
