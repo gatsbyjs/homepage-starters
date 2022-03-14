@@ -14,6 +14,11 @@ export default {
         },
       ],
     },
-    { title: "CTA", name: "cta", type: "homepageLink" },
+    {
+      title: "CTA",
+      name: "cta",
+      type: "reference",
+      to: [{ type: "homepageLink" }],
+    },
   ],
 }

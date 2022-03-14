@@ -23,12 +23,32 @@ exports.createSchemaCustomization = async ({ actions }) => {
     extend(options) {
       return {
         resolve(source) {
-          console.log("resolve sanity block content", { options })
           const html = sanityBlockContentToHTML({
             blocks: source[options.fieldName],
           })
-          console.log(html)
           return html
+        },
+      }
+    },
+  })
+
+  actions.createFieldExtension({
+    name: "navItemType",
+    args: {
+      name: {
+        type: "String!",
+        defaultValue: "Link",
+      },
+    },
+    extend(options) {
+      return {
+        resolve() {
+          switch (options.name) {
+            case "Group":
+              return "Group"
+            default:
+              return "Link"
+          }
         },
       }
     },
@@ -303,7 +323,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
   // CMS-specific types for Homepage
   actions.createTypes(/* GraphQL */ `
-    type SanityHomepageLink implements Node & HomepageLink @dontInfer {
+    type SanityHomepageLink implements Node & HomepageLink {
       id: ID!
       href: String
       text: String
@@ -343,7 +363,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       kicker: String
       text: String
       image: HomepageImage @link(by: "id", from: "image.asset._ref")
-      links: [HomepageLink]
+      links: [HomepageLink] @link
     }
 
     type SanityHomepageFeatureList implements Node & HomepageFeatureList & HomepageBlock {
@@ -362,7 +382,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       heading: String
       text: String
       image: HomepageImage @link(by: "id", from: "image.asset._ref")
-      links: [HomepageLink]
+      links: [HomepageLink] @link
     }
 
     type SanityHomepageLogo implements Node & HomepageLogo {
@@ -424,7 +444,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       image: HomepageImage @link(by: "id", from: "image.asset._ref")
       icon: HomepageImage @link(by: "id", from: "icon.asset._ref")
       content: [HomepageStat]
-      links: [HomepageLink]
+      links: [HomepageLink] @link
     }
 
     type SanityHomepageProduct implements Node & HomepageProduct {
@@ -432,7 +452,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       heading: String
       text: String
       image: HomepageImage @link(by: "id", from: "image.asset._ref")
-      links: [HomepageLink]
+      links: [HomepageLink] @link
     }
 
     type SanityHomepageProductList implements Node & HomepageProductList & HomepageBlock {
@@ -444,10 +464,26 @@ exports.createSchemaCustomization = async ({ actions }) => {
       content: [HomepageProduct]
     }
 
+    type SanityNavItem implements Node & NavItem & HeaderNavItem {
+      id: ID!
+      navItemType: String @navItemType(name: "Link")
+      href: String
+      text: String
+      icon: HomepageImage @link(by: "id", from: "icon.asset._ref")
+      description: String
+    }
+
+    type SanityNavItemGroup implements Node & NavItemGroup & HeaderNavItem {
+      id: ID!
+      navItemType: String @navItemType(name: "Group")
+      name: String
+      navItems: [NavItem] @link
+    }
+
     type SanityLayoutHeader implements Node & LayoutHeader {
       id: ID!
-      navItems: [HeaderNavItem]
-      cta: HomepageLink
+      navItems: [HeaderNavItem] @link(from: "navItems._ref")
+      cta: HomepageLink @link
     }
 
     type SanitySocialLink implements Node & SocialLink {
@@ -458,9 +494,9 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type SanityLayoutFooter implements Node & LayoutFooter {
       id: ID!
-      links: [HomepageLink]
-      meta: [HomepageLink]
-      socialLinks: [SocialLink]
+      links: [HomepageLink] @link
+      meta: [HomepageLink] @link
+      socialLinks: [SocialLink] @link
       copyright: String
     }
 
@@ -531,10 +567,4 @@ exports.createSchemaCustomization = async ({ actions }) => {
       html: String! @sanityBlockContent(fieldName: "content")
     }
   `)
-}
-
-exports.onCreateNode = ({ node }) => {
-  // if (node.internal.type === "SanityHomepageTestimonial") {
-  //   console.log(node)
-  // }
 }
