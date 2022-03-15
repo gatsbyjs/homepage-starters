@@ -42,13 +42,15 @@ fs.readdirSync(dir.dist).map((dirname) => {
   })
 })
 
-const createStarterDist = async (basename) => {
-  const repo = repos[basename]
+const createStarterDist = async (basename, isTypescript = false) => {
+  const repo = repos[`${basename}${isTypescript ? "-ts" : ""}`]
   if (!repo) {
-    console.warn(`No repo configured for ${basename}`)
+    console.warn(
+      `No repo configured for ${basename}${isTypescript ? "-ts" : ""}`
+    )
     return
   }
-  const dirname = `${basename}-plugin`
+  const dirname = `${basename}-plugin${isTypescript ? "-ts" : ""}`
 
   const name = repo.substring(repo.lastIndexOf("/") + 1)
 
@@ -77,7 +79,7 @@ const createStarterDist = async (basename) => {
   // copy root files
   const rootFiles = [".gitignore", "gatsby-browser.js", "LICENSE"]
   // if destination repo is Typescript add "src"
-  if (repo.isTypescript) {
+  if (isTypescript) {
     rootFiles.push("src")
   }
   rootFiles.forEach((file) => {
@@ -89,7 +91,7 @@ const createStarterDist = async (basename) => {
   })
 
   // otherwise if destination repo is not Typescript, handle transpilation
-  if (!repo.isTypescript) {
+  if (!isTypescript) {
     // array to contain all directories found inside src, seeded with src to begin with
     const srcDirectories = ["src"]
     // function to traverse src directory and collect array of all filenames within
@@ -115,7 +117,8 @@ const createStarterDist = async (basename) => {
     // transpile typescript src files
     srcFiles.forEach((srcFilename) => {
       const extension = path.extname(srcFilename)
-      // we want to skip over the .css.ts files and only transpile .ts/.tsx
+      // we want to skip over the .css.ts files (vanilla-extract styles)
+      // and only transpile .ts/.tsx
       if (
         (extension === ".ts" || extension === ".tsx") &&
         !srcFilename.includes(".css.ts")
@@ -149,6 +152,7 @@ const createStarterDist = async (basename) => {
           dest,
           prettier.format(outputText.replace(/\/\* :newline: \*\//g, "\n"), {
             semi: false,
+            parser: "babel",
           })
         )
       } else {
@@ -252,17 +256,20 @@ const publish = async () => {
     .readdirSync(dir.plugins)
     .map((name) => name.replace(/\-plugin/, ""))
 
-  console.log(`Preparing ${starters.length} starters for publishing...`)
+  console.log(`Preparing ${starters.length * 2} starters for publishing...`)
 
   // get last commit message from this repo
   await SimpleGit().log(["-1", "--pretty=%B"], (err, result) => {
     commitMessage = result.latest.hash
   })
 
-  console.log(`Created ${starters.length} starters`)
+  console.log(`Creating ${starters.length * 2} starters`)
 
   for (let i = 0; i < starters.length; i++) {
+    // create JS version
     await createStarterDist(starters[i])
+    // create TS version
+    await createStarterDist(starters[i], true)
   }
 
   console.log("Done")
