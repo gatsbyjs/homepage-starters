@@ -1,15 +1,29 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
-import { Container, Box, Heading } from "../components/ui"
+import { Container, Box, Heading, HomepageImage } from "../components/ui"
+import { Containers } from "../components/ui.css"
 
-export default function Page(props) {
+interface PageProps {
+  data: {
+    page: {
+      id: string
+      title: string
+      slug: string
+      description: string
+      image: { id: string; url: string }
+      html: string
+    }
+  }
+}
+
+export default function Page(props: PageProps) {
   const { page } = props.data
 
   return (
     <Layout {...page}>
       <Box paddingY={5}>
-        <Container width="narrow">
+        <Container width={Containers.Narrow}>
           <Heading as="h1">{page.title}</Heading>
           <div
             dangerouslySetInnerHTML={{
@@ -31,7 +45,7 @@ export const query = graphql`
       description
       image {
         id
-        gatsbyImageData
+        url
       }
       html
     }

@@ -7,7 +7,7 @@ import "../styles.css"
 interface LayoutProps {
   title: string
   description?: string
-  image?: { url: string }
+  image?: { id: string; url: string }
 }
 
 const Layout: React.FC<LayoutProps> = (props) => {

@@ -24,6 +24,7 @@ export interface HomepageImage {
   id: string
   alt: string
   gatsbyImageData: IGatsbyImageData
+  url: string
 }
 
 type WithChildren<T = {}> = T & { children?: React.ReactNode }
@@ -221,7 +222,12 @@ export function Kicker({ ...props }) {
   return <Text variant={styles.TextVariants.Kicker} {...props} />
 }
 
-export function Link({ to, href, ...props }) {
+interface LinkProps extends BaseProps {
+  to?: string
+  href?: string
+}
+
+export function Link({ to, href, ...props }: WithChildren<LinkProps>) {
   const url = href || to || ""
   if (isAbsoluteURL(url)) {
     return (
