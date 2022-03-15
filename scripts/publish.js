@@ -122,9 +122,18 @@ const createStarterDist = async (basename) => {
       ) {
         console.log(`Transpiling '${srcFilename}'`)
         const { outputText } = ts.transpileModule(
-          fs.readFileSync(srcFilename).toString(),
+          // replace new lines with a code comment to ensure new line preservation
+          fs
+            .readFileSync(srcFilename)
+            .toString()
+            .replace(/\n\n/g, "\n/* :newline: */"),
           {
-            compilerOptions: { jsx: "preserve", target: "esnext" },
+            compilerOptions: {
+              jsx: "preserve",
+              target: "esnext",
+              newLine: "lf",
+              removeComments: false,
+            },
           }
         )
         const dest = path.join(
@@ -135,7 +144,13 @@ const createStarterDist = async (basename) => {
         console.log(
           `Copying transpiled version of '${srcFilename}' to '${dest}`
         )
-        fs.writeFileSync(dest, prettier.format(outputText, { semi: false }))
+        // write transpiled code to file, restoring new lines
+        fs.writeFileSync(
+          dest,
+          prettier.format(outputText.replace(/\/\* :newline: \*\//g, "\n"), {
+            semi: false,
+          })
+        )
       } else {
         // copy over src files that don't require transpilation
         const dest = path.join(dir.dist, name, srcFilename)
