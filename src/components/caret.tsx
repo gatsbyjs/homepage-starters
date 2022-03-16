@@ -12,6 +12,7 @@ export default function CaretDown({
 }: CaretProps) {
   const width = size
   const height = (8 / 9) * size
+
   return (
     <svg
       width={width}

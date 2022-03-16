@@ -76,16 +76,12 @@ const sizes = {
   navIconSmall: "30px",
 }
 
-export enum Radii {
-  Button = "button",
-  Large = "large",
-  Circle = "circle",
-}
+export type Radii = "button" | "large" | "circle"
 
-const radii = {
-  [Radii.Button]: "10px",
-  [Radii.Large]: "24px",
-  [Radii.Circle]: "99999px",
+const radii: Record<Radii, string> = {
+  button: "10px",
+  large: "24px",
+  circle: "99999px",
 }
 
 const shadows = {

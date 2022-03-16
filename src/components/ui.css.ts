@@ -18,17 +18,11 @@ export const container = style({
   paddingRight: theme.space[4],
 })
 
-export enum Containers {
-  Normal = "normal",
-  Wide = "wide",
-  Narrow = "narrow",
-  Tight = "tight",
-  Fullbleed = "fullbleed",
-}
+export type Containers = "normal" | "wide" | "narrow" | "tight" | "fullbleed"
 
-export const containers = styleVariants({
-  [Containers.Normal]: [container],
-  [Containers.Wide]: [
+export const containers: Record<Containers, string> = styleVariants({
+  normal: [container],
+  wide: [
     container,
     {
       maxWidth: theme.sizes.wide,
@@ -36,19 +30,19 @@ export const containers = styleVariants({
       paddingRight: 0,
     },
   ],
-  [Containers.Narrow]: [
+  narrow: [
     container,
     {
       maxWidth: theme.sizes.narrow,
     },
   ],
-  [Containers.Tight]: [
+  tight: [
     container,
     {
       maxWidth: theme.sizes.tight,
     },
   ],
-  [Containers.Fullbleed]: [
+  fullbleed: [
     container,
     {
       paddingLeft: 0,
@@ -72,53 +66,52 @@ export const flex = style({
   alignItems: "center",
 })
 
-export enum FlexVariants {
-  Wrap = "wrap",
-  Start = "start",
-  Baseline = "baseline",
-  ColumnStart = "columnStart",
-  Column = "column",
-  End = "end",
-  Stretch = "stretch",
-  SpaceBetween = "spaceBetween",
-  Center = "center",
-  Responsive = "responsive",
-}
+export type FlexVariants =
+  | "wrap"
+  | "start"
+  | "baseline"
+  | "columnStart"
+  | "column"
+  | "end"
+  | "stretch"
+  | "spaceBetween"
+  | "center"
+  | "responsive"
 
-export const flexVariants = styleVariants({
-  [FlexVariants.Wrap]: {
+export const flexVariants: Record<FlexVariants, string> = styleVariants({
+  wrap: {
     flexWrap: "wrap",
   },
-  [FlexVariants.Start]: {
+  start: {
     alignItems: "flex-start",
   },
-  [FlexVariants.Baseline]: {
+  baseline: {
     alignItems: "baseline",
   },
-  [FlexVariants.ColumnStart]: {
+  columnStart: {
     flexDirection: "column",
     alignItems: "flex-start",
   },
-  [FlexVariants.Column]: {
+  column: {
     flexDirection: "column",
   },
-  [FlexVariants.End]: {
+  end: {
     alignItems: "flex-end",
   },
-  [FlexVariants.Stretch]: {
+  stretch: {
     alignItems: "stretch",
   },
-  [FlexVariants.SpaceBetween]: {
+  spaceBetween: {
     width: "100%",
     flexWrap: "wrap",
     justifyContent: "space-between",
   },
-  [FlexVariants.Center]: {
+  center: {
     width: "100%",
     flexWrap: "wrap",
     justifyContent: "center",
   },
-  [FlexVariants.Responsive]: {
+  responsive: {
     flexDirection: "column",
     "@media": {
       [media.small]: {
@@ -130,23 +123,22 @@ export const flexVariants = styleVariants({
 
 export const flexGap = styleVariants(theme.space, (gap) => ({ gap }))
 
-export enum Widths {
-  Full = "full",
-  Half = "half",
-  Quarter = "quarter",
-  Third = "third",
-  TwoThirds = "twothirds",
-  FitContent = "fitContent",
-}
+export type Widths =
+  | "full"
+  | "half"
+  | "quarter"
+  | "third"
+  | "twothirds"
+  | "fitContent"
 
-export const widths = styleVariants(
+export const widths: Record<Widths, string> = styleVariants(
   {
-    [Widths.Full]: "100%",
-    [Widths.Half]: "50%",
-    [Widths.Quarter]: "25%",
-    [Widths.Third]: "33.3333%",
-    [Widths.TwoThirds]: "33.3333%",
-    [Widths.FitContent]: "fit-content",
+    full: "100%",
+    half: "50%",
+    quarter: "25%",
+    third: "33.3333%",
+    twothirds: "33.3333%",
+    fitContent: "fit-content",
   },
   (width) => [
     {
@@ -254,26 +246,25 @@ export const marginBottom = styleVariants(
 
 export const margin0 = style({ margin: 0 })
 
-export enum TextVariants {
-  Body = "body",
-  Lead = "lead",
-  SuperHeading = "superHeading",
-  Heading = "heading",
-  Subhead = "subhead",
-  SubheadSmall = "subheadSmall",
-  Kicker = "kicker",
-  Caps = "caps",
-  Stat = "stat",
-  StatLabel = "statLabel",
-  Small = "small",
-  Medium = "medium",
-  Mega = "mega",
-  Center = "center",
-  Bold = "bold",
-}
+export type TextVariants =
+  | "body"
+  | "lead"
+  | "superHeading"
+  | "heading"
+  | "subhead"
+  | "subheadSmall"
+  | "kicker"
+  | "caps"
+  | "stat"
+  | "statLabel"
+  | "small"
+  | "medium"
+  | "mega"
+  | "center"
+  | "bold"
 
-export const text = styleVariants({
-  [TextVariants.Body]: [
+export const text: Record<TextVariants, string> = styleVariants({
+  body: [
     margin0,
     {
       marginBottom: theme.space[3],
@@ -283,7 +274,7 @@ export const text = styleVariants({
       letterSpacing: theme.letterSpacings.normal,
     },
   ],
-  [TextVariants.Lead]: [
+  lead: [
     margin0,
     {
       marginBottom: theme.space[3],
@@ -293,7 +284,7 @@ export const text = styleVariants({
       letterSpacing: theme.letterSpacings.normal,
     },
   ],
-  [TextVariants.SuperHeading]: [
+  superHeading: [
     margin0,
     {
       marginTop: theme.space[4],
@@ -310,7 +301,7 @@ export const text = styleVariants({
       },
     },
   ],
-  [TextVariants.Heading]: [
+  heading: [
     margin0,
     {
       marginBottom: theme.space[3],
@@ -326,7 +317,7 @@ export const text = styleVariants({
       },
     },
   ],
-  [TextVariants.Subhead]: [
+  subhead: [
     margin0,
     {
       marginBottom: theme.space[3],
@@ -336,7 +327,7 @@ export const text = styleVariants({
       letterSpacing: theme.letterSpacings.tight,
     },
   ],
-  [TextVariants.SubheadSmall]: [
+  subheadSmall: [
     margin0,
     {
       marginBottom: theme.space[3],
@@ -346,7 +337,7 @@ export const text = styleVariants({
       letterSpacing: theme.letterSpacings.tight,
     },
   ],
-  [TextVariants.Kicker]: [
+  kicker: [
     margin0,
     {
       marginBottom: theme.space[2],
@@ -358,7 +349,7 @@ export const text = styleVariants({
       textTransform: "uppercase",
     },
   ],
-  [TextVariants.Caps]: [
+  caps: [
     margin0,
     {
       marginBottom: theme.space[2],
@@ -369,7 +360,7 @@ export const text = styleVariants({
       fontStyle: "normal",
     },
   ],
-  [TextVariants.Stat]: [
+  stat: [
     margin0,
     {
       fontFamily: theme.fonts.mono,
@@ -378,7 +369,7 @@ export const text = styleVariants({
       lineHeight: theme.lineHeights.tight,
     },
   ],
-  [TextVariants.StatLabel]: [
+  statLabel: [
     margin0,
     {
       fontWeight: theme.fontWeights.bold,
@@ -386,20 +377,20 @@ export const text = styleVariants({
       lineHeight: theme.lineHeights.heading,
     },
   ],
-  [TextVariants.Small]: [
+  small: [
     margin0,
     {
       fontSize: theme.fontSizes[1],
       marginBottom: theme.space[2],
     },
   ],
-  [TextVariants.Medium]: [
+  medium: [
     margin0,
     {
       fontSize: theme.fontSizes[3],
     },
   ],
-  [TextVariants.Mega]: [
+  mega: [
     margin0,
     {
       fontSize: "180px",
@@ -413,10 +404,10 @@ export const text = styleVariants({
       },
     },
   ],
-  [TextVariants.Center]: {
+  center: {
     textAlign: "center",
   },
-  [TextVariants.Bold]: {
+  bold: {
     fontWeight: theme.fontWeights.bold,
   },
 })
@@ -477,15 +468,10 @@ const button = style({
   borderRadius: theme.radii.button,
 })
 
-export enum ButtonVariants {
-  Primary = "primary",
-  Reversed = "reversed",
-  Link = "link",
-  LinkReversed = "linkReversed",
-}
+export type ButtonVariants = "primary" | "reversed" | "link" | "linkReversed"
 
-export const buttons = styleVariants({
-  [ButtonVariants.Primary]: [
+export const buttons: Record<ButtonVariants, string> = styleVariants({
+  primary: [
     button,
     {
       color: theme.colors.background,
@@ -498,7 +484,7 @@ export const buttons = styleVariants({
       },
     },
   ],
-  [ButtonVariants.Reversed]: [
+  reversed: [
     button,
     {
       color: theme.colors.primary,
@@ -513,7 +499,7 @@ export const buttons = styleVariants({
       },
     },
   ],
-  [ButtonVariants.Link]: [
+  link: [
     button,
     {
       color: "inherit",
@@ -526,7 +512,7 @@ export const buttons = styleVariants({
       },
     },
   ],
-  [ButtonVariants.LinkReversed]: [
+  linkReversed: [
     button,
     {
       color: "inherit",
@@ -543,17 +529,14 @@ export const buttons = styleVariants({
   ],
 })
 
-export enum Backgrounds {
-  Primary = "primary",
-  Muted = "muted",
-}
+export type Backgrounds = "primary" | "muted"
 
-export const backgrounds = styleVariants({
-  [Backgrounds.Primary]: {
+export const backgrounds: Record<Backgrounds, string> = styleVariants({
+  primary: {
     color: theme.colors.background,
     backgroundColor: theme.colors.primary,
   },
-  [Backgrounds.Muted]: {
+  muted: {
     color: theme.colors.primary,
     backgroundColor: theme.colors.muted,
   },
@@ -575,32 +558,25 @@ export const avatar = style({
   borderRadius: theme.radii.circle,
 })
 
-export enum LogoSizes {
-  Small = "small",
-  Medium = "medium",
-}
+export type LogoSizes = "small" | "medium"
 
-export const logos = styleVariants({
-  [LogoSizes.Small]: {
+export const logos: Record<LogoSizes, string> = styleVariants({
+  small: {
     width: "85px",
     height: "20px",
   },
-  [LogoSizes.Medium]: {
+  medium: {
     maxWidth: "128px",
   },
 })
 
-export enum IconSizes {
-  Small = "small",
-  Medium = "medium",
-  Large = "large",
-}
+export type IconSizes = "small" | "medium" | "large"
 
-export const icons = styleVariants(
+export const icons: Record<IconSizes, string> = styleVariants(
   {
-    [IconSizes.Small]: "24px",
-    [IconSizes.Medium]: "32px",
-    [IconSizes.Large]: "64px",
+    small: "24px",
+    medium: "32px",
+    large: "64px",
   },
   (size) => ({
     width: size,

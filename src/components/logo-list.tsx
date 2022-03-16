@@ -9,7 +9,6 @@ import {
   Logo,
   HomepageImage,
 } from "./ui"
-import { Containers, FlexVariants, LogoSizes, TextVariants } from "./ui.css"
 
 export interface LogoItemProps {
   id: string
@@ -21,15 +20,11 @@ export function LogoItem(props: LogoItemProps) {
   if (!props.image) return null
 
   return (
-    <Logo
-      alt={props.alt}
-      image={props.image.gatsbyImageData}
-      size={LogoSizes.Medium}
-    />
+    <Logo alt={props.alt} image={props.image.gatsbyImageData} size="medium" />
   )
 }
 
-interface LogoListProps {
+export interface LogoListProps {
   text?: string
   logos: LogoItemProps[]
 }
@@ -37,14 +32,14 @@ interface LogoListProps {
 export default function LogoList(props: LogoListProps) {
   return (
     <Section paddingY={4}>
-      <Container width={Containers.Narrow}>
+      <Container width="narrow">
         {props.text && (
-          <Text center variant={TextVariants.Lead}>
+          <Text center variant="lead">
             {props.text}
           </Text>
         )}
         <Space size={4} />
-        <FlexList gap={4} variant={FlexVariants.Center}>
+        <FlexList gap={4} variant="center">
           {props.logos.map(
             (logo) =>
               logo && (

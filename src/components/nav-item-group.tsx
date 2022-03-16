@@ -10,7 +10,7 @@ import {
 } from "./ui"
 import Caret from "./caret"
 import * as styles from "./nav-item-group.css"
-import { FlexVariants, media } from "./ui.css"
+import { media } from "./ui.css"
 
 export type NavItemGroupNavItem = {
   id: string
@@ -85,7 +85,7 @@ export default function NavItemGroup({ name, navItems }: NavItemGroupProps) {
   return (
     <Flex
       data-id={`${name}-group-wrapper`}
-      variant={FlexVariants.ColumnStart}
+      variant="columnStart"
       gap={4}
       className={styles.navGroupWrapper}
     >
@@ -106,14 +106,14 @@ export default function NavItemGroup({ name, navItems }: NavItemGroupProps) {
           }
         >
           <FlexList
-            variant={FlexVariants.ColumnStart}
+            variant="columnStart"
             gap={2}
             className={styles.navLinkListWrapperInner}
           >
             {navItems.map((navItem) => (
               <li key={navItem.id}>
                 <NavLink to={navItem.href} className={styles.navLinkListLink}>
-                  <Flex variant={FlexVariants.Start} gap={3}>
+                  <Flex variant="start" gap={3}>
                     {navItem.icon && (
                       <GatsbyImage
                         alt={navItem.icon.alt}
@@ -121,11 +121,7 @@ export default function NavItemGroup({ name, navItems }: NavItemGroupProps) {
                         className={styles.navIcon}
                       />
                     )}
-                    <Flex
-                      variant={FlexVariants.ColumnStart}
-                      marginY={1}
-                      gap={0}
-                    >
+                    <Flex variant="columnStart" marginY={1} gap={0}>
                       <Box as="span" className={styles.navLinkTitle}>
                         {navItem.text}
                       </Box>

@@ -12,10 +12,8 @@ import {
   HomepageLink,
   HomepageImage,
 } from "./ui"
-import { Backgrounds, Containers, TextVariants, FlexVariants } from "./ui.css"
-import { Radii } from "../theme.css"
 
-interface HomepageCtaProps {
+export interface CtaProps {
   id: string
   kicker?: string
   heading: string
@@ -24,26 +22,18 @@ interface HomepageCtaProps {
   image?: HomepageImage
 }
 
-export default function HomepageCta(props: HomepageCtaProps) {
+export default function HomepageCta(props: CtaProps) {
   return (
-    <Container width={Containers.Fullbleed}>
-      <Section
-        padding={5}
-        radius={Radii.Large}
-        background={Backgrounds.Primary}
-      >
+    <Container width="fullbleed">
+      <Section padding={5} radius="large" background="primary">
         <Heading center>
           {props.kicker && <Kicker center>{props.kicker}</Kicker>}
           {props.heading}
         </Heading>
-        <Text as="p" center variant={TextVariants.Lead}>
+        <Text as="p" center variant="lead">
           {props.text}
         </Text>
-        <ButtonList
-          links={props.links}
-          variant={FlexVariants.Center}
-          reversed
-        />
+        <ButtonList links={props.links} variant="center" reversed />
         {props.image && (
           <Nudge left={5} right={5} bottom={5}>
             <GatsbyImage

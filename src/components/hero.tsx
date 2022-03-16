@@ -1,22 +1,21 @@
-import * as React from "react"
 import { graphql } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import * as React from "react"
 import {
-  Container,
-  Section,
-  Text,
-  Heading,
-  Subhead,
-  Kicker,
-  Flex,
   Box,
   ButtonList,
+  Container,
+  Flex,
+  Heading,
   HomepageImage,
   HomepageLink,
+  Kicker,
+  Section,
+  Subhead,
+  Text,
 } from "./ui"
-import { FlexVariants, Widths } from "./ui.css"
 
-interface HeroProps {
+export interface HeroProps {
   image?: HomepageImage
   kicker?: string
   h1: string
@@ -29,8 +28,8 @@ export default function Hero(props: HeroProps) {
   return (
     <Section>
       <Container>
-        <Flex gap={4} variant={FlexVariants.Responsive}>
-          <Box width={Widths.Half}>
+        <Flex gap={4} variant="responsive">
+          <Box width="half">
             {props.image && (
               <GatsbyImage
                 alt={props.image.alt}
@@ -38,7 +37,7 @@ export default function Hero(props: HeroProps) {
               />
             )}
           </Box>
-          <Box width={Widths.Half}>
+          <Box width="half">
             <Heading as="h1">
               {props.kicker && <Kicker>{props.kicker}</Kicker>}
               {props.h1}

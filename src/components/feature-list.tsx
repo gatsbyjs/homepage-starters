@@ -1,21 +1,19 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 import { Container, Box, Kicker, Heading, Text } from "./ui"
-import Feature, { FeatureProps } from "./feature"
-import { Backgrounds, Containers } from "./ui.css"
-import { Radii } from "../theme.css"
+import Feature, { FeatureDataProps } from "./feature"
 
-interface FeatureListProps {
+export interface FeatureListProps {
   kicker?: string
   heading: string
   text?: string
-  content: FeatureProps[]
+  content: FeatureDataProps[]
 }
 
 export default function FeatureList(props: FeatureListProps) {
   return (
-    <Container width={Containers.Fullbleed}>
-      <Box background={Backgrounds.Muted} radius={Radii.Large}>
+    <Container width="fullbleed">
+      <Box background="muted" radius="large">
         <Box center paddingY={5}>
           <Heading>
             {props.kicker && <Kicker>{props.kicker}</Kicker>}

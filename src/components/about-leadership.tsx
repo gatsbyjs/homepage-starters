@@ -12,7 +12,6 @@ import {
   Space,
   HomepageImage,
 } from "./ui"
-import { Containers, FlexVariants, TextVariants, Widths } from "./ui.css"
 
 interface AboutProfileProps {
   id: string
@@ -23,7 +22,7 @@ interface AboutProfileProps {
 
 function AboutProfile(props: AboutProfileProps) {
   return (
-    <Box width={Widths.Third} padding={4} center>
+    <Box width="third" padding={4} center>
       {props.image && (
         <GatsbyImage
           alt={props.image.alt}
@@ -33,12 +32,12 @@ function AboutProfile(props: AboutProfileProps) {
       <Space size={3} />
       <Box>
         {props.name && (
-          <Text variant={TextVariants.Medium} bold center>
+          <Text variant="medium" bold center>
             {props.name}
           </Text>
         )}
         {props.jobTitle && (
-          <Text variant={TextVariants.Medium} center>
+          <Text variant="medium" center>
             {props.jobTitle}
           </Text>
         )}
@@ -47,7 +46,7 @@ function AboutProfile(props: AboutProfileProps) {
   )
 }
 
-interface AboutLeadershipProps {
+export interface AboutLeadershipProps {
   kicker?: string
   heading?: string
   subhead?: string
@@ -57,17 +56,13 @@ interface AboutLeadershipProps {
 export default function AboutLeadership(props: AboutLeadershipProps) {
   return (
     <Section>
-      <Container width={Containers.Tight}>
+      <Container width="tight">
         <Box center paddingY={4}>
           {props.kicker && <Kicker>{props.kicker}</Kicker>}
           {props.heading && <Heading as="h1">{props.heading}</Heading>}
           {props.subhead && <Text>{props.subhead}</Text>}
         </Box>
-        <FlexList
-          gap={0}
-          variant={FlexVariants.Center}
-          alignItems={FlexVariants.Start}
-        >
+        <FlexList gap={0} variant="center" alignItems="start">
           {props.content.map((profile) => (
             <AboutProfile key={profile.id} {...profile} />
           ))}

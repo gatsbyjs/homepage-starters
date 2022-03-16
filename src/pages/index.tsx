@@ -1,21 +1,31 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
-import * as sections from "../components/sections"
+import {
+  getSectionComponentAndProps,
+  HomepageBlock,
+} from "../components/sections"
 
-const Fallback = (props) => {
-  console.warn(`No component found for: ${props.blocktype}`)
-  return false
+interface HomepageProps {
+  data: {
+    homepage: {
+      id: string
+      title: string
+      description: string
+      image: { id: string; url: string }
+      blocks: HomepageBlock[]
+    }
+  }
 }
 
-export default function Homepage(props) {
+export default function Homepage(props: HomepageProps) {
   const { homepage } = props.data
 
   return (
     <Layout {...homepage}>
-      {homepage.blocks.map((block, i) => {
-        const Component = sections[block.blocktype] || Fallback
-        return <Component key={block.id} index={i} {...block} />
+      {homepage.blocks.map((block) => {
+        const { Component, props } = getSectionComponentAndProps(block)
+        return <Component key={block.id} {...props} />
       })}
     </Layout>
   )
@@ -35,7 +45,6 @@ export const query = graphql`
         id
         blocktype
         ...HomepageHeroContent
-        ...HomepageFeatureContent
         ...HomepageFeatureListContent
         ...HomepageCtaContent
         ...HomepageLogoListContent

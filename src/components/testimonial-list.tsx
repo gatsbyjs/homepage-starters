@@ -13,7 +13,6 @@ import {
   Avatar,
   HomepageImage,
 } from "./ui"
-import { FlexVariants, TextVariants, Widths } from "./ui.css"
 
 interface TestimonialProps {
   id: string
@@ -24,16 +23,16 @@ interface TestimonialProps {
 
 function Testimonial(props: TestimonialProps) {
   return (
-    <Flex variant={FlexVariants.Start}>
+    <Flex variant="start">
       {props.avatar && (
         <Avatar alt={props.avatar.alt} image={props.avatar.gatsbyImageData} />
       )}
       <Blockquote>
-        <Text as="p" variant={TextVariants.Lead}>
+        <Text as="p" variant="lead">
           {props.quote}
         </Text>
         <figcaption>
-          <Text as="cite" bold variant={TextVariants.Caps}>
+          <Text as="cite" bold variant="caps">
             {props.source}
           </Text>
         </figcaption>
@@ -42,7 +41,7 @@ function Testimonial(props: TestimonialProps) {
   )
 }
 
-interface TestimonialListProps {
+export interface TestimonialListProps {
   kicker?: string
   heading: string
   content: TestimonialProps[]
@@ -58,14 +57,9 @@ export default function TestimonialList(props: TestimonialListProps) {
             {props.heading}
           </Heading>
         </Box>
-        <FlexList gutter={3} variant={FlexVariants.Start} responsive wrap>
+        <FlexList gutter={3} variant="start" responsive wrap>
           {props.content.map((testimonial, index) => (
-            <Box
-              as="li"
-              key={testimonial.id + index}
-              width={Widths.Half}
-              padding={3}
-            >
+            <Box as="li" key={testimonial.id + index} width="half" padding={3}>
               <Testimonial {...testimonial} />
             </Box>
           ))}

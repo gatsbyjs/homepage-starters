@@ -3,9 +3,8 @@ import { graphql } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { Container, Section, Text, SuperHeading, HomepageImage } from "./ui"
 import * as styles from "./about-hero.css"
-import { Containers } from "./ui.css"
 
-interface AboutHeroProps {
+export interface AboutHeroProps {
   heading: string
   text?: string
   image?: HomepageImage
@@ -22,7 +21,7 @@ export default function AboutHero(props: AboutHeroProps) {
           <Text className={styles.aboutHeroText}>{props.text}</Text>
         )}
       </Container>
-      <Container width={Containers.Wide}>
+      <Container width="wide">
         {props.image && (
           <GatsbyImage
             alt={props.image.alt}
