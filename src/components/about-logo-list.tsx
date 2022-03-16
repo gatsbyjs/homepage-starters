@@ -10,7 +10,6 @@ import {
   HomepageLink,
 } from "./ui"
 import { LogoItem, LogoItemProps } from "./logo-list"
-import { Containers, FlexVariants } from "./ui.css"
 
 export interface AboutLogoListProps {
   heading?: string
@@ -27,9 +26,9 @@ export default function AboutLogoList(props: AboutLogoListProps) {
           <LinkList links={props.links} />
         </Box>
       </Container>
-      <Container width={Containers.Narrow}>
+      <Container width="narrow">
         <Box paddingY={6}>
-          <FlexList gap={5} variant={FlexVariants.Center}>
+          <FlexList gap={5} variant="center">
             {props.logos.map((logo, i) => (
               <li key={`${logo.id}-${i}`}>
                 <LogoItem {...logo} />

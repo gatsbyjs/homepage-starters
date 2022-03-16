@@ -1,8 +1,7 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
-import { Container, Box, Heading, HomepageImage } from "../components/ui"
-import { Containers } from "../components/ui.css"
+import { Container, Box, Heading } from "../components/ui"
 
 interface PageProps {
   data: {
@@ -23,7 +22,7 @@ export default function Page(props: PageProps) {
   return (
     <Layout {...page}>
       <Box paddingY={5}>
-        <Container width={Containers.Narrow}>
+        <Container width="narrow">
           <Heading as="h1">{page.title}</Heading>
           <div
             dangerouslySetInnerHTML={{

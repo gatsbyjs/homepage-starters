@@ -19,7 +19,6 @@ import {
   mobileHeaderNavWrapper,
   mobileNavSVGColorWrapper,
 } from "./header.css"
-import { ButtonVariants, FlexVariants } from "./ui.css"
 import NavItemGroup, { NavItemGroupNavItem } from "./nav-item-group"
 import BrandLogo from "./brand-logo"
 
@@ -103,7 +102,7 @@ export default function Header() {
     <header>
       <Container className={desktopHeaderNavWrapper}>
         <Space size={2} />
-        <Flex variant={FlexVariants.SpaceBetween}>
+        <Flex variant="spaceBetween">
           <NavLink to="/">
             <VisuallyHidden>Home</VisuallyHidden>
             <BrandLogo />
@@ -130,7 +129,7 @@ export default function Header() {
       </Container>
       <Container className={mobileHeaderNavWrapper[isOpen ? "open" : "closed"]}>
         <Space size={2} />
-        <Flex variant={FlexVariants.SpaceBetween}>
+        <Flex variant="spaceBetween">
           <span
             className={
               mobileNavSVGColorWrapper[isOpen ? "reversed" : "primary"]
@@ -145,12 +144,7 @@ export default function Header() {
             <Space />
             <div>
               {cta && (
-                <Button
-                  to={cta.href}
-                  variant={
-                    isOpen ? ButtonVariants.Reversed : ButtonVariants.Primary
-                  }
-                >
+                <Button to={cta.href} variant={isOpen ? "reversed" : "primary"}>
                   {cta.text}
                 </Button>
               )}
@@ -172,7 +166,7 @@ export default function Header() {
       {isOpen && (
         <div className={mobileNavOverlay}>
           <nav>
-            <FlexList responsive variant={FlexVariants.Stretch}>
+            <FlexList responsive variant="stretch">
               {navItems?.map((navItem) => (
                 <li key={navItem.id}>
                   {navItem.navItemType === "Group" ? (

@@ -48,7 +48,7 @@ interface ContainerProps extends BaseProps {
 }
 
 export function Container({
-  width = styles.Containers.Normal,
+  width = "normal",
   ...props
 }: WithChildren<ContainerProps>) {
   return <Base cx={[styles.containers[width]]} {...props} />
@@ -104,7 +104,7 @@ interface BoxProps extends BaseProps {
 }
 
 export function Box({
-  width = styles.Widths.Full,
+  width = "full",
   background,
   padding,
   paddingY,
@@ -189,7 +189,7 @@ interface TextProps extends BaseProps {
 }
 
 export function Text({
-  variant = styles.TextVariants.Body,
+  variant = "body",
   center,
   bold,
   ...props
@@ -207,19 +207,19 @@ export function Text({
 }
 
 export function SuperHeading({ ...props }) {
-  return <Text as="h1" variant={styles.TextVariants.SuperHeading} {...props} />
+  return <Text as="h1" variant="superHeading" {...props} />
 }
 
 export function Heading({ ...props }) {
-  return <Text as="h2" variant={styles.TextVariants.Heading} {...props} />
+  return <Text as="h2" variant="heading" {...props} />
 }
 
 export function Subhead({ ...props }) {
-  return <Text as="h3" variant={styles.TextVariants.Subhead} {...props} />
+  return <Text as="h3" variant="subhead" {...props} />
 }
 
 export function Kicker({ ...props }) {
-  return <Text variant={styles.TextVariants.Kicker} {...props} />
+  return <Text variant="kicker" {...props} />
 }
 
 interface LinkProps extends BaseProps {
@@ -253,7 +253,7 @@ interface ButtonProps extends BaseProps {
 }
 
 export function Button({
-  variant = styles.ButtonVariants.Primary,
+  variant = "primary",
   ...props
 }: WithChildren<ButtonProps>) {
   return <Base as={Link} cx={[styles.buttons[variant]]} {...props} />
@@ -272,11 +272,9 @@ export function ButtonList({
 }: ButtonListProps) {
   const getVariant = (i): styles.ButtonVariants => {
     if (reversed) {
-      return i === 0
-        ? styles.ButtonVariants.Reversed
-        : styles.ButtonVariants.LinkReversed
+      return i === 0 ? "reversed" : "linkReversed"
     }
-    return i === 0 ? styles.ButtonVariants.Primary : styles.ButtonVariants.Link
+    return i === 0 ? "primary" : "link"
   }
   return (
     <FlexList marginY={4} {...props}>
@@ -332,7 +330,7 @@ interface LogoProps extends GatsbyImageProps {
   size: styles.LogoSizes
 }
 
-export function Logo({ alt, image, size = styles.LogoSizes.Small }: LogoProps) {
+export function Logo({ alt, image, size = "small" }: LogoProps) {
   return (
     <GatsbyImage
       alt={alt}
@@ -346,11 +344,7 @@ interface IconProps extends GatsbyImageProps {
   size?: styles.IconSizes
 }
 
-export function Icon({
-  alt,
-  image,
-  size = styles.IconSizes.Medium,
-}: IconProps) {
+export function Icon({ alt, image, size = "medium" }: IconProps) {
   return (
     <GatsbyImage
       alt={alt}

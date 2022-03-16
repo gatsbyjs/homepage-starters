@@ -10,14 +10,14 @@ export default function NotFound() {
     <Layout title="404: Page not found">
       <Box paddingY={4}>
         <Container>
-          <Flex variant={FlexVariants.Column}>
+          <Flex variant="column">
             <Heading variant="mega" className={styles.heading}>
               404
             </Heading>
             <Heading as="h1">Page not found</Heading>
-            <Flex variant={FlexVariants.Column} gap={0}>
-              <Text variant={TextVariants.Lead} className={styles.text}>
-                Sorry! We couldn’t find the page you were looking for.
+            <Flex variant="column" gap={0}>
+              <Text variant="lead" className={styles.text}>
+                Sorry! We couldn't find the page you were looking for.
               </Text>
               <Link to="/" className={styles.link}>
                 <span>Back to home</span>
