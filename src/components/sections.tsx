@@ -1,18 +1,16 @@
-import HomepageHero, { HeroProps } from "./hero"
-import HomepageFeatureList, { FeatureListProps } from "./feature-list"
-import HomepageLogoList, { LogoListProps } from "./logo-list"
-import HomepageBenefitList, { BenefitListProps } from "./benefit-list"
-import HomepageTestimonialList, {
-  TestimonialListProps,
-} from "./testimonial-list"
-import HomepageStatList, { StatListProps } from "./stat-list"
-import HomepageCta, { CtaProps } from "./cta"
-import HomepageProductList, { ProductListProps } from "./product-list"
+import { HeroProps } from "./hero"
+import { FeatureListProps } from "./feature-list"
+import { LogoListProps } from "./logo-list"
+import { BenefitListProps } from "./benefit-list"
+import { TestimonialListProps } from "./testimonial-list"
+import { StatListProps } from "./stat-list"
+import { CtaProps } from "./cta"
+import { ProductListProps } from "./product-list"
 
-import AboutHero, { AboutHeroProps } from "./about-hero"
-import AboutStatList, { AboutStatListProps } from "./about-stat-list"
-import AboutLeadership, { AboutLeadershipProps } from "./about-leadership"
-import AboutLogoList, { AboutLogoListProps } from "./about-logo-list"
+import { AboutHeroProps } from "./about-hero"
+import { AboutStatListProps } from "./about-stat-list"
+import { AboutLeadershipProps } from "./about-leadership"
+import { AboutLogoListProps } from "./about-logo-list"
 
 export { default as HomepageHero } from "./hero"
 export { default as HomepageFeatureList } from "./feature-list"
@@ -26,20 +24,6 @@ export { default as AboutHero } from "./about-hero"
 export { default as AboutStatList } from "./about-stat-list"
 export { default as AboutLeadership } from "./about-leadership"
 export { default as AboutLogoList } from "./about-logo-list"
-
-export type Sections =
-  | typeof HomepageHero
-  | typeof HomepageFeatureList
-  | typeof HomepageLogoList
-  | typeof HomepageBenefitList
-  | typeof HomepageTestimonialList
-  | typeof HomepageStatList
-  | typeof HomepageCta
-  | typeof HomepageProductList
-  | typeof AboutHero
-  | typeof AboutStatList
-  | typeof AboutLeadership
-  | typeof AboutLogoList
 
 export type SectionProps =
   | HeroProps
