@@ -1,10 +1,7 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
-import {
-  getSectionComponentAndProps,
-  HomepageBlock,
-} from "../components/sections"
+import * as sections from "../components/sections"
 
 interface AboutProps {
   data: {
@@ -13,7 +10,7 @@ interface AboutProps {
       title: string
       description: string
       image: { id: string; url: string }
-      blocks: HomepageBlock[]
+      blocks: sections.HomepageBlock[]
     }
   }
 }
@@ -24,8 +21,9 @@ export default function About(props: AboutProps) {
   return (
     <Layout {...aboutPage}>
       {aboutPage.blocks.map((block) => {
-        const { Component, props } = getSectionComponentAndProps(block)
-        return <Component key={block.id} {...props} />
+        const { id, blocktype, ...componentProps } = block
+        const Component = sections[blocktype]
+        return <Component key={id} {...(componentProps as any)} />
       })}
     </Layout>
   )
