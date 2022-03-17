@@ -50,7 +50,7 @@ const createStarterDist = async (basename, isTypescript = false) => {
     )
     return
   }
-  const dirname = `${basename}-plugin${isTypescript ? "-ts" : ""}`
+  const dirname = `${basename}-plugin`
 
   const name = repo.substring(repo.lastIndexOf("/") + 1)
 
@@ -81,6 +81,7 @@ const createStarterDist = async (basename, isTypescript = false) => {
   // if destination repo is Typescript add "src"
   if (isTypescript) {
     rootFiles.push("src")
+    rootFiles.push("tsconfig.json")
   }
   rootFiles.forEach((file) => {
     const dest = path.join(dir.dist, name, file)
@@ -173,11 +174,22 @@ const createStarterDist = async (basename, isTypescript = false) => {
     "gatsby-node.js",
     "package.json",
     "README.md",
-    "src",
     "scripts",
     "docs/images",
     "data",
+    "src/colors.css.ts",
   ]
+  // push cms-specific TS/JS files conditionally to files array
+  if (isTypescript) {
+    files.push("src/components/brand-logo.tsx")
+    files.push("src/components/footer.tsx")
+    files.push("src/components/header.tsx")
+  } else {
+    files.push("src/components/brand-logo.js")
+    files.push("src/components/footer.js")
+    files.push("src/components/header.js")
+  }
+
   files.forEach((file) => {
     const src = path.join(dir.plugins, dirname, file)
     const dest = path.join(dir.dist, name, file)
@@ -192,7 +204,7 @@ const createStarterDist = async (basename, isTypescript = false) => {
     path.join(dir.dist, name, "pull_request_template.md")
   )
 
-  const json = createPackageJSON(name)
+  const json = createPackageJSON(name, isTypescript)
   fs.writeFileSync(path.join(dir.dist, name, "package.json"), json, "utf8")
 
   // Remove the about page from WordPress because it is not used
@@ -230,15 +242,18 @@ const createStarterDist = async (basename, isTypescript = false) => {
     .push("origin", "main")
 }
 
-const createPackageJSON = (name) => {
+const createPackageJSON = (name, isTypescript = false) => {
   console.log("Creating package.json for", name)
   const root = require("../package.json")
   const pkg = require(path.resolve(dir.dist, name, "package.json"))
   pkg.name = name
-  pkg.private = true
   Object.entries(root.dependencies).forEach(([key, val]) => {
     pkg.dependencies[key] = val
   })
+  if (isTypescript) {
+    pkg.devDependencies = {}
+    pkg.devDependencies["typescript"] = root.devDependencies["typescript"]
+  }
   pkg.scripts = {
     start: "gatsby develop",
     develop: "gatsby develop",

@@ -19,35 +19,60 @@ import {
   mobileNavSVGColorWrapper,
 } from "./header.css"
 import BrandLogo from "./brand-logo"
+import NavItemGroup, { NavItemGroupNavItem } from "./nav-item-group"
 
-const data = {
+type NavItem = {
+  id: string
+  navItemType: "Link"
+  href: string
+  text: string
+}
+
+type NavItemGroup = {
+  id: string
+  navItemType: "Group"
+  name: string
+  navItems: NavItemGroupNavItem[]
+}
+
+interface HeaderData {
+  navItems: NavItem[] | NavItemGroup[]
+  cta: {
+    id: string
+    href: string
+    text: string
+  }
+}
+
+const data: HeaderData = {
   navItems: [
     {
-      id: 0,
+      id: "0",
       navItemType: "Link",
       href: "#!",
       text: "Products",
     },
     {
-      id: 1,
+      id: "1",
       navItemType: "Link",
       href: "#!",
       text: "Pricing",
     },
     {
-      id: 2,
+      id: "2",
       navItemType: "Link",
       href: "#!",
       text: "About",
     },
     {
-      id: 3,
+      id: "3",
       navItemType: "Link",
       href: "#!",
       text: "Blog",
     },
   ],
   cta: {
+    id: "0",
     href: "#!",
     text: "Sign Up",
   },
