@@ -75,10 +75,7 @@ export default function BlogIndex(props) {
           </FlexList>
         </Box>
         <Box paddingY={4}>
-          <Subhead>
-            <Kicker>Kicker</Kicker>
-            Product Updates
-          </Subhead>
+          <Subhead>Product Updates</Subhead>
           <FlexList responsive wrap gap={0} gutter={3} variant="start">
             {regularPosts.map((post) => (
               <Box as="li" key={post.id} padding={3} width="third">

@@ -12,6 +12,7 @@ import {
   Text,
   Avatar,
 } from "../components/ui"
+import { avatar as avatarStyle } from "../components/ui.css"
 import * as styles from "./blog-post.css.ts"
 
 export default function BlogPost(props) {
@@ -35,7 +36,11 @@ export default function BlogPost(props) {
                       image={post.author.avatar}
                     />
                   ) : (
-                    <img src={post.author.avatar.url} alt={post.author.alt} />
+                    <img
+                      src={post.author.avatar.url}
+                      alt={post.author.alt}
+                      className={avatarStyle}
+                    />
                   ))}
                 <Text variant="bold">{post.author.name}</Text>
               </Flex>
