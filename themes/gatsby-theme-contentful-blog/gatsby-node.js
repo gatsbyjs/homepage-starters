@@ -82,6 +82,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       contentfulExcerpt: contentfulBlogPostExcerptTextNode @link(from: "excerpt___NODE")
       image: Image @link(from: "image___NODE")
       author: BlogAuthor @link(from: "author___NODE")
+      category: String
     }
   `)
 }

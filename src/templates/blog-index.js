@@ -15,7 +15,7 @@ import {
   Text,
 } from "../components/ui"
 
-function PostCard({ slug, image, title, excerpt, author, ...props }) {
+function PostCard({ slug, image, title, excerpt, author, category, ...props }) {
   return (
     <BlockLink {...props} to={`/blog/${slug}`}>
       {image && (
@@ -25,7 +25,7 @@ function PostCard({ slug, image, title, excerpt, author, ...props }) {
         </>
       )}
       <Subhead>
-        <Kicker>Category TK</Kicker>
+        <Kicker>{category}</Kicker>
         {title}
       </Subhead>
       <Text as="p">{excerpt}</Text>
@@ -38,7 +38,7 @@ function PostCard({ slug, image, title, excerpt, author, ...props }) {
   )
 }
 
-function PostCardSmall({ slug, image, title, ...props }) {
+function PostCardSmall({ slug, image, title, category, ...props }) {
   return (
     <BlockLink {...props} to={`/blog/${slug}`}>
       {image && (
@@ -48,7 +48,7 @@ function PostCardSmall({ slug, image, title, ...props }) {
         </>
       )}
       <Subhead>
-        <Kicker>Category TK</Kicker>
+        <Kicker>{category}</Kicker>
         {title}
       </Subhead>
     </BlockLink>
@@ -58,14 +58,8 @@ function PostCardSmall({ slug, image, title, ...props }) {
 export default function BlogIndex(props) {
   const posts = props.data.allBlogPost.nodes
 
-  // todo: use categories as groups
-  const featuredPosts = posts.slice(0, 2)
-  const smallPosts = posts.slice(1)
-  // for development only
-  const fakedPosts = Array.from({ length: 12 }).map((n, i) => ({
-    ...posts[0],
-    id: posts[0].id + i,
-  }))
+  const featuredPosts = posts.filter((p) => p.category === "Featured")
+  const regularPosts = posts.filter((p) => p.category !== "Featured")
 
   return (
     <Layout title="Blog">
@@ -83,10 +77,10 @@ export default function BlogIndex(props) {
         <Box paddingY={4}>
           <Subhead>
             <Kicker>Kicker</Kicker>
-            TK Category
+            Product Updates
           </Subhead>
           <FlexList responsive wrap gap={0} gutter={3} variant="start">
-            {fakedPosts.map((post) => (
+            {regularPosts.map((post) => (
               <Box as="li" key={post.id} padding={3} width="third">
                 <PostCardSmall {...post} />
               </Box>
@@ -100,12 +94,13 @@ export default function BlogIndex(props) {
 
 export const query = graphql`
   query {
-    allBlogPost {
+    allBlogPost(sort: { fields: date, order: DESC }) {
       nodes {
         id
         slug
         title
         excerpt
+        category
         image {
           id
           alt

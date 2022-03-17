@@ -33,7 +33,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       image: Image
       date: Date! @dateformat
       author: BlogAuthor
-      # category: String
+      category: String
     }
   `)
 }

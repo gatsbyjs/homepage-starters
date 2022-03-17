@@ -53,6 +53,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       date: Date! @dateformat
       image: Image @link
       author: BlogAuthor @link(by: "parent.id")
+      category: String
     }
 
     # custom type for blog theme implementation
