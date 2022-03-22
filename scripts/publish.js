@@ -77,7 +77,7 @@ const createStarterDist = async (basename, isTypescript = false) => {
   ]
 
   // copy root files
-  const rootFiles = [".gitignore", "gatsby-browser.js", "LICENSE"]
+  const rootFiles = [".gitignore", "gatsby-browser.js", "LICENSE", "yarn.lock"]
   // if destination repo is Typescript add "src"
   if (isTypescript) {
     rootFiles.push("src")
