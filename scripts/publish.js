@@ -214,7 +214,13 @@ const createStarterDist = async (basename, isTypescript = false) => {
 
   // Remove the about page from WordPress because it is not used
   if (basename === "wordpress") {
-    const filepath = path.join(dir.dist, name, "src", "pages", "about.js")
+    const filepath = path.join(
+      dir.dist,
+      name,
+      "src",
+      "pages",
+      `about.${isTypescript ? "tsx" : "js"}`
+    )
     fs.removeSync(filepath)
   }
 
