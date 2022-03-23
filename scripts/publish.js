@@ -173,7 +173,6 @@ const createStarterDist = async (basename, isTypescript = false) => {
     "gatsby-config.js",
     "gatsby-node.js",
     "package.json",
-    "README.md",
     "scripts",
     "docs/images",
     "data",
@@ -181,10 +180,12 @@ const createStarterDist = async (basename, isTypescript = false) => {
   ]
   // push cms-specific TS/JS files conditionally to files array
   if (isTypescript) {
+    files.push("TS-README.md")
     files.push("src/components/brand-logo.tsx")
     files.push("src/components/footer.tsx")
     files.push("src/components/header.tsx")
   } else {
+    files.push("README.md")
     files.push("src/components/brand-logo.js")
     files.push("src/components/footer.js")
     files.push("src/components/header.js")
@@ -196,6 +197,10 @@ const createStarterDist = async (basename, isTypescript = false) => {
     console.log(`Copying '${file}' to '${dest}'`)
     if (!fs.existsSync(src)) return
     fs.copySync(src, dest)
+    // if we copied over the TS version of the readme, rename it
+    if (file === "TS-README.md") {
+      fs.renameSync(dest, path.join(dir.dist, name, "README.md"))
+    }
   })
 
   // Copy pull request template to target repos

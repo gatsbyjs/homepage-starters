@@ -8,6 +8,9 @@ Create a homepage using Gatsby and DatoCMS. This starter demonstrates how to use
 
 [View the Demo](https://gatsbydatocmshomepage.gatsbyjs.io/)
 
+**Note:**
+This is the JavaScript version of DatoCMS homepage starter codebase. A functionally identical TypeScript version is also maintained and can be found on [GitHub](https://github.com/gatsbyjs/gatsby-starter-datocms-homepage-ts).
+
 ## Quick start
 
 You will need a new or existing DatoCMS project to use this starter and will be asked for a Read-only API token as well as the [environment][] during installation.
@@ -19,7 +22,7 @@ You can find your API token under the Settings > API tokens section of your proj
 
    Use the Gatsby CLI to get started locally:
 
-   ```sh name
+   ```sh repo
    npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-datocms-homepage
    ```
 
@@ -213,7 +216,7 @@ For this example, we'll create a new "Banner" component.
 
 1. Next, create the Banner component:
 
-   ```jsx
+   ```jsx fileExt
    // src/components/banner.js
    import * as React from "react"
    import { graphql } from "gatsby"
@@ -241,7 +244,7 @@ For this example, we'll create a new "Banner" component.
 
 1. Export the component from `src/components/sections.js`
 
-   ```js
+   ```js fileExt
    // src/components/sections.js
    export { default as HomepageHero } from "./hero"
    export { default as HomepageFeature } from "./feature"
@@ -259,7 +262,7 @@ For this example, we'll create a new "Banner" component.
 
 1. Add the GraphQL query fragment to the query in `src/pages/index.js`
 
-   ```js
+   ```js fileExt
    // in src/pages/index.js
    export const query = graphql`
      {

@@ -2,42 +2,46 @@
   <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
 </a>
 
-# Gatsby Starter Contentful Homepage
+# Gatsby Starter DatoCMS Homepage
 
-Create a homepage using Gatsby and Contentful. This starter demonstrates how to use Contentful to build a homepage and can be customized to match your own visual branding.
+Create a homepage using Gatsby and DatoCMS. This starter demonstrates how to use DatoCMS to build a homepage and can be customized to match your own visual branding.
 
-[View the Demo](https://gatsbycontentfulhomepage.gatsbyjs.io/)
+[View the Demo](https://gatsbydatocmshomepagets.gatsbyjs.io/)
 
 **Note:**
-This is the JavaScript version of Contentful homepage starter codebase. A functionally identical TypeScript version is also maintained and can be found on [GitHub](https://github.com/gatsbyjs/gatsby-starter-contentful-homepage-ts).
+This is the TypeScript version of DatoCMS homepage starter codebase. A functionally identical JavaScript version is also maintained and can be found on [GitHub](https://github.com/gatsbyjs/gatsby-starter-datocms-homepage).
 
 ## Quick start
 
-You will need a new or existing [Contentful space][] to use this starter and will be asked for your [Space ID][], [Content Management API Key][] (also referred to as a Personal Access Token) and [Content Delivery API Key][] during installation.
+You will need a new or existing DatoCMS project to use this starter and will be asked for a Read-only API token as well as the [environment][] during installation.
+You can find your API token under the Settings > API tokens section of your project settings, and Environment can be found under the Settings > Environments section. By default your environment will be named "main".
 
-[contentful space]: https://www.contentful.com/help/contentful-101/#step-2-create-a-space
-[space id]: https://www.contentful.com/help/find-space-id/
-[content delivery api key]: https://www.contentful.com/developers/docs/references/authentication/#api-keys-in-the-contentful-web-app
-[content management api key]: https://www.contentful.com/developers/docs/references/authentication/#the-content-management-api
+[environment]: https://www.datocms.com/docs/scripting-migrations/introduction#whats-an-environment
 
 1. **Create a Gatsby site**
 
    Use the Gatsby CLI to get started locally:
 
    ```sh repo
-   npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-contentful-homepage
+   npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-datocms-homepage-ts
    ```
 
-1. **Run the Contentful setup script**
+1. **Create your DatoCMS project**
 
-   From your site's root directory, run:
+[![Clone DatoCMS project](https://dashboard.datocms.com/clone/button.svg)](https://dashboard.datocms.com/clone?projectId=60908&name=Homepage+Starter)
 
-   ```sh
-   cd my-homepage
-   yarn setup
-   ```
+This will clone the data model and records backing the demo site to populate your DatoCMS project.
 
-   This will run a script to populate your Contentful space's content model and add demo content.
+1. **Run the setup script**
+
+After setting up the cloned DatoCMS project, from your site's root directory, run:
+
+```sh
+cd my-homepage
+yarn setup
+```
+
+This will run a script to create `.env.development` and `.env.production` files for you populated with your DatoCMS project environment variables.
 
 1. **Start developing**
 
@@ -53,7 +57,7 @@ You will need a new or existing [Contentful space][] to use this starter and wil
 
 ## Deploy your site
 
-Once your content is available in Contentful, deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
+Once your content is available in DatoCMS, deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
 
 1. Push your local site to a new repo in either GitHub, GitLab, or Bitbucket
 1. Log into your [Gatsby Cloud Dashboard][] and click on **Add a site**
@@ -69,18 +73,17 @@ For a more detailed walkthrough, see the tutorial on how to [build your site wit
 ### Deploy without using the CLI
 
 Alternatively, you can deploy this starter directly to Gatsby Cloud.
-Note that you will need to set up your content in Contentful manually.
+Note that you will need to set up your content in DatoCMS manually.
 
-[![Deploy to Gatsby](https://www.gatsbyjs.com/deploynow.png "Deploy to Gatsby")](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-contentful-homepage)
+[![Deploy to Gatsby](https://www.gatsbyjs.com/deploynow.png "Deploy to Gatsby")](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-datocms-homepage-ts)
 
 ## Setting up Gatsby Cloud Preview
 
-To use Gatsby Cloud Preview with this site, see the documentation for
-[Installing Content Sync for Contentful][].
+To enable Gatsby Preview with this site, see the documentation for
+[Installing Content Sync for DatoCMS][].
 
-[installing content sync for contentful]: https://support.gatsbyjs.com/hc/en-us/articles/4410371995539-Installing-Content-Sync-for-Contentful
-[add the gatsby cloud app to contentful]: https://support.gatsbyjs.com/hc/en-us/articles/360056047134-Add-the-Gatsby-Cloud-App-to-Contentful
-[connecting to contentful manually]: https://support.gatsbyjs.com/hc/en-us/articles/360052076554-Connecting-to-Contentful-Manually
+[connecting to datocms]: https://support.gatsbyjs.com/hc/en-us/articles/360052324454-Connecting-to-DatoCMS
+[installing content sync for datocms]: https://support.gatsbyjs.com/hc/en-us/articles/4410387813907-Installing-Content-Sync-for-DatoCMS
 
 ## What's included?
 
@@ -114,11 +117,11 @@ To update the colors used in this starter, edit the `src/colors.css.ts` file.
 ```.ts
 // src/colors.css.ts
 export const colors = {
-  background: "#ffd500",
-  text: "#005bbb",
-  primary: "#005bbb",
-  muted: "#f5cc00",
-  active: "#004287",
+  background: "#fff",
+  text: "#db3000",
+  primary: "#db3000",
+  muted: "#fffbfa",
+  active: "#751a00",
   black: "#000",
 }
 
@@ -127,13 +130,13 @@ export const colors = {
 If you'd like to add additional colors, add additional keys to this object.
 This file is imported into `src/theme.css.ts` and creates CSS custom properties, that can be imported and used in other `.css.ts` files.
 
-The UI components file `src/components/ui.js` imports styles from `src/components/ui.css.ts`. You can see how the theme and color values are being used in this file.
+The UI components file `src/components/ui.tsx` imports styles from `src/components/ui.css.ts`. You can see how the theme and color values are being used in this file.
 
 ### Add your logo
 
 ![Logo](./docs/images/logo.png)
 
-Replace the `src/components/brand-logo.js` component with your own brand logo.
+Replace the `src/components/brand-logo.tsx` component with your own brand logo.
 If you have an SVG version, it can be rendered inline as a React component, following the example in this file. Note that SVG attributes will need to be camel cased for JSX.
 
 Using an inline SVG for the logo allows it to pick up the colors used in CSS, which is how the logo colors are inverted for the mobile menu.
@@ -144,44 +147,46 @@ If you prefer to use an image, use the [`StaticImage`](https://www.gatsbyjs.com/
 
 ![Headings & Buttons](./docs/images/headings-buttons.png)
 
-To further customize the look and feel of the homepage, edit the UI components in `src/components/ui.js` and styles in `src/components/ui.css.ts`.
+To further customize the look and feel of the homepage, edit the UI components in `src/components/ui.tsx` and styles in `src/components/ui.css.ts`.
 
 ### Customize section components
 
 To customize any of the sections of the homepage, edit the relevant component in `src/components`.
-Most of the styles for these components are handled with shared UI components in `src/components/ui.js`.
+Most of the styles for these components are handled with shared UI components in `src/components/ui.tsx`.
 
 ### Create custom section components
 
 To create a new type of section in your homepage, you'll want to create a new section component. Using the existing components as an example.
 For this example, we'll create a new "Banner" component.
 
-1. First, update your content model in Contentful
+1. First, update your content model in DatoCMS
 
-   1. In your Contentful space, create a new content type and call it "Homepage Banner."
+   1. In your DatoCMS project, go to Settings > Blocks Library to create a new block called "Banner."
 
       <img src="./docs/images/step-1.png" alt="Step 1" width="300" />
 
-   1. For this example, add two fields to your new content type: `heading` and `text` – these can be _Short text_ types.
+   1. For this example, add two Text fields to your new block type: `heading` and `text` – these can be _Single-line string_ types.
 
       <img src="./docs/images/step-2.png" alt="Step 2" width="300" />
       <img src="./docs/images/step-3.png" alt="Step 3" width="300" />
       <img src="./docs/images/step-4.png" alt="Step 4" width="300" />
+      <img src="./docs/images/step-5.png" alt="Step 5" width="300" />
 
-   1. Find the content type for _Homepage_ in Contentful and edit the settings for the _Content_ field. Under _Validation_, ensure that the new _Homepage Banner_ type is checked to make it available as a content type on the Homepage.
+   1. After saving the new block type, navigate to Settings > Models and edit the _Homepage_ model.
 
-      <img src="./docs/images/step-5.png" alt="Step 5" width="500" />
       <img src="./docs/images/step-6.png" alt="Step 6" width="500" />
-      <img src="./docs/images/step-7.png" alt="Step 7" width="500" />
 
-   1. Navigate to the _Content_ tab to edit the _Homepage_ and add a section with this new _Homepage Banner_ content type.
+   1. Edit the _Content_ field and under _Validations_, add the _Banner_ to the list of allowed blocks.
+
+      <img src="./docs/images/step-7.png" alt="Step 7" width="300" />
+
+   1. Go to the _Content_ tab in your project select Homepage, scroll to the bottom and click _Create new_ to add content for your Banner, then save the _Homepage_.
 
       <img src="./docs/images/step-8.png" alt="Step 8" width="500" />
-      <img src="./docs/images/step-9.png" alt="Step 9" width="500" />
 
 1. Update `gatsby-node.js`
 
-   Edit your site's `gatsby-node.js` file, adding an interface for `HomepageBanner` that matches your content model in Contentful.
+   Edit your site's `gatsby-node.js` file, adding an interface for `HomepageBanner` that matches your content model in DatoCMS.
    This allows the homepage to query the abstract `HomepageBanner` type.
 
    ```js
@@ -198,7 +203,7 @@ For this example, we'll create a new "Banner" component.
      `)
      // ...
      actions.createTypes(`
-       type ContentfulHomepageBanner implements Node & HomepageBanner & HomepageBlock @dontInfer {
+       type DatoCmsBanner implements Node & HomepageBanner & HomepageBlock @dontInfer {
          id: ID!
          blocktype: String @blocktype
          heading: String
@@ -212,7 +217,7 @@ For this example, we'll create a new "Banner" component.
 1. Next, create the Banner component:
 
    ```jsx fileExt
-   // src/components/banner.js
+   // src/components/banner.tsx
    import * as React from "react"
    import { graphql } from "gatsby"
    import { Section, Container, Heading, Text } from "./ui"
@@ -237,10 +242,10 @@ For this example, we'll create a new "Banner" component.
    `
    ```
 
-1. Export the component from `src/components/sections.js`
+1. Export the component from `src/components/sections.tsx`
 
    ```js fileExt
-   // src/components/sections.js
+   // src/components/sections.tsx
    export { default as HomepageHero } from "./hero"
    export { default as HomepageFeature } from "./feature"
    export { default as HomepageFeatureList } from "./feature-list"
@@ -255,10 +260,10 @@ For this example, we'll create a new "Banner" component.
    export { default as HomepageBanner } from "./banner"
    ```
 
-1. Add the GraphQL query fragment to the query in `src/pages/index.js`
+1. Add the GraphQL query fragment to the query in `src/pages/index.tsx`
 
    ```js fileExt
-   // in src/pages/index.js
+   // in src/pages/index.tsx
    export const query = graphql`
      {
        homepage {

@@ -94,6 +94,16 @@ function variablePlugin(opts) {
           node.value = node.value.replace("$", n)
         })
       }
+
+      // support variable file name extensions in inline code
+      if (node.type === "inlineCode") {
+        if (!opts.fileExt) {
+          throw new Error(
+            `Inline Code has variable file extension but variable value was not provided`
+          )
+        }
+        node.value = node.value.replace(":var[fileExt]", opts.fileExt)
+      }
     })
   }
 }
@@ -159,11 +169,18 @@ const template = fs.readFileSync("docs/readme-template.md", "utf8")
 
 Object.keys(starters).forEach(async (key, i) => {
   const starter = starters[key]
+  const isTS = key.includes("-ts")
   const outdir = path.join(process.cwd(), "plugins", starter.dirname)
   const readme = await buildMarkdown(template, {
     basedir: path.join(process.cwd(), "plugins", starter.dirname),
-    vars: starter,
+    vars: {
+      ...starter,
+      fileExt: isTS ? "tsx" : "js",
+      repoType: isTS ? "TypeScript" : "JavaScript",
+      altRepoType: isTS ? "JavaScript" : "TypeScript",
+      altRepoUrl: starters[isTS ? key.replace("-ts", "") : `${key}-ts`].repo,
+    },
   })
-  fs.writeFileSync(path.join(outdir, "README.md"), readme)
+  fs.writeFileSync(path.join(outdir, `${isTS ? "TS-" : ""}README.md`), readme)
   console.log(`README.md written for ${key}`)
 })

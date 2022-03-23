@@ -2,42 +2,47 @@
   <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
 </a>
 
-# Gatsby Starter Contentful Homepage
+# Gatsby Starter WordPress Homepage
 
-Create a homepage using Gatsby and Contentful. This starter demonstrates how to use Contentful to build a homepage and can be customized to match your own visual branding.
+Create a homepage using Gatsby and WordPress. This starter demonstrates how to use WordPress to build a homepage and can be customized to match your own visual branding.
 
-[View the Demo](https://gatsbycontentfulhomepage.gatsbyjs.io/)
+[View the Demo](https://gatsbywordpresshomepagets.gatsbyjs.io/)
 
 **Note:**
-This is the JavaScript version of Contentful homepage starter codebase. A functionally identical TypeScript version is also maintained and can be found on [GitHub](https://github.com/gatsbyjs/gatsby-starter-contentful-homepage-ts).
+This is the TypeScript version of WordPress homepage starter codebase. A functionally identical JavaScript version is also maintained and can be found on [GitHub](https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage).
 
 ## Quick start
 
-You will need a new or existing [Contentful space][] to use this starter and will be asked for your [Space ID][], [Content Management API Key][] (also referred to as a Personal Access Token) and [Content Delivery API Key][] during installation.
+You will need a new or existing WordPress instance to use this starter.
+This starter requires the following plugins to be installed in your WordPress instance:
 
-[contentful space]: https://www.contentful.com/help/contentful-101/#step-2-create-a-space
-[space id]: https://www.contentful.com/help/find-space-id/
-[content delivery api key]: https://www.contentful.com/developers/docs/references/authentication/#api-keys-in-the-contentful-web-app
-[content management api key]: https://www.contentful.com/developers/docs/references/authentication/#the-content-management-api
+- [WPGatsby][]
+- [WPGraphQL][]
+- [Advanced Custom Fields][]
+- [WPGraphQL for Advanced Custom Fields][]
+
+Once these plugins are installed, you'll need the URL of the GraphQL endpoint for configuration.
+
+[wpgatsby]: https://wordpress.org/plugins/wp-gatsby/
+[wpgraphql]: https://wordpress.org/plugins/wp-graphql/
+[advanced custom fields]: https://wordpress.org/plugins/advanced-custom-fields/
+[wpgraphql for advanced custom fields]: https://github.com/wp-graphql/wp-graphql-acf
 
 1. **Create a Gatsby site**
 
    Use the Gatsby CLI to get started locally:
 
    ```sh repo
-   npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-contentful-homepage
+   npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage-ts
    ```
 
-1. **Run the Contentful setup script**
+1. **Import content to your WordPress instance**
 
-   From your site's root directory, run:
-
-   ```sh
-   cd my-homepage
-   yarn setup
-   ```
-
-   This will run a script to populate your Contentful space's content model and add demo content.
+   - In your WordPress Admin, navigate to _Custom Fields_ > _Tools_ and upload the `data/acf-field-groups.json` file in the _Import Field Groups_ form and click _Import File_.
+   - Under _Pages_, create a new page called "Homepage."
+   - Ensure that the Homepage imported into WordPress is set to be your site's "Homepage" by going to _Settings_ > _Reading_ and setting the _Your homepage displays_ field to _A static page_ and select _Homepage_ from the dropdown.
+   - Navigate back to the Homepage, where you should see the custom field groups for the homepage and you can add your own content.
+   - Finally, go to _GraphQL_ > _Settings_ and copy the endpoint for the GraphQL API (e.g. https://example.com/graphql) and create a `.env` file with `WPGRAPHQL_URL="<your-graphql-endpoint-url>"`.
 
 1. **Start developing**
 
@@ -53,7 +58,7 @@ You will need a new or existing [Contentful space][] to use this starter and wil
 
 ## Deploy your site
 
-Once your content is available in Contentful, deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
+Once your content is available in WordPress, deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
 
 1. Push your local site to a new repo in either GitHub, GitLab, or Bitbucket
 1. Log into your [Gatsby Cloud Dashboard][] and click on **Add a site**
@@ -69,18 +74,16 @@ For a more detailed walkthrough, see the tutorial on how to [build your site wit
 ### Deploy without using the CLI
 
 Alternatively, you can deploy this starter directly to Gatsby Cloud.
-Note that you will need to set up your content in Contentful manually.
+Note that you will need to set up your content in WordPress manually.
 
-[![Deploy to Gatsby](https://www.gatsbyjs.com/deploynow.png "Deploy to Gatsby")](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-contentful-homepage)
+[![Deploy to Gatsby](https://www.gatsbyjs.com/deploynow.png "Deploy to Gatsby")](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage-ts)
 
 ## Setting up Gatsby Cloud Preview
 
 To use Gatsby Cloud Preview with this site, see the documentation for
-[Installing Content Sync for Contentful][].
+[Setting up Preview with WPGatsby][].
 
-[installing content sync for contentful]: https://support.gatsbyjs.com/hc/en-us/articles/4410371995539-Installing-Content-Sync-for-Contentful
-[add the gatsby cloud app to contentful]: https://support.gatsbyjs.com/hc/en-us/articles/360056047134-Add-the-Gatsby-Cloud-App-to-Contentful
-[connecting to contentful manually]: https://support.gatsbyjs.com/hc/en-us/articles/360052076554-Connecting-to-Contentful-Manually
+[setting up preview with wpgatsby]: https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-source-wordpress/docs/tutorials/configuring-wp-gatsby.md#setting-up-preview
 
 ## What's included?
 
@@ -114,11 +117,11 @@ To update the colors used in this starter, edit the `src/colors.css.ts` file.
 ```.ts
 // src/colors.css.ts
 export const colors = {
-  background: "#ffd500",
-  text: "#005bbb",
-  primary: "#005bbb",
-  muted: "#f5cc00",
-  active: "#004287",
+  background: "#fff",
+  text: "#004ca3",
+  primary: "#004ca3",
+  muted: "#f5fcff",
+  active: "#001d3d",
   black: "#000",
 }
 
@@ -127,13 +130,13 @@ export const colors = {
 If you'd like to add additional colors, add additional keys to this object.
 This file is imported into `src/theme.css.ts` and creates CSS custom properties, that can be imported and used in other `.css.ts` files.
 
-The UI components file `src/components/ui.js` imports styles from `src/components/ui.css.ts`. You can see how the theme and color values are being used in this file.
+The UI components file `src/components/ui.tsx` imports styles from `src/components/ui.css.ts`. You can see how the theme and color values are being used in this file.
 
 ### Add your logo
 
 ![Logo](./docs/images/logo.png)
 
-Replace the `src/components/brand-logo.js` component with your own brand logo.
+Replace the `src/components/brand-logo.tsx` component with your own brand logo.
 If you have an SVG version, it can be rendered inline as a React component, following the example in this file. Note that SVG attributes will need to be camel cased for JSX.
 
 Using an inline SVG for the logo allows it to pick up the colors used in CSS, which is how the logo colors are inverted for the mobile menu.
@@ -144,44 +147,30 @@ If you prefer to use an image, use the [`StaticImage`](https://www.gatsbyjs.com/
 
 ![Headings & Buttons](./docs/images/headings-buttons.png)
 
-To further customize the look and feel of the homepage, edit the UI components in `src/components/ui.js` and styles in `src/components/ui.css.ts`.
+To further customize the look and feel of the homepage, edit the UI components in `src/components/ui.tsx` and styles in `src/components/ui.css.ts`.
 
 ### Customize section components
 
 To customize any of the sections of the homepage, edit the relevant component in `src/components`.
-Most of the styles for these components are handled with shared UI components in `src/components/ui.js`.
+Most of the styles for these components are handled with shared UI components in `src/components/ui.tsx`.
 
 ### Create custom section components
 
 To create a new type of section in your homepage, you'll want to create a new section component. Using the existing components as an example.
 For this example, we'll create a new "Banner" component.
 
-1. First, update your content model in Contentful
+1. First, update your custom fields in WordPress to support the new component
 
-   1. In your Contentful space, create a new content type and call it "Homepage Banner."
+   Under the _Custom Fields_ tab, create a new _Field Group_ and call it "Homepage Banner."
+   For this example, add two text fields: `banner_heading` and `banner_text`.
+   In the _Location_ rules, be sure to show the field group in _Page_ post types.
+   Also ensure that the _Show in GraphQL_ option is enabled for this field.
 
-      <img src="./docs/images/step-1.png" alt="Step 1" width="300" />
-
-   1. For this example, add two fields to your new content type: `heading` and `text` – these can be _Short text_ types.
-
-      <img src="./docs/images/step-2.png" alt="Step 2" width="300" />
-      <img src="./docs/images/step-3.png" alt="Step 3" width="300" />
-      <img src="./docs/images/step-4.png" alt="Step 4" width="300" />
-
-   1. Find the content type for _Homepage_ in Contentful and edit the settings for the _Content_ field. Under _Validation_, ensure that the new _Homepage Banner_ type is checked to make it available as a content type on the Homepage.
-
-      <img src="./docs/images/step-5.png" alt="Step 5" width="500" />
-      <img src="./docs/images/step-6.png" alt="Step 6" width="500" />
-      <img src="./docs/images/step-7.png" alt="Step 7" width="500" />
-
-   1. Navigate to the _Content_ tab to edit the _Homepage_ and add a section with this new _Homepage Banner_ content type.
-
-      <img src="./docs/images/step-8.png" alt="Step 8" width="500" />
-      <img src="./docs/images/step-9.png" alt="Step 9" width="500" />
+   Navigate to the _Pages_ tab and edit the Homepage and add content for the new Banner component.
 
 1. Update `gatsby-node.js`
 
-   Edit your site's `gatsby-node.js` file, adding an interface for `HomepageBanner` that matches your content model in Contentful.
+   Edit your site's `gatsby-node.js` file, adding a type for `HomepageBanner` that matches your custom fields in WordPress.
    This allows the homepage to query the abstract `HomepageBanner` type.
 
    ```js
@@ -189,7 +178,7 @@ For this example, we'll create a new "Banner" component.
    exports.createSchemaCustomization = async ({ actions }) => {
      // ...
      actions.createTypes(`
-       interface HomepageBanner implements Node & HomepageBlock {
+       type HomepageBanner implements Node & HomepageBlock {
          id: ID!
          blocktype: String
          heading: String
@@ -197,22 +186,77 @@ For this example, we'll create a new "Banner" component.
        }
      `)
      // ...
-     actions.createTypes(`
-       type ContentfulHomepageBanner implements Node & HomepageBanner & HomepageBlock @dontInfer {
-         id: ID!
-         blocktype: String @blocktype
-         heading: String
-         text: String
-       }
-     `)
+   }
+   // ...
+   exports.onCreateNode = ({ actions, node, createNodeId, createContentDigest }) => {
+   }
      // ...
+     switch (node.internal.type) {
+       case "WpPage":
+         if (node.slug !== "homepage") return
+         const {
+           homepageHero,
+           homepageCta,
+           statList,
+           testimonialList,
+           productList,
+           logoList,
+           featureList,
+           benefitList,
+           // add the new custom field group here
+           homepageBanner,
+         } = node
+
+         const heroID = createNodeId(`${node.id} >>> HomepageHero`)
+         // create an node id for the field group
+         const bannerID = createNodeId(`${node.id} >>> HomepageBanner`)
+         // ...
+
+         // create a new node for this field group
+         actions.createNode({
+           id: bannerID,
+           internal: {
+             type: "HomepageBanner",
+             contentDigest: createContentDigest(JSON.stringify(homepageBanner)),
+           },
+           parent: node.id,
+           blocktype: "HomepageBanner",
+           heading: homepageBanner.bannerHeading,
+           text: homepageBanner.bannerText,
+         })
+         // ...
+         actions.createNode({
+           ...node,
+           id: createNodeId(`${node.id} >>> Homepage`),
+           internal: {
+             type: "Homepage",
+             contentDigest: node.internal.contentDigest,
+           },
+           parent: node.id,
+           blocktype: "Homepage",
+           image: node.featuredImageId,
+           content: [
+             heroID,
+             logosID,
+             // add your banner content in the postion you would like it to appear on the page
+             bannerID,
+             productsID,
+             featuresID,
+             benefitsID,
+             statsID,
+             testimonialsID,
+             ctaID,
+           ],
+         })
+         // ...
+     }
    }
    ```
 
 1. Next, create the Banner component:
 
    ```jsx fileExt
-   // src/components/banner.js
+   // src/components/banner.tsx
    import * as React from "react"
    import { graphql } from "gatsby"
    import { Section, Container, Heading, Text } from "./ui"
@@ -237,10 +281,10 @@ For this example, we'll create a new "Banner" component.
    `
    ```
 
-1. Export the component from `src/components/sections.js`
+1. Export the component from `src/components/sections.tsx`
 
    ```js fileExt
-   // src/components/sections.js
+   // src/components/sections.tsx
    export { default as HomepageHero } from "./hero"
    export { default as HomepageFeature } from "./feature"
    export { default as HomepageFeatureList } from "./feature-list"
@@ -255,10 +299,10 @@ For this example, we'll create a new "Banner" component.
    export { default as HomepageBanner } from "./banner"
    ```
 
-1. Add the GraphQL query fragment to the query in `src/pages/index.js`
+1. Add the GraphQL query fragment to the query in `src/pages/index.tsx`
 
    ```js fileExt
-   // in src/pages/index.js
+   // in src/pages/index.tsx
    export const query = graphql`
      {
        homepage {
