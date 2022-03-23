@@ -79,6 +79,8 @@ const createStarterDist = async (basename) => {
     "gatsby-browser.js",
     "LICENSE",
     "yarn.lock",
+    ".prettierrc.json",
+    ".prettierignore",
   ]
   rootFiles.forEach((file) => {
     const dest = path.join(dir.dist, name, file)
@@ -160,6 +162,12 @@ const createPackageJSON = (name) => {
   pkg.private = true
   Object.entries(root.dependencies).forEach(([key, val]) => {
     pkg.dependencies[key] = val
+  })
+  pkg.devDependencies = {}
+  // prettier dev dependencies
+  const devDeps = ["prettier", "husky", "lint-staged"]
+  devDeps.forEach((devDep) => {
+    pkg.devDependencies[devDep] = root.devDependencies[devDep]
   })
   pkg.scripts = {
     start: "gatsby develop",
