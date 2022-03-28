@@ -1,8 +1,15 @@
 {
   "name": "sanity-plugin",
+  "private": true,
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "workspaces": [
+    "studio"
+  ],
+  "scripts": {
+    "studio:build": "yarn workspace studio build"
+  },
   "dependencies": {
     "@sanity/block-content-to-html": "^2.0.0",
     "gatsby-plugin-image": "^2.9.1",

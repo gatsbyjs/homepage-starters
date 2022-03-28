@@ -1,10 +1,8 @@
 {
-  "name": "homepagestarter",
+  "name": "studio",
   "private": true,
   "version": "1.0.0",
   "description": "",
-  "main": "package.json",
-  "author": "Brent Jackson <jxnblk@gmail.com>",
   "license": "UNLICENSED",
   "scripts": {
     "start": "sanity start",
@@ -28,5 +26,7 @@
     "react-dom": "^17.0",
     "styled-components": "^5.2.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@sanity/cli": "^2.28.0"
+  }
 }
