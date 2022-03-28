@@ -26,12 +26,12 @@ exports.onCreateWebpackConfig = ({ actions, store }) => {
   actions.setWebpackConfig({
     resolve: {
       alias: {
-        "./colors.css.ts": path.resolve(
+        "./colors.css": path.resolve(
           __dirname,
           "plugins",
           plugin,
           "src",
-          "colors.css.ts"
+          "colors.css"
         ),
         "./brand-logo": path.resolve(
           __dirname,
@@ -56,13 +56,13 @@ exports.onCreateWebpackConfig = ({ actions, store }) => {
             plugin,
             "src",
             "components",
-            "header.js"
+            "header.tsx"
           ),
-          "./header.css.ts": path.resolve(
+          "./header.css": path.resolve(
             __dirname,
             "src",
             "components",
-            "header.css.ts"
+            "header.css"
           ),
           "./footer": path.resolve(
             __dirname,
@@ -70,9 +70,9 @@ exports.onCreateWebpackConfig = ({ actions, store }) => {
             plugin,
             "src",
             "components",
-            "footer.js"
+            "footer.tsx"
           ),
-          "./ui": path.resolve(__dirname, "src", "components", "ui.js"),
+          "./ui": path.resolve(__dirname, "src", "components", "ui.tsx"),
         },
       },
     })

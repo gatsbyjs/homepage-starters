@@ -9,13 +9,25 @@ import {
   Heading,
   Text,
   Space,
+  HomepageImage,
 } from "./ui"
 
-function Benefit(props) {
+interface BenefitProps {
+  id: string
+  image?: HomepageImage
+  heading: string
+  text: string
+}
+
+function Benefit(props: BenefitProps) {
   return (
     <Box as="li" width="third" padding={4} paddingY={3}>
       {props.image && (
-        <Icon alt={props.image.alt} image={props.image} size="small" />
+        <Icon
+          alt={props.image.alt}
+          image={props.image.gatsbyImageData}
+          size="small"
+        />
       )}
       <Space size={2} />
       <Heading variant="subheadSmall">{props.heading}</Heading>
@@ -24,7 +36,13 @@ function Benefit(props) {
   )
 }
 
-export default function BenefitList(props) {
+export interface BenefitListProps {
+  heading?: string
+  text?: string
+  content: BenefitProps[]
+}
+
+export default function BenefitList(props: BenefitListProps) {
   return (
     <Section>
       <Container>

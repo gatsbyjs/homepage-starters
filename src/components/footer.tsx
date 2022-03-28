@@ -18,6 +18,7 @@ import {
   Text,
   IconLink,
   VisuallyHidden,
+  HomepageLink,
 } from "./ui"
 import BrandLogo from "./brand-logo"
 
@@ -68,8 +69,20 @@ const getSocialName = ({ service }) => {
   return socialMedia[service]?.name
 }
 
-export default function Footer(props) {
-  const data = useStaticQuery(graphql`
+interface FooterData {
+  layout: {
+    footer: {
+      id: string
+      links: HomepageLink[]
+      meta: { id: string; href: string; text: string }[]
+      copyright: string
+      socialLinks: { id: string; service: string; username: string }[]
+    }
+  }
+}
+
+export default function Footer() {
+  const data: FooterData = useStaticQuery(graphql`
     query {
       layout {
         footer {

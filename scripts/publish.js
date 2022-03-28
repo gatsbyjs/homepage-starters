@@ -3,6 +3,8 @@ const fs = require("fs-extra")
 const path = require("path")
 const debug = require("debug")
 const SimpleGit = require("simple-git")
+const ts = require("typescript")
+const prettier = require("prettier")
 const data = require("./data")
 
 /*
@@ -40,10 +42,11 @@ fs.readdirSync(dir.dist).map((dirname) => {
   })
 })
 
-const createStarterDist = async (basename) => {
-  const repo = repos[basename]
+const createStarterDist = async (basename, isTypescript = false) => {
+  const repoName = `${basename}${isTypescript ? "-ts" : ""}`
+  const repo = repos[repoName]
   if (!repo) {
-    console.warn(`No repo configured for ${basename}`)
+    console.warn(`No repo configured for ${repoName}`)
     return
   }
   const dirname = `${basename}-plugin`
@@ -75,13 +78,17 @@ const createStarterDist = async (basename) => {
   // copy root files
   const rootFiles = [
     ".gitignore",
-    "src",
     "gatsby-browser.js",
     "LICENSE",
     "yarn.lock",
     ".prettierrc.json",
     ".prettierignore",
   ]
+  // if destination repo is Typescript add "src"
+  if (isTypescript) {
+    rootFiles.push("src")
+    rootFiles.push("tsconfig.json")
+  }
   rootFiles.forEach((file) => {
     const dest = path.join(dir.dist, name, file)
     console.log(`Copying '${file}' to '${dest}'`)
@@ -90,24 +97,117 @@ const createStarterDist = async (basename) => {
     })
   })
 
+  // otherwise if destination repo is not Typescript, handle transpilation
+  if (!isTypescript) {
+    // array to contain all directories found inside src, seeded with src to begin with
+    const srcDirectories = ["src"]
+    // function to traverse src directory and collect array of all filenames within
+    const getAllSrcFiles = (dirPath = "src", filesArray = []) => {
+      fs.readdirSync(dirPath).forEach((file) => {
+        const filePath = path.join(dirPath, file)
+        if (fs.statSync(filePath).isDirectory()) {
+          srcDirectories.push(filePath)
+          filesArray = getAllSrcFiles(filePath, filesArray)
+        } else {
+          filesArray.push(filePath)
+        }
+      })
+      return filesArray
+    }
+
+    const srcFiles = getAllSrcFiles()
+    // create any directories needed
+    srcDirectories.forEach((directory) => {
+      const destDirectory = path.join(dir.dist, name, directory)
+      console.log(`Copying '${directory}' to '${destDirectory}'`)
+      fs.mkdirSync(destDirectory)
+    })
+    // transpile typescript src files
+    srcFiles.forEach((srcFilename) => {
+      const extension = path.extname(srcFilename)
+      // we want to skip over the .css.ts files (vanilla-extract styles)
+      // and only transpile .ts/.tsx
+      if (
+        (extension === ".ts" || extension === ".tsx") &&
+        !srcFilename.includes(".css.ts")
+      ) {
+        console.log(`Transpiling '${srcFilename}'`)
+        const { outputText } = ts.transpileModule(
+          // replace new lines with a code comment to ensure new line preservation
+          fs
+            .readFileSync(srcFilename)
+            .toString()
+            .replace(/\n\n/g, "\n/* :newline: */"),
+          {
+            compilerOptions: {
+              jsx: "preserve",
+              target: "esnext",
+              newLine: "lf",
+              removeComments: false,
+            },
+          }
+        )
+        const dest = path.join(
+          dir.dist,
+          name,
+          `${path.basename(srcFilename, extension)}.js`
+        )
+        console.log(
+          `Copying transpiled version of '${srcFilename}' to '${dest}`
+        )
+        // write transpiled code to file, restoring new lines
+        fs.writeFileSync(
+          dest,
+          prettier.format(outputText.replace(/\/\* :newline: \*\//g, "\n"), {
+            semi: false,
+            parser: "babel",
+          })
+        )
+      } else {
+        // copy over src files that don't require transpilation
+        const dest = path.join(dir.dist, name, srcFilename)
+        console.log(`Copying '${srcFilename}' to '${dest}'`)
+        fs.copySync(srcFilename, dest, {
+          filter: (n) => !ignore.includes(n),
+        })
+      }
+    })
+  }
+
   // copy cms-specific files
   const files = [
     ".env.EXAMPLE",
     "gatsby-config.js",
     "gatsby-node.js",
     "package.json",
-    "README.md",
-    "src",
     "scripts",
     "docs/images",
     "data",
+    "src/colors.css.ts",
   ]
+  // push cms-specific TS/JS files conditionally to files array
+  if (isTypescript) {
+    files.push("TS-README.md")
+    files.push("src/components/brand-logo.tsx")
+    files.push("src/components/footer.tsx")
+    files.push("src/components/header.tsx")
+  } else {
+    files.push("README.md")
+    files.push("src/components/brand-logo.js")
+    files.push("src/components/footer.js")
+    files.push("src/components/header.js")
+  }
+
   files.forEach((file) => {
     const src = path.join(dir.plugins, dirname, file)
     const dest = path.join(dir.dist, name, file)
     console.log(`Copying '${file}' to '${dest}'`)
     if (!fs.existsSync(src)) return
     fs.copySync(src, dest)
+    // if we copied over the TS version of the readme, rename it
+    if (file === "TS-README.md") {
+      fs.renameSync(dest, path.join(dir.dist, name, "README.md"))
+    }
   })
 
   // Copy pull request template to target repos
@@ -116,12 +216,18 @@ const createStarterDist = async (basename) => {
     path.join(dir.dist, name, "pull_request_template.md")
   )
 
-  const json = createPackageJSON(name)
+  const json = createPackageJSON(name, isTypescript)
   fs.writeFileSync(path.join(dir.dist, name, "package.json"), json, "utf8")
 
   // Remove the about page from WordPress because it is not used
   if (basename === "wordpress") {
-    const filepath = path.join(dir.dist, name, "src", "pages", "about.js")
+    const filepath = path.join(
+      dir.dist,
+      name,
+      "src",
+      "pages",
+      `about.${isTypescript ? "tsx" : "js"}`
+    )
     fs.removeSync(filepath)
   }
 
@@ -130,7 +236,10 @@ const createStarterDist = async (basename) => {
   await SimpleGit({
     baseDir: path.join(dir.dist, name),
   }).status(["--porcelain"], (err, result) => {
-    hasChanges = result.modified.length > 0 || result.not_added.length > 0
+    hasChanges =
+      result.modified.length > 0 ||
+      result.not_added.length > 0 ||
+      result.deleted.length > 0
   })
 
   if (!hasChanges) {
@@ -154,12 +263,11 @@ const createStarterDist = async (basename) => {
     .push("origin", "main")
 }
 
-const createPackageJSON = (name) => {
+const createPackageJSON = (name, isTypescript = false) => {
   console.log("Creating package.json for", name)
   const root = require("../package.json")
   const pkg = require(path.resolve(dir.dist, name, "package.json"))
   pkg.name = name
-  pkg.private = true
   Object.entries(root.dependencies).forEach(([key, val]) => {
     pkg.dependencies[key] = val
   })
@@ -169,6 +277,10 @@ const createPackageJSON = (name) => {
   devDeps.forEach((devDep) => {
     pkg.devDependencies[devDep] = root.devDependencies[devDep]
   })
+  // optional TS dev dependency
+  if (isTypescript) {
+    pkg.devDependencies["typescript"] = root.devDependencies["typescript"]
+  }
   pkg.scripts = {
     start: "gatsby develop",
     develop: "gatsby develop",
@@ -186,17 +298,20 @@ const publish = async () => {
     .readdirSync(dir.plugins)
     .map((name) => name.replace(/\-plugin/, ""))
 
-  console.log(`Preparing ${starters.length} starters for publishing...`)
+  console.log(`Preparing ${starters.length * 2} starters for publishing...`)
 
   // get last commit message from this repo
   await SimpleGit().log(["-1", "--pretty=%B"], (err, result) => {
     commitMessage = result.latest.hash
   })
 
-  console.log(`Created ${starters.length} starters`)
+  console.log(`Creating ${starters.length * 2} starters`)
 
   for (let i = 0; i < starters.length; i++) {
+    // create JS version
     await createStarterDist(starters[i])
+    // create TS version
+    await createStarterDist(starters[i], true)
   }
 
   console.log("Done")
