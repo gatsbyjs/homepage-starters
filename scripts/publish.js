@@ -77,7 +77,14 @@ const createStarterDist = async (basename, isTypescript = false) => {
   ]
 
   // copy root files
-  const rootFiles = [".gitignore", "gatsby-browser.js", "LICENSE", "yarn.lock"]
+  const rootFiles = [
+    ".gitignore",
+    "gatsby-browser.js",
+    "LICENSE",
+    "yarn.lock",
+    ".prettierrc.json",
+    ".prettierignore",
+  ]
   // if destination repo is Typescript add "src"
   if (isTypescript) {
     rootFiles.push("src")
@@ -264,8 +271,14 @@ const createPackageJSON = (name, isTypescript = false) => {
   Object.entries(root.dependencies).forEach(([key, val]) => {
     pkg.dependencies[key] = val
   })
+  pkg.devDependencies = {}
+  // prettier dev dependencies
+  const devDeps = ["prettier", "husky", "lint-staged"]
+  devDeps.forEach((devDep) => {
+    pkg.devDependencies[devDep] = root.devDependencies[devDep]
+  })
+  // optional TS dev dependency
   if (isTypescript) {
-    pkg.devDependencies = {}
     pkg.devDependencies["typescript"] = root.devDependencies["typescript"]
   }
   pkg.scripts = {
