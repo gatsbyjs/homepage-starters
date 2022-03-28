@@ -9,7 +9,7 @@ Create a homepage using Gatsby and :var[cms]. This starter demonstrates how to u
 :link[demoURL]{text="View the Demo"}
 
 **Note:**
-This version of the :var[cms] homepage starter is written in :var[repoType]. If you want to use :var[cms] but :var[altRepoType] is more your style, there is also a :var[altRepoType] version maintained on :link[altRepoUrl]{text="GitHub"} that you might prefer.
+This version of the :var[cms] homepage starter is written in :var[repoType]. If you want to use :var[cms] but :var[altRepoType] is more your style, there is also a :var[altRepoType] version maintained on :link[altRepoUrl]{text="GitHub"}.
 
 ## Quick start
 

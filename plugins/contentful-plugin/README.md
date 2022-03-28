@@ -9,7 +9,7 @@ Create a homepage using Gatsby and Contentful. This starter demonstrates how to 
 [View the Demo](https://gatsbycontentfulhomepage.gatsbyjs.io/)
 
 **Note:**
-This version of the Contentful homepage starter is written in JavaScript. If you want to use Contentful but TypeScript is more your style, there is also a TypeScript version maintained on [GitHub](https://github.com/gatsbyjs/gatsby-starter-contentful-homepage-ts) that you might prefer.
+This version of the Contentful homepage starter is written in JavaScript. If you want to use Contentful but TypeScript is more your style, there is also a TypeScript version maintained on [GitHub](https://github.com/gatsbyjs/gatsby-starter-contentful-homepage-ts).
 
 ## Quick start
 

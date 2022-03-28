@@ -9,7 +9,7 @@ Create a homepage using Gatsby and Drupal. This starter demonstrates how to use 
 [View the Demo](https://gatsbydrupalhomepagets.gatsbyjs.io/)
 
 **Note:**
-This version of the Drupal homepage starter is written in TypeScript. If you want to use Drupal but JavaScript is more your style, there is also a JavaScript version maintained on [GitHub](https://github.com/gatsbyjs/gatsby-starter-drupal-homepage) that you might prefer.
+This version of the Drupal homepage starter is written in TypeScript. If you want to use Drupal but JavaScript is more your style, there is also a JavaScript version maintained on [GitHub](https://github.com/gatsbyjs/gatsby-starter-drupal-homepage).
 
 ## Quick start
 

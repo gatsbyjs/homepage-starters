@@ -9,7 +9,7 @@ Create a homepage using Gatsby and WordPress. This starter demonstrates how to u
 [View the Demo](https://gatsbywordpresshomepagets.gatsbyjs.io/)
 
 **Note:**
-This version of the WordPress homepage starter is written in TypeScript. If you want to use WordPress but JavaScript is more your style, there is also a JavaScript version maintained on [GitHub](https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage) that you might prefer.
+This version of the WordPress homepage starter is written in TypeScript. If you want to use WordPress but JavaScript is more your style, there is also a JavaScript version maintained on [GitHub](https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage).
 
 ## Quick start
 
