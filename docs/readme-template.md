@@ -9,7 +9,7 @@ Create a homepage using Gatsby and :var[cms]. This starter demonstrates how to u
 :link[demoURL]{text="View the Demo"}
 
 **Note:**
-This is the :var[repoType] version of :var[cms] homepage starter codebase. A functionally identical :var[altRepoType] version is also maintained and can be found on :link[altRepoUrl]{text="GitHub"}.
+This version of the :var[cms] homepage starter is written in :var[repoType]. If you want to use :var[cms] but :var[altRepoType] is more your style, there is also a :var[altRepoType] version maintained on :link[altRepoUrl]{text="GitHub"} that you might prefer.
 
 ## Quick start
 
@@ -95,13 +95,13 @@ To update the colors used in this starter, edit the `src/colors.css.ts` file.
 If you'd like to add additional colors, add additional keys to this object.
 This file is imported into `src/theme.css.ts` and creates CSS custom properties, that can be imported and used in other `.css.ts` files.
 
-The UI components file `src/components/ui.:var[fileExt]` imports styles from `src/components/ui.css.ts`. You can see how the theme and color values are being used in this file.
+The UI components file `src/components/ui.$fileExt` imports styles from `src/components/ui.css.ts`. You can see how the theme and color values are being used in this file.
 
 ### Add your logo
 
 ![Logo](./docs/images/logo.png)
 
-Replace the `src/components/brand-logo.:var[fileExt]` component with your own brand logo.
+Replace the `src/components/brand-logo.$fileExt` component with your own brand logo.
 If you have an SVG version, it can be rendered inline as a React component, following the example in this file. Note that SVG attributes will need to be camel cased for JSX.
 
 Using an inline SVG for the logo allows it to pick up the colors used in CSS, which is how the logo colors are inverted for the mobile menu.
@@ -112,12 +112,12 @@ If you prefer to use an image, use the [`StaticImage`](https://www.gatsbyjs.com/
 
 ![Headings & Buttons](./docs/images/headings-buttons.png)
 
-To further customize the look and feel of the homepage, edit the UI components in `src/components/ui.:var[fileExt]` and styles in `src/components/ui.css.ts`.
+To further customize the look and feel of the homepage, edit the UI components in `src/components/ui.$fileExt` and styles in `src/components/ui.css.ts`.
 
 ### Customize section components
 
 To customize any of the sections of the homepage, edit the relevant component in `src/components`.
-Most of the styles for these components are handled with shared UI components in `src/components/ui.:var[fileExt]`.
+Most of the styles for these components are handled with shared UI components in `src/components/ui.$fileExt`.
 
 ### Create custom section components
 
@@ -154,7 +154,7 @@ For this example, we'll create a new "Banner" component.
    `
    ```
 
-1. Export the component from `src/components/sections.:var[fileExt]`
+1. Export the component from `src/components/sections.$fileExt`
 
    ```js fileExt
    // src/components/sections.$
@@ -172,7 +172,7 @@ For this example, we'll create a new "Banner" component.
    export { default as HomepageBanner } from "./banner"
    ```
 
-1. Add the GraphQL query fragment to the query in `src/pages/index.:var[fileExt]`
+1. Add the GraphQL query fragment to the query in `src/pages/index.$fileExt`
 
    ```js fileExt
    // in src/pages/index.$

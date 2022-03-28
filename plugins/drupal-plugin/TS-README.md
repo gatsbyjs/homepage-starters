@@ -9,7 +9,7 @@ Create a homepage using Gatsby and Drupal. This starter demonstrates how to use 
 [View the Demo](https://gatsbydrupalhomepagets.gatsbyjs.io/)
 
 **Note:**
-This is the TypeScript version of Drupal homepage starter codebase. A functionally identical JavaScript version is also maintained and can be found on [GitHub](https://github.com/gatsbyjs/gatsby-starter-drupal-homepage).
+This version of the Drupal homepage starter is written in TypeScript. If you want to use Drupal but JavaScript is more your style, there is also a JavaScript version maintained on [GitHub](https://github.com/gatsbyjs/gatsby-starter-drupal-homepage) that you might prefer.
 
 ## Quick start
 
@@ -433,6 +433,16 @@ For this example, we'll create a new "Banner" component.
      }
    `
    ```
+
+## Troubleshooting
+
+### Errors after making changes to the schema
+
+If you've made changes to the `gatsby-node.js` file or changes to the Drupal data model, clear the Gatsby cache before running the develop server:
+
+```sh
+yarn clean && yarn start
+```
 
 ---
 

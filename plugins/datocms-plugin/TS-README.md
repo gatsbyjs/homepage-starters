@@ -9,7 +9,7 @@ Create a homepage using Gatsby and DatoCMS. This starter demonstrates how to use
 [View the Demo](https://gatsbydatocmshomepagets.gatsbyjs.io/)
 
 **Note:**
-This is the TypeScript version of DatoCMS homepage starter codebase. A functionally identical JavaScript version is also maintained and can be found on [GitHub](https://github.com/gatsbyjs/gatsby-starter-datocms-homepage).
+This version of the DatoCMS homepage starter is written in TypeScript. If you want to use DatoCMS but JavaScript is more your style, there is also a JavaScript version maintained on [GitHub](https://github.com/gatsbyjs/gatsby-starter-datocms-homepage) that you might prefer.
 
 ## Quick start
 
@@ -293,6 +293,16 @@ For this example, we'll create a new "Banner" component.
      }
    `
    ```
+
+## Troubleshooting
+
+### Errors after making changes to the schema
+
+If you've made changes to the `gatsby-node.js` file or changes to the DatoCMS data model, clear the Gatsby cache before running the develop server:
+
+```sh
+yarn clean && yarn start
+```
 
 ---
 

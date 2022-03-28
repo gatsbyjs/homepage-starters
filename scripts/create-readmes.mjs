@@ -102,7 +102,7 @@ function variablePlugin(opts) {
             `Inline Code has variable file extension but variable value was not provided`
           )
         }
-        node.value = node.value.replace(":var[fileExt]", opts.fileExt)
+        node.value = node.value.replace("$fileExt", opts.fileExt)
       }
     })
   }
