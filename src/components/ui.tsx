@@ -11,7 +11,8 @@ import * as React from "react"
 import * as styles from "./ui.css"
 import { Radii, SpaceTokens } from "../theme.css"
 
-export const cx = (...args) => args.filter(Boolean).join(" ")
+export const cx = (...args: (string | undefined)[]) =>
+  args.filter(Boolean).join(" ")
 
 export interface HomepageLink {
   id: string
@@ -79,7 +80,7 @@ export function Flex({
     <Base
       cx={[
         styles.flex,
-        styles.flexVariants[variant],
+        variant && styles.flexVariants[variant],
         responsive && styles.flexVariants.responsive,
         wrap && styles.flexVariants.wrap,
         gutter && styles.gutter[gutter],
@@ -190,8 +191,8 @@ interface TextProps extends BaseProps {
 
 export function Text({
   variant = "body",
-  center,
-  bold,
+  center = false,
+  bold = false,
   ...props
 }: WithChildren<TextProps>) {
   return (
