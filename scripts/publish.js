@@ -43,11 +43,10 @@ fs.readdirSync(dir.dist).map((dirname) => {
 })
 
 const createStarterDist = async (basename, isTypescript = false) => {
-  const repo = repos[`${basename}${isTypescript ? "-ts" : ""}`]
+  const repoName = `${basename}${isTypescript ? "-ts" : ""}`
+  const repo = repos[repoName]
   if (!repo) {
-    console.warn(
-      `No repo configured for ${basename}${isTypescript ? "-ts" : ""}`
-    )
+    console.warn(`No repo configured for ${repoName}`)
     return
   }
   const dirname = `${basename}-plugin`
@@ -105,11 +104,12 @@ const createStarterDist = async (basename, isTypescript = false) => {
     // function to traverse src directory and collect array of all filenames within
     const getAllSrcFiles = (dirPath = "src", filesArray = []) => {
       fs.readdirSync(dirPath).forEach((file) => {
-        if (fs.statSync(dirPath + "/" + file).isDirectory()) {
-          srcDirectories.push(dirPath + "/" + file)
-          filesArray = getAllSrcFiles(dirPath + "/" + file, filesArray)
+        const filePath = path.join(dirPath, file)
+        if (fs.statSync(filePath).isDirectory()) {
+          srcDirectories.push(filePath)
+          filesArray = getAllSrcFiles(filePath, filesArray)
         } else {
-          filesArray.push(path.join(dirPath, "/", file))
+          filesArray.push(filePath)
         }
       })
       return filesArray
@@ -150,7 +150,7 @@ const createStarterDist = async (basename, isTypescript = false) => {
         const dest = path.join(
           dir.dist,
           name,
-          srcFilename.replace(extension, ".js")
+          `${path.basename(srcFilename, extension)}.js`
         )
         console.log(
           `Copying transpiled version of '${srcFilename}' to '${dest}`
