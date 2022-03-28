@@ -150,7 +150,7 @@ const createStarterDist = async (basename, isTypescript = false) => {
         const dest = path.join(
           dir.dist,
           name,
-          `${path.basename(srcFilename, extension)}.js`
+          srcFilename.replace(extension, ".js")
         )
         console.log(
           `Copying transpiled version of '${srcFilename}' to '${dest}`
