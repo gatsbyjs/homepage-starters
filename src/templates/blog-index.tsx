@@ -25,7 +25,6 @@ interface PostCardSmallProps {
 
 interface PostCardProps extends PostCardSmallProps {
   excerpt?: string
-  // todo
   author?: BlogAuthor
 }
 
