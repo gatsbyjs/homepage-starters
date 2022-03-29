@@ -1,6 +1,6 @@
 import * as React from "react"
 import { graphql } from "gatsby"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import { GatsbyImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
 // prettier-ignore
 import {
@@ -11,11 +11,36 @@ import {
   Heading,
   Text,
   Avatar,
+  HomepageImage,
 } from "../components/ui"
 import { avatar as avatarStyle } from "../components/ui.css"
 import * as styles from "./blog-post.css"
 
-export default function BlogPost(props) {
+export interface BlogAuthor {
+  id: string
+  name: string
+  avatar: HomepageImage
+}
+
+export interface BlogPost {
+  id: string
+  slug: string
+  title: string
+  excerpt: string
+  category: string
+  date: string
+  html: string
+  image: HomepageImage
+  author: BlogAuthor
+}
+
+export interface BlogPostProps {
+  data: {
+    blogPost: BlogPost
+  }
+}
+
+export default function BlogPost(props: BlogPostProps) {
   const post = props.data.blogPost
 
   return (
@@ -33,12 +58,12 @@ export default function BlogPost(props) {
                   (!!post.author.avatar.gatsbyImageData ? (
                     <Avatar
                       {...post.author.avatar}
-                      image={post.author.avatar}
+                      image={post.author.avatar.gatsbyImageData}
                     />
                   ) : (
                     <img
                       src={post.author.avatar.url}
-                      alt={post.author.alt}
+                      alt={post.author.name}
                       className={avatarStyle}
                     />
                   ))}
@@ -50,7 +75,10 @@ export default function BlogPost(props) {
           <Text center>{post.date}</Text>
           <Space size={4} />
           {post.image && (
-            <GatsbyImage alt={post.image.alt} image={getImage(post.image)} />
+            <GatsbyImage
+              alt={post.image.alt}
+              image={post.image.gatsbyImageData}
+            />
           )}
           <Space size={5} />
           <div

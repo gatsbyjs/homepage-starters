@@ -15,6 +15,7 @@ import {
   Text,
   HomepageImage,
 } from "../components/ui"
+import { BlogAuthor, BlogPost } from "./blog-post"
 
 interface PostCardSmallProps {
   slug: string
@@ -81,22 +82,6 @@ function PostCardSmall({
       </Subhead>
     </BlockLink>
   )
-}
-
-export interface BlogAuthor {
-  id: string
-  name: string
-  avatar: HomepageImage
-}
-
-export interface BlogPost {
-  id: string
-  slug: string
-  title: string
-  excerpt: string
-  category: string
-  image: HomepageImage
-  author: BlogAuthor
 }
 
 export interface BlogIndexProps {
