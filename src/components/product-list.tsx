@@ -11,13 +11,27 @@ import {
   Box,
   Icon,
   LinkList,
+  HomepageImage,
+  HomepageLink,
 } from "./ui"
 
-function Product(props) {
+interface ProductProps {
+  id: string
+  image: HomepageImage
+  heading: string
+  text: string
+  links: HomepageLink[]
+}
+
+function Product(props: ProductProps) {
   return (
     <Box center>
       {props.image && (
-        <Icon alt={props.image.alt} image={props.image} size="large" />
+        <Icon
+          alt={props.image.alt}
+          image={props.image.gatsbyImageData}
+          size="large"
+        />
       )}
       <Subhead>{props.heading}</Subhead>
       <Text>{props.text}</Text>
@@ -26,7 +40,14 @@ function Product(props) {
   )
 }
 
-export default function ProductList(props) {
+export interface ProductListProps {
+  kicker?: string
+  heading: string
+  text?: string
+  content: ProductProps[]
+}
+
+export default function ProductList(props: ProductListProps) {
   return (
     <Section>
       <Container>

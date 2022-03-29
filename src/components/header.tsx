@@ -1,4 +1,5 @@
 import * as React from "react"
+import { graphql, useStaticQuery } from "gatsby"
 import { Menu, X } from "react-feather"
 import {
   Container,
@@ -18,43 +19,75 @@ import {
   mobileHeaderNavWrapper,
   mobileNavSVGColorWrapper,
 } from "./header.css"
+import NavItemGroup, { NavItemGroupNavItem } from "./nav-item-group"
 import BrandLogo from "./brand-logo"
 
-const data = {
-  navItems: [
-    {
-      id: 0,
-      navItemType: "Link",
-      href: "#!",
-      text: "Products",
-    },
-    {
-      id: 1,
-      navItemType: "Link",
-      href: "#!",
-      text: "Pricing",
-    },
-    {
-      id: 2,
-      navItemType: "Link",
-      href: "#!",
-      text: "About",
-    },
-    {
-      id: 3,
-      navItemType: "Link",
-      href: "#!",
-      text: "Blog",
-    },
-  ],
-  cta: {
-    href: "#!",
-    text: "Sign Up",
-  },
+type NavItem = {
+  id: string
+  navItemType: "Link"
+  href: string
+  text: string
+}
+
+type NavItemGroup = {
+  id: string
+  navItemType: "Group"
+  name: string
+  navItems: NavItemGroupNavItem[]
+}
+
+interface HeaderData {
+  layout: {
+    header: {
+      id: string
+      navItems: NavItem[] | NavItemGroup[]
+      cta: {
+        id: string
+        href: string
+        text: string
+      }
+    }
+  }
 }
 
 export default function Header() {
-  const { navItems, cta } = data
+  const data: HeaderData = useStaticQuery(graphql`
+    query {
+      layout {
+        header {
+          id
+          navItems {
+            id
+            navItemType
+            ... on NavItem {
+              href
+              text
+            }
+            ... on NavItemGroup {
+              name
+              navItems {
+                id
+                href
+                text
+                description
+                icon {
+                  alt
+                  gatsbyImageData
+                }
+              }
+            }
+          }
+          cta {
+            id
+            href
+            text
+          }
+        }
+      }
+    }
+  `)
+
+  const { navItems, cta } = data.layout.header
   const [isOpen, setOpen] = React.useState(false)
 
   React.useEffect(() => {
@@ -79,7 +112,14 @@ export default function Header() {
               {navItems &&
                 navItems.map((navItem) => (
                   <li key={navItem.id}>
-                    <NavLink to={navItem.href}>{navItem.text}</NavLink>
+                    {navItem.navItemType === "Group" ? (
+                      <NavItemGroup
+                        name={navItem.name}
+                        navItems={navItem.navItems}
+                      />
+                    ) : (
+                      <NavLink to={navItem.href}>{navItem.text}</NavLink>
+                    )}
                   </li>
                 ))}
             </FlexList>
@@ -129,9 +169,16 @@ export default function Header() {
             <FlexList responsive variant="stretch">
               {navItems?.map((navItem) => (
                 <li key={navItem.id}>
-                  <NavLink to={navItem.href} className={mobileNavLink}>
-                    {navItem.text}
-                  </NavLink>
+                  {navItem.navItemType === "Group" ? (
+                    <NavItemGroup
+                      name={navItem.name}
+                      navItems={navItem.navItems}
+                    />
+                  ) : (
+                    <NavLink to={navItem.href} className={mobileNavLink}>
+                      {navItem.text}
+                    </NavLink>
+                  )}
                 </li>
               ))}
             </FlexList>

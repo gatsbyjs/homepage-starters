@@ -1,5 +1,6 @@
 import * as React from "react"
-export default function ChevronRight(props) {
+
+export default function ChevronRight(props: { className?: string }) {
   return (
     <svg
       viewBox="0 0 7 11"
