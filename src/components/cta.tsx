@@ -9,9 +9,20 @@ import {
   Text,
   ButtonList,
   Kicker,
+  HomepageLink,
+  HomepageImage,
 } from "./ui"
 
-export default function HomepageCta(props) {
+export interface CtaProps {
+  id: string
+  kicker?: string
+  heading: string
+  text: string
+  links: HomepageLink[]
+  image?: HomepageImage
+}
+
+export default function HomepageCta(props: CtaProps) {
   return (
     <Container width="fullbleed">
       <Section padding={5} radius="large" background="primary">
@@ -25,7 +36,10 @@ export default function HomepageCta(props) {
         <ButtonList links={props.links} variant="center" reversed />
         {props.image && (
           <Nudge left={5} right={5} bottom={5}>
-            <GatsbyImage alt={props.image.alt} image={getImage(props.image)} />
+            <GatsbyImage
+              alt={props.image.alt}
+              image={getImage(props.image.gatsbyImageData)}
+            />
           </Nudge>
         )}
       </Section>

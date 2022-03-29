@@ -1,22 +1,68 @@
-import * as React from "react"
 import { Link as GatsbyLink } from "gatsby"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import {
+  GatsbyImage,
+  GatsbyImageProps,
+  getImage,
+  IGatsbyImageData,
+  ImageDataLike,
+} from "gatsby-plugin-image"
 import isAbsoluteURL from "is-absolute-url"
-import * as styles from "./ui.css.ts"
+import * as React from "react"
+import * as styles from "./ui.css"
+import { Radii, SpaceTokens } from "../theme.css"
 
-export const cx = (...args) => args.filter(Boolean).join(" ")
+export const cx = (...args: (string | undefined)[]) =>
+  args.filter(Boolean).join(" ")
+
+export interface HomepageLink {
+  id: string
+  href: string
+  url: string
+  text: string
+}
+
+export interface HomepageImage {
+  id: string
+  alt: string
+  gatsbyImageData: IGatsbyImageData
+  url: string
+}
+
+type WithChildren<T = {}> = T & { children?: React.ReactNode }
+interface BaseProps {
+  as?: React.ElementType | React.FC
+  cx?: string[]
+  className?: string
+}
 
 export function Base({
   as: Component = "div",
   cx: _cx = [],
   className,
   ...props
-}) {
+}: BaseProps) {
   return <Component className={cx(..._cx, className)} {...props} />
 }
 
-export function Container({ width = "normal", ...props }) {
+interface ContainerProps extends BaseProps {
+  width?: styles.Containers
+}
+
+export function Container({
+  width = "normal",
+  ...props
+}: WithChildren<ContainerProps>) {
   return <Base cx={[styles.containers[width]]} {...props} />
+}
+
+interface FlexProps extends BaseProps {
+  variant?: styles.FlexVariants
+  gap?: SpaceTokens
+  gutter?: SpaceTokens
+  wrap?: boolean
+  responsive?: boolean
+  marginY?: SpaceTokens
+  alignItems?: styles.FlexVariants
 }
 
 export function Flex({
@@ -27,25 +73,35 @@ export function Flex({
   responsive,
   marginY,
   alignItems,
-  cx: _cx,
+  cx: _cx = [],
   ...props
-}) {
+}: WithChildren<FlexProps>) {
   return (
     <Base
       cx={[
         styles.flex,
-        styles.flexVariants[variant],
+        variant && styles.flexVariants[variant],
         responsive && styles.flexVariants.responsive,
         wrap && styles.flexVariants.wrap,
         gutter && styles.gutter[gutter],
         gutter ? styles.flexGap[0] : styles.flexGap[gap],
         marginY && styles.marginY[marginY],
         alignItems && styles.flexVariants[alignItems],
-        _cx,
+        ..._cx,
       ]}
       {...props}
     />
   )
+}
+
+interface BoxProps extends BaseProps {
+  width?: styles.Widths
+  background?: styles.Backgrounds
+  padding?: SpaceTokens
+  paddingY?: SpaceTokens
+  radius?: Radii
+  center?: boolean
+  order?: 0 | 1 | 2 | 3
 }
 
 export function Box({
@@ -56,57 +112,89 @@ export function Box({
   radius,
   center = false,
   order,
-  cx,
+  cx: _cx = [],
   ...props
-}) {
+}: WithChildren<BoxProps>) {
   return (
     <Base
       cx={[
         styles.widths[width],
-        styles.backgrounds[background],
-        styles.padding[padding],
-        styles.paddingY[paddingY],
-        styles.radii[radius],
+        background && styles.backgrounds[background],
+        padding && styles.padding[padding],
+        paddingY && styles.paddingY[paddingY],
+        radius && styles.radii[radius],
         center && styles.box.center,
         order && styles.order[order],
-        cx,
+        ..._cx,
       ]}
       {...props}
     />
   )
 }
 
-export function FlexList({ ...props }) {
-  return <Flex as="ul" cx={styles.list} {...props} />
+interface FlexListProps extends FlexProps {}
+
+export function FlexList(props: WithChildren<FlexListProps>) {
+  return <Flex as="ul" cx={[styles.list]} {...props} />
 }
 
 export function List(props) {
   return <Base as="ul" cx={[styles.list]} {...props} />
 }
 
-export function Space({ size = "auto", ...props }) {
+interface SpaceProps extends BaseProps {
+  size?: SpaceTokens | "auto"
+}
+
+export function Space({ size = "auto", ...props }: SpaceProps) {
   return <Base cx={[styles.margin[size]]} {...props} />
 }
 
-export function Nudge({ left, right, top, bottom, ...props }) {
+interface NudgeProps {
+  left?: number
+  right?: number
+  top?: number
+  bottom?: number
+}
+
+export function Nudge({
+  left,
+  right,
+  top,
+  bottom,
+  ...props
+}: WithChildren<NudgeProps>) {
   return (
     <Base
       cx={[
-        styles.margin.left[-left],
-        styles.margin.right[-right],
-        styles.margin.top[-top],
-        styles.margin.bottom[-bottom],
+        left && styles.marginLeft[-left],
+        right && styles.marginRight[-right],
+        top && styles.marginTop[-top],
+        bottom && styles.marginBottom[-bottom],
       ]}
       {...props}
     />
   )
 }
 
-export function Section(props) {
+interface SectionProps extends BoxProps {}
+
+export function Section(props: WithChildren<SectionProps>) {
   return <Box as="section" className={styles.section} {...props} />
 }
 
-export function Text({ variant = "body", center, bold, ...props }) {
+interface TextProps extends BaseProps {
+  variant?: styles.TextVariants
+  center?: boolean
+  bold?: boolean
+}
+
+export function Text({
+  variant = "body",
+  center = false,
+  bold = false,
+  ...props
+}: WithChildren<TextProps>) {
   return (
     <Base
       cx={[
@@ -135,7 +223,12 @@ export function Kicker({ ...props }) {
   return <Text variant="kicker" {...props} />
 }
 
-export function Link({ to, href, ...props }) {
+interface LinkProps extends BaseProps {
+  to?: string
+  href?: string
+}
+
+export function Link({ to, href, ...props }: WithChildren<LinkProps>) {
   const url = href || to || ""
   if (isAbsoluteURL(url)) {
     return (
@@ -154,12 +247,31 @@ export function NavButtonLink({ ...props }) {
   return <Base as="button" cx={[styles.navButtonlink]} {...props} />
 }
 
-export function Button({ variant = "primary", ...props }) {
+interface ButtonProps extends BaseProps {
+  variant?: styles.ButtonVariants
+  href?: string
+  to?: string
+}
+
+export function Button({
+  variant = "primary",
+  ...props
+}: WithChildren<ButtonProps>) {
   return <Base as={Link} cx={[styles.buttons[variant]]} {...props} />
 }
 
-export function ButtonList({ links = [], reversed = false, ...props }) {
-  const getVariant = (i) => {
+interface ButtonListProps extends BaseProps {
+  links: HomepageLink[]
+  variant?: styles.FlexVariants
+  reversed?: boolean
+}
+
+export function ButtonList({
+  links = [],
+  reversed = false,
+  ...props
+}: ButtonListProps) {
+  const getVariant = (i): styles.ButtonVariants => {
     if (reversed) {
       return i === 0 ? "reversed" : "linkReversed"
     }
@@ -183,7 +295,11 @@ export function CTALink(props) {
   return <Base as={Link} cx={[styles.ctaLink]} {...props} />
 }
 
-export function LinkList({ links = [], ...props }) {
+interface LinkListProps extends BaseProps {
+  links: HomepageLink[]
+}
+
+export function LinkList({ links = [], ...props }: LinkListProps) {
   return (
     <FlexList {...props}>
       {links &&
@@ -200,13 +316,22 @@ export function Blockquote(props) {
   return <Base as="blockquote" cx={[styles.blockquote]} {...props} />
 }
 
-export function Avatar({ alt, image }) {
+export interface AvatarProps {
+  alt: string
+  image: ImageDataLike
+}
+
+export function Avatar({ alt, image }: AvatarProps) {
   return (
     <GatsbyImage alt={alt} image={getImage(image)} className={styles.avatar} />
   )
 }
 
-export function Logo({ alt, image, size = "small" }) {
+interface LogoProps extends GatsbyImageProps {
+  size: styles.LogoSizes
+}
+
+export function Logo({ alt, image, size = "small" }: LogoProps) {
   return (
     <GatsbyImage
       alt={alt}
@@ -216,7 +341,11 @@ export function Logo({ alt, image, size = "small" }) {
   )
 }
 
-export function Icon({ alt, image, size = "medium" }) {
+interface IconProps extends GatsbyImageProps {
+  size?: styles.IconSizes
+}
+
+export function Icon({ alt, image, size = "medium" }: IconProps) {
   return (
     <GatsbyImage
       alt={alt}
