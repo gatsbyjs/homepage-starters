@@ -15,7 +15,15 @@ import {
   Text,
 } from "../components/ui"
 
-function PostCard({ slug, image, title, excerpt, author, category, ...props }) {
+function PostCard({
+  slug,
+  image,
+  title,
+  excerpt,
+  author,
+  category,
+  ...props
+}: PostCardProps) {
   return (
     <BlockLink {...props} to={`/blog/${slug}`}>
       {image && (
@@ -38,7 +46,13 @@ function PostCard({ slug, image, title, excerpt, author, category, ...props }) {
   )
 }
 
-function PostCardSmall({ slug, image, title, category, ...props }) {
+function PostCardSmall({
+  slug,
+  image,
+  title,
+  category,
+  ...props
+}: PostCardSmallProps) {
   return (
     <BlockLink {...props} to={`/blog/${slug}`}>
       {image && (

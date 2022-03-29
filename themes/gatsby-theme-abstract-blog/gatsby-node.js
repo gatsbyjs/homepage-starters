@@ -1,3 +1,4 @@
+const fs = require("fs")
 const path = require("path")
 
 // This core theme expects a src/template/blog-post.js
@@ -5,8 +6,8 @@ const path = require("path")
 // as well as an abstract BlogPost interface in GraphQL
 
 const defaults = {
-  postPath: "src/templates/blog-post.js",
-  indexPath: "src/templates/blog-index.js",
+  postPath: "src/templates/blog-post",
+  indexPath: "src/templates/blog-index",
 }
 
 exports.createSchemaCustomization = async ({ actions }) => {
@@ -48,10 +49,24 @@ exports.createPages = async ({ actions, graphql, reporter }, _opts = {}) => {
   try {
     components.post = path.join(global.__GATSBY.root, opts.postPath)
     components.index = path.join(global.__GATSBY.root, opts.indexPath)
-    require.resolve(components.post)
-    require.resolve(components.index)
+    // todo throw when file not found
+    if (fs.existsSync(components.post + ".js")) {
+      components.post = components.post + ".js"
+    } else if (fs.existsSync(components.post + ".tsx")) {
+      components.post = components.post + ".tsx"
+    } else {
+      throw new Error(`No template found for ${opts.postPath}`)
+    }
+
+    if (fs.existsSync(components.index + ".js")) {
+      components.index = components.index + ".js"
+    } else if (fs.existsSync(components.index + ".tsx")) {
+      components.index = components.index + ".tsx"
+    } else {
+      throw new Error(`No template found for ${opts.indexPath}`)
+    }
   } catch (e) {
-    reporter.warn("No templates found for blog theme in host site")
+    reporter.warn(e)
     return
   }
 
