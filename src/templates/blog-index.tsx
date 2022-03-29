@@ -1,6 +1,6 @@
 import * as React from "react"
 import { graphql } from "gatsby"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import { GatsbyImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
 // prettier-ignore
 import {
@@ -13,7 +13,21 @@ import {
   Subhead,
   Kicker,
   Text,
+  HomepageImage,
 } from "../components/ui"
+
+interface PostCardSmallProps {
+  slug: string
+  image?: HomepageImage
+  title?: string
+  category?: string
+}
+
+interface PostCardProps extends PostCardSmallProps {
+  excerpt?: string
+  // todo
+  author?: BlogAuthor
+}
 
 function PostCard({
   slug,
@@ -28,7 +42,7 @@ function PostCard({
     <BlockLink {...props} to={`/blog/${slug}`}>
       {image && (
         <>
-          <GatsbyImage alt={image.alt} image={getImage(image)} />
+          <GatsbyImage alt={image.alt} image={image.gatsbyImageData} />
           <Space size={3} />
         </>
       )}
@@ -57,7 +71,7 @@ function PostCardSmall({
     <BlockLink {...props} to={`/blog/${slug}`}>
       {image && (
         <>
-          <GatsbyImage alt={image.alt} image={getImage(image)} />
+          <GatsbyImage alt={image.alt} image={image.gatsbyImageData} />
           <Space size={3} />
         </>
       )}
@@ -67,6 +81,30 @@ function PostCardSmall({
       </Subhead>
     </BlockLink>
   )
+}
+
+export interface BlogAuthor {
+  id: string
+  name: string
+  avatar: HomepageImage
+}
+
+export interface BlogPost {
+  id: string
+  slug: string
+  title: string
+  excerpt: string
+  category: string
+  image: HomepageImage
+  author: BlogAuthor
+}
+
+export interface BlogIndexProps {
+  data: {
+    allBlogPost: {
+      nodes: BlogPost[]
+    }
+  }
 }
 
 export default function BlogIndex(props) {

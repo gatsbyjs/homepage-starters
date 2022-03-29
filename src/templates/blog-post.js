@@ -13,7 +13,7 @@ import {
   Avatar,
 } from "../components/ui"
 import { avatar as avatarStyle } from "../components/ui.css"
-import * as styles from "./blog-post.css.ts"
+import * as styles from "./blog-post.css"
 
 export default function BlogPost(props) {
   const post = props.data.blogPost
