@@ -8,6 +8,7 @@
     "studio"
   ],
   "scripts": {
+    "studio:setup": "yarn workspace studio setup",
     "studio:build": "yarn workspace studio build"
   },
   "dependencies": {
