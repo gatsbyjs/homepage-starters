@@ -3,7 +3,20 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import { Container, Box, Heading } from "../components/ui"
 
-export default function Page(props) {
+interface PageProps {
+  data: {
+    page: {
+      id: string
+      title: string
+      slug: string
+      description: string
+      image: { id: string; url: string }
+      html: string
+    }
+  }
+}
+
+export default function Page(props: PageProps) {
   const { page } = props.data
 
   return (
@@ -31,7 +44,7 @@ export const query = graphql`
       description
       image {
         id
-        gatsbyImageData
+        url
       }
       html
     }
