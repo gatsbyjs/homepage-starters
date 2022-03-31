@@ -90,7 +90,7 @@ export interface BlogIndexProps {
   }
 }
 
-export default function BlogIndex(props) {
+export default function BlogIndex(props: BlogIndexProps) {
   const posts = props.data.allBlogPost.nodes
 
   const featuredPosts = posts.filter((p) => p.category === "Featured")
