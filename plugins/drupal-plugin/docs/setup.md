@@ -42,7 +42,7 @@ For a video guided step-by-step tutorial see the links below:
 [Local dev for Pantheon sites with Lando by Jantcu](https://www.youtube.com/watch?v=88WUuV-WJao)
 
 1. Install **Lando** and **Docker**
-1. A **Machine Token** is needed by **Pantheon** in order to _push and pull_ the **_*Database, Files and Code*_**. To generate a **Machine Token** follow these [instructions](https://pantheon.io/docs/machine-tokens). Remember that the **Machine Key** will only be visible once so keep it handy.
+1. A **Machine Token** is needed by **Pantheon** in order to _push and pull_ the **Database, Files and Code**. To generate a **Machine Token** follow these [instructions](https://pantheon.io/docs/machine-tokens). Remember that the **Machine Key** will only be visible once so keep it handy.
 1. ```sh
    # Create a new directory for your Drupal site
    mkdir homepage-starter
@@ -95,7 +95,7 @@ All the modules should now be installed and activated. To ensure that they are a
 
    <img src="./docs/images/setup-step-9.png" width="500">
 
-1. Head to the bottom on the page and click the **_*Install*_** button.
+1. Head to the bottom on the page and click the **Install** button.
 
 1. Now you're done in your Drupal site! But we have one more step remaining to connect to your Gatsby homepage site.
 
