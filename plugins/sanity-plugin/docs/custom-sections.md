@@ -80,9 +80,9 @@
 
    1. Deploy the updated GraphQL API by running:
 
-   ```sh
-   yarn deploy
-   ```
+      ```sh
+      yarn deploy
+      ```
 
 1. Update `gatsby-node.js`
 
