@@ -13,7 +13,7 @@ This version of the Sanity homepage starter is written in TypeScript. If you wan
 
 ## Quick start
 
-TK
+You will need a Sanity account to use this starter. You can create a new account or use an existing one.
 
 1. **Create a Gatsby site**
 
@@ -50,6 +50,8 @@ TK
       ```sh
       yarn start
       ```
+
+   1. In your Gatsby site's directory, run `yarn setup` to create `.env.development` and `.env.production` files with configuration for your Sanity project.
 
 1. **Start developing**
 
