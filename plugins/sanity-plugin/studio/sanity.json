@@ -1,11 +1,11 @@
 {
   "root": true,
+  "api": {
+    "dataset": "production",
+    "projectId": "ch0ck8ut"
+  },
   "project": {
     "name": "homepage-starter"
-  },
-  "api": {
-    "projectId": "ch0ck8ut",
-    "dataset": "production"
   },
   "plugins": [
     "@sanity/base",
@@ -14,9 +14,6 @@
     "@sanity/desk-tool"
   ],
   "env": {
-    "development": {
-      "plugins": ["@sanity/vision"]
-    },
     "production": {
       "project": {
         "basePath": "/__sanity"
