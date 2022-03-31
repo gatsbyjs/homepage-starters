@@ -168,9 +168,9 @@ export const marginY = styleVariants(theme.space, (margin) => ({
   marginBottom: margin,
 }))
 
-export const gutter = styleVariants(theme.space, (val) => ({
-  marginLeft: calc.multiply(val as string, -1),
-  marginRight: calc.multiply(val as string, -1),
+export const gutter = styleVariants(theme.space, (val: string) => ({
+  marginLeft: calc.multiply(val, -1),
+  marginRight: calc.multiply(val, -1),
 }))
 
 export const radii = styleVariants(theme.radii, (borderRadius) => ({
