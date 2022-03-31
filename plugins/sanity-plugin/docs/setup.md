@@ -25,3 +25,5 @@
       ```sh
       yarn start
       ```
+
+   1. In your Gatsby site's directory, run `yarn setup` to create `.env.development` and `.env.production` files with configuration for your Sanity project.

@@ -9,6 +9,7 @@
     "start": "sanity start",
     "build": "sanity build ../static/__sanity",
     "deploy": "sanity graphql deploy",
+    "secrets": "sanity debug --secrets",
     "sanity-init": "sanity init"
   },
   "keywords": [
