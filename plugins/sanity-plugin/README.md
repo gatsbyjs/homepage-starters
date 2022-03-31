@@ -45,13 +45,23 @@ You will need a Sanity account to use this starter. You can create a new account
       yarn deploy
       ```
 
-   1. Start the Sanity Studio development server to start adding content:
+   1. Optionally, to import the demo content for this starter run:
+
+      ```sh
+      yarn import
+      ```
+
+   1. Start the Sanity Studio development server to start editing content:
 
       ```sh
       yarn start
       ```
 
-   1. In your Gatsby site's directory, run `yarn setup` to create `.env.development` and `.env.production` files with configuration for your Sanity project.
+   1. In your _Gatsby site's directory_, to create `.env.development` and `.env.production` files with configuration for your Sanity project, run:
+
+      ```sh
+      yarn setup
+      ```
 
 1. **Start developing**
 
