@@ -26,6 +26,12 @@ exports.createSchemaCustomization = async ({ actions }) => {
       url: String
     }
 
+    type DatoCmsBlogauthor implements Node & BlogAuthor {
+      id: ID!
+      name: String
+      avatar: Image
+    }
+
     type DatoCmsBlogpost implements Node & BlogPost {
       id: ID!
       slug: String!
@@ -35,6 +41,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       excerpt: String!
       image: Image
       date: Date!
+      author: BlogAuthor
     }
   `)
 }

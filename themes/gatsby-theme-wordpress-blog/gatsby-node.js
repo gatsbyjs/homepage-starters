@@ -43,14 +43,79 @@ exports.createSchemaCustomization = async ({ actions }) => {
       url: String @proxy(from: "mediaItemUrl")
     }
 
-    type WpPost implements Node & BlogPost {
+    # custom type for blog posts
+    type WpBlogPost implements Node & BlogPost {
       id: ID!
       slug: String!
       title: String!
-      html: String! @proxy(from: "content")
+      html: String!
       excerpt: String! @sanitizeHTML
       date: Date!
-      image: Image @link(by: "id", from: "featuredImage.node.id")
+      image: Image @link
+      author: BlogAuthor @link(by: "parent.id")
+    }
+
+    # custom type for blog theme implementation
+    type WpBlogAuthor implements Node & BlogAuthor {
+      id: ID!
+      name: String
+      avatar: Image @link
+    }
+
+    # custom type to handle WpUser gravatars
+    type WpBlogAuthorAvatar implements Node & Image {
+      id: ID!
+      alt: String
+      url: String
+      gatsbyImageData: JSON
     }
   `)
+}
+
+exports.onCreateNode = ({
+  node,
+  actions,
+  createNodeId,
+  createContentDigest,
+}) => {
+  if (node.internal.type === "WpUser") {
+    // create custom BlogAuthor type
+    const avatarID = createNodeId(node.avatar.url)
+    actions.createNode({
+      id: avatarID,
+      internal: {
+        type: "WpBlogAuthorAvatar",
+        contentDigest: createContentDigest(node.avatar.url),
+      },
+      url: node.avatar.url,
+      alt: node.name,
+      gatsbyImageData: null,
+    })
+
+    actions.createNode({
+      id: createNodeId(`${node.id} >>> BlogAuthor`),
+      internal: {
+        type: "WpBlogAuthor",
+        contentDigest: node.internal.contentDigest,
+      },
+      parent: node.id,
+      name: node.name,
+      avatar: avatarID,
+    })
+  }
+  if (node.internal.type === "WpPost") {
+    // create custom BlogPost type
+    actions.createNode({
+      ...node,
+      id: createNodeId(`${node.id} >>> WpBlogPost`),
+      internal: {
+        type: "WpBlogPost",
+        contentDigest: node.internal.contentDigest,
+      },
+      parent: node.id,
+      html: node.content,
+      image: node.featuredImage?.node?.id,
+      author: node.author?.node?.id,
+    })
+  }
 }
