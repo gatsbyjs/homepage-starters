@@ -2,7 +2,8 @@
   "name": "sanity-plugin",
   "version": "1.0.0",
   "scripts": {
-    "setup": "node ./scripts/setup.js"
+    "setup": "node ./scripts/setup.js",
+    "full-setup": "./scripts/init.js --path studio"
   },
   "dependencies": {
     "@sanity/block-content-to-html": "^2.0.0",
@@ -10,6 +11,11 @@
     "gatsby-source-sanity": "^7.3.2"
   },
   "devDependencies": {
-    "configstore": "^5.0.0"
+    "ci-info": "^3.3.0",
+    "configstore": "^5.0.0",
+    "dotenv": "^16.0.0",
+    "execa": "^5.1.1",
+    "inquirer-fuzzy-path": "^2.3.0",
+    "yargs": "^17.4.0"
   }
 }
