@@ -57,13 +57,10 @@ const createProject = async (opts = {}) => {
 
   console.log("Creating new Sanity project")
 
-  console.log(token)
-  console.log(config)
-  console.log("Return early!!")
-  return
-
-  const displayName = config.project?.name || "New Sanity Project"
-  const datasetName = config.api?.dataset || "production"
+  // TODO: clean this up when using prompt
+  const displayName =
+    opts.displayName || config.project?.name || "New Sanity Project"
+  const datasetName = opts.dataset || config.api?.dataset || "production"
   const envVars = []
 
   try {
@@ -110,7 +107,7 @@ const createProject = async (opts = {}) => {
 const deployGraphQL = async (dirname) => {
   console.log("Deploying Sanity GraphQL API")
   try {
-    // TODO: use @sanity/cli
+    // Use @sanity/cli for deploying due to lack of Node.js API
     const proc = await execa("npx", ["@sanity/cli", "deploy"], {
       cwd: dirname,
     })
@@ -124,7 +121,7 @@ const deployGraphQL = async (dirname) => {
 // Show prompt in local dev
 if (env !== "production" && !isCloud && !ci.isCI) {
   const inquirer = require("inquirer")
-  // inquirer.registerPrompt('fuzzypath', require('inquirer-fuzzy-path'))
+  inquirer.registerPrompt("fuzzypath", require("inquirer-fuzzy-path"))
   const defaults = {
     token: process.env.SANITY_TOKEN || args.token || sanityToken,
     path: args.path,
@@ -140,7 +137,7 @@ if (env !== "production" && !isCloud && !ci.isCI) {
       default: defaults.token,
     },
     {
-      // type: 'fuzzypath',
+      type: "fuzzypath",
       name: "path",
       message: "Path to local Sanity Studio directory",
       when: !args.path,
