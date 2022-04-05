@@ -1,4 +1,5 @@
 const dato = require("datocms-structured-text-to-html-string")
+const { getGatsbyImageResolver } = require("gatsby-plugin-image/graphql-utils")
 
 exports.createSchemaCustomization = async ({ actions }) => {
   actions.createFieldExtension({
@@ -10,6 +11,16 @@ exports.createSchemaCustomization = async ({ actions }) => {
             .replace("DatoCms", "")
             .replace(/list$/, "List")
         },
+      }
+    },
+  })
+
+  actions.createFieldExtension({
+    name: "imagePassthroughArgs",
+    extend(options) {
+      const { args } = getGatsbyImageResolver()
+      return {
+        args,
       }
     },
   })
@@ -140,7 +151,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     interface HomepageImage implements Node {
       id: ID!
       alt: String
-      gatsbyImageData: JSON
+      gatsbyImageData: JSON @imagePassthroughArgs
       url: String
       ## DatoCMS specific
       originalId: String
@@ -447,7 +458,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type DatoCmsAsset implements Node & HomepageImage {
       id: ID!
       alt: String
-      gatsbyImageData: JSON
+      gatsbyImageData: JSON @imagePassthroughArgs
       originalId: String
       entityPayload: JSON
       image: HomepageImage @recursiveImage
