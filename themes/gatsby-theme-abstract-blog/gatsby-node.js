@@ -1,5 +1,6 @@
 const fs = require("fs")
 const path = require("path")
+const { getGatsbyImageResolver } = require("gatsby-plugin-image/graphql-utils")
 
 // This core theme expects a src/template/blog-post.js
 // and src/template/blog-index.js in the host site
@@ -11,11 +12,21 @@ const defaults = {
 }
 
 exports.createSchemaCustomization = async ({ actions }) => {
+  actions.createFieldExtension({
+    name: "imagePassthroughArgs",
+    extend(options) {
+      const { args } = getGatsbyImageResolver()
+      return {
+        args,
+      }
+    },
+  })
+
   actions.createTypes(`
     interface Image implements Node {
       id: ID!
       alt: String
-      gatsbyImageData: JSON
+      gatsbyImageData: JSON @imagePassthroughArgs
       url: String
     }
 
