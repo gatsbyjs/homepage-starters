@@ -1,7 +1,7 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
-import Layout from "../components/layout"
+import Layout from "../../src/components/layout"
 import {
   Container,
   Flex,
@@ -11,8 +11,8 @@ import {
   Text,
   Avatar,
   HomepageImage,
-} from "../components/ui"
-import { avatar as avatarStyle } from "../components/ui.css"
+} from "../../src/components/ui"
+import { avatar as avatarStyle } from "../../src/components/ui.css"
 import * as styles from "./blog-post.css"
 
 export interface BlogAuthor {
@@ -33,57 +33,49 @@ export interface BlogPost {
   author: BlogAuthor
 }
 
-export interface BlogPostProps {
-  data: {
-    blogPost: BlogPost
-  }
-}
-
-export default function BlogPost(props: BlogPostProps) {
-  const post = props.data.blogPost
-
+export default function BlogPost(props: BlogPost) {
   return (
-    <Layout {...post} description={post.excerpt}>
+    <Layout {...props} description={props.excerpt}>
       <Container>
         <Box paddingY={5}>
           <Heading as="h1" center>
-            {post.title}
+            {props.title}
           </Heading>
           <Space size={4} />
-          {post.author && (
+          {props.author && (
             <Box center>
               <Flex>
-                {post.author.avatar &&
-                  (!!post.author.avatar.gatsbyImageData ? (
+                {props.author.avatar &&
+                  (!!props.author.avatar.gatsbyImageData ? (
                     <Avatar
-                      {...post.author.avatar}
-                      image={post.author.avatar.gatsbyImageData}
+                      {...props.author.avatar}
+                      image={props.author.avatar.gatsbyImageData}
                     />
                   ) : (
                     <img
-                      src={post.author.avatar.url}
-                      alt={post.author.name}
+                      src={props.author.avatar.url}
+                      alt={props.author.name}
                       className={avatarStyle}
                     />
                   ))}
-                <Text variant="bold">{post.author.name}</Text>
+                <Text variant="bold">{props.author.name}</Text>
               </Flex>
             </Box>
           )}
           <Space size={4} />
-          <Text center>{post.date}</Text>
+          <Text center>{props.date}</Text>
           <Space size={4} />
-          {post.image && (
+          {props.image && (
             <GatsbyImage
-              alt={post.image.alt}
-              image={post.image.gatsbyImageData}
+              alt={props.image.alt}
+              image={props.image.gatsbyImageData}
             />
           )}
           <Space size={5} />
           <div
             className={styles.blogPost}
             dangerouslySetInnerHTML={{
-              __html: post.html,
+              __html: props.html,
             }}
           />
         </Box>
@@ -91,32 +83,3 @@ export default function BlogPost(props: BlogPostProps) {
     </Layout>
   )
 }
-
-export const query = graphql`
-  query ($id: String!) {
-    blogPost(id: { eq: $id }) {
-      id
-      slug
-      title
-      html
-      excerpt
-      date(formatString: "MMMM Do, YYYY")
-      image {
-        id
-        url
-        gatsbyImageData
-        alt
-      }
-      author {
-        id
-        name
-        avatar {
-          id
-          alt
-          gatsbyImageData
-          url
-        }
-      }
-    }
-  }
-`

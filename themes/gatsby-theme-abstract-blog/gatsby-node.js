@@ -13,7 +13,7 @@ const defaults = {
 
 exports.createSchemaCustomization = async ({ actions }) => {
   actions.createFieldExtension({
-    name: "imagePassthroughArgs",
+    name: "imagePassthroughArguments",
     extend(options) {
       const { args } = getGatsbyImageResolver()
       return {
@@ -26,7 +26,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     interface Image implements Node {
       id: ID!
       alt: String
-      gatsbyImageData: JSON @imagePassthroughArgs
+      gatsbyImageData: JSON @imagePassthroughArguments
       url: String
     }
 
@@ -50,7 +50,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
   `)
 }
 
-exports.createPages = async ({ actions, graphql, reporter }, _opts = {}) => {
+exports.onCreateWebpackConfig = ({ actions }, _opts = {}) => {
   const components = {}
   const opts = {
     postPath: _opts.postPath || defaults.postPath,
@@ -60,7 +60,7 @@ exports.createPages = async ({ actions, graphql, reporter }, _opts = {}) => {
   try {
     components.post = path.join(global.__GATSBY.root, opts.postPath)
     components.index = path.join(global.__GATSBY.root, opts.indexPath)
-    // todo throw when file not found
+
     if (fs.existsSync(components.post + ".js")) {
       components.post = components.post + ".js"
     } else if (fs.existsSync(components.post + ".tsx")) {
@@ -79,6 +79,22 @@ exports.createPages = async ({ actions, graphql, reporter }, _opts = {}) => {
   } catch (e) {
     reporter.warn(e)
     return
+  }
+
+  actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        "@gatsby-theme-abstract-blog/post": path.resolve(components.post),
+        "@gatsby-theme-abstract-blog/index": path.resolve(components.index),
+      },
+    },
+  })
+}
+
+exports.createPages = async ({ actions, graphql, reporter }) => {
+  const components = {
+    post: path.join(__dirname, "src/post.js"),
+    index: path.join(__dirname, "src/index.js"),
   }
 
   const result = await graphql(`
