@@ -31,6 +31,8 @@ export interface BlogPost {
   html: string
   image: HomepageImage
   author: BlogAuthor
+  next?: BlogPost
+  previous?: BlogPost
 }
 
 export default function BlogPost(props: BlogPost) {

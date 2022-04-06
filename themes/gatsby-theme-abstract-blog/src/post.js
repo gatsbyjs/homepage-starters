@@ -4,12 +4,13 @@ import BlogPost from "@gatsby-theme-abstract-blog/post"
 
 export default function BlogPostQuery(props) {
   const post = props.data.blogPost
+  const { next, previous } = props.data
 
-  return <BlogPost {...post} />
+  return <BlogPost {...post} next={next} previous={previous} />
 }
 
 export const query = graphql`
-  query ($id: String!) {
+  query ($id: String!, $next: String, $previous: String) {
     blogPost(id: { eq: $id }) {
       id
       slug
@@ -32,6 +33,28 @@ export const query = graphql`
           gatsbyImageData
           url
         }
+      }
+    }
+    previous: blogPost(slug: { eq: $previous }) {
+      id
+      slug
+      title
+      image {
+        id
+        url
+        gatsbyImageData
+        alt
+      }
+    }
+    next: blogPost(slug: { eq: $next }) {
+      id
+      slug
+      title
+      image {
+        id
+        url
+        gatsbyImageData
+        alt
       }
     }
   }
