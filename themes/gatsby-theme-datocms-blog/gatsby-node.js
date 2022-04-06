@@ -20,7 +20,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type DatoCmsAsset implements Node & Image {
       id: ID!
       alt: String
-      gatsbyImageData: JSON
+      gatsbyImageData: JSON @imagePassthroughArguments
       originalId: String
       entityPayload: JSON
       url: String

@@ -1,7 +1,7 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
-import Layout from "../../src/components/layout"
+import Layout from "../components/layout"
 import {
   Container,
   FlexList,
@@ -13,7 +13,7 @@ import {
   Kicker,
   Text,
   HomepageImage,
-} from "../../src/components/ui"
+} from "../components/ui"
 import { BlogAuthor, BlogPost } from "./blog-post"
 
 interface PostCardSmallProps {

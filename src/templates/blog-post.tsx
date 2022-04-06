@@ -1,7 +1,7 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
-import Layout from "../../src/components/layout"
+import Layout from "../components/layout"
 import {
   Container,
   Flex,
@@ -11,8 +11,8 @@ import {
   Text,
   Avatar,
   HomepageImage,
-} from "../../src/components/ui"
-import { avatar as avatarStyle } from "../../src/components/ui.css"
+} from "../components/ui"
+import { avatar as avatarStyle } from "../components/ui.css"
 import * as styles from "./blog-post.css"
 
 export interface BlogAuthor {
