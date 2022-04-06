@@ -11,6 +11,49 @@ const defaults = {
   indexPath: "src/templates/blog-index",
 }
 
+const pluginState = {}
+
+exports.onPluginInit = ({ reporter }, _opts = {}) => {
+  const components = {}
+  const opts = {
+    postPath: _opts.postPath || defaults.postPath,
+    indexPath: _opts.indexPath || defaults.indexPath,
+  }
+
+  try {
+    components.post = path.join(global.__GATSBY.root, opts.postPath)
+    components.index = path.join(global.__GATSBY.root, opts.indexPath)
+
+    if (fs.existsSync(components.post + ".js")) {
+      components.post = components.post + ".js"
+    } else if (fs.existsSync(components.post + ".tsx")) {
+      components.post = components.post + ".tsx"
+    } else {
+      delete components.post
+      reporter.warn(
+        `[gatsby-theme-abstract-blog] No template found for ${opts.postPath}`
+      )
+      return
+    }
+
+    if (fs.existsSync(components.index + ".js")) {
+      components.index = components.index + ".js"
+    } else if (fs.existsSync(components.index + ".tsx")) {
+      components.index = components.index + ".tsx"
+    } else {
+      delete components.index
+      reporter.warn(
+        `[gatsby-theme-abstract-blog] No template found for ${opts.indexPath}`
+      )
+    }
+  } catch (e) {
+    reporter.warn(`[gatsby-theme-abstract-blog] ${e}`)
+    return
+  }
+
+  pluginState.components = components
+}
+
 exports.createSchemaCustomization = async ({ actions }) => {
   actions.createFieldExtension({
     name: "imagePassthroughArguments",
@@ -50,35 +93,14 @@ exports.createSchemaCustomization = async ({ actions }) => {
   `)
 }
 
-exports.onCreateWebpackConfig = ({ actions }, _opts = {}) => {
-  const components = {}
-  const opts = {
-    postPath: _opts.postPath || defaults.postPath,
-    indexPath: _opts.indexPath || defaults.indexPath,
-  }
+exports.onCreateWebpackConfig = ({ actions, reporter }, _opts = {}) => {
+  const components = pluginState.components
 
-  try {
-    components.post = path.join(global.__GATSBY.root, opts.postPath)
-    components.index = path.join(global.__GATSBY.root, opts.indexPath)
-
-    if (fs.existsSync(components.post + ".js")) {
-      components.post = components.post + ".js"
-    } else if (fs.existsSync(components.post + ".tsx")) {
-      components.post = components.post + ".tsx"
-    } else {
-      throw new Error(`No template found for ${opts.postPath}`)
-    }
-
-    if (fs.existsSync(components.index + ".js")) {
-      components.index = components.index + ".js"
-    } else if (fs.existsSync(components.index + ".tsx")) {
-      components.index = components.index + ".tsx"
-    } else {
-      throw new Error(`No template found for ${opts.indexPath}`)
-    }
-  } catch (e) {
-    reporter.warn(e)
-    return
+  if (!components || !components.post || !components.index) {
+    // fallback components to prevent breaking builds
+    reporter.warn("[gatsby-theme-abstract-blog] Using fallback components")
+    components.post = path.join(__dirname, "src/fallback.js")
+    components.index = path.join(__dirname, "src/fallback.js")
   }
 
   actions.setWebpackConfig({
@@ -92,7 +114,12 @@ exports.onCreateWebpackConfig = ({ actions }, _opts = {}) => {
 }
 
 exports.createPages = async ({ actions, graphql, reporter }) => {
-  const components = {
+  const components = pluginState.components
+  if (!components || !components.post || !components.index) return
+
+  reporter.info("[gatsby-theme-abstract-blog] creating pages")
+
+  const templates = {
     post: path.join(__dirname, "src/post.js"),
     index: path.join(__dirname, "src/index.js"),
   }
@@ -110,7 +137,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   if (result.errors) {
     reporter.panicOnBuild(
-      `There was an error sourcing blog posts`,
+      `[gatsby-theme-abstract-blog] There was an error sourcing blog posts`,
       result.errors
     )
   }
@@ -121,7 +148,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
   actions.createPage({
     path: "/blog/",
-    component: components.index,
+    component: templates.index,
     context: {},
   })
 
@@ -131,7 +158,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
 
     actions.createPage({
       path: `/blog/${post.slug}`,
-      component: components.post,
+      component: templates.post,
       context: {
         id: post.id,
         slug: post.slug,
