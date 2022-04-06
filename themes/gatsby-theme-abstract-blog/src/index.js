@@ -20,7 +20,7 @@ export const query = graphql`
         image {
           id
           alt
-          gatsbyImageData(aspectRatio: 2)
+          gatsbyImageData
         }
         author {
           id
