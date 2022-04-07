@@ -10,8 +10,8 @@
     "build": "sanity build ../static/__sanity",
     "deploy": "sanity graphql deploy",
     "sanity-init": "sanity init",
-    "import": "sanity dataset import ../scripts/content.tar.gz production",
-    "export": "sanity dataset export production ../scripts/content.tar.gz"
+    "sanity-import": "sanity dataset import ../scripts/content.tar.gz production",
+    "sanity-export": "sanity dataset export production ../scripts/content.tar.gz"
   },
   "keywords": [
     "sanity"

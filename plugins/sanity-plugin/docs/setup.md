@@ -23,7 +23,7 @@
    1. Optionally, to import the demo content for this starter run:
 
       ```sh
-      yarn import
+      yarn sanity-import
       ```
 
    1. Start the Sanity Studio development server to start editing content:
