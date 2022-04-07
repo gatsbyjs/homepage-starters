@@ -6,8 +6,11 @@
   },
   "dependencies": {
     "@sanity/block-content-to-html": "^2.0.0",
+    "gatsby-plugin-manifest": "^4.6.0",
+    "gatsby-plugin-react-helmet": "^5.5.0",
     "gatsby-plugin-image": "^2.9.1",
-    "gatsby-source-sanity": "^7.3.2"
+    "gatsby-source-sanity": "^7.3.2",
+    "react-helmet": "^6.1.0"
   },
   "devDependencies": {
     "configstore": "^5.0.0"
