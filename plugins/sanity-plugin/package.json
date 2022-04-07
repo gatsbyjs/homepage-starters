@@ -1,0 +1,15 @@
+{
+  "name": "sanity-plugin",
+  "version": "1.0.0",
+  "scripts": {
+    "setup": "node ./scripts/setup.js"
+  },
+  "dependencies": {
+    "@sanity/block-content-to-html": "^2.0.0",
+    "gatsby-plugin-image": "^2.9.1",
+    "gatsby-source-sanity": "^7.3.2"
+  },
+  "devDependencies": {
+    "configstore": "^5.0.0"
+  }
+}

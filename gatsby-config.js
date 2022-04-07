@@ -5,6 +5,7 @@ module.exports = {
     // "datocms-plugin",
     // "drupal-plugin",
     // "wordpress-plugin",
+    // "sanity-plugin",
 
     // optional blog themes
     // "gatsby-theme-contentful-blog",
