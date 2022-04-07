@@ -7,7 +7,12 @@ module.exports = {
     // "wordpress-plugin",
 
     // optional blog themes
-    "gatsby-theme-contentful-blog",
+    {
+      resolve: "gatsby-theme-contentful-blog",
+      options: {
+        customQueries: true,
+      },
+    },
     // "gatsby-theme-datocms-blog",
     // "gatsby-theme-wordpress-blog",
   ],
