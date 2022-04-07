@@ -1,5 +1,12 @@
 const path = require("path")
 
+const localPlugins = [
+  "contentful-plugin",
+  "datocms-plugin",
+  "drupal-plugin",
+  "wordpress-plugin",
+]
+
 // for theming development
 exports.onCreateWebpackConfig = ({ actions, store }) => {
   // redux state to check which plugin is used
@@ -7,16 +14,7 @@ exports.onCreateWebpackConfig = ({ actions, store }) => {
   const plugins = state.config.plugins.map((plugin) => plugin.resolve)
   const plugin = plugins.reduce((a, b) => {
     if (a) return a
-    switch (b) {
-      case "gatsby-source-contentful":
-        return "contentful-plugin"
-      case "gatsby-source-wordpress":
-        return "wordpress-plugin"
-      case "gatsby-source-datocms":
-        return "datocms-plugin"
-      case "gatsby-source-drupal":
-        return "drupal-plugin"
-    }
+    if (localPlugins.includes(b)) return b
     return null
   }, null)
 
@@ -85,7 +83,7 @@ exports.onCreateWebpackConfig = ({ actions, store }) => {
 exports.createSchemaCustomization = async ({ actions, store }) => {
   const state = store.getState()
   const plugins = state.config.plugins.map((plugin) => plugin.resolve)
-  if (!plugins.includes("gatsby-source-wordpress")) return
+  if (!plugins.includes("wordpress-plugin")) return
 
   actions.createTypes(/* GraphQL */ `
     interface HeaderNavItem implements Node {
@@ -163,7 +161,7 @@ exports.sourceNodes = ({
 }) => {
   const state = store.getState()
   const plugins = state.config.plugins.map((plugin) => plugin.resolve)
-  if (!plugins.includes("gatsby-source-wordpress")) return
+  if (!plugins.includes("wordpress-plugin")) return
   actions.createNode({
     id: createNodeId(`Shim AboutPage`),
     internal: {

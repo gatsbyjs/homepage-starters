@@ -18,6 +18,12 @@ exports.createSchemaCustomization = async ({ actions }) => {
       url: String
     }
 
+    interface BlogAuthor implements Node {
+      id: ID!
+      name: String
+      avatar: Image
+    }
+
     interface BlogPost implements Node {
       id: ID!
       slug: String!
@@ -26,7 +32,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       excerpt: String!
       image: Image
       date: Date!
-      # TODO: author
+      author: BlogAuthor
     }
   `)
 }
