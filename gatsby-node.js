@@ -4,6 +4,7 @@ const localPlugins = [
   "contentful-plugin",
   "datocms-plugin",
   "drupal-plugin",
+  "sanity-plugin",
   "wordpress-plugin",
 ]
 
