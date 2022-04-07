@@ -9,6 +9,7 @@ const { getGatsbyImageResolver } = require("gatsby-plugin-image/graphql-utils")
 const defaults = {
   postPath: "src/templates/blog-post",
   indexPath: "src/templates/blog-index",
+  customQueries: false,
 }
 
 const pluginState = {}
@@ -113,16 +114,19 @@ exports.onCreateWebpackConfig = ({ actions, reporter }, _opts = {}) => {
   })
 }
 
-exports.createPages = async ({ actions, graphql, reporter }) => {
+exports.createPages = async ({ actions, graphql, reporter }, _opts = {}) => {
   const components = pluginState.components
   if (!components || !components.post || !components.index) return
+  const opts = { ...defaults, ..._opts }
 
   reporter.info("[gatsby-theme-abstract-blog] creating pages")
 
-  const templates = {
-    post: path.join(__dirname, "src/post.js"),
-    index: path.join(__dirname, "src/index.js"),
-  }
+  const templates = opts.customQueries
+    ? components
+    : {
+        post: path.join(__dirname, "src/post.js"),
+        index: path.join(__dirname, "src/index.js"),
+      }
 
   const result = await graphql(`
     {

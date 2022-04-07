@@ -110,6 +110,7 @@ module.exports = {
       options: {
         postPath: "src/templates/blog-post",
         indexPath: "src/templates/blog-index",
+        customQueries: false,
       },
     },
   ],
@@ -118,3 +119,4 @@ module.exports = {
 
 - `postPath`: relative path to template for the blog post pages
 - `indexPath`: relative path to template for the blog index page
+- `customQueries`: set to `true` to use provided components as page components that include Gatsby GraphQL page queries
