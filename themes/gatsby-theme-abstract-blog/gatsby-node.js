@@ -55,6 +55,18 @@ exports.onPluginInit = ({ reporter }, _opts = {}) => {
   pluginState.components = components
 }
 
+exports.pluginOptionsSchema = ({ Joi }) => {
+  return Joi.object({
+    postPath: Joi.string().description("File path to blog post template"),
+    indexPath: Joi.string().description(
+      "File path to blog index page template"
+    ),
+    customQueries: Joi.boolean().description(
+      "Use blog templates as page components with custom GraphQL queries"
+    ),
+  })
+}
+
 exports.createSchemaCustomization = async ({ actions }) => {
   actions.createFieldExtension({
     name: "imagePassthroughArguments",
