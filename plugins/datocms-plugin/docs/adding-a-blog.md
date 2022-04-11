@@ -2,66 +2,46 @@
   <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
 </a>
 
-# Gatsby Starter Sanity Homepage
+# Gatsby Starter DatoCMS Homepage
 
-Create a homepage using Gatsby and Sanity. This starter demonstrates how to use Sanity to build a homepage and can be customized to match your own visual branding.
+Create a homepage using Gatsby and DatoCMS. This starter demonstrates how to use DatoCMS to build a homepage and can be customized to match your own visual branding.
 
-[View the Demo](https://gatsbysanityhomepage.gatsbyjs.io/)
+[View the Demo](https://gatsbydatocmshomepagets.gatsbyjs.io/)
 
 **Note:**
-This version of the Sanity homepage starter is written in JavaScript. If you want to use Sanity but TypeScript is more your style, there is also a TypeScript version maintained on [GitHub](https://github.com/gatsbyjs/gatsby-starter-sanity-homepage-ts).
+This version of the DatoCMS homepage starter is written in TypeScript. If you want to use DatoCMS but JavaScript is more your style, there is also a JavaScript version maintained on [GitHub](https://github.com/gatsbyjs/gatsby-starter-datocms-homepage).
 
 ## Quick start
 
-You will need a Sanity account to use this starter. You can create a new account or use an existing one.
+You will need a new or existing DatoCMS project to use this starter and will be asked for a Read-only API token as well as the [environment][] during installation.
+You can find your API token under the Settings > API tokens section of your project settings, and Environment can be found under the Settings > Environments section. By default your environment will be named "main".
+
+[environment]: https://www.datocms.com/docs/scripting-migrations/introduction#whats-an-environment
 
 1. **Create a Gatsby site**
 
    Use the Gatsby CLI to get started locally:
 
    ```sh repo
-   npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-sanity-homepage
+   npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-datocms-homepage-ts
    ```
 
-1. **Set up Sanity Studio**
+1. **Create your DatoCMS project**
 
-   1. In the `studio` directory, install dependencies for Sanity Studio:
+[![Clone DatoCMS project](https://dashboard.datocms.com/clone/button.svg)](https://dashboard.datocms.com/clone?projectId=60908&name=Homepage+Starter)
 
-      ```sh
-      yarn
-      ```
+This will clone the data model and records backing the demo site to populate your DatoCMS project.
 
-   1. Create a new Sanity project by running:
+1. **Run the setup script**
 
-      ```sh
-      yarn sanity-init
-      ```
+After setting up the cloned DatoCMS project, from your site's root directory, run:
 
-      This will prompt you to log in if this is your first time using Sanity CLI.
+```sh
+cd my-homepage
+yarn setup
+```
 
-   1. Deploy the Sanity GraphQL API for your new project:
-
-      ```sh
-      yarn deploy
-      ```
-
-   1. Optionally, to import the demo content for this starter run:
-
-      ```sh
-      yarn sanity-import
-      ```
-
-   1. Start the Sanity Studio development server to start editing content:
-
-      ```sh
-      yarn start
-      ```
-
-   1. In your _Gatsby site's directory_, to create `.env.development` and `.env.production` files with configuration for your Sanity project, run:
-
-      ```sh
-      yarn setup
-      ```
+This will run a script to create `.env.development` and `.env.production` files for you populated with your DatoCMS project environment variables.
 
 1. **Start developing**
 
@@ -77,7 +57,7 @@ You will need a Sanity account to use this starter. You can create a new account
 
 ## Deploy your site
 
-Once your content is available in Sanity, deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
+Once your content is available in DatoCMS, deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
 
 1. Push your local site to a new repo in either GitHub, GitLab, or Bitbucket
 1. Log into your [Gatsby Cloud Dashboard][] and click on **Add a site**
@@ -93,16 +73,17 @@ For a more detailed walkthrough, see the tutorial on how to [build your site wit
 ### Deploy without using the CLI
 
 Alternatively, you can deploy this starter directly to Gatsby Cloud.
-Note that you will need to set up your content in Sanity manually.
+Note that you will need to set up your content in DatoCMS manually.
 
-[![Deploy to Gatsby](https://www.gatsbyjs.com/deploynow.png "Deploy to Gatsby")](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-sanity-homepage)
+[![Deploy to Gatsby](https://www.gatsbyjs.com/deploynow.png "Deploy to Gatsby")](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-datocms-homepage-ts)
 
 ## Setting up Gatsby Cloud Preview
 
-To use Gatsby Cloud Preview with this site, see the documentation for
-[Connecting to Sanity via Quick Connect][].
+To enable Gatsby Preview with this site, see the documentation for
+[Installing Content Sync for DatoCMS][].
 
-[connecting to sanity via quick connect]: https://support.gatsbyjs.com/hc/en-us/articles/360052324694-Connecting-to-Sanity-via-Quick-Connect
+[connecting to datocms]: https://support.gatsbyjs.com/hc/en-us/articles/360052324454-Connecting-to-DatoCMS
+[installing content sync for datocms]: https://support.gatsbyjs.com/hc/en-us/articles/4410387813907-Installing-Content-Sync-for-DatoCMS
 
 ## What's included?
 
@@ -136,12 +117,11 @@ To update the colors used in this starter, edit the `src/colors.css.ts` file.
 ```.ts
 // src/colors.css.ts
 export const colors = {
-  // TODO
-  background: "#ffd500",
-  text: "#005bbb",
-  primary: "#005bbb",
-  muted: "#f5cc00",
-  active: "#004287",
+  background: "#fff",
+  text: "#db3000",
+  primary: "#db3000",
+  muted: "#fffbfa",
+  active: "#751a00",
   black: "#000",
 }
 
@@ -150,13 +130,13 @@ export const colors = {
 If you'd like to add additional colors, add additional keys to this object.
 This file is imported into `src/theme.css.ts` and creates CSS custom properties, that can be imported and used in other `.css.ts` files.
 
-The UI components file `src/components/ui.js` imports styles from `src/components/ui.css.ts`. You can see how the theme and color values are being used in this file.
+The UI components file `src/components/ui.tsx` imports styles from `src/components/ui.css.ts`. You can see how the theme and color values are being used in this file.
 
 ### Add your logo
 
 ![Logo](./docs/images/logo.png)
 
-Replace the `src/components/brand-logo.js` component with your own brand logo.
+Replace the `src/components/brand-logo.tsx` component with your own brand logo.
 If you have an SVG version, it can be rendered inline as a React component, following the example in this file. Note that SVG attributes will need to be camel cased for JSX.
 
 Using an inline SVG for the logo allows it to pick up the colors used in CSS, which is how the logo colors are inverted for the mobile menu.
@@ -167,107 +147,46 @@ If you prefer to use an image, use the [`StaticImage`](https://www.gatsbyjs.com/
 
 ![Headings & Buttons](./docs/images/headings-buttons.png)
 
-To further customize the look and feel of the homepage, edit the UI components in `src/components/ui.js` and styles in `src/components/ui.css.ts`.
+To further customize the look and feel of the homepage, edit the UI components in `src/components/ui.tsx` and styles in `src/components/ui.css.ts`.
 
 ### Customize section components
 
 To customize any of the sections of the homepage, edit the relevant component in `src/components`.
-Most of the styles for these components are handled with shared UI components in `src/components/ui.js`.
+Most of the styles for these components are handled with shared UI components in `src/components/ui.tsx`.
 
 ### Create custom section components
 
 To create a new type of section in your homepage, you'll want to create a new section component, using the existing components as an example.
 For this example, we'll create a new "Banner" component.
 
-1. First, update your schema in the Sanity Studio.
+1. First, update your content model in DatoCMS
 
-   1. In the `studio` directory, create a new file in the `schema` directory for your new section. For this example, name it `homepageBanner.js`
+   1. In your DatoCMS project, go to Settings > Blocks Library to create a new block called "Banner."
 
-      ```js
-      // studio/schema/homepageBanner.js
-      export default {
-        name: "homepageBanner",
-        title: "Homepage Banner",
-        type: "document",
-        fields: [
-          { title: "Heading", name: "heading", type: "string" },
-          { title: "Text", name: "text", type: "string" },
-        ],
-      }
-      ```
+      <img src="./docs/images/step-1.png" alt="Step 1" width="300" />
 
-   1. Add this module to the schema.
+   1. For this example, add two Text fields to your new block type: `heading` and `text` – these can be _Single-line string_ types.
 
-      ```js
-      // studio/schema/schema.js
-      // ...
-      import homepageBanner from "./homepageBanner"
+      <img src="./docs/images/step-2.png" alt="Step 2" width="300" />
+      <img src="./docs/images/step-3.png" alt="Step 3" width="300" />
+      <img src="./docs/images/step-4.png" alt="Step 4" width="300" />
+      <img src="./docs/images/step-5.png" alt="Step 5" width="300" />
 
-      export default createSchema({
-        name: "default",
-        types: schemaTypes.concat([
-          // ...
-          homepageBanner,
-        ]),
-      })
-      ```
+   1. After saving the new block type, navigate to Settings > Models and edit the _Homepage_ model.
 
-   1. Add this new section type to the schema in `studio/schema/homepage.js`
+      <img src="./docs/images/step-6.png" alt="Step 6" width="500" />
 
-      ```js
-      // studio/schema/homepage.js
-      export default {
-        name: "homepage",
-        title: "Homepage",
-        type: "document",
-        fields: [
-          { title: "Title", name: "title", type: "string" },
-          { title: "Description", name: "description", type: "string" },
-          { title: "Image", name: "image", type: "image" },
-          {
-            title: "Content",
-            name: "content",
-            type: "array",
-            of: [
-              {
-                type: "reference",
-                to: [
-                  { type: "homepageHero" },
-                  { type: "homepageFeature" },
-                  { type: "homepageFeatureList" },
-                  { type: "homepageCta" },
-                  { type: "homepageLogoList" },
-                  { type: "homepageTestimonialList" },
-                  { type: "homepageBenefitList" },
-                  { type: "homepageStatList" },
-                  { type: "homepageProductList" },
-                  // Add the new section
-                  { type: "homepageBanner" },
-                ],
-              },
-            ],
-          },
-        ],
-      }
-      ```
+   1. Edit the _Content_ field and under _Validations_, add the _Banner_ to the list of allowed blocks.
 
-   1. In the `studio` directory, start Sanity Studio by running:
+      <img src="./docs/images/step-7.png" alt="Step 7" width="300" />
 
-      ```sh
-      yarn start
-      ```
+   1. Go to the _Content_ tab in your project select Homepage, scroll to the bottom and click _Create new_ to add content for your Banner, then save the _Homepage_.
 
-   1. Navigate to the Homepage and add a new section with this new _Homepage Banner_ section.
-
-   1. Deploy the updated GraphQL API by running:
-
-      ```sh
-      yarn deploy
-      ```
+      <img src="./docs/images/step-8.png" alt="Step 8" width="500" />
 
 1. Update `gatsby-node.js`
 
-   Edit your site's `gatsby-node.js` file, adding an interface for `HomepageBanner` that matches the schema in Sanity Studio.
+   Edit your site's `gatsby-node.js` file, adding an interface for `HomepageBanner` that matches your content model in DatoCMS.
    This allows the homepage to query the abstract `HomepageBanner` type.
 
    ```js
@@ -284,7 +203,7 @@ For this example, we'll create a new "Banner" component.
      `)
      // ...
      actions.createTypes(`
-       type SanityHomepageBanner implements Node & HomepageBanner & HomepageBlock @dontInfer {
+       type DatoCmsBanner implements Node & HomepageBanner & HomepageBlock @dontInfer {
          id: ID!
          blocktype: String @blocktype
          heading: String
@@ -298,7 +217,7 @@ For this example, we'll create a new "Banner" component.
 1. Next, create the Banner component:
 
    ```jsx fileExt
-   // src/components/banner.js
+   // src/components/banner.tsx
    import * as React from "react"
    import { graphql } from "gatsby"
    import { Section, Container, Heading, Text } from "./ui"
@@ -323,10 +242,10 @@ For this example, we'll create a new "Banner" component.
    `
    ```
 
-1. Export the component from `src/components/sections.js`
+1. Export the component from `src/components/sections.tsx`
 
    ```js fileExt
-   // src/components/sections.js
+   // src/components/sections.tsx
    export { default as HomepageHero } from "./hero"
    export { default as HomepageFeature } from "./feature"
    export { default as HomepageFeatureList } from "./feature-list"
@@ -341,10 +260,10 @@ For this example, we'll create a new "Banner" component.
    export { default as HomepageBanner } from "./banner"
    ```
 
-1. Add the GraphQL query fragment to the query in `src/pages/index.js`
+1. Add the GraphQL query fragment to the query in `src/pages/index.tsx`
 
    ```js fileExt
-   // in src/pages/index.js
+   // in src/pages/index.tsx
    export const query = graphql`
      {
        homepage {
@@ -379,7 +298,7 @@ For this example, we'll create a new "Banner" component.
 
 ### Errors after making changes to the schema
 
-If you've made changes to the `gatsby-node.js` file or changes to the Sanity data model, clear the Gatsby cache before running the develop server:
+If you've made changes to the `gatsby-node.js` file or changes to the DatoCMS data model, clear the Gatsby cache before running the develop server:
 
 ```sh
 yarn clean && yarn start
