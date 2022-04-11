@@ -1,315 +1,194 @@
-<a href="https://www.gatsbyjs.com">
-  <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
-</a>
+# Adding a blog to your homepage starter
 
-# Gatsby Starter Contentful Homepage
+The Gatsby Homepage starter includes components for creating a homepage and an _About_ page as well as templates for simple pages like a _Privacy Policy_ page.
 
-Create a homepage using Gatsby and Contentful. This starter demonstrates how to use Contentful to build a homepage and can be customized to match your own visual branding.
+It does not include a blog by default, but you can install an optional theme to source blog content from a CMS of your choice.
 
-[View the Demo](https://gatsbycontentfulhomepagets.gatsbyjs.io/)
+## Get started
 
-**Note:**
-This version of the Contentful homepage starter is written in TypeScript. If you want to use Contentful but JavaScript is more your style, there is also a JavaScript version maintained on [GitHub](https://github.com/gatsbyjs/gatsby-starter-contentful-homepage).
+The content for the blog pages is sourced by a [Gatsby Theme][], which you'll need to install in your site.
 
-## Quick start
+[gatsby theme]: https://www.gatsbyjs.com/docs/themes/
 
-You will need a new or existing [Contentful space][] to use this starter and will be asked for your [Space ID][], [Content Management API Key][] (also referred to as a Personal Access Token) and [Content Delivery API Key][] during installation.
+This homepage starter uses Contentful for its content, but you can choose a different CMS for your blog.
+For example, if you've decided to switch to Contentful, but you have an existing blog in a different CMS and want to keep the content separate, you can install the blog theme for that CMS.
 
-[contentful space]: https://www.contentful.com/help/contentful-101/#step-2-create-a-space
-[space id]: https://www.contentful.com/help/find-space-id/
-[content delivery api key]: https://www.contentful.com/developers/docs/references/authentication/#api-keys-in-the-contentful-web-app
-[content management api key]: https://www.contentful.com/developers/docs/references/authentication/#the-content-management-api
+Currently, the following blog themes are available to work out-of-the-box with this starter:
 
-1. **Create a Gatsby site**
+- [gatsby-theme-contentful-blog][]
+- [gatsby-theme-datocms-blog][]
+- [gatsby-theme-wordpress-blog][]
 
-   Use the Gatsby CLI to get started locally:
+Choose one of these blog themes, install it, and add it to your site's `gatsby-config.js`.
 
-   ```sh repo
-   npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-contentful-homepage-ts
-   ```
-
-1. **Run the Contentful setup script**
-
-   From your site's root directory, run:
-
-   ```sh
-   cd my-homepage
-   yarn setup
-   ```
-
-   This will run a script to populate your Contentful space's content model and add demo content.
-
-1. **Start developing**
-
-   In your site directory, start the development server:
-
-   ```sh
-   yarn start
-   ```
-
-   Your site should now be running at <http://localhost:8000>
-
-1. **Open the source code and start editing**
-
-## Deploy your site
-
-Once your content is available in Contentful, deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
-
-1. Push your local site to a new repo in either GitHub, GitLab, or Bitbucket
-1. Log into your [Gatsby Cloud Dashboard][] and click on **Add a site**
-1. Use the **Import from a Git repository** option to find your site
-1. Add the environment variables from your `.env.production` file to Gatsby Cloud during setup
-1. Click **Build site** and your site should start building
-
-For a more detailed walkthrough, see the tutorial on how to [build your site with Gatsby Cloud][tutorial].
-
-[gatsby cloud dashboard]: https://gatsbyjs.com/dashboard
-[tutorial]: https://www.gatsbyjs.com/docs/tutorial/part-1/#build-your-site-with-gatsby-cloud
-
-### Deploy without using the CLI
-
-Alternatively, you can deploy this starter directly to Gatsby Cloud.
-Note that you will need to set up your content in Contentful manually.
-
-[![Deploy to Gatsby](https://www.gatsbyjs.com/deploynow.png "Deploy to Gatsby")](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-contentful-homepage-ts)
-
-## Setting up Gatsby Cloud Preview
-
-To use Gatsby Cloud Preview with this site, see the documentation for
-[Installing Content Sync for Contentful][].
-
-[installing content sync for contentful]: https://support.gatsbyjs.com/hc/en-us/articles/4410371995539-Installing-Content-Sync-for-Contentful
-[add the gatsby cloud app to contentful]: https://support.gatsbyjs.com/hc/en-us/articles/360056047134-Add-the-Gatsby-Cloud-App-to-Contentful
-[connecting to contentful manually]: https://support.gatsbyjs.com/hc/en-us/articles/360052076554-Connecting-to-Contentful-Manually
-
-## What's included?
-
-```sh
-├── README.md
-├── gatsby-config.js
-├── gatsby-node.js
-├── src
-│   ├── components
-│   ├── pages
-│   ├── colors.css.ts
-│   ├── styles.css.ts
-│   └── theme.css.ts
-└── .env.EXAMPLE
+```sh name
+npm i gatsby-theme-contentful-blog
 ```
 
-1. **`gatsby-config.js`**: [Gatsby config][] file that includes plugins required for this starter.
-1. **`gatsby-node.js`**: [Gatsby Node][] config file that creates an abstract data model for the homepage content.
-1. **`src/`**: The source directory for the starter, including pages, components, and [Vanilla Extract][] files for styling.
+```js name
+// gatsby-config.js
+module.exports = {
+  plugins: [
+    // ...
+    // Add the theme to the plugins array
+    "gatsby-theme-contentful-blog",
+  ],
+}
+```
 
-[gatsby config]: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-config/
-[gatsby node]: https://www.gatsbyjs.com/docs/reference/config-files/gatsby-node/
-[vanilla extract]: https://vanilla-extract.style/
+### Add content models and content to Contentful
 
-## How to
+In your Contentful space, add new content models for _Blog Author_ and _Blog Post_.
 
-### Update the color theme
+The _Blog Author_ content model should have the following fields:
 
-To update the colors used in this starter, edit the `src/colors.css.ts` file.
+- `name`: Short text
+- `avatar`: Media (image)
 
-```.ts
-// src/colors.css.ts
-export const colors = {
-  background: "#ffd500",
-  text: "#005bbb",
-  primary: "#005bbb",
-  muted: "#f5cc00",
-  active: "#004287",
-  black: "#000",
+The _Blog Post_ content model should have the following fields:
+
+- `slug`: Unique Short text with the custom validation: `^[a-zA-Z0-9\/_-]*$` - this field is used for the URL path
+- `title`: Short text
+- `body`: Rich text
+- `excerpt`: Long text
+- `image`: Media (image)
+- `date`: Date & time
+- `category`: Short text
+- `author`: Reference to `BlogAuthor` (see below)
+
+Once you've set up the content models, navigate to the _Content_ tab and start adding blog posts.
+
+### Environment Variables
+
+If you're using a different CMS in your blog than the one used for the homepage content, be sure to add the required environment variables to your `.env.development` and `.end.production` files.
+
+- WordPress requires:
+  - `WPGRAPHQL_URL`
+- Contentful requires:
+  - `CONTENTFUL_SPACE_ID`
+  - `CONTENTFUL_ACCESS_TOKEN`
+- DatoCMS requires:
+  - `DATOCMS_API_TOKEN`
+  - `DATOCMS_ENVIRONMENT`
+
+## Adding templates
+
+These blog themes do not render pages by default. Once a blog theme is added to your site and configured, create two templates in your site to render the blog index page and blog post pages. You will need to add a `src/templates/blog-index.js` file and `src/templates/blog-post.js` file.
+
+```js
+// example src/templates/blog-index.js
+import * as React from "react"
+import { graphql } from "gatsby"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import Layout from "../components/layout"
+import { Container, Heading, Box, Link } from "../components/ui"
+
+export default function BlogIndex(props) {
+  const posts = props.data.allBlogPost.nodes
+
+  return (
+    <Layout title="Blog">
+      <Container>
+        <Box paddingY={4}>
+          <Heading as="h1">Blog</Heading>
+          <ul>
+            {posts.map((post) => (
+              <li key={post.id}>
+                {post.image && (
+                  <Link to={`/blog/${post.slug}`}>
+                    <GatsbyImage
+                      alt={post.image.alt}
+                      image={getImage(post.image)}
+                    />
+                  </Link>
+                )}
+                <Link to={`/blog/${post.slug}`}>{post.title}</Link>
+                <p>{post.excerpt}</p>
+              </li>
+            ))}
+          </ul>
+        </Box>
+      </Container>
+    </Layout>
+  )
 }
 
+export const query = graphql`
+  query {
+    allBlogPost {
+      nodes {
+        id
+        slug
+        title
+        excerpt
+        image {
+          id
+          alt
+          gatsbyImageData
+        }
+      }
+    }
+  }
+`
 ```
 
-If you'd like to add additional colors, add additional keys to this object.
-This file is imported into `src/theme.css.ts` and creates CSS custom properties, that can be imported and used in other `.css.ts` files.
+```js
+// example src/templates/blog-post.js
+import * as React from "react"
+import { graphql } from "gatsby"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import Layout from "../components/layout"
+import { Container, Heading, Box } from "../components/ui"
 
-The UI components file `src/components/ui.tsx` imports styles from `src/components/ui.css.ts`. You can see how the theme and color values are being used in this file.
+export default function BlogPost(props) {
+  const post = props.data.blogPost
 
-### Add your logo
+  return (
+    <Layout {...post} description={post.excerpt}>
+      <Container>
+        <Box paddingY={4}>
+          {post.image && (
+            <GatsbyImage alt={post.image.alt} image={getImage(post.image)} />
+          )}
+          <Heading as="h1">{post.title}</Heading>
+          <div
+            dangerouslySetInnerHTML={{
+              __html: post.html,
+            }}
+          />
+        </Box>
+      </Container>
+    </Layout>
+  )
+}
 
-![Logo](./docs/images/logo.png)
-
-Replace the `src/components/brand-logo.tsx` component with your own brand logo.
-If you have an SVG version, it can be rendered inline as a React component, following the example in this file. Note that SVG attributes will need to be camel cased for JSX.
-
-Using an inline SVG for the logo allows it to pick up the colors used in CSS, which is how the logo colors are inverted for the mobile menu.
-
-If you prefer to use an image, use the [`StaticImage`](https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-plugin-image/#staticimage) component from `gatsby-plugin-image` in place of the SVG in this file.
-
-### Customize headings, buttons, and other styles
-
-![Headings & Buttons](./docs/images/headings-buttons.png)
-
-To further customize the look and feel of the homepage, edit the UI components in `src/components/ui.tsx` and styles in `src/components/ui.css.ts`.
-
-### Customize section components
-
-To customize any of the sections of the homepage, edit the relevant component in `src/components`.
-Most of the styles for these components are handled with shared UI components in `src/components/ui.tsx`.
-
-### Create custom section components
-
-To create a new type of section in your homepage, you'll want to create a new section component, using the existing components as an example.
-For this example, we'll create a new "Banner" component.
-
-1. First, update your content model in Contentful
-
-   1. In your Contentful space, create a new content type and call it "Homepage Banner."
-
-      <img src="./docs/images/step-1.png" alt="Step 1" width="300" />
-
-   1. For this example, add two fields to your new content type: `heading` and `text` – these can be _Short text_ types.
-
-      <img src="./docs/images/step-2.png" alt="Step 2" width="300" />
-      <img src="./docs/images/step-3.png" alt="Step 3" width="300" />
-      <img src="./docs/images/step-4.png" alt="Step 4" width="300" />
-
-   1. Find the content type for _Homepage_ in Contentful and edit the settings for the _Content_ field. Under _Validation_, ensure that the new _Homepage Banner_ type is checked to make it available as a content type on the Homepage.
-
-      <img src="./docs/images/step-5.png" alt="Step 5" width="500" />
-      <img src="./docs/images/step-6.png" alt="Step 6" width="500" />
-      <img src="./docs/images/step-7.png" alt="Step 7" width="500" />
-
-   1. Navigate to the _Content_ tab to edit the _Homepage_ and add a section with this new _Homepage Banner_ content type.
-
-      <img src="./docs/images/step-8.png" alt="Step 8" width="500" />
-      <img src="./docs/images/step-9.png" alt="Step 9" width="500" />
-
-1. Update `gatsby-node.js`
-
-   Edit your site's `gatsby-node.js` file, adding an interface for `HomepageBanner` that matches your content model in Contentful.
-   This allows the homepage to query the abstract `HomepageBanner` type.
-
-   ```js
-   // in gatsby-node.js
-   exports.createSchemaCustomization = async ({ actions }) => {
-     // ...
-     actions.createTypes(`
-       interface HomepageBanner implements Node & HomepageBlock {
-         id: ID!
-         blocktype: String
-         heading: String
-         text: String
-       }
-     `)
-     // ...
-     actions.createTypes(`
-       type ContentfulHomepageBanner implements Node & HomepageBanner & HomepageBlock @dontInfer {
-         id: ID!
-         blocktype: String @blocktype
-         heading: String
-         text: String
-       }
-     `)
-     // ...
-   }
-   ```
-
-1. Next, create the Banner component:
-
-   ```jsx fileExt
-   // src/components/banner.tsx
-   import * as React from "react"
-   import { graphql } from "gatsby"
-   import { Section, Container, Heading, Text } from "./ui"
-
-   export default function Banner(props) {
-     return (
-       <Section>
-         <Container>
-           <Heading>{props.heading}</Heading>
-           <Text>{props.text}</Text>
-         </Container>
-       </Section>
-     )
-   }
-
-   export const query = graphql`
-     fragment HomepageBannerContent on HomepageBanner {
-       id
-       heading
-       text
-     }
-   `
-   ```
-
-1. Export the component from `src/components/sections.tsx`
-
-   ```js fileExt
-   // src/components/sections.tsx
-   export { default as HomepageHero } from "./hero"
-   export { default as HomepageFeature } from "./feature"
-   export { default as HomepageFeatureList } from "./feature-list"
-   export { default as HomepageLogoList } from "./logo-list"
-   export { default as HomepageBenefitList } from "./benefit-list"
-   export { default as HomepageTestimonialList } from "./testimonial-list"
-   export { default as HomepageStatList } from "./stat-list"
-   export { default as HomepageCta } from "./cta"
-   export { default as HomepageProductList } from "./product-list"
-
-   // add export for new component
-   export { default as HomepageBanner } from "./banner"
-   ```
-
-1. Add the GraphQL query fragment to the query in `src/pages/index.tsx`
-
-   ```js fileExt
-   // in src/pages/index.tsx
-   export const query = graphql`
-     {
-       homepage {
-         id
-         title
-         description
-         image {
-           id
-           url
-         }
-         blocks: content {
-           id
-           blocktype
-           ...HomepageHeroContent
-           ...HomepageFeatureContent
-           ...HomepageFeatureListContent
-           ...HomepageCtaContent
-           ...HomepageLogoListContent
-           ...HomepageTestimonialListContent
-           ...HomepageBenefitListContent
-           ...HomepageStatListContent
-           ...HomepageProductListContent
-           # New component fragment
-           ...HomepageBannerContent
-         }
-       }
-     }
-   `
-   ```
-
-## Troubleshooting
-
-### Errors after making changes to the schema
-
-If you've made changes to the `gatsby-node.js` file or changes to the Contentful data model, clear the Gatsby cache before running the develop server:
-
-```sh
-yarn clean && yarn start
+export const query = graphql`
+  query ($id: String!) {
+    blogPost(id: { eq: $id }) {
+      id
+      slug
+      title
+      html
+      excerpt
+      date
+      image {
+        id
+        url
+        gatsbyImageData
+        alt
+      }
+    }
+  }
+`
 ```
 
----
+## Using another CMS or data source
 
-## 🎓 Learning Gatsby
+If the CMS that you'd like to use for your blog hasn't been built as a theme yet, you can use [gatsby-theme-abstract-blog][] to pull your blog content for other sources.
 
-Looking for more guidance? Full documentation for Gatsby lives [on the website](https://www.gatsbyjs.com/). Here are some places to start:
+<!-- TODO: check links after publishing -->
 
-- **For most developers, we recommend starting with our [in-depth tutorial for creating a site with Gatsby](https://www.gatsbyjs.com/tutorial/).** It starts with zero assumptions about your level of ability and walks through every step of the process.
-- **To dive straight into code samples, head [to our documentation](https://www.gatsbyjs.com/docs/).**
-
-## 💫 Deploy
-
-[Build, Deploy, and Host On The Only Cloud Built For Gatsby](https://www.gatsbyjs.com/cloud/)
-
-Gatsby Cloud is an end-to-end cloud platform specifically built for the Gatsby framework that combines a modern developer experience with an optimized, global edge network.
+[gatsby-theme-abstract-blog]: https://github.com/gatsbyjs/homepage-starters/tree/main/themes/gatsby-theme-abstract-blog
+[gatsby-theme-contentful-blog]: https://github.com/gatsbyjs/homepage-starters/tree/main/themes/gatsby-theme-contentful-blog
+[gatsby-theme-datocms-blog]: https://github.com/gatsbyjs/homepage-starters/tree/main/themes/gatsby-theme-datocms-blog
+[gatsby-theme-wordpress-blog]: https://github.com/gatsbyjs/homepage-starters/tree/main/themes/gatsby-theme-wordpress-blog

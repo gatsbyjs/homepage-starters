@@ -183,8 +183,11 @@ Object.keys(starters).forEach(async (key, i) => {
     },
   }
   const readme = await buildMarkdown(template, opts)
-  const blogDocs = await buildMarkdown(blogTemplate, opts)
   fs.writeFileSync(path.join(outdir, `${isTS ? "TS-" : ""}README.md`), readme)
-  fs.writeFileSync(path.join(outdir, "docs", `adding-a-blog.md`), readme)
+  if (starter.blogTheme) {
+    const blogDocs = await buildMarkdown(blogTemplate, opts)
+    fs.writeFileSync(path.join(outdir, "docs", `adding-a-blog.md`), blogDocs)
+    console.log(`Blog theme docs written for ${key}`)
+  }
   console.log(`README.md written for ${key}`)
 })
