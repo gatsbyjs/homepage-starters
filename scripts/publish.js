@@ -42,6 +42,9 @@ fs.readdirSync(dir.dist).map((dirname) => {
   })
 })
 
+// ignore files in nested packages like sanity studio
+const ignoreRegEx = /node_modules|dist/
+
 const createStarterDist = async (basename, isTypescript = false) => {
   const repoName = `${basename}${isTypescript ? "-ts" : ""}`
   const repo = repos[repoName]
@@ -73,6 +76,7 @@ const createStarterDist = async (basename, isTypescript = false) => {
     ".cache",
     ".env.development",
     ".env.production",
+    "dist",
   ]
 
   // copy root files
@@ -185,6 +189,7 @@ const createStarterDist = async (basename, isTypescript = false) => {
     "docs/adding-a-blog.md",
     "data",
     "src/colors.css.ts",
+    "studio", // sanity studio
   ]
   // push cms-specific TS/JS files conditionally to files array
   if (isTypescript) {
@@ -204,7 +209,14 @@ const createStarterDist = async (basename, isTypescript = false) => {
     const dest = path.join(dir.dist, name, file)
     console.log(`Copying '${file}' to '${dest}'`)
     if (!fs.existsSync(src)) return
-    fs.copySync(src, dest)
+    fs.copySync(src, dest, {
+      filter: (n) => {
+        if (ignoreRegEx.test(n)) {
+          return false
+        }
+        return !ignore.includes(n)
+      },
+    })
     // if we copied over the TS version of the readme, rename it
     if (file === "TS-README.md") {
       fs.renameSync(dest, path.join(dir.dist, name, "README.md"))
