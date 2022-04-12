@@ -20,7 +20,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type DatoCmsAsset implements Node & Image {
       id: ID!
       alt: String
-      gatsbyImageData: JSON
+      gatsbyImageData: JSON @imagePassthroughArguments
       originalId: String
       entityPayload: JSON
       url: String
@@ -40,7 +40,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
       html: String! @datocmsRichText
       excerpt: String!
       image: Image
-      date: Date!
+      date: Date! @dateformat
+      category: String
       author: BlogAuthor
     }
   `)

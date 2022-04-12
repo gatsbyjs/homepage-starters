@@ -45,11 +45,9 @@ Add these two templates to your site.
 ```js
 // src/templates/blog-index.js
 import * as React from "react"
-import { graphql, Link } from "gatsby"
+import { Link } from "gatsby"
 
-export default function BlogIndex(props) {
-  const posts = props.data.allBlogPost.nodes
-
+export default function BlogIndex({ posts }) {
   return (
     <div>
       <h1>Blog</h1>
@@ -63,50 +61,24 @@ export default function BlogIndex(props) {
     </div>
   )
 }
-
-export const query = graphql`
-  query {
-    allBlogPost {
-      nodes {
-        id
-        slug
-        title
-      }
-    }
-  }
-`
 ```
 
 ```js
 // src/templates/blog-post.js
 import * as React from "react"
-import { graphql } from "gatsby"
 
 export default function BlogPost(props) {
-  const post = props.data.blogPost
-
   return (
     <div>
-      <h1>{post.title}</h1>
+      <h1>{props.title}</h1>
       <div
         dangerouslySetInnerHTML={{
-          __html: post.html,
+          __html: props.html,
         }}
       />
     </div>
   )
 }
-
-export const query = graphql`
-  query ($id: String!) {
-    blogPost(id: { eq: $id }) {
-      id
-      slug
-      title
-      html
-    }
-  }
-`
 ```
 
 ## Options
@@ -118,8 +90,8 @@ module.exports = {
     {
       resolve: "gatsby-theme-datocms-blog",
       options: {
-        postPath: "src/templates/blog-post.js",
-        indexPath: "src/templates/blog-index.js",
+        postPath: "src/templates/blog-posts",
+        indexPath: "src/templates/blog-index",
       },
     },
   ],
