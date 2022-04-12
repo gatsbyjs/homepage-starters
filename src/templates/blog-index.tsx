@@ -83,16 +83,10 @@ function PostCardSmall({
 }
 
 export interface BlogIndexProps {
-  data: {
-    allBlogPost: {
-      nodes: BlogPost[]
-    }
-  }
+  posts: BlogPost[]
 }
 
-export default function BlogIndex(props: BlogIndexProps) {
-  const posts = props.data.allBlogPost.nodes
-
+export default function BlogIndex({ posts }: BlogIndexProps) {
   const featuredPosts = posts.filter((p) => p.category === "Featured")
   const regularPosts = posts.filter((p) => p.category !== "Featured")
 
@@ -123,26 +117,3 @@ export default function BlogIndex(props: BlogIndexProps) {
     </Layout>
   )
 }
-
-export const query = graphql`
-  query {
-    allBlogPost(sort: { fields: date, order: DESC }) {
-      nodes {
-        id
-        slug
-        title
-        excerpt
-        category
-        image {
-          id
-          alt
-          gatsbyImageData(aspectRatio: 2)
-        }
-        author {
-          id
-          name
-        }
-      }
-    }
-  }
-`

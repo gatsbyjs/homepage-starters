@@ -9,11 +9,67 @@ const { getGatsbyImageResolver } = require("gatsby-plugin-image/graphql-utils")
 const defaults = {
   postPath: "src/templates/blog-post",
   indexPath: "src/templates/blog-index",
+  customQueries: false,
+}
+
+const pluginState = {}
+
+exports.onPluginInit = ({ reporter }, _opts = {}) => {
+  const components = {}
+  const opts = {
+    postPath: _opts.postPath || defaults.postPath,
+    indexPath: _opts.indexPath || defaults.indexPath,
+  }
+
+  try {
+    components.post = path.join(global.__GATSBY.root, opts.postPath)
+    components.index = path.join(global.__GATSBY.root, opts.indexPath)
+
+    if (fs.existsSync(components.post + ".js")) {
+      components.post = components.post + ".js"
+    } else if (fs.existsSync(components.post + ".tsx")) {
+      components.post = components.post + ".tsx"
+    } else {
+      delete components.post
+      reporter.warn(
+        `[gatsby-theme-abstract-blog] No template found for ${opts.postPath}`
+      )
+      return
+    }
+
+    if (fs.existsSync(components.index + ".js")) {
+      components.index = components.index + ".js"
+    } else if (fs.existsSync(components.index + ".tsx")) {
+      components.index = components.index + ".tsx"
+    } else {
+      delete components.index
+      reporter.warn(
+        `[gatsby-theme-abstract-blog] No template found for ${opts.indexPath}`
+      )
+    }
+  } catch (e) {
+    reporter.warn(`[gatsby-theme-abstract-blog] ${e}`)
+    return
+  }
+
+  pluginState.components = components
+}
+
+exports.pluginOptionsSchema = ({ Joi }) => {
+  return Joi.object({
+    postPath: Joi.string().description("File path to blog post template"),
+    indexPath: Joi.string().description(
+      "File path to blog index page template"
+    ),
+    customQueries: Joi.boolean().description(
+      "Use blog templates as page components with custom GraphQL queries"
+    ),
+  })
 }
 
 exports.createSchemaCustomization = async ({ actions }) => {
   actions.createFieldExtension({
-    name: "imagePassthroughArgs",
+    name: "imagePassthroughArguments",
     extend(options) {
       const { args } = getGatsbyImageResolver()
       return {
@@ -26,7 +82,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     interface Image implements Node {
       id: ID!
       alt: String
-      gatsbyImageData: JSON @imagePassthroughArgs
+      gatsbyImageData: JSON @imagePassthroughArguments
       url: String
     }
 
@@ -50,36 +106,39 @@ exports.createSchemaCustomization = async ({ actions }) => {
   `)
 }
 
+exports.onCreateWebpackConfig = ({ actions, reporter }, _opts = {}) => {
+  const components = pluginState.components
+
+  if (!components || !components.post || !components.index) {
+    // fallback components to prevent breaking builds
+    reporter.warn("[gatsby-theme-abstract-blog] Using fallback components")
+    components.post = path.join(__dirname, "src/fallback.js")
+    components.index = path.join(__dirname, "src/fallback.js")
+  }
+
+  actions.setWebpackConfig({
+    resolve: {
+      alias: {
+        "@gatsby-theme-abstract-blog/post": path.resolve(components.post),
+        "@gatsby-theme-abstract-blog/index": path.resolve(components.index),
+      },
+    },
+  })
+}
+
 exports.createPages = async ({ actions, graphql, reporter }, _opts = {}) => {
-  const components = {}
-  const opts = {
-    postPath: _opts.postPath || defaults.postPath,
-    indexPath: _opts.indexPath || defaults.indexPath,
-  }
+  const components = pluginState.components
+  if (!components || !components.post || !components.index) return
+  const opts = { ...defaults, ..._opts }
 
-  try {
-    components.post = path.join(global.__GATSBY.root, opts.postPath)
-    components.index = path.join(global.__GATSBY.root, opts.indexPath)
-    // todo throw when file not found
-    if (fs.existsSync(components.post + ".js")) {
-      components.post = components.post + ".js"
-    } else if (fs.existsSync(components.post + ".tsx")) {
-      components.post = components.post + ".tsx"
-    } else {
-      throw new Error(`No template found for ${opts.postPath}`)
-    }
+  reporter.info("[gatsby-theme-abstract-blog] creating pages")
 
-    if (fs.existsSync(components.index + ".js")) {
-      components.index = components.index + ".js"
-    } else if (fs.existsSync(components.index + ".tsx")) {
-      components.index = components.index + ".tsx"
-    } else {
-      throw new Error(`No template found for ${opts.indexPath}`)
-    }
-  } catch (e) {
-    reporter.warn(e)
-    return
-  }
+  const templates = opts.customQueries
+    ? components
+    : {
+        post: path.join(__dirname, "src/post.js"),
+        index: path.join(__dirname, "src/index.js"),
+      }
 
   const result = await graphql(`
     {
@@ -94,7 +153,7 @@ exports.createPages = async ({ actions, graphql, reporter }, _opts = {}) => {
 
   if (result.errors) {
     reporter.panicOnBuild(
-      `There was an error sourcing blog posts`,
+      `[gatsby-theme-abstract-blog] There was an error sourcing blog posts`,
       result.errors
     )
   }
@@ -105,7 +164,7 @@ exports.createPages = async ({ actions, graphql, reporter }, _opts = {}) => {
 
   actions.createPage({
     path: "/blog/",
-    component: components.index,
+    component: templates.index,
     context: {},
   })
 
@@ -115,7 +174,7 @@ exports.createPages = async ({ actions, graphql, reporter }, _opts = {}) => {
 
     actions.createPage({
       path: `/blog/${post.slug}`,
-      component: components.post,
+      component: templates.post,
       context: {
         id: post.id,
         slug: post.slug,

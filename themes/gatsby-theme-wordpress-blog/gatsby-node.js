@@ -1,13 +1,19 @@
 const sanitizeHTML = require("sanitize-html")
+const { getGatsbyImageResolver } = require("gatsby-plugin-image/graphql-utils")
 
 exports.createSchemaCustomization = async ({ actions }) => {
   actions.createFieldExtension({
     name: "wpImageProxy",
     extend(options) {
+      const { args } = getGatsbyImageResolver()
       return {
+        args,
         async resolve(source, args, context, info) {
           const imageType = info.schema.getType("ImageSharp")
-          const file = context.nodeModel.getNodeById(source.localFile)
+          const file = context.nodeModel.getNodeById({
+            id: source.localFile,
+          })
+          if (!file) return null
           const image = context.nodeModel.getNodeById({
             id: file.children[0],
           })
@@ -68,7 +74,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       alt: String
       url: String
-      gatsbyImageData: JSON
+      gatsbyImageData: JSON @wpImageProxy
     }
   `)
 }

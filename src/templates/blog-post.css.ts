@@ -1,5 +1,5 @@
 import { style, globalStyle } from "@vanilla-extract/css"
-import { theme } from "../theme.css"
+import { theme } from "../../src/theme.css"
 
 export const blogPost = style({
   fontSize: theme.fontSizes[3],
