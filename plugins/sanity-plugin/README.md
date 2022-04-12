@@ -48,7 +48,7 @@ You will need a Sanity account to use this starter. You can create a new account
    1. Optionally, to import the demo content for this starter run:
 
       ```sh
-      yarn import
+      yarn sanity-import
       ```
 
    1. Start the Sanity Studio development server to start editing content:
@@ -136,12 +136,11 @@ To update the colors used in this starter, edit the `src/colors.css.ts` file.
 ```.ts
 // src/colors.css.ts
 export const colors = {
-  // TODO
-  background: "#ffd500",
-  text: "#005bbb",
-  primary: "#005bbb",
-  muted: "#f5cc00",
-  active: "#004287",
+  background: "#f03e2f",
+  text: "#000000",
+  primary: "#000000",
+  muted: "#f14e41",
+  active: "#e6e6e6",
   black: "#000",
 }
 
