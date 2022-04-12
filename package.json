@@ -21,23 +21,26 @@
     "themes/*"
   ],
   "dependencies": {
-    "@fontsource/dm-mono": "^4.5.3",
-    "@fontsource/dm-sans": "^4.5.2",
+    "@fontsource/dm-mono": "^4.5.4",
+    "@fontsource/dm-sans": "^4.5.3",
     "@vanilla-extract/babel-plugin": "^1.1.4",
     "@vanilla-extract/css": "^1.6.8",
     "@vanilla-extract/css-utils": "^0.1.2",
     "@vanilla-extract/webpack-plugin": "^2.1.5",
-    "gatsby": "^4.9.2",
-    "gatsby-plugin-image": "^2.9.0",
-    "gatsby-plugin-sharp": "^4.9.0",
+    "gatsby": "^4.9.3",
+    "gatsby-plugin-image": "^2.9.1",
+    "gatsby-plugin-sharp": "^4.9.1",
     "gatsby-plugin-vanilla-extract": "^2.0.1",
-    "gatsby-source-filesystem": "^4.9.0",
+    "gatsby-source-filesystem": "^4.9.1",
+    "gatsby-theme-contentful-blog": "1.0.0-1",
+    "gatsby-theme-datocms-blog": "1.0.0-1",
+    "gatsby-theme-wordpress-blog": "1.0.0-1",
     "gatsby-transformer-sharp": "^4.9.0",
     "is-absolute-url": "^4.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-feather": "^2.0.9",
-    "sharp": "^0.30.2"
+    "sharp": "^0.30.3"
   },
   "devDependencies": {
     "debug": "^4.3.3",
@@ -48,9 +51,9 @@
     "remark-directive": "^2.0.1",
     "remark-parse": "^10.0.1",
     "remark-stringify": "^10.0.2",
-    "simple-git": "^3.2.6",
-    "typescript": "^4.6.2",
+    "simple-git": "^3.3.0",
     "unified": "^10.1.2",
+    "typescript": "^4.6.2",
     "unist-util-visit": "^4.1.0"
   },
   "lint-staged": {

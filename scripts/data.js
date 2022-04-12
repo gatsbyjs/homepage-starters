@@ -53,6 +53,24 @@ module.exports = {
     deploynow:
       "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-drupal-homepage-ts",
   },
+  sanity: {
+    repo: "https://github.com/gatsbyjs/gatsby-starter-sanity-homepage",
+    cms: "Sanity",
+    name: "sanity",
+    dirname: "sanity-plugin",
+    demoURL: "https://gatsbysanityhomepage.gatsbyjs.io/",
+    deploynow:
+      "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-sanity-homepage",
+  },
+  "sanity-ts": {
+    repo: "https://github.com/gatsbyjs/gatsby-starter-sanity-homepage-ts",
+    cms: "Sanity",
+    name: "sanity",
+    dirname: "sanity-plugin",
+    demoURL: "https://gatsbysanityhomepagets.gatsbyjs.io/",
+    deploynow:
+      "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-sanity-homepage-ts",
+  },
   wordpress: {
     repo: "https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage",
     cms: "WordPress",
