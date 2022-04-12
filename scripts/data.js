@@ -7,6 +7,7 @@ module.exports = {
     demoURL: "https://gatsbycontentfulhomepage.gatsbyjs.io/",
     deploynow:
       "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-contentful-homepage",
+    blogTheme: true,
   },
   "contentful-ts": {
     repo: "https://github.com/gatsbyjs/gatsby-starter-contentful-homepage-ts",
@@ -16,6 +17,7 @@ module.exports = {
     demoURL: "https://gatsbycontentfulhomepagets.gatsbyjs.io/",
     deploynow:
       "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-contentful-homepage-ts",
+    blogTheme: true,
   },
   datocms: {
     repo: "https://github.com/gatsbyjs/gatsby-starter-datocms-homepage",
@@ -25,6 +27,7 @@ module.exports = {
     demoURL: "https://gatsbydatocmshomepage.gatsbyjs.io/",
     deploynow:
       "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-datocms-homepage",
+    blogTheme: true,
   },
   "datocms-ts": {
     repo: "https://github.com/gatsbyjs/gatsby-starter-datocms-homepage-ts",
@@ -34,6 +37,7 @@ module.exports = {
     demoURL: "https://gatsbydatocmshomepagets.gatsbyjs.io/",
     deploynow:
       "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-datocms-homepage-ts",
+    blogTheme: true,
   },
   drupal: {
     repo: "https://github.com/gatsbyjs/gatsby-starter-drupal-homepage",
@@ -43,6 +47,7 @@ module.exports = {
     demoURL: "https://gatsbydrupalhomepage.gatsbyjs.io/",
     deploynow:
       "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-drupal-homepage",
+    blogTheme: false,
   },
   "drupal-ts": {
     repo: "https://github.com/gatsbyjs/gatsby-starter-drupal-homepage-ts",
@@ -52,6 +57,7 @@ module.exports = {
     demoURL: "https://gatsbydrupalhomepagets.gatsbyjs.io/",
     deploynow:
       "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-drupal-homepage-ts",
+    blogTheme: false,
   },
   sanity: {
     repo: "https://github.com/gatsbyjs/gatsby-starter-sanity-homepage",
@@ -61,6 +67,7 @@ module.exports = {
     demoURL: "https://gatsbysanityhomepage.gatsbyjs.io/",
     deploynow:
       "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-sanity-homepage",
+    blogTheme: false,
   },
   "sanity-ts": {
     repo: "https://github.com/gatsbyjs/gatsby-starter-sanity-homepage-ts",
@@ -70,6 +77,7 @@ module.exports = {
     demoURL: "https://gatsbysanityhomepagets.gatsbyjs.io/",
     deploynow:
       "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-sanity-homepage-ts",
+    blogTheme: false,
   },
   wordpress: {
     repo: "https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage",
@@ -79,6 +87,7 @@ module.exports = {
     demoURL: "https://gatsbywordpresshomepage.gatsbyjs.io/",
     deploynow:
       "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage",
+    blogTheme: true,
   },
   "wordpress-ts": {
     repo: "https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage-ts",
@@ -88,5 +97,6 @@ module.exports = {
     demoURL: "https://gatsbywordpresshomepagets.gatsbyjs.io/",
     deploynow:
       "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage-ts",
+    blogTheme: true,
   },
 }

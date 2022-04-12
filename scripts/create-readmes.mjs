@@ -166,12 +166,13 @@ const buildMarkdown = async (md, opts) => {
 }
 
 const template = fs.readFileSync("docs/readme-template.md", "utf8")
+const blogTemplate = fs.readFileSync("docs/adding-a-blog.md", "utf8")
 
 Object.keys(starters).forEach(async (key, i) => {
   const starter = starters[key]
   const isTS = key.includes("-ts")
   const outdir = path.join(process.cwd(), "plugins", starter.dirname)
-  const readme = await buildMarkdown(template, {
+  const opts = {
     basedir: path.join(process.cwd(), "plugins", starter.dirname),
     vars: {
       ...starter,
@@ -180,7 +181,13 @@ Object.keys(starters).forEach(async (key, i) => {
       altRepoType: isTS ? "JavaScript" : "TypeScript",
       altRepoUrl: starters[isTS ? key.replace("-ts", "") : `${key}-ts`].repo,
     },
-  })
+  }
+  const readme = await buildMarkdown(template, opts)
   fs.writeFileSync(path.join(outdir, `${isTS ? "TS-" : ""}README.md`), readme)
+  if (starter.blogTheme) {
+    const blogDocs = await buildMarkdown(blogTemplate, opts)
+    fs.writeFileSync(path.join(outdir, "docs", `adding-a-blog.md`), blogDocs)
+    console.log(`Blog theme docs written for ${key}`)
+  }
   console.log(`README.md written for ${key}`)
 })

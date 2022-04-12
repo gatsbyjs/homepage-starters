@@ -182,6 +182,7 @@ const createStarterDist = async (basename, isTypescript = false) => {
     "package.json",
     "scripts",
     "docs/images",
+    "docs/adding-a-blog.md",
     "data",
     "src/colors.css.ts",
   ]
