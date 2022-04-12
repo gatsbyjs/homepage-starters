@@ -4,7 +4,6 @@ const { getGatsbyImageResolver } = require("gatsby-plugin-image/graphql-utils")
 
 // This core theme expects a src/template/blog-post.js
 // and src/template/blog-index.js in the host site
-// as well as an abstract BlogPost interface in GraphQL
 
 const defaults = {
   postPath: "src/templates/blog-post",
