@@ -284,7 +284,7 @@ const createPackageJSON = (name, isTypescript = false) => {
   Object.entries(root.dependencies).forEach(([key, val]) => {
     pkg.dependencies[key] = val
   })
-  pkg.devDependencies = {}
+  pkg.devDependencies = pkg.devDependencies || {}
   // prettier dev dependencies
   const devDeps = ["prettier", "husky", "lint-staged"]
   devDeps.forEach((devDep) => {
