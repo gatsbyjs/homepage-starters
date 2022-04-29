@@ -8,6 +8,7 @@ To use these starters for a new Gatsby site, use one of the following:
 - https://github.com/gatsbyjs/gatsby-starter-datocms-homepage
 - https://github.com/gatsbyjs/gatsby-starter-drupal-homepage
 - https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage
+- https://github.com/gatsbyjs/gatsby-starter-sanity-homepage
 
 ## Local development
 
