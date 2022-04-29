@@ -35,5 +35,5 @@
    1. In your _Gatsby site's directory_, to create `.env.development` and `.env.production` files with configuration for your Sanity project, run:
 
       ```sh
-      yarn setup
+      yarn & yarn setup
       ```
