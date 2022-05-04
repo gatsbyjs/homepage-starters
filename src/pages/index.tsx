@@ -18,7 +18,7 @@ interface HomepageProps {
 
 export default function Homepage(props: HomepageProps) {
   const { homepage } = props.data
-
+  console.log("props", props)
   return (
     <Layout {...homepage}>
       {homepage.blocks.map((block) => {

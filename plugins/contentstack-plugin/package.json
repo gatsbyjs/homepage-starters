@@ -1,0 +1,19 @@
+{
+  "name": "contentstack",
+  "version": "1.0.0",
+  "scripts": {
+    "setup": "node ./scripts/setup.js",
+    "export-content": "contentful space export --space-id=$SPACE_ID --management-token=$MANAGEMENT_TOKEN --export-dir=scripts --content-file=data.json"
+  },
+  "dependencies": {
+    "gatsby-plugin-manifest": "^4.6.0",
+    "gatsby-plugin-react-helmet": "^5.5.0",
+    "gatsby-source-contentstack": "^4.0.1",
+    "react-helmet": "^6.1.0"
+  },
+  "devDependencies": {
+    "chalk": "4",
+    "inquirer": "^8.2.0",
+    "yargs-parser": "^21.0.0"
+  }
+}
