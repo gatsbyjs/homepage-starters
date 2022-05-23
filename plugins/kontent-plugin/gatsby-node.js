@@ -58,8 +58,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
         defaultValue: "",
       },
     },
-    // The extension `args` (above) are passed to `extend` as
-    // the first argument (`options` below)
     extend(options, prevFieldConfig) {
       return {
         args: {
@@ -74,46 +72,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
   actions.createFieldExtension({
     name: "KontentNodeFromElement",
-    args: {
-      variableName: {
-        type: "String",
-        defaultValue: "",
-      },
-      type: {
-        type: "String",
-        defaultValue: "",
-      },
-    },
-    extend(options, prevFieldConfig) {
-      return {
-        async resolve(source, args, context, info) {
-          const codenames = source.elements[options.variableName].value
-          const lng = source.preferred_language
-
-          const { entries } = await context.nodeModel.findAll({
-            query: {
-              filter: {
-                system: {
-                  codename: {
-                    in: codenames,
-                  },
-                },
-                preferred_language: {
-                  eq: lng,
-                },
-              },
-            },
-            type: getKontentItemNodeTypeName(options.type),
-          })
-
-          return entries
-        },
-      }
-    },
-  })
-
-  actions.createFieldExtension({
-    name: "KontentNodFromElement",
     args: {
       variableName: {
         type: "String",
@@ -172,7 +130,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
   })
 
   actions.createFieldExtension({
-    name: "KontentBlock",
+    name: "KontentNodesFromElement",
     args: {
       variableName: {
         type: "String",
@@ -202,17 +160,13 @@ exports.createSchemaCustomization = async ({ actions }) => {
                 },
               },
             },
-            type: options.type,
+            type: getKontentItemNodeTypeName(options.type),
           })
+          const arrayEntries = Array.from(entries)
 
-          const mapEntries = Array.from(entries.map((val) => val))
-
-          const return_entries = codenames.map(
-            (val) => mapEntries.filter((x) => x.system.codename === val)[0]
+          return codenames.map(
+            (val) => arrayEntries.filter((x) => x.system.codename === val)[0]
           )
-
-          const centries = return_entries
-          return return_entries
         },
       }
     },
@@ -304,13 +258,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
       blocktype: String
     }
 
-    interface kontent_homepage_block implements Node & HomepageBlock {
-      id: ID!
-      blocktype: String
-      system: kontent_item_system!
-      preferred_language: String!
-    }
-
     interface HomepageLink implements Node {
       id: ID!
       href: String
@@ -339,13 +286,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
 
     interface HomepageImage implements Node {
-      id: ID!
-      alt: String
-      gatsbyImageData: JSON @imagePassthroughArgs
-      url: String
-    }
-
-    type kontent_asset_homepage_image implements Node & HomepageImage {
       id: ID!
       alt: String
       gatsbyImageData: JSON @imagePassthroughArgs
@@ -578,30 +518,12 @@ exports.createSchemaCustomization = async ({ actions }) => {
     }
   `)
 
-  actions.createTypes(/* GraphQL */ `
-    type kontent_item_homepage_link implements Node & HomepageLink @dontInfer {
+  actions.createTypes(/* GraphQl */ `
+    interface kontent_item_homepage_block implements Node & HomepageBlock {
       id: ID!
-      href: String @KontentObject(variableName: "href")
-      text: String @KontentObject(variableName: "text")
-    }
-
-    type kontent_item_nav_item implements Node & NavItem & HeaderNavItem
-      @dontInfer {
-      id: ID!
-      navItemType: String @navItemType(name: "Link")
-      href: String @KontentObject(variableName: "href")
-      text: String @KontentObject(variableName: "text")
-      icon: HomepageImage @KontentImage
-      description: String @KontentObject(variableName: "description")
-    }
-
-    type kontent_item_navitemgroup implements Node & NavItemGroup & HeaderNavItem
-      @dontInfer {
-      id: ID!
-      navItemType: String @navItemType(name: "Group")
-      name: String @KontentObject(variableName: "name")
-      navItems: [NavItem]
-        @KontentNodeFromElement(variableName: "navitems", type: "nav_item")
+      blocktype: String
+      system: kontent_item_system!
+      preferred_language: String!
     }
 
     type kontent_asset_homepage_image implements Node & HomepageImage {
@@ -611,7 +533,48 @@ exports.createSchemaCustomization = async ({ actions }) => {
       url: String
     }
 
-    type kontent_item_homepage_hero implements Node & HomepageHero & kontent_homepage_block & HomepageBlock
+    interface kontent_item_header_nav_item implements Node & HeaderNavItem {
+      id: ID!
+      navItemType: String
+      system: kontent_item_system!
+      preferred_language: String!
+    }
+  `)
+
+  actions.createTypes(/* GraphQL */ `
+    type kontent_item_homepage_link implements Node & HomepageLink @dontInfer {
+      id: ID!
+      href: String @KontentObject(variableName: "href")
+      text: String @KontentObject(variableName: "text")
+    }
+
+    type kontent_item_nav_item implements Node & NavItem & HeaderNavItem & kontent_item_header_nav_item
+      @dontInfer {
+      id: ID!
+      navItemType: String @navItemType(name: "Link")
+      href: String @KontentObject(variableName: "href")
+      text: String @KontentObject(variableName: "text")
+      icon: HomepageImage @KontentImage(variableName: "icon")
+      description: String @KontentObject(variableName: "description")
+    }
+
+    type kontent_item_navitemgroup implements Node & NavItemGroup & HeaderNavItem & kontent_item_header_nav_item
+      @dontInfer {
+      id: ID!
+      navItemType: String @navItemType(name: "Group")
+      name: String @KontentObject(variableName: "name")
+      navItems: [NavItem]
+        @KontentNodesFromElement(variableName: "navitems", type: "nav_item")
+    }
+
+    type kontent_asset_homepage_image implements Node & HomepageImage {
+      id: ID!
+      alt: String
+      gatsbyImageData: JSON @imagePassthroughArgs
+      url: String
+    }
+
+    type kontent_item_homepage_hero implements Node & HomepageHero & kontent_item_homepage_block & HomepageBlock
       @dontInfer {
       id: ID!
       blocktype: String @blocktype
@@ -621,10 +584,10 @@ exports.createSchemaCustomization = async ({ actions }) => {
       image: HomepageImage @KontentImage
       text: String @KontentObject(variableName: "text")
       links: [HomepageLink]
-        @KontentNodeFromElement(variableName: "links", type: "homepage_link")
+        @KontentNodesFromElement(variableName: "links", type: "homepage_link")
     }
 
-    type kontent_item_homepage_feature implements Node & kontent_homepage_block & HomepageBlock & HomepageFeature
+    type kontent_item_homepage_feature implements Node & kontent_item_homepage_block & HomepageBlock & HomepageFeature
       @dontInfer {
       blocktype: String @blocktype
       heading: String @KontentObject(variableName: "heading")
@@ -632,23 +595,23 @@ exports.createSchemaCustomization = async ({ actions }) => {
       text: String @KontentObject(variableName: "text")
       image: HomepageImage @KontentImage
       links: [HomepageLink]
-        @KontentNodeFromElement(variableName: "links", type: "homepage_link")
+        @KontentNodesFromElement(variableName: "links", type: "homepage_link")
     }
 
-    type kontent_item_homepage_feature_list implements Node & kontent_homepage_block & HomepageBlock & HomepageFeatureList
+    type kontent_item_homepage_feature_list implements Node & kontent_item_homepage_block & HomepageBlock & HomepageFeatureList
       @dontInfer {
       blocktype: String @blocktype
       kicker: String @KontentObject(variableName: "kicker")
       heading: String @KontentObject(variableName: "heading")
       text: String @KontentObject(variableName: "text")
       content: [HomepageFeature]
-        @KontentNodeFromElement(
+        @KontentNodesFromElement(
           variableName: "content"
           type: "homepage_feature"
         )
     }
 
-    type kontent_item_homepage_cta implements Node & kontent_homepage_block & HomepageBlock & HomepageCta
+    type kontent_item_homepage_cta implements Node & kontent_item_homepage_block & HomepageBlock & HomepageCta
       @dontInfer {
       blocktype: String @blocktype
       kicker: String @KontentObject(variableName: "kicker")
@@ -656,7 +619,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       text: String @KontentObject(variableName: "text")
       image: HomepageImage @KontentImage
       links: [HomepageLink]
-        @KontentNodeFromElement(variableName: "links", type: "homepage_link")
+        @KontentNodesFromElement(variableName: "links", type: "homepage_link")
     }
 
     type kontent_item_homepage_logo implements Node & HomepageLogo @dontInfer {
@@ -665,12 +628,12 @@ exports.createSchemaCustomization = async ({ actions }) => {
       alt: String @KontentObject(variableName: "alt")
     }
 
-    type kontent_item_homepage_logo_list implements Node & kontent_homepage_block & HomepageBlock & HomepageLogoList
+    type kontent_item_homepage_logo_list implements Node & kontent_item_homepage_block & HomepageBlock & HomepageLogoList
       @dontInfer {
       blocktype: String @blocktype
       text: String @KontentObject(variableName: "text")
       logos: [HomepageLogo]
-        @KontentNodeFromElement(variableName: "logos", type: "homepage_logo")
+        @KontentNodesFromElement(variableName: "logos", type: "homepage_logo")
     }
 
     type kontent_item_homepage_testimonial implements Node & HomepageTestimonial
@@ -681,14 +644,14 @@ exports.createSchemaCustomization = async ({ actions }) => {
       avatar: HomepageImage @KontentImage(variableName: "avatar")
     }
 
-    type kontent_item_homepage_testimonial_list implements Node & kontent_homepage_block & HomepageBlock & HomepageTestimonialList
+    type kontent_item_homepage_testimonial_list implements Node & kontent_item_homepage_block & HomepageBlock & HomepageTestimonialList
       @dontInfer {
       id: ID!
       blocktype: String @blocktype
       kicker: String @KontentObject(variableName: "kicker")
       heading: String @KontentObject(variableName: "heading")
       content: [HomepageTestimonial]
-        @KontentNodeFromElement(
+        @KontentNodesFromElement(
           variableName: "content"
           type: "homepage_testimonial"
         )
@@ -702,14 +665,14 @@ exports.createSchemaCustomization = async ({ actions }) => {
       image: HomepageImage @KontentImage
     }
 
-    type kontent_item_homepage_benefit_list implements Node & kontent_homepage_block & HomepageBlock & HomepageBenefitList
+    type kontent_item_homepage_benefit_list implements Node & kontent_item_homepage_block & HomepageBlock & HomepageBenefitList
       @dontInfer {
       id: ID!
       blocktype: String @blocktype
       heading: String @KontentObject(variableName: "heading")
       text: String @KontentObject(variableName: "text")
       content: [HomepageBenefit]
-        @KontentNodeFromElement(
+        @KontentNodesFromElement(
           variableName: "content"
           type: "homepage_benefit"
         )
@@ -722,7 +685,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       heading: String @KontentObject(variableName: "heading")
     }
 
-    type kontent_item_homepage_stat_list implements Node & kontent_homepage_block & HomepageBlock & HomepageStatList
+    type kontent_item_homepage_stat_list implements Node & kontent_item_homepage_block & HomepageBlock & HomepageStatList
       @dontInfer {
       id: ID!
       blocktype: String @blocktype
@@ -732,9 +695,9 @@ exports.createSchemaCustomization = async ({ actions }) => {
       image: HomepageImage @KontentImage
       icon: HomepageImage @KontentImage(variableName: "icon")
       content: [HomepageStat]
-        @KontentNodeFromElement(variableName: "content", type: "homepage_stat")
+        @KontentNodesFromElement(variableName: "content", type: "homepage_stat")
       links: [HomepageLink]
-        @KontentNodeFromElement(variableName: "links", type: "homepage_link")
+        @KontentNodesFromElement(variableName: "links", type: "homepage_link")
     }
 
     type kontent_item_homepage_product implements Node & HomepageProduct
@@ -743,17 +706,17 @@ exports.createSchemaCustomization = async ({ actions }) => {
       text: String @KontentObject(variableName: "text")
       image: HomepageImage @KontentImage
       links: [HomepageLink]
-        @KontentNodeFromElement(variableName: "links", type: "homepage_link")
+        @KontentNodesFromElement(variableName: "links", type: "homepage_link")
     }
 
-    type kontent_item_homepage_product_list implements Node & HomepageProductList & kontent_homepage_block & HomepageBlock
+    type kontent_item_homepage_product_list implements Node & HomepageProductList & kontent_item_homepage_block & HomepageBlock
       @dontInfer {
       blocktype: String @blocktype
       heading: String @KontentObject(variableName: "heading")
       kicker: String @KontentObject(variableName: "kicker")
       text: String @KontentObject(variableName: "text")
       content: [HomepageProduct]
-        @KontentNodeFromElement(
+        @KontentNodesFromElement(
           variableName: "content"
           type: "homepage_product"
         )
@@ -765,13 +728,16 @@ exports.createSchemaCustomization = async ({ actions }) => {
       description: String @KontentObject(variableName: "description")
       image: HomepageImage @KontentImage
       content: [HomepageBlock]
-        @KontentBlock(variableName: "content", type: "kontent_homepage_block")
+        @KontentNodesFromElement(
+          variableName: "content"
+          type: "homepage_block"
+        )
     }
   `)
 
   // CMS specific types for About page
   actions.createTypes(/* GraphQL */ `
-    type kontent_item_about_hero implements Node & AboutHero & kontent_homepage_block & HomepageBlock
+    type kontent_item_about_hero implements Node & AboutHero & kontent_item_homepage_block & HomepageBlock
       @dontInfer {
       id: ID!
       blocktype: String @blocktype
@@ -786,12 +752,12 @@ exports.createSchemaCustomization = async ({ actions }) => {
       label: String @KontentObject(variableName: "label")
     }
 
-    type kontent_item_about_stat_list implements Node & AboutStatList & kontent_homepage_block & HomepageBlock
+    type kontent_item_about_stat_list implements Node & AboutStatList & kontent_item_homepage_block & HomepageBlock
       @dontInfer {
       id: ID!
       blocktype: String @blocktype
       content: [AboutStat]
-        @KontentNodeFromElement(variableName: "content", type: "about_stat")
+        @KontentNodesFromElement(variableName: "content", type: "about_stat")
     }
 
     type kontent_item_about_profile implements Node & AboutProfile @dontInfer {
@@ -801,7 +767,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       jobTitle: String @KontentObject(variableName: "job_title")
     }
 
-    type kontent_item_about_leadership implements Node & AboutLeadership & kontent_homepage_block & HomepageBlock
+    type kontent_item_about_leadership implements Node & AboutLeadership & kontent_item_homepage_block & HomepageBlock
       @dontInfer {
       id: ID!
       blocktype: String @blocktype
@@ -809,18 +775,18 @@ exports.createSchemaCustomization = async ({ actions }) => {
       heading: String @KontentObject(variableName: "heading")
       subhead: String @KontentObject(variableName: "subhead")
       content: [AboutProfile]
-        @KontentNodeFromElement(variableName: "content", type: "about_profile")
+        @KontentNodesFromElement(variableName: "content", type: "about_profile")
     }
 
-    type kontent_item_about_logo_list implements Node & AboutLogoList & kontent_homepage_block & HomepageBlock
+    type kontent_item_about_logo_list implements Node & AboutLogoList & kontent_item_homepage_block & HomepageBlock
       @dontInfer {
       id: ID!
       blocktype: String @blocktype
       heading: String @KontentObject(variableName: "heading")
       links: [HomepageLink]
-        @KontentNodeFromElement(variableName: "links", type: "homepage_link")
+        @KontentNodesFromElement(variableName: "links", type: "homepage_link")
       logos: [HomepageLogo]
-        @KontentNodeFromElement(variableName: "logos", type: "homepage_logo")
+        @KontentNodesFromElement(variableName: "logos", type: "homepage_logo")
     }
 
     type kontent_item_about_page implements Node & AboutPage @dontInfer {
@@ -829,7 +795,10 @@ exports.createSchemaCustomization = async ({ actions }) => {
       description: String @KontentObject(variableName: "description")
       image: HomepageImage @KontentImage
       content: [HomepageBlock]
-        @KontentBlock(variableName: "content", type: "kontent_homepage_block")
+        @KontentNodesFromElement(
+          variableName: "content"
+          type: "homepage_block"
+        )
     }
   `)
 
@@ -838,9 +807,12 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type kontent_item_layoutheader implements Node & LayoutHeader @dontInfer {
       id: ID!
       navItems: [HeaderNavItem]
-        @KontentNodeFromElement(variableName: "navitems", type: "nav_item")
+        @KontentNodesFromElement(
+          variableName: "navitems"
+          type: "header_nav_item"
+        )
       cta: HomepageLink
-        @KontentNodFromElement(variableName: "cta", type: "homepage_link")
+        @KontentNodeFromElement(variableName: "cta", type: "homepage_link")
     }
 
     type kontent_item_sociallink implements Node & SocialLink @dontInfer {
@@ -852,11 +824,11 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type kontent_item_layoutfooter implements Node & LayoutFooter @dontInfer {
       id: ID!
       links: [HomepageLink]
-        @KontentNodeFromElement(variableName: "links", type: "homepage_link")
+        @KontentNodesFromElement(variableName: "links", type: "homepage_link")
       meta: [HomepageLink]
-        @KontentNodeFromElement(variableName: "meta", type: "homepage_link")
+        @KontentNodesFromElement(variableName: "meta", type: "homepage_link")
       socialLinks: [SocialLink]
-        @KontentNodeFromElement(
+        @KontentNodesFromElement(
           variableName: "social_links"
           type: "sociallink"
         )
@@ -866,9 +838,9 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type kontent_item_layout implements Node & Layout @dontInfer {
       id: ID!
       header: LayoutHeader
-        @KontentNodFromElement(variableName: "header", type: "layoutheader")
+        @KontentNodeFromElement(variableName: "header", type: "layoutheader")
       footer: LayoutFooter
-        @KontentNodFromElement(variableName: "footer", type: "layoutfooter")
+        @KontentNodeFromElement(variableName: "footer", type: "layoutfooter")
     }
   `)
 

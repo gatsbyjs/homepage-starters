@@ -5,9 +5,9 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     siteUrl: "https://gatsbycontentfulhomepage.gatsbyjs.io/",
-    title: "Gatsby Contentful Homepage Starter",
+    title: "Gatsby Kontent Homepage Starter",
     author: `Gatsby`,
-    description: "A Gatsby Starter for building homepages with Contentful",
+    description: "A Gatsby Starter for building homepages with Kontent",
   },
   plugins: [
     {
@@ -25,10 +25,10 @@ module.exports = {
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        name: "Gatsby Starter Contentful Homepage",
+        name: "Gatsby Starter Kontent Homepage",
         short_name: "Gatsby",
         start_url: "/",
-        background_color: "#ffe491",
+        background_color: "#F05A22",
         theme_color: "#004ca3",
         icon: "src/favicon.png",
       },
