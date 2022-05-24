@@ -108,7 +108,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     interface HomepageImage implements Node {
       id: ID!
       alt: String
-      gatsbyImageData: JSON @imagePassthroughArgs
+      gatsbyImageData: JSON
       url: String
     }
 
@@ -352,16 +352,16 @@ exports.createSchemaCustomization = async ({ actions }) => {
       navItemType: String @navItemType(name: "Link")
       href: String
       text: String
-      icon: HomepageImage @link(from: "icon___NODE")
+      icon: HomepageImage @link
       description: String
     }
 
-    type Contentstack_nav_item_group implements Node & NavItemGroup & HeaderNavItem
+    type Contentstack_navitemgroup implements Node & NavItemGroup & HeaderNavItem
       @dontInfer {
       id: ID!
       navItemType: String @navItemType(name: "Group")
       name: String
-      navItems: [NavItem] @link(from: "navItems___NODE")
+      navItems: [NavItem] @link(from: "navitems___NODE")
     }
 
     type Contentstack_assets implements Node & HomepageImage {
@@ -379,9 +379,9 @@ exports.createSchemaCustomization = async ({ actions }) => {
       heading: String!
       kicker: String
       subhead: String
-      image: HomepageImage @link(from: "image___NODE")
+      image: HomepageImage @link
       text: String
-      links: [HomepageLink] @link(from: "links___NODE")
+      links: [HomepageLink] @link
     }
 
     type Contentstack_homepage_feature implements Node & HomepageBlock & HomepageFeature
@@ -390,8 +390,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
       heading: String
       kicker: String
       text: String
-      image: HomepageImage @link(from: "image___NODE")
-      links: [HomepageLink] @link(from: "links___NODE")
+      image: HomepageImage @link
+      links: [HomepageLink] @link
     }
 
     type Contentstack_homepage_feature_list implements Node & HomepageBlock & HomepageFeatureList
@@ -400,7 +400,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       kicker: String
       heading: String
       text: String
-      content: [HomepageFeature] @link(from: "content___NODE")
+      content: [HomepageFeature] @link
     }
 
     type Contentstack_homepage_cta implements Node & HomepageBlock & HomepageCta
@@ -409,13 +409,13 @@ exports.createSchemaCustomization = async ({ actions }) => {
       kicker: String
       heading: String
       text: String
-      image: HomepageImage @link(from: "image___NODE")
-      links: [HomepageLink] @link(from: "links___NODE")
+      image: HomepageImage @link
+      links: [HomepageLink] @link
     }
 
     type Contentstack_homepage_logo implements Node & HomepageLogo @dontInfer {
       id: ID!
-      image: HomepageImage @link(from: "image___NODE")
+      image: HomepageImage @link
       alt: String
     }
 
@@ -423,7 +423,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       @dontInfer {
       blocktype: String @blocktype
       text: String
-      logos: [HomepageLogo] @link(from: "logos___NODE")
+      logos: [HomepageLogo] @link
     }
 
     type Contentstack_homepage_testimonial implements Node & HomepageTestimonial
@@ -431,7 +431,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       quote: String
       source: String
-      avatar: HomepageImage @link(from: "avatar___NODE")
+      avatar: HomepageImage @link
     }
 
     type Contentstack_homepage_testimonial_list implements Node & HomepageBlock & HomepageTestimonialList
@@ -440,7 +440,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       blocktype: String @blocktype
       kicker: String
       heading: String
-      content: [HomepageTestimonial] @link(from: "content___NODE")
+      content: [HomepageTestimonial] @link
     }
 
     type Contentstack_homepage_benefit implements Node & HomepageBenefit
@@ -448,7 +448,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       heading: String
       text: String
-      image: HomepageImage @link(from: "image___NODE")
+      image: HomepageImage @link
     }
 
     type Contentstack_homepage_benefit_list implements Node & HomepageBlock & HomepageBenefitList
@@ -457,7 +457,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       blocktype: String @blocktype
       heading: String
       text: String
-      content: [HomepageBenefit] @link(from: "content___NODE")
+      content: [HomepageBenefit] @link
     }
 
     type Contentstack_homepage_stat implements Node & HomepageStat @dontInfer {
@@ -474,18 +474,18 @@ exports.createSchemaCustomization = async ({ actions }) => {
       kicker: String
       heading: String
       text: String
-      image: HomepageImage @link(from: "image___NODE")
-      icon: HomepageImage @link(from: "icon___NODE")
-      content: [HomepageStat] @link(from: "content___NODE")
-      links: [HomepageLink] @link(from: "links___NODE")
+      image: HomepageImage @link
+      icon: HomepageImage @link
+      content: [HomepageStat] @link
+      links: [HomepageLink] @link
     }
 
     type Contentstack_homepage_product implements Node & HomepageProduct
       @dontInfer {
       heading: String
       text: String
-      image: HomepageImage @link(from: "image___NODE")
-      links: [HomepageLink] @link(from: "links___NODE")
+      image: HomepageImage @link
+      links: [HomepageLink] @link
     }
 
     type Contentstack_homepage_product_list implements Node & HomepageProductList & HomepageBlock
@@ -494,15 +494,15 @@ exports.createSchemaCustomization = async ({ actions }) => {
       heading: String
       kicker: String
       text: String
-      content: [HomepageProduct] @link(from: "content___NODE")
+      content: [HomepageProduct] @link
     }
 
     type Contentstack_homepage implements Node & Homepage @dontInfer {
       id: ID!
       title: String
       description: String
-      image: HomepageImage @link(from: "image___NODE")
-      content: [HomepageBlock] @link(from: "content___NODE")
+      image: HomepageImage @link
+      content: [HomepageBlock] @link
     }
   `)
 
@@ -514,7 +514,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       blocktype: String @blocktype
       heading: String
       text: String
-      image: HomepageImage @link(from: "image___NODE")
+      image: HomepageImage @link
     }
 
     type Contentstack_about_stat implements Node & AboutStat @dontInfer {
@@ -527,12 +527,12 @@ exports.createSchemaCustomization = async ({ actions }) => {
       @dontInfer {
       id: ID!
       blocktype: String @blocktype
-      content: [AboutStat] @link(from: "content___NODE")
+      content: [AboutStat] @link
     }
 
     type Contentstack_about_profile implements Node & AboutProfile @dontInfer {
       id: ID!
-      image: HomepageImage @link(from: "image___NODE")
+      image: HomepageImage @link
       name: String
       jobTitle: String
     }
@@ -544,7 +544,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       kicker: String
       heading: String
       subhead: String
-      content: [AboutProfile] @link(from: "content___NODE")
+      content: [AboutProfile] @link
     }
 
     type Contentstack_about_logo_list implements Node & AboutLogoList & HomepageBlock
@@ -552,16 +552,16 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       blocktype: String @blocktype
       heading: String
-      links: [HomepageLink] @link(from: "links___NODE")
-      logos: [HomepageLogo] @link(from: "logos___NODE")
+      links: [HomepageLink] @link
+      logos: [HomepageLogo] @link
     }
 
     type Contentstack_about_page implements Node & AboutPage @dontInfer {
       id: ID!
       title: String
       description: String
-      image: HomepageImage @link(from: "image___NODE")
-      content: [HomepageBlock] @link(from: "content___NODE")
+      image: HomepageImage @link
+      content: [HomepageBlock] @link
     }
   `)
 
@@ -569,7 +569,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
   actions.createTypes(/* GraphQL */ `
     type Contentstack_layoutheader implements Node & LayoutHeader @dontInfer {
       id: ID!
-      navItems: [HeaderNavItem] @link(from: "navItems__NODE")
+      navItems: [HeaderNavItem] @link(from: "navitems___NODE")
+      # TODO convert array to single node
       cta: HomepageLink @link(from: "cta___NODE")
     }
 
@@ -581,16 +582,17 @@ exports.createSchemaCustomization = async ({ actions }) => {
 
     type Contentstack_layoutfooter implements Node & LayoutFooter @dontInfer {
       id: ID!
-      links: [HomepageLink] @link(from: "links___NODE")
-      meta: [HomepageLink] @link(from: "meta___NODE")
-      socialLinks: [SocialLink] @link(from: "socialLinks___NODE")
+      links: [HomepageLink] @link
+      meta: [HomepageLink] @link
+      socialLinks: [SocialLink] @link(by: "id", from: "social_links___NODE")
       copyright: String
     }
 
-    type Contentstack_layout implements Node & Layout @dontInfer {
+    type Contentstack_layout implements Node & Layout {
       id: ID!
-      header: LayoutHeader @link(from: "header___NODE")
-      footer: LayoutFooter @link(from: "footer___NODE")
+      # TODO convert array to single node
+      header: LayoutHeader @link
+      footer: LayoutFooter @link
     }
   `)
 
@@ -601,7 +603,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       slug: String!
       title: String
       description: String
-      image: HomepageImage @link(from: "image___NODE")
+      image: HomepageImage @link
       html: String! @richText
     }
   `)
