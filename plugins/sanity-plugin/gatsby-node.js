@@ -91,7 +91,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     interface HomepageImage implements Node {
       id: ID!
       alt: String
-      gatsbyImageData: JSON
+      gatsbyImageData: GatsbyImageData
       url: String
     }
 
@@ -332,7 +332,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type SanityImageAsset implements Node & HomepageImage {
       id: ID!
       alt: String @proxy(from: "altText")
-      gatsbyImageData: JSON
+      gatsbyImageData: GatsbyImageData
       url: String
     }
 
