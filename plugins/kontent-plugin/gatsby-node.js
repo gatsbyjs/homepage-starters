@@ -4,7 +4,9 @@ const {
   getKontentItemNodeTypeName,
 } = require("@kentico/gatsby-source-kontent/src/naming")
 const { createContentDigest } = require("gatsby-core-utils")
+const crypto = require("crypto")
 
+// TODO import when the function is exported in the library
 function getGatsbyImageData({
   image,
   backgroundColor,
@@ -88,8 +90,6 @@ exports.createSchemaCustomization = async ({ actions }) => {
           const codenames = source.elements[options.variableName].value
           const lng = source.preferred_language
 
-          const new_type = getKontentItemNodeTypeName(options.type)
-
           const entry = await context.nodeModel.findOne({
             query: {
               filter: {
@@ -103,7 +103,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
                 },
               },
             },
-            type: new_type,
+            type: getKontentItemNodeTypeName(options.type),
           })
 
           return entry
@@ -187,7 +187,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
           const gatsbyImage = getGatsbyImageData({ image })
 
           return {
-            id: "f98a8742-29df-4e4c-9896-ff0fa7c55c5a",
+            id: crypto.randomUUID(),
             url: image.url,
             gatsbyImageData: gatsbyImage,
             alt: "alt",
