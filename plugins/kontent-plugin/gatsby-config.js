@@ -4,7 +4,7 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    siteUrl: "https://gatsbycontentfulhomepage.gatsbyjs.io/",
+    siteUrl: "https://gatsbykontenthomepage.gatsbyjs.io/",
     title: "Gatsby Kontent Homepage Starter",
     author: `Gatsby`,
     description: "A Gatsby Starter for building homepages with Kontent",
