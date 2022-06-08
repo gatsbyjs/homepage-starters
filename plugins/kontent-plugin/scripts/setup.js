@@ -75,7 +75,7 @@ const questions = [
 
 inquirer
   .prompt(questions)
-  .then(async ({ projectId, managementApiKey }) => {
+  .then(({ projectId, managementApiKey }) => {
     // write env vars to .env.development & .env.production
     const dotenv = [
       `# All environment variables will be sourced`,
@@ -84,8 +84,6 @@ inquirer
       `KONTENT_PROJECT_ID="${projectId}"`,
     ].join("\n")
 
-    await importData(projectId, managementApiKey)
-
     const configFiles = [".env.development", ".env.production"]
       .map((name) => path.join(__dirname, "..", name))
       .forEach((filename) => {
@@ -93,6 +91,18 @@ inquirer
       })
 
     console.log(`.env files written`)
+
+    return { projectId, managementApiKey }
+  })
+  .then(({ projectId, managementApiKey }) => {
+    importData(projectId, managementApiKey)
+  })
+  .then((_, error) => {
+    console.log(
+      `All set! You can now run ${chalk.yellow(
+        "yarn start"
+      )} to see it in action.`
+    )
   })
   .catch((err) => {
     console.error(err)
