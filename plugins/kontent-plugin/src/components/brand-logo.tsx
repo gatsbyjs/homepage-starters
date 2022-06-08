@@ -1,6 +1,6 @@
 import * as React from "react"
 
-export default function GatsbyContentfulLogo() {
+export default function GatsbyKontentLogo() {
   return (
     <svg
       width="82"
