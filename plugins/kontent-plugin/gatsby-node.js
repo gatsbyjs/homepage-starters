@@ -4,7 +4,7 @@ const {
   getKontentItemNodeTypeName,
 } = require("@kentico/gatsby-source-kontent/src/naming")
 const { createContentDigest } = require("gatsby-core-utils")
-const crypto = require("crypto")
+const { v4: uuidv4 } = require("uuid")
 
 // TODO import when the function is exported in the library
 function getGatsbyImageData({
@@ -167,7 +167,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
           const gatsbyImage = getGatsbyImageData({ image })
 
           return {
-            id: crypto.randomUUID(),
+            id: uuidv4(),
             url: image.url,
             gatsbyImageData: gatsbyImage,
             alt: "alt",
