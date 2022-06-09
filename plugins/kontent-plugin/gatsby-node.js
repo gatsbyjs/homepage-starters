@@ -164,6 +164,11 @@ exports.createSchemaCustomization = async ({ actions }) => {
       return {
         async resolve(source, args, context, info) {
           const image = source.elements[options.variableName].value
+
+          if (image.length === 0) {
+            return null
+          }
+
           const gatsbyImage = getGatsbyImageData({ image })
 
           return {
@@ -832,7 +837,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       title: String @proxy(from: "elements.title.value")
       description: String @proxy(from: "elements.description.value")
       image: HomepageImage @KontentImage
-      html: String! @proxy(from: "elements.html.value")
+      html: String! @proxy(from: "elements.body.value")
     }
   `)
 }
