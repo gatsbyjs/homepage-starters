@@ -99,4 +99,22 @@ module.exports = {
       "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage-ts",
     blogTheme: true,
   },
+  kontent: {
+    repo: "https://github.com/gatsbyjs/gatsby-starter-kontent-homepage",
+    cms: "Kontent",
+    name: "kontent",
+    dirname: "kontent-plugin",
+    demoURL: "https://gatsbykontenthomepage.gatsbyjs.io/",
+    deploynow: "test",
+    blogTheme: false,
+  },
+  "kontent-ts": {
+    repo: "https://github.com/gatsbyjs/gatsby-starter-kontent-homepage-ts",
+    cms: "Kontent",
+    name: "kontent",
+    dirname: "kontent-plugin",
+    demoURL: "https://gatsbykontenthomepage.gatsbyjs.io/",
+    deploynow: "test",
+    blogTheme: false,
+  },
 }
