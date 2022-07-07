@@ -26,7 +26,7 @@ To use this starter, you will need a new or existing [Kontent.ai project][] and 
    npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-kontent-homepage-ts
    ```
 
-1. **Create an empty Kontent project**
+1. **Create an empty [Kontent project](https://kontent.ai/learn/tutorials/manage-kontent/projects/manage-projects/#a-create-projects)**
 
 1. **Run the Kontent setup script**
 

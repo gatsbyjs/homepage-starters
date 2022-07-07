@@ -1,4 +1,4 @@
-1. **Create an empty Kontent project**
+1. **Create an empty [Kontent project](https://kontent.ai/learn/tutorials/manage-kontent/projects/manage-projects/#a-create-projects)**
 
 2. **Run the Kontent setup script**
 
