@@ -5,8 +5,8 @@
     "setup": "node ./scripts/setup.js"
   },
   "dependencies": {
-    "@kentico/gatsby-source-kontent": "^8.0.0",
-    "gatsby-plugin-manifest": "^4.6.0",
+    "@kentico/gatsby-source-kontent": "8.1.0",
+    "@kentico/gatsby-kontent-components": "8.1.0",
     "gatsby-plugin-react-helmet": "^5.5.0",
     "react-helmet": "^6.1.0",
     "uuid": "^8.3.2"

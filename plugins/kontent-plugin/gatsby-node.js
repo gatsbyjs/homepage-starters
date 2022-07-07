@@ -1,55 +1,8 @@
 const { getGatsbyImageResolver } = require("gatsby-plugin-image/graphql-utils")
-const { getImageData } = require("gatsby-plugin-image")
-const {
-  getKontentItemNodeTypeName,
-} = require("@kentico/gatsby-source-kontent/src/naming")
+const { getKontentItemNodeTypeName } = require("@kentico/gatsby-source-kontent")
+const { getGatsbyImageData } = require("@kentico/gatsby-kontent-components")
 const { createContentDigest } = require("gatsby-core-utils")
 const { v4: uuidv4 } = require("uuid")
-
-// TODO import when the function is exported in the library
-function getGatsbyImageData({
-  image,
-  backgroundColor,
-  options = {},
-  layout = `constrained`,
-  ...props
-}) {
-  const urlBuilder = ({
-    baseUrl,
-    width,
-    height,
-    options: { quality, fit = "crop", lossless },
-  }) => {
-    const props = [
-      ["w", width],
-      ["h", height],
-      ["auto", "format"],
-      ["bg", backgroundColor],
-      ["q", quality],
-      ["lossless", lossless],
-      ["fit", fit],
-    ]
-    const query = props
-      .filter(([, val]) => typeof val !== "undefined")
-      .map(([key, val]) => `${key}=${encodeURIComponent(val)}`)
-      .join("&")
-
-    return `${baseUrl}?${query}`
-  }
-  const data = getImageData({
-    baseUrl: image[0].url,
-    sourceWidth: image[0].width,
-    sourceHeight: image[0].height,
-    layout,
-    urlBuilder,
-    backgroundColor,
-    pluginName: "gatsby-kontent-components",
-    options,
-    ...props,
-  })
-
-  return data
-}
 
 exports.createSchemaCustomization = async ({ actions }) => {
   actions.createFieldExtension({
@@ -169,7 +122,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
             return null
           }
 
-          const gatsbyImage = getGatsbyImageData({ image })
+          const gatsbyImage = getGatsbyImageData({ image: image[0] })
 
           return {
             id: uuidv4(),
