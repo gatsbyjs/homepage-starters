@@ -9,8 +9,8 @@ const config = new Configstore(
     globalConfigPath: true,
   }
 )
-const token = process.env.SANITY_TOKEN || config.get("authToken")
-const dataset = process.env.SANITY_DATASET || studio.api?.dataset
+const token = process.env.SANITY_READ_TOKEN || config.get("authToken")
+const dataset = process.env.SANITY_PROJECT_DATASET || studio.api?.dataset
 const projectId = process.env.SANITY_PROJECT_ID || studio.api?.projectId
 
 if (!token) {
@@ -29,9 +29,9 @@ const content = [
   `# All environment variables will be sourced`,
   `# and made available to gatsby-config.js, gatsby-node.js, etc.`,
   `# Do NOT commit this file to source control`,
-  `SANITY_TOKEN='${token}'`,
+  `SANITY_READ_TOKEN='${token}'`,
   `SANITY_PROJECT_ID='${projectId}'`,
-  `SANITY_DATASET='${dataset}'`,
+  `SANITY_PROJECT_DATASET='${dataset}'`,
 ].join("\n")
 
 fs.writeFileSync(".env.development", content)
