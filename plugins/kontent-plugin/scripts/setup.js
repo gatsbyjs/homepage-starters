@@ -7,43 +7,53 @@ const { ImportService, ZipService } = require("@kentico/kontent-backup-manager")
 const {
   FileService,
 } = require("@kentico/kontent-backup-manager/dist/cjs/lib/node")
+const { cwd, chdir } = require("process")
 
 const importData = async (projectId, managementApiKey) => {
   const fileService = new FileService({
     enableLog: true,
   })
 
-  const zipFile = await fileService.loadFileAsync("data")
+  const current_directory = cwd()
 
-  const zipService = new ZipService({
-    context: "node.js",
-    enableLog: true,
-  })
+  try {
+    chdir(__dirname)
 
-  const importService = new ImportService({
-    onImport: (item) => {
-      console.log(`Imported: ${item.title} | ${item.type}`)
-    },
-    canImport: {
-      asset: (item) => true,
-      contentType: (item) => true,
-      assetFolder: (item) => true,
-      contentItem: (item) => true,
-      contentTypeSnippet: (item) => true,
-      language: (item) => true,
-      languageVariant: (item) => true,
-      taxonomy: (item) => true,
-    },
-    enablePublish: true,
-    projectId: projectId,
-    apiKey: managementApiKey,
-    enableLog: true,
-    fixLanguages: true,
-  })
+    const zipFile = await fileService.loadFileAsync("data")
+    const zipService = new ZipService({
+      context: "node.js",
+      enableLog: true,
+    })
 
-  const importData = await zipService.extractZipAsync(zipFile)
+    const importService = new ImportService({
+      onImport: (item) => {
+        console.log(`Imported: ${item.title} | ${item.type}`)
+      },
+      canImport: {
+        asset: (item) => true,
+        contentType: (item) => true,
+        assetFolder: (item) => true,
+        contentItem: (item) => true,
+        contentTypeSnippet: (item) => true,
+        language: (item) => true,
+        languageVariant: (item) => true,
+        taxonomy: (item) => true,
+      },
+      enablePublish: true,
+      projectId: projectId,
+      apiKey: managementApiKey,
+      enableLog: true,
+      fixLanguages: true,
+    })
 
-  await importService.importFromSourceAsync(importData)
+    const importData = await zipService.extractZipAsync(zipFile)
+
+    await importService.importFromSourceAsync(importData)
+  } catch (exception) {
+    console.log(`An error occurred: ${exception}`)
+  } finally {
+    chdir(current_directory)
+  }
 }
 
 console.log(`
@@ -95,7 +105,7 @@ inquirer
     return { projectId, managementApiKey }
   })
   .then(({ projectId, managementApiKey }) => {
-    importData(projectId, managementApiKey)
+    return importData(projectId, managementApiKey)
   })
   .then((_, error) => {
     console.log(
