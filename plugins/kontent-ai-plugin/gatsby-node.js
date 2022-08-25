@@ -1,6 +1,6 @@
 const { getGatsbyImageResolver } = require("gatsby-plugin-image/graphql-utils")
-const { getKontentItemNodeTypeName } = require("@kentico/gatsby-source-kontent")
-const { getGatsbyImageData } = require("@kentico/gatsby-kontent-components")
+const { getKontentItemNodeTypeName } = require("@kontent-ai/gatsby-source")
+const { getGatsbyImageData } = require("@kontent-ai/gatsby-components")
 const { createContentDigest } = require("gatsby-core-utils")
 const { v4: uuidv4 } = require("uuid")
 

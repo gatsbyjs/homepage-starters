@@ -3,10 +3,8 @@ const argv = require("yargs-parser")(process.argv.slice(2))
 const fs = require("fs")
 const path = require("path")
 const inquirer = require("inquirer")
-const { ImportService, ZipService } = require("@kentico/kontent-backup-manager")
-const {
-  FileService,
-} = require("@kentico/kontent-backup-manager/dist/cjs/lib/node")
+const { ImportService, ZipService } = require("@kontent-ai/backup-manager")
+const { FileService } = require("@kontent-ai/backup-manager/dist/cjs/lib/node")
 const { cwd, chdir } = require("process")
 
 const importData = async (projectId, managementApiKey) => {
@@ -39,7 +37,7 @@ const importData = async (projectId, managementApiKey) => {
         languageVariant: (item) => true,
         taxonomy: (item) => true,
       },
-      enablePublish: true,
+      preserveWorkflow: true,
       projectId: projectId,
       apiKey: managementApiKey,
       enableLog: true,
@@ -57,7 +55,7 @@ const importData = async (projectId, managementApiKey) => {
 }
 
 console.log(`
-  To use this starter, please create a new project in app.kentico.ai
+  To use this starter, please create a new project in app.kontent.ai
   and provide us with credentials need to set it up.
   The required keys can be found in Project settings -> API KEYS and
   you will need:

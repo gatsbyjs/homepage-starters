@@ -6,7 +6,7 @@ module.exports = {
     // "drupal-plugin",
     // "wordpress-plugin",
     // "sanity-plugin",
-    "kontent-plugin",
+    "kontent-ai-plugin",
 
     // optional blog themes
     // "gatsby-theme-contentful-blog",

@@ -4,14 +4,14 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    siteUrl: "https://gatsbykontenthomepage.gatsbyjs.io/",
-    title: "Gatsby Kontent Homepage Starter",
+    siteUrl: "https://gatsbykontent-aihomepage.gatsbyjs.io/",
+    title: "Gatsby Kontent.ai Homepage Starter",
     author: `Gatsby`,
-    description: "A Gatsby Starter for building homepages with Kontent",
+    description: "A Gatsby Starter for building homepages with Kontent.ai",
   },
   plugins: [
     {
-      resolve: `@kentico/gatsby-source-kontent`,
+      resolve: `@kontent-ai/gatsby-source`,
       options: {
         projectId: process.env.KONTENT_PROJECT_ID,
         languageCodenames: [`en-US`],
@@ -25,7 +25,7 @@ module.exports = {
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        name: "Gatsby Starter Kontent Homepage",
+        name: "Gatsby Starter Kontent.ai Homepage",
         short_name: "Gatsby",
         start_url: "/",
         background_color: "#41D9C5",

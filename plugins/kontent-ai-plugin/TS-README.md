@@ -2,14 +2,14 @@
   <img alt="Gatsby" src="https://www.gatsbyjs.com/Gatsby-Monogram.svg" width="60" />
 </a>
 
-# Gatsby Starter Kontent Homepage
+# Gatsby Starter Kontent.ai Homepage
 
-Create a homepage using Gatsby and Kontent. This starter demonstrates how to use Kontent to build a homepage and can be customized to match your own visual branding.
+Create a homepage using Gatsby and Kontent.ai. This starter demonstrates how to use Kontent.ai to build a homepage and can be customized to match your own visual branding.
 
-[View the Demo](https://gatsbykontenthomepage.gatsbyjs.io/)
+[View the Demo](https://gatsbykontentaihomepage.gatsbyjs.io/)
 
 **Note:**
-This version of the Kontent homepage starter is written in JavaScript. If you want to use Kontent but TypeScript is more your style, there is also a TypeScript version maintained on [GitHub](https://github.com/gatsbyjs/gatsby-starter-kontent-homepage-ts).
+This version of the Kontent.ai homepage starter is written in TypeScript. If you want to use Kontent.ai but JavaScript is more your style, there is also a JavaScript version maintained on [GitHub](https://github.com/gatsbyjs/gatsby-starter-kontent-ai-homepage).
 
 ## Quick start
 
@@ -23,12 +23,12 @@ To use this starter, you will need a new or existing [Kontent.ai project][] and 
    Use the Gatsby CLI to get started locally:
 
    ```sh repo
-   npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-kontent-homepage
+   npx gatsby new my-homepage https://github.com/gatsbyjs/gatsby-starter-kontent-ai-homepage-ts
    ```
 
-1. **Create an empty [Kontent project](https://kontent.ai/learn/tutorials/manage-kontent/projects/manage-projects/#a-create-projects)**
+1. **Create an empty [Kontent.ai project](https://kontent.ai/learn/tutorials/manage-kontent/projects/manage-projects/#a-create-projects)**
 
-1. **Run the Kontent setup script**
+1. **Run the Kontent.ai setup script**
 
    From your site's root directory, run:
 
@@ -37,7 +37,7 @@ To use this starter, you will need a new or existing [Kontent.ai project][] and 
    yarn setup
    ```
 
-   This will run a script to populate your Kontent project with demo content.
+   This will run a script to populate your Kontent.ai project with demo content.
 
 1. **Start developing**
 
@@ -53,7 +53,7 @@ To use this starter, you will need a new or existing [Kontent.ai project][] and 
 
 ## Deploy your site
 
-Once your content is available in Kontent, deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
+Once your content is available in Kontent.ai, deploy your site to [Gatsby Cloud](https://gatsbyjs.com/products/cloud):
 
 1. Push your local site to a new repo in either GitHub, GitLab, or Bitbucket
 1. Log into your [Gatsby Cloud Dashboard][] and click on **Add a site**
@@ -69,14 +69,14 @@ For a more detailed walkthrough, see the tutorial on how to [build your site wit
 ### Deploy without using the CLI
 
 Alternatively, you can deploy this starter directly to Gatsby Cloud.
-Note that you will need to set up your content in Kontent manually.
+Note that you will need to set up your content in Kontent.ai manually.
 
 [![Deploy to Gatsby](https://www.gatsbyjs.com/deploynow.png "Deploy to Gatsby")](test)
 
 ## Setting up Gatsby Cloud Preview
 
 To use Gatsby Cloud Preview with this site, follow the instructions in the
-[Connecting to Kontent](https://support.gatsbyjs.com/hc/en-us/articles/360052324654-Connecting-to-Kontent).
+[Connecting to Kontent.ai](https://support.gatsbyjs.com/hc/en-us/articles/360052324654-Connecting-to-Kontent).
 
 ## What's included?
 
@@ -123,13 +123,13 @@ export const colors = {
 If you'd like to add additional colors, add additional keys to this object.
 This file is imported into `src/theme.css.ts` and creates CSS custom properties, that can be imported and used in other `.css.ts` files.
 
-The UI components file `src/components/ui.js` imports styles from `src/components/ui.css.ts`. You can see how the theme and color values are being used in this file.
+The UI components file `src/components/ui.tsx` imports styles from `src/components/ui.css.ts`. You can see how the theme and color values are being used in this file.
 
 ### Add your logo
 
 ![Logo](./docs/images/logo.png)
 
-Replace the `src/components/brand-logo.js` component with your own brand logo.
+Replace the `src/components/brand-logo.tsx` component with your own brand logo.
 If you have an SVG version, it can be rendered inline as a React component, following the example in this file. Note that SVG attributes will need to be camel cased for JSX.
 
 Using an inline SVG for the logo allows it to pick up the colors used in CSS, which is how the logo colors are inverted for the mobile menu.
@@ -140,19 +140,19 @@ If you prefer to use an image, use the [`StaticImage`](https://www.gatsbyjs.com/
 
 ![Headings & Buttons](./docs/images/headings-buttons.png)
 
-To further customize the look and feel of the homepage, edit the UI components in `src/components/ui.js` and styles in `src/components/ui.css.ts`.
+To further customize the look and feel of the homepage, edit the UI components in `src/components/ui.tsx` and styles in `src/components/ui.css.ts`.
 
 ### Customize section components
 
 To customize any of the sections of the homepage, edit the relevant component in `src/components`.
-Most of the styles for these components are handled with shared UI components in `src/components/ui.js`.
+Most of the styles for these components are handled with shared UI components in `src/components/ui.tsx`.
 
 ### Create custom section components
 
 To create a new type of section in your homepage, you'll want to create a new section component, using the existing components as an example.
 For this example, we'll create a new "Banner" component.
 
-1. First, update your content type in Kontent project
+1. First, update your content type in Kontent.ai project
 
    1. In `Content model` section create a new content type and name it "Homepage Banner."
 
@@ -162,7 +162,7 @@ For this example, we'll create a new "Banner" component.
 
       <img src="./images/step-2.png" alt="Step 2" width="700" />
 
-   1. Find the content type for _Homepage_ in Kontent and adjust the settings for the _Content_ element. Click on settings icon to show configuration for the given element. Under _Allowed content types_, ensure that the _Homepage Banner_ type is checked to make it available as a content type on the Homepage.
+   1. Find the content type for _Homepage_ in Kontent.ai and adjust the settings for the _Content_ element. Click on settings icon to show configuration for the given element. Under _Allowed content types_, ensure that the _Homepage Banner_ type is checked to make it available as a content type on the Homepage.
 
       <img src="./images/step-3.png" alt="Step 3" width="700" />
       <img src="./images/step-4.png" alt="Step 4" width="700" />
@@ -206,7 +206,7 @@ For this example, we'll create a new "Banner" component.
 1. Next, create the Banner component:
 
    ```jsx fileExt
-   // src/components/banner.js
+   // src/components/banner.tsx
    import * as React from "react"
    import { graphql } from "gatsby"
    import { Section, Container, Heading, Text } from "./ui"
@@ -231,10 +231,10 @@ For this example, we'll create a new "Banner" component.
    `
    ```
 
-1. Export the component from `src/components/sections.js`
+1. Export the component from `src/components/sections.tsx`
 
    ```js fileExt
-   // src/components/sections.js
+   // src/components/sections.tsx
    export { default as HomepageHero } from "./hero"
    export { default as HomepageFeature } from "./feature"
    export { default as HomepageFeatureList } from "./feature-list"
@@ -249,10 +249,10 @@ For this example, we'll create a new "Banner" component.
    export { default as HomepageBanner } from "./banner"
    ```
 
-1. Add the GraphQL query fragment to the query in `src/pages/index.js`
+1. Add the GraphQL query fragment to the query in `src/pages/index.tsx`
 
    ```js fileExt
-   // in src/pages/index.js
+   // in src/pages/index.tsx
    export const query = graphql`
      {
        homepage {
@@ -287,7 +287,7 @@ For this example, we'll create a new "Banner" component.
 
 ### Errors after making changes to the schema
 
-If you've made changes to the `gatsby-node.js` file or changes to the Kontent data model, clear the Gatsby cache before running the develop server:
+If you've made changes to the `gatsby-node.js` file or changes to the Kontent.ai data model, clear the Gatsby cache before running the develop server:
 
 ```sh
 yarn clean && yarn start

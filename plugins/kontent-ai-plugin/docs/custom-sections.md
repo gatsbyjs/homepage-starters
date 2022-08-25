@@ -1,4 +1,4 @@
-1. First, update your content type in Kontent project
+1. First, update your content type in Kontent.ai project
 
    1. In `Content model` section create a new content type and name it "Homepage Banner."
 
@@ -8,7 +8,7 @@
 
       <img src="./images/step-2.png" alt="Step 2" width="700" />
 
-   1. Find the content type for _Homepage_ in Kontent and adjust the settings for the _Content_ element. Click on settings icon to show configuration for the given element. Under _Allowed content types_, ensure that the _Homepage Banner_ type is checked to make it available as a content type on the Homepage.
+   1. Find the content type for _Homepage_ in Kontent.ai and adjust the settings for the _Content_ element. Click on settings icon to show configuration for the given element. Under _Allowed content types_, ensure that the _Homepage Banner_ type is checked to make it available as a content type on the Homepage.
 
       <img src="./images/step-3.png" alt="Step 3" width="700" />
       <img src="./images/step-4.png" alt="Step 4" width="700" />
