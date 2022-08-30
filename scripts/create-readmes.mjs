@@ -66,7 +66,7 @@ function variablePlugin(opts) {
             node.children = [
               {
                 type: "image",
-                url: "https://www.gatsbyjs.com/deploynow.png",
+                url: "https://www.gatsbyjs.com/deploynow.svg",
                 title: "Deploy to Gatsby",
                 alt: "Deploy to Gatsby",
               },
