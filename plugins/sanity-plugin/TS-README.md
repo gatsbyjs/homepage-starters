@@ -98,7 +98,7 @@ This repository uses the `gatsby-provision` convention to allow for automatic CM
 
 Otherwise, you can always set up your content in Sanity manually before deploying to Gatsby Cloud.
 
-[![Deploy to Gatsby](https://www.gatsbyjs.com/deploynow.png "Deploy to Gatsby")](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-sanity-homepage-ts)
+[![Deploy to Gatsby](https://www.gatsbyjs.com/deploynow.svg "Deploy to Gatsby")](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-sanity-homepage-ts)
 
 ## Setting up Gatsby Cloud Preview
 

@@ -28,7 +28,7 @@ You can find your API token under the Settings > API tokens section of your proj
 
 1. **Create your DatoCMS project**
 
-[![Clone DatoCMS project](https://dashboard.datocms.com/clone/button.svg)](https://dashboard.datocms.com/clone?projectId=60908&name=Homepage+Starter)
+[![Clone DatoCMS project](https://dashboard.datocms.com/clone/button.svg)](https://dashboard.datocms.com/clone?projectId=60908\&name=Homepage+Starter)
 
 This will clone the data model and records backing the demo site to populate your DatoCMS project.
 
@@ -76,7 +76,7 @@ Alternatively, you can deploy this starter directly to Gatsby Cloud.
 
 Note that you will need to set up your content in DatoCMS manually.
 
-[![Deploy to Gatsby](https://www.gatsbyjs.com/deploynow.png "Deploy to Gatsby")](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-datocms-homepage-ts)
+[![Deploy to Gatsby](https://www.gatsbyjs.com/deploynow.svg "Deploy to Gatsby")](https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-datocms-homepage-ts)
 
 ## Setting up Gatsby Cloud Preview
 
