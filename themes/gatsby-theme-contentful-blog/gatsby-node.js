@@ -49,11 +49,11 @@ exports.createSchemaCustomization = async ({ actions }) => {
     },
   })
 
-  actions.createTypes(`
+  actions.createTypes(/* GraphQL */ `
     type ContentfulAsset implements Node & Image {
       id: ID!
       alt: String @proxy(from: "title")
-      gatsbyImageData: JSON
+      gatsbyImageData: GatsbyImageData
       url: String @urlSchema
       file: JSON
       title: String
@@ -79,7 +79,8 @@ exports.createSchemaCustomization = async ({ actions }) => {
       body: String!
       date: Date! @dateformat
       excerpt: String! @contentfulExcerpt
-      contentfulExcerpt: contentfulBlogPostExcerptTextNode @link(from: "excerpt___NODE")
+      contentfulExcerpt: contentfulBlogPostExcerptTextNode
+        @link(from: "excerpt___NODE")
       image: Image @link(from: "image___NODE")
       author: BlogAuthor @link(from: "author___NODE")
       category: String
