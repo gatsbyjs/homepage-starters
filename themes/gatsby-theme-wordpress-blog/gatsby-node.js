@@ -11,7 +11,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
         async resolve(source, args, context, info) {
           const imageType = info.schema.getType("ImageSharp")
           const file = context.nodeModel.getNodeById({
-            id: source.localFile,
+            id: source.localFile?.id,
           })
           if (!file) return null
           const image = context.nodeModel.getNodeById({
@@ -40,11 +40,11 @@ exports.createSchemaCustomization = async ({ actions }) => {
     },
   })
 
-  actions.createTypes(`
+  actions.createTypes(/* GraphQL */ `
     type WpMediaItem implements Node & Image {
       id: ID!
       alt: String @proxy(from: "altText")
-      gatsbyImageData: JSON @wpImageProxy
+      gatsbyImageData: GatsbyImageData @wpImageProxy
       localFile: File
       url: String @proxy(from: "mediaItemUrl")
     }
@@ -74,7 +74,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
       id: ID!
       alt: String
       url: String
-      gatsbyImageData: JSON @wpImageProxy
+      gatsbyImageData: GatsbyImageData @wpImageProxy
     }
   `)
 }
