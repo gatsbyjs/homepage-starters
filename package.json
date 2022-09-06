@@ -31,7 +31,7 @@
     "gatsby-plugin-image": "^2.22.0",
     "gatsby-plugin-sharp": "^4.22.0",
     "gatsby-plugin-vanilla-extract": "^2.0.1",
-    "gatsby-source-filesystem": "^4.15.0",
+    "gatsby-source-filesystem": "^4.22.0",
     "gatsby-transformer-sharp": "^4.22.0",
     "is-absolute-url": "^4.0.1",
     "react": "^17.0.2",

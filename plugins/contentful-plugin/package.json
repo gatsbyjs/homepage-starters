@@ -15,8 +15,8 @@
   },
   "devDependencies": {
     "chalk": "4",
-    "contentful-cli": "^1.10.0",
-    "contentful-import": "^8.2.28",
+    "contentful-cli": "^1.15.3",
+    "contentful-import": "^8.3.2",
     "gatsby-provision-contentful": "^0.0.3",
     "inquirer": "^8.2.0",
     "yargs-parser": "^21.0.0"
