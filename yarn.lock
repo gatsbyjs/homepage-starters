@@ -7304,10 +7304,10 @@ gatsby-source-datocms@^4.0.4:
     semver "^7.3.5"
     unist-util-visit "^2.0.3"
 
-gatsby-source-drupal@^5.6.0:
-  version "5.16.0"
-  resolved "https://registry.yarnpkg.com/gatsby-source-drupal/-/gatsby-source-drupal-5.16.0.tgz#391c964792576ae3c18c7a31874adc20193829fa"
-  integrity sha512-Yh8+FocPF4T2suWoH9fCNOsPneOOp03M5l0hAJ2ai6Uuh1J4SdAQpMZbudMAQFZhWcgh7LgEveMfkLlxz2XSjg==
+gatsby-source-drupal@^5.23.0:
+  version "5.23.0"
+  resolved "https://registry.yarnpkg.com/gatsby-source-drupal/-/gatsby-source-drupal-5.23.0.tgz#5853a8e4960c5775bb146573e3c2f7a948ff87ef"
+  integrity sha512-yiWvxlgg+rfBYz2/zcF6qdTkOmxmz1cxJq/XIwxSBfu47M0g1NoQUaxfYhqg/pnGxvlm2xiQ+8NdGJOgKbXsMw==
   dependencies:
     "@babel/runtime" "^7.15.4"
     "@opentelemetry/semantic-conventions" "0.26.0"
@@ -7315,9 +7315,9 @@ gatsby-source-drupal@^5.6.0:
     bluebird "^3.7.2"
     body-parser "^1.20.0"
     fastq "^1.13.0"
-    gatsby-plugin-utils "^3.9.0"
-    gatsby-source-filesystem "^4.15.0"
-    got "^11.8.3"
+    gatsby-plugin-utils "^3.16.0"
+    gatsby-source-filesystem "^4.22.0"
+    got "^11.8.5"
     http2-wrapper "^2.1.11"
     lodash "^4.17.21"
     opentracing "^0.14.7"
