@@ -151,7 +151,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     interface HomepageImage implements Node {
       id: ID!
       alt: String
-      gatsbyImageData: JSON @imagePassthroughArgs
+      gatsbyImageData: GatsbyImageData @imagePassthroughArgs
       url: String
       ## DatoCMS specific
       originalId: String
@@ -458,7 +458,7 @@ exports.createSchemaCustomization = async ({ actions }) => {
     type DatoCmsAsset implements Node & HomepageImage {
       id: ID!
       alt: String
-      gatsbyImageData: JSON @imagePassthroughArgs
+      gatsbyImageData: GatsbyImageData @imagePassthroughArgs
       originalId: String
       entityPayload: JSON
       image: HomepageImage @recursiveImage

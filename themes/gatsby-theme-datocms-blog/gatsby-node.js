@@ -16,11 +16,11 @@ exports.createSchemaCustomization = async ({ actions }) => {
     },
   })
 
-  actions.createTypes(`
+  actions.createTypes(/* GraphQL */ `
     type DatoCmsAsset implements Node & Image {
       id: ID!
       alt: String
-      gatsbyImageData: JSON @imagePassthroughArguments
+      gatsbyImageData: GatsbyImageData @imagePassthroughArguments
       originalId: String
       entityPayload: JSON
       url: String
