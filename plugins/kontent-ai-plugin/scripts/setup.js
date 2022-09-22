@@ -3,9 +3,27 @@ const argv = require("yargs-parser")(process.argv.slice(2))
 const fs = require("fs")
 const path = require("path")
 const inquirer = require("inquirer")
-const { ImportService, ZipService } = require("@kontent-ai/backup-manager")
+const {
+  ImportService,
+  ZipService,
+  CleanService,
+} = require("@kontent-ai/backup-manager")
 const { FileService } = require("@kontent-ai/backup-manager/dist/cjs/lib/node")
 const { cwd, chdir } = require("process")
+
+const clearProject = async (projectId, managementApiKey) => {
+  const cleanService = new CleanService({
+    onDelete: (item) => {
+      console.log(`Deleted: ${item.title} | ${item.type}`)
+    },
+    fixLanguages: true,
+    projectId: projectId,
+    apiKey: managementApiKey,
+    enableLog: true,
+  })
+
+  await cleanService.cleanAllAsync()
+}
 
 const importData = async (projectId, managementApiKey) => {
   const fileService = new FileService({
@@ -56,8 +74,10 @@ const importData = async (projectId, managementApiKey) => {
 
 console.log(`
   To use this starter, please create a new project in app.kontent.ai
-  and provide us with credentials need to set it up.
-  The required keys can be found in Project settings -> API KEYS and
+  and provide us with credentials need to set it up. If you want to use
+  already existing project, keep in mind that it should be clean to avoid
+  problems during importing data. This script provides you with an option to
+  clear it for you. The required keys can be found in Project settings -> API KEYS and
   you will need:
 
     1. ${chalk.blue("Project ID")}
@@ -79,10 +99,23 @@ const questions = [
     when: !argv.managementApiKey,
     message: "Your Content Management API access token",
   },
+  {
+    name: "cleanProject",
+    when: !argv.cleanProject,
+    message: `Your project should be empty before migrating. Do you want to clear the project ${argv.projectId} (y/n)`,
+  },
 ]
 
 inquirer
   .prompt(questions)
+  .then(async ({ projectId, managementApiKey, cleanProject }) => {
+    if (cleanProject === "y") {
+      console.log(`Cleaning the project with projectID: ${projectId}`)
+      await clearProject(projectId, managementApiKey)
+      console.log("Cleaning completed")
+    }
+    return { projectId, managementApiKey }
+  })
   .then(({ projectId, managementApiKey }) => {
     // write env vars to .env.development & .env.production
     const dotenv = [
