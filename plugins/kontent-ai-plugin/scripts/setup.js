@@ -77,7 +77,7 @@ console.log(`
   and provide us with credentials need to set it up. If you want to use
   already existing project, keep in mind that it should be clean to avoid
   problems during importing data. This script provides you with an option to
-  clear it for you. The required keys can be found in Project settings -> API KEYS and
+  clear it for you. The required keys can be found in Project settings -> Api keys and
   you will need:
 
     1. ${chalk.blue("Project ID")}
