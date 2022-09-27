@@ -102,7 +102,7 @@ const questions = [
   {
     name: "cleanProject",
     when: !argv.cleanProject,
-    message: `Your project should be empty before migrating. Do you want to clear the project ${argv.projectId} (y/n)`,
+    message: `For best results, this script should be ran against an empty Kontent.ai project. Do you want to clear the project before proceeding? (y/n)`,
   },
 ]
 
