@@ -114,7 +114,7 @@ module.exports = {
     name: "kontent-ai",
     dirname: "kontent-ai-plugin",
     demoURL: "https://gatsbykontentaihomepage.gatsbyjs.io/",
-    deploynow: "test",
+    deploynow: "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-kontent-ai-homepage-ts",
     blogTheme: false,
   },
 }
