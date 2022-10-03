@@ -28,7 +28,7 @@ You can find your API token under the Settings > API tokens section of your proj
 
 1. **Create your DatoCMS project**
 
-[![Clone DatoCMS project](https://dashboard.datocms.com/clone/button.svg)](https://dashboard.datocms.com/clone?projectId=60908\&name=Homepage+Starter)
+[![Clone DatoCMS project](https://dashboard.datocms.com/clone/button.svg)](https://dashboard.datocms.com/clone?projectId=60908&name=Homepage+Starter)
 
 This will clone the data model and records backing the demo site to populate your DatoCMS project.
 

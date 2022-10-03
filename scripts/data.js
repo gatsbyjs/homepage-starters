@@ -99,4 +99,22 @@ module.exports = {
       "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage-ts",
     blogTheme: true,
   },
+  "kontent-ai": {
+    repo: "https://github.com/gatsbyjs/gatsby-starter-kontent-ai-homepage",
+    cms: "Kontent.ai",
+    name: "kontent-ai",
+    dirname: "kontent-ai-plugin",
+    demoURL: "https://gatsbykontent-aihomepage.gatsbyjs.io/",
+    deploynow: "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-kontent-ai-homepage",
+    blogTheme: false,
+  },
+  "kontent-ai-ts": {
+    repo: "https://github.com/gatsbyjs/gatsby-starter-kontent-ai-homepage-ts",
+    cms: "Kontent.ai",
+    name: "kontent-ai",
+    dirname: "kontent-ai-plugin",
+    demoURL: "https://gatsbykontentaihomepage.gatsbyjs.io/",
+    deploynow: "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-kontent-ai-homepage-ts",
+    blogTheme: false,
+  },
 }

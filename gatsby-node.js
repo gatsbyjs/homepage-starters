@@ -6,6 +6,7 @@ const localPlugins = [
   "drupal-plugin",
   "sanity-plugin",
   "wordpress-plugin",
+  "kontent-ai-plugin",
 ]
 
 // for theming development
