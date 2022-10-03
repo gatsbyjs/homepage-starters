@@ -55,7 +55,7 @@ For a more detailed walkthrough, see the tutorial on how to [build your site wit
 ### Deploy without using the CLI
 
 Alternatively, you can deploy this starter directly to Gatsby Cloud.
-Note that you will need to set up your content in :var[cms] manually.
+::include{file=docs/deploy-now-cms-instructions.md}
 
 :link[deploynow]{text="Deploy to Gatsby"}
 

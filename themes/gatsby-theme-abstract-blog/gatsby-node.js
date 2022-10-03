@@ -77,11 +77,11 @@ exports.createSchemaCustomization = async ({ actions }) => {
     },
   })
 
-  actions.createTypes(`
+  actions.createTypes(/* GraphQL */ `
     interface Image implements Node {
       id: ID!
       alt: String
-      gatsbyImageData: JSON @imagePassthroughArguments
+      gatsbyImageData: GatsbyImageData @imagePassthroughArguments
       url: String
     }
 
