@@ -2173,6 +2173,31 @@
           "validations": [],
           "disabled": false,
           "omitted": false
+        },
+        {
+          "id": "category",
+          "name": "Category",
+          "type": "Text",
+          "localized": false,
+          "required": false,
+          "validations": [],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "author",
+          "name": "Author",
+          "type": "Link",
+          "localized": false,
+          "required": false,
+          "validations": [
+            {
+              "linkContentType": ["blogAuthor"]
+            }
+          ],
+          "disabled": false,
+          "omitted": false,
+          "linkType": "Entry"
         }
       ]
     },
@@ -3287,6 +3312,100 @@
           "validations": [],
           "disabled": false,
           "omitted": false
+        }
+      ]
+    },
+    {
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "p39nycxzit31"
+          }
+        },
+        "id": "blogAuthor",
+        "type": "ContentType",
+        "createdAt": "2022-01-06T20:35:23.291Z",
+        "updatedAt": "2022-02-10T18:09:48.607Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 23,
+        "publishedAt": "2022-02-10T18:09:48.607Z",
+        "firstPublishedAt": "2022-01-06T20:35:23.541Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "4SDtqAl8Y6iEC5454bbsbU"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "4SDtqAl8Y6iEC5454bbsbU"
+          }
+        },
+        "publishedCounter": 12,
+        "version": 24,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "4SDtqAl8Y6iEC5454bbsbU"
+          }
+        }
+      },
+      "displayField": "name",
+      "name": "Blog Author",
+      "description": "",
+      "fields": [
+        {
+          "id": "slug",
+          "name": "slug",
+          "type": "Symbol",
+          "localized": false,
+          "required": true,
+          "validations": [
+            {
+              "unique": true
+            },
+            {
+              "regexp": {
+                "pattern": "^[a-zA-Z0-9\\/_-]*$",
+                "flags": null
+              }
+            }
+          ],
+          "disabled": false,
+          "omitted": false
+        },        
+        {
+          "id": "name",
+          "name": "Name",
+          "type": "Symbol",
+          "localized": false,
+          "required": true,
+          "validations": [],
+          "disabled": false,
+          "omitted": false
+        },
+        {
+          "id": "avatar",
+          "name": "Avatar",
+          "type": "Link",
+          "localized": false,
+          "required": false,
+          "validations": [],
+          "disabled": false,
+          "omitted": false,
+          "linkType": "Asset"
         }
       ]
     }
@@ -5216,6 +5335,11 @@
         {
           "fieldId": "excerpt",
           "widgetId": "multipleLine",
+          "widgetNamespace": "builtin"
+        },
+        {
+          "fieldId": "category",
+          "widgetId": "singleLine",
           "widgetNamespace": "builtin"
         }
       ]
@@ -10714,7 +10838,157 @@
         },
         "excerpt": {
           "en-US": "This is an excerpt for the blog post."
+        },
+        "category": {
+          "en-US": "examples"
+        },
+        "author": {
+          "en-US": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Entry",
+              "id": "5EMNPqC3aZ4v36goXmGOLZ"
+            }
+          }
+        }          
+      }
+    }, 
+    {
+      "metadata": {
+        "tags": []
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "p39nycxzit31"
+          }
+        },
+        "id": "283eEzAwGfc2GgKFh4c5GZ",
+        "type": "Entry",
+        "createdAt": "2022-01-25T21:41:08.356Z",
+        "updatedAt": "2022-02-08T21:40:59.886Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 23,
+        "publishedAt": "2022-02-08T21:40:59.886Z",
+        "firstPublishedAt": "2022-01-25T21:42:52.038Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "4SDtqAl8Y6iEC5454bbsbU"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "4SDtqAl8Y6iEC5454bbsbU"
+          }
+        },
+        "publishedCounter": 5,
+        "version": 24,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "4SDtqAl8Y6iEC5454bbsbU"
+          }
+        },
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "blogPost"
+          }
         }
+      },
+      "fields": {
+        "slug": {
+          "en-US": "hello-world-2"
+        },
+        "title": {
+          "en-US": "Hello World Two"
+        },
+        "date": {
+          "en-US": "2022-01-25T00:00-05:00"
+        },
+        "image": {
+          "en-US": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Asset",
+              "id": "U3SK6xjRhpQRa9vJy8nyM"
+            }
+          }
+        },
+        "body": {
+          "en-US": {
+            "data": {},
+            "content": [
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "Hello! This is a demo blog post used for development only. This uses a Contentful Rich Text field for content.",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              },
+              {
+                "data": {
+                  "target": {
+                    "sys": {
+                      "id": "5ZkiE2jhld2iLz7VBmMEeX",
+                      "type": "Link",
+                      "linkType": "Asset"
+                    }
+                  }
+                },
+                "content": [],
+                "nodeType": "embedded-asset-block"
+              },
+              {
+                "data": {},
+                "content": [
+                  {
+                    "data": {},
+                    "marks": [],
+                    "value": "",
+                    "nodeType": "text"
+                  }
+                ],
+                "nodeType": "paragraph"
+              }
+            ],
+            "nodeType": "document"
+          }
+        },
+        "excerpt": {
+          "en-US": "This is an excerpt for the blog post."
+        },
+        "category": {
+          "en-US": "examples"
+        },
+        "author": {
+          "en-US": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Entry",
+              "id": "5EMNPqC3aZ4v36goXmGOLZ"
+            }
+          }
+        }      
       }
     },
     {
@@ -10891,7 +11165,7 @@
                           },
                           {
                             "nodeType": "text",
-                            "value": " means an entity that controls, is controlled by or is under common control with a party, where \"control\" means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.",
+                            "value": " means an entity that controls, is controlled by or is under common control with a party, where \"control\" means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.",
                             "marks": [],
                             "data": {}
                           }
@@ -10919,7 +11193,7 @@
                           },
                           {
                             "nodeType": "text",
-                            "value": " refers to: New York, United States",
+                            "value": " refers to: New York, United States",
                             "marks": [],
                             "data": {}
                           }
@@ -10947,7 +11221,7 @@
                           },
                           {
                             "nodeType": "text",
-                            "value": " (referred to as either \"the Company\", \"We\", \"Us\" or \"Our\" in this Agreement) refers to Homepage LLC, 11 Eleventh Ave, New York, NY 11111.",
+                            "value": " (referred to as either \"the Company\", \"We\", \"Us\" or \"Our\" in this Agreement) refers to Homepage LLC, 11 Eleventh Ave, New York, NY 11111.",
                             "marks": [],
                             "data": {}
                           }
@@ -10975,7 +11249,7 @@
                           },
                           {
                             "nodeType": "text",
-                            "value": " means any device that can access the Service such as a computer, a cellphone or a digital tablet.",
+                            "value": " means any device that can access the Service such as a computer, a cellphone or a digital tablet.",
                             "marks": [],
                             "data": {}
                           }
@@ -11003,7 +11277,7 @@
                           },
                           {
                             "nodeType": "text",
-                            "value": " refers to the Website.",
+                            "value": " refers to the Website.",
                             "marks": [],
                             "data": {}
                           }
@@ -11031,7 +11305,7 @@
                           },
                           {
                             "nodeType": "text",
-                            "value": " (also referred as \"Terms\") mean these Terms and Conditions that form the entire agreement between You and the Company regarding the use of the Service. This Terms and Conditions agreement has been created with the help of the ",
+                            "value": " (also referred as \"Terms\") mean these Terms and Conditions that form the entire agreement between You and the Company regarding the use of the Service. This Terms and Conditions agreement has been created with the help of the ",
                             "marks": [],
                             "data": {}
                           },
@@ -11079,7 +11353,7 @@
                           },
                           {
                             "nodeType": "text",
-                            "value": " means any services or content (including data, information, products or services) provided by a third-party that may be displayed, included or made available by the Service.",
+                            "value": " means any services or content (including data, information, products or services) provided by a third-party that may be displayed, included or made available by the Service.",
                             "marks": [],
                             "data": {}
                           }
@@ -11107,7 +11381,7 @@
                           },
                           {
                             "nodeType": "text",
-                            "value": " refers to Homepage Starter, accessible from ",
+                            "value": " refers to Homepage Starter, accessible from ",
                             "marks": [],
                             "data": {}
                           },
@@ -11155,7 +11429,7 @@
                           },
                           {
                             "nodeType": "text",
-                            "value": " means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.",
+                            "value": " means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.",
                             "marks": [],
                             "data": {}
                           }
@@ -11887,7 +12161,7 @@
                           },
                           {
                             "nodeType": "text",
-                            "value": " means a unique account created for You to access our Service or parts of our Service.",
+                            "value": " means a unique account created for You to access our Service or parts of our Service.",
                             "marks": [],
                             "data": {}
                           }
@@ -11915,7 +12189,7 @@
                           },
                           {
                             "nodeType": "text",
-                            "value": " (referred to as either \"the Company\", \"We\", \"Us\" or \"Our\" in this Agreement) refers to Homepage LLC, 11 Eleventh Ave, New York, NY 11111.",
+                            "value": " (referred to as either \"the Company\", \"We\", \"Us\" or \"Our\" in this Agreement) refers to Homepage LLC, 11 Eleventh Ave, New York, NY 11111.",
                             "marks": [],
                             "data": {}
                           }
@@ -11943,7 +12217,7 @@
                           },
                           {
                             "nodeType": "text",
-                            "value": " are small files that are placed on Your computer, mobile device or any other device by a website, containing the details of Your browsing history on that website among its many uses.",
+                            "value": " are small files that are placed on Your computer, mobile device or any other device by a website, containing the details of Your browsing history on that website among its many uses.",
                             "marks": [],
                             "data": {}
                           }
@@ -11971,7 +12245,7 @@
                           },
                           {
                             "nodeType": "text",
-                            "value": " refers to: New York, United States",
+                            "value": " refers to: New York, United States",
                             "marks": [],
                             "data": {}
                           }
@@ -11999,7 +12273,7 @@
                           },
                           {
                             "nodeType": "text",
-                            "value": " means any device that can access the Service such as a computer, a cellphone or a digital tablet.",
+                            "value": " means any device that can access the Service such as a computer, a cellphone or a digital tablet.",
                             "marks": [],
                             "data": {}
                           }
@@ -12027,7 +12301,7 @@
                           },
                           {
                             "nodeType": "text",
-                            "value": " is any information that relates to an identified or identifiable individual.",
+                            "value": " is any information that relates to an identified or identifiable individual.",
                             "marks": [],
                             "data": {}
                           }
@@ -12055,7 +12329,7 @@
                           },
                           {
                             "nodeType": "text",
-                            "value": " refers to the Website.",
+                            "value": " refers to the Website.",
                             "marks": [],
                             "data": {}
                           }
@@ -12083,7 +12357,7 @@
                           },
                           {
                             "nodeType": "text",
-                            "value": " means any natural or legal person who processes the data on behalf of the Company. It refers to third-party companies or individuals employed by the Company to facilitate the Service, to provide the Service on behalf of the Company, to perform services related to the Service or to assist the Company in analyzing how the Service is used.",
+                            "value": " means any natural or legal person who processes the data on behalf of the Company. It refers to third-party companies or individuals employed by the Company to facilitate the Service, to provide the Service on behalf of the Company, to perform services related to the Service or to assist the Company in analyzing how the Service is used.",
                             "marks": [],
                             "data": {}
                           }
@@ -12111,7 +12385,7 @@
                           },
                           {
                             "nodeType": "text",
-                            "value": " refers to data collected automatically, either generated by the use of the Service or from the Service infrastructure itself (for example, the duration of a page visit).",
+                            "value": " refers to data collected automatically, either generated by the use of the Service or from the Service infrastructure itself (for example, the duration of a page visit).",
                             "marks": [],
                             "data": {}
                           }
@@ -12139,7 +12413,7 @@
                           },
                           {
                             "nodeType": "text",
-                            "value": " refers to Homepage Starter, accessible from ",
+                            "value": " refers to Homepage Starter, accessible from ",
                             "marks": [],
                             "data": {}
                           },
@@ -12187,7 +12461,7 @@
                           },
                           {
                             "nodeType": "text",
-                            "value": " means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.",
+                            "value": " means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.",
                             "marks": [],
                             "data": {}
                           }
@@ -12401,7 +12675,7 @@
                         "content": [
                           {
                             "nodeType": "text",
-                            "value": " ",
+                            "value": " ",
                             "marks": [],
                             "data": {}
                           }
@@ -12447,7 +12721,7 @@
                         "content": [
                           {
                             "nodeType": "text",
-                            "value": " ",
+                            "value": " ",
                             "marks": [],
                             "data": {}
                           }
@@ -12471,7 +12745,7 @@
                         "content": [
                           {
                             "nodeType": "text",
-                            "value": " ",
+                            "value": " ",
                             "marks": [],
                             "data": {}
                           }
@@ -12505,7 +12779,7 @@
                         "content": [
                           {
                             "nodeType": "text",
-                            "value": " ",
+                            "value": " ",
                             "marks": [],
                             "data": {}
                           }
@@ -12535,7 +12809,7 @@
                 "content": [
                   {
                     "nodeType": "text",
-                    "value": "Cookies can be \"Persistent\" or \"Session\" Cookies. Persistent Cookies remain on Your personal computer or mobile device when You go offline, while Session Cookies are deleted as soon as You close Your web browser. You can learn more about cookies here: ",
+                    "value": "Cookies can be \"Persistent\" or \"Session\" Cookies. Persistent Cookies remain on Your personal computer or mobile device when You go offline, while Session Cookies are deleted as soon as You close Your web browser. You can learn more about cookies here: ",
                     "marks": [],
                     "data": {}
                   },
@@ -12839,7 +13113,7 @@
                           },
                           {
                             "nodeType": "text",
-                            "value": " to manage Your registration as a user of the Service. The Personal Data You provide can give You access to different functionalities of the Service that are available to You as a registered user.",
+                            "value": " to manage Your registration as a user of the Service. The Personal Data You provide can give You access to different functionalities of the Service that are available to You as a registered user.",
                             "marks": [],
                             "data": {}
                           }
@@ -12867,7 +13141,7 @@
                           },
                           {
                             "nodeType": "text",
-                            "value": " the development, compliance and undertaking of the purchase contract for the products, items or services You have purchased or of any other contract with Us through the Service.",
+                            "value": " the development, compliance and undertaking of the purchase contract for the products, items or services You have purchased or of any other contract with Us through the Service.",
                             "marks": [],
                             "data": {}
                           }
@@ -12895,7 +13169,7 @@
                           },
                           {
                             "nodeType": "text",
-                            "value": " To contact You by email, telephone calls, SMS, or other equivalent forms of electronic communication, such as a mobile application's push notifications regarding updates or informative communications related to the functionalities, products or contracted services, including the security updates, when necessary or reasonable for their implementation.",
+                            "value": " To contact You by email, telephone calls, SMS, or other equivalent forms of electronic communication, such as a mobile application's push notifications regarding updates or informative communications related to the functionalities, products or contracted services, including the security updates, when necessary or reasonable for their implementation.",
                             "marks": [],
                             "data": {}
                           }
@@ -12923,7 +13197,7 @@
                           },
                           {
                             "nodeType": "text",
-                            "value": " with news, special offers and general information about other goods, services and events which we offer that are similar to those that you have already purchased or enquired about unless You have opted not to receive such information.",
+                            "value": " with news, special offers and general information about other goods, services and events which we offer that are similar to those that you have already purchased or enquired about unless You have opted not to receive such information.",
                             "marks": [],
                             "data": {}
                           }
@@ -12951,7 +13225,7 @@
                           },
                           {
                             "nodeType": "text",
-                            "value": " To attend and manage Your requests to Us.",
+                            "value": " To attend and manage Your requests to Us.",
                             "marks": [],
                             "data": {}
                           }
@@ -12979,7 +13253,7 @@
                           },
                           {
                             "nodeType": "text",
-                            "value": " We may use Your information to evaluate or conduct a merger, divestiture, restructuring, reorganization, dissolution, or other sale or transfer of some or all of Our assets, whether as a going concern or as part of bankruptcy, liquidation, or similar proceeding, in which Personal Data held by Us about our Service users is among the assets transferred.",
+                            "value": " We may use Your information to evaluate or conduct a merger, divestiture, restructuring, reorganization, dissolution, or other sale or transfer of some or all of Our assets, whether as a going concern or as part of bankruptcy, liquidation, or similar proceeding, in which Personal Data held by Us about our Service users is among the assets transferred.",
                             "marks": [],
                             "data": {}
                           }
@@ -13059,7 +13333,7 @@
                         "content": [
                           {
                             "nodeType": "text",
-                            "value": " ",
+                            "value": " ",
                             "marks": [],
                             "data": {}
                           }
@@ -13105,7 +13379,7 @@
                         "content": [
                           {
                             "nodeType": "text",
-                            "value": " ",
+                            "value": " ",
                             "marks": [],
                             "data": {}
                           }
@@ -13151,7 +13425,7 @@
                         "content": [
                           {
                             "nodeType": "text",
-                            "value": " ",
+                            "value": " ",
                             "marks": [],
                             "data": {}
                           }
@@ -13197,7 +13471,7 @@
                         "content": [
                           {
                             "nodeType": "text",
-                            "value": " ",
+                            "value": " ",
                             "marks": [],
                             "data": {}
                           }
@@ -13243,7 +13517,7 @@
                         "content": [
                           {
                             "nodeType": "text",
-                            "value": " ",
+                            "value": " ",
                             "marks": [],
                             "data": {}
                           }
@@ -17944,6 +18218,81 @@
               }
             }
           ]
+        }
+      }
+    },
+    {
+      "metadata": {
+        "tags": []
+      },
+      "sys": {
+        "space": {
+          "sys": {
+            "type": "Link",
+            "linkType": "Space",
+            "id": "p39nycxzit31"
+          }
+        },
+        "id": "5EMNPqC3aZ4v36goXmGOLZ",
+        "type": "Entry",
+        "createdAt": "2022-02-03T20:15:29.944Z",
+        "updatedAt": "2022-02-16T20:20:59.769Z",
+        "environment": {
+          "sys": {
+            "id": "master",
+            "type": "Link",
+            "linkType": "Environment"
+          }
+        },
+        "publishedVersion": 10,
+        "publishedAt": "2022-02-16T20:20:59.769Z",
+        "firstPublishedAt": "2022-02-03T20:16:07.647Z",
+        "createdBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "4SDtqAl8Y6iEC5454bbsbU"
+          }
+        },
+        "updatedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "4SDtqAl8Y6iEC5454bbsbU"
+          }
+        },
+        "publishedCounter": 3,
+        "version": 11,
+        "publishedBy": {
+          "sys": {
+            "type": "Link",
+            "linkType": "User",
+            "id": "4SDtqAl8Y6iEC5454bbsbU"
+          }
+        },
+        "contentType": {
+          "sys": {
+            "type": "Link",
+            "linkType": "ContentType",
+            "id": "blogAuthor"
+          }
+        }
+      },
+      "fields": {
+        "name": {
+          "en-US": "Amy Hansen"
+        },
+        "slug": {
+          "en-US": "amy-hansen"
+        },        
+        "avatar": {
+          "en-US": {
+            "sys": {
+              "type": "Link",
+              "linkType": "Asset",
+              "id": "NNg898VTuwbnld5ohcDdC"
+            }
+          }
         }
       }
     }
