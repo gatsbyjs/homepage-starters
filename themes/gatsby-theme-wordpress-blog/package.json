@@ -1,13 +1,13 @@
 {
   "name": "gatsby-theme-wordpress-blog",
-  "version": "1.0.0-3",
+  "version": "1.0.0-4",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
     "gatsby-plugin-image": "^2.23.1",
     "gatsby-plugin-sharp": "^4.23.1",
     "gatsby-source-wordpress": "^6.23.1",
-    "gatsby-theme-abstract-blog": "1.0.0-2",
+    "gatsby-theme-abstract-blog": "1.0.0-3",
     "gatsby-transformer-remark": "^5.22.0",
     "gatsby-transformer-sharp": "^4.23.1",
     "sanitize-html": "^2.7.0",
