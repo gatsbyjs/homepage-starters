@@ -9,6 +9,18 @@ const localPlugins = [
   "kontent-ai-plugin",
 ]
 
+exports.createPages = ({ actions }) => {
+  const { createSlice } = actions
+  createSlice({
+    id: "header",
+    component: require.resolve("./src/components/header.tsx"),
+  })
+  createSlice({
+    id: "footer",
+    component: require.resolve("./src/components/footer.tsx"),
+  })
+}
+
 // for theming development
 exports.onCreateWebpackConfig = ({ actions, store }) => {
   // redux state to check which plugin is used

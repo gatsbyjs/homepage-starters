@@ -1,8 +1,7 @@
 import * as React from "react"
 import Header from "./header"
-import Footer from "./footer"
-import Head from "./head"
 import "../styles.css"
+import { Slice } from "gatsby"
 
 interface LayoutProps {
   title: string
@@ -14,10 +13,9 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = (props) => {
   return (
     <>
-      <Head {...props} />
-      <Header />
+      <Slice alias="header" />
       {props.children}
-      <Footer />
+      <Slice alias="footer" />
     </>
   )
 }
