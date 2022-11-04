@@ -8,6 +8,7 @@ interface LayoutProps {
   title: string
   description?: string
   image?: { id: string; url: string }
+  children?: React.ReactNode
 }
 
 const Layout: React.FC<LayoutProps> = (props) => {
