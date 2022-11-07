@@ -1,5 +1,4 @@
 import * as React from "react"
-import { graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
 import Layout from "../components/layout"
 import {
@@ -15,7 +14,7 @@ import {
   HomepageImage,
 } from "../components/ui"
 import { BlogAuthor, BlogPost } from "./blog-post"
-
+import SEOHead from "../components/head"
 interface PostCardSmallProps {
   slug: string
   image?: HomepageImage
@@ -116,4 +115,7 @@ export default function BlogIndex({ posts }: BlogIndexProps) {
       </Container>
     </Layout>
   )
+}
+export const Head = () => {
+  return <SEOHead title="Blog" />
 }

@@ -1,8 +1,6 @@
 import * as React from "react"
-import Header from "./header"
 import "../styles.css"
 import { Slice } from "gatsby"
-
 interface LayoutProps {
   title: string
   description?: string

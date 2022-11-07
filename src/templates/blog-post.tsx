@@ -14,6 +14,7 @@ import {
 } from "../components/ui"
 import { avatar as avatarStyle } from "../components/ui.css"
 import * as styles from "./blog-post.css"
+import SEOHead from "../components/head"
 
 export interface BlogAuthor {
   id: string
@@ -84,4 +85,7 @@ export default function BlogPost(props: BlogPost) {
       </Container>
     </Layout>
   )
+}
+export const Head = (props: BlogPost) => {
+  return <SEOHead {...props} description={props.excerpt} />
 }
