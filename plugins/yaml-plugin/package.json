@@ -2,8 +2,6 @@
   "name": "yaml-homepage-plugin",
   "version": "1.0.0",
   "dependencies": {
-    "gatsby-plugin-react-helmet": "^5.5.0",
-    "gatsby-transformer-yaml": "^4.4.0",
-    "react-helmet": "^6.1.0"
+    "gatsby-transformer-yaml": "^4.4.0"
   }
 }

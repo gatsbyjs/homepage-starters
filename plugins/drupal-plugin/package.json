@@ -5,9 +5,7 @@
     "setup": "node ./scripts/setup.js"
   },
   "dependencies": {
-    "gatsby-plugin-react-helmet": "^5.5.0",
-    "gatsby-source-drupal": "^5.24.1",
-    "react-helmet": "^6.1.0"
+    "gatsby-source-drupal": "^5.25.0"
   },
   "devDependencies": {
     "chalk": "^4.1.0",

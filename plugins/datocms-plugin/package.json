@@ -7,10 +7,8 @@
   },
   "dependencies": {
     "datocms-structured-text-to-html-string": "^2.1.3",
-    "gatsby-plugin-manifest": "^4.7.0",
-    "gatsby-plugin-react-helmet": "^5.5.0",
-    "gatsby-source-datocms": "^4.0.4",
-    "react-helmet": "^6.1.0"
+    "gatsby-plugin-manifest": "^5.0.0-next.4",
+    "gatsby-source-datocms": "^5.0.0-3"
   },
   "devDependencies": {
     "chalk": "^4.1.0",
