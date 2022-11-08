@@ -81,6 +81,7 @@ const createStarterDist = async (basename, isTypescript = false) => {
 
   // copy root files
   const rootFiles = [
+    ".nvmrc",
     ".gitignore",
     "gatsby-browser.js",
     "LICENSE",
@@ -220,6 +221,29 @@ const createStarterDist = async (basename, isTypescript = false) => {
     // if we copied over the TS version of the readme, rename it
     if (file === "TS-README.md") {
       fs.renameSync(dest, path.join(dir.dist, name, "README.md"))
+    }
+    // if we copied over the gatsby-node file, append type-conditional slices config
+    if (file === "gatsby-node.js") {
+      fs.appendFileSync(
+        dest,
+        `
+exports.createPages = ({ actions }) => {
+  const { createSlice } = actions
+  createSlice({
+    id: "header",
+    component: require.resolve("./src/components/header${
+      isTypescript ? ".tsx" : ".js"
+    }"),
+  })
+  createSlice({
+    id: "footer",
+    component: require.resolve("./src/components/footer${
+      isTypescript ? ".tsx" : ".js"
+    }"),
+  })
+}
+      `
+      )
     }
   })
 
