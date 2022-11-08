@@ -1,6 +1,9 @@
 {
   "name": "sanity-plugin",
   "version": "1.0.0",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "setup": "node ./scripts/setup.js",
     "gatsby-provision": "gatsby-provision-sanity --sanity-config-path='./studio' --sanity-content-path='./scripts/content.tar.gz'"

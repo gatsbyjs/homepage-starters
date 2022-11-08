@@ -4,6 +4,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "BDS",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "start": "gatsby clean && gatsby develop",
     "build": "gatsby build",
