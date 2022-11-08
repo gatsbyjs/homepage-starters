@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "@sanity/block-content-to-html": "^2.0.0",
-    "gatsby-plugin-image": "^3.0.0-next.5",
-    "gatsby-plugin-manifest": "^5.0.0-next.4",
+    "gatsby-plugin-image": "^3.0.0",
+    "gatsby-plugin-manifest": "^5.0.0",
     "gatsby-source-sanity": "^7.3.2"
   },
   "devDependencies": {

@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@contentful/rich-text-html-renderer": "^15.11.1",
-    "gatsby-plugin-manifest": "^5.0.0-next.4",
-    "gatsby-source-contentful": "^8.0.0-next.4"
+    "gatsby-plugin-manifest": "^5.0.0",
+    "gatsby-source-contentful": "^8.0.0"
   },
   "devDependencies": {
     "chalk": "4",

@@ -8,7 +8,7 @@
     "setup": "node ./scripts/setup.js"
   },
   "dependencies": {
-    "gatsby-source-drupal": "^5.25.0"
+    "gatsby-source-drupal": "^6.0.0"
   },
   "devDependencies": {
     "chalk": "^4.1.0",

@@ -6,8 +6,8 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
-    "gatsby-plugin-manifest": "^5.0.0-next.4",
-    "gatsby-source-wordpress": "^7.0.0-next.7"
+    "gatsby-plugin-manifest": "^5.0.0",
+    "gatsby-source-wordpress": "^7.0.0"
   },
   "devDependencies": {}
 }
