@@ -21,7 +21,7 @@ export default function Page(props: PageProps) {
   const { page } = props.data
 
   return (
-    <Layout {...page}>
+    <Layout>
       <Box paddingY={5}>
         <Container width="narrow">
           <Heading as="h1">{page.title}</Heading>

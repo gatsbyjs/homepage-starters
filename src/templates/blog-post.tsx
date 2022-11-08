@@ -38,7 +38,7 @@ export interface BlogPost {
 
 export default function BlogPost(props: BlogPost) {
   return (
-    <Layout {...props} description={props.excerpt}>
+    <Layout>
       <Container>
         <Box paddingY={5}>
           <Heading as="h1" center>

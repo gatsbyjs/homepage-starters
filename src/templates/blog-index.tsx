@@ -90,7 +90,7 @@ export default function BlogIndex({ posts }: BlogIndexProps) {
   const regularPosts = posts.filter((p) => p.category !== "Featured")
 
   return (
-    <Layout title="Blog">
+    <Layout>
       <Container>
         <Box paddingY={4}>
           <Heading as="h1">Blog</Heading>
