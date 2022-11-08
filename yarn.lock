@@ -7052,30 +7052,6 @@ gatsby-sharp@^1.0.0:
     "@types/sharp" "^0.30.5"
     sharp "^0.30.7"
 
-gatsby-source-contentful@^7.21.1:
-  version "7.22.0"
-  resolved "https://registry.yarnpkg.com/gatsby-source-contentful/-/gatsby-source-contentful-7.22.0.tgz#677cb61c8dd69fb330ee06a6ab401b5391355ea0"
-  integrity sha512-POTCu8C7J+F+Ptl1zNKyHKvodhUPBggaD5MIXZryEVTqgMdAA9b4UdGWgTwW2rVLPHZcEY95ypuN4UDPXgStYQ==
-  dependencies:
-    "@babel/runtime" "^7.15.4"
-    "@contentful/rich-text-react-renderer" "^15.12.1"
-    "@contentful/rich-text-types" "^15.12.1"
-    "@hapi/joi" "^15.1.1"
-    "@vercel/fetch-retry" "^5.1.3"
-    chalk "^4.1.2"
-    common-tags "^1.8.2"
-    contentful "^9.1.33"
-    fs-extra "^10.1.0"
-    gatsby-core-utils "^3.24.0"
-    gatsby-plugin-utils "^3.18.0"
-    gatsby-source-filesystem "^4.24.0"
-    is-online "^9.0.1"
-    json-stringify-safe "^5.0.1"
-    lodash "^4.17.21"
-    node-fetch "^2.6.7"
-    semver "^7.3.7"
-    url "^0.11.0"
-
 gatsby-source-contentful@^8.0.0:
   version "8.0.0"
   resolved "https://registry.yarnpkg.com/gatsby-source-contentful/-/gatsby-source-contentful-8.0.0.tgz#c62649e4f2e3bd77ea1eb47ba5aacd419d14f1ff"
@@ -7100,7 +7076,7 @@ gatsby-source-contentful@^8.0.0:
     semver "^7.3.7"
     url "^0.11.0"
 
-gatsby-source-datocms@^4.0.4:
+gatsby-source-datocms@^4.0.5:
   version "4.0.5"
   resolved "https://registry.yarnpkg.com/gatsby-source-datocms/-/gatsby-source-datocms-4.0.5.tgz#6d2600f4c17349de9e5f8b38d5c174676e358d7d"
   integrity sha512-yY9u5fqma5nVM3yaAxPHt0fgLPL+C6G2r2VM2SUqv98J3Q6y3+JiHQSrIstjzS22zzHpBuPWuIDL1laXFcj7/w==
@@ -7344,6 +7320,34 @@ gatsby-transformer-remark@^5.22.0:
     remark-stringify "^9.0.1"
     retext-english "^3.0.4"
     sanitize-html "^1.27.5"
+    underscore.string "^3.3.6"
+    unified "^9.2.2"
+    unist-util-remove-position "^3.0.0"
+    unist-util-select "^3.0.4"
+    unist-util-visit "^2.0.3"
+
+gatsby-transformer-remark@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/gatsby-transformer-remark/-/gatsby-transformer-remark-6.0.0.tgz#28e5103a1aab326ca98224c7fe7b4b866a358d40"
+  integrity sha512-HEOrDNV2Yr5CZbAjDcOVh5ACH/Ov21lgDpGPGxg680TvHAFcwcoPgCy+Ve3iKAQmfRkOY7DKZu0z7JyCCvsNBQ==
+  dependencies:
+    "@babel/runtime" "^7.15.4"
+    gatsby-core-utils "^4.0.0"
+    gray-matter "^4.0.3"
+    hast-util-raw "^6.0.2"
+    hast-util-to-html "^7.1.3"
+    lodash "^4.17.21"
+    mdast-util-to-hast "^10.2.0"
+    mdast-util-to-string "^2.0.0"
+    mdast-util-toc "^5.1.0"
+    remark "^13.0.0"
+    remark-footnotes "^3.0.0"
+    remark-gfm "^1.0.0"
+    remark-parse "^9.0.0"
+    remark-retext "^4.0.0"
+    remark-stringify "^9.0.1"
+    retext-english "^3.0.4"
+    sanitize-html "^2.7.2"
     underscore.string "^3.3.6"
     unified "^9.2.2"
     unist-util-remove-position "^3.0.0"
@@ -12504,7 +12508,7 @@ sanitize-html@^1.27.5:
     parse-srcset "^1.0.2"
     postcss "^7.0.27"
 
-sanitize-html@^2.7.0:
+sanitize-html@^2.7.0, sanitize-html@^2.7.2:
   version "2.7.3"
   resolved "https://registry.yarnpkg.com/sanitize-html/-/sanitize-html-2.7.3.tgz#166c868444ee4f9fd7352ac8c63fa86c343fc2bd"
   integrity sha512-jMaHG29ak4miiJ8wgqA1849iInqORgNv7SLfSw9LtfOhEUQ1C0YHKH73R+hgyufBW9ZFeJrb057k9hjlfBCVlw==
