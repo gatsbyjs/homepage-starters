@@ -1,0 +1,3 @@
+[template.environment]
+  DATOCMS_API_TOKEN = "DatoCMS Read-only API token"
+  DATOCMS_ENVIRONMENT = "Environment name"

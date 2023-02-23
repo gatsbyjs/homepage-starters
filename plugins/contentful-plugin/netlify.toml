@@ -1,0 +1,3 @@
+[template.environment]
+    CONTENTFUL_SPACE_ID="your Space ID"
+    CONTENTFUL_ACCESS_TOKEN="Your Content Delivery API access token"

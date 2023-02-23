@@ -1,0 +1,4 @@
+[template.environment]
+    SANITY_PROJECT_ID="Sanity project ID"
+    SANITY_PROJECT_DATASET="Sanity project dataset"
+    SANITY_READ_TOKEN="Sanity read token"

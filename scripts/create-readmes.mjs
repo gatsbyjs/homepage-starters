@@ -66,9 +66,9 @@ function variablePlugin(opts) {
             node.children = [
               {
                 type: "image",
-                url: "https://www.gatsbyjs.com/deploynow.svg",
-                title: "Deploy to Gatsby",
-                alt: "Deploy to Gatsby",
+                url: "https://www.netlify.com/img/deploy/button.svg",
+                title: "Deploy to Netlify",
+                alt: "Deploy to Netlify",
               },
             ]
           } else {
