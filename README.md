@@ -5,10 +5,17 @@ Development setup for homepage starters with various CMS backends
 To use these starters for a new Gatsby site, use one of the following:
 
 - https://github.com/gatsbyjs/gatsby-starter-contentful-homepage
+- https://github.com/gatsbyjs/gatsby-starter-contentful-homepage-ts
 - https://github.com/gatsbyjs/gatsby-starter-datocms-homepage
+- https://github.com/gatsbyjs/gatsby-starter-datocms-homepage-ts
 - https://github.com/gatsbyjs/gatsby-starter-drupal-homepage
+- https://github.com/gatsbyjs/gatsby-starter-drupal-homepage-ts
 - https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage
+- https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage-ts
 - https://github.com/gatsbyjs/gatsby-starter-sanity-homepage
+- https://github.com/gatsbyjs/gatsby-starter-sanity-homepage-ts
+- https://github.com/gatsbyjs/gatsby-starter-kontent-ai-homepage
+- https://github.com/gatsbyjs/gatsby-starter-kontent-ai-homepage-ts
 
 ## Local development
 
@@ -39,6 +46,14 @@ Code and functionality that is specific to a particular source plugin should be 
 │       ├── gatsby-config.js
 │       ├── gatsby-node.js
 │       └── package.json
+│   └── sanity-plugin
+│       ├── gatsby-config.js
+│       ├── gatsby-node.js
+│       └── package.json
+│   └── kontent-ai-plugin
+│       ├── gatsby-config.js
+│       ├── gatsby-node.js
+│       └── package.json
 ├── src
 │   ├── components
 │   └── pages
@@ -65,6 +80,10 @@ Code and functionality that is specific to a particular source plugin should be 
    DRUPAL_BASIC_AUTH_USERNAME=""
    DRUPAL_BASIC_AUTH_PASSWORD=""
    WPGRAPHQL_URL=""
+   SANITY_PROJECT_ID=""
+   SANITY_PROJECT_DATASET=""
+   SANITY_TOKEN=""
+   KONTENT_PROJECT_ID=""
    ```
 
 1. Edit the root `gatsby-config.js` and comment or uncomment the CMS plugin that you're developing against.
@@ -106,6 +125,8 @@ Specifically, most changes will be in each directory's `gatsby-node.js` file.
 - `plugins/datocms-plugin/gatsby-node.js`
 - `plugins/drupal-plugin/gatsby-node.js`
 - `plugins/wordpress-plugin/gatsby-node.js`
+- `plugins/sanity-plugin/gatsby-node.js`
+- `plugins/kontent-ai-plugin/gatsby-node.js`
 
 ## Adding support for another CMS
 
