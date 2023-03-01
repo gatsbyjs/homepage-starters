@@ -4,7 +4,7 @@
 
       <img src="./docs/images/step-1.png" alt="Step 1" width="300" />
 
-   1. For this example, change the _Title_ field's name to _Heading_ in when creating your new content type. Remove any fields that are added dy default and create a new field called `text` this should be of `Text (plain, long)` data type or use an existing field with the same type and field name.
+   1. For this example, change the _Title_ field's name to _Heading_ in when creating your new content type. Remove any fields that are added by default and create a new field called `text` this should be of `Text (plain, long)` data type or use an existing field with the same type and field name.
 
       <img src="./docs/images/step-2.png" alt="Step 2" width="400" />
 

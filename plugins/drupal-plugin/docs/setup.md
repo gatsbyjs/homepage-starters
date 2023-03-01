@@ -48,7 +48,7 @@ For a video guided step-by-step tutorial see the links below:
    mkdir homepage-starter
    cd homepage-starter
 
-   # Initialize Lando and when prompted select Pantheon and paste in the Machine Key generated earlier. Continue following the prompts provided to pull donw your site.
+   # Initialize Lando and when prompted select Pantheon and paste in the Machine Key generated earlier. Continue following the prompts provided to pull down your site.
    lando init
 
    # Start server
