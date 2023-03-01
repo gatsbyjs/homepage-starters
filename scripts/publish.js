@@ -204,6 +204,14 @@ const createStarterDist = async (basename, isTypescript = false) => {
     files.push("src/components/footer.js")
     files.push("src/components/header.js")
   }
+  // push alternative About page for Contentful due to content type limit for free spaces
+  if (basename === "contentful") {
+    if (isTypescript) {
+      files.push("src/pages/about.tsx")
+    } else {
+      files.push("src/pages/about.js")
+    }
+  }
 
   files.forEach((file) => {
     const src = path.join(dir.plugins, dirname, file)
