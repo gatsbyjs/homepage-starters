@@ -35,10 +35,10 @@ export default function About(props) {
               on the number of content types apply.
             </p>
             <p>
-              Take a look at the repository <code>README</code> for details on
-              how to provision your Contentful space with the{" "}
-              <code>aboutPage</code> content types included once you have a paid
-              plan.
+              Take a look at the repository <code>README</code> Quick Start
+              section for a note on how to provision your Contentful space with
+              the <code>aboutPage</code> content types included once you have a
+              paid plan.
             </p>
           </div>
         </div>
