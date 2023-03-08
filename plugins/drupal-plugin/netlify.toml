@@ -1,0 +1,4 @@
+[template.environment]
+  DRUPAL_BASE_URL="Drupal Site Base URL"
+  DRUPAL_BASIC_AUTH_USERNAME="Username"
+  DRUPAL_BASIC_AUTH_PASSWORD="Password"

@@ -6,7 +6,7 @@ module.exports = {
     dirname: "contentful-plugin",
     demoURL: "https://gatsbycontentfulhomepage.gatsbyjs.io/",
     deploynow:
-      "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-contentful-homepage",
+      "https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-contentful-homepage",
     blogTheme: true,
   },
   "contentful-ts": {
@@ -16,7 +16,7 @@ module.exports = {
     dirname: "contentful-plugin",
     demoURL: "https://gatsbycontentfulhomepagets.gatsbyjs.io/",
     deploynow:
-      "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-contentful-homepage-ts",
+      "https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-contentful-homepage-ts",
     blogTheme: true,
   },
   datocms: {
@@ -26,7 +26,7 @@ module.exports = {
     dirname: "datocms-plugin",
     demoURL: "https://gatsbydatocmshomepage.gatsbyjs.io/",
     deploynow:
-      "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-datocms-homepage",
+      "https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-datocms-homepage",
     blogTheme: true,
   },
   "datocms-ts": {
@@ -36,7 +36,7 @@ module.exports = {
     dirname: "datocms-plugin",
     demoURL: "https://gatsbydatocmshomepagets.gatsbyjs.io/",
     deploynow:
-      "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-datocms-homepage-ts",
+      "https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-datocms-homepage-ts",
     blogTheme: true,
   },
   drupal: {
@@ -46,7 +46,7 @@ module.exports = {
     dirname: "drupal-plugin",
     demoURL: "https://gatsbydrupalhomepage.gatsbyjs.io/",
     deploynow:
-      "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-drupal-homepage",
+      "https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-drupal-homepage",
     blogTheme: false,
   },
   "drupal-ts": {
@@ -56,7 +56,7 @@ module.exports = {
     dirname: "drupal-plugin",
     demoURL: "https://gatsbydrupalhomepagets.gatsbyjs.io/",
     deploynow:
-      "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-drupal-homepage-ts",
+      "https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-drupal-homepage-ts",
     blogTheme: false,
   },
   sanity: {
@@ -66,7 +66,7 @@ module.exports = {
     dirname: "sanity-plugin",
     demoURL: "https://gatsbysanityhomepage.gatsbyjs.io/",
     deploynow:
-      "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-sanity-homepage",
+      "https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-sanity-homepage",
     blogTheme: false,
   },
   "sanity-ts": {
@@ -76,7 +76,7 @@ module.exports = {
     dirname: "sanity-plugin",
     demoURL: "https://gatsbysanityhomepagets.gatsbyjs.io/",
     deploynow:
-      "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-sanity-homepage-ts",
+      "https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-sanity-homepage-ts",
     blogTheme: false,
   },
   wordpress: {
@@ -86,7 +86,7 @@ module.exports = {
     dirname: "wordpress-plugin",
     demoURL: "https://gatsbywordpresshomepage.gatsbyjs.io/",
     deploynow:
-      "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage",
+      "https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage",
     blogTheme: true,
   },
   "wordpress-ts": {
@@ -96,7 +96,7 @@ module.exports = {
     dirname: "wordpress-plugin",
     demoURL: "https://gatsbywordpresshomepagets.gatsbyjs.io/",
     deploynow:
-      "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage-ts",
+      "https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-wordpress-homepage-ts",
     blogTheme: true,
   },
   "kontent-ai": {
@@ -105,7 +105,8 @@ module.exports = {
     name: "kontent-ai",
     dirname: "kontent-ai-plugin",
     demoURL: "https://gatsbykontent-aihomepage.gatsbyjs.io/",
-    deploynow: "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-kontent-ai-homepage",
+    deploynow:
+      "https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-kontent-ai-homepage",
     blogTheme: false,
   },
   "kontent-ai-ts": {
@@ -114,7 +115,8 @@ module.exports = {
     name: "kontent-ai",
     dirname: "kontent-ai-plugin",
     demoURL: "https://gatsbykontentaihomepage.gatsbyjs.io/",
-    deploynow: "https://www.gatsbyjs.com/dashboard/deploynow?url=https://github.com/gatsbyjs/gatsby-starter-kontent-ai-homepage-ts",
+    deploynow:
+      "https://app.netlify.com/start/deploy?repository=https://github.com/gatsbyjs/gatsby-starter-kontent-ai-homepage-ts",
     blogTheme: false,
   },
 }
