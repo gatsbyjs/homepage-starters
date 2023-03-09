@@ -8283,6 +8283,11 @@ react-icon-base@^2.1.2:
   resolved "https://registry.npmjs.org/react-icon-base/-/react-icon-base-2.1.2.tgz#a17101dad9c1192652356096860a9ab43a0766c7"
   integrity sha512-NRlRo0RPxWRMQT7osj8UCBSSXsGOxhF1pre84ildhuft5S2U382NOs7tg29osWSjbO90L2a3VTCqadA/LnAzHQ==
 
+react-icons@^4.3.1:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-4.4.0.tgz#a13a8a20c254854e1ec9aecef28a95cdf24ef703"
+  integrity sha512-fSbvHeVYo/B5/L4VhB7sBA1i2tS8MkT0Hb9t2H1AVPkwGfVHLJCqyr2Py9dKMxsyM63Eng1GkdZfbWj+Fmv8Rg==
+
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
   resolved "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
@@ -8837,6 +8842,13 @@ sanity-diff-patch@^1.0.9:
   integrity sha512-J5YeuM/S7rLTp51iqUunwzz7Rf68K/jCDGKtNCj6Wzcfgf9CH+0GtPlvf2DFsg0QQhYYZ72FOVn6skmoLjMCdw==
   dependencies:
     diff-match-patch "^1.0.5"
+
+sanity-plugin-gatsby-cloud-preview@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/sanity-plugin-gatsby-cloud-preview/-/sanity-plugin-gatsby-cloud-preview-1.0.3.tgz#c24e27ac43b03c2e14d87dd80642259c400158d7"
+  integrity sha512-u9kpJvhDiBjucdezxAZRIx/HWi4G0efOy0E5aL2hW2KUxjBRCLlEtGsTq4fdKLDybjcsU+jPIcUp6wogfl5pUA==
+  dependencies:
+    react-icons "^4.3.1"
 
 sax@~1.2.4:
   version "1.2.4"
