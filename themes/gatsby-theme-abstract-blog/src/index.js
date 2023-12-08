@@ -10,7 +10,7 @@ export default function BlogIndexQuery(props) {
 
 export const query = graphql`
   query {
-    allBlogPost(sort: { fields: date, order: DESC }) {
+    allBlogPost(sort: {date: DESC}) {
       nodes {
         id
         slug
