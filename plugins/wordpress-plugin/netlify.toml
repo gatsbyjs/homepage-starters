@@ -1,0 +1,2 @@
+[template.environment]
+    WPGRAPHQL_URL="WPGraphQL Url"

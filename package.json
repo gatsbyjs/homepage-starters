@@ -16,6 +16,7 @@
     "type-watch": "tsc --noEmit --watch",
     "prepublish": "husky install",
     "create-readmes": "./scripts/create-readmes.mjs",
+    "create-tomls": "./scripts/create-tomls.mjs",
     "publish-starters": "./scripts/publish.js",
     "publish-starters:dry-run": "./scripts/publish.js --dry-run"
   },
