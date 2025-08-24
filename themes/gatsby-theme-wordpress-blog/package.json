@@ -8,7 +8,7 @@
     "gatsby-plugin-sharp": "^5.0.0",
     "gatsby-source-wordpress": "^7.0.0",
     "gatsby-theme-abstract-blog": "1.0.0-3",
-    "gatsby-transformer-remark": "^6.0.0",
+    "gatsby-transformer-remark": "^6.3.2",
     "gatsby-transformer-sharp": "^5.0.0",
     "sanitize-html": "^2.7.0",
     "sharp": "^0.29.3"
